@@ -1,0 +1,10 @@
+{
+    "deployment_name": "tcpcloud workshop",
+    "domain_name": "workshop.cloudlab.cz",
+    "reclass_repository": "https://github.com/tcpcloud/workshop-salt-model.git",
+    "cfg01_address": "172.10.10.100",
+    "ctl01_address": "172.10.10.101",
+    "ctl02_address": "172.10.10.102",
+    "ctl03_address": "172.10.10.103",
+    "mon01_address": "172.10.10.107",
+}

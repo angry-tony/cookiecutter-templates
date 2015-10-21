@@ -1,0 +1,35 @@
+classes:
+- service.git.client
+- system.linux.system.single
+- system.openssh.client.workshop
+- system.horizon.server.multi
+- system.horizon.server.app.tcpcloud_kilo
+- system.salt.master.single
+- system.salt.master.formula.graphite
+- system.salt.master.formula.kedb
+- system.salt.master.formula.linux
+- system.salt.master.formula.openstack_core
+- system.salt.master.formula.saltstack
+- system.salt.master.formula.sensu
+- system.reclass.storage.salt
+- system.reclass.storage.system.workshop
+- system.openstack.proxy.workshop
+parameters:
+  _param:
+    reclass_data_repository: "{{cookiecutter.reclass_repository}}"
+    reclass_data_revision: master
+    reclass_config_master: {{cookiecutter.cfg01_address}}
+    single_address: {{cookiecutter.cfg01_address}}
+    salt_master_host: 127.0.0.1
+    salt_master_base_environment: prd
+    rabbitmq_monitor_password: password
+    sensu_message_queue_host: {{cookiecutter.mon01_address}}
+    collectd_backend_carbon_host: {{cookiecutter.mon01_address}}
+    collectd_backend_carbon_port: 2013
+  linux:
+    system:
+      name: cfg01
+      domain: {{cookiecutter.domain_name}}
+  salt:
+    master:
+      accept_policy: open_mode
