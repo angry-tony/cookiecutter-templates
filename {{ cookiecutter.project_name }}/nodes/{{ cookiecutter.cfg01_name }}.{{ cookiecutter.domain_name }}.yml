@@ -16,7 +16,7 @@ classes:
 - system.openstack.common
 parameters:
   _param:
-    reclass_data_repository: git@git.tcpcloud.eu:reclass-models/{{ project_name }}.git
+    reclass_data_repository: git@git.tcpcloud.eu:reclass-models/{{ cookiecutter.project_name }}.git
     reclass_data_revision: master
     reclass_config_master: {{ cookiecutter.cfg01_ip }}
     single_address: {{ cookiecutter.cfg01_ip }}
