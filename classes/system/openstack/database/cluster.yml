@@ -1,0 +1,42 @@
+classes:
+- service.keepalived.cluster.single
+- service.haproxy.proxy.single
+- system.openstack.common.openstack
+parameters:
+  _param:
+    cluster_vip_address: {{ dbs_vip }}
+    cluster_node01_hostname: {{ dbs01_name }}
+    cluster_node01_address: {{ dbs01_ip }}
+    cluster_node02_hostname: {{ dbs01_name }}
+    cluster_node02_address: {{ dbs02_ip }}
+    cluster_node03_hostname: {{ dbs03_name }}
+    cluster_node03_address: {{ dbs03_ip }}
+    galera_server_cluster_name: openstack_cluster
+    galera_server_maintenance_password: ieyieh7aipho3odohh0Iphae9aesa2al
+    galera_server_admin_password: oghoeyah1OoTlhae9euzuMouvei9xuo4
+  keepalived:
+    cluster:
+      instance:
+        VIP:
+          virtual_router_id: 190
+  haproxy:
+    proxy:
+      listen:
+        mysql_cluster:
+          type: mysql
+          binds:
+          - address: ${_param:cluster_vip_address}
+            port: 3306
+          servers:
+          - name: ${_param:cluster_node01_hostname}
+            host: ${_param:cluster_node01_address}
+            port: 3306
+            params: check
+          - name: ${_param:cluster_node02_hostname}
+            host: ${_param:cluster_node02_address}
+            port: 3306
+            params: backup check
+          - name: ${_param:cluster_node03_hostname}
+            host: ${_param:cluster_node03_address}
+            port: 3306
+            params: backup check

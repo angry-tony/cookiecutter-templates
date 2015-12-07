@@ -8,8 +8,8 @@ classes:
 parameters:
   _param:
     billometer_secret_key: billometer
-    keystone_billometer_address: localhost
-    keystone_billometer_password: password
+    keystone_billometer_address: ${_param:billometer_identity_host}
+    keystone_billometer_password: ${_param:billometer_identity_password}
     postgresql_billometer_password: password
     postgresql_graphite_password: password
     rabbitmq_admin_name: admin
@@ -29,6 +29,21 @@ parameters:
             password: ${_param:postgresql_billometer_password}
             host: 127.0.0.1
             rights: all privileges
+  billometer:
+    server:
+      source:
+        engine: pkg
+      metric:
+        in:
+          engine: graphite
+          host: 10.0.106.150
+          port: 80
+          ssl: false
+        out:
+          engine: statsd
+          host: 10.0.106.150
+          prefix: billometer
+          port: 8125
   rabbitmq:
     server:
       host:

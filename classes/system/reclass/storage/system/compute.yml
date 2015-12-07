@@ -1,0 +1,22 @@
+parameters:
+  reclass:
+    storage:
+      node:
+        {{ cmp01_name }}.{{ domain_name }}:
+          name: {{ cmp01_name }}
+          domain: {{ domain_name }}
+          classes:
+          - system.linux.system.single
+          - system.openstack.compute.cluster
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            single_address: {{ cmp01_ip }}
+        {{ cmp02_name }}.{{ domain_name }}:
+          name: {{ cmp02_name }}
+          domain: {{ domain_name }}
+          classes:
+          - system.linux.system.single
+          - system.openstack.compute.cluster
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            single_address: {{ cmp02_ip }}

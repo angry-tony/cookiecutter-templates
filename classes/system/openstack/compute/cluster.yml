@@ -1,10 +1,14 @@
 classes:
 - system.nova.compute.cluster
 - system.opencontrail.compute.cluster
+- system.openstack.common
 - service.ceilometer.agent.cluster
 - service.ceilometer.agent.publisher.graphite
-- system.openstack._common
 parameters:
+  _param:
+    opencontrail_compute_address: ${_param:single_address}
+    opencontrail_compute_gateway: {{ cmp_gw }}
+    opencontrail_compute_iface: eth0
   linux:
     storage:
       multipath: false
