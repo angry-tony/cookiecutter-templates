@@ -1,2 +1,55 @@
 classes:
+- service.keepalived.cluster.single
+- service.haproxy.proxy.single
+- system.neutron.control.cluster
+- system.opencontrail.control.control
 - system.openstack.common
+parameters:
+  _param:
+    cluster_vip_address: {{ cookiecutter.ntw_vip }}
+    cluster_node01_hostname: {{ cookiecutter.ntw01_name }}
+    cluster_node01_address: {{ cookiecutter.ntw01_ip }}
+    cluster_node02_hostname: {{ cookiecutter.ntw02_name }}
+    cluster_node02_address: {{ cookiecutter.ntw02_ip }}
+    cluster_node03_hostname: {{ cookiecutter.ntw03_name }}
+    cluster_node03_address: {{ cookiecutter.ntw03_ip }}
+  linux:
+    network:
+      host:
+        proxy_vip:
+          address: ${_param:control_vip_address}
+          names:
+          - vpc20.tcpcloud.eu
+  keepalived:
+    cluster:
+      instance:
+        VIP:
+          virtual_router_id: 200
+  neutron:
+    server:
+      dns_domain: ${_param:dns_domain}
+      database:
+        host: ${_param:database_vip_address}
+      identity:
+        host: ${_param:control_vip_address}
+      message_queue:
+        host: ${_param:control_vip_address}
+      compute:
+        host: ${_param:control_vip_address}
+      plugin: contrail
+      tunnel_type: vxlan
+      public_networks: []
+      contrail:
+        version: ${_param:contrail_version}
+  opencontrail:
+    common:
+      identity:
+        host: ${_param:control_vip_address}
+    config:
+      message_queue:
+        host: ${_param:control_vip_address}
+      identity:
+        host: ${_param:control_vip_address}
+    web:
+      identity:
+        host: ${_param:control_vip_address}

@@ -2,49 +2,48 @@ parameters:
   reclass:
     storage:
       node:
-        {{ bil01_name }}.{{ domain_name }}:
-          name: {{ bil01_name }}
-          domain: {{ domain_name }}
+        {{ cookiecutter.bil01_name }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter.bil01_name }}
+          domain: {{ cookiecutter.domain_name }}
           classes:
           - system.linux.system.single
           - system.openstack.billometer.single
           params:
             salt_master_host: ${_param:reclass_config_master}
-            single_address: {{ bil01_ip }}
-        {{ prx01_name }}.{{ domain_name }}:
-          name: {{ prx01_name }}
-          domain: {{ domain_name }}
+            single_address: {{ cookiecutter.bil01_ip }}
+        {{ cookiecutter.prx01_name }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter.prx01_name }}
+          domain: {{ cookiecutter.domain_name }}
           classes:
           - system.linux.system.single
           - system.openstack.proxy.single
           params:
             salt_master_host: ${_param:reclass_config_master}
-            single_address: {{ prx01_ip }}
-        {{ mon01_name }}.{{ domain_name }}:
-          name: {{ mon01_name }}
-          domain: {{ domain_name }}
+            single_address: {{ cookiecutter.prx01_ip }}
+        {{ cookiecutter.mon01_name }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter.mon01_name }}
+          domain: {{ cookiecutter.domain_name }}
           classes:
           - system.linux.system.single
           - system.openstack.monitor.single
           params:
             salt_master_host: ${_param:reclass_config_master}
-            single_address: {{ mon01_ip }}
-        {{ mtr01_name }}.{{ domain_name }}:
-          name: {{ mtr01_name }}
-          domain: {{ domain_name }}
+            single_address: {{ cookiecutter.mon01_ip }}
+        {{ cookiecutter.mtr01_name }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter.mtr01_name }}
+          domain: {{ cookiecutter.domain_name }}
           classes:
           - system.linux.system.single
           - system.openstack.meter.single
           params:
             salt_master_host: ${_param:reclass_config_master}
-            single_address: {{ mtr01_ip }}
-            ceilometer_database_host: {{ mtr01_ip }}
-        {{ log01_name }}.{{ domain_name }}:
-          name: {{ log01_name }}
-          domain: {{ domain_name }}
+            single_address: {{ cookiecutter.mtr01_ip }}
+        {{ cookiecutter.log01_name }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter.log01_name }}
+          domain: {{ cookiecutter.domain_name }}
           classes:
           - system.linux.system.single
           - system.openstack.log.single
           params:
             salt_master_host: ${_param:reclass_config_master}
-            single_address: {{ log01_ip }}
+            single_address: {{ cookiecutter.log01_ip }}

@@ -19,6 +19,8 @@
     "mtr01_name": "mtr01",
     "prx01_name": "prx01",
     "bil01_name": "bil01",
+    "cmp01_name": "cmp01",
+    "cmp02_name": "cmp02",
     "ctl_vip": "",
     "ctl01_ip": "",
     "ctl02_ip": "",
@@ -36,5 +38,9 @@
     "mon01_ip": "",
     "mtr01_ip": "",
     "prx01_ip": "",
-    "bil01_ip": ""
+    "bil01_ip": "",
+    "cmp_gw": "",
+    "cmp01_ip": "",
+    "cmp02_ip": ""
+
 }

@@ -7,7 +7,7 @@ classes:
 parameters:
   _param:
     opencontrail_compute_address: ${_param:single_address}
-    opencontrail_compute_gateway: {{ cmp_gw }}
+    opencontrail_compute_gateway: {{ cookiecutter.cmp_gw }}
     opencontrail_compute_iface: eth0
   linux:
     storage:

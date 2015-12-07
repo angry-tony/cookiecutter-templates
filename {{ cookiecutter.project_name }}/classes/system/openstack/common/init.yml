@@ -1,73 +1,75 @@
+{%- macro password(size=16) -%}
+{% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'|random }}{% endfor %}
+{%- endmacro %}
 parameters:
   _param:
     cluster_local_address: ${_param:single_address}
-    database_vip_address: {{ dbs_vip }}
-    control_vip_address: {{ ctl_vip }}
-    network_vip_address: {{ ntw_vip }}
-    mtr_vip_address: {{ mtr01_ip }}
-    mon_vip_address: {{ mon01_ip }}
-    control_node01_address: {{ ctl01_ip }}
-    control_node02_address: {{ ctl02_ip }}
-    control_node03_address: {{ ctl03_ip }}
-    gluster_node01_address: {{ ctl01_ip }}
-    gluster_node02_address: {{ ctl02_ip }}
-    gluster_node03_address: {{ ctl03_ip }}
-    rabbitmq_secret_key: {{range(10)|random}}
-    rabbitmq_admin_password: {{range(10)|random}}
-    rabbitmq_openstack_password: {{range(10)|random}}
-    rabbitmq_cold_password: 
-    billometer_version: {{ openstack_version }}
-    billometer_service_host: {{ bil01_ip }}
-    rabbitmq_billometer_password: 
-    ceilometer_secret_key: 
-    ceilometer_version: {{ openstack_version }}
+    database_vip_address: {{ cookiecutter.dbs_vip }}
+    control_vip_address: {{ cookiecutter.ctl_vip }}
+    network_vip_address: {{ cookiecutter.ntw_vip }}
+    mtr_vip_address: {{ cookiecutter.mtr01_ip }}
+    mon_vip_address: {{ cookiecutter.mon01_ip }}
+    control_node01_address: {{ cookiecutter.ctl01_ip }}
+    control_node02_address: {{ cookiecutter.ctl02_ip }}
+    control_node03_address: {{ cookiecutter.ctl03_ip }}
+    gluster_node01_address: {{ cookiecutter.ctl01_ip }}
+    gluster_node02_address: {{ cookiecutter.ctl02_ip }}
+    gluster_node03_address: {{ cookiecutter.ctl03_ip }}
+    rabbitmq_secret_key: {{ password(16) }}
+    rabbitmq_admin_password: {{ password(16) }}
+    rabbitmq_openstack_password: {{ password(16) }}
+    billometer_version: {{ cookiecutter.openstack_version }}
+    billometer_service_host: {{ cookiecutter.bil01_ip }}
+    rabbitmq_billometer_password: {{ password(16) }}
+    ceilometer_secret_key: {{ password(16) }}
+    ceilometer_version: {{ cookiecutter.openstack_version }}
     ceilometer_service_host: ${_param:mdb_vip_address}
     ceilometer_graphite_publisher_host: ${_param:mtr_vip_address}
     ceilometer_graphite_publisher_port: 2023
-    cinder_version: {{ openstack_version }}
+    cinder_version: {{ cookiecutter.openstack_version }}
     cinder_service_host: ${_param:control_vip_address}
-    glance_version: {{ openstack_version }}
+    glance_version: {{ cookiecutter.openstack_version }}
     glance_service_host: ${_param:control_vip_address}
-    heat_version: {{ openstack_version }}
+    heat_version: {{ cookiecutter.openstack_version }}
     heat_service_host: ${_param:control_vip_address}
     heat_domain_admin_password: 
-    keystone_version: {{ openstack_version }}
+    keystone_version: {{ cookiecutter.openstack_version }}
     keystone_server_host: ${_param:control_vip_address}
     keystone_service_host: ${_param:control_vip_address}
-    murano_version: {{ openstack_version }}
+    murano_version: {{ cookiecutter.openstack_version }}
     murano_service_host: ${_param:murano_vip_address}
-    neutron_version: {{ openstack_version }}
+    neutron_version: {{ cookiecutter.openstack_version }}
     neutron_service_host: ${_param:network_vip_address}
-    nova_version: {{ openstack_version }}
+    nova_version: {{ cookiecutter.openstack_version }}
     nova_service_host: ${_param:control_vip_address}
     mysql_admin_user: root
-    mysql_admin_password: 
-    mysql_cinder_password: 
-    mysql_graphite_password: 
-    mysql_glance_password: 
-    mysql_heat_password: 
-    mysql_keystone_password: 
-    mysql_murano_password: 
-    mysql_neutron_password: 
-    mysql_nova_password: 
-    keystone_service_token: 
-    keystone_admin_password: 
+    mysql_admin_password: {{ password(16) }}
+    mysql_cinder_password: {{ password(16) }}
+    mysql_graphite_password: {{ password(16) }}
+    mysql_glance_password: {{ password(16) }}
+    mysql_heat_password: {{ password(16) }}
+    mysql_keystone_password: {{ password(16) }}
+    mysql_murano_password: {{ password(16) }}
+    mysql_neutron_password: {{ password(16) }}
+    mysql_nova_password: {{ password(16) }}
+    keystone_service_token: {{ password(16) }}
+    keystone_admin_password: {{ password(16) }}
     keystone_admin_email: root@tcpcloud.eu
-    keystone_cinder_password: 
-    keystone_glance_password: 
-    keystone_heat_password: 
-    keystone_keystone_password: 
-    keystone_murano_password: 
-    keystone_neutron_password: 
-    keystone_nova_password: 
-    keystone_monitoring_password: 
-    keystone_billometer_password: 
-    keystone_ceilometer_password: 
-    opencontrail_version: {{ opencontrail_version }}
+    keystone_cinder_password: {{ password(16) }}
+    keystone_glance_password: {{ password(16) }}
+    keystone_heat_password: {{ password(16) }}
+    keystone_keystone_password: {{ password(16) }}
+    keystone_murano_password: {{ password(16) }}
+    keystone_neutron_password: {{ password(16) }}
+    keystone_nova_password: {{ password(16) }}
+    keystone_monitoring_password: {{ password(16) }}
+    keystone_billometer_password: {{ password(16) }}
+    keystone_ceilometer_password: {{ password(16) }}
+    opencontrail_version: {{ cookiecutter.opencontrail_version }}
     collectd_backend_carbon_host: ${_param:mtr_vip_address}
     collectd_backend_carbon_port: 2023
     sensu_message_queue_host: ${_param:mon_vip_address}
-    rabbitmq_monitor_password: 
-    kedb_secret_key: 
-    rabbitmq_log_password: 
-    dns_domain: vpc20.cloudlab.cz
+    rabbitmq_monitor_password: {{ password(16) }}
+    kedb_secret_key: {{ password(16) }}
+    rabbitmq_log_password: {{ password(16) }}
+    dns_domain: cloud.tcpcloud.eu

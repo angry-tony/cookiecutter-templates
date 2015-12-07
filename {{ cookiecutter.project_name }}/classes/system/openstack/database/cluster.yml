@@ -1,16 +1,19 @@
+{%- macro password(size=16) -%}
+{% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'|random }}{% endfor %}
+{%- endmacro %}
 classes:
 - service.keepalived.cluster.single
 - service.haproxy.proxy.single
 - system.openstack.common.openstack
 parameters:
   _param:
-    cluster_vip_address: {{ dbs_vip }}
-    cluster_node01_hostname: {{ dbs01_name }}
-    cluster_node01_address: {{ dbs01_ip }}
-    cluster_node02_hostname: {{ dbs01_name }}
-    cluster_node02_address: {{ dbs02_ip }}
-    cluster_node03_hostname: {{ dbs03_name }}
-    cluster_node03_address: {{ dbs03_ip }}
+    cluster_vip_address: {{ cookiecutter.dbs_vip }}
+    cluster_node01_hostname: {{ cookiecutter.dbs01_name }}
+    cluster_node01_address: {{ cookiecutter.dbs01_ip }}
+    cluster_node02_hostname: {{ cookiecutter.dbs01_name }}
+    cluster_node02_address: {{ cookiecutter.dbs02_ip }}
+    cluster_node03_hostname: {{ cookiecutter.dbs03_name }}
+    cluster_node03_address: {{ cookiecutter.dbs03_ip }}
     galera_server_cluster_name: openstack_cluster
     galera_server_maintenance_password: ieyieh7aipho3odohh0Iphae9aesa2al
     galera_server_admin_password: oghoeyah1OoTlhae9euzuMouvei9xuo4

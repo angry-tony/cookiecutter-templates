@@ -2,115 +2,116 @@ parameters:
   reclass:
     storage:
       node:
-        {{ ctl01_name }}.{{ domain_name }}:
-          name: {{ ctl01_name }}
-          domain: {{ domain_name }}
+        {{ cookiecutter.ctl01_name }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter.ctl01_name }}
+          domain: {{ cookiecutter.domain_name }}
           classes:
           - system.linux.system.single
           - system.openstack.control.master
           params:
             salt_master_host: ${_param:reclass_config_master}
-            single_address: {{ ctl01_ip }}
+            single_address: {{ cookiecutter.ctl01_ip }}
             keepalived_vip_priority: 103
             rabbitmq_cluster_role: master
-        {{ ctl02_name }}.{{ domain_name }}:
-          name: {{ ctl02_name }}
-          domain: {{ domain_name }}
+        {{ cookiecutter.ctl02_name }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter.ctl02_name }}
+          domain: {{ cookiecutter.domain_name }}
           classes:
           - system.linux.system.single
           - system.openstack.control.slave
           params:
             salt_master_host: ${_param:reclass_config_master}
-            single_address: {{ ctl02_ip }}
+            single_address: {{ cookiecutter.ctl02_ip }}
             keepalived_vip_priority: 102
             rabbitmq_cluster_role: slave
-        {{ ctl03_name }}.{{ domain_name }}:
-          name: {{ ctl03_name }}
-          domain: {{ domain_name }}
+        {{ cookiecutter.ctl03_name }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter.ctl03_name }}
+          domain: {{ cookiecutter.domain_name }}
           classes:
           - system.linux.system.single
           - system.openstack.control.slave
           params:
             salt_master_host: ${_param:reclass_config_master}
-            single_address: {{ ctl03_ip }}
+            single_address: {{ cookiecutter.ctl03_ip }}
             keepalived_vip_priority: 101
             rabbitmq_cluster_role: slave
-        {{ dbs01_name }}.{{ domain_name }}:
-          name: {{ dbs01_name }}
-          domain: {{ domain_name }}
+        {{ cookiecutter.dbs01_name }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter.dbs01_name }}
+          domain: {{ cookiecutter.domain_name }}
           classes:
           - system.linux.system.single
           - system.openstack.database.master
           params:
             salt_master_host: ${_param:reclass_config_master}
-            single_address: {{ dbs01_ip }}
+            single_address: {{ cookiecutter.dbs01_ip }}
             keepalived_vip_interface: eth0
             keepalived_vip_priority: 203
             mysql_cluster_role: master
-        {{ dbs02_name }}.{{ domain_name }}:
-          name: {{ dbs02_name }}
-          domain: {{ domain_name }}
+        {{ cookiecutter.dbs02_name }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter.dbs02_name }}
+          domain: {{ cookiecutter.domain_name }}
           classes:
           - system.linux.system.single
           - system.openstack.database.slave
           params:
             salt_master_host: ${_param:reclass_config_master}
-            single_address: {{ dbs02_ip }}
+            single_address: {{ cookiecutter.dbs02_ip }}
             keepalived_vip_interface: eth0
             keepalived_vip_priority: 202
             mysql_cluster_role: slave
-        {{ dbs03_name }}.{{ domain_name }}:
-          name: {{ dbs03_name }}
-          domain: {{ domain_name }}
+        {{ cookiecutter.dbs03_name }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter.dbs03_name }}
+          domain: {{ cookiecutter.domain_name }}
           classes:
           - system.linux.system.single
           - system.openstack.database.slave
           params:
             salt_master_host: ${_param:reclass_config_master}
-            single_address: {{ dbs03_ip }}
+            single_address: {{ cookiecutter.dbs03_ip }}
             keepalived_vip_priority: 201
-        {{ ntw01_name }}.{{ domain_name }}:
-          name: {{ ntw01_name }}
-          domain: {{ domain_name }}
+        {{ cookiecutter.ntw01_name }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter.ntw01_name }}
+          domain: {{ cookiecutter.domain_name }}
           classes:
           - system.linux.system.single
           - system.openstack.network.cluster
           params:
             salt_master_host: ${_param:reclass_config_master}
-            single_address: {{ ntw01_ip }}
+            single_address: {{ cookiecutter.ntw01_ip }}
             keepalived_vip_interface: eth0
             keepalived_vip_priority: 303
             opencontrail_database_id: 1
-        {{ ntw02_name }}.{{ domain_name }}:
-          name: {{ ntw02_name }}
-          domain: {{ domain_name }}
+        {{ cookiecutter.ntw02_name }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter.ntw02_name }}
+          domain: {{ cookiecutter.domain_name }}
           classes:
           - system.linux.system.single
           - system.openstack.network.cluster
           params:
             salt_master_host: ${_param:reclass_config_master}
-            single_address: {{ ntw02_ip }}
+            single_address: {{ cookiecutter.ntw02_ip }}
             keepalived_vip_interface: eth0
             keepalived_vip_priority: 302
             opencontrail_database_id: 2
-        {{ ntw03_name }}.{{ domain_name }}:
-          name: {{ ntw03_name }}
-          domain: {{ domain_name }}
+        {{ cookiecutter.ntw03_name }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter.ntw03_name }}
+          domain: {{ cookiecutter.domain_name }}
           classes:
           - system.linux.system.single
           - system.openstack.network.cluster
           params:
             salt_master_host: ${_param:reclass_config_master}
-            single_address: {{ ntw03_ip }}
+            single_address: {{ cookiecutter.ntw03_ip }}
             keepalived_vip_interface: eth0
             keepalived_vip_priority: 301
             opencontrail_database_id: 3
-        {{ mdb01_name }}.{{ domain_name }}:
-          name: {{ mdb01_name }}
-          domain: {{ domain_name }}
+        {{ cookiecutter.mdb01_name }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter.mdb01_name }}
+          domain: {{ cookiecutter.domain_name }}
           classes:
           - system.linux.system.single
           - system.openstack.control.meter
           params:
             salt_master_host: ${_param:reclass_config_master}
-            single_address: {{ mdb01_ip }}
+            single_address: {{ cookiecutter.mdb01_ip }}
+            ceilometer_database_host: {{ cookiecutter.mdb01_name }}

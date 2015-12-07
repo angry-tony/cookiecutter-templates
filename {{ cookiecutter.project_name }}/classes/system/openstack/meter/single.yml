@@ -1,35 +1,40 @@
 classes:
-- service.mongodb.server.single
-- service.ceilometer.server.single
-- system.openstack.common.workshop
+- service.memcached.server.local
+- service.postgresql.server.local
+- service.graphite.server.single
+- service.apache.server.single
+- service.supervisor.server.single
 parameters:
-  linux:
-    network:
-      host:
-        ctl01:
-          address: ${_param:cluster_node01_address}
-          names:
-          - ${_param:cluster_node01_hostname}
-        ctl02:
-          address: ${_param:cluster_node02_address}
-          names:
-          - ${_param:cluster_node02_hostname}
-        ctl03:
-          address: ${_param:cluster_node03_address}
-          names:
-          - ${_param:cluster_node03_hostname}
-  mongodb:
+  _param:
+    graphite_secret_key: asdf56as5fdg1asf5g4atik4j58454
+    postgresql_graphite_password: 5fsd15a4frg1df112h3d1gfh8r4k4j
+    apache2_site_graphite_host: 10.0.106.150
+    rabbitmq_graphite_password: g5641f5ygh45etg4hf1jh54d6yfr5u
+  apache:
+    server:
+      modules:
+      - wsgi
+      site:
+        graphite_server:
+          enabled: true
+          type: graphite
+          name: server
+          host:
+            name: ${_param:apache2_site_graphite_host}
+  postgresql:
     server:
       database:
-        ceilometer:
-          enabled: true
-          password: ${_param:mongodb_ceilometer_password}
+        graphite:
+          encoding: UTF8
+          locale: cs_CZ
           users:
-          - name: ceilometer
-            password: ${_param:mongodb_ceilometer_password}
-  ceilometer:
+          - name: graphite
+            password: ${_param:postgresql_graphite_password}
+            host: 127.0.0.1
+            rights: all privileges
+  supervisor:
     server:
-      identity:
-        host: ${_param:cluster_vip_address}
-      message_queue:
-        host: ${_param:cluster_vip_address}
+      enabled: false
+      service:
+        graphite_server:
+          enabled: false
