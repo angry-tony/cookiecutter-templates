@@ -12,9 +12,9 @@ parameters:
     gluster_node01_address: {{ ctl01_ip }}
     gluster_node02_address: {{ ctl02_ip }}
     gluster_node03_address: {{ ctl03_ip }}
-    rabbitmq_secret_key: 
-    rabbitmq_admin_password: 
-    rabbitmq_openstack_password: 
+    rabbitmq_secret_key: {{range(10)|random}}
+    rabbitmq_admin_password: {{range(10)|random}}
+    rabbitmq_openstack_password: {{range(10)|random}}
     rabbitmq_cold_password: 
     billometer_version: {{ openstack_version }}
     billometer_service_host: {{ bil01_ip }}
