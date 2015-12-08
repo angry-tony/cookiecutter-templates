@@ -27,7 +27,7 @@ parameters:
           address: {{ cookiecutter.ctl01_ip }}
           names:
           - {{ cookiecutter.ctl01_name }}
-        {{ cookiecutter.ctl02s_name }}:
+        {{ cookiecutter.ctl02_name }}:
           address: {{ cookiecutter.ctl02_ip }}
           names:
           - {{ cookiecutter.ctl02_name }}
