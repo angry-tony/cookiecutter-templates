@@ -19,6 +19,7 @@ parameters:
     cluster_node02_address: {{ cookiecutter.ctl02_ip }}
     cluster_node03_hostname: {{ cookiecutter.ctl03_name }}
     cluster_node03_address: {{ cookiecutter.ctl03_ip }}
+    glusterfs_service_host: {{ cookiecutter.ctl_vip }}
   keepalived:
     cluster:
       instance:
