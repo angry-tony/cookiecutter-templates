@@ -40,7 +40,7 @@ parameters:
       tunnel_type: vxlan
       public_networks: []
       contrail:
-        version: ${_param:contrail_version}
+        version: ${_param:opencontrail_version}
   opencontrail:
     common:
       identity:

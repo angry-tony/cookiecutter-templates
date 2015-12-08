@@ -4,7 +4,7 @@ classes:
 - system.keystone.server.service.glance
 - system.keystone.server.service.murano
 - system.keystone.server.service.nova
-- system.keystone.server.service.nova21
+#- system.keystone.server.service.nova21
 - system.keystone.server.service.neutron
 - system.keystone.server.service.cinder
 - system.keystone.server.service.heat

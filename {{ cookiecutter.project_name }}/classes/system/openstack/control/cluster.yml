@@ -11,6 +11,14 @@ classes:
 - system.heat.server.cluster
 - system.openstack.common
 parameters:
+  _param:
+    cluster_vip_address: {{ cookiecutter.ctl_vip }}
+    cluster_node01_hostname: {{ cookiecutter.ctl01_name }}
+    cluster_node01_address: {{ cookiecutter.ctl01_ip }}
+    cluster_node02_hostname: {{ cookiecutter.ctl01_name }}
+    cluster_node02_address: {{ cookiecutter.ctl02_ip }}
+    cluster_node03_hostname: {{ cookiecutter.ctl03_name }}
+    cluster_node03_address: {{ cookiecutter.ctl03_ip }}
   keepalived:
     cluster:
       instance:

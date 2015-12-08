@@ -4,12 +4,12 @@
 classes:
 - service.mongodb.server.single
 - system.ceilometer.server.single
-- system.openstack.common.openstack
+- system.openstack.common
 parameters:
   _param:
     mongodb_server_replica_set: ceilometer
-    mongodb_ceilometer_password: 
-    mongodb_admin_password: 
+    mongodb_ceilometer_password: {{ password(16) }}
+    mongodb_admin_password: {{ password(16) }}
     mongodb_shared_key: |
       4vie+55QrhSCbxyg/a1yH7JBJIVfmAv4P6/tr8SUQGcGPIRFZCRpYqpUmleLUbK7
       iBqz+cuN9XAQQm1EGPHJK354nALM4qZYW5T2Y4z6kuUixC9Xl2LQxksFusREhhNG

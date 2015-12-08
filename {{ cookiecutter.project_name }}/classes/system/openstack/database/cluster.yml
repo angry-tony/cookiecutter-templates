@@ -4,7 +4,7 @@
 classes:
 - service.keepalived.cluster.single
 - service.haproxy.proxy.single
-- system.openstack.common.openstack
+- system.openstack.common
 parameters:
   _param:
     cluster_vip_address: {{ cookiecutter.dbs_vip }}
@@ -15,8 +15,8 @@ parameters:
     cluster_node03_hostname: {{ cookiecutter.dbs03_name }}
     cluster_node03_address: {{ cookiecutter.dbs03_ip }}
     galera_server_cluster_name: openstack_cluster
-    galera_server_maintenance_password: ieyieh7aipho3odohh0Iphae9aesa2al
-    galera_server_admin_password: oghoeyah1OoTlhae9euzuMouvei9xuo4
+    galera_server_maintenance_password: {{ password(16) }}
+    galera_server_admin_password: {{ password(16) }}
   keepalived:
     cluster:
       instance:
