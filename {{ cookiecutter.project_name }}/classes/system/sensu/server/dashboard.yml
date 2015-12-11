@@ -5,7 +5,6 @@ classes:
 - service.sensu.server.single
 parameters:
   _param:
-    rabbitmq_monitor_password: password
     sensu_message_queue_host: 127.0.0.1
   sensu:
     dashboard:

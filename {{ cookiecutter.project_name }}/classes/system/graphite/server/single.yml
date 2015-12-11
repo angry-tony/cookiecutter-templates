@@ -6,13 +6,7 @@ classes:
 - service.supervisor.server.single
 parameters:
   _param:
-    graphite_secret_key: secret
-    postgresql_graphite_password: password
     apache2_site_graphite_host: ${_param:single_address}
-    rabbitmq_graphite_password: password
-    rabbitmq_monitor_password: password
-    rabbitmq_admin_password: password
-    rabbitmq_secret_key: password
   apache:
     server:
       modules:

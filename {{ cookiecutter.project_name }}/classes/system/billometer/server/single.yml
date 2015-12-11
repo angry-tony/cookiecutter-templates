@@ -7,16 +7,8 @@ classes:
 - service.supervisor.server.single
 parameters:
   _param:
-    billometer_secret_key: billometer
     keystone_billometer_address: ${_param:billometer_identity_host}
     keystone_billometer_password: ${_param:billometer_identity_password}
-    postgresql_billometer_password: password
-    postgresql_graphite_password: password
-    rabbitmq_admin_name: admin
-    rabbitmq_admin_password: password
-    rabbitmq_secret_key: rabbitmq
-    rabbitmq_billometer_password: password
-    rabbitmq_graphite_password: password
   postgresql:
     server:
       database:
