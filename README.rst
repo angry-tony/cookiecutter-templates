@@ -23,8 +23,10 @@ Following parameters need to be provided
 
 * "project_name": "project-reclass-salt-model", name of
 * "domain_name": "cloud.company.com", domain part of FQDN
+* "admin_email": "root@localhost", keystone admin
 * "openstack_version": "kilo", openstack version
 * "opencontrail_version": "2.2", opencontrail version
+* "sensu_mail_handler": false, deploy sensu mail handler (using admin_email)
 * "cfg01_name": "cfg01", hostnames
 * "ctl01_name": "ctl01",
 * "ctl02_name": "ctl02",

@@ -11,7 +11,7 @@ parameters:
           enabled: true
         mail:
           enabled: true
-          mail_to: root@localhost
+          mail_to: {{ cookiecutter.admin_email }}
           host: localhost
           port: 25
           user: root

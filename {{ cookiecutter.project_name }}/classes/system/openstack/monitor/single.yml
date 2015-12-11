@@ -3,6 +3,8 @@ classes:
 - system.graphite.server.single
 - system.sensu.client.remote
 - system.sensu.server.single
+{%- if cookiecutter.sensu_mail_handler == "True" %}
 - system.sensu.server.handler.mail
+{%- endif %}
 - system.sensu.server.dashboard
 - system.openstack.common

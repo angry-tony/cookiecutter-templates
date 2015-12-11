@@ -1,8 +1,10 @@
 {
     "project_name": "project-reclass-salt-model",
     "domain_name": "cloud.company.com",
+    "admin_email": "root@localhost",
     "openstack_version": "kilo",
     "opencontrail_version": "2.2",
+    "sensu_mail_handler": false,
     "cfg01_name": "cfg01",
     "ctl01_name": "ctl01",
     "ctl02_name": "ctl02",
