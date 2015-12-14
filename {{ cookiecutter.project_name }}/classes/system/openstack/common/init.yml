@@ -8,6 +8,7 @@ parameters:
     database_vip_address: {{ cookiecutter.dbs_vip }}
     control_vip_address: {{ cookiecutter.ctl_vip }}
     network_vip_address: {{ cookiecutter.ntw_vip }}
+    murano_vip_address: ${_param:control_vip_address}
     mdb_vip_address: {% if cookiecutter.ceilometer_cluster %}{{ cookiecutter.mdb_vip }}{% else %}{{ cookiecutter.mdb_ip }}{% endif %}
     mtr_vip_address: {% if cookiecutter.metering_cluster %}{{ cookiecutter.mtr_vip }}{% else %}{{ cookiecutter.mtr01_ip }}{% endif %}
     mon_vip_address: {{ cookiecutter.mon01_ip }}
