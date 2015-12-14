@@ -2,7 +2,7 @@ classes:
 - service.keepalived.cluster.single
 - service.haproxy.proxy.single
 - system.neutron.control.cluster
-{%- if cookiecutter.opencontrail_split_analytics == "True" %}
+{%- if cookiecutter.opencontrail_analytics_cluster == "True" %}
 - system.opencontrail.control.control
 {%- else %}
 - system.opencontrail.control.cluster
