@@ -8,7 +8,7 @@ parameters:
   _param:
     opencontrail_compute_address: ${_param:single_address}
     opencontrail_compute_gateway: {{ cookiecutter.cmp_gw }}
-    opencontrail_compute_iface: eth0
+    opencontrail_compute_iface: {{ cookiecutter.cmp_iface }}
   linux:
     storage:
       multipath: false

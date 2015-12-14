@@ -67,6 +67,7 @@
     "prx02_ip": "",
     "bil01_ip": "",
     "cmp_gw": "",
+    "cmp_iface": "eth0",
     "cmp01_ip": "",
     "cmp02_ip": ""
 }

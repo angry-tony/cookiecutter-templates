@@ -90,5 +90,6 @@ Following parameters need to be provided
 * "prx02_ip": "",
 * "bil01_ip": "",
 * "cmp_gw": "",
+* "cmp_iface": "",
 * "cmp01_ip": "",
 * "cmp02_ip": ""
