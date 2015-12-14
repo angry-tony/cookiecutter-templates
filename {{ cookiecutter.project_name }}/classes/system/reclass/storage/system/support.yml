@@ -7,7 +7,7 @@ parameters:
           domain: {{ cookiecutter.domain_name }}
           classes:
           - system.linux.system.single
-          - system.openstack.billometer.single
+          - system.openstack.billing.single
           params:
             salt_master_host: ${_param:reclass_config_master}
             single_address: {{ cookiecutter.bil01_ip }}

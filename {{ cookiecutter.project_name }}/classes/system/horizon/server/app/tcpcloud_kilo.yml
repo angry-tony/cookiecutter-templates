@@ -38,7 +38,7 @@ parameters:
             prefix: 'CACHE_TCPCLOUD_KILO'
           identity:
             engine: keystone
-            host: ${_param:cluster_vip_address}
+            host: ${_param:control_vip_address}
             encryption: none
             port: 5000
             api_version: 3

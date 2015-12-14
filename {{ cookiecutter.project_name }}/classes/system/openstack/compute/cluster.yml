@@ -14,6 +14,6 @@ parameters:
       multipath: false
   nova:
     compute:
-      vncproxy_url: http://${_param:cluster_vip_address}:6080
+      vncproxy_url: http://${_param:control_vip_address}:6080
       notification:
         driver: messagingv2

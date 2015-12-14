@@ -9,6 +9,9 @@ parameters:
     database_vip_address: {{ cookiecutter.dbs_vip }}
     control_vip_address: {{ cookiecutter.ctl_vip }}
     network_vip_address: {{ cookiecutter.ntw_vip }}
+    analytics_vip_address: {{ cookiecutter.nal_vip }}
+    # TODO: cluster_vip_address should be used only in local context
+    cluster_vip_address: ${_param:control_vip_address}
     murano_vip_address: ${_param:control_vip_address}
     mdb_vip_address: {% if cookiecutter.ceilometer_cluster %}{{ cookiecutter.mdb_vip }}{% else %}{{ cookiecutter.mdb_ip }}{% endif %}
     mtr_vip_address: {% if cookiecutter.metering_cluster %}{{ cookiecutter.mtr_vip }}{% else %}{{ cookiecutter.mtr01_ip }}{% endif %}
@@ -35,6 +38,8 @@ parameters:
     glance_version: {{ cookiecutter.openstack_version }}
     glance_service_host: ${_param:control_vip_address}
     graphite_secret_key: {{ password(64) }}
+    horizon_secret_key: {{ password(64) }}
+    horizon_identity_encryption: none
     heat_version: {{ cookiecutter.openstack_version }}
     heat_service_host: ${_param:control_vip_address}
     heat_domain_admin_password: {{ password(16) }}
