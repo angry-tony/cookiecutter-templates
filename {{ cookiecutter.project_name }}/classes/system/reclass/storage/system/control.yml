@@ -157,3 +157,28 @@ parameters:
             salt_master_host: ${_param:reclass_config_master}
             single_address: {{ cookiecutter.mdb01_ip }}
             ceilometer_database_host: {{ cookiecutter.mdb01_name }}
+
+        {%- if cookiecutter.ceilometer_cluster == "True" %}
+
+        {{ cookiecutter.mdb02_name }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter.mdb02_name }}
+          domain: {{ cookiecutter.domain_name }}
+          classes:
+          - system.linux.system.single
+          - system.openstack.control.meter
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            single_address: {{ cookiecutter.mdb02_ip }}
+            ceilometer_database_host: {{ cookiecutter.mdb02_name }}
+        {{ cookiecutter.mdb03_name }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter.mdb03_name }}
+          domain: {{ cookiecutter.domain_name }}
+          classes:
+          - system.linux.system.single
+          - system.openstack.control.meter
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            single_address: {{ cookiecutter.mdb03_ip }}
+            ceilometer_database_host: {{ cookiecutter.mdb03_name }}
+
+        {%- endif %}

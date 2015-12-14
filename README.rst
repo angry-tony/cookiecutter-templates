@@ -30,6 +30,7 @@ Following parameters need to be provided
 * "opencontrail_version": "2.2", opencontrail version
 * "opencontrail_analytics_cluster": true, split analytics to separate cluster
 * "metering_cluster": true, deploy multi-node metering instead of single-node
+* "ceilometer_cluster": true, deploy multi-node ceilometer instead of single-node
 * "sensu_mail_handler": false, deploy sensu mail handler (using admin_email)
 * "apt_repository": "", APT repository base URL
 * "apt_branch": "nightly", APT repository branch (nightly, testing, stable)
@@ -75,11 +76,13 @@ Following parameters need to be provided
 * "dbs01_ip": "",
 * "dbs02_ip": "",
 * "dbs03_ip": "",
+* "mdb_vip": "",
 * "mdb01_ip": "",
 * "mdb02_ip": "",
 * "mdb03_ip": "",
 * "log01_ip": "",
 * "mon01_ip": "",
+* "mtr_vip": "",
 * "mtr01_ip": "",
 * "mtr02_ip": "",
 * "prx01_ip": "",

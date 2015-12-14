@@ -3,11 +3,13 @@
 {%- endmacro %}
 parameters:
   _param:
+    openstack_endpoint: {{ cookiecutter.openstack_endpoint }}
     cluster_local_address: ${_param:single_address}
     database_vip_address: {{ cookiecutter.dbs_vip }}
     control_vip_address: {{ cookiecutter.ctl_vip }}
     network_vip_address: {{ cookiecutter.ntw_vip }}
-    mtr_vip_address: {{ cookiecutter.mtr01_ip }}
+    mdb_vip_address: {% if cookiecutter.ceilometer_cluster %}{{ cookiecutter.mdb_vip }}{% else %}{{ cookiecutter.mdb_ip }}{% endif %}
+    mtr_vip_address: {% if cookiecutter.metering_cluster %}{{ cookiecutter.mtr_vip }}{% else %}{{ cookiecutter.mtr01_ip }}{% endif %}
     mon_vip_address: {{ cookiecutter.mon01_ip }}
     control_node01_address: {{ cookiecutter.ctl01_ip }}
     control_node02_address: {{ cookiecutter.ctl02_ip }}

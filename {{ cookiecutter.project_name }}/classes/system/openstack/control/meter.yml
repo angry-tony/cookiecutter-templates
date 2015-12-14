@@ -2,14 +2,37 @@
 {% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'|random }}{% endfor %}
 {%- endmacro %}
 classes:
+{%- if cookiecutter.ceilometer_cluster == "True" %}
+- service.keepalived.cluster.single
+- service.mongodb.server.cluster
+- service.haproxy.proxy.single
+- service.ceilometer.server.cluster
+{%- else %}
 - service.mongodb.server.single
-- system.ceilometer.server.single
+- service.ceilometer.server.single
+{%- endif %}
 - system.openstack.common
 parameters:
   _param:
+    {%- if cookiecutter.ceilometer_cluster == "True" %}
+    cluster_vip_address: ${_param:mdb_vip_address}
+    cluster_node01_hostname: {{ cookiecutter.mdb01_name }}
+    cluster_node01_address: {{ cookiecutter.mdb01_address }}
+    cluster_node02_hostname: {{ cookiecutter.mdb02_name }}
+    cluster_node02_address: {{ cookiecutter.mdb02_address }}
+    cluster_node03_hostname: {{ cookiecutter.mdb03_name }}
+    cluster_node03_address: {{ cookiecutter.mdb03_address }}
+    mongodb_master: ${_param:cluster_node01_hostname}
+    mongodb_server_members:
+    - host: {{ cookiecutter.mdb01_name }}
+      priority: 2
+    - host: {{ cookiecutter.mdb02_name }}
+    - host: {{ cookiecutter.mdb03_name }}
+    {%- endif %}
     mongodb_server_replica_set: ceilometer
     mongodb_ceilometer_password: {{ password(16) }}
     mongodb_admin_password: {{ password(16) }}
+    # TODO: generate shared key
     mongodb_shared_key: |
       4vie+55QrhSCbxyg/a1yH7JBJIVfmAv4P6/tr8SUQGcGPIRFZCRpYqpUmleLUbK7
       iBqz+cuN9XAQQm1EGPHJK354nALM4qZYW5T2Y4z6kuUixC9Xl2LQxksFusREhhNG
@@ -27,6 +50,20 @@ parameters:
       GAtpBpigdPkfllaOUZed+BEOGB8LxkeWITzy+e9czzhYKje4KRbiEpdmaZn5f+H8
       izdFOf9y6CQJf+HLXbYktDMyEboF3QjW+kBgTXtZPU4ayQhlfcjXgPAgZgX4Zu+T
       A0T/FT11UYXnEJdT1Zc/41Gc24ng
+  {%- if cookiecutter.ceilometer_cluster == "True" %}
+  keepalived:
+    cluster:
+      instance:
+        VIP:
+          virtual_router_id: 230
+  {%- endif %}
+  linux:
+    network:
+      host:
+        proxy_vip:
+          address: ${_param:control_vip_address}
+          names:
+          - ${_param:openstack_endpoint}
   mongodb:
     server:
       database:

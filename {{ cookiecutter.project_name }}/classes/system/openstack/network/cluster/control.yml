@@ -23,7 +23,7 @@ parameters:
         proxy_vip:
           address: ${_param:control_vip_address}
           names:
-          - {{ cookiecutter.openstack_endpoint }}
+          - ${_param:openstack_endpoint}
   keepalived:
     cluster:
       instance:
