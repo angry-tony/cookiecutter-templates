@@ -5,7 +5,7 @@
     "openstack_version": "kilo",
     "openstack_endpoint": "cloud.company.com",
     "opencontrail_version": "2.2",
-    "opencontrail_split_analytics": true,
+    "opencontrail_analytics_cluster": true,
     "sensu_mail_handler": false,
     "apt_repository": "http://apt.tcpcloud.eu",
     "apt_branch": "nightly",

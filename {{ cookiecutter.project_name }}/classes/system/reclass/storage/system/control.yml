@@ -106,7 +106,7 @@ parameters:
             keepalived_vip_priority: 301
             opencontrail_database_id: 3
 
-        {%- if cookiecutter.split_analytics %}
+        {%- if cookiecutter.opencontrail_split_analytics == "True" %}
 
         {{ cookiecutter.nal01_name }}.{{ cookiecutter.domain_name }}:
           name: {{ cookiecutter.nal01_name }}
