@@ -8,6 +8,7 @@ classes:
 parameters:
   _param:
     keystone_billometer_address: ${_param:control_vip_address}
+    billometer_identity_password: ${_param:keystone_billometer_password}
   postgresql:
     server:
       database:
