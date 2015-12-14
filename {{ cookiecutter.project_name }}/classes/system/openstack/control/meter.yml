@@ -17,11 +17,11 @@ parameters:
     {%- if cookiecutter.ceilometer_cluster == "True" %}
     cluster_vip_address: ${_param:mdb_vip_address}
     cluster_node01_hostname: {{ cookiecutter.mdb01_name }}
-    cluster_node01_address: {{ cookiecutter.mdb01_address }}
+    cluster_node01_address: {{ cookiecutter.mdb01_ip }}
     cluster_node02_hostname: {{ cookiecutter.mdb02_name }}
-    cluster_node02_address: {{ cookiecutter.mdb02_address }}
+    cluster_node02_address: {{ cookiecutter.mdb02_ip }}
     cluster_node03_hostname: {{ cookiecutter.mdb03_name }}
-    cluster_node03_address: {{ cookiecutter.mdb03_address }}
+    cluster_node03_address: {{ cookiecutter.mdb03_ip }}
     mongodb_master: ${_param:cluster_node01_hostname}
     mongodb_server_members:
     - host: {{ cookiecutter.mdb01_name }}
