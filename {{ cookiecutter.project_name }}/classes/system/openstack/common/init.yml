@@ -5,6 +5,7 @@ parameters:
   _param:
     cluster_public_host: {{ cookiecutter.openstack_endpoint }}
     cluster_local_address: ${_param:single_address}
+    admin_email: {{ cookiecutter.admin_email }}
     database_vip_address: {{ cookiecutter.dbs_vip }}
     control_vip_address: {{ cookiecutter.ctl_vip }}
     network_vip_address: {{ cookiecutter.ntw_vip }}
@@ -59,7 +60,7 @@ parameters:
     postgresql_graphite_password: {{ password(16) }}
     keystone_service_token: {{ password(16) }}
     keystone_admin_password: {{ password(16) }}
-    keystone_admin_email: {{ cookiecutter.admin_email }}
+    keystone_admin_email: ${_param:admin_email}
     keystone_cinder_password: {{ password(16) }}
     keystone_glance_password: {{ password(16) }}
     keystone_heat_password: {{ password(16) }}
