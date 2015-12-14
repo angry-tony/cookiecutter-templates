@@ -63,6 +63,7 @@ parameters:
     mysql_neutron_password: {{ password(16) }}
     mysql_nova_password: {{ password(16) }}
     postgresql_graphite_password: {{ password(16) }}
+    postgresql_billometer_password: {{ password(16) }}
     keystone_service_token: {{ password(16) }}
     keystone_admin_password: {{ password(16) }}
     keystone_admin_email: ${_param:admin_email}
