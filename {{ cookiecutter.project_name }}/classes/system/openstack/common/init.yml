@@ -72,6 +72,7 @@ parameters:
     keystone_billometer_password: {{ password(16) }}
     keystone_ceilometer_password: {{ password(16) }}
     opencontrail_version: {{ cookiecutter.opencontrail_version }}
+    opencontrail_stats_password: {{ password(16) }}
     collectd_backend_carbon_host: ${_param:mtr_vip_address}
     collectd_backend_carbon_port: 2023
     sensu_message_queue_host: ${_param:mon_vip_address}
