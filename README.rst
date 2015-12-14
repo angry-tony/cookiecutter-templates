@@ -27,6 +27,8 @@ Following parameters need to be provided
 * "openstack_version": "kilo", openstack version
 * "opencontrail_version": "2.2", opencontrail version
 * "sensu_mail_handler": false, deploy sensu mail handler (using admin_email)
+* "apt_repository": "", APT repository base URL
+* "apt_branch": "nightly", APT repository branch (nightly, testing, stable)
 * "cfg01_name": "cfg01", hostnames
 * "ctl01_name": "ctl01",
 * "ctl02_name": "ctl02",

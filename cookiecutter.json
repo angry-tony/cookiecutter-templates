@@ -5,6 +5,8 @@
     "openstack_version": "kilo",
     "opencontrail_version": "2.2",
     "sensu_mail_handler": false,
+    "apt_repository": "http://apt.tcpcloud.eu",
+    "apt_branch": "nightly",
     "cfg01_name": "cfg01",
     "ctl01_name": "ctl01",
     "ctl02_name": "ctl02",
