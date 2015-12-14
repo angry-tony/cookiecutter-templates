@@ -2,7 +2,11 @@ classes:
 - service.keepalived.cluster.single
 - service.haproxy.proxy.single
 - system.neutron.control.cluster
+{%- if cookiecutter.contrail_split_analytics == "True" %}
 - system.opencontrail.control.control
+{%- else %}
+- system.opencontrail.control.cluster
+{%- endif %}
 - system.openstack.common
 parameters:
   _param:

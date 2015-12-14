@@ -74,7 +74,7 @@ parameters:
           domain: {{ cookiecutter.domain_name }}
           classes:
           - system.linux.system.single
-          - system.openstack.network.cluster
+          - system.openstack.network.cluster.control
           params:
             salt_master_host: ${_param:reclass_config_master}
             single_address: {{ cookiecutter.ntw01_ip }}
@@ -86,7 +86,7 @@ parameters:
           domain: {{ cookiecutter.domain_name }}
           classes:
           - system.linux.system.single
-          - system.openstack.network.cluster
+          - system.openstack.network.cluster.control
           params:
             salt_master_host: ${_param:reclass_config_master}
             single_address: {{ cookiecutter.ntw02_ip }}
@@ -98,13 +98,55 @@ parameters:
           domain: {{ cookiecutter.domain_name }}
           classes:
           - system.linux.system.single
-          - system.openstack.network.cluster
+          - system.openstack.network.cluster.control
           params:
             salt_master_host: ${_param:reclass_config_master}
             single_address: {{ cookiecutter.ntw03_ip }}
             keepalived_vip_interface: eth0
             keepalived_vip_priority: 301
             opencontrail_database_id: 3
+
+        {%- if cookiecutter.split_analytics %}
+
+        {{ cookiecutter.nal01_name }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter.nal01_name }}
+          domain: {{ cookiecutter.domain_name }}
+          classes:
+          - system.linux.system.single
+          - system.openstack.network.cluster.analytics
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            single_address: {{ cookiecutter.nal01_ip }}
+            keepalived_vip_interface: eth0
+            keepalived_vip_priority: 303
+            opencontrail_database_id: 1
+        {{ cookiecutter.nal02_name }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter.nal02_name }}
+          domain: {{ cookiecutter.domain_name }}
+          classes:
+          - system.linux.system.single
+          - system.openstack.network.cluster.analytics
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            single_address: {{ cookiecutter.nal02_ip }}
+            keepalived_vip_interface: eth0
+            keepalived_vip_priority: 302
+            opencontrail_database_id: 2
+        {{ cookiecutter.nal03_name }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter.nal03_name }}
+          domain: {{ cookiecutter.domain_name }}
+          classes:
+          - system.linux.system.single
+          - system.openstack.network.cluster.analytics
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            single_address: {{ cookiecutter.nal03_ip }}
+            keepalived_vip_interface: eth0
+            keepalived_vip_priority: 301
+            opencontrail_database_id: 3
+
+        {%- endif %}
+
         {{ cookiecutter.mdb01_name }}.{{ cookiecutter.domain_name }}:
           name: {{ cookiecutter.mdb01_name }}
           domain: {{ cookiecutter.domain_name }}

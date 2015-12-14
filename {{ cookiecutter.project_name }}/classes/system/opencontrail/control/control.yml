@@ -1,5 +1,5 @@
 classes:
-- service.opencontrail.control.cluster
+- service.opencontrail.control.control
 parameters:
   haproxy:
     proxy:
@@ -40,24 +40,6 @@ parameters:
           - name: {{ cookiecutter.ntw03_name }}
             host: ${_param:cluster_node03_address}
             port: 9110
-            params: check inter 2000 rise 2 fall 3
-        contrail_analytics:
-          type: contrail-analytics
-          binds:
-          - address: ${_param:cluster_vip_address}
-            port: 8081
-          servers:
-          - name: {{ cookiecutter.ntw01_name }}
-            host: ${_param:cluster_node01_address}
-            port: 9081
-            params: check inter 2000 rise 2 fall 3
-          - name: {{ cookiecutter.ntw02_name }}
-            host: ${_param:cluster_node02_address}
-            port: 9081
-            params: check inter 2000 rise 2 fall 3
-          - name: {{ cookiecutter.ntw03_name }}
-            host: ${_param:cluster_node03_address}
-            port: 9081
             params: check inter 2000 rise 2 fall 3
         contrail_config_stats:
           type: contrail-config

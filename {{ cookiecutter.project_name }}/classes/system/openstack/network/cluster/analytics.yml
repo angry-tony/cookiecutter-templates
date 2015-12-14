@@ -1,0 +1,31 @@
+classes:
+- service.keepalived.cluster.single
+- service.haproxy.proxy.single
+- system.opencontrail.control.analytics
+- system.openstack.common
+parameters:
+  _param:
+    network_vip_address: {{ cookiecutter.ntw_vip }}
+    cluster_vip_address: {{ cookiecutter.nal_vip }}
+    cluster_node01_hostname: {{ cookiecutter.nal01_name }}
+    cluster_node01_address: {{ cookiecutter.nal01_ip }}
+    cluster_node02_hostname: {{ cookiecutter.nal02_name }}
+    cluster_node02_address: {{ cookiecutter.nal02_ip }}
+    cluster_node03_hostname: {{ cookiecutter.nal03_name }}
+    cluster_node03_address: {{ cookiecutter.nal03_ip }}
+  linux:
+    network:
+      host:
+        proxy_vip:
+          address: ${_param:control_vip_address}
+          names:
+          - {{ cookiecutter.openstack_endpoint }}
+  keepalived:
+    cluster:
+      instance:
+        VIP:
+          virtual_router_id: 210
+  opencontrail:
+    common:
+      identity:
+        host: ${_param:control_vip_address}
