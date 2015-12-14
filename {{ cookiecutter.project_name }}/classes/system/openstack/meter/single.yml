@@ -1,14 +1,11 @@
 classes:
+- system.openstack.common
 - service.memcached.server.local
 - service.postgresql.server.local
 - service.graphite.server.single
 - service.apache.server.single
 - service.supervisor.server.single
 parameters:
-  _param:
-    graphite_secret_key: asdf56as5fdg1asf5g4atik4j58454
-    postgresql_graphite_password: 5fsd15a4frg1df112h3d1gfh8r4k4j
-    rabbitmq_graphite_password: g5641f5ygh45etg4hf1jh54d6yfr5u
   apache:
     server:
       modules:
