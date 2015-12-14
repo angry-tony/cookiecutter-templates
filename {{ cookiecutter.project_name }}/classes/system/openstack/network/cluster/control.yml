@@ -23,7 +23,7 @@ parameters:
         proxy_vip:
           address: ${_param:control_vip_address}
           names:
-          - ${_param:openstack_endpoint}
+          - ${_param:cluster_public_host}
   keepalived:
     cluster:
       instance:

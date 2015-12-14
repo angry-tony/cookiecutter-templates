@@ -3,7 +3,7 @@
     "domain_name": "cloud.company.com",
     "admin_email": "root@localhost",
     "openstack_version": "kilo",
-    "openstack_endpoint": "cloud.company.com",
+    "cluster_public_host": "cloud.company.com",
     "opencontrail_version": "2.2",
     "opencontrail_analytics_cluster": true,
     "metering_cluster": true,

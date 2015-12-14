@@ -3,7 +3,7 @@
 {%- endmacro %}
 parameters:
   _param:
-    openstack_endpoint: {{ cookiecutter.openstack_endpoint }}
+    cluster_public_host: {{ cookiecutter.openstack_endpoint }}
     cluster_local_address: ${_param:single_address}
     database_vip_address: {{ cookiecutter.dbs_vip }}
     control_vip_address: {{ cookiecutter.ctl_vip }}
