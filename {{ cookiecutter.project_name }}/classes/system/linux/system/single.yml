@@ -10,13 +10,10 @@ parameters:
     system:
       repo:
         tcpcloud:
-          source: "deb [arch=amd64] {{ cookiecutter.apt_repository }}/{{ cookiecutter.apt_branch }}/ trusty main security extra tcp tcp-salt {{ cookiecutter.openstack_version }} {% if cookiecutter.opencontrail_version == '1.2' %}oc22{% endif %} galera-s9s"
+          source: "deb [arch=amd64] {{ cookiecutter.apt_repository }}/{{ cookiecutter.apt_branch }}/ trusty main security extra tcp tcp-salt {{ cookiecutter.openstack_version }} {% if cookiecutter.opencontrail_version == '2.2' %}oc22{% endif %} galera-s9s"
           architectures: amd64
           default: true
           key_url: "http://apt.tcpcloud.eu/public.gpg"
-          pin:
-            - priority: 900
-              pin: 'origin "apt.tcpcloud.eu"'
     network:
       host:
         {{ cookiecutter.cfg01_name }}:
