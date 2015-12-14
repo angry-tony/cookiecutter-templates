@@ -8,7 +8,6 @@ parameters:
   _param:
     graphite_secret_key: asdf56as5fdg1asf5g4atik4j58454
     postgresql_graphite_password: 5fsd15a4frg1df112h3d1gfh8r4k4j
-    apache2_site_graphite_host: 10.0.106.150
     rabbitmq_graphite_password: g5641f5ygh45etg4hf1jh54d6yfr5u
   apache:
     server:
@@ -19,8 +18,6 @@ parameters:
           enabled: true
           type: graphite
           name: server
-          host:
-            name: ${_param:apache2_site_graphite_host}
   postgresql:
     server:
       database:
