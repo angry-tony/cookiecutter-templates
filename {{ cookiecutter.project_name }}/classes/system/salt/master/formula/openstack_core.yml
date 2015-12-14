@@ -4,6 +4,9 @@ parameters:
       environment:
         prd:
           formula:
+            billometer:
+              source: pkg
+              name: salt-formula-billometer
             ceilometer:
               source: pkg
               name: salt-formula-ceilometer
