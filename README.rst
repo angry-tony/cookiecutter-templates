@@ -29,6 +29,7 @@ Following parameters need to be provided
 * "openstack_endpoint": "cloud.company.com", openstack API endpoint
 * "opencontrail_version": "2.2", opencontrail version
 * "opencontrail_analytics_cluster": true, split analytics to separate cluster
+* "metering_cluster": true, deploy multi-node metering instead of single-node
 * "sensu_mail_handler": false, deploy sensu mail handler (using admin_email)
 * "apt_repository": "", APT repository base URL
 * "apt_branch": "nightly", APT repository branch (nightly, testing, stable)

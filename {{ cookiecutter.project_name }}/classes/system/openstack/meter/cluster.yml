@@ -1,0 +1,44 @@
+classes:
+- system.openstack.common
+- service.memcached.server.local
+- service.postgresql.server.local
+- service.graphite.server.cluster
+- service.apache.server.single
+- service.supervisor.server.single
+parameters:
+  _param:
+    cluster_local_address: ${_param:single_address}
+    cluster_vip_address: {{ cookiecutter.mtr_vip }}
+    cluster_node01_address: {{ cookiecutter.mtr01_ip }}
+    cluster_node02_address: {{ cookiecutter.mtr02_ip }}
+  keepalived:
+    cluster:
+      instance:
+        VIP:
+          virtual_router_id: 250
+  apache:
+    server:
+      modules:
+      - wsgi
+      site:
+        graphite_server:
+          enabled: true
+          type: graphite
+          name: server
+  postgresql:
+    server:
+      database:
+        graphite:
+          encoding: UTF8
+          locale: cs_CZ
+          users:
+          - name: graphite
+            password: ${_param:postgresql_graphite_password}
+            host: 127.0.0.1
+            rights: all privileges
+  supervisor:
+    server:
+      enabled: false
+      service:
+        graphite_server:
+          enabled: false
