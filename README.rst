@@ -26,6 +26,7 @@ Following parameters need to be provided
 * "domain_name": "cloud.company.com", domain part of FQDN
 * "admin_email": "root@localhost", keystone admin
 * "openstack_version": "kilo", openstack version
+* "openstack_endpoint": "cloud.company.com", openstack API endpoint
 * "opencontrail_version": "2.2", opencontrail version
 * "sensu_mail_handler": false, deploy sensu mail handler (using admin_email)
 * "apt_repository": "", APT repository base URL

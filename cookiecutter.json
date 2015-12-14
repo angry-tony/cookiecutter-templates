@@ -3,6 +3,7 @@
     "domain_name": "cloud.company.com",
     "admin_email": "root@localhost",
     "openstack_version": "kilo",
+    "openstack_endpoint": "cloud.company.com",
     "opencontrail_version": "2.2",
     "sensu_mail_handler": false,
     "apt_repository": "http://apt.tcpcloud.eu",

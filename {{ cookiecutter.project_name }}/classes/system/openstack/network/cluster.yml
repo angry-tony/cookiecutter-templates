@@ -19,7 +19,7 @@ parameters:
         proxy_vip:
           address: ${_param:control_vip_address}
           names:
-          - vpc20.tcpcloud.eu
+          - {{ cookiecutter.openstack_endpoint }}
   keepalived:
     cluster:
       instance:
