@@ -7,8 +7,8 @@ classes:
 - service.supervisor.server.single
 parameters:
   _param:
-    keystone_billometer_address: ${_param:billometer_identity_host}
-    keystone_billometer_password: ${_param:billometer_identity_password}
+    keystone_billometer_address: ${_param:control_vip_address}
+    keystone_billometer_password: ${_param:keystone_billometer_password}
   postgresql:
     server:
       database:
