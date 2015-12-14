@@ -1,7 +1,7 @@
 classes:
 - service.glance.control.cluster
 - service.haproxy.proxy.single
-- system.glance.control.storage.glusterfs
+- system.glusterfs.storage.glance
 parameters:
   mysql:
     server:

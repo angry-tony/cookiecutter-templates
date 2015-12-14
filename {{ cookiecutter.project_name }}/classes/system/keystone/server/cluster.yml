@@ -2,7 +2,7 @@ classes:
 - service.git.client
 - service.keystone.server.cluster
 - service.python.environment
-- system.keystone.server.storage.glusterfs
+- system.glusterfs.storage.keystone
 parameters:
   keystone:
     server:
