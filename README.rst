@@ -28,6 +28,7 @@ Following parameters need to be provided
 * "openstack_version": "kilo", openstack version
 * "cluster_public_host": "cloud.company.com", openstack API endpoint
 * "opencontrail_version": "2.2", opencontrail version
+* "opencontrail_dns": "8.8.8.8",
 * "opencontrail_analytics_cluster": true, split analytics to separate cluster
 * "metering_cluster": true, deploy multi-node metering instead of single-node
 * "ceilometer_cluster": true, deploy multi-node ceilometer instead of single-node
