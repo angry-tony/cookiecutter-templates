@@ -25,12 +25,12 @@ parameters:
       metric:
         in:
           engine: graphite
-          host: 10.0.106.150
+          host: ${_param:mtr_vip_address}
           port: 80
           ssl: false
         out:
           engine: statsd
-          host: 10.0.106.150
+          host: ${_param:mtr_vip_address}
           prefix: billometer
           port: 8125
   rabbitmq:
