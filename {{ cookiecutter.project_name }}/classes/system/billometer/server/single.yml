@@ -1,6 +1,3 @@
-{%- macro password(size=16) -%}
-{% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'|random }}{% endfor %}
-{%- endmacro %}
 classes:
 - service.git.client
 - service.billometer.server.single
@@ -9,17 +6,6 @@ classes:
 - service.rabbitmq.server.single
 - service.supervisor.server.single
 parameters:
-  _param:
-    billometer_secret_key: {{ password(16) }}
-    billometer_identity_password: ${_param:keystone_billometer_password}
-    billometer_identity_host: ${_param:control_vip_address}
-    billometer_identity_token: ${_param:keystone_service_token}
-    keystone_billometer_address: ${_param:billometer_service_host}
-    postgresql_billometer_password: {{ password(16) }}
-    rabbitmq_admin_name: admin
-    rabbitmq_admin_password: {{ password(16) }}
-    rabbitmq_secret_key: {{ password(16) }}
-    rabbitmq_billometer_password: {{ password(16) }}
   postgresql:
     server:
       database:
