@@ -1,2 +1,3 @@
 classes:
 - system.openstack.database.cluster
+- service.galera.slave.cluster

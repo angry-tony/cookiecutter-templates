@@ -1,5 +1,6 @@
 classes:
 - system.openstack.database.cluster
+- service.galera.master.cluster
 parameters:
   _param:
     mysql_cluster_role: master
