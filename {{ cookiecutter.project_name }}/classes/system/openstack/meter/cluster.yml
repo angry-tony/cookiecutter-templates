@@ -1,5 +1,6 @@
 classes:
 - system.openstack.common
+- service.keepalived.cluster.single
 - service.memcached.server.local
 - service.postgresql.server.local
 - service.graphite.server.cluster

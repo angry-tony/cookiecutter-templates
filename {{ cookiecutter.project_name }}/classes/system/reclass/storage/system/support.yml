@@ -16,10 +16,19 @@ parameters:
           domain: {{ cookiecutter.domain_name }}
           classes:
           - system.linux.system.single
-          - system.openstack.proxy.single
+          - system.openstack.proxy.cluster
           params:
             salt_master_host: ${_param:reclass_config_master}
             single_address: {{ cookiecutter.prx01_ip }}
+        {{ cookiecutter.prx02_name }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter.prx02_name }}
+          domain: {{ cookiecutter.domain_name }}
+          classes:
+          - system.linux.system.single
+          - system.openstack.proxy.cluster
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            single_address: {{ cookiecutter.prx02_ip }}
         {{ cookiecutter.mon01_name }}.{{ cookiecutter.domain_name }}:
           name: {{ cookiecutter.mon01_name }}
           domain: {{ cookiecutter.domain_name }}
@@ -45,9 +54,7 @@ parameters:
             {%- if cookiecutter.metering_cluster == "True" %}
             keepalived_vip_priority: 100
             {%- endif %}
-
         {%- if cookiecutter.metering_cluster == "True" %}
-
         {{ cookiecutter.mtr02_name }}.{{ cookiecutter.domain_name }}:
           name: {{ cookiecutter.mtr02_name }}
           domain: {{ cookiecutter.domain_name }}
@@ -58,9 +65,7 @@ parameters:
             salt_master_host: ${_param:reclass_config_master}
             single_address: {{ cookiecutter.mtr02_ip }}
             keepalived_vip_priority: 101
-
         {%- endif %}
-
         {{ cookiecutter.log01_name }}.{{ cookiecutter.domain_name }}:
           name: {{ cookiecutter.log01_name }}
           domain: {{ cookiecutter.domain_name }}

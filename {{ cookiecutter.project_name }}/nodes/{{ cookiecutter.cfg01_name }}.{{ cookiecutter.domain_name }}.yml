@@ -4,6 +4,7 @@ classes:
 - system.openssh.client.workshop
 - system.salt.master.single
 - system.salt.master.formula.graphite
+- system.salt.master.formula.heka
 - system.salt.master.formula.kedb
 - system.salt.master.formula.linux
 - system.salt.master.formula.openstack_core
