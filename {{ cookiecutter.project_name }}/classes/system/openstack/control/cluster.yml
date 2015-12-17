@@ -6,7 +6,6 @@ classes:
 - system.keystone.server.cluster
 - system.glance.control.cluster
 - system.nova.control.cluster
-- system.neutron.control.cluster
 - system.cinder.control.cluster
 - system.heat.server.cluster
 - system.openstack.common
@@ -47,7 +46,19 @@ parameters:
       database:
         host: ${_param:database_vip_address}
       {%- endif %}
+      identity:
+        engine: keystone
+        host: ${_param:control_vip_address}
+        port: 35357
+        user: nova
+        password: ${_param:keystone_nova_password}
+        tenant: service
       networking: contrail
+      network:
+        host: ${_param:network_vip_address}
+        user: neutron
+        password: ${_param:keystone_neutron_password}
+        tenant: service
       bind:
         private_address: ${_param:cluster_local_address}
         public_address: ${_param:cluster_vip_address}
@@ -59,17 +70,6 @@ parameters:
         members:
         - host: 127.0.0.1
           port: 11211
-  neutron:
-    server:
-      {%- if cookiecutter.dbs_vip %}
-      database:
-        host: ${_param:database_vip_address}
-      {%- endif %}
-      plugin: contrail
-      tunnel_type: vxlan
-      public_networks: []
-      contrail:
-        version: ${_param:opencontrail_version}
   haproxy:
     proxy:
       listen:

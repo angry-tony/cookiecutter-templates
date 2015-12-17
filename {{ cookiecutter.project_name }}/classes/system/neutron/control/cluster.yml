@@ -37,3 +37,14 @@ parameters:
             host: ${_param:cluster_node03_address}
             port: 9696
             params: check inter 10s fastinter 2s downinter 3s rise 3 fall 3
+  neutron:
+    server:
+      {%- if cookiecutter.dbs_vip %}
+      database:
+        host: ${_param:database_vip_address}
+      {%- endif %}
+      plugin: contrail
+      tunnel_type: vxlan
+      public_networks: []
+      contrail:
+        version: ${_param:opencontrail_version}
