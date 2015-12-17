@@ -75,8 +75,10 @@ parameters:
             params: check inter 10s fastinter 2s downinter 3s rise 3 fall 3
   heat:
     server:
+      {%- if cookiecutter.dbs_vip %}
       database:
         host: ${_param:database_vip_address}
+      {%- endif %}
       notification: true
       stack_domain_admin:
         name: heat_domain_admin

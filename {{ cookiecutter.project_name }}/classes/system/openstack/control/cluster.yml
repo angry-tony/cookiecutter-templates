@@ -28,19 +28,25 @@ parameters:
   keystone:
     server:
       admin_email: ${_param:admin_email}
+      {%- if cookiecutter.dbs_vip %}
       database:
         host: ${_param:database_vip_address}
+      {%- endif %}
   glance:
     server:
       storage:
         engine: file
       images: []
+      {%- if cookiecutter.dbs_vip %}
       database:
         host: ${_param:database_vip_address}
+      {%- endif %}
   nova:
     controller:
+      {%- if cookiecutter.dbs_vip %}
       database:
         host: ${_param:database_vip_address}
+      {%- endif %}
       networking: contrail
       bind:
         private_address: ${_param:cluster_local_address}
@@ -55,8 +61,10 @@ parameters:
           port: 11211
   neutron:
     server:
+      {%- if cookiecutter.dbs_vip %}
       database:
         host: ${_param:database_vip_address}
+      {%- endif %}
       plugin: contrail
       tunnel_type: vxlan
       public_networks: []
@@ -88,5 +96,7 @@ parameters:
       notification: true
     controller:
       notification: true
+      {%- if cookiecutter.dbs_vip %}
       database:
         host: ${_param:database_vip_address}
+      {%- endif %}
