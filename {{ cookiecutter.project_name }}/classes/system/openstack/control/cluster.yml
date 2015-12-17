@@ -28,13 +28,19 @@ parameters:
   keystone:
     server:
       admin_email: ${_param:admin_email}
+      database:
+        host: ${_param:database_vip_address}
   glance:
     server:
       storage:
         engine: file
       images: []
+      database:
+        host: ${_param:database_vip_address}
   nova:
     controller:
+      database:
+        host: ${_param:database_vip_address}
       networking: contrail
       bind:
         private_address: ${_param:cluster_local_address}
@@ -49,6 +55,8 @@ parameters:
           port: 11211
   neutron:
     server:
+      database:
+        host: ${_param:database_vip_address}
       plugin: contrail
       tunnel_type: vxlan
       public_networks: []
@@ -80,3 +88,5 @@ parameters:
       notification: true
     controller:
       notification: true
+      database:
+        host: ${_param:database_vip_address}
