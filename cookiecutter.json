@@ -3,6 +3,8 @@
     "domain_name": "am.lithium.com",
     "admin_email": "root@lithium.com",
     "openstack_version": "kilo",
+    "horizon_version": "liberty",
+    "horizon_theme_name": "lithium",
     "cluster_public_host": "10.166.8.70",
     "opencontrail_version": "2.2",
     "opencontrail_dns": "8.8.8.8",
