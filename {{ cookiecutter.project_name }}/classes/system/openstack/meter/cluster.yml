@@ -13,11 +13,7 @@ parameters:
     cluster_node01_address: {{ cookiecutter.mtr01_ip }}
     cluster_node02_address: {{ cookiecutter.mtr02_ip }}
     graphite_database_host: 127.0.0.1
-  keepalived:
-    cluster:
-      instance:
-        VIP:
-          virtual_router_id: 250
+    keepalived_vip_virtual_router_id: 250
   apache:
     server:
       modules:
@@ -27,6 +23,8 @@ parameters:
           enabled: true
           type: graphite
           name: server
+          host:
+            name: ${_param:single_address}
   postgresql:
     server:
       database:

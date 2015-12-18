@@ -17,11 +17,14 @@ parameters:
     galera_server_cluster_name: openstack_cluster
     galera_server_maintenance_password: {{ password(16) }}
     galera_server_admin_password: {{ password(16) }}
-  keepalived:
-    cluster:
-      instance:
-        VIP:
-          virtual_router_id: 190
+    keepalived_vip_virtual_router_id: 190
+  linux:
+    system:
+      repo:
+        tcpcloud_openstack:
+          source: "deb [arch=amd64] http://apt.tcpcloud.eu/testing/ trusty galera-s9s"
+          architectures: amd64
+          key_url: "http://apt.tcpcloud.eu/public.gpg"
   haproxy:
     proxy:
       listen:

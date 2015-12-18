@@ -27,6 +27,11 @@ parameters:
     system:
       name: {{ cookiecutter.cfg01_name }}
       domain: {{ cookiecutter.domain_name }}
+      repo:
+        tcpcloud_salt:
+          source: "deb [arch=amd64] http://apt.tcpcloud.eu/testing/ trusty tcp-salt"
+          architectures: amd64
+          key_url: "http://apt.tcpcloud.eu/public.gpg"
   salt:
     master:
       accept_policy: open_mode

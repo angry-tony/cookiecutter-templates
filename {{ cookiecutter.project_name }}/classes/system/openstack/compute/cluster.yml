@@ -12,6 +12,12 @@ parameters:
   linux:
     storage:
       multipath: false
+    system:
+      repo:
+        tcpcloud_openstack:
+          source: "deb [arch=amd64] http://apt.tcpcloud.eu/testing/ trusty ${_param:nova_version}"
+          architectures: amd64
+          key_url: "http://apt.tcpcloud.eu/public.gpg"
   nova:
     compute:
       vncproxy_url: http://${_param:control_vip_address}:6080

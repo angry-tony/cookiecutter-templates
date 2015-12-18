@@ -17,6 +17,7 @@ parameters:
     cluster_node02_address: {{ cookiecutter.ntw02_ip }}
     cluster_node03_hostname: {{ cookiecutter.ntw03_name }}
     cluster_node03_address: {{ cookiecutter.ntw03_ip }}
+    keepalived_vip_virtual_router_id: 200
   linux:
     network:
       host:
@@ -24,11 +25,12 @@ parameters:
           address: ${_param:control_vip_address}
           names:
           - ${_param:cluster_public_host}
-  keepalived:
-    cluster:
-      instance:
-        VIP:
-          virtual_router_id: 200
+    system:
+      repo:
+        tcpcloud_contrail:
+          source: "deb [arch=amd64] http://apt.tcpcloud.eu/testing/ trusty ${_param:neutron_version} oc22"
+          architectures: amd64
+          key_url: "http://apt.tcpcloud.eu/public.gpg"
   neutron:
     server:
       dns_domain: ${_param:dns_domain}

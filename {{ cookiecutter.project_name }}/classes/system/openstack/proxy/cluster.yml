@@ -8,10 +8,15 @@ classes:
 - system.nginx.server.proxy.openstack_vnc
 - system.nginx.server.proxy.openstack_web
 - system.nginx.server.proxy.sensu_web
-#- system.horizon.server.multi
-#- system.horizon.server.app.tcpcloud_liberty
 - system.openstack.common
 parameters:
   _param:
     cluster_vip_address: {{ cookiecutter.prx_vip }}
     keepalived_vip_virtual_router_id: 185
+  linux:
+    system:
+      repo:
+        tcpcloud_horizon:
+          source: "deb [arch=amd64] http://apt.tcpcloud.eu/testing/ trusty ${_param:horizon_version}"
+          architectures: amd64
+          key_url: "http://apt.tcpcloud.eu/public.gpg"

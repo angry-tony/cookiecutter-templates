@@ -19,17 +19,20 @@ parameters:
     cluster_node03_hostname: {{ cookiecutter.ctl03_name }}
     cluster_node03_address: {{ cookiecutter.ctl03_ip }}
     glusterfs_service_host: {{ cookiecutter.ctl_vip }}
-  keepalived:
-    cluster:
-      instance:
-        VIP:
-          virtual_router_id: 150
+    keepalived_vip_virtual_router_id: 150
+  linux:
+    system:
+      repo:
+        tcpcloud_openstack:
+          source: "deb [arch=amd64] http://apt.tcpcloud.eu/testing/ trusty ${_param:nova_version}"
+          architectures: amd64
+          key_url: "http://apt.tcpcloud.eu/public.gpg"
   keystone:
     server:
       admin_email: ${_param:admin_email}
       {%- if cookiecutter.dbs_vip %}
       database:
-        host: ${_param:database_vip_address}
+        host: ${_param: database_vip_address}
       {%- endif %}
   glance:
     server:
