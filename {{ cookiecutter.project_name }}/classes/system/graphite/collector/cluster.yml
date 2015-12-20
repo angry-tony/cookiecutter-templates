@@ -1,0 +1,3 @@
+classes:
+- service.memcached.server.single
+- service.graphite.collector.cluster

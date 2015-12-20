@@ -1,8 +1,8 @@
 classes:
 - system.openstack.common
 - service.keepalived.cluster.single
-- service.memcached.server.local
 - service.postgresql.server.local
+- system.graphite.collector.cluster
 - service.graphite.server.cluster
 - service.apache.server.single
 - service.supervisor.server.single
@@ -14,6 +14,7 @@ parameters:
     cluster_node02_address: {{ cookiecutter.mtr02_ip }}
     graphite_database_host: 127.0.0.1
     keepalived_vip_virtual_router_id: 250
+    apache2_site_graphite_host: ${_param:single_address}
   apache:
     server:
       modules:
@@ -24,7 +25,8 @@ parameters:
           type: graphite
           name: server
           host:
-            name: ${_param:single_address}
+            name: ${_param:apache2_site_graphite_host}
+            port: 80
   postgresql:
     server:
       database:
