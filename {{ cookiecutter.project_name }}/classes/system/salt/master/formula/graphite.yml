@@ -10,6 +10,9 @@ parameters:
             graphite:
               source: pkg
               name: salt-formula-graphite
+            nodejs:
+              source: pkg
+              name: salt-nodejs-statsd
             postgresql:
               source: pkg
               name: salt-formula-postgresql
