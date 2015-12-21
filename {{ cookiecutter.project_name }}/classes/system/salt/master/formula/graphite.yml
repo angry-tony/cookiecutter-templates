@@ -13,3 +13,6 @@ parameters:
             postgresql:
               source: pkg
               name: salt-formula-postgresql
+            statsd:
+              source: pkg
+              name: salt-formula-statsd

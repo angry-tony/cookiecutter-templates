@@ -3,6 +3,7 @@ classes:
 - service.keepalived.cluster.single
 - service.postgresql.server.local
 - system.graphite.collector.cluster
+- system.statsd.server.single
 - service.graphite.server.cluster
 - service.apache.server.single
 - service.supervisor.server.single
@@ -15,6 +16,7 @@ parameters:
     graphite_database_host: 127.0.0.1
     keepalived_vip_virtual_router_id: 250
     apache2_site_graphite_host: ${_param:single_address}
+    statsd_server_backend_host: ${_param:single_address}
   apache:
     server:
       modules:
