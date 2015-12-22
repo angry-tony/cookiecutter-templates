@@ -13,25 +13,27 @@ parameters:
     system:
       repo:
         tcpcloud_horizon:
-          source: "deb [arch=amd64] http://apt.tcpcloud.eu/nightly/ trusty ${_param:horizon_version}"
+          source: "deb [arch=amd64] {{ cookiecutter.apt_repository }}/{{ cookiecutter.apt_branch }}/ trusty ${_param:horizon_version}"
           architectures: amd64
-          key_url: "http://apt.tcpcloud.eu/public.gpg"
+          key_url: "{{ cookiecutter.apt_repository }}/public.gpg"
   horizon:
     server:
       control_nodes:
         {{ cookiecutter.ctl01_name }}.{{ cookiecutter.domain_name }}: nova-control, cinder-control, glance-control
         {{ cookiecutter.ctl02_name }}.{{ cookiecutter.domain_name }}: nova-control, cinder-control, glance-control
         {{ cookiecutter.ctl03_name }}.{{ cookiecutter.domain_name }}: nova-control, cinder-control, glance-control
-        {{ cookiecutter.ntw01_name }}.{{ cookiecutter.domain_name }}: contrail-control, contrail-config, contrail-database, neutron-control
-        {{ cookiecutter.ntw02_name }}.{{ cookiecutter.domain_name }}: contrail-control, contrail-config, contrail-database, neutron-control
-        {{ cookiecutter.ntw03_name }}.{{ cookiecutter.domain_name }}: contrail-control, contrail-config, contrail-database, neutron-control
+        {{ cookiecutter.ntw01_name }}.{{ cookiecutter.domain_name }}: contrail-control, contrail-config, contrail-database, neutron-control{% if cookiecutter.opencontrail_analytics_cluster == "False" %} contrail-analytics, contrail-database{% endif %}
+        {{ cookiecutter.ntw02_name }}.{{ cookiecutter.domain_name }}: contrail-control, contrail-config, contrail-database, neutron-control{% if cookiecutter.opencontrail_analytics_cluster == "False" %} contrail-analytics, contrail-database{% endif %}
+        {{ cookiecutter.ntw03_name }}.{{ cookiecutter.domain_name }}: contrail-control, contrail-config, contrail-database, neutron-control{% if cookiecutter.opencontrail_analytics_cluster == "False" %} contrail-analytics, contrail-database{% endif %}
         {{ cookiecutter.dbs01_name }}.{{ cookiecutter.domain_name }}: galera-cluster
         {{ cookiecutter.dbs02_name }}.{{ cookiecutter.domain_name }}: galera-cluster
         {{ cookiecutter.dbs03_name }}.{{ cookiecutter.domain_name }}: galera-cluster
+        {% if cookiecutter.opencontrail_analytics_cluster == "True" %}
         {{ cookiecutter.nal01_name }}.{{ cookiecutter.domain_name }}: contrail-analytics, contrail-database
         {{ cookiecutter.nal02_name }}.{{ cookiecutter.domain_name }}: contrail-analytics, contrail-database
         {{ cookiecutter.nal03_name }}.{{ cookiecutter.domain_name }}: contrail-analytics, contrail-database
-        {% if cookiecutter.metering_cluster %}
+        {% endif %}
+        {% if cookiecutter.metering_cluster == "True" %}
         {{ cookiecutter.mtr01_name }}.{{ cookiecutter.domain_name }}: graphite server
         {{ cookiecutter.mtr02_name }}.{{ cookiecutter.domain_name }}: graphite server
         {% else %}
@@ -40,7 +42,7 @@ parameters:
         {{ cookiecutter.log01_name }}.{{ cookiecutter.domain_name }}: logging server
         {{ cookiecutter.prx01_name }}.{{ cookiecutter.domain_name }}: openstack-api proxy, openstack-horizon proxy, graphite proxy
         {{ cookiecutter.prx02_name }}.{{ cookiecutter.domain_name }}: openstack-api proxy, openstack-horizon proxy, graphite proxy
-        {% if cookiecutter.ceilometer_cluster %}
+        {% if cookiecutter.ceilometer_cluster == "True" %}
         {{ cookiecutter.mdb01_name }}.{{ cookiecutter.domain_name }}: ceilometer server, mongodb
         {{ cookiecutter.mdb02_name }}.{{ cookiecutter.domain_name }}: ceilometer server, mongodb
         {{ cookiecutter.mdb03_name }}.{{ cookiecutter.domain_name }}: ceilometer server, mongodb
