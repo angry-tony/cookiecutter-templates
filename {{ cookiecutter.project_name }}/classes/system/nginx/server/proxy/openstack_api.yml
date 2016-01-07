@@ -14,10 +14,15 @@ parameters:
           host:
             name: ${_param:cluster_public_host}
             port: 5000
+          {%- if cookiecutter.ssl_enabled == "True" %}
           ssl:
             enabled: true
             cert: ${_param:ssl_endpoint_cert}
             key: ${_param:ssl_endpoint_key}
+            {%- if cookiecutter.ssl_chain != "" %}
+            chain: ${_param:ssl_endpoint_chain}
+            {%- endif %}
+          {%- endif %}
         nginx_proxy_openstack_api_keystone_private:
           enabled: true
           type: nginx_proxy
@@ -29,10 +34,15 @@ parameters:
           host:
             name: ${_param:cluster_public_host}
             port: 35357
+          {%- if cookiecutter.ssl_enabled == "True" %}
           ssl:
             enabled: true
             cert: ${_param:ssl_endpoint_cert}
             key: ${_param:ssl_endpoint_key}
+            {%- if cookiecutter.ssl_chain != "" %}
+            chain: ${_param:ssl_endpoint_chain}
+            {%- endif %}
+          {%- endif %}
         nginx_proxy_openstack_api_nova:
           enabled: true
           type: nginx_proxy
@@ -44,10 +54,15 @@ parameters:
           host:
             name: ${_param:cluster_public_host}
             port: 8774
+          {%- if cookiecutter.ssl_enabled == "True" %}
           ssl:
             enabled: true
             cert: ${_param:ssl_endpoint_cert}
             key: ${_param:ssl_endpoint_key}
+            {%- if cookiecutter.ssl_chain != "" %}
+            chain: ${_param:ssl_endpoint_chain}
+            {%- endif %}
+          {%- endif %}
         nginx_proxy_openstack_api_cinder:
           enabled: true
           type: nginx_proxy
@@ -59,10 +74,15 @@ parameters:
           host:
             name: ${_param:cluster_public_host}
             port: 8776
+          {%- if cookiecutter.ssl_enabled == "True" %}
           ssl:
             enabled: true
             cert: ${_param:ssl_endpoint_cert}
             key: ${_param:ssl_endpoint_key}
+            {%- if cookiecutter.ssl_chain != "" %}
+            chain: ${_param:ssl_endpoint_chain}
+            {%- endif %}
+          {%- endif %}
         nginx_proxy_openstack_api_glance:
           enabled: true
           type: nginx_proxy
@@ -74,10 +94,15 @@ parameters:
           host:
             name: ${_param:cluster_public_host}
             port: 9292
+          {%- if cookiecutter.ssl_enabled == "True" %}
           ssl:
             enabled: true
             cert: ${_param:ssl_endpoint_cert}
             key: ${_param:ssl_endpoint_key}
+            {%- if cookiecutter.ssl_chain != "" %}
+            chain: ${_param:ssl_endpoint_chain}
+            {%- endif %}
+          {%- endif %}
         nginx_proxy_openstack_api_neutron:
           enabled: true
           type: nginx_proxy
@@ -89,10 +114,15 @@ parameters:
           host:
             name: ${_param:cluster_public_host}
             port: 9696
+          {%- if cookiecutter.ssl_enabled == "True" %}
           ssl:
             enabled: true
             cert: ${_param:ssl_endpoint_cert}
             key: ${_param:ssl_endpoint_key}
+            {%- if cookiecutter.ssl_chain != "" %}
+            chain: ${_param:ssl_endpoint_chain}
+            {%- endif %}
+          {%- endif %}
         nginx_proxy_openstack_api_heat_cfn:
           enabled: true
           type: nginx_proxy
@@ -104,10 +134,15 @@ parameters:
           host:
             name: ${_param:cluster_public_host}
             port: 8000
+          {%- if cookiecutter.ssl_enabled == "True" %}
           ssl:
             enabled: true
             cert: ${_param:ssl_endpoint_cert}
             key: ${_param:ssl_endpoint_key}
+            {%- if cookiecutter.ssl_chain != "" %}
+            chain: ${_param:ssl_endpoint_chain}
+            {%- endif %}
+          {%- endif %}
         nginx_proxy_openstack_api_heat:
           enabled: true
           type: nginx_proxy
@@ -119,10 +154,15 @@ parameters:
           host:
             name: ${_param:cluster_public_host}
             port: 8004
+          {%- if cookiecutter.ssl_enabled == "True" %}
           ssl:
             enabled: true
             cert: ${_param:ssl_endpoint_cert}
             key: ${_param:ssl_endpoint_key}
+            {%- if cookiecutter.ssl_chain != "" %}
+            chain: ${_param:ssl_endpoint_chain}
+            {%- endif %}
+          {%- endif %}
         nginx_proxy_openstack_api_nova_ec2:
           enabled: true
           type: nginx_proxy
@@ -134,7 +174,12 @@ parameters:
           host:
             name: ${_param:cluster_public_host}
             port: 8773
+          {%- if cookiecutter.ssl_enabled == "True" %}
           ssl:
             enabled: true
             cert: ${_param:ssl_endpoint_cert}
             key: ${_param:ssl_endpoint_key}
+            {%- if cookiecutter.ssl_chain != "" %}
+            chain: ${_param:ssl_endpoint_chain}
+            {%- endif %}
+          {%- endif %}

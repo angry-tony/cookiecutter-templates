@@ -27,6 +27,10 @@ Following parameters need to be provided
 * "admin_email": "root@localhost", keystone admin
 * "openstack_version": "kilo", openstack version
 * "cluster_public_host": "cloud.company.com", openstack API endpoint
+* "ssl_endpoint": false,
+* "ssl_key": "",
+* "ssl_cert": "",
+* "ssl_chain": "",
 * "opencontrail_version": "2.2", opencontrail version
 * "opencontrail_dns": "8.8.8.8",
 * "opencontrail_analytics_cluster": true, split analytics to separate cluster

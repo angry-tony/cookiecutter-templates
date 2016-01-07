@@ -14,3 +14,12 @@ parameters:
           host:
             name: ${_param:cluster_public_host}
             port: 8080
+          {%- if cookiecutter.ssl_enabled == "True" %}
+          ssl:
+            enabled: true
+            cert: ${_param:ssl_endpoint_cert}
+            key: ${_param:ssl_endpoint_key}
+            {%- if cookiecutter.ssl_chain != "" %}
+            chain: ${_param:ssl_endpoint_chain}
+            {%- endif %}
+          {%- endif %}

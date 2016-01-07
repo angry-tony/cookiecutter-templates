@@ -9,6 +9,17 @@ classes:
 - system.horizon.server.single
 - system.openstack.common
 parameters:
+  _param:
+    {%- if cookiecutter.ssl_enabled == "True" %}
+    ssl_endpoint_key: |
+      {{ cookiecutter.ssl_key }}
+    ssl_endpoint_cert: |
+      {{ cookiecutter.ssl_cert }}
+    {%- if cookiecutter.ssl_chain != "" %}
+    ssl_endpoint_chain: |
+      {{ cookiecutter.ssl_chain }}
+    {%- endif %}
+    {%- endif %}
   linux:
     system:
       repo:
