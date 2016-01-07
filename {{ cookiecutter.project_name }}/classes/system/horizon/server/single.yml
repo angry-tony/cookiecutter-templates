@@ -18,6 +18,9 @@ parameters:
           key_url: "{{ cookiecutter.apt_repository }}/public.gpg"
   horizon:
     server:
+      bind:
+        address: {{ cookiecutter.horizon_bind_address }}
+        port: {{ cookiecutter.horizon_bind_port }}
       control_nodes:
         {{ cookiecutter.ctl01_name }}.{{ cookiecutter.domain_name }}: nova-control, cinder-control, glance-control
         {{ cookiecutter.ctl02_name }}.{{ cookiecutter.domain_name }}: nova-control, cinder-control, glance-control
