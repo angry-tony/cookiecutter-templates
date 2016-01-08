@@ -87,10 +87,12 @@ parameters:
           enabled: true
           type: nginx_proxy
           name: openstack_api_glance
+          underscores_in_headers: true
           proxy:
             host: ${_param:control_vip_address}
             port: 9292
             protocol: http
+            size: 8000
           host:
             name: ${_param:cluster_public_host}
             port: 9292
