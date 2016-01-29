@@ -27,6 +27,11 @@ parameters:
           source: "deb [arch=amd64] http://apt.tcpcloud.eu/testing/ trusty ${_param:nova_version}"
           architectures: amd64
           key_url: "http://apt.tcpcloud.eu/public.gpg"
+      kernel:
+        sysctl:
+          net.ipv4.tcp_keepalive_intvl: 3
+          net.ipv4.tcp_keepalive_time: 30
+          net.ipv4.tcp_keepalive_probes: 8
   keystone:
     server:
       admin_email: ${_param:admin_email}
