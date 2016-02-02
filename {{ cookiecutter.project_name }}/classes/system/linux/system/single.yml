@@ -19,16 +19,20 @@ parameters:
         {{ cookiecutter.cfg01_name }}:
           address: {{ cookiecutter.cfg01_ip }}
           names:
+          - {{ cookiecutter.cfg01_name }}.{{ cookiecutter.domain_name }}
           - {{ cookiecutter.cfg01_name }}
         {{ cookiecutter.ctl01_name }}:
           address: {{ cookiecutter.ctl01_ip }}
           names:
+          - {{ cookiecutter.ctl01_name }}.{{ cookiecutter.domain_name }}
           - {{ cookiecutter.ctl01_name }}
         {{ cookiecutter.ctl02_name }}:
           address: {{ cookiecutter.ctl02_ip }}
           names:
+          - {{ cookiecutter.ctl02_name }}.{{ cookiecutter.domain_name }}
           - {{ cookiecutter.ctl02_name }}
         {{ cookiecutter.ctl03_name }}:
           address: {{ cookiecutter.ctl03_ip }}
           names:
+          - {{ cookiecutter.ctl03_name }}.{{ cookiecutter.domain_name }}
           - {{ cookiecutter.ctl03_name }}
