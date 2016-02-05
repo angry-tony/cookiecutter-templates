@@ -1,0 +1,11 @@
+parameters:
+  linux:
+    system:
+      job:
+        ceilometer-expirer:
+          command: ceilometer-expirer --config-file /etc/ceilometer/ceilometer.conf
+          enabled: true
+          user: root
+          hour: 1
+          minute: 0
+
