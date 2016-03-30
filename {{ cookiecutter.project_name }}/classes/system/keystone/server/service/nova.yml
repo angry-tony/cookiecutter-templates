@@ -2,6 +2,25 @@ parameters:
   keystone:
     server:
       service:
+        novav3:
+          type: computev3
+          description: OpenStack Compute Service v3
+          user:
+            name: nova
+            password: ${_param:keystone_nova_password}
+          bind:
+            public_address: ${_param:nova_service_host}
+            public_protocol: http
+            public_port: 8774
+            public_path: '/v3'
+            internal_address: ${_param:nova_service_host}
+            internal_port: 8774
+            internal_protocol: http
+            internal_path: '/v3'
+            admin_address: ${_param:nova_service_host}
+            admin_port: 8774
+            admin_protocol: http
+            admin_path: '/v3'
         nova:
           type: compute
           description: OpenStack Compute Service
