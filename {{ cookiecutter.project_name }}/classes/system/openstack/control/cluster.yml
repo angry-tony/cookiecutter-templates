@@ -32,6 +32,17 @@ parameters:
           net.ipv4.tcp_keepalive_intvl: 3
           net.ipv4.tcp_keepalive_time: 30
           net.ipv4.tcp_keepalive_probes: 8
+  rabbitmq:
+    server:
+      host:
+        '/openstack':
+          enabled: true
+          user: openstack
+          password: ${_param:rabbitmq_openstack_password}
+          policies:
+          - name: ha-ttl
+            pattern: '^(?!amq\.).*'
+            definition: '{"ha-mode": "all", "message-ttl": 120000}'
   keystone:
     server:
       admin_email: ${_param:admin_email}
