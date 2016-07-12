@@ -28,3 +28,5 @@ parameters:
       vncproxy_url: http://${_param:control_vip_address}:6080
       notification:
         driver: messagingv2
+      network:
+        host: ${_param:network_vip_address}
