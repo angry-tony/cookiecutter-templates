@@ -6,7 +6,7 @@ parameters:
           type: computev3
           description: OpenStack Compute Service v3
           user:
-            name: nova
+            name: novav3
             password: ${_param:keystone_nova_password}
           bind:
             public_address: ${_param:nova_service_host}
