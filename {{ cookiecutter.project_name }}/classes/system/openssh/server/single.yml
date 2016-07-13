@@ -10,7 +10,7 @@ parameters:
           home: /root
           # Password is cloudlab, comment out, configure your SSH key bellow
           # and disable password auth
-          # password: $6$0Qqj.6l.$T9k9Onm9pIDo6ULABVBRNogyizG.9CnwQ4bvI4xH.AWeIGHbLyFU87ejMTtKvAAyd3dncRYbeUV.VbnXJU2u./
+          password: $6$0Qqj.6l.$T9k9Onm9pIDo6ULABVBRNogyizG.9CnwQ4bvI4xH.AWeIGHbLyFU87ejMTtKvAAyd3dncRYbeUV.VbnXJU2u./
   openssh:
     server:
       permit_root_login: true
