@@ -14,7 +14,23 @@ Installation
 
     pip install cookiecutter
 
-    cookiecutter cookiecutter-reclass-model
+    git clone git@git.tcpcloud.eu:cookiecutter-templates/cookiecutter-openstack-full-reclass-model.git
+
+
+Usage
+=====
+
+Create new environment definition from `cookiecutter.json.example` and process:
+
+.. code-block:: bash
+
+    CUSTOMER_ENV=<Name>
+    cp cookiecutter.json.example ${CUSTOMER_ENV}
+
+    # update [FIXME, 'Company.com', etc...]
+    $EDITOR ${CUSTOMER_ENV}.json
+
+    cookiecutter [--config-file ${CUSTOMER_ENV}.json>] --output-dir ${CUSTOMER_ENV}-salt-model
 
 
 Parameters
