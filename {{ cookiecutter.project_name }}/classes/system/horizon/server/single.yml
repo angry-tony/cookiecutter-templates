@@ -57,11 +57,11 @@ parameters:
         {{ cookiecutter.cfg01_name }}.{{ cookiecutter.domain_name }}: salt master
       # sensu monitoring in horizon dashboard
       sensu_api:
-        '{% cookiecutter.sensu_instance %}':
-          host: {% cookiecutter.mon01_ip %}
+        '{{ cookiecutter.sensu_instance }}':
+          host: {{ cookiecutter.mon01_ip }}
           port: 4567
       kedb_api:
-        host: {% cookiecutter.mon01_ip %}
+        host: {{ cookiecutter.mon01_ip }}
         port: 6754
       plugin:
         # sensu monitoring in horizon dashboard
