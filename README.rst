@@ -34,6 +34,16 @@ Create new environment definition from `cookiecutter.json.example` and process:
     cookiecutter $PWD --output-dir ../../reclass-models [--config-file ${CUSTOMER_ENV}.yaml] [-f] [--no-input]
 
 
+Development and testing
+=======================
+
+Before you commit and push back to repo run a test run:
+
+.. code-block:: bash
+
+  cookiecutter $PWD --output-dir /tmp -f --no-input
+
+
 Parameters
 ----------
 

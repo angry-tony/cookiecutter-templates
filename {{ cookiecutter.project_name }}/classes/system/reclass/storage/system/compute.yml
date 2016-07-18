@@ -2,21 +2,16 @@ parameters:
   reclass:
     storage:
       node:
-        {{ cookiecutter.cmp01_name }}.{{ cookiecutter.domain_name }}:
-          name: {{ cookiecutter.cmp01_name }}
+    {%- for node in cookiecutter.keys()|sort %}
+      {%- if node[5:] == '_ip' and node[:3] == 'cmp' %}
+        {{ cookiecutter[node[:-3]+'_name'] }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter[node[:-3]+'_name'] }}
           domain: {{ cookiecutter.domain_name }}
           classes:
           - system.linux.system.single
           - system.openstack.compute.cluster
           params:
             salt_master_host: ${_param:reclass_config_master}
-            single_address: {{ cookiecutter.cmp01_ip }}
-        {{ cookiecutter.cmp02_name }}.{{ cookiecutter.domain_name }}:
-          name: {{ cookiecutter.cmp02_name }}
-          domain: {{ cookiecutter.domain_name }}
-          classes:
-          - system.linux.system.single
-          - system.openstack.compute.cluster
-          params:
-            salt_master_host: ${_param:reclass_config_master}
-            single_address: {{ cookiecutter.cmp02_ip }}
+            single_address: {{ cookiecutter[node] }}
+      {%- endif %}
+    {%- endfor %}
