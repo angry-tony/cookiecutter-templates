@@ -1,5 +1,6 @@
 {
-    "project_name": "project-reclass-salt-model",
+    "environment": "tcpcloud-poc",
+    "project_name": "{{cookiecutter.environment}}-reclass-salt-model",
     "domain_name": "cloud.company.com",
     "admin_email": "root@localhost",
     "openstack_version": "liberty",
@@ -23,6 +24,12 @@
     "apt_repository": "http://apt.tcpcloud.eu",
     "openstack_endpoint": "",
     "apt_branch": "nightly",
+
+    "network_underlay_dns1": "8.8.8.8",
+    "network_underlay_dns2": "8.8.4.4",
+    "network_underlay_gw": "FIXME",
+    "network_underlay_mask": "255.255.255.0",
+
     "bil01_name": "bil01",
     "bmk01_name": "bmk01",
     "cfg01_name": "cfg01",

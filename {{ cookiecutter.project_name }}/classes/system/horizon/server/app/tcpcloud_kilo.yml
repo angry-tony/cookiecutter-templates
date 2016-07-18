@@ -22,7 +22,7 @@ parameters:
       app:
         tcpcloud_kilo:
           version: kilo
-          branding: "workshop dashboard | tcp cloud"
+          branding: "{{ cookiecutter.environment }} dashboard | tcp cloud"
           bind:
             address: 0.0.0.0
             port: 8078

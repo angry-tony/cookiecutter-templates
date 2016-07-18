@@ -1,7 +1,7 @@
 classes:
 - service.git.client
 - system.linux.system.single
-- system.openssh.client.workshop
+- system.openssh.client.{{ cookiecutter.environment }}
 - system.salt.master.single
 - system.salt.master.formula.graphite
 - system.salt.master.formula.heka
