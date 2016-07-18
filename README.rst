@@ -31,7 +31,7 @@ Create new environment definition from `cookiecutter.json.example` and process:
     # update [FIXME, 'Company.com', etc...]
     $EDITOR cookiecutter.json
 
-    cookiecutter $PWD --output-dir ../../reclass-models [--config-file ${CUSTOMER_ENV}.yaml]
+    cookiecutter $PWD --output-dir ../../reclass-models [--config-file ${CUSTOMER_ENV}.yaml] [-f] [--no-input]
 
 
 Parameters
