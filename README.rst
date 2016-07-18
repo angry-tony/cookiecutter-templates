@@ -25,12 +25,13 @@ Create new environment definition from `cookiecutter.json.example` and process:
 .. code-block:: bash
 
     CUSTOMER_ENV=<Name>
-    cp cookiecutter.json.example ${CUSTOMER_ENV}
+    cp cookiecutter.json.example ${CUSTOMER_ENV}.json
+    ln -s ${CUSTOMER_ENV}.json cookiecutter.json
 
     # update [FIXME, 'Company.com', etc...]
-    $EDITOR ${CUSTOMER_ENV}.json
+    $EDITOR cookiecutter.json
 
-    cookiecutter [--config-file ${CUSTOMER_ENV}.json>] --output-dir ${CUSTOMER_ENV}-salt-model
+    cookiecutter --output-dir ../../reclass-models [--config-file ${CUSTOMER_ENV}.yaml]
 
 
 Parameters
