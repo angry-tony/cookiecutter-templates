@@ -1,0 +1,20 @@
+parameters:
+  reclass:
+    storage:
+      node:
+    {%- for node in cookiecutter.keys()|sort %}
+      {%- if node[5:] == '_ip' and node[:3] == 'kvm' %}
+        {{ node[:-3] }}.os.st.sk:
+          name: {{ node[:-3] }}
+          domain: {{ cookiecutter.domain_name }}
+          classes:
+          - system.linux.system.kvm
+          - system.openstack.common
+          - system.salt.control.{{ cookiecutter.environment }}
+          - system.salt.control.profiles
+          #- system.openstack.control.openstack_cinder
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            single_address: {{ cookiecutter[node] }}
+      {%- endif %}
+    {%- endfor %}

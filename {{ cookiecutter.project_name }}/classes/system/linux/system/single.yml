@@ -5,7 +5,14 @@ classes:
 - system.collectd.client.carbon
 - system.sensu.client.single
 - system.openssh.server.single
+- system.openssh.server.team.tcpcloud
 parameters:
+  _param:
+
+    # TODO, Configure linux.system.single
+    #ntp_strata_host1: #TODO, configure ntp hosts
+    #ntp_strata_host2: #TODO, acnfigure ntp hosts
+
   linux:
     system:
       package:
@@ -13,29 +20,26 @@ parameters:
           version: purged
       repo:
         tcpcloud:
-          source: "deb [arch=amd64] {{ cookiecutter.apt_repository }}/{{ cookiecutter.apt_branch }}/ trusty main security extra tcp tcp-salt {{ cookiecutter.openstack_version }} {% if cookiecutter.opencontrail_version == '2.2' %}oc22{% endif %} galera-s9s"
+          source: "deb [arch=amd64] {{ cookiecutter.apt_repository }}/{{ cookiecutter.apt_branch }}/ trusty main security extra tcp tcp-salt {{ cookiecutter.openstack_version }} oc{{cookiecutter.opencontrail_version|replace('.', '') }} galera-s9s"
           architectures: amd64
           default: true
           key_url: "{{ cookiecutter.apt_repository }}/public.gpg"
     network:
+      #resolv:
+      #  dns:
+      #    - {{cookiecutter.network_underlay_dns1}}
+      #    - {{cookiecutter.network_underlay_dns2}}
+      #  domain: {{cookiecutter.domain_name}}
+      #  search:
+      #    - {{cookiecutter.domain_name}}
       host:
-        {{ cookiecutter.cfg01_name }}:
-          address: {{ cookiecutter.cfg01_ip }}
+    {%- for node in cookiecutter.keys()|sort %}
+      {%- if node[5:] == '_ip' %}
+        {{ cookiecutter[node[:-3]+'_name'] }}:
+          name: {{ node[:-3] }}
+          address: {{ cookiecutter[node] }}
           names:
-          - {{ cookiecutter.cfg01_name }}.{{ cookiecutter.domain_name }}
-          - {{ cookiecutter.cfg01_name }}
-        {{ cookiecutter.ctl01_name }}:
-          address: {{ cookiecutter.ctl01_ip }}
-          names:
-          - {{ cookiecutter.ctl01_name }}.{{ cookiecutter.domain_name }}
-          - {{ cookiecutter.ctl01_name }}
-        {{ cookiecutter.ctl02_name }}:
-          address: {{ cookiecutter.ctl02_ip }}
-          names:
-          - {{ cookiecutter.ctl02_name }}.{{ cookiecutter.domain_name }}
-          - {{ cookiecutter.ctl02_name }}
-        {{ cookiecutter.ctl03_name }}:
-          address: {{ cookiecutter.ctl03_ip }}
-          names:
-          - {{ cookiecutter.ctl03_name }}.{{ cookiecutter.domain_name }}
-          - {{ cookiecutter.ctl03_name }}
+            - {{ cookiecutter[node[:-3]+'_name'] }}.{{ cookiecutter.domain_name }}
+            - {{ cookiecutter[node[:-3]+'_name'] }}
+      {%- endif %}
+    {%- endfor %}

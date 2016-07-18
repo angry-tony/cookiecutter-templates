@@ -8,7 +8,7 @@ parameters:
           name: {{ cookiecutter[node[:-3]+'_name'] }}
           domain: {{ cookiecutter.domain_name }}
           classes:
-          - system.linux.system.single
+          - system.linux.system.compute
           - system.openstack.compute.cluster
           params:
             salt_master_host: ${_param:reclass_config_master}

@@ -6,7 +6,7 @@ parameters:
           name: {{ cookiecutter.bil01_name }}
           domain: {{ cookiecutter.domain_name }}
           classes:
-          - system.linux.system.single
+          - system.linux.system.support
           - system.openstack.billing.single
           params:
             salt_master_host: ${_param:reclass_config_master}
@@ -15,7 +15,7 @@ parameters:
           name: {{ cookiecutter.prx01_name }}
           domain: {{ cookiecutter.domain_name }}
           classes:
-          - system.linux.system.single
+          - system.linux.system.support
           - system.openstack.proxy.cluster
           params:
             salt_master_host: ${_param:reclass_config_master}
@@ -24,7 +24,7 @@ parameters:
           name: {{ cookiecutter.prx02_name }}
           domain: {{ cookiecutter.domain_name }}
           classes:
-          - system.linux.system.single
+          - system.linux.system.support
           - system.openstack.proxy.cluster
           params:
             salt_master_host: ${_param:reclass_config_master}
@@ -33,7 +33,7 @@ parameters:
           name: {{ cookiecutter.mon01_name }}
           domain: {{ cookiecutter.domain_name }}
           classes:
-          - system.linux.system.single
+          - system.linux.system.support
           - system.openstack.monitor.single
           params:
             salt_master_host: ${_param:reclass_config_master}
@@ -42,7 +42,7 @@ parameters:
           name: {{ cookiecutter.mtr01_name }}
           domain: {{ cookiecutter.domain_name }}
           classes:
-          - system.linux.system.single
+          - system.linux.system.support
           {%- if cookiecutter.metering_cluster == "True" %}
           - system.openstack.meter.cluster
           {%- else %}
@@ -59,7 +59,7 @@ parameters:
           name: {{ cookiecutter.mtr02_name }}
           domain: {{ cookiecutter.domain_name }}
           classes:
-          - system.linux.system.single
+          - system.linux.system.support
           - system.openstack.meter.cluster
           params:
             salt_master_host: ${_param:reclass_config_master}
@@ -70,7 +70,7 @@ parameters:
           name: {{ cookiecutter.log01_name }}
           domain: {{ cookiecutter.domain_name }}
           classes:
-          - system.linux.system.single
+          - system.linux.system.support
           - system.openstack.log.single
           params:
             salt_master_host: ${_param:reclass_config_master}

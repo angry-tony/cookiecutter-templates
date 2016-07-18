@@ -1,0 +1,22 @@
+classes:
+- system.linux.system.single
+parameters:
+  linux:
+    system:
+      console:
+        ttyS0:
+          autologin: root
+          rate: 115200
+          term: xterm
+    # TODO, configure network interface for KVM nodes
+    #network:
+    #  interface:
+    #    eth0:
+    #      enabled: true
+    #      type: eth
+    #      address: ${_param:single_address}
+    #      netmask: {{ cookiecutter.network_underlay_mask }}
+    #      gateway: {{ cookiecutter.network_underlay_gw }}
+    #      name_servers:
+    #        - {{ cookiecutter.network_underlay_dns1 }}
+    #        - {{ cookiecutter.network_underlay_dns2 }}

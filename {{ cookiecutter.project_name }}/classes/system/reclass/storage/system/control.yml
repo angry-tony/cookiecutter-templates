@@ -6,7 +6,7 @@ parameters:
           name: {{ cookiecutter.ctl01_name }}
           domain: {{ cookiecutter.domain_name }}
           classes:
-          - system.linux.system.single
+          - system.linux.system.control
           - system.openstack.control.master
           params:
             salt_master_host: ${_param:reclass_config_master}
@@ -17,7 +17,7 @@ parameters:
           name: {{ cookiecutter.ctl02_name }}
           domain: {{ cookiecutter.domain_name }}
           classes:
-          - system.linux.system.single
+          - system.linux.system.control
           - system.openstack.control.slave
           params:
             salt_master_host: ${_param:reclass_config_master}
@@ -28,7 +28,7 @@ parameters:
           name: {{ cookiecutter.ctl03_name }}
           domain: {{ cookiecutter.domain_name }}
           classes:
-          - system.linux.system.single
+          - system.linux.system.control
           - system.openstack.control.slave
           params:
             salt_master_host: ${_param:reclass_config_master}
@@ -39,7 +39,7 @@ parameters:
           name: {{ cookiecutter.dbs01_name }}
           domain: {{ cookiecutter.domain_name }}
           classes:
-          - system.linux.system.single
+          - system.linux.system.control
           - system.openstack.database.master
           params:
             salt_master_host: ${_param:reclass_config_master}
@@ -51,7 +51,7 @@ parameters:
           name: {{ cookiecutter.dbs02_name }}
           domain: {{ cookiecutter.domain_name }}
           classes:
-          - system.linux.system.single
+          - system.linux.system.control
           - system.openstack.database.slave
           params:
             salt_master_host: ${_param:reclass_config_master}
@@ -63,7 +63,7 @@ parameters:
           name: {{ cookiecutter.dbs03_name }}
           domain: {{ cookiecutter.domain_name }}
           classes:
-          - system.linux.system.single
+          - system.linux.system.control
           - system.openstack.database.slave
           params:
             salt_master_host: ${_param:reclass_config_master}
@@ -73,7 +73,7 @@ parameters:
           name: {{ cookiecutter.ntw01_name }}
           domain: {{ cookiecutter.domain_name }}
           classes:
-          - system.linux.system.single
+          - system.linux.system.control
           - system.openstack.network.cluster.control
           params:
             salt_master_host: ${_param:reclass_config_master}
@@ -85,7 +85,7 @@ parameters:
           name: {{ cookiecutter.ntw02_name }}
           domain: {{ cookiecutter.domain_name }}
           classes:
-          - system.linux.system.single
+          - system.linux.system.control
           - system.openstack.network.cluster.control
           params:
             salt_master_host: ${_param:reclass_config_master}
@@ -97,7 +97,7 @@ parameters:
           name: {{ cookiecutter.ntw03_name }}
           domain: {{ cookiecutter.domain_name }}
           classes:
-          - system.linux.system.single
+          - system.linux.system.control
           - system.openstack.network.cluster.control
           params:
             salt_master_host: ${_param:reclass_config_master}
@@ -112,7 +112,7 @@ parameters:
           name: {{ cookiecutter.nal01_name }}
           domain: {{ cookiecutter.domain_name }}
           classes:
-          - system.linux.system.single
+          - system.linux.system.control
           - system.openstack.network.cluster.analytics
           params:
             salt_master_host: ${_param:reclass_config_master}
@@ -124,7 +124,7 @@ parameters:
           name: {{ cookiecutter.nal02_name }}
           domain: {{ cookiecutter.domain_name }}
           classes:
-          - system.linux.system.single
+          - system.linux.system.control
           - system.openstack.network.cluster.analytics
           params:
             salt_master_host: ${_param:reclass_config_master}
@@ -136,7 +136,7 @@ parameters:
           name: {{ cookiecutter.nal03_name }}
           domain: {{ cookiecutter.domain_name }}
           classes:
-          - system.linux.system.single
+          - system.linux.system.control
           - system.openstack.network.cluster.analytics
           params:
             salt_master_host: ${_param:reclass_config_master}
@@ -151,7 +151,7 @@ parameters:
           name: {{ cookiecutter.mdb01_name }}
           domain: {{ cookiecutter.domain_name }}
           classes:
-          - system.linux.system.single
+          - system.linux.system.control
           - system.openstack.control.meter
           - system.ceilometer.server.expirer
           params:
@@ -165,7 +165,7 @@ parameters:
           name: {{ cookiecutter.mdb02_name }}
           domain: {{ cookiecutter.domain_name }}
           classes:
-          - system.linux.system.single
+          - system.linux.system.control
           - system.openstack.control.meter
           params:
             salt_master_host: ${_param:reclass_config_master}
@@ -175,7 +175,7 @@ parameters:
           name: {{ cookiecutter.mdb03_name }}
           domain: {{ cookiecutter.domain_name }}
           classes:
-          - system.linux.system.single
+          - system.linux.system.control
           - system.openstack.control.meter
           params:
             salt_master_host: ${_param:reclass_config_master}

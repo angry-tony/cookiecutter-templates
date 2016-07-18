@@ -1,0 +1,51 @@
+applications:
+- openssh
+parameters:
+  openssh:
+    client:
+      enabled: true
+      user:
+        root:
+          enabled: true
+          user: ${linux:system:user:root}
+          private_key: ${private_keys:{{cookiecutter.environment}}}
+          known_hosts:
+          - ${known_hosts:git.tcpcloud.eu}
+  known_hosts:
+    git.tcpcloud.eu:
+      name: git.tcpcloud.eu
+      type: ecdsa
+      fingerprint: fc:77:72:6c:65:c0:e1:26:0d:68:b8:a8:4a:56:38:22
+  private_keys:
+    {{cookiecutter.environment}}:
+      # TODO, update {{cookiecutter.environment}} admins SSH private key
+      # 'insecure' workshop key:
+      type: rsa
+      key: |
+        -----BEGIN RSA PRIVATE KEY-----
+        MIIEpAIBAAKCAQEAt3zWJcXEPEEHhOIpBaHfYd7z7ol3Tv358zccSLt8Kc+m6WVg
+        t13FdQ9EPGl9BEGcU7VcYV2cvUlJpotb5qZXKcrF9xiOZdQzxZnuM6MzEwimDRsU
+        zhCB2wLcsKXVFumqjQ7qDxkzQ2MHVPZf3uLDHdFvnCXMNu8A6YUvVDTKvy7WZ5/9
+        O89is12iepug+IFAmx9l+teIvGtVSk8WkAkZOhl4VIGVocc3gqxlqAKEkYUGNjf8
+        WNakNmwSf+VeD4ep4lUxU/32Z5DTQzJwmWo2nlg/omOkAZu3FdBD+WRHQtdELmvT
+        +bsOMDWAfiunU0yfwXZZwWtvpMW8pHHZEY1nmQIDAQABAoIBAEQP5IfCYlZPcPCT
+        y8+xCeGOCEH1b/I3N55GVRGNqjMAOdPdrRCXkgUoEpGuN5d6lvheD9R2GwwDwXQr
+        wX0/OpngA6ryyu9u1X146ejxoqJu1NmLsB339ZM97osAGJkVOBR28c+D84YNl8ym
+        T02oI+RNqe7r/mJqKZZ1tuavZn2fy1A378mYkfKyabeY7tRFN7viQq5oF2RjXM4i
+        jNJf6Qj2b5j1VF1AIQWOpsqqGax157/YceLxtDB4bhYO4EKepVUcwtwaWrlY+TfE
+        FF4wmrwBsY/+YfBsWpt/bEOYbGxwDi6f+iQSu17XVgxThiYu7z4RJblE2AKDbFuJ
+        bds+a/kCgYEA2tEDCevyxki3S4l+A45IuB1Wxbxb6zRbLnp5bymJPD2A72FyNHw1
+        I81V/XaoQEB+aVKY2SMlwdjb/a+dHYRZ3106XGPgfaF6qxye9O3H4Aj8aj6SJEhd
+        iILIgf6Is1FEtsH/NCreRsiYfwZSLwMQ+r60sKeRI7SrY0oXeNtIO38CgYEA1qrx
+        9CjKD5D/opgKZwsF9wfMY9VQ0iia+Z6fAsaNZAsnnpX1m4sqQ1TLxyTwKBFBtWg4
+        sr+1vMpRGih0qsLVlj+Um8S8tR4VdLNg1EskYcgXQzTvvl9Zp/O+Ucv30iZODfl4
+        WOpLzIGNqeuAZZJqzo3cufzdzOcoaKeGGv9cSOcCgYB1Kn3KDkFM0xryo4iKNuHR
+        VERmVNmTM9GvLX1gfIkzbGthwnf4ipmZthVZRvQIk4AcvVGC00MgbRI+4I3shDXr
+        WGwrlH9cRd79SLIEzF2+JJGkAiUWsHkE46KhmL1x5w44HeCc+mdS145wVd4jtiyd
+        VwhBnzgkOlWbMM0otaIT2QKBgQCdB0ceV4gXgvW8toNFhSbD4Yx9qtkIInPbDVE7
+        8ooTGKXOt9uGAHLV9f1qm3ahmJ38WVTATMRgaY6SF+3fy835rmDC4VM5GdyQFXdL
+        U/w1Gu0JWHvXQmCPHxmlNBMAQszuJAMI57qyykIafg7aPhSrK9K+ql6FOMKya3kJ
+        3qpfGQKBgQCGDRcFPdEAaCLRhfHlNQaPqrrrn+WFbAECHdNGFIhw0K5S705rkNfe
+        9lOZPugEBOJp+MPwVA4sxA2BC5RjM7A1a28WsVibzpDXiYPopTzzTFmmLE/u2M07
+        GCvRwHxFbLRuNmX7zHRlFpjiAr5/n81UOtm/bocwuP+9ScJuNrkGnQ==
+        -----END RSA PRIVATE KEY-----

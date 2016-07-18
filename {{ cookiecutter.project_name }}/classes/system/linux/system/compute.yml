@@ -1,0 +1,53 @@
+classes:
+- system.linux.system.single
+parameters:
+  # TODO, configure network interface for CMP nodes
+  #linux:
+    #network:
+      #interface:
+        #eth0:
+          #proto: manual
+          #enabled: true
+          #type: slave
+          #mtu: 9000
+          #master: bond0
+        #eth1:
+          #proto: manual
+          #enabled: true
+          #type: slave
+          #mtu: 9000
+          #master: bond0
+        #bond0:
+          #enabled: true
+          #type: bond
+          #proto: manual
+          #use_interfaces:
+          #- eth0
+          #- eth1
+          #slaves: eth0 eth1
+          #mode: active-backup
+          #mtu: 9000
+          #rx: off
+          #tx: off
+          #sg: off
+          #tso: off
+          #ufo: off
+          #gso: off
+          #gro: off
+          #lro: off
+
+        #vhost0:
+          #enabled: true
+          #type: eth
+          #mtu: 9000
+          #address: ${_param:single_address}
+          #netmask: {{ cookiecutter.network_underlay_mask }}
+          #gateway: {{ cookiecutter.network_underlay_gw }}
+          #pre_up_cmds:
+          #- /usr/lib/contrail/if-vhost0
+          #use_interfaces:
+          #- bond0
+          #name_servers:
+            #- {{ cookiecutter.network_underlay_dns1 }}
+            #- {{ cookiecutter.network_underlay_dns2 }}
+          #dns-search: {{ cookiecutter.domain_name }}
