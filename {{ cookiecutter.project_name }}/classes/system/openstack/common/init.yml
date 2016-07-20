@@ -1,6 +1,5 @@
-{%- macro password(size=16) -%}
-{% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'|random }}{% endfor %}
-{%- endmacro %}
+classes:
+  - system.openstakc.common.credentials
 parameters:
   _param:
     cluster_public_host: {{ cookiecutter.openstack_endpoint }}
@@ -22,13 +21,8 @@ parameters:
     gluster_node01_address: {{ cookiecutter.ctl01_ip }}
     gluster_node02_address: {{ cookiecutter.ctl02_ip }}
     gluster_node03_address: {{ cookiecutter.ctl03_ip }}
-    rabbitmq_secret_key: {{ password(64) }}
-    rabbitmq_admin_password: {{ password(16) }}
-    rabbitmq_openstack_password: {{ password(16) }}
     billometer_version: {{ cookiecutter.openstack_version }}
     billometer_service_host: {{ cookiecutter.bil01_ip }}
-    rabbitmq_billometer_password: {{ password(16) }}
-    ceilometer_secret_key: {{ password(64) }}
     ceilometer_version: {{ cookiecutter.openstack_version }}
     ceilometer_service_host: ${_param:mdb_vip_address}
     ceilometer_graphite_publisher_host: ${_param:mtr_vip_address}
@@ -37,12 +31,9 @@ parameters:
     cinder_service_host: ${_param:control_vip_address}
     glance_version: {{ cookiecutter.openstack_version }}
     glance_service_host: ${_param:control_vip_address}
-    graphite_secret_key: {{ password(64) }}
-    horizon_secret_key: {{ password(64) }}
     horizon_identity_encryption: none
     heat_version: {{ cookiecutter.openstack_version }}
     heat_service_host: ${_param:control_vip_address}
-    heat_domain_admin_password: {{ password(16) }}
     keystone_version: {{ cookiecutter.openstack_version }}
     keystone_server_host: ${_param:control_vip_address}
     keystone_service_host: ${_param:control_vip_address}
@@ -53,38 +44,10 @@ parameters:
     nova_version: {{ cookiecutter.openstack_version }}
     nova_service_host: ${_param:control_vip_address}
     mysql_admin_user: root
-    mysql_admin_password: {{ password(16) }}
-    mysql_cinder_password: {{ password(16) }}
-    mysql_graphite_password: {{ password(16) }}
-    mysql_glance_password: {{ password(16) }}
-    mysql_heat_password: {{ password(16) }}
-    mysql_keystone_password: {{ password(16) }}
-    mysql_murano_password: {{ password(16) }}
-    mysql_neutron_password: {{ password(16) }}
-    mysql_nova_password: {{ password(16) }}
-    postgresql_graphite_password: {{ password(16) }}
-    postgresql_billometer_password: {{ password(16) }}
-    keystone_service_token: {{ password(16) }}
-    keystone_admin_password: {{ password(16) }}
     keystone_admin_email: ${_param:admin_email}
-    keystone_cinder_password: {{ password(16) }}
-    keystone_glance_password: {{ password(16) }}
-    keystone_heat_password: {{ password(16) }}
-    keystone_keystone_password: {{ password(16) }}
-    keystone_murano_password: {{ password(16) }}
-    keystone_neutron_password: {{ password(16) }}
-    keystone_nova_password: {{ password(16) }}
-    keystone_monitoring_password: {{ password(16) }}
-    keystone_billometer_password: {{ password(16) }}
-    keystone_ceilometer_password: {{ password(16) }}
     opencontrail_version: {{ cookiecutter.opencontrail_version }}
     opencontrail_compute_dns: {{ cookiecutter.opencontrail_dns }}
-    opencontrail_stats_password: {{ password(16) }}
     collectd_backend_carbon_host: ${_param:mtr_vip_address}
     collectd_backend_carbon_port: 2023
     sensu_message_queue_host: ${_param:mon_vip_address}
-    rabbitmq_monitor_password: {{ password(16) }}
-    rabbitmq_graphite_password: {{ password(16) }}
-    kedb_secret_key: {{ password(64) }}
-    rabbitmq_log_password: {{ password(16) }}
     dns_domain: {{ cookiecutter.domain_name }}
