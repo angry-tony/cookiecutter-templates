@@ -1,5 +1,5 @@
 classes:
-  - system.openstakc.common.credentials
+  - system.openstack.common.credentials
 parameters:
   _param:
     cluster_public_host: {{ cookiecutter.openstack_endpoint }}

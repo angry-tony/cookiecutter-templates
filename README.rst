@@ -33,6 +33,13 @@ Create new environment definition from `cookiecutter.json.example` and process:
 
     cookiecutter $PWD --output-dir ../../reclass-models [--config-file ${CUSTOMER_ENV}.yaml] [-f] [--no-input]
 
+Advanced, on additional runs, revert files containing generated credentials (ensure you have current state committed in git repo):
+
+.. code-block:: bash
+
+  find . -name credentials.yml |xargs -I'{}' "git checkout -- {}"
+
+
 
 Development and testing
 =======================
