@@ -158,6 +158,8 @@ parameters:
             salt_master_host: ${_param:reclass_config_master}
             single_address: {{ cookiecutter.mdb01_ip }}
             ceilometer_database_host: {{ cookiecutter.mdb01_name }}
+            keepalived_vip_priority: 301
+            keepalived_vip_interface: eth0
 
         {%- if cookiecutter.ceilometer_cluster == "True" %}
 
@@ -171,6 +173,8 @@ parameters:
             salt_master_host: ${_param:reclass_config_master}
             single_address: {{ cookiecutter.mdb02_ip }}
             ceilometer_database_host: {{ cookiecutter.mdb02_name }}
+            keepalived_vip_priority: 302
+            keepalived_vip_interface: eth0
         {{ cookiecutter.mdb03_name }}.{{ cookiecutter.domain_name }}:
           name: {{ cookiecutter.mdb03_name }}
           domain: {{ cookiecutter.domain_name }}
@@ -181,5 +185,7 @@ parameters:
             salt_master_host: ${_param:reclass_config_master}
             single_address: {{ cookiecutter.mdb03_ip }}
             ceilometer_database_host: {{ cookiecutter.mdb03_name }}
+            keepalived_vip_priority: 303
+            keepalived_vip_interface: eth0
 
         {%- endif %}

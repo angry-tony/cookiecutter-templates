@@ -8,10 +8,11 @@ classes:
 - system.openssh.server.team.tcpcloud
 parameters:
   _param:
-
+  
     # TODO, Configure linux.system.single
-    #ntp_strata_host1: #TODO, configure ntp hosts
-    #ntp_strata_host2: #TODO, acnfigure ntp hosts
+    # TODO, configure ntp hosts
+    ntp_strata_host1: 127.0.1.1
+    ntp_strata_host2: 127.0.2.1
 
   linux:
     system:

@@ -15,6 +15,7 @@ parameters:
     cluster_node02_address: {{ cookiecutter.mtr02_ip }}
     graphite_database_host: 127.0.0.1
     keepalived_vip_virtual_router_id: 250
+    carbon_message_queue_host: ${_param:single_address}
     apache2_site_graphite_host: ${_param:single_address}
     statsd_server_backend_host: ${_param:single_address}
   apache:

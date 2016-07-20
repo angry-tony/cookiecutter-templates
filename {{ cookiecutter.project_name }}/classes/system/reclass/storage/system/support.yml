@@ -20,6 +20,7 @@ parameters:
           params:
             salt_master_host: ${_param:reclass_config_master}
             single_address: {{ cookiecutter.prx01_ip }}
+            keepalived_vip_priority: 101
         {{ cookiecutter.prx02_name }}.{{ cookiecutter.domain_name }}:
           name: {{ cookiecutter.prx02_name }}
           domain: {{ cookiecutter.domain_name }}
@@ -29,6 +30,7 @@ parameters:
           params:
             salt_master_host: ${_param:reclass_config_master}
             single_address: {{ cookiecutter.prx02_ip }}
+            keepalived_vip_priority: 102
         {{ cookiecutter.mon01_name }}.{{ cookiecutter.domain_name }}:
           name: {{ cookiecutter.mon01_name }}
           domain: {{ cookiecutter.domain_name }}

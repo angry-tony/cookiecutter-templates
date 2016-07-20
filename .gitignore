@@ -2,3 +2,5 @@ nodes/_generated/
 nodes/_generated/*
 classes/service/
 classes/service/*
+.kitchen/
+.kitchen.local.yml
