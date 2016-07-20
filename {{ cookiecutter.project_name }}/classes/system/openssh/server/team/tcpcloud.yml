@@ -26,6 +26,12 @@ parameters:
           full_name: Jakub Pavlik
           home: /home/jpavlik
           email: jakub.pavlik@tcpcloud.eu
+        jkonecny:
+          enabled: true
+          name: jkonecny
+          sudo: true
+          full_name: Jiri Konecny
+          home: /home/jkonecny
         tux:
           enabled: true
           name: tux
@@ -87,6 +93,7 @@ parameters:
         #  - ${public_keys:tcpcloud}
         #  - ${public_keys:newt}
         #  - ${public_keys:jpavlik}
+        #  - ${public_keys:jkonecny}
         #  - ${public_keys:tux}
         #  - ${public_keys:marco}
         #  - ${public_keys:filip}
@@ -105,6 +112,11 @@ parameters:
           public_keys:
           - ${public_keys:jpavlik}
           user: ${linux:system:user:jpavlik}
+        jkonecny:
+          enabled: true
+          public_keys:
+          - ${public_keys:jkonecny}
+          user: ${linux:system:user:jkonecny}
         tux:
           enabled: true
           public_keys:
@@ -142,6 +154,8 @@ parameters:
       key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3odU+3V2uDA2ptAFL9hrJRPNEEdAyztWOZFQ5Oyd9oerTGOU3p4xmrgWWjfKFKbYGhiiIUcYAol5PkTfKukGEkkjCHYA1t023soCaaAj85wCZCnw2zQNAziwxTYmAzTqgxiSvtZNMMrtJvFHRIRDzJ3M1lV0prWNWkMM1/3FAd4W49y6VT3fkMCo8uqG7CfGdgR2DgBCxf9KaNPfW5eDEPOgmE5lK8tVSEI6T+Cg7hbcTf4lFYnlFBnlQgp/0JstsM4Vbwb4B34LOpOsf2S8rrWk2xQMjwaMHXkc2s/E8iW3F5nVFuyEXYISFQIiAHw8dzC6CHgLcyHUVWwznKawZ newt@newt-dev1
     jpavlik:
       key: ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAylDZDzgMuEsJQpwFHDW+QivCVhryxXd1/HWqq1TVhJmT9oNAYdhUBnf/9kVtgmP0EWpDJtGSEaSugCmx8KE76I64RhpOTlm7wO0FFUVnzhFtTPx38WHfMjMdk1HF8twZU4svi72Xbg1KyBimwvaxTTd4zxq8Mskp3uwtkqPcQJDSQaZYv+wtuB6m6vHBCOTZwAognDGEvvCg0dgTU4hch1zoHSaxedS1UFHjUAM598iuI3+hMos/5hjG/vuay4cPLBJX5x1YF6blbFALwrQw8ZmTPaimqDUA9WD6KSmS1qg4rOkk4cszIfJ5vyymMrG+G3qk5LeT4VrgIgWQTAHyXw== pavlk.jakub@gmail.com
+    jkonecny:
+      key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDIYO4/Nwrs5PJTPJabVOVWW47RvErdCG7U3Gabi8xffdA5uN1YTZbiqHt4SNPRmto60+YX35YjFH3giJotf+q5Ct5GN5m90VVRRtppAK+TAHtMgisIa6j5re6egHoi++9L1NwwTLDr/lzD4Gf7MBtU+q3scJJFmrTpLKUqC2ptL8wnCMlXbnjF1zfHqFbaMxXss7ZU/puHlY7Oc6pPzf+30XTQaq+0ZbshEJMDD0iGH3ijk7V2CCnpShZpQYF8FaLhSRkLzqn4xwrcK1dtENPL9qFBME+XYeC5vvBEMU7MBgs4jLX2KDyx/ZFbk+i79pd37hxNPs7Aj105ppVAaiqWsUgZxdfbC3GaW/U0jqJCDtlftnq1FLCRfO8O2sIJsfA78qWOP5ylD+dnGvYzcexQFpfgu49ZqoJYIt0EgSElH27MHF+hmwE6MHHKyBhELn3iN2uY6IWZTEVG7JROuDPOD6zAAaEw90M2xs1O4kUusArqNnL+AyYNlKGvkMy6ztf2a7+YH9u8zpZCMJUBq3gPTGnFGAeiynoaoSxeN83VYv64durJ439SmRZGMQMHJh3/H0TIAJPO4VwzPwhnn+fg/zaT93Ofg/BNZ4EG+panVCdtNa+sLvZTy01pfwtgX2bDrhpPTiotTea9/8PcEi+DM3CVeIOOZigOEFk+oAo5sw== jiri.konecny@tcpcloud.eu
     tux:
       key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDXEN5qmte4oMYFCMZtuNzWiu5M32Dp0OsfR1pSz5gMMQF1Sw3xEDXEATEWhyvJTuVtFQasWVcMCYzEPev8H54UK97dLlxHxEDD9PQYY2O+xu/Rq+p/jryJ/T3mO7LDjUUXtHkUnsDZ51G+sFAWktE+FifwrEDmAEnRucLqOzVhehelG73S3uqfxVsPTsW2CcVIZICKtvdODbgAVyCf1LRR0LJv4fXqcyebCbzIrk4NWJhc474TH88niC7PH5VfxSfXZdKoi3yKVMgqdGSUxGhkx3D5CwCR9K+kUnP0rE5GNIqoCiS8iNbWl6POfMPSxH/ckqZN1h8El6SEoPJzVNp9 tux@tux-workbook
     marco:
@@ -154,3 +168,5 @@ parameters:
       key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCt9HA2bUwCVGGdUjyFzdPFp0j2z9XanLW9gHZ3BhB6Wc4ficU6zmbqYxrHUvdmUrRJbLMEAo9JDlzAIw4CPGhRkD3d7HfnmlEYcEeizLnnC+CmKo3+mrwkQIzWIz6PJOh1kvp5uaNp4ztjRGXXmPzcR0nk4jRD89gLHvH9EYStxZI6nsi3mmWR/LhgIhijb8p63duhE4HuK/RRRjeDQaUsbTG9TMEskY5ZI3p/QM55wlml9F8QJrtwxpaIPI5Fl8lflq+4YcoqgDIBFc6nwubIuiNY4gPJ8s1SQfsfxHSOJpFPZDwi76dxUpthtJrU46fqRvXPzTKoS29WZ5pSAY6p pavel.cizinsky@tcpcloud.eu
     pmichalec:
       key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGwsfObHWHqBv6UQBjvm0nkgnAGc5MZPuQXJ3ln4sM1P pmichalec@dontpanic
+
+
