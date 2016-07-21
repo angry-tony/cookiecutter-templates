@@ -4,7 +4,7 @@ parameters:
       node:
     {%- for node in cookiecutter.keys()|sort %}
       {%- if node[5:] == '_ip' and node[:3] == 'kvm' %}
-        {{ node[:-3] }}.os.st.sk:
+        {{ node[:-3] }}.{{ cookiecutter.domain_name }}:
           name: {{ node[:-3] }}
           domain: {{ cookiecutter.domain_name }}
           classes:

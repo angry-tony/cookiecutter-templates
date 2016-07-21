@@ -7,28 +7,38 @@ parameters:
       virt_enabled: True
       size:
         # TODO edit/add custom sizing as required
+        bil:
+          cpu: 2
+          ram: 4096
+          disk_profile: default
+          net_profile: default
+        bmk:
+          cpu: 2
+          ram: 4096
+          disk_profile: medium
+          net_profile: default
         ctl:
           cpu: 6
-          ram: 12288
+          ram: 16384
           disk_profile: default
-          net_profile: default
-        ntw:
-          cpu: 4
-          ram: 12288
-          disk_profile: default
-          net_profile: default
-        nal:
-          cpu: 4
-          ram: 8192
-          disk_profile: xlarge
           net_profile: default
         dbs:
           cpu: 4
           ram: 8192
-          disk_profile: default
+          disk_profile: medium
           net_profile: default
-        prx:
+        log:
           cpu: 4
+          ram: 8192
+          disk_profile: large
+          net_profile: default
+        mdb:
+          cpu: 2
+          ram: 8192
+          disk_profile: medium
+          net_profile: default
+        mon:
+          cpu: 2
           ram: 8192
           disk_profile: default
           net_profile: default
@@ -37,24 +47,19 @@ parameters:
           ram: 8192
           disk_profile: medium
           net_profile: default
-        mdb:
-          cpu: 2
-          ram: 8192
+        nal:
+          cpu: 4
+          ram: 12288
+          disk_profile: xlarge
+          net_profile: default
+        ntw:
+          cpu: 4
+          ram: 16384
           disk_profile: default
           net_profile: default
-        mon:
-          cpu: 2
-          ram: 8192
-          disk_profile: default
-          net_profile: default
-        log:
+        prx:
           cpu: 4
           ram: 8192
-          disk_profile: large
-          net_profile: default
-        bil:
-          cpu: 2
-          ram: 4096
           disk_profile: default
           net_profile: default
         jumpserver:

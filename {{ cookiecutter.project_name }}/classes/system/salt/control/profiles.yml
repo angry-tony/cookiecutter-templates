@@ -9,10 +9,10 @@ parameters:
     disk:
       default:
         - system:
-            size: 40000
+            size: 50000
       small:
         - system:
-            size: 20000
+            size: 30000
       medium:
         - system:
             size: 80000

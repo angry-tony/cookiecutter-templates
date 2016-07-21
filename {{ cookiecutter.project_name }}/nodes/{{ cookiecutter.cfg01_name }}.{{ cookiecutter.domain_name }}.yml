@@ -14,6 +14,7 @@ classes:
 - system.reclass.storage.system.support
 - system.reclass.storage.system.control
 - system.reclass.storage.system.compute
+- system.reclass.storage.system.kvm
 - system.openstack.common
 parameters:
   _param:

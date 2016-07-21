@@ -2,7 +2,7 @@
 driver:
   name: docker
   use_sudo: false
-  hostname: cfg01.cloud.company.com
+  hostname: cfg01.<%= ENV['SALT_MODEL_DOMAIN'] || cloud.company.com %>
   volume:
     - <%= ENV['PWD'] %>:/tmp/kitchen
   provision_command:

@@ -33,11 +33,17 @@ Create new environment definition from `cookiecutter.json.example` and process:
 
     cookiecutter $PWD --output-dir ../../reclass-models [--config-file ${CUSTOMER_ENV}.yaml] [-f] [--no-input]
 
-Advanced, on additional runs, revert files containing generated credentials (ensure you have current state committed in git repo):
+Advanced, on additional runs, revert files containing generated credentials (ensure you have current state committed in git repo before cookiecutter updates). 
+Use `git diff` to find out possible updates:
 
 .. code-block:: bash
 
-  find . -name credentials.yml |xargs -I'{}' "git checkout -- {}"
+  M=$(find . -name credentials.yml;ls classes/system/openssh/client/*)
+  git diff $M
+  git checkout -- $M
+
+  #find . -name credentials.yml |xargs -I'{}' "git checkout -- {}"
+  #git checkout -- classes/system/openssh/client/*
 
 
 
