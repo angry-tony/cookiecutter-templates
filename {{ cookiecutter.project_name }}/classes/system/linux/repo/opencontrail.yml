@@ -2,6 +2,7 @@ parameters:
     system:
       repo:
         tcpcloud_contrail:
-          source: "deb [arch=amd64] http://apt.tcpcloud.eu/nightly/ trusty ${_param:neutron_version} oc30"
+          # oc30 is now by default
+          source: "deb [arch=amd64] {{ cookiecutter.apt_repository }}/{{ cookiecutter.apt_branch }}/ trusty oc{{cookiecutter.opencontrail_version|replace('.', '') }}"
           architectures: amd64
           key_url: "http://apt.tcpcloud.eu/public.gpg"
