@@ -64,7 +64,7 @@ for CLASS in ${ADDSYSTEMS[@]}; do
   cp -fa $BASE/classes/system/${SYSTEM}/* ${CLUSTER_PATH}${CLUSTER_NS_PATH}/${SYSTEM}
 
   # reclass
-  find ${CLUSTER_PATH}${CLUSTER_NS_PATH} -type f -exec sed -i "/^[[:blank:]]*-[[:blank:]]*system.${SYSTEM//\//.}/ s/\(^[[:blank:]]*-[[:blank:]]*\)system\.\([\.[[:alpha:]]*]*\).*$/\1cluster.${CLUSTER_NS}\.\2/" {} ";"
+  find ${CLUSTER_PATH}${CLUSTER_NS_PATH} -type f -exec sed -i "/^[[:blank:]]*-[[:blank:]]*system.${SYSTEM//\//.}/ s/\(^[[:blank:]]*-[[:blank:]]*\)system\.\([-_\.[[:alpha:]]*]*\).*$/\1cluster.${CLUSTER_NS}\.\2/" {} ";"
 
   # list files created
   test -n "$VERBOSE"  && {
@@ -85,7 +85,7 @@ Dont forget to update $CLUSTER_NS specific configuration that's not included in 
     Example:
 
       cd classes/system/reclass/storage/system
-      sed -i "s/^\([[:blank:]]*-[[:blank:]]*\)system\.\([\.[[:alpha:]]*]*\).*$/\1cluster.${CLUSTER_NS}\.\2/" ./*_{{cookiecutter.cluster}}.yml
+      sed -i "s/^\([[:blank:]]*-[[:blank:]]*\)system\.\([-_\.[[:alpha:]]*]*\).*$/\1cluster.${CLUSTER_NS}\.\2/" ./*_{{cookiecutter.cluster}}.yml
 
 - environment related config under ${CLUSTER_PATH}${CLUSTER_NS_PATH}
     - interfaces, routes
