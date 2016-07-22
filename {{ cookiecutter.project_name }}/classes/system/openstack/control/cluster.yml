@@ -44,7 +44,7 @@ parameters:
   haproxy:
     proxy:
       listen:
-        # FIXME, cluster spec. in this context is ctl not dbs! This is a way wrong.
+        # FIXME, cluster spec. in this context is ctl not dbs!
         mysql_cluster:
           type: mysql
           binds:

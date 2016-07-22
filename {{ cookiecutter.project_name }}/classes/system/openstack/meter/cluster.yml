@@ -9,7 +9,7 @@ classes:
 - service.supervisor.server.single
 parameters:
   _param:
-    # FIXME, cluster_* parameters are not clear in what service/system are used? Btw: haproxy class is not icnluded?
+    # FIXME, cluster_* parameters are set for what service/system? haproxy is not icnluded?
     cluster_local_address: ${_param:single_address}
     cluster_vip_address: {{ cookiecutter.mtr_vip }}
     cluster_node01_address: {{ cookiecutter.mtr01_ip }}
