@@ -2,6 +2,7 @@ classes:
 - service.keepalived.cluster.single
 - service.haproxy.proxy.single
 - system.neutron.control.cluster
+# NOTE, if opencontrail_analytics_cluster is True then install only control part (cluster=control+analytics)
 {%- if cookiecutter.opencontrail_analytics_cluster == "True" %}
 - system.opencontrail.control.control
 {%- else %}
@@ -25,39 +26,3 @@ parameters:
           address: ${_param:control_vip_address}
           names:
           - ${_param:cluster_public_host}
-    system:
-      repo:
-        tcpcloud_contrail:
-          source: "deb [arch=amd64] http://apt.tcpcloud.eu/testing/ trusty ${_param:neutron_version} oc22"
-          architectures: amd64
-          key_url: "http://apt.tcpcloud.eu/public.gpg"
-  neutron:
-    server:
-      dns_domain: ${_param:dns_domain}
-      database:
-        host: ${_param:database_vip_address}
-      identity:
-        host: ${_param:control_vip_address}
-      message_queue:
-        host: ${_param:control_vip_address}
-      compute:
-        host: ${_param:control_vip_address}
-      plugin: contrail
-      tunnel_type: vxlan
-      public_networks: []
-      contrail:
-        version: ${_param:opencontrail_version}
-  opencontrail:
-    common:
-      identity:
-        host: ${_param:control_vip_address}
-    config:
-      message_queue:
-        host: ${_param:control_vip_address}
-      identity:
-        host: ${_param:control_vip_address}
-    web:
-      identity:
-        host: ${_param:control_vip_address}
-      cache:
-        host: 127.0.0.1

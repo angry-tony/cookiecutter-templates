@@ -1,4 +1,5 @@
 classes:
+- system.linux.system.compute
 - system.nova.compute.cluster
 - system.opencontrail.compute.cluster
 - system.openstack.common
@@ -9,24 +10,3 @@ parameters:
     opencontrail_compute_address: ${_param:single_address}
     opencontrail_compute_gateway: {{ cookiecutter.cmp_gw }}
     opencontrail_compute_iface: {{ cookiecutter.cmp_iface }}
-  linux:
-    storage:
-      multipath: false
-    system:
-      repo:
-        tcpcloud_openstack:
-          source: "deb [arch=amd64] http://apt.tcpcloud.eu/testing/ trusty ${_param:nova_version}"
-          architectures: amd64
-          key_url: "http://apt.tcpcloud.eu/public.gpg"
-      kernel:
-        sysctl:
-          net.ipv4.tcp_keepalive_intvl: 3
-          net.ipv4.tcp_keepalive_time: 30
-          net.ipv4.tcp_keepalive_probes: 8
-  nova:
-    compute:
-      vncproxy_url: http://${_param:control_vip_address}:6080
-      notification:
-        driver: messagingv2
-      network:
-        host: ${_param:network_vip_address}

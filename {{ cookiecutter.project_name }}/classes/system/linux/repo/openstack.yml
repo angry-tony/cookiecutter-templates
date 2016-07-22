@@ -1,0 +1,17 @@
+classes:
+- system.linux.repo.tcpcloud
+parameters:
+  linux:
+    system:
+      repo:
+        # FIXME, add support apt/yum repos. Keep in mind structure will change.
+        # FIXME add opencontrail version param
+        # FIXME add galera version param
+        tcpcloud_openstack:
+          source: "deb [arch=amd64] http://apt.tcpcloud.eu/nightly/ trusty ${_param:nova_version} ${_param:neutron_version} ${_param:horizon_version} galera-s9s oc30"
+          {%- set repotags=[_param:nova_version, _param:neutron_version, _param:horizon_version, cookiecutter.openstack_version , cookiecutter.galera_repo_tag]}}
+          {%- set repotags=[_param:nova_version, _param:neutron_version, _param:horizon_version, cookiecutter.openstack_version , cookiecutter.galera_repo_tag]}}
+          source: "deb [arch=amd64] {{ cookiecutter.apt_repository }}/{{ cookiecutter.apt_branch }}/ trusty main security extra tcp tcp-salt {{ cookiecutter.openstack_version }} oc{{cookiecutter.opencontrail_version|replace('.', '') }} {{ cookiecutter.galera_repo_tag }}"
+          architectures: amd64
+          key_url: "{{ cookiecutter.apt_repository }}/public.gpg"
+

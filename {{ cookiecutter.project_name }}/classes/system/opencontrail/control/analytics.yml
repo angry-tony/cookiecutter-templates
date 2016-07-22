@@ -1,6 +1,10 @@
 classes:
 - service.opencontrail.control.analytics
 parameters:
+  opencontrail:
+    common:
+      identity:
+        host: ${_param:control_vip_address}
   haproxy:
     proxy:
       listen:

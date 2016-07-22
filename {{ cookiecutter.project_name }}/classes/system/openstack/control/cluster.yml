@@ -3,12 +3,14 @@ classes:
 - service.haproxy.proxy.single
 - service.memcached.server.single
 - service.rabbitmq.server.cluster
+#- system.rabbitmq.server.openstack # deprecated, it's beco of service => def. here
 - system.keystone.server.cluster
 - system.glance.control.cluster
 - system.nova.control.cluster
 - system.cinder.control.cluster
 - system.heat.server.cluster
 - system.openstack.common
+- system.linux.system.control
 parameters:
   _param:
     cluster_vip_address: {{ cookiecutter.ctl_vip }}
@@ -20,18 +22,6 @@ parameters:
     cluster_node03_address: {{ cookiecutter.ctl03_ip }}
     glusterfs_service_host: {{ cookiecutter.ctl_vip }}
     keepalived_vip_virtual_router_id: 150
-  linux:
-    system:
-      repo:
-        tcpcloud_openstack:
-          source: "deb [arch=amd64] http://apt.tcpcloud.eu/testing/ trusty ${_param:nova_version}"
-          architectures: amd64
-          key_url: "http://apt.tcpcloud.eu/public.gpg"
-      kernel:
-        sysctl:
-          net.ipv4.tcp_keepalive_intvl: 3
-          net.ipv4.tcp_keepalive_time: 30
-          net.ipv4.tcp_keepalive_probes: 8
   rabbitmq:
     server:
       host:
@@ -51,55 +41,10 @@ parameters:
           - name: HA
             pattern: '^(?!amq\.).*'
             definition: '{"ha-mode": "all", "message-ttl": 120000}'
-  keystone:
-    server:
-      admin_email: ${_param:admin_email}
-      {%- if cookiecutter.dbs_vip %}
-      database:
-        host: ${_param:database_vip_address}
-      {%- endif %}
-  glance:
-    server:
-      storage:
-        engine: file
-      images: []
-      {%- if cookiecutter.dbs_vip %}
-      database:
-        host: ${_param:database_vip_address}
-      {%- endif %}
-  nova:
-    controller:
-      {%- if cookiecutter.dbs_vip %}
-      database:
-        host: ${_param:database_vip_address}
-      {%- endif %}
-      identity:
-        engine: keystone
-        host: ${_param:control_vip_address}
-        port: 35357
-        user: nova
-        password: ${_param:keystone_nova_password}
-        tenant: service
-      networking: contrail
-      network:
-        host: ${_param:network_vip_address}
-        user: neutron
-        password: ${_param:keystone_neutron_password}
-        tenant: service
-      bind:
-        private_address: ${_param:cluster_local_address}
-        public_address: ${_param:cluster_vip_address}
-        novncproxy_port: 6080
-      vncproxy_url: http://${_param:cluster_vip_address}:6080
-      cache:
-        engine: memcached
-        prefix: CACHE_NOVA
-        members:
-        - host: 127.0.0.1
-          port: 11211
   haproxy:
     proxy:
       listen:
+        # FIXME, cluster spec. in this context is ctl not dbs!
         mysql_cluster:
           type: mysql
           binds:
@@ -118,12 +63,3 @@ parameters:
             host: ${_param:cluster_node03_address}
             port: 3306
             params: backup check
-  cinder:
-    volume:
-      notification: true
-    controller:
-      notification: true
-      {%- if cookiecutter.dbs_vip %}
-      database:
-        host: ${_param:database_vip_address}
-      {%- endif %}

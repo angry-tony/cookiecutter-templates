@@ -1,8 +1,14 @@
 classes:
 - system.linux.system.single
+- system.linux.repo.openstack
 parameters:
   linux:
     system:
+      kernel:
+        sysctl:
+          net.ipv4.tcp_keepalive_intvl: 3
+          net.ipv4.tcp_keepalive_time: 30
+          net.ipv4.tcp_keepalive_probes: 8
       console:
         ttyS0:
           autologin: root

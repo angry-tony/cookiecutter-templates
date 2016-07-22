@@ -40,3 +40,10 @@ parameters:
   cinder:
     volume:
       enabled: false
+      notification: true
+    controller:
+      notification: true
+      {%- if cookiecutter.dbs_vip %}
+      database:
+        host: ${_param:database_vip_address}
+      {%- endif %}

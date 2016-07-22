@@ -2,10 +2,12 @@ classes:
 - service.linux.system
 - service.ntp.client
 - service.salt.minion.master
+- system.linux.repo.openstack
 - system.collectd.client.carbon
 - system.sensu.client.single
 - system.openssh.server.single
 - system.openssh.server.team.tcpcloud
+- system.linux.repo.tcpcloud
 parameters:
   _param:
   
@@ -19,12 +21,6 @@ parameters:
       package:
         cloud-init:
           version: purged
-      repo:
-        tcpcloud:
-          source: "deb [arch=amd64] {{ cookiecutter.apt_repository }}/{{ cookiecutter.apt_branch }}/ trusty main security extra tcp tcp-salt {{ cookiecutter.openstack_version }} oc{{cookiecutter.opencontrail_version|replace('.', '') }} galera-s9s"
-          architectures: amd64
-          default: true
-          key_url: "{{ cookiecutter.apt_repository }}/public.gpg"
     network:
       #resolv:
       #  dns:

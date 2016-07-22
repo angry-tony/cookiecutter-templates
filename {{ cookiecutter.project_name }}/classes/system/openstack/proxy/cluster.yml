@@ -9,6 +9,7 @@ classes:
 - system.nginx.server.proxy.openstack_web
 - system.nginx.server.proxy.sensu_web
 - system.openstack.common
+# -system.linux.repo.horizon
 parameters:
   _param:
     cluster_vip_address: {{ cookiecutter.prx_vip }}
@@ -23,10 +24,3 @@ parameters:
       {{ cookiecutter.ssl_chain }}
     {%- endif %}
     {%- endif %}
-  linux:
-    system:
-      repo:
-        tcpcloud_horizon:
-          source: "deb [arch=amd64] http://apt.tcpcloud.eu/testing/ trusty ${_param:horizon_version}"
-          architectures: amd64
-          key_url: "http://apt.tcpcloud.eu/public.gpg"

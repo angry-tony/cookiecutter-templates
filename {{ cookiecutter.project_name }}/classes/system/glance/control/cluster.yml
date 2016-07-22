@@ -3,6 +3,15 @@ classes:
 - service.haproxy.proxy.single
 - system.glusterfs.storage.glance
 parameters:
+  glance:
+    server:
+      storage:
+        engine: file
+      images: []
+      {%- if cookiecutter.dbs_vip %}
+      database:
+        host: ${_param:database_vip_address}
+      {%- endif %}
   mysql:
     server:
       database:

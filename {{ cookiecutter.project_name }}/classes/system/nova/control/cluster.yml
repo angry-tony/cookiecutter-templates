@@ -2,6 +2,36 @@ classes:
 - service.haproxy.proxy.single
 - service.nova.control.cluster
 parameters:
+  nova:
+    controller:
+      {%- if cookiecutter.dbs_vip %}
+      database:
+        host: ${_param:database_vip_address}
+      {%- endif %}
+      identity:
+        engine: keystone
+        host: ${_param:control_vip_address}
+        port: 35357
+        user: nova
+        password: ${_param:keystone_nova_password}
+        tenant: service
+      networking: contrail
+      network:
+        host: ${_param:network_vip_address}
+        user: neutron
+        password: ${_param:keystone_neutron_password}
+        tenant: service
+      bind:
+        private_address: ${_param:cluster_local_address}
+        public_address: ${_param:cluster_vip_address}
+        novncproxy_port: 6080
+      vncproxy_url: http://${_param:cluster_vip_address}:6080
+      cache:
+        engine: memcached
+        prefix: CACHE_NOVA
+        members:
+        - host: 127.0.0.1
+          port: 11211
   mysql:
     server:
       database:

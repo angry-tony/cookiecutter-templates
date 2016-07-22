@@ -1,5 +1,6 @@
 classes:
 - system.linux.system.single
+- system.linux.repo.openstack
 parameters:
   linux:
     system:

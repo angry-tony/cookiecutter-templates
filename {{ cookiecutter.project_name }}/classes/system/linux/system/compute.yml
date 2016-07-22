@@ -1,8 +1,17 @@
 classes:
 - system.linux.system.single
+- system.linux.repo.openstack
 parameters:
   # TODO, configure network interface for CMP nodes
-  #linux:
+  linux:
+    storage:
+      multipath: false
+    system:
+      kernel:
+        sysctl:
+          net.ipv4.tcp_keepalive_intvl: 3
+          net.ipv4.tcp_keepalive_time: 30
+          net.ipv4.tcp_keepalive_probes: 8
     #network:
       #interface:
         #eth0:

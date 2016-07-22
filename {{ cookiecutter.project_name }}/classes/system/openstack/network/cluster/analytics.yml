@@ -3,6 +3,7 @@ classes:
 - service.haproxy.proxy.single
 - system.opencontrail.control.analytics
 - system.openstack.common
+#- system.linux.repo.opencontrail
 parameters:
   _param:
     network_vip_address: {{ cookiecutter.ntw_vip }}
@@ -21,13 +22,3 @@ parameters:
           address: ${_param:control_vip_address}
           names:
           - ${_param:cluster_public_host}
-    system:
-      repo:
-        tcpcloud_contrail:
-          source: "deb [arch=amd64] http://apt.tcpcloud.eu/testing/ trusty ${_param:neutron_version} oc22"
-          architectures: amd64
-          key_url: "http://apt.tcpcloud.eu/public.gpg"
-  opencontrail:
-    common:
-      identity:
-        host: ${_param:control_vip_address}

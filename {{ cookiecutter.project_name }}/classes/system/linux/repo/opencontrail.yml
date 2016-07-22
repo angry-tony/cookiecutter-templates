@@ -1,0 +1,7 @@
+parameters:
+    system:
+      repo:
+        tcpcloud_contrail:
+          source: "deb [arch=amd64] http://apt.tcpcloud.eu/nightly/ trusty ${_param:neutron_version} oc30"
+          architectures: amd64
+          key_url: "http://apt.tcpcloud.eu/public.gpg"
