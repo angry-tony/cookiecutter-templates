@@ -11,18 +11,21 @@ function _dirtyExit() {
 }
 
 
-# check pos. args. are defined
+# check pos. args.
 ####
+
 [[ -z "$1" || -z "$2" ]] && {
   _usage; _dirtyExit "ERROR: No cluster or system.class namespace defined. "
 }
 
 CLUSTER_NS=$1
+CLUSTER_NS_PATH=${CLUSTER_NS//\./\/}
 shift
 IFS=' ' read -r -a ADDSYSTEMS <<< ${@}
-BASE=.
-CLUSTER_PATH=$BASE/classes/cluster/${CLUSTER_CLASS//\./\//}
-CLUSTER_NS_PATH=${CLUSTER_NS//\./\/}
+MODEL=.
+CLASSES_PATH=$MODEL/classes
+SYSTEMS_PATH=$CLASSES_PATH/system
+CLUSTERS_PATH=$CLASSES_PATH/cluster
 
 
 
@@ -32,18 +35,22 @@ CLUSTER_NS_PATH=${CLUSTER_NS//\./\/}
 # check the repo is commited
 git diff --quiet HEAD || echo "WARNING: You have an uncommitted changes in working tree."
 
+# check ./reclass.sh script exist
+test -f $MODEL/reclass.sh || _dirtyExit "ERROR: $MODEL/reclass.sh script is missing in model PATH."
+
 # check $ADDSYSTEMS exist
 for CLASS in ${ADDSYSTEMS[@]}; do
-  test -d $CLASS || _dirtyExit "WARNING: System $CLASS to move in cluster was not found"
+  test -d $CLASS || _dirtyExit "ERROR: System $CLASS to move in cluster was not found"
 done
 
 # check $ADD_SYSTEMS are not refered from other classes/system
 for CLASS in ${ADDSYSTEMS[@]}; do
   # strip path prefix, keep only system class name
   SYSTEM=${CLASS//classes\/system\//}
-  for OTHER_CLASS in $(ls $BASE/classes/system | grep -v "${SYSTEM//\/*/}" | grep -v "reclass"); do
-    #echo grep -REq "system.$SYSTEM" "$BASE/classes/system/$(basename ${OTHER_CLASS//\//.} .yml)"
-    grep -REq "system.$SYSTEM" "$BASE/classes/system/$(basename ${OTHER_CLASS//\//.} .yml)" && _dirtyExit "WARNING: Class '$OTHER_CLASS' refer '$CLASS'. As you are moving '$CLASS' to '/classes/cluster/$CLUSTER_NS_PATH' you should fix your model first."
+  for OTHER_CLASS in $(ls $SYSTEMS_PATH | grep -v "${SYSTEM//\/*/}" | grep -v "reclass"); do
+    #echo grep -REq "system.$SYSTEM" "$SYSTEMS_PATH/$(basename ${OTHER_CLASS//\//.} .yml)"
+    grep -REq "system.$SYSTEM" "$SYSTEMS_PATH/$(basename ${OTHER_CLASS//\//.} .yml)" && \
+      _dirtyExit "ERROR: Class '$OTHER_CLASS' refer '$CLASS'. As you are moving '$CLASS' to '$CLUSTERS_PATH/$CLUSTER_NS_PATH' you should fix your model first."
   done
 done
 
@@ -51,26 +58,33 @@ done
 # Create cluster definition
 ####
 
-mkdir -p ${CLUSTER_PATH}${CLUSTER_NS_PATH}
+mkdir -p ${CLUSTERS_PATH}/${CLUSTER_NS_PATH}
 
 # create cluster
 for CLASS in ${ADDSYSTEMS[@]}; do
 
-  SYSTEM=${CLASS//classes\/system\//}
-  echo "Creating ${CLUSTER_PATH}${CLUSTER_NS_PATH}/${SYSTEM} ..."
+  # strip path prefix
+  SYSTEM=${CLASS//classes\//}
+  echo "Creating ${CLUSTERS_PATH}/${CLUSTER_NS_PATH}/${SYSTEM} ..."
 
   # copy path
-  mkdir -p "${CLUSTER_PATH}${CLUSTER_NS_PATH}/${SYSTEM}"
-  cp -fa $BASE/classes/system/${SYSTEM}/* ${CLUSTER_PATH}${CLUSTER_NS_PATH}/${SYSTEM}
+  mkdir -p "${CLUSTERS_PATH}/${CLUSTER_NS_PATH}/${SYSTEM}"
+  cp -fa ${CLASS}/* ${CLUSTERS_PATH}/${CLUSTER_NS_PATH}/${SYSTEM}
 
-  # reclass
-  find ${CLUSTER_PATH}${CLUSTER_NS_PATH} -type f -exec sed -i "/^[[:blank:]]*-[[:blank:]]*system.${SYSTEM//\//.}/ s/\(^[[:blank:]]*-[[:blank:]]*\)system\.\([-_\.[[:alpha:]]*]*\).*$/\1cluster.${CLUSTER_NS}\.\2/" {} ";"
+done
+
+# reclass
+for CLASS in ${ADDSYSTEMS[@]}; do
+  # strip path prefix
+  SYSTEM=${CLASS//classes\//}
+
+  #find ${CLUSTERS_PATH}/${CLUSTER_NS_PATH} -type f -exec sed -i "/^[[:blank:]]*-[[:blank:]]*system.${SYSTEM//\//.}/ s/\(^[[:blank:]]*-[[:blank:]]*\)system\.\([-_\.[[:alpha:]]*]*\).*$/\1cluster.${CLUSTER_NS}\.\2/" {} ";"
+  $MODEL/reclass.sh "${SYSTEM//\//.}" "${CLUSTER_NS}" ${CLUSTERS_PATH}/${CLUSTER_NS_PATH}
 
   # list files created
   test -n "$VERBOSE"  && {
-    which tree &>/dev/null && tree "${CLUSTER_PATH}${CLUSTER_NS_PATH}/${SYSTEM}"
+    which tree &>/dev/null && tree "${CLUSTERS_PATH}/${CLUSTER_NS_PATH}/${SYSTEM}"
   }
-
 done
 
 
@@ -79,18 +93,19 @@ done
 
 cat <<EOF
 
-Dont forget to update $CLUSTER_NS specific configuration that's not included in general $BASE/classes namespace.
+Dont forget to update $CLUSTER_NS specific configuration that's not included in general $MODEL/classes namespace.
 
-  - node definition, which classes they load ( classes/system/reclass/storage/system )
-    Example:
-
-      cd classes/system/reclass/storage/system
-      sed -i "s/^\([[:blank:]]*-[[:blank:]]*\)system\.\([-_\.[[:alpha:]]*]*\).*$/\1cluster.${CLUSTER_NS}\.\2/" ./*_{{cookiecutter.cluster}}.yml
-
-- environment related config under ${CLUSTER_PATH}${CLUSTER_NS_PATH}
+  - environment related config under ${CLUSTERS_PATH}/${CLUSTER_NS_PATH}
     - interfaces, routes
     - etc..
 
-
-
+  - node definition, which classes they load ( classes/system/reclass/storage/system )
+    Example:
 EOF
+
+for CLASS in ${ADDSYSTEMS[@]}; do
+  # strip path prefix, keep only system class name
+  SYSTEM=${CLASS//classes\/}
+  echo      $MODEL/reclass.sh "${SYSTEM//\//.}" "${CLUSTER_NS}" classes/system/reclass/storage/system
+done
+

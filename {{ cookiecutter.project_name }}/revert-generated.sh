@@ -2,19 +2,26 @@
 
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 M=$(find classes/system -name credentials.yml;ls classes/system/openssh/client/*)
-git diff $M
+git status
 
-echo "Files with modified instance data:"
-ls -lh $M
+echo "Type [yes] to auto revert known generated/credential files?"
+read answ
+[[ "$answ" == "yes" ]] &&{
+  echo "Reverting ..."
+  git checkout -- $(echo $M|xargs)
+}
 
 cat <<EOF
 
+Use git diff to preview changes:
 
-If there are no changes in model than updated credentials feel free to checkout HEAD state"
+  git diff $M
+
+If there are no changes in model than updated generated/credentials files, revert HEAD state with:
 
   git checkout -- $(echo $M|xargs)
 
-Othervise perform a manual merge and add chnages to:
+Othervise perform a manual merge:
 
   git difftool ${BRANCH} ${BRANCH}~1 -- $(echo $M|xargs)
 
