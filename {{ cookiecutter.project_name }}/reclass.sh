@@ -48,7 +48,7 @@ shift $((OPTIND-1))
   _usage; _dirtyExit "ERROR: Missing class namespace or PATH positional argument."
 }
 
-SED_OPS="-iq"
+SED_OPS="-i"
 [[ -z "$PREVIEW" ]] || SED_OPS=""
 
 ORIGNS=$1
@@ -71,6 +71,7 @@ done
 
 function join { local d=$1; shift; echo -n "$1"; shift; printf "%s" "${@/#/$d}"; }
 
+echo "Reclassing $ORIGNS with preffix ${DESTNS}"
 for NS in ${PATHNS[@]}; do
 
   find ${NS} -type f -exec sed $SED_OPS "/^[[:blank:]]*-[[:blank:]]*${ORIGINS}/ s/\(^[[:blank:]]*-[[:blank:]]*\)\(${ORIGNS}[-_\.[[:alpha:]]*]*\).*$/\1${DESTNS}\.\2/" {} ";"
@@ -84,9 +85,12 @@ for NS in ${PATHNS[@]}; do
     #find ${NS} -type f -exec sed $SED_OPS "/^[[:blank:]]*-[[:blank:]]*${ORIGINS}/ s/\(^[[:blank:]]*-[[:blank:]]*\)${ORIGNS_PREFFIX}\.\(${ORIGNS_WITHOUT_PREFFIX}[-_\.[[:alpha:]]*]*\).*$/\1${DESTNS}\.\2/" {} ";"
 
     # affect only modified 'class' lines
+    echo "Renaming classes with $RENAME_CLASS_EXPR"
     find ${NS} -type f -exec sed $SED_OPS "/^[[:blank:]]*-[[:blank:]]*${DESTNS}\.${ORIGINS}/ ${RENAME_CLASS_EXPR}" {} ";"
 
   }
-
 done
+
+exit 0
+
 

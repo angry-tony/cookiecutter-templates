@@ -15,7 +15,7 @@ cat <<EOF
 
 Use git diff to preview changes:
 
-  git diff $M
+  git diff $(echo $M|xargs)
 
 If there are no changes in model than updated generated/credentials files, revert HEAD state with:
 

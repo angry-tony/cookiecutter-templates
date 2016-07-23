@@ -22,10 +22,9 @@ CLUSTER_NS=$1
 CLUSTER_NS_PATH=${CLUSTER_NS//\./\/}
 shift
 IFS=' ' read -r -a ADDSYSTEMS <<< ${@}
-MODEL=.
+MODEL=${SALT_MODEL_PATH:-.}
 CLASSES_PATH=$MODEL/classes
 SYSTEMS_PATH=$CLASSES_PATH/system
-CLUSTERS_PATH=$CLASSES_PATH/cluster
 
 
 
@@ -50,7 +49,7 @@ for CLASS in ${ADDSYSTEMS[@]}; do
   for OTHER_CLASS in $(ls $SYSTEMS_PATH | grep -v "${SYSTEM//\/*/}" | grep -v "reclass"); do
     #echo grep -REq "system.$SYSTEM" "$SYSTEMS_PATH/$(basename ${OTHER_CLASS//\//.} .yml)"
     grep -REq "system.$SYSTEM" "$SYSTEMS_PATH/$(basename ${OTHER_CLASS//\//.} .yml)" && \
-      _dirtyExit "ERROR: Class '$OTHER_CLASS' refer '$CLASS'. As you are moving '$CLASS' to '$CLUSTERS_PATH/$CLUSTER_NS_PATH' you should fix your model first."
+      _dirtyExit "ERROR: Class '$OTHER_CLASS' refer '$CLASS'. As you are moving '$CLASS' to '$CLASSES_PATH/$CLUSTER_NS_PATH' you should fix your model first."
   done
 done
 
@@ -58,18 +57,18 @@ done
 # Create cluster definition
 ####
 
-mkdir -p ${CLUSTERS_PATH}/${CLUSTER_NS_PATH}
+mkdir -p ${CLASSES_PATH}/${CLUSTER_NS_PATH}
 
 # create cluster
 for CLASS in ${ADDSYSTEMS[@]}; do
 
   # strip path prefix
   SYSTEM=${CLASS//classes\//}
-  echo "Creating ${CLUSTERS_PATH}/${CLUSTER_NS_PATH}/${SYSTEM} ..."
+  echo "Creating ${CLASSES_PATH}/${CLUSTER_NS_PATH}/${SYSTEM} ..."
 
   # copy path
-  mkdir -p "${CLUSTERS_PATH}/${CLUSTER_NS_PATH}/${SYSTEM}"
-  cp -fa ${CLASS}/* ${CLUSTERS_PATH}/${CLUSTER_NS_PATH}/${SYSTEM}
+  mkdir -p "${CLASSES_PATH}/${CLUSTER_NS_PATH}/${SYSTEM}"
+  cp -fa ${CLASS}/* ${CLASSES_PATH}/${CLUSTER_NS_PATH}/${SYSTEM}
 
 done
 
@@ -78,12 +77,12 @@ for CLASS in ${ADDSYSTEMS[@]}; do
   # strip path prefix
   SYSTEM=${CLASS//classes\//}
 
-  #find ${CLUSTERS_PATH}/${CLUSTER_NS_PATH} -type f -exec sed -i "/^[[:blank:]]*-[[:blank:]]*system.${SYSTEM//\//.}/ s/\(^[[:blank:]]*-[[:blank:]]*\)system\.\([-_\.[[:alpha:]]*]*\).*$/\1cluster.${CLUSTER_NS}\.\2/" {} ";"
-  $MODEL/reclass.sh "${SYSTEM//\//.}" "${CLUSTER_NS}" ${CLUSTERS_PATH}/${CLUSTER_NS_PATH}
+  #find ${CLASSES_PATH}/${CLUSTER_NS_PATH} -type f -exec sed -i "/^[[:blank:]]*-[[:blank:]]*system.${SYSTEM//\//.}/ s/\(^[[:blank:]]*-[[:blank:]]*\)system\.\([-_\.[[:alpha:]]*]*\).*$/\1cluster.${CLUSTER_NS}\.\2/" {} ";"
+  $MODEL/reclass.sh "${SYSTEM//\//.}" "${CLUSTER_NS}" ${CLASSES_PATH}/${CLUSTER_NS_PATH}
 
   # list files created
   test -n "$VERBOSE"  && {
-    which tree &>/dev/null && tree "${CLUSTERS_PATH}/${CLUSTER_NS_PATH}/${SYSTEM}"
+    which tree &>/dev/null && tree "${CLASSES_PATH}/${CLUSTER_NS_PATH}/${SYSTEM}"
   }
 done
 
@@ -95,7 +94,7 @@ cat <<EOF
 
 Dont forget to update $CLUSTER_NS specific configuration that's not included in general $MODEL/classes namespace.
 
-  - environment related config under ${CLUSTERS_PATH}/${CLUSTER_NS_PATH}
+  - environment related config under ${CLASSES_PATH}/${CLUSTER_NS_PATH}
     - interfaces, routes
     - etc..
 
@@ -106,6 +105,6 @@ EOF
 for CLASS in ${ADDSYSTEMS[@]}; do
   # strip path prefix, keep only system class name
   SYSTEM=${CLASS//classes\/}
-  echo      $MODEL/reclass.sh "${SYSTEM//\//.}" "${CLUSTER_NS}" classes/system/reclass/storage/system
+  echo "      $MODEL/reclass.sh "${SYSTEM//\//.}" "${CLUSTER_NS}" classes/system/reclass/storage/system/*{{cookiecutter.cluster}}*"
 done
 
