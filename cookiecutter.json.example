@@ -1,7 +1,7 @@
 {
     "environment": "tcpcloud-poc",
     "cluster": "poc_region01",
-    "project_name": "{{cookiecutter.environment}}-reclass-salt-model",
+    "project_name": "{{cookiecutter.environment}}-salt-model",
     "domain_name": "cloud.company.com",
     "admin_email": "root@localhost",
     "openstack_version": "liberty",
