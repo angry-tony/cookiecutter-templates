@@ -7,7 +7,6 @@ classes:
 - system.sensu.client.single
 - system.openssh.server.single
 - system.openssh.server.team.tcpcloud
-- system.linux.repo.tcpcloud
 parameters:
   _param:
   

@@ -1,5 +1,5 @@
 classes:
-- system.linux.repo.tcpcloud
+#- system.linux.repo.tcpcloud # FIXME, assume it will load tcp tcp-salt extras in future
 parameters:
   linux:
     system:
@@ -7,7 +7,7 @@ parameters:
         tcpcloud_openstack:
           # NOTE: if offended with latter, feel free to add cookiecutter additional filters as ansible does: http://docs.ansible.com/ansible/playbooks_filters.html
           {%- set repotags={ cookiecutter.horizon_version: '', cookiecutter.openstack_version: '' , cookiecutter.galera_repo_tag: '' } %}
-          source: "deb [arch=amd64] {{ cookiecutter.apt_repository }}/{{ cookiecutter.apt_branch }}/ trusty main security extra tcp tcp-salt {{ repotags|join(' ') }} {{ cookiecutter.openstack_version }} oc{{cookiecutter.opencontrail_version|replace('.', '') }} {{ cookiecutter.galera_repo_tag }}"
+          source: "deb [arch=amd64] {{ cookiecutter.apt_repository }}/{{ cookiecutter.apt_branch }}/ trusty main security extra tcp tcp-salt {{ repotags|join(' ') }} oc{{cookiecutter.opencontrail_version|replace('.', '') }}"
           architectures: amd64
           key_url: "{{ cookiecutter.apt_repository }}/public.gpg"
 
