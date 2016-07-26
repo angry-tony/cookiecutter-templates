@@ -35,7 +35,7 @@ parameters:
       #    - {{cookiecutter.domain_name}}
       host:
     {%- for node in cookiecutter.keys()|sort %}
-      {%- if node[5:] == '_ip' %}
+      {%- if node[5:] == '_ip' and cookiecutter[node] != "" %}
         {{ cookiecutter[node[:-3]+'_name'] }}:
           name: {{ node[:-3] }}
           address: {{ cookiecutter[node] }}

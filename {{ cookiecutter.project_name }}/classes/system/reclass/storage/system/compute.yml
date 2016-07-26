@@ -3,7 +3,7 @@ parameters:
     storage:
       node:
     {%- for node in cookiecutter.keys()|sort %}
-      {%- if node[5:] == '_ip' and node[:3] == 'cmp' %}
+      {%- if node[5:] == '_ip' and node[:3] == 'cmp' and cookiecutter[node] != "" %}
         {{ cookiecutter[node[:-3]+'_name'] }}.{{ cookiecutter.domain_name }}:
           name: {{ cookiecutter[node[:-3]+'_name'] }}
           domain: {{ cookiecutter.domain_name }}
