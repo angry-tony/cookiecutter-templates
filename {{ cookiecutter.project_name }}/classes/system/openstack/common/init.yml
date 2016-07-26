@@ -53,8 +53,3 @@ parameters:
     collectd_backend_carbon_port: 2023
     sensu_message_queue_host: ${_param:mon_vip_address}
     dns_domain: {{ cookiecutter.domain_name }}
-  linux:
-    system:
-      repo:
-        tcpcloud_openstack:
-          default: true

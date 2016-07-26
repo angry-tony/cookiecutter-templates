@@ -3,7 +3,7 @@ parameters:
     system:
       repo:
         tcpcloud:
-          #default: true
+          default: true
           source: "deb [arch=amd64] {{ cookiecutter.apt_repository }}/{{ cookiecutter.apt_branch }}/ trusty main security extra tcp tcp-salt"
           architectures: amd64
           key_url: "{{ cookiecutter.apt_repository }}/public.gpg"
