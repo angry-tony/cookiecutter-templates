@@ -1,5 +1,11 @@
 classes:
 - service.git.client
+{%- if cookiecutter.cluster is defined and cookiecutter.cluster != "" %}
+# TODO, point your cfg01 classes against cluster '{{cookiecutter.cluster}}'
+# Example: use preffix 'cluster.{{ cookiecutter.cluster }}.'before all system classes you have moved
+#- cluster.{{ cookiecutter.cluster }}.system.linux.system.single
+#- cluster.{{ cookiecutter.cluster }}.system.openstack.common
+{%- endif %}
 - system.linux.system.single
 - system.openssh.client.{{ cookiecutter.environment }}
 - system.salt.master.single
@@ -10,6 +16,7 @@ classes:
 - system.salt.master.formula.openstack_core
 - system.salt.master.formula.saltstack
 - system.salt.master.formula.sensu
+# TODO, validate your reclass/storage
 - system.reclass.storage.salt
 - system.reclass.storage.system.support
 - system.reclass.storage.system.control
