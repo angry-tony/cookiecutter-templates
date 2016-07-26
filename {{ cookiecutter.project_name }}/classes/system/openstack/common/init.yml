@@ -56,5 +56,5 @@ parameters:
   linux:
     system:
       repo:
-        openstack:
+        tcpcloud_openstack:
           default: true
