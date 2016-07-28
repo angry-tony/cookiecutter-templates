@@ -24,14 +24,8 @@ parameters:
       bind:
         private_address: ${_param:cluster_local_address}
         public_address: ${_param:cluster_vip_address}
-        novncproxy_port: 6080
+        vncproxy_port: 6080
       vncproxy_url: http://${_param:cluster_vip_address}:6080
-      cache:
-        engine: memcached
-        prefix: CACHE_NOVA
-        members:
-        - host: 127.0.0.1
-          port: 11211
   mysql:
     server:
       database:
