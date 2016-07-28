@@ -3,6 +3,6 @@ parameters:
     system:
       repo:
         tcpcloud_galera:
-          source: "deb [arch=amd64] {{ cookiecutter.apt_repository }}/{{ cookiecutter.apt_branch }}/ trusty galera-s9s"
+          source: "deb [arch=amd64] {{ cookiecutter.apt_repository }}/{{ cookiecutter.apt_branch_galera|default(cookiecutter.apt_branch)  }}/  {{ cookiecutter.apt_release_code }} {{ cookiecutter.apt_repo_tags_galera|default('galera-s9s') }}"
           architectures: amd64
           key_url: "http://apt.tcpcloud.eu/public.gpg"

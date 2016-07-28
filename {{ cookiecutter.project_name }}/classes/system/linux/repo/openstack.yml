@@ -1,13 +1,15 @@
 classes:
+- system.linux.repo.galera
 - system.linux.repo.tcpcloud
+- system.linux.repo.opencontrail
 parameters:
   linux:
     system:
       repo:
         tcpcloud_openstack:
           # NOTE: if offended with latter, feel free to add cookiecutter additional filters as ansible does: http://docs.ansible.com/ansible/playbooks_filters.html
-          {%- set repotags={ cookiecutter.horizon_version: '', cookiecutter.openstack_version: '' , cookiecutter.galera_repo_tag: '' } %}
-          source: "deb [arch=amd64] {{ cookiecutter.apt_repository }}/{{ cookiecutter.apt_branch }}/ trusty {{ repotags|join(' ') }} oc{{cookiecutter.opencontrail_version|replace('.', '') }}"
+          {%- set repotags={ cookiecutter.horizon_version: '', cookiecutter.openstack_version: ''} %}
+          source: "deb [arch=amd64] {{ cookiecutter.apt_repository }}/{{ cookiecutter.apt_branch_openstack|default(cookiecutter.apt_branch)  }}/ {{ cookiecutter.apt_release_code }} {{ repotags|join(' ') }}"
           architectures: amd64
           key_url: "{{ cookiecutter.apt_repository }}/public.gpg"
 

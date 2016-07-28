@@ -3,6 +3,6 @@ parameters:
       repo:
         tcpcloud_contrail:
           # oc30 is now by default
-          source: "deb [arch=amd64] {{ cookiecutter.apt_repository }}/{{ cookiecutter.apt_branch }}/ trusty oc{{cookiecutter.opencontrail_version|replace('.', '') }}"
+          source: "deb [arch=amd64] {{ cookiecutter.apt_repository }}/{{ cookiecutter.apt_branch_contrail|default(cookiecutter.apt_branch) }}/ {{ cookiecutter.apt_release_code }} oc{{cookiecutter.opencontrail_version|replace('.', '') }}"
           architectures: amd64
           key_url: "http://apt.tcpcloud.eu/public.gpg"
