@@ -5,6 +5,7 @@ parameters:
         heat:
           type: orchestration
           description: Heat Orchestration API
+          region: ${_param:keystone_region}
           user:
             name: heat
             password: ${_param:keystone_heat_password}
@@ -25,6 +26,7 @@ parameters:
         heat-cfn:
           type: cloudformation
           description: AWS CloudFormation API
+          region: ${_param:keystone_region}
           bind:
             public_address: ${_param:heat_service_host}
             public_protocol: http

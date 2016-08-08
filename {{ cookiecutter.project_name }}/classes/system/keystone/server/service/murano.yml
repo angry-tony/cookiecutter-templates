@@ -5,6 +5,7 @@ parameters:
         murano:
           type: application_catalog
           description: Application Catalog for OpenStack
+          region: ${_param:keystone_region}
           user:
             name: murano
             password: ${_param:keystone_murano_password}

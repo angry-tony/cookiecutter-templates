@@ -18,6 +18,7 @@ parameters:
         tenant: service
       networking: contrail
       network:
+        region: ${_param:keystone_region}
         host: ${_param:network_vip_address}
         user: neutron
         password: ${_param:keystone_neutron_password}

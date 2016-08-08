@@ -5,6 +5,7 @@ parameters:
         keystone:
           type: identity
           description: OpenStack Identity Service
+          region: ${_param:keystone_region}
           bind:
             public_address: ${_param:keystone_service_host}
             public_port: 5000

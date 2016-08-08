@@ -6,6 +6,7 @@ classes:
 parameters:
   keystone:
     server:
+      region: ${_param:keystone_region}
       tokens:
         engine: fernet
       admin_email: ${_param:admin_email}

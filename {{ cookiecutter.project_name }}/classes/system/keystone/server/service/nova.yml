@@ -5,6 +5,7 @@ parameters:
         novav3:
           type: computev3
           description: OpenStack Compute Service v3
+          region: ${_param:keystone_region}
           user:
             name: novav3
             password: ${_param:keystone_nova_password}
@@ -24,6 +25,7 @@ parameters:
         nova:
           type: compute
           description: OpenStack Compute Service
+          region: ${_param:keystone_region}
           user:
             name: nova
             password: ${_param:keystone_nova_password}
@@ -43,6 +45,7 @@ parameters:
         ec2:
           type: ec2
           description: OpenStack EC2 Service
+          region: ${_param:keystone_region}
           bind:
             public_address: ${_param:nova_service_host}
             public_protocol: http

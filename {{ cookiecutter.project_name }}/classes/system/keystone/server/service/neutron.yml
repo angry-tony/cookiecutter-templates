@@ -5,6 +5,7 @@ parameters:
         neutron:
           type: network
           description: OpenStack Networking Service
+          region: ${_param:keystone_region}
           user:
             name: neutron
             password: ${_param:keystone_neutron_password}

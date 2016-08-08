@@ -5,6 +5,7 @@ parameters:
         billometer:
           type: billing
           description: Openstack Billing Service
+          region: ${_param:keystone_region}
           user:
             name: billometer
             password: ${_param:keystone_billometer_password}

@@ -5,6 +5,7 @@ parameters:
         cinder:
           type: volume
           description: OpenStack Volume Service
+          region: ${_param:keystone_region}
           user:
             name: cinder
             password: ${_param:keystone_cinder_password}
@@ -25,6 +26,7 @@ parameters:
         cinderv2:
           type: volumev2
           description: OpenStack Volume Service v2.0
+          region: ${_param:keystone_region}
           bind:
             public_address: ${_param:cinder_service_host}
             public_protocol: http

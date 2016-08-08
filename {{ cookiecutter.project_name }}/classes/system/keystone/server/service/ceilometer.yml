@@ -5,6 +5,7 @@ parameters:
         ceilometer:
           type: metering
           description: OpenStack Telemetry Service
+          region: ${_param:keystone_region}
           user:
             name: ceilometer
             password: ${_param:keystone_ceilometer_password}

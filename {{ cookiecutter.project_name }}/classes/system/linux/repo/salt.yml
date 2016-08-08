@@ -1,0 +1,9 @@
+parameters:
+  linux:
+    system:
+      repo:
+        tcpcloud_salt:
+          default: true
+          source: "deb [arch=amd64] {{ cookiecutter.apt_repository }}/{{ cookiecutter.apt_branch_salt|default(cookiecutter.apt_branch) }}/ {{ cookiecutter.apt_release_code }} {{  cookiecutter.apt_repo_tags_salt|default('tcp-salt') }}"
+          architectures: amd64
+          key_url: "{{ cookiecutter.apt_repository }}/public.gpg"

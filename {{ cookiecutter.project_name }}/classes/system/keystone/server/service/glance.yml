@@ -5,6 +5,7 @@ parameters:
         glance:
           type: image
           description: OpenStack Image Service
+          region: ${_param:keystone_region}
           user:
             name: glance
             password: ${_param:keystone_glance_password}

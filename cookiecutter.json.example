@@ -1,8 +1,9 @@
 {
     "environment"             : "tcpcloud-poc",
-    "cluster"                 : "what.ever.level.region01",
+    "cluster"                 : "FIXME.what.ever.level.region01",
     "project_name"            : "{{cookiecutter.environment}}-salt-model",
-    "openstack_version": "liberty",
+    "openstack_version"       : "liberty",
+    "keystone_region"         : "RegionOne",
 
 
     "admin_email"             : "root@localhost",
@@ -17,7 +18,7 @@
     "ceilometer_cluster"      : true,
     "cluster_public_host"     : "cloud.company.com",
     "domain_name"             : "cloud.company.com",
-    "horizon_bind_address"    : "127.0.0.1",
+    "horizon_bind_address"    : "0.0.0.0",
     "horizon_bind_port"       : "8078",
     "horizon_theme_name"      : "FIXME",
     "horizon_version"         : "{{cookiecutter.openstack_version}}",
@@ -31,7 +32,7 @@
     "opencontrail_version"    : "3.0",
     "openstack_endpoint"      : "",
     "sensu_instance"          : "FIXME",
-    "sensu_mail_handler"      : false,
+    "sensu_mail_handler"      : true,
     "ssl_cert"                : "",
     "ssl_chain"               : "",
     "ssl_enabled"             : false,
