@@ -2,6 +2,7 @@
     "environment"             : "tcpcloud-poc",
     "cluster"                 : "what.ever.level.region01",
     "project_name"            : "{{cookiecutter.environment}}-salt-model",
+    "openstack_version": "liberty",
 
 
     "admin_email"             : "root@localhost",
@@ -29,7 +30,6 @@
     "opencontrail_dns"        : "8.8.8.8",
     "opencontrail_version"    : "3.0",
     "openstack_endpoint"      : "",
-    "openstack_version"       : "liberty",
     "sensu_instance"          : "FIXME",
     "sensu_mail_handler"      : false,
     "ssl_cert"                : "",
@@ -37,6 +37,7 @@
     "ssl_enabled"             : false,
     "ssl_endpoint"            : false,
     "ssl_key"                 : "",
+    "apt_repo_tags_contrail"  : "oc{{cookiecutter.opencontrail_version|replace('.', '')}} tcp",
 
     "bil01_name": "bil01",
     "bmk01_name": "bmk01",

@@ -62,7 +62,7 @@ Parameters
 
 Following parameters need to be provided
 
-* "project_name": "project-reclass-salt-model", name of
+* "project_name": "project--salt-model", name of
 * "domain_name": "cloud.company.com", domain part of FQDN
 * "admin_email": "root@localhost", keystone admin
 * "openstack_version": "kilo", openstack version
