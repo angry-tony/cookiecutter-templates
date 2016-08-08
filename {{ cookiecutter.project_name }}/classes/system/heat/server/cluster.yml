@@ -4,6 +4,8 @@ classes:
 parameters:
   mysql:
     server:
+      identity:
+        region: ${_param:keystone_region}
       database:
         heat:
           encoding: utf8

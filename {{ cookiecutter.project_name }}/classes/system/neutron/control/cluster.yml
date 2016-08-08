@@ -47,10 +47,12 @@ parameters:
         host: ${_param:database_vip_address}
       {%- endif %}
       identity:
+        region: ${_param:keystone_region}
         host: ${_param:control_vip_address}
       message_queue:
         host: ${_param:control_vip_address}
       compute:
+        region: ${_param:keystone_region}
         host: ${_param:control_vip_address}
       plugin: contrail
       tunnel_type: vxlan

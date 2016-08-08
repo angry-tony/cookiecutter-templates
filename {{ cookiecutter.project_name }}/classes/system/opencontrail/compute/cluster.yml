@@ -42,6 +42,7 @@ parameters:
       enabled: false
       identity:
         engine: keystone
+        region: ${_param:keystone_region}
         host: ${_param:control_vip_address}
         port: 35357
         user: neutron

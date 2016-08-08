@@ -39,9 +39,13 @@ parameters:
             params: check inter 10s fastinter 2s downinter 3s rise 3 fall 3
   cinder:
     volume:
+      identity:
+        region: ${_param:keystone_region}
       enabled: false
       notification: true
     controller:
+      identity:
+        region: ${_param:keystone_region}
       notification: true
       {%- if cookiecutter.dbs_vip %}
       database:

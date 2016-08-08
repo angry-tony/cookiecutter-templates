@@ -39,6 +39,7 @@ parameters:
     keystone_version: {{ cookiecutter.openstack_version }}
     keystone_server_host: ${_param:control_vip_address}
     keystone_service_host: ${_param:control_vip_address}
+    keystone_region: RegionOne
     murano_version: {{ cookiecutter.openstack_version }}
     murano_service_host: ${_param:murano_vip_address}
     neutron_version: {{ cookiecutter.openstack_version }}

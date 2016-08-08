@@ -5,6 +5,8 @@ classes:
 parameters:
   glance:
     server:
+      identity:
+        region: ${_param:keystone_region}
       storage:
         engine: file
       images: []
