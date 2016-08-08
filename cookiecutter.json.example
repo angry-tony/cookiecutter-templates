@@ -8,9 +8,10 @@
     "apt_branch"              : "stable",
     "apt_branch_contrail"     : "nightly",
     "apt_branch_horizon"      : "nightly",
+    "apt_branch_salt"         : "nightly",
     "apt_repository"          : "http://apt.tcpcloud.eu",
     "apt_release_code"        : "trusty",
-    "apt_repo_tags"           : "main security extra tcp tcp-salt"
+    "apt_repo_tags"           : "main security extra tcp"
     "apt_repo_tags_galera"    : "galera-s9s",
     "ceilometer_cluster"      : true,
     "cluster_public_host"     : "cloud.company.com",

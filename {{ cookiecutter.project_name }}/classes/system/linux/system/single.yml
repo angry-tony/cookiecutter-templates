@@ -9,11 +9,9 @@ classes:
 - system.openssh.server.team.tcpcloud
 parameters:
   _param:
-  
-    # TODO, Configure linux.system.single
-    # TODO, configure ntp hosts
-    ntp_strata_host1: 127.0.1.1
-    ntp_strata_host2: 127.0.2.1
+    # TODO, configure ntp hosts if default formula metadata: ntp.cesnet.cz and pool.ntp.org does not fit
+    # ntp_strata_host1: ntp.cesnet.cz
+    # ntp_strata_host2: pool.ntp.org
 
   linux:
     system:

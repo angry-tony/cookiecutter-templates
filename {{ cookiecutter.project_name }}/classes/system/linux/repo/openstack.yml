@@ -1,4 +1,5 @@
 classes:
+- system.linux.repo.salt
 - system.linux.repo.galera
 - system.linux.repo.tcpcloud
 - system.linux.repo.opencontrail
