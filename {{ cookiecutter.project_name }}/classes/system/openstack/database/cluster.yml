@@ -10,7 +10,7 @@ parameters:
     cluster_vip_address: {{ cookiecutter.dbs_vip }}
     cluster_node01_hostname: {{ cookiecutter.dbs01_name }}
     cluster_node01_address: {{ cookiecutter.dbs01_ip }}
-    cluster_node02_hostname: {{ cookiecutter.dbs01_name }}
+    cluster_node02_hostname: {{ cookiecutter.dbs02_name }}
     cluster_node02_address: {{ cookiecutter.dbs02_ip }}
     cluster_node03_hostname: {{ cookiecutter.dbs03_name }}
     cluster_node03_address: {{ cookiecutter.dbs03_ip }}
