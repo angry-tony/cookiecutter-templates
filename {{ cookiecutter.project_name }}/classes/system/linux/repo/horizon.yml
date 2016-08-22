@@ -3,6 +3,6 @@ parameters:
     system:
       repo:
         tcpcloud_horizon:
-          source: "deb [arch=amd64] {{ cookiecutter.apt_repository }}/{{ cookiecutter.apt_branch_horizon|default(cookiecutter.apt_branch)  }}/ {{ cookiecutter.apt_release_code }} ${_param:horizon_version}"
+          source: "deb [arch=amd64] {{ cookiecutter.apt_repository }}/{{ cookiecutter.apt_branch_horizon|default(cookiecutter.apt_branch)  }}/ ${_param:distrib_codename} ${_param:horizon_version}"
           architectures: amd64
           key_url: "http://apt.tcpcloud.eu/public.gpg"

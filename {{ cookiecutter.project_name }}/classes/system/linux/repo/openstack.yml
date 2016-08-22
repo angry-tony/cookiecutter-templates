@@ -10,7 +10,7 @@ parameters:
         tcpcloud_openstack:
           # NOTE: if offended with latter, feel free to add cookiecutter additional filters as ansible does: http://docs.ansible.com/ansible/playbooks_filters.html
           {%- set repotags={ cookiecutter.horizon_version: '', cookiecutter.openstack_version: ''} %}
-          source: "deb [arch=amd64] {{ cookiecutter.apt_repository }}/{{ cookiecutter.apt_branch_openstack|default(cookiecutter.apt_branch)  }}/ {{ cookiecutter.apt_release_code }} {{ repotags|join(' ') }}"
+          source: "deb [arch=amd64] {{ cookiecutter.apt_repository }}/{{ cookiecutter.apt_branch_openstack|default(cookiecutter.apt_branch)  }}/ ${_param:distrib_codename} {{ repotags|join(' ') }}"
           architectures: amd64
           key_url: "{{ cookiecutter.apt_repository }}/public.gpg"
 
