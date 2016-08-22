@@ -1,5 +1,0 @@
-parameters:
-  _param:
-  {%- for key in cookiecutter.keys()|sort %}
-    {{key}}: {{cookiecutter[key]}}
-  {%- endfor %}

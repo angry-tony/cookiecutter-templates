@@ -8,6 +8,7 @@
 
     "admin_email"             : "root@localhost",
     "apt_branch"              : "stable",
+    "apt_branch_openstack"    : "nightly",
     "apt_branch_contrail"     : "nightly",
     "apt_branch_horizon"      : "nightly",
     "apt_branch_salt"         : "nightly",
