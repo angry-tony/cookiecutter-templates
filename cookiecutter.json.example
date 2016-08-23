@@ -14,7 +14,7 @@
     "apt_branch_salt"         : "nightly",
     "apt_repository"          : "http://apt.tcpcloud.eu",
     "apt_release_code"        : "trusty",
-    "apt_repo_tags"           : "main security extra tcp"
+    "apt_repo_tags"           : "main security extra tcp",
     "apt_repo_tags_galera"    : "galera-s9s",
     "ceilometer_cluster"      : true,
     "cluster_public_host"     : "cloud.company.com",
@@ -107,7 +107,7 @@
     "ntw_vip"  : "10.10.10.70",
     "prx01_ip" : "10.10.10.81",
     "prx02_ip" : "10.10.10.82",
-    "prx_vip"  : "10.10.10.80"
+    "prx_vip"  : "10.10.10.80",
 
     "cmp01_ip" : "10.10.10.101",
     "cmp02_ip" : "10.10.10.102",
@@ -119,5 +119,5 @@
 
     "kvm01_ip" : "10.10.10.201",
     "kvm02_ip" : "10.10.10.202",
-    "kvm03_ip" : "10.10.10.203",
+    "kvm03_ip" : "10.10.10.203"
 }
