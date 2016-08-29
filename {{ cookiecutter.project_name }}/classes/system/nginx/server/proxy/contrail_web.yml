@@ -8,7 +8,7 @@ parameters:
           type: nginx_proxy
           name: contrail
           proxy:
-            host: ${_param:cluster_vip_address}
+            host: ${_param:network_vip_address}
             port: 8143
             protocol: https
           host:
