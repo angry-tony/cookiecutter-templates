@@ -43,6 +43,9 @@ parameters:
         engine: neutron
         host: ${_param:network_vip_address}
         port: 9696
+        user: neutron
+        tenant: service
+        password: ${_param:keystone_neutron_password}
       cache:
         engine: memcached
         members:

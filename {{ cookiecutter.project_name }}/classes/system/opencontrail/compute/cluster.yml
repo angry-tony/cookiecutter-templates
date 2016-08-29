@@ -28,15 +28,6 @@ parameters:
         mask: ${_param:opencontrail_compute_iface_mask}
         dns: ${_param:opencontrail_compute_dns}
         mtu: 9000
-  nova:
-    compute:
-      networking: contrail
-      network:
-        engine: keystone
-        host: ${_param:control_vip_address}
-        user: neutron
-        password: ${_param:keystone_neutron_password}
-        tenant: service
   neutron:
     switch:
       enabled: false
