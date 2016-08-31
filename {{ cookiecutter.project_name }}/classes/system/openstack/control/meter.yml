@@ -35,13 +35,6 @@ parameters:
         VIP:
           virtual_router_id: 230
   {%- endif %}
-  linux:
-    network:
-      host:
-        proxy_vip:
-          address: ${_param:control_vip_address}
-          names:
-          - ${_param:cluster_public_host}
   mongodb:
     server:
       database:

@@ -36,3 +36,12 @@ parameters:
             - {{ cookiecutter[node[:-3]+'_name'] }}
       {%- endif %}
     {%- endfor %}
+        keystone:
+          name: keystone
+          address: ${_param:control_vip_address}
+          names:
+            - keystone
+        proxy_vip:
+          address: ${_param:proxy_vip_address}
+          names:
+          - ${_param:cluster_public_host}

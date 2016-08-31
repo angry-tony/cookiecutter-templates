@@ -19,10 +19,3 @@ parameters:
     cluster_node03_hostname: {{ cookiecutter.ntw03_name }}
     cluster_node03_address: {{ cookiecutter.ntw03_ip }}
     keepalived_vip_virtual_router_id: 200
-  linux:
-    network:
-      host:
-        proxy_vip:
-          address: ${_param:control_vip_address}
-          names:
-          - ${_param:cluster_public_host}

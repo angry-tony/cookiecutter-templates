@@ -7,6 +7,7 @@ parameters:
     cluster_local_address: ${_param:single_address}
     admin_email: {{ cookiecutter.admin_email }}
     database_vip_address: {{ cookiecutter.dbs_vip }}
+    proxy_vip_address: {{ cookiecutter.prx_vip }}
     control_vip_address: {{ cookiecutter.ctl_vip }}
     network_vip_address: {{ cookiecutter.ntw_vip }}
     analytics_vip_address: {{ cookiecutter.nal_vip }}
