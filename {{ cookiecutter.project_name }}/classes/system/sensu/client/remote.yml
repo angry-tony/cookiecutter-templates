@@ -7,3 +7,7 @@ parameters:
       plugin:
         monitoring_for_openstack:
           enabled: True
+        ruby_gems:
+          enabled: True
+          name:
+            bunny:
