@@ -46,6 +46,7 @@ parameters:
             password: ${_param:mongodb_ceilometer_password}
   ceilometer:
     server:
+      region: ${_param:keystone_region}
       database:
         password: ${_param:mongodb_ceilometer_password}
         host: ${_param:single_address}
