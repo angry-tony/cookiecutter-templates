@@ -1,0 +1,18 @@
+classes:
+  - system.openstack.common
+  - system.elasticsearch.server.cluster.datamaster
+  - system.haproxy.proxy.logging
+  - system.kibana.server.single
+  - system.linux.system.repo.openstack
+  - service.keepalived.cluster.single
+parameters:
+  _param:
+    cluster_node01_hostname: {{ cookiecutter.log01_name }}
+    cluster_node01_address:  {{ cookiecutter.log01_ip }}
+    cluster_node02_hostname: {{ cookiecutter.log02_name }}
+    cluster_node02_address:  {{ cookiecutter.log02_ip }}
+    cluster_node03_hostname: {{ cookiecutter.log03_name }}
+    cluster_node03_address:  {{ cookiecutter.log03_ip }}
+    cluster_vip_address:     {{ cookiecutter.log_vip }}
+    keepalived_vip_virtual_router_id: 170
+    keepalived_vip_interface: eth0

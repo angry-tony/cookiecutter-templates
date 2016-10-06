@@ -1,0 +1,13 @@
+classes:
+- service.kibana.server.single
+#- system.heka.common
+parameters:
+  kibana:
+    server:
+      enabled: true
+      database:
+        engine: elasticsearch
+        host: ${_param:heka_elasticsearch_host}
+        port: 9200
+      bind:
+        address: ${_param:single_address}

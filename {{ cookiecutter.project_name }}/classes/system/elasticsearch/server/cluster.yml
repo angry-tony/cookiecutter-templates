@@ -1,0 +1,35 @@
+classes:
+- service.elasticsearch.server.cluster
+- service.java.environment
+- system.linux.repo.elasticsearch
+parameters:
+  _param:
+    java_environment_version: "7"
+    java_environment_platform: openjdk
+  java:
+    environment:
+      headless: true
+  elasticsearch:
+    server:
+      enabled: true
+      publish_host: ${_param:single_address}
+      master: true
+      data: false
+      index:
+        shards: 1
+        replicas: 1
+      bind:
+        address: ${_param:single_address}
+        port: 9200
+      cluster:
+        multicast: false
+        minimum_master_nodes: 2
+        members:
+          # Master + data nodes
+          - host: {{ cookiecutter.log01_ip }}
+          - host: {{ cookiecutter.log02_ip }}
+          - host: {{ cookiecutter.log03_ip }}
+  linux:
+    sysctl:
+      vm.max_map_count: 262144
+      vm.swappiness: 0

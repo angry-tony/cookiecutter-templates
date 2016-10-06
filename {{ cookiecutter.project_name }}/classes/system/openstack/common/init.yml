@@ -55,3 +55,6 @@ parameters:
     sensu_message_queue_host: ${_param:mon_vip_address}
     dns_domain: {{ cookiecutter.domain_name }}
     linux_distrib_codename: {{ cookiecutter.apt_release_code }}
+    heka_elasticsearch_host: {{ cookiecutter.log_vip }}
+
+

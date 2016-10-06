@@ -1,0 +1,18 @@
+classes:
+- system.elasticsearch.server.cluster
+parameters:
+  elasticsearch:
+    server:
+      master: false
+      data: true
+#  linux:
+#    storage:
+#      mount:
+#        elasticsearch:
+#          enabled: true
+#          device: /dev/vdb
+#          path: /var/lib/elasticsearch
+#          file_system: ext4
+#          user: elasticsearch
+#          group: elasticsearch
+#          opts: "rw,noatime"

@@ -1,0 +1,7 @@
+classes:
+- system.elasticsearch.server.cluster
+parameters:
+  elasticsearch:
+    server:
+      master: true
+      data: false
