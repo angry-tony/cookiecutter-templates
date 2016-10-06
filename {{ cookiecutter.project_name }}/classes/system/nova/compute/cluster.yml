@@ -31,8 +31,11 @@ parameters:
         tenant: service
       message_queue:
         engine: rabbitmq
-        host: ${_param:control_vip_address}
         port: 5672
+        members:
+        - host: ${_param:control_node01_address}
+        - host: ${_param:control_node02_address}
+        - host: ${_param:control_node03_address}
         user: openstack
         password: ${_param:rabbitmq_openstack_password}
         virtual_host: '/openstack'
