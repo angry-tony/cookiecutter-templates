@@ -8,6 +8,8 @@ classes:
 - system.nginx.server.proxy.openstack_vnc
 - system.nginx.server.proxy.openstack_web
 - system.nginx.server.proxy.sensu_web
+#- system.nginx.server.proxy.salt_doc
+#- system.nginx.server.proxy.rally_results
 - system.openstack.common
 # -system.linux.repo.horizon
 parameters:
