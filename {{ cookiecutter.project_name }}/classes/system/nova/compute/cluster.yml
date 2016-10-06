@@ -3,6 +3,7 @@ applications:
 parameters:
   nova:
     compute:
+      region: ${_param:keystone_region}
       version: ${_param:nova_version}
       enabled: true
       virtualization: kvm
