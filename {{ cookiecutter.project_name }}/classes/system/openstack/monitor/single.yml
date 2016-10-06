@@ -7,3 +7,4 @@ classes:
 - system.sensu.server.dashboard
 - system.openstack.common
 - system.openstack.monitor.credentials
+- system.keystone.client.monitoring
