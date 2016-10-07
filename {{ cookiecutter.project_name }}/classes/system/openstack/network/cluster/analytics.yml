@@ -3,7 +3,8 @@ classes:
 - service.haproxy.proxy.single
 - system.opencontrail.control.analytics
 - system.openstack.common
-#- system.linux.repo.opencontrail
+- system.linux.repo.opencontrail
+- system.linux.repo.openstack
 parameters:
   _param:
     network_vip_address: {{ cookiecutter.ntw_vip }}

@@ -1,0 +1,36 @@
+classes:
+- service.keepalived.cluster.single
+- service.haproxy.proxy.single
+- service.rabbitmq.server.cluster
+- system.openstack.common
+- system.linux.system.control
+- system.linux.system.repo.openstack
+parameters:
+  _param:
+    cluster_vip_address: 10.25.12.40
+    cluster_node01_hostname: sdp-vsrmqv-01
+    cluster_node01_address: 10.25.12.41
+    cluster_node02_hostname: sdp-vsrmqv-02
+    cluster_node02_address: 10.25.12.42
+    cluster_node03_hostname: sdp-vsrmqv-03
+    cluster_node03_address: 10.25.12.43
+    keepalived_vip_virtual_router_id: 180
+  rabbitmq:
+    server:
+      host:
+        '/':
+          enabled: true
+          user: guest
+          password: guest
+          policies:
+          - name: HA
+            pattern: '^(?!amq\.).*'
+            definition: '{"ha-mode": "all", "message-ttl": 120000}'
+        '/openstack':
+          enabled: true
+          user: openstack
+          password: ${_param:rabbitmq_openstack_password}
+          policies:
+          - name: HA
+            pattern: '^(?!amq\.).*'
+            definition: '{"ha-mode": "all", "message-ttl": 120000}'

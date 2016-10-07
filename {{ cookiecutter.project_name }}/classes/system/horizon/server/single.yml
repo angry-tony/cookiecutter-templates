@@ -51,9 +51,9 @@ parameters:
         '{{ cookiecutter.sensu_instance }}':
           host: {{ cookiecutter.mon01_ip }}
           port: 4567
-      kedb_api:
-        host: {{ cookiecutter.mon01_ip }}
-        port: 6754
+      #kedb_api:
+      #  host: {{ cookiecutter.mon01_ip }}
+      #  port: 6754
       plugin:
         # sensu monitoring in horizon dashboard
         monitoring_dashboard:
@@ -80,23 +80,23 @@ parameters:
           source:
             engine: pkg
             name: python-horizon-overrides-plugin
-        billing:
-          metric:
-            engine: graphite
-            host: ${_param:mtr_vip_address}
-            port: 80
-          config:
-            currency: CZK
-            allocation: false
-            extra_resource_types: false
-          source:
-            engine: pkg
-            name: openstack-dashboard-billing
-        telemetry:
-          metric:
-            engine: graphite
-            host: ${_param:mtr_vip_address}
-            port: 80
-          source:
-            engine: pkg
-            name: openstack-dashboard-telemetry
+      #  billing:
+      #    metric:
+      #      engine: graphite
+      #      host: ${_param:mtr_vip_address}
+      #      port: 80
+      #    config:
+      #      currency: CZK
+      #      allocation: false
+      #      extra_resource_types: false
+      #    source:
+      #      engine: pkg
+      #      name: openstack-dashboard-billing
+      #  telemetry:
+      #    metric:
+      #      engine: graphite
+      #      host: ${_param:mtr_vip_address}
+      #      port: 80
+      #    source:
+      #      engine: pkg
+      #      name: openstack-dashboard-telemetry

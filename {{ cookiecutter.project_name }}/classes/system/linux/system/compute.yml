@@ -1,8 +1,8 @@
 classes:
 - system.linux.system.single
 - system.linux.repo.openstack
+- system.linux.repo.opencontrail
 parameters:
-  # TODO, configure network interface for CMP nodes
   linux:
     storage:
       multipath: false
@@ -12,6 +12,35 @@ parameters:
           net.ipv4.tcp_keepalive_intvl: 3
           net.ipv4.tcp_keepalive_time: 30
           net.ipv4.tcp_keepalive_probes: 8
+      #job:
+      #  cmd1:
+      #    command: '/bin/bash /root/monitor.sh'
+      #    enabled: true
+      #    user: 'root'
+      #rc:
+      #  local: |
+      #    #!/bin/sh -e
+      #    #
+      #    # rc.local
+      #    #
+      #    ######### This file is managed by Salt! ##########
+      #    # This script is executed at the end of each multiuser runlevel.
+      #    # Make sure that the script will "exit 0" on success or any other
+      #    # value on error.
+      #    #
+      #    ip link set mtu 9000 dev bond0
+      #    ip link set mtu 9000 dev ${_param:opencontrail_compute_iface}
+      #    ip link set up dev ${_param:opencontrail_compute_iface}
+      #    route add -net FIXME_ntw01_ip netmask 255.255.255.255 gw ${_param:opencontrail_compute_gateway}
+      #    route add -net FIXME_ntw02_ip netmask 255.255.255.255 gw ${_param:opencontrail_compute_gateway}
+      #    route add -net FIXME_ntw03_ip netmask 255.255.255.255 gw ${_param:opencontrail_compute_gateway}
+      #    exit 0
+      package:
+        lldpd:
+          version: latest
+        iperf3:
+          version: latest
+    # TODO, configure network interface for CMP nodes
     #network:
       #interface:
         #eth0:
