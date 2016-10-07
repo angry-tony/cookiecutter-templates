@@ -30,6 +30,7 @@ parameters:
           - host: {{ cookiecutter.log02_ip }}
           - host: {{ cookiecutter.log03_ip }}
   linux:
-    sysctl:
-      vm.max_map_count: 262144
-      vm.swappiness: 0
+    system:
+      sysctl:
+        vm.max_map_count: 262144
+        vm.swappiness: 0
