@@ -32,4 +32,4 @@ parameters:
         mirantis_openstack_updates:
           source: "deb {{ cookiecutter.apt_repository_openstack|default(cookiecutter.apt_repository) }}/ mos8.0-updates main restricted"
           architectures: amd64
-          key_url: "{{ cookiecutter.apt_repository_openstack|default(cookiecutter.apt_repository) }}/archive-mos8.0.key"%
+          key_url: "{{ cookiecutter.apt_repository_openstack|default(cookiecutter.apt_repository) }}/archive-mos8.0.key"
