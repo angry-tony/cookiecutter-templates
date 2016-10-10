@@ -1,0 +1,20 @@
+parameters:
+  sensu:
+    server:
+      enabled: true
+      handler:
+        default:
+          enabled: true
+          set:
+          - sfdc
+        stdout:
+          enabled: true
+        sfdc:
+          enabled: true
+          sfdc_client_id: "FIXME"
+          sfdc_client_secret: FIXME
+          sfdc_username: FIXME
+          sfdc_password: FIXME
+          sfdc_auth_url: https://mirantis.my.salesforce.com
+          environment: FIXME
+          sfdc_organization_id: FIXME

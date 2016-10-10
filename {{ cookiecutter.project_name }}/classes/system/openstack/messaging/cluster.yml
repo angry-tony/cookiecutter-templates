@@ -7,13 +7,13 @@ classes:
 - system.linux.repo.openstack
 parameters:
   _param:
-    cluster_vip_address: ${_param: messaging_vip_address}
+    cluster_vip_address: ${_param:messaging_vip_address}
     cluster_node01_hostname: {{ cookiecutter.rmq01_name }}
-    cluster_node01_address: {{ messaging_node01_address }}
+    cluster_node01_address:  ${_param:messaging_node01_address }}
     cluster_node02_hostname: {{ cookiecutter.rmq02_name }}
-    cluster_node02_address: {{ messaging_node02_address }}
+    cluster_node02_address:  ${_param:messaging_node02_address }}
     cluster_node03_hostname: {{ cookiecutter.rmq03_name }}
-    cluster_node03_address: {{ messaging_node03_address }}
+    cluster_node03_address:  ${_param:messaging_node03_address }}
     keepalived_vip_virtual_router_id: 180
   rabbitmq:
     server:

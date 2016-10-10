@@ -76,6 +76,12 @@ parameters:
             single_address: {{ cookiecutter.mtr01_ip }}
             {%- if cookiecutter.metering_cluster == "True" %}
             keepalived_vip_priority: 100
+            {%- if cookiecutter.metering_cluster == "True" %}
+            mysql_replication_offset: 1
+            mysql_replication_master_address: {{cookiecutter.mtr02_ip}}
+            mysql_replication_master: {{cookiecutter.mtr02_name}}
+            {%- endif %}
+            mysql_server_id: 1
             {%- endif %}
         {%- if cookiecutter.metering_cluster == "True" %}
         {{ cookiecutter.mtr02_name }}.{{ cookiecutter.domain_name }}:
@@ -88,6 +94,10 @@ parameters:
             salt_master_host: ${_param:reclass_config_master}
             single_address: {{ cookiecutter.mtr02_ip }}
             keepalived_vip_priority: 101
+            mysql_replication_offset: 2
+            mysql_replication_master_address: {{cookiecutter.mtr01_ip}}
+            mysql_replication_master: {{cookiecutter.mtr01_name}}
+            mysql_server_id: 2
         {%- endif %}
 
 
