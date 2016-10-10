@@ -4,7 +4,7 @@ classes:
 - service.rabbitmq.server.cluster
 - system.openstack.common
 - system.linux.system.control
-- system.linux.system.repo.openstack
+- system.linux.repo.openstack
 parameters:
   _param:
     cluster_vip_address: 10.25.12.40

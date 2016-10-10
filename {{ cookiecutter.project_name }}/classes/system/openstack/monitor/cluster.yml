@@ -1,6 +1,6 @@
 classes:
   - system.openstack.common
-  - system.linux.system.repo.sensu
+  - system.linux.repo.sensu
   - system.openstack.monitor.credentials
   - system.rabbitmq.server.cluster.monitoring
   - system.haproxy.proxy.monitoring
@@ -9,7 +9,7 @@ classes:
   - system.sensu.server.handler.sfdc
   - system.sensu.server.handler.slack
   - system.mysql.server.cluster
-  - system.linux.system.repo.openstack
+  - system.linux.repo.openstack
   - system.keystone.client.monitoring
   - service.python.environment
   - service.memcached.server.local
