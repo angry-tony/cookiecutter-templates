@@ -36,10 +36,31 @@ parameters:
           domain: {{ cookiecutter.domain_name }}
           classes:
           - system.linux.system.support
-          - system.openstack.monitor.single
+          - system.openstack.monitor.cluster
           params:
             salt_master_host: ${_param:reclass_config_master}
             single_address: {{ cookiecutter.mon01_ip }}
+            rabbitmq_cluster_role: master
+            keepalived_vip_priority: 101
+            mysql_replication_offset: 1
+            mysql_replication_master_address: {{ cookiecutter.mon02_ip }}
+            mysql_replication_master: {{ cookiecutter.mon02_ip }}
+            mysql_server_id: 1
+        {{ cookiecutter.mon02_name }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter.mon02_name }}
+          domain: {{ cookiecutter.domain_name }}
+          classes:
+          - system.linux.system.support
+          - system.openstack.monitor.cluster
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            single_address: {{ cookiecutter.mon02_ip }}
+            rabbitmq_cluster_role: slave
+            keepalived_vip_priority: 102
+            mysql_replication_offset: 2
+            mysql_replication_master_address: {{ cookiecutter.mon01_ip }}
+            mysql_replication_master: {{ cookiecutter.mon01_ip }}
+            mysql_server_id: 2
         {{ cookiecutter.mtr01_name }}.{{ cookiecutter.domain_name }}:
           name: {{ cookiecutter.mtr01_name }}
           domain: {{ cookiecutter.domain_name }}
@@ -68,12 +89,20 @@ parameters:
             single_address: {{ cookiecutter.mtr02_ip }}
             keepalived_vip_priority: 101
         {%- endif %}
-        {{ cookiecutter.log01_name }}.{{ cookiecutter.domain_name }}:
-          name: {{ cookiecutter.log01_name }}
+
+
+        # TODO: change class: system.olenstack.log.cluster to .single if you have defined only one log node
+    {%- for node in cookiecutter.keys()|sort %}
+      {%- if node[5:] == '_ip' and node[:3] == 'log' and cookiecutter[node] != "" %}
+        {{ cookiecutter[node[:-3]+'_name'] }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter[node[:-3]+'_name'] }}
           domain: {{ cookiecutter.domain_name }}
           classes:
           - system.linux.system.support
-          - system.openstack.log.single
+          - system.openstack.log.cluster
           params:
             salt_master_host: ${_param:reclass_config_master}
-            single_address: {{ cookiecutter.log01_ip }}
+            single_address: {{ cookiecutter[node] }}
+            keepalived_vip_priority: 1{{ node[:-3][-2:]}}
+      {%- endif %}
+    {%- endfor %}
