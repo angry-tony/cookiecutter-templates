@@ -1,0 +1,34 @@
+classes:
+- service.rabbitmq.server.single
+parameters:
+  rabbitmq:
+    server:
+      secret_key: biephae7toobeesh0aich8thix3chaimua7shiewojee8ieDaecop4OepeMuuF4e
+      host:
+        '/':
+          enabled: true
+          user: guest
+          password: guest
+        '/monitor':
+          enabled: true
+          user: monitor
+          password: ${_param:rabbitmq_monitor_password}
+      admin:
+        name: admin
+        password: zeQuooQu4Lai8En9ohp7eed8esahpie2
+      bind:
+        address: ${_param:single_address}
+      management:
+        bind:
+          address: ${_param:single_address}
+#    cluster:
+#      enabled: false
+#      name: monitoring
+#      role: ${_param:rabbitmq_cluster_role}
+#      master: ${_param:cluster_node01_hostname}
+#      mode: disc
+#      members:
+#      - name: ${_param:cluster_node01_hostname}
+#        host: ${_param:cluster_node01_address}
+#      - name: ${_param:cluster_node02_hostname}
+#        host: ${_param:cluster_node02_address}
