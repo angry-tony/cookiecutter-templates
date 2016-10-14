@@ -1,0 +1,28 @@
+{%- macro password(size=16) -%}
+{% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'|random }}{% endfor %}
+{%- endmacro %}
+classes:
+  - service.mysql.server.replication_both
+parameters:
+  _param:
+    mysql_admin_user: root
+    # TODO: remove comment to get individual mysql user passwords per instance, otherwise shared is used
+    #mysql_admin_password: {{ password(16) }}
+    mysql_replication_user: slave_user
+    # TODO: remove comment to get individual mysql user passwords per instance, otherwise shared is used
+    #mysql_replication_password: {{ password(16) }}
+    # SSL placeholders
+    mysql_ssl_authority: dummy
+    mysql_ssl_certificate: dummy
+    mysql_ssl_client_certificate: dummy
+  mysql:
+    server:
+      bind:
+        address: ${_param:single_address}
+      version: "5.5"
+      replication:
+        auto_increment:
+          increment: 2
+          offset: ${_param:mysql_replication_offset}
+      ssl:
+        enabled: false

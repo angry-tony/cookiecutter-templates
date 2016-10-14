@@ -6,7 +6,7 @@ driver:
   volume:
     - <%= ENV['PWD'] %>:/tmp/kitchen
   provision_command:
-    #- apt-get update
+    - apt-get update
     - which wget >/dev/null || (apt-get install -y wget)
     - echo 'deb [arch=amd64] http://apt.tcpcloud.eu/nightly trusty main security extra tcp tcp-salt' > /etc/apt/sources.list
     - wget -O - http://apt.tcpcloud.eu/public.gpg | apt-key add -

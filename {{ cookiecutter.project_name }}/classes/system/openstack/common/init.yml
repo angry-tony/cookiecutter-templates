@@ -16,10 +16,14 @@ parameters:
     murano_vip_address: ${_param:control_vip_address}
     mdb_vip_address: {% if cookiecutter.ceilometer_cluster %}{{ cookiecutter.mdb_vip }}{% else %}{{ cookiecutter.mdb_ip }}{% endif %}
     mtr_vip_address: {% if cookiecutter.metering_cluster %}{{ cookiecutter.mtr_vip }}{% else %}{{ cookiecutter.mtr01_ip }}{% endif %}
-    mon_vip_address: {{ cookiecutter.mon01_ip }}
+    mon_vip_address: {% if cookiecutter.monitoring_cluster %}{{ cookiecutter.mon_vip }}{% else %}{{ cookiecutter.mon01_ip }}{% endif %}
+    messaging_vip_address: {{ cookiecutter.rmq_vip }}
     control_node01_address: {{ cookiecutter.ctl01_ip }}
     control_node02_address: {{ cookiecutter.ctl02_ip }}
     control_node03_address: {{ cookiecutter.ctl03_ip }}
+    messaging_node01_address: {{ cookiecutter.rmq01_ip }}
+    messaging_node02_address: {{ cookiecutter.rmq02_ip }}
+    messaging_node03_address: {{ cookiecutter.rmq03_ip }}
     gluster_node01_address: {{ cookiecutter.ctl01_ip }}
     gluster_node02_address: {{ cookiecutter.ctl02_ip }}
     gluster_node03_address: {{ cookiecutter.ctl03_ip }}

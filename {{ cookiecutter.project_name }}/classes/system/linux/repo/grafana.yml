@@ -1,0 +1,8 @@
+parameters:
+  linux:
+    system:
+      repo:
+        grafana:
+          source: "deb https://packagecloud.io/grafana/stable/debian/ wheezy main"
+          architectures: amd64
+          key_url: "https://packagecloud.io/gpg.key"

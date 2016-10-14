@@ -1,29 +1,72 @@
 classes:
 - system.openstack.common
 - service.keepalived.cluster.single
-- service.postgresql.server.local
 - system.graphite.collector.cluster
 - system.statsd.server.single
+- system.linux.repo.grafana
+- system.mysql.server.cluster
+- system.linux.repo.openstack
+- service.redis.server.single
+- service.grafana.server.single
 - service.graphite.server.cluster
 - service.apache.server.single
 - service.supervisor.server.single
 parameters:
   _param:
-    # FIXME, cluster_* parameters are not clear in what service/system are used? Btw: haproxy class is not icnluded?
     cluster_local_address: ${_param:single_address}
     cluster_vip_address: {{ cookiecutter.mtr_vip }}
     cluster_node01_address: {{ cookiecutter.mtr01_ip }}
     cluster_node02_address: {{ cookiecutter.mtr02_ip }}
     graphite_database_host: 127.0.0.1
     keepalived_vip_virtual_router_id: 250
+    keepalived_vip_interface: eth0
     carbon_message_queue_host: ${_param:single_address}
     apache2_site_graphite_host: ${_param:single_address}
+    apache2_site_grafana_host: ${_param:single_address}
     statsd_server_backend_host: ${_param:single_address}
+  graphite:
+    server:
+      database:
+        engine: mysql
+        port: 3306
+        host: ${_param:single_address}
+  grafana:
+    server:
+      database:
+        engine: mysql
+        port: 3306
+        host: ${_param:single_address}
+      session:
+        engine: redis
+        host: 127.0.0.1
+        port: 6379
+      bind:
+        address: 127.0.0.1
+        port: 8081
+      users:
+        auto_assign_role: Admin
+        sign_up: false
+      auth:
+        engine: anonymous
+        role: Admin
+      mail:
+        enabled: false
+        from: root@localhost
   apache:
     server:
       modules:
       - wsgi
+      - headers
+      - proxy_http
+      - status
       site:
+        server_status:
+          enabled: true
+          type: stats
+          name: server_status
+          host:
+            name: ${_param:cluster_vip_address}
+            port: 80
         graphite_server:
           enabled: true
           type: graphite
@@ -31,7 +74,31 @@ parameters:
           host:
             name: ${_param:apache2_site_graphite_host}
             port: 80
-  postgresql:
+        grafana_server:
+          enabled: true
+          type: proxy
+          name: grafana
+          proxy:
+            host: 127.0.0.1
+            port: 8081
+            protocol: http
+            nocanon: true
+            preservehost: true
+          host:
+            name: ${_param:apache2_site_grafana_host}
+            port: 8080
+  supervisor:
+    server:
+      enabled: false
+      service:
+        graphite_server:
+          enabled: false
+  linux:
+    system:
+      package:
+        python-django:
+          version: 1.6.1-2ubuntu0.14
+  mysql:
     server:
       database:
         graphite:
@@ -40,11 +107,20 @@ parameters:
           users:
           - name: graphite
             password: ${_param:postgresql_graphite_password}
+            #host: ${_param:single_address}
             host: 127.0.0.1
             rights: all privileges
-  supervisor:
-    server:
-      enabled: false
-      service:
-        graphite_server:
-          enabled: false
+        grafana:
+          encoding: UTF8
+          locale: cs_CZ
+          users:
+          - name: grafana
+            password: ${_param:postgresql_grafana_password}
+            host: ${_param:single_address}
+            rights: all privileges
+            #  supervisor:
+            #server:
+            #enabled: false
+            #service:
+            #graphite_server:
+            #enabled: false

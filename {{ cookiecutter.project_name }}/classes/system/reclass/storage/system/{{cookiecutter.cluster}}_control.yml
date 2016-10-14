@@ -35,6 +35,42 @@ parameters:
             single_address: {{ cookiecutter.ctl03_ip }}
             keepalived_vip_priority: 101
             rabbitmq_cluster_role: slave
+        {{ cookiecutter.rmq01_name }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter.rmq01_name }}
+          domain: {{ cookiecutter.domain_name }}
+          classes:
+          - system.linux.system.control
+          - system.openstack.messaging.cluster
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            single_address: {{ cookiecutter.rmq01_ip }}
+            keepalived_vip_priority: 103
+            rabbitmq_cluster_role: master
+            keepalived_vip_interface: eth0
+        {{ cookiecutter.rmq02_name }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter.rmq02_name }}
+          domain: {{ cookiecutter.domain_name }}
+          classes:
+          - system.linux.system.control
+          - system.openstack.messaging.cluster
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            single_address: {{ cookiecutter.rmq02_ip }}
+            keepalived_vip_priority: 102
+            rabbitmq_cluster_role: slave
+            keepalived_vip_interface: eth0
+        {{ cookiecutter.rmq03_name }}.{{ cookiecutter.domain_name }}:
+          name: {{ cookiecutter.rmq03_name }}
+          domain: {{ cookiecutter.domain_name }}
+          classes:
+          - system.linux.system.control
+          - system.openstack.messaging.cluster
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            single_address: {{ cookiecutter.rmq03_ip }}
+            keepalived_vip_priority: 101
+            rabbitmq_cluster_role: slave
+            keepalived_vip_interface: eth0
         {{ cookiecutter.dbs01_name }}.{{ cookiecutter.domain_name }}:
           name: {{ cookiecutter.dbs01_name }}
           domain: {{ cookiecutter.domain_name }}
