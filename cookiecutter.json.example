@@ -1,7 +1,8 @@
 {
     "environment"             : "tcpcloud-poc",
-    "cluster"                 : "FIXME.what.ever.level.region01",
+    "cluster"                 : "FIXME.what.ever.level.region01 or keep me empty",
     "project_name"            : "{{cookiecutter.environment}}-salt-model",
+    "reclass_repository"      : "git@github.com:Mirantis/{{cookiecutter.project_name}}.git",
     "openstack_version"       : "liberty",
     "keystone_region"         : "RegionOne",
 
