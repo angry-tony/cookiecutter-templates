@@ -1,0 +1,31 @@
+classes:
+- system.heka.common
+- service.rabbitmq.server.single
+parameters:
+  rabbitmq:
+    server:
+      secret_key: Ho4naes1tah6weechi3xohs5eidighee7ezaiqu4oochuer2ohneiluph0aech5u
+      host:
+        'log':
+          enabled: true
+          user: log
+          password: ${_param:heka_amqp_password}
+      admin:
+        name: admin
+        password: zeQuooQu4Lai8En9ohp7eed8esahpie2
+      bind:
+        address: ${_param:single_address}
+      management:
+        bind:
+          address: ${_param:single_address}
+#    cluster:
+#      enabled: true
+#      name: logging
+#      role: ${_param:rabbitmq_cluster_role}
+#      master: ${_param:cluster_node01_hostname}
+#      mode: disc
+#      members:
+#      - name: ${_param:cluster_node01_hostname}
+#        host: ${_param:cluster_node01_address}
+#      - name: ${_param:cluster_node02_hostname}
+#        host: ${_param:cluster_node02_address}

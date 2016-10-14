@@ -1,0 +1,15 @@
+parameters:
+  sensu:
+    server:
+      enabled: true
+      handler:
+        default:
+          enabled: true
+          set:
+          - slack
+        stdout:
+          enabled: true
+        slack:
+          enabled: true
+          webhook_url: FIXME
+          channel: '#FIXME'

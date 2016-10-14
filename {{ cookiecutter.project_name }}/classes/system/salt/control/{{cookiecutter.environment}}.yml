@@ -27,6 +27,11 @@ parameters:
           ram: 8192
           disk_profile: medium
           net_profile: default
+        rmq:
+          cpu: 4
+          ram: 8192
+          disk_profile: default
+          net_profile: default
         log:
           cpu: 4
           ram: 8192
@@ -74,7 +79,7 @@ parameters:
           engine: virt
           node:
             # TODO edit/add placement nodes to provider hosts
-            {%- for node_preffix in "bil ctl dbs log mdb mon mtr nal ntw prx".split() %}
+            {%- for node_preffix in "bil ctl dbs rmq log mdb mon mtr nal ntw prx".split() %}
               {%- for node in cookiecutter.keys()|sort %}
                 {%- if node[5:] == '_ip' and node[:3] == node_preffix %}
             {{cookiecutter[node[:-3]+'_name']}}:

@@ -1,0 +1,82 @@
+classes:
+  - system.openstack.common
+  - system.linux.repo.sensu
+  - system.openstack.monitor.credentials
+  - system.rabbitmq.server.cluster.monitoring
+  - system.haproxy.proxy.monitoring
+  - system.sensu.server.dashboard
+  - system.sensu.server.handler.mail
+  #- system.sensu.server.handler.sfdc
+  #- system.sensu.server.handler.slack
+  - system.mysql.server.cluster
+  - system.linux.repo.openstack
+  - system.keystone.client.monitoring
+  - service.python.environment
+  - service.memcached.server.local
+  - service.sensu.server.single
+  - service.keepalived.cluster.single
+  - service.redis.server.single
+#  - service.supervisor.server.single
+#  - service.kedb.server.single
+parameters:
+  _param:
+    cluster_node01_hostname: {{ cookiecutter.mon01_name }}
+    cluster_node01_address: {{ cookiecutter.mon01_ip }}
+    cluster_node02_hostname: {{ cookiecutter.mon02_name }}
+    cluster_node02_address: {{ cookiecutter.mon02_ip }}
+    cluster_vip_address: ${_param:mon_vip_address}
+    sensu_message_queue_host: ${_param:cluster_vip_address}
+    keepalived_vip_virtual_router_id: 240
+    keepalived_vip_interface: eth0
+    kedb_logging_dsn: {{ cookiecutter.domain_name }}
+  redis:
+    server:
+      bind:
+        address: ${_param:single_address}
+  sensu:
+    server:
+      bind:
+        address: ${_param:single_address}
+      database:
+        host: ${_param:cluster_vip_address}
+  collectd:
+    client:
+        check:
+          curl:
+            openstack_keystone_api:
+              url: "http://${_param:control_vip_address}:5000/v2/"
+            openstack_nova_api_v2:
+              url: "http://${_param:control_vip_address}:8774/"
+            openstack_glance-api:
+              url: "http://${_param:control_vip_address}:9292/"
+            openstack_neutron-api:
+              url: "http://${_param:network_vip_address}:9696/"
+            openstack_nova_api_v3:
+              url: "http://${_param:control_vip_address}:8774/v3/"
+            openstack_heat_cnf:
+              url: "http://${_param:control_vip_address}:8000/v1/"
+            openstack_heat_api:
+              url: "http://${_param:control_vip_address}:8004/v1/"
+          ping:
+            openstack_dashboard:
+              host: "${_param:proxy_vip_address}"
+  # mysql:
+  #   server:
+  #     database:
+  #       kedb:
+  #         encoding: UTF8
+  #         locale: cs_CZ
+  #         users:
+  #         - name: kedb
+  #           password: ${_param:mysql_kedb_password}
+  #           host: ${_param:single_address}
+  #           rights: all privileges
+  # kedb:
+  #   server:
+  #     database:
+  #       engine: mysql
+  #       port: 3306
+  #       host: ${_param:single_address}
+  #       password: ${_param:mysql_kedb_password}
+  #     source:
+  #       engine: pkg

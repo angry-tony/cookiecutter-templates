@@ -3,7 +3,7 @@ classes:
   - system.elasticsearch.server.cluster.datamaster
   - system.haproxy.proxy.logging
   - system.kibana.server.single
-  - system.linux.system.repo.openstack
+  - system.linux.repo.openstack
   - service.keepalived.cluster.single
 parameters:
   _param:
