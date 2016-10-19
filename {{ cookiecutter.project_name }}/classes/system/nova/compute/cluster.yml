@@ -61,3 +61,14 @@ parameters:
           port: 11211
         - host: ${_param:control_node03_address}
           port: 11211
+      user:
+        # TODO: Update nova-compute key infrastructure
+        public_key: ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHk0Pfasxy2/o4dw8s9MLqcN0/yxsRdjjvQQPt3Y6a2m generic@nova-compute
+        private_key: |
+          -----BEGIN OPENSSH PRIVATE KEY-----
+          b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAMwAAAAtzc2gtZW
+          QyNTUxOQAAACB5ND32rMctv6OHcPLPTC6nDdP8sbEXY470ED7d2OmtpgAAAJj2zWkJ9s1p
+          CQAAAAtzc2gtZWQyNTUxOQAAACB5ND32rMctv6OHcPLPTC6nDdP8sbEXY470ED7d2Omtpg
+          AAAEBULB2Nv1OC2dWmjmWioZ6je4EzvvbvRg/gxO3aV3M8lXk0Pfasxy2/o4dw8s9MLqcN
+          0/yxsRdjjvQQPt3Y6a2mAAAAE3BtaWNoYWxlY0Bkb250cGFuaWMBAg==
+          -----END OPENSSH PRIVATE KEY-----
