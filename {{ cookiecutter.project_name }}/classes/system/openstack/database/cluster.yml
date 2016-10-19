@@ -2,7 +2,6 @@ classes:
 - service.keepalived.cluster.single
 - service.haproxy.proxy.single
 - system.openstack.common
-- system.linux.repo.galera
 - system.openstack.database.credentials
 - system.linux.repo.openstack
 #- system.haproxy.mysql

@@ -1,18 +1,10 @@
 classes:
 - system.linux.repo.salt
-- system.linux.repo.galera
-- system.linux.repo.tcpcloud
 - system.linux.repo.opencontrail
 parameters:
   linux:
     system:
       repo:
-        #tcpcloud_openstack:
-        #  # NOTE: if offended with latter, feel free to add cookiecutter additional filters as ansible does: http://docs.ansible.com/ansible/playbooks_filters.html
-        #  {%- set repotags={ cookiecutter.horizon_version: '', cookiecutter.openstack_version: ''} %}
-        #  source: "deb [arch=amd64] {{ cookiecutter.apt_repository }}/{{ cookiecutter.apt_branch_openstack|default(cookiecutter.apt_branch)  }}/ ${_param:linux_distrib_codename} {{ repotags|join(' ') }}"
-        #  architectures: amd64
-        #  key_url: "{{ cookiecutter.apt_repository }}/public.gpg"
         mirantis_openstack:
           source: "deb {{ cookiecutter.apt_repository_openstack|default(cookiecutter.apt_repository) }}/ mos8.0 main restricted"
           architectures: amd64
