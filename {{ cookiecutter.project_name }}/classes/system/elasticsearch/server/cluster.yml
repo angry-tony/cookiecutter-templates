@@ -2,7 +2,7 @@ classes:
 - service.elasticsearch.server.cluster
 - service.java.environment
 - service.glusterfs.server
-- system.linux.repo.elasticsearch
+- system.linux.system.repo.elasticsearch
 parameters:
   _param:
     java_environment_version: "7"

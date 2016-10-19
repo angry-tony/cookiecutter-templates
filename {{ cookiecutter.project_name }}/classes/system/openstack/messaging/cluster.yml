@@ -4,7 +4,7 @@ classes:
 - service.rabbitmq.server.cluster
 - system.openstack.common
 - system.linux.system.control
-- system.linux.repo.openstack
+- system.linux.system.repo.openstack
 parameters:
   _param:
     cluster_vip_address: ${_param:messaging_vip_address}

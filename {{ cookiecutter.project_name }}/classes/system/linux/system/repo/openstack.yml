@@ -1,6 +1,6 @@
 classes:
-- system.linux.repo.salt
-- system.linux.repo.opencontrail
+- system.linux.system.repo.salt
+- system.linux.system.repo.opencontrail
 parameters:
   linux:
     system:

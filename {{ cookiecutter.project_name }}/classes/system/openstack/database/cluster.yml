@@ -3,7 +3,7 @@ classes:
 - service.haproxy.proxy.single
 - system.openstack.common
 - system.openstack.database.credentials
-- system.linux.repo.openstack
+- system.linux.system.repo.openstack
 #- system.haproxy.mysql
 parameters:
   _param:

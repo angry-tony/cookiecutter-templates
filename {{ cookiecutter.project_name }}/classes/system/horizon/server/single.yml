@@ -1,7 +1,7 @@
 classes:
 - service.horizon.server.single
 - system.horizon.server.credentials
-- system.linux.repo.horizon
+- system.linux.system.repo.horizon
 parameters:
   _param:
     horizon_identity_host: ${_param:control_vip_address}

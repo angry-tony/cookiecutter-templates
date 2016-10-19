@@ -1,6 +1,6 @@
 classes:
 - system.openstack.common.credentials
-- system.linux.repo.openstack
+- system.linux.system.repo.openstack
 parameters:
   _param:
     cluster_public_host: {{ cookiecutter.openstack_endpoint }}

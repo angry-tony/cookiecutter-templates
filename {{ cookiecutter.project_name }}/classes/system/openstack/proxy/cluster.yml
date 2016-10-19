@@ -11,7 +11,7 @@ classes:
 #- system.nginx.server.proxy.salt_doc
 #- system.nginx.server.proxy.rally_results
 - system.openstack.common
-# -system.linux.repo.horizon
+# -system.linux.system.repo.horizon
 parameters:
   _param:
     cluster_vip_address: {{ cookiecutter.prx_vip }}

@@ -2,9 +2,9 @@ classes:
 - service.linux.system
 - service.ntp.client
 - service.salt.minion.master
-- system.linux.repo.ubuntu.trusty
-- system.linux.repo.sensu
-- system.linux.repo.salt
+- system.linux.system.repo.ubuntu.trusty
+- system.linux.system.repo.sensu
+- system.linux.system.repo.salt
 - system.collectd.client.carbon
 - system.sensu.client.single
 - system.heka.shipper

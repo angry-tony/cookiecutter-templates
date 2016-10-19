@@ -3,9 +3,9 @@ classes:
 - service.keepalived.cluster.single
 - system.graphite.collector.cluster
 - system.statsd.server.single
-- system.linux.repo.grafana
+- system.linux.system.repo.grafana
 - system.mysql.server.cluster
-- system.linux.repo.openstack
+- system.linux.system.repo.openstack
 - service.redis.server.single
 - service.grafana.server.single
 - service.graphite.server.cluster

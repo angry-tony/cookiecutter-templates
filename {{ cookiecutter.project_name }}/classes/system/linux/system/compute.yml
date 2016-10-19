@@ -1,7 +1,7 @@
 classes:
 - system.linux.system.single
-- system.linux.repo.openstack
-- system.linux.repo.opencontrail
+- system.linux.system.repo.openstack
+- system.linux.system.repo.opencontrail
 parameters:
   linux:
     storage:

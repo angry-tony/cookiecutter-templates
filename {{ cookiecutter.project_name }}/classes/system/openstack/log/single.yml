@@ -3,7 +3,7 @@ classes:
   - system.elasticsearch.server.single
   - system.elasticsearch.server.curator
   - system.kibana.server.single
-  - system.linux.repo.elasticsearch
+  - system.linux.system.repo.elasticsearch
 parameters:
   _param:
     cluster_node01_hostname: {{ cookiecutter.log01_name }}
