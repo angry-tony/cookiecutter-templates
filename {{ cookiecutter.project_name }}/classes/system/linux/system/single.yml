@@ -36,7 +36,7 @@ parameters:
       package:
         cloud-init:
           version: purged
-        python-msgpack:
+        msgpack-python:
           version: latest
       timezone: UTC
       locale:
