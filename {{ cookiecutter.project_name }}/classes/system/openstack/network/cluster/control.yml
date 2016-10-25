@@ -9,6 +9,8 @@ classes:
 - system.opencontrail.control.cluster
 {%- endif %}
 - system.openstack.common
+- system.linux.system.repo.opencontrail
+- system.linux.system.repo.openstack
 parameters:
   _param:
     cluster_vip_address: {{ cookiecutter.ntw_vip }}
