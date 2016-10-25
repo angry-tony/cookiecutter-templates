@@ -2,6 +2,7 @@ classes:
 - service.elasticsearch.server.cluster
 - service.java.environment
 - service.glusterfs.server
+- service.glusterfs.client
 - system.linux.system.repo.elasticsearch
 parameters:
   _param:

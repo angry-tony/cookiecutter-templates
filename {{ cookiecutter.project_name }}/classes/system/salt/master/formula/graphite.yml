@@ -19,3 +19,6 @@ parameters:
             statsd:
               source: pkg
               name: salt-formula-statsd
+            grafana:
+              source: pkg
+              name: salt-formula-grafana

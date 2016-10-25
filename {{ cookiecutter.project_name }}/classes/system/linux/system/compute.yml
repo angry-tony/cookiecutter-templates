@@ -5,7 +5,8 @@ classes:
 parameters:
   linux:
     storage:
-      multipath: false
+      multipath: 
+        enable: false
     system:
       kernel:
         sysctl:
