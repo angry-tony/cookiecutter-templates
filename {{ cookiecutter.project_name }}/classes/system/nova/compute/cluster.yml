@@ -35,9 +35,9 @@ parameters:
         engine: rabbitmq
         port: 5672
         members:
-        - host: ${_param:control_node01_address}
-        - host: ${_param:control_node02_address}
-        - host: ${_param:control_node03_address}
+        - host: ${_param:messaging_node01_address}
+        - host: ${_param:messaging_node02_address}
+        - host: ${_param:messaging_node03_address}
         user: openstack
         password: ${_param:rabbitmq_openstack_password}
         virtual_host: '/openstack'

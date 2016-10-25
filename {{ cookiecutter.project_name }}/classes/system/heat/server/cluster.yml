@@ -86,3 +86,8 @@ parameters:
         name: heat_domain_admin
         password: ${_param:heat_domain_admin_password}
         domain: heat
+      message_queue:
+        members:
+          - host: ${_param:messaging_node01_address}
+          - host: ${_param:messaging_node02_address}
+          - host: ${_param:messaging_node03_address}

@@ -14,6 +14,8 @@ parameters:
       database:
         host: ${_param:database_vip_address}
       {%- endif %}
+    message_queue:
+      host: ${_param:messaging_vip_address}
   mysql:
     server:
       database:

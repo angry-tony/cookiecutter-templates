@@ -7,7 +7,7 @@ parameters:
         host: ${_param:control_vip_address}
     config:
       message_queue:
-        host: ${_param:control_vip_address}
+        host: ${_param:messaging_vip_address}
       identity:
         host: ${_param:control_vip_address}
     web:

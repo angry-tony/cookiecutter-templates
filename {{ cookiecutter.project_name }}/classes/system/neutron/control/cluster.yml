@@ -59,3 +59,9 @@ parameters:
       public_networks: []
       contrail:
         version: ${_param:opencontrail_version}
+      message_queue:
+        members:
+          - host: ${_param:messaging_node01_address}
+          - host: ${_param:messaging_node02_address}
+          - host: ${_param:messaging_node03_address}
+
