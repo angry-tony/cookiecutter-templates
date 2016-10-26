@@ -97,7 +97,7 @@ parameters:
     system:
       package:
         python-django:
-          version: 1.6.1-2ubuntu0.14
+          version: 1.6.1-2ubuntu0.15
   mysql:
     server:
       database:
@@ -107,8 +107,8 @@ parameters:
           users:
           - name: graphite
             password: ${_param:postgresql_graphite_password}
-            #host: ${_param:single_address}
-            host: 127.0.0.1
+            host: ${_param:single_address}
+            #host: 127.0.0.1
             rights: all privileges
         grafana:
           encoding: UTF8
