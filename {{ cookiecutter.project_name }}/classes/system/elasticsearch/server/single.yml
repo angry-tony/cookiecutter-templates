@@ -1,4 +1,0 @@
-classes:
-- service.java.environment.openjdk7
-- service.elasticsearch.server.single
-
