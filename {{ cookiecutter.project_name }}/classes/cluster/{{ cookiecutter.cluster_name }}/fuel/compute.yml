@@ -13,74 +13,55 @@ classes:
 parameters:
   salt:
     control:
+      size: #RAM 4096,8192,16384,32768,65536
+        openstack.control:
+          cpu: 8
+          ram: 32768
+          disk_profile: small
+          net_profile: default
+        openstack.database:
+          cpu: 8
+          ram: 16384
+          disk_profile: large
+          net_profile: default
+        openstack.message_queue:
+          cpu: 8
+          ram: 32768
+          disk_profile: small
+          net_profile: default
+        openstack.proxy:
+          cpu: 4
+          ram: 8192
+          disk_profile: small
+          net_profile: default
+        opencontrail.control:
+          cpu: 8
+          ram: 32768
+          disk_profile: small
+          net_profile: default
+        opencontrail.analytics:
+          cpu: 8
+          ram: 32768
+          disk_profile: large
+          net_profile: default
+        stacklight.log:
+          cpu: 4
+          ram: 8192
+          disk_profile: xxlarge
+          net_profile: default
+        stacklight.server:
+          cpu: 4
+          ram: 8192
+          disk_profile: small
+          net_profile: default
+        stacklight.telemetry:
+          cpu: 4
+          ram: 8192
+          disk_profile: xxlarge
+          net_profile: default
       cluster:
         internal:
           node:
-            ctl01:
-              provider: cfg01.${_param:cluster_domain}
-            msg01:
-              provider: cfg01.${_param:cluster_domain}
-            dbs01:
-              provider: cfg01.${_param:cluster_domain}
-            prx01:
-              provider: cfg01.${_param:cluster_domain}
-            ntw01:
-              provider: kvm04.${_param:cluster_domain}
-            ntw02:
-              provider: kvm05.${_param:cluster_domain}
-            ntw03:
-              provider: kvm06.${_param:cluster_domain}
-            nal01:
-              provider: kvm04.${_param:cluster_domain}
-            nal02:
-              provider: kvm05.${_param:cluster_domain}
-            nal03:
-              provider: kvm06.${_param:cluster_domain}
-            mtr01:
-              provider: kvm07.${_param:cluster_domain}
-            mtr02:
-              provider: kvm08.${_param:cluster_domain}
-            mtr03:
-              provider: kvm09.${_param:cluster_domain}
-            mon01:
-              provider: kvm07.${_param:cluster_domain}
-            mon02:
-              provider: kvm08.${_param:cluster_domain}
-            mon03:
-              provider: kvm09.${_param:cluster_domain}
-            log01:
-              provider: kvm07.${_param:cluster_domain}
-            log02:
-              provider: kvm08.${_param:cluster_domain}
-            log03:
-              provider: kvm09.${_param:cluster_domain}
-  linux:
-    network:
-      interface:
-        p1p1:
-          enabled: true
-          type: eth
-          proto: manual
-        p4p1.602:
-          enabled: true
-          type: vlan
-          proto: manual
-          use_interfaces:
-          - p4p1
-        br0:
-          enabled: true
-          type: bridge
-          address: ${_param:deploy_address}
-          netmask: 255.255.252.0
-          use_interfaces:
-          - p1p1
-        br1:
-          enabled: true
-          type: bridge
-          address: ${_param:single_address}
-          gateway: 172.20.8.1
-          netmask: 255.255.252.0
-          use_interfaces:
-          - p4p1.602
-
+            prx02:
+              provider: kvm03.${_param:cluster_domain}
           

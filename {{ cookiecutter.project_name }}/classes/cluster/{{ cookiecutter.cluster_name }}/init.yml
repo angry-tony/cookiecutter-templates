@@ -17,6 +17,7 @@ parameters:
     cluster_public_host: {{ cookiecutter.public_host }}
     # fuel service addresses
     fuel_config_address: {{ cookiecutter.salt_master_ip }}
+    fuel_config_deploy_address: {{ cookiecutter.salt_master_management_ip }}
 
     fuel_compute_node01_address: {{ cookiecutter.kvm01_control_ip }}
     fuel_compute_node02_address: {{ cookiecutter.kvm02_control_ip }}
