@@ -1,5 +1,6 @@
 classes:
 - system.linux.system.repo.tcp_extra
+- system.linux.system.repo.mos9
 - system.rabbitmq.server.cluster
 - system.rabbitmq.server.vhost.openstack
 - cluster.{{ cookiecutter.cluster_name }}
