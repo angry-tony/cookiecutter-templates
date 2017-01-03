@@ -58,6 +58,7 @@ parameters:
     mongodb_ceilometer_password: {{ password(16) }}
     mongodb_admin_password: {{ password(16) }}
     mongodb_shared_key: {{ password(64) }}
+    metadata_password: {{ password(16) }}
   linux:
     network:
       host:
