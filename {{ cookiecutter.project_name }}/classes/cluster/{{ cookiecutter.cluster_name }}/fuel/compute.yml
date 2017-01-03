@@ -1,4 +1,8 @@
 classes:
+- system.linux.system.repo_local.mos9
+- system.glusterfs.server.volume.glance
+- system.glusterfs.server.volume.keystone
+- system.glusterfs.server.cluster
 - system.salt.control.virt
 - system.salt.control.cluster.opencontrail_analytics_cluster
 - system.salt.control.cluster.opencontrail_control_cluster
@@ -14,6 +18,7 @@ parameters:
   salt:
     control:
       size: #RAM 4096,8192,16384,32768,65536
+      ##Default production sizing
         openstack.control:
           cpu: 8
           ram: 32768
@@ -64,4 +69,50 @@ parameters:
           node:
             prx02:
               provider: kvm03.${_param:cluster_domain}
+  ##FIXME
+  # linux:
+  #   network:
+  #     interface:
+  #       eth0:
+  #         enabled: true
+  #         type: eth
+  #         proto: manual
+  #       eth1:
+  #         enabled: true
+  #         type: eth
+  #         proto: manual
+  #       eth2:
+  #         enabled: true
+  #         type: eth
+  #         proto: manual
+  #       br_mgm:
+  #         enabled: true
+  #         proto: static
+  #         type: bridge
+  #         address: ${_param:deploy_address}
+  #         netmask: 255.255.255.0
+  #         use_interfaces:
+  #         - eth0
+  #       bond0:
+  #         enabled: true
+  #         proto: manual
+  #         type: bond
+  #         use_interfaces:
+  #         - eth1
+  #         - eth2
+  #         slaves: eth1 eth2
+  #         mode: active-backup
+  #       br_ctl: 
+  #         enabled: true
+  #         type: bridge
+  #         proto: static
+  #         address: ${_param:single_address}
+  #         gateway: {{ cookiecutter.control_network_gateway }}
+  #         netmask: {{ cookiecutter.control_network_netmask }}
+  #         name_servers:
+  #         - {{ cookiecutter.dns_server01 }}
+  #         - {{ cookiecutter.dns_server02 }}
+  #         use_interfaces:
+  #         - bond0
+
           

@@ -9,6 +9,7 @@ classes:
 - system.galera.server.database.heat
 - system.galera.server.database.keystone
 - system.galera.server.database.nova
+- system.galera.server.database.neutron
 - cluster.{{ cookiecutter.cluster_name }}
 parameters:
   _param:

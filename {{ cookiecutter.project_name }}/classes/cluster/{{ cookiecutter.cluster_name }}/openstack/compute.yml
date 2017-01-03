@@ -15,39 +15,45 @@ parameters:
     cluster_node03_hostname: ctl03
     cluster_node03_address: ${_param:openstack_control_node03_address}
     opencontrail_compute_address: ${_param:single_address}
-  linux:
-    network:
-      interface:
-        p4p1:
-          enabled: true
-          type: eth
-          proto: manual
-          mtu: 9000
-        p4p1.602:
-          enabled: true
-          type: vlan
-          address: ${_param:control_address}
-          gateway: 172.20.8.1
-          netmask: 255.255.252.0
-          mtu: 1500
-          use_interfaces:
-          - p4p1
-        p4p1.637:
-          enabled: true
-          type: vlan
-          proto: manual
-          mtu: 9000
-          use_interfaces:
-          - p4p1
-        vhost0:
-          enabled: true
-          type: eth
-          mtu: 9000
-          address: ${_param:single_address}
-          netmask: 255.255.252.0
-          pre_up_cmds:
-          - /usr/lib/contrail/if-vhost0
-          use_interfaces:
-          - p4p1.637
-          name_servers:
-            - 8.8.8.8
+    nova_vncproxy_url: http://${_param:openstack_proxy_address}:6080
+##FIXME
+ # linux:
+ #   network:
+ #     interface:
+ #       eth0:
+ #         enabled: true
+ #         type: slave
+ #         master: bond1
+ #         mtu: 9000
+ #         pre_up_cmds:
+ #         - /sbin/ethtool --offload eth6 rx off tx off tso off gro off
+ #       eth1:
+ #         enabled: true
+ #         type: slave
+ #         master: bond1
+ #         mtu: 9000
+ #         pre_up_cmds:
+ #         - /sbin/ethtool --offload eth7 rx off tx off tso off gro off
+ #       bond0:
+ #         enabled: true
+ #         proto: manual
+ #         type: bond
+ #         use_interfaces:
+ #         - eth0
+ #         - eth1
+ #         slaves: eth0 eth1
+ #         mode: active-backup
+ #         mtu: 9000
+ #       vhost0:
+ #         enabled: true
+ #         type: eth
+ #         mtu: 9000
+ #         address: ${_param:single_address}
+ #         netmask: 255.255.255.0
+ #         pre_up_cmds:
+ #         - /usr/lib/contrail/if-vhost0
+ #         use_interfaces:
+ #         - bond0
+ #         name_servers:
+  #         - {{ cookiecutter.dns_server01 }}
+  #         - {{ cookiecutter.dns_server02 }}

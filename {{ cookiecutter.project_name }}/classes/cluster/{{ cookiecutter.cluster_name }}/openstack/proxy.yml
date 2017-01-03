@@ -1,5 +1,5 @@
 classes:
-- system.linux.system.repo.mos9
+- system.linux.system.repo.tcp-liberty
 - system.nginx.server.single
 - system.nginx.server.proxy.opencontrail_web
 - system.nginx.server.proxy.openstack_api
@@ -8,9 +8,14 @@ classes:
 - system.horizon.server.single
 - system.salt.minion.pki.certificate
 - system.sphinx.server.doc.reclass
+- service.keepalived.cluster.single
 - cluster.{{ cookiecutter.cluster_name }}
+- cluster.{{ cookiecutter.cluster_name }}.openstack.dashboard
+- cluster.{{ cookiecutter.cluster_name }}.stacklight.proxy
 parameters:
   _param:
+    keepalived_vip_interface: eth1
+    keepalived_vip_virtual_router_id: 240
     nginx_proxy_ssl:
       enabled: true
       authority: mk_lab_ca

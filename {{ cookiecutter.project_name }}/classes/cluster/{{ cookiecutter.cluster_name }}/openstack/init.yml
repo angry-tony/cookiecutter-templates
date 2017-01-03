@@ -19,12 +19,14 @@ parameters:
     heat_version: ${_param:openstack_version}
     heat_service_host: ${_param:openstack_control_address}
     heat_domain_admin_password: {{ password(16) }}
-    ceilometer_version: ${_param:openstack_version}
-    ceilometer_service_host: 172.16.10.108
     cinder_version: ${_param:openstack_version}
     cinder_service_host: ${_param:openstack_control_address}
-    ceilometer_graphite_publisher_host: 172.16.10.107
-    ceilometer_graphite_publisher_port: 2013
+    ##Definition for rabbit
+    #ceilometer_version: ${_param:openstack_version}
+    #ceilometer_service_host: ${_param:openstack_telemetry_address}
+    #ceilometer_graphite_publisher_host: ${_param:openstack_billing_address}
+    #ceilometer_graphite_publisher_port: 2023
+    #ceilometer_influxdb_password: {{ password(16) }} 
     nova_version: ${_param:openstack_version}
     nova_service_host: ${_param:openstack_control_address}
     neutron_version: ${_param:openstack_version}
@@ -59,6 +61,17 @@ parameters:
     mongodb_admin_password: {{ password(16) }}
     mongodb_shared_key: {{ password(64) }}
     metadata_password: {{ password(16) }}
+
+    ##Billing (soon deprecated)
+    #keystone_billometer_password: {{ password(16) }}
+    #keystone_billometer_address: ${_param:billometer_service_host}
+    #billometer_service_host: ${_param:openstack_billing_address}
+    #billometer_version: ${_param:openstack_version}
+    #billometer_secret_key: {{ password(64) }}
+    #billometer_identity_password: ${_param:keystone_billometer_password}
+    #billometer_identity_host: ${_param:openstack_control_address}
+    #billometer_identity_token: ${_param:keystone_service_token}
+
   linux:
     network:
       host:

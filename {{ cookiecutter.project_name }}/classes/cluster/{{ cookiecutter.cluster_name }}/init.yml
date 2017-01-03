@@ -12,13 +12,19 @@ classes:
 parameters: 
   _param:
     cluster_domain: {{ cookiecutter.cluster_domain }}
+    stacklight_environment: ${_param:cluster_domain}
     reclass_data_revision: master
     cluster_name: {{ cookiecutter.cluster_name }}
     cluster_public_host: {{ cookiecutter.public_host }}
+    ##local repositiry for aptly
+    #local_repo_url: ip_address
+    #linux_repo_refresh_db: True
+
     # fuel service addresses
     fuel_config_address: {{ cookiecutter.salt_master_ip }}
     fuel_config_deploy_address: {{ cookiecutter.salt_master_management_ip }}
 
+    fuel_compute_address: {{ cookiecutter.kvm_vip_ip }}
     fuel_compute_node01_address: {{ cookiecutter.kvm01_control_ip }}
     fuel_compute_node02_address: {{ cookiecutter.kvm02_control_ip }}
     fuel_compute_node03_address: {{ cookiecutter.kvm03_control_ip }}
@@ -43,6 +49,16 @@ parameters:
     openstack_message_queue_node01_address: {{ cookiecutter.openstack_message_queue_node01_address }}
     openstack_message_queue_node02_address: {{ cookiecutter.openstack_message_queue_node02_address }}
     openstack_message_queue_node03_address: {{ cookiecutter.openstack_message_queue_node03_address }}
+
+    ##Nodes for ceilometer (not generic use case)
+    #openstack_telemetry_address: 
+    #openstack_telemetry_node01_address: 
+    #openstack_telemetry_node02_address: 
+    #openstack_telemetry_node03_address: 
+    
+    ##Node for billing (only if billing node used)
+    #openstack_billing_address: 
+    
     # opencontrail service addresses
     opencontrail_analytics_address: {{ cookiecutter.opencontrail_analytics_address }}
     opencontrail_analytics_node01_address: {{ cookiecutter.opencontrail_analytics_node01_address }}
@@ -77,6 +93,16 @@ parameters:
     openstack_compute_node04_control_address: {{ cookiecutter.openstack_compute_node04_control_address }}
     openstack_compute_node05_control_address: {{ cookiecutter.openstack_compute_node05_control_address }}
 
+    ##CI/CD
+    #fuel_integration_node01_single_address: 
+    #fuel_version_control_node01_single_address: 
+    #fuel_storage_node01_single_address: 
+    #fuel_benchmark_node01_single_address: 
+
+    ##FIXME if ntp defined
+    #ntp_strata_host1: 
+    #ntp_strata_host2: 
+
     # Interface definitions
     linux_dhcp_interface:
       enabled: true
@@ -87,7 +113,8 @@ parameters:
       type: eth
       proto: static
       address: ${_param:single_address}
-      netmask: 255.255.252.0
-      gateway: 172.20.8.1
+      netmask: {{ cookiecutter.control_network_netmask }}
+      gateway: {{ cookiecutter.control_network_gateway }}
       name_servers:
-        - 8.8.8.8
+        - {{ cookiecutter.dns_server01 }}
+        - {{ cookiecutter.dns_server02 }}

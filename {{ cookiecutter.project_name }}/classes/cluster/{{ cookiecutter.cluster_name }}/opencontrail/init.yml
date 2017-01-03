@@ -5,10 +5,10 @@ parameters:
   _param:
     opencontrail_version: 3.0
     opencontrail_stats_password: {{ password(16) }}
-    opencontrail_compute_dns: 8.8.8.8
-    opencontrail_compute_gateway: 172.20.128.1
-    opencontrail_compute_iface: p4p1.637
-    opencontrail_compute_iface_mask: 22
+    opencontrail_compute_dns: {{ cookiecutter.opencontrail_compute_dns }}
+    opencontrail_compute_gateway: {{ cookiecutter.opencontrail_compute_gateway }}
+    opencontrail_compute_iface: {{ cookiecutter.opencontrail_compute_iface }}
+    opencontrail_compute_iface_mask: {{ cookiecutter.opencontrail_compute_iface_mask }}
   linux:
     network:
       host:
