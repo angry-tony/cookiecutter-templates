@@ -10,6 +10,9 @@ classes:
 - system.cinder.control.cluster
 - system.cinder.volume.single
 - system.heat.server.cluster
+- system.glusterfs.client.cluster
+- system.glusterfs.client.volume.glance
+- system.glusterfs.client.volume.keystone
 - cluster.{{ cookiecutter.cluster_name }}
 parameters:
   _param:
@@ -24,6 +27,7 @@ parameters:
     cluster_node03_hostname: ctl03
     cluster_node03_address: ${_param:openstack_control_node03_address}
     nova_vncproxy_url: http://${_param:openstack_proxy_address}:6080
+    
   linux:
     network:
       interface:

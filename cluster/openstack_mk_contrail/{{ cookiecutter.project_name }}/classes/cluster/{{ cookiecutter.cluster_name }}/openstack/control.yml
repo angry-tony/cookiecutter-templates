@@ -8,6 +8,9 @@ classes:
 - system.cinder.control.cluster
 - system.cinder.volume.single
 - system.heat.server.cluster
+- system.glusterfs.client.cluster
+- system.glusterfs.client.volume.glance
+- system.glusterfs.client.volume.keystone
 - cluster.{{ cookiecutter.cluster_name }}
 parameters:
   _param:
