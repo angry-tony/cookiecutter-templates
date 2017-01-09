@@ -3,7 +3,6 @@
 classes:
 - system.linux.system.single
 - system.openssh.server.team.tcpcloud
-- system.openssh.server.team.qa_scale
 - cluster.{{ cookiecutter.cluster_name }}.fuel
 - cluster.{{ cookiecutter.cluster_name }}.openstack
 - cluster.{{ cookiecutter.cluster_name }}.opencontrail

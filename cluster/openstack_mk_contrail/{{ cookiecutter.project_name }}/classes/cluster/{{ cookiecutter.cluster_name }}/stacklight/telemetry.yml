@@ -1,4 +1,5 @@
 classes:
+- system.linux.system.repo.grafana
 - system.influxdb.server.single
 - cluster.{{ cookiecutter.cluster_name }}
 parameters:

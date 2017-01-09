@@ -6,6 +6,18 @@ parameters:
     openstack_version: mitaka
     openstack_region: RegionOne
     admin_email: root@localhost
+    ##Neutron osv/nodvr
+    neutron_control_dvr: False
+    neutron_tenant_network_types: "flat,vxlan"
+    neutron_l3_ha: True
+    neutron_global_physnet_mtu: 9000
+    neutron_external_mtu: 9000
+    neutron_gateway_dvr: False
+    neutron_gateway_agent_mode: legacy
+    neutron_compute_dvr: False
+    neutron_compute_agent_mode: legacy
+    neutron_compute_external_access: False
+#    neutron_tenant_vlan_range: "1810:1840" not needed
     galera_server_cluster_name: openstack_cluster
     galera_server_maintenance_password: {{ password(16) }}
     galera_server_admin_password: {{ password(16) }}
@@ -21,7 +33,7 @@ parameters:
     heat_domain_admin_password: {{ password(16) }}
     cinder_version: ${_param:openstack_version}
     cinder_service_host: ${_param:openstack_control_address}
-    ##Definition for rabbit
+    ##Definition for ceilometer
     #ceilometer_version: ${_param:openstack_version}
     #ceilometer_service_host: ${_param:openstack_telemetry_address}
     #ceilometer_graphite_publisher_host: ${_param:openstack_billing_address}

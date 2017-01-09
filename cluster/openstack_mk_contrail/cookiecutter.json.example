@@ -3,6 +3,7 @@
     "cluster_domain"                            : "cluster_name.local",
     "cluster_name"                              : "cluster_name",
     "public_host"                               : "prx01.local",
+    "reclass_repository"                        : "https://github.com/Mirantis/mk-lab-salt-model.git",
 
     "control_network_netmask"                   : "10.167.4.1",
     "control_network_gateway"                   : "255.255.255.0",
@@ -36,7 +37,7 @@
     "openstack_message_queue_node01_address"    : "10.167.4.41",
     "openstack_message_queue_node02_address"    : "10.167.4.42",
     "openstack_message_queue_node03_address"    : "10.167.4.43",
-    
+
     "opencontrail_analytics_address"            : "10.167.4.30",
     "opencontrail_analytics_node01_address"     : "10.167.4.31",
     "opencontrail_analytics_node02_address"     : "10.167.4.32",
@@ -50,7 +51,7 @@
     "opencontrail_compute_gateway"              : "10.167.2.1",
     "opencontrail_compute_iface"                : "bond0",
     "opencontrail_compute_iface_mask"           : "24",
-    
+        
     "stacklight_monitor_address"                : "10.167.4.70",
     "stacklight_monitor_node01_address"         : "10.167.4.71",
     "stacklight_monitor_node02_address"         : "10.167.4.72",

@@ -1,6 +1,6 @@
 classes:
+- system.linux.system.repo.tcp-elastic
 - system.elasticsearch.server.cluster
-- system.linux.system.repo.saltstack_2016_3_xenial
 - system.haproxy.proxy.listen.elasticsearch
 - cluster.{{ cookiecutter.cluster_name }}
 parameters:
