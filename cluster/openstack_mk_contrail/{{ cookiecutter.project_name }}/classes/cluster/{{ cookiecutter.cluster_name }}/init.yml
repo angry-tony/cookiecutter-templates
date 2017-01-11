@@ -3,7 +3,7 @@
 classes:
 - system.linux.system.single
 - system.openssh.server.team.tcpcloud
-- cluster.{{ cookiecutter.cluster_name }}.fuel
+- cluster.{{ cookiecutter.cluster_name }}.infra
 - cluster.{{ cookiecutter.cluster_name }}.openstack
 - cluster.{{ cookiecutter.cluster_name }}.opencontrail
 - cluster.{{ cookiecutter.cluster_name }}.stacklight
@@ -19,18 +19,18 @@ parameters:
     #local_repo_url: ip_address
     #linux_repo_refresh_db: True
 
-    # fuel service addresses
-    fuel_config_address: {{ cookiecutter.salt_master_ip }}
-    fuel_config_deploy_address: {{ cookiecutter.salt_master_management_ip }}
+    # infra service addresses
+    infra_config_address: {{ cookiecutter.salt_master_ip }}
+    infra_config_deploy_address: {{ cookiecutter.salt_master_management_ip }}
 
-    fuel_compute_address: {{ cookiecutter.kvm_vip_ip }}
-    fuel_compute_node01_address: {{ cookiecutter.kvm01_control_ip }}
-    fuel_compute_node02_address: {{ cookiecutter.kvm02_control_ip }}
-    fuel_compute_node03_address: {{ cookiecutter.kvm03_control_ip }}
+    infra_compute_address: {{ cookiecutter.kvm_vip_ip }}
+    infra_compute_node01_address: {{ cookiecutter.kvm01_control_ip }}
+    infra_compute_node02_address: {{ cookiecutter.kvm02_control_ip }}
+    infra_compute_node03_address: {{ cookiecutter.kvm03_control_ip }}
 
-    fuel_compute_node01_deploy_address: {{ cookiecutter.kvm01_deploy_ip }}
-    fuel_compute_node02_deploy_address: {{ cookiecutter.kvm02_deploy_ip }}
-    fuel_compute_node03_deploy_address: {{ cookiecutter.kvm03_deploy_ip }}
+    infra_compute_node01_deploy_address: {{ cookiecutter.kvm01_deploy_ip }}
+    infra_compute_node02_deploy_address: {{ cookiecutter.kvm02_deploy_ip }}
+    infra_compute_node03_deploy_address: {{ cookiecutter.kvm03_deploy_ip }}
 
     # openstack service addresses
     openstack_proxy_address: {{ cookiecutter.openstack_proxy_address }}
@@ -93,10 +93,10 @@ parameters:
     openstack_compute_node05_control_address: {{ cookiecutter.openstack_compute_node05_control_address }}
 
     ##CI/CD
-    #fuel_integration_node01_single_address: 
-    #fuel_version_control_node01_single_address: 
-    #fuel_storage_node01_single_address: 
-    #fuel_benchmark_node01_single_address: 
+    #infra_integration_node01_single_address: 
+    #infra_version_control_node01_single_address: 
+    #infra_storage_node01_single_address: 
+    #infra_benchmark_node01_single_address: 
 
     ##FIXME if ntp defined
     #ntp_strata_host1: 
