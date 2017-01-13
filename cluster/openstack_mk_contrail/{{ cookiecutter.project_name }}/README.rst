@@ -6,14 +6,14 @@
 config node
 ===========
 
-{{ cookiecutter.cfg01_name }}
+{{ cookiecutter.salt_master_hostname }}
 
 openstack control cluster
 =========================
 
-{{ cookiecutter.ctl01_name }}
-{{ cookiecutter.ctl02_name }}
-{{ cookiecutter.ctl03_name }}
+{{ cookiecutter.openstack_control_node01_address }}
+{{ cookiecutter.openstack_control_node02_address }}
+{{ cookiecutter.openstack_control_node03_address }}
 
 
 salt model
