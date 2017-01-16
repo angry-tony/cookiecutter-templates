@@ -1,9 +1,0 @@
-parameters:
-  linux:
-    system:
-      repo:
-        tcpcloud:
-          default: true
-          source: "deb [arch=amd64] {{ cookiecutter.apt_repository }}/{{ cookiecutter.apt_branch }}/ ${_param:linux_distrib_codename} {{  cookiecutter.apt_repo_tags|default('main') }}"
-          architectures: amd64
-          key_url: "{{ cookiecutter.apt_repository }}/public.gpg"

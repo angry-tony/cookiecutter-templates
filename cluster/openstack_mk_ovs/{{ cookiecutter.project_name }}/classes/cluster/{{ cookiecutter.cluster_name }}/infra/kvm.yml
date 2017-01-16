@@ -1,0 +1,117 @@
+classes:
+- system.linux.system.repo.mos9
+- system.linux.system.repo.saltstack_2016_3_trusty
+- system.glusterfs.server.volume.glance
+- system.glusterfs.server.volume.keystone
+- system.glusterfs.server.cluster
+- system.salt.control.virt
+- system.salt.control.cluster.openstack_control_cluster
+- system.salt.control.cluster.openstack_proxy_cluster
+- system.salt.control.cluster.openstack_database_cluster
+- system.salt.control.cluster.openstack_message_queue_cluster
+- system.salt.control.cluster.stacklight_server_cluster
+- system.salt.control.cluster.stacklight_log_cluster
+- system.salt.control.cluster.stacklight_telemetry_cluster
+- cluster.{{ cookiecutter.cluster_name }}
+parameters:
+  salt:
+    control:
+      size: #RAM 4096,8192,16384,32768,65536
+      ##Default production sizing
+        openstack.control:
+          cpu: 8
+          ram: 32768
+          disk_profile: small
+          net_profile: default
+        openstack.database:
+          cpu: 8
+          ram: 16384
+          disk_profile: large
+          net_profile: default
+        openstack.message_queue:
+          cpu: 8
+          ram: 32768
+          disk_profile: small
+          net_profile: default
+        openstack.proxy:
+          cpu: 4
+          ram: 8192
+          disk_profile: small
+          net_profile: default
+        opencontrail.control:
+          cpu: 8
+          ram: 32768
+          disk_profile: small
+          net_profile: default
+        opencontrail.analytics:
+          cpu: 8
+          ram: 32768
+          disk_profile: large
+          net_profile: default
+        stacklight.log:
+          cpu: 4
+          ram: 8192
+          disk_profile: xxlarge
+          net_profile: default
+        stacklight.server:
+          cpu: 4
+          ram: 8192
+          disk_profile: small
+          net_profile: default
+        stacklight.telemetry:
+          cpu: 4
+          ram: 8192
+          disk_profile: xxlarge
+          net_profile: default
+      cluster:
+        internal:
+          node:
+            prx02:
+              provider: kvm03.${_param:cluster_domain}
+  ##FIXME
+  # linux:
+  #   network:
+  #     interface:
+  #       eth0:
+  #         enabled: true
+  #         type: eth
+  #         proto: manual
+  #       eth1:
+  #         enabled: true
+  #         type: eth
+  #         proto: manual
+  #       eth2:
+  #         enabled: true
+  #         type: eth
+  #         proto: manual
+  #       br_mgm:
+  #         enabled: true
+  #         proto: static
+  #         type: bridge
+  #         address: ${_param:deploy_address}
+  #         netmask: 255.255.255.0
+  #         use_interfaces:
+  #         - eth0
+  #       bond0:
+  #         enabled: true
+  #         proto: manual
+  #         type: bond
+  #         use_interfaces:
+  #         - eth1
+  #         - eth2
+  #         slaves: eth1 eth2
+  #         mode: active-backup
+  #       br_ctl: 
+  #         enabled: true
+  #         type: bridge
+  #         proto: static
+  #         address: ${_param:single_address}
+  #         gateway: {{ cookiecutter.control_network_gateway }}
+  #         netmask: {{ cookiecutter.control_network_netmask }}
+  #         name_servers:
+  #         - {{ cookiecutter.dns_server01 }}
+  #         - {{ cookiecutter.dns_server02 }}
+  #         use_interfaces:
+  #         - bond0
+
+          

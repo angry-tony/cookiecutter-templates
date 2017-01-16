@@ -1,0 +1,2 @@
+classes:
+- cluster.{{ cookiecutter.cluster_name }}

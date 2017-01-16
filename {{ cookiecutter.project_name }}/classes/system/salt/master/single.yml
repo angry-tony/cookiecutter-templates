@@ -1,3 +1,0 @@
-classes:
-- service.salt.master.single
-- system.linux.system.repo.salt_formulas

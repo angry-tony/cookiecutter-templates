@@ -1,0 +1,59 @@
+classes:
+- system.linux.system.repo.contrail
+- system.linux.system.repo.mos9
+- system.nova.compute.cluster
+- system.opencontrail.compute.cluster
+- cluster.{{ cookiecutter.cluster_name }}
+parameters:
+  _param:
+    cluster_vip_address: ${_param:openstack_control_address}
+    cluster_local_address: ${_param:control_address}
+    cluster_node01_hostname: ctl01
+    cluster_node01_address: ${_param:openstack_control_node01_address}
+    cluster_node02_hostname: ctl02
+    cluster_node02_address: ${_param:openstack_control_node02_address}
+    cluster_node03_hostname: ctl03
+    cluster_node03_address: ${_param:openstack_control_node03_address}
+    opencontrail_compute_address: ${_param:single_address}
+    nova_vncproxy_url: http://${_param:openstack_proxy_address}:6080
+##FIXME
+ # linux:
+ #   network:
+ #     interface:
+ #       eth0:
+ #         enabled: true
+ #         type: slave
+ #         master: bond1
+ #         mtu: 9000
+ #         pre_up_cmds:
+ #         - /sbin/ethtool --offload eth6 rx off tx off tso off gro off
+ #       eth1:
+ #         enabled: true
+ #         type: slave
+ #         master: bond1
+ #         mtu: 9000
+ #         pre_up_cmds:
+ #         - /sbin/ethtool --offload eth7 rx off tx off tso off gro off
+ #       bond0:
+ #         enabled: true
+ #         proto: manual
+ #         type: bond
+ #         use_interfaces:
+ #         - eth0
+ #         - eth1
+ #         slaves: eth0 eth1
+ #         mode: active-backup
+ #         mtu: 9000
+ #       vhost0:
+ #         enabled: true
+ #         type: eth
+ #         mtu: 9000
+ #         address: ${_param:single_address}
+ #         netmask: 255.255.255.0
+ #         pre_up_cmds:
+ #         - /usr/lib/contrail/if-vhost0
+ #         use_interfaces:
+ #         - bond0
+ #         name_servers:
+  #         - {{ cookiecutter.dns_server01 }}
+  #         - {{ cookiecutter.dns_server02 }}
