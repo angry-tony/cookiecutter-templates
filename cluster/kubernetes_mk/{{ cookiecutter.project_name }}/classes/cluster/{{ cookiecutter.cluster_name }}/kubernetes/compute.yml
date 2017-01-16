@@ -1,0 +1,51 @@
+classes:
+- system.linux.system.repo.docker
+- system.kubernetes.pool.cluster
+- system.salt.minion.pki.k8s_client_certificate
+#- system.bird.server.single
+- cluster.{{ cookiecutter.cluster_name }}
+parameters:
+  kubernetes:
+    pool:
+      network:
+        image: {{ cookiecutter.calico_image }}
+        calicoctl:
+          image: {{ cookiecutter.calicoctl_image }}
+        cni:
+          image: {{ cookiecutter.calico_cni_image }}
+
+#        volumes:
+#          - /srv/calico/bird.cfg.mesh.template:/etc/calico/confd/templates/bird.cfg.mesh.template
+#          - /srv/calico/bird.cfg.no-mesh.template:/etc/calico/confd/templates/bird.cfg.no-mesh.template
+#          - /srv/calico/custom_filters.cfg:/etc/calico/confd/config/custom_filters.cfg
+    common:
+      hyperkube:
+        image: {{ cookiecutter.hyperkube_image }}
+##FIXME
+ # linux:
+ #   network:
+ #     interface:
+ #       eth0:
+ #         enabled: true
+ #         type: slave
+ #         master: bond1
+ #         mtu: 9000
+ #         pre_up_cmds:
+ #         - /sbin/ethtool --offload eth6 rx off tx off tso off gro off
+ #       eth1:
+ #         enabled: true
+ #         type: slave
+ #         master: bond1
+ #         mtu: 9000
+ #         pre_up_cmds:
+ #         - /sbin/ethtool --offload eth7 rx off tx off tso off gro off
+ #       bond0:
+ #         enabled: true
+ #         proto: manual
+ #         type: bond
+ #         use_interfaces:
+ #         - eth0
+ #         - eth1
+ #         slaves: eth0 eth1
+ #         mode: active-backup
+ #         mtu: 9000
