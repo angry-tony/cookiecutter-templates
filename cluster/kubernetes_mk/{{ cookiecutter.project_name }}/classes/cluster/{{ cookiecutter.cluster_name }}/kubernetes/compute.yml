@@ -1,7 +1,7 @@
 classes:
 - system.linux.system.repo.docker
 - system.kubernetes.pool.cluster
-- system.salt.minion.pki.k8s_client_certificate
+- system.salt.minion.cert.k8s_client_certificate
 #- system.bird.server.single
 - cluster.{{ cookiecutter.cluster_name }}
 parameters:
