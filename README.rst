@@ -1,8 +1,9 @@
-cookiecutter-reclass-model
-============================
 
-A cookiecutter_ template for tcp cloud OpenStack infrastructure model full
-possible setup.
+========================================
+OpenStack Cluster Cookiecutter Templates
+========================================
+
+A cookiecutter_ templates for generating OpenStack infrastructure models (cluster level).
 
 .. _cookiecutter: https://github.com/audreyr/cookiecutter
 
@@ -14,7 +15,7 @@ Installation
 
     pip install cookiecutter
 
-    git clone git@git.tcpcloud.eu:cookiecutter-templates/cookiecutter-openstack-full-reclass-model.git
+    git clone https://github.com/Mirantis/mk2x-cookiecutter-reclass-model.git
 
 
 Usage
@@ -33,18 +34,13 @@ Create new environment definition from `cookiecutter.json.example` and process:
 
     cookiecutter $PWD --output-dir ../../reclass-models [--config-file ${CUSTOMER_ENV}.yaml] [-f] [--no-input]
 
-Advanced, on additional runs, revert files containing generated credentials (ensure you have current state committed in git repo before cookiecutter updates). 
-Use `git diff` to find out possible updates:
 
-.. code-block:: bash
+Available deployments
+---------------------
 
-  M=$(find . -name credentials.yml;ls classes/system/openssh/client/*)
-  git diff $M
-  git checkout -- $M
-
-  #find . -name credentials.yml |xargs -I'{}' "git checkout -- {}"
-  #git checkout -- classes/system/openssh/client/*
-
+* kubernetes_mk
+* openstack_mk_contrail
+* openstack_mk_ovs
 
 
 Development and testing
@@ -60,7 +56,7 @@ Before you commit and push back to repo run a test run:
 Parameters
 ----------
 
-Following parameters need to be provided
+Parameters that need to be provided
 
 * "project_name": "project--salt-model", name of
 * "domain_name": "cloud.company.com", domain part of FQDN
