@@ -1,8 +1,7 @@
 {
-    "project_name"                              : "deployment_name",
-    "cluster_domain"                            : "cluster_name.local",
-    "cluster_name"                              : "cluster_name",
-    "public_host"                               : "prx01.local",
+    "cluster_name"                              : "deployment_name",
+    "cluster_domain"                            : "deploy-name.local",
+    "public_host"                               : "public-name",
     "reclass_repository"                        : "https://github.com/Mirantis/mk-lab-salt-model.git",
 
     "control_network_netmask"                   : "255.255.255.0",
@@ -20,7 +19,7 @@
     "kvm03_control_ip"                          : "10.167.4.243",
     "kvm01_deploy_ip"                           : "10.167.5.241",
     "kvm02_deploy_ip"                           : "10.167.5.242",
-    "kvm03_deploy_ip"                           : "10.167.5.243",       
+    "kvm03_deploy_ip"                           : "10.167.5.243",
     "kvm01_name"                                : "kvm01",
     "kvm02_name"                                : "kvm02",
     "kvm03_name"                                : "kvm03",
@@ -125,7 +124,4 @@
     "openstack_compute_node03_hostname"   : "cmp003",
     "openstack_compute_node04_hostname"   : "cmp004",
     "openstack_compute_node05_hostname"   : "cmp005"
-
-
-
 }

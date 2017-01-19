@@ -36,30 +36,56 @@ Create new environment definition from `cookiecutter.json.example` and process:
 
 
 Available deployments
----------------------
-
-* kubernetes_mk
-* openstack_mk_contrail
-* openstack_mk_ovs
+=====================
 
 
-Development and testing
-=======================
+kubernetes_mk
+-------------
 
-Before you commit and push back to repo run a test run:
+"cluster_domain"
+"cluster_name"
+"reclass_repository": Repository for this cluster model.
 
-.. code-block:: bash
+"salt_master_ip": Management IP of salt master, leave blank if not present.
+"salt_master_management_ip": IP that is use for salt communication.
 
-  cookiecutter $PWD --output-dir /tmp -f --no-input
+"kubernetes_control_address": VIP of control cluster.
+"kubernetes_control_node01_address": IP address of Kubernetes control node.
+"kubernetes_control_node02_address": IP address of Kubernetes control node.
+"kubernetes_control_node03_address": IP address of Kubernetes control node.
+"kubernetes_control_node01_deploy_address": PXE IP address of Kubernetes control node, leave blank if not present.
+"kubernetes_control_node02_deploy_address": PXE IP address of Kubernetes control node, leave blank if not present.
+"kubernetes_control_node03_deploy_address": PXE IP address of Kubernetes control node, leave blank if not present.
+
+"kubernetes_keepalived_vip_interface": Interface that will be used for kubernetes_control_address.
+
+"kubernetes_compute_node01_single_address": IP address of Kubernetes compute node.
+"kubernetes_compute_node02_single_address": IP address of Kubernetes compute node.
+"kubernetes_compute_node01_deploy_address": PXE IP address of Kubernetes compute node, leave blank if not present.
+"kubernetes_compute_node02_deploy_address": PXE IP address of Kubernetes compute node, leave blank if not present.
+
+"cfg01_name": salt master hostname.
+"ctl01_name": ctl01 hostname.
+"ctl02_name": ctl02 hostname.
+"ctl03_name": ctl03 hostname.
+"ctl_name": VIP hostname.
+"cmp01_name": cmp01 hostname.
+"cmp02_name": cmp02 hostname.
+
+"calico_network": network used for calico containers.
+"calico_netmask": netmask for calico_network.
+"calico_enable_nat": enable NAT from calico containers.
+
+"hyperkube_image": image used for kubernetes services.
+"calico_cni_image": image with Calico cni plugins.
+"calico_image": image of calico.
 
 
-Parameters
-----------
+openstack_mk_contrail and openstack_mk_ovs
+------------------------------------------
 
-Parameters that need to be provided
-
-* "project_name": "project--salt-model", name of
-* "domain_name": "cloud.company.com", domain part of FQDN
+"cluster_domain": "cloud.company.com", domain part of FQDN
+"cluster_name": "cloud_deploy01"
 * "admin_email": "root@localhost", keystone admin
 * "openstack_version": "kilo", openstack version
 * "cluster_public_host": "cloud.company.com", openstack API endpoint

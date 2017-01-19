@@ -1,7 +1,6 @@
 {
-    "project_name"                              : "deployment_name",
-    "cluster_domain"                            : "cluster_name.local",
-    "cluster_name"                              : "cluster_name",
+    "cluster_name"                              : "deployment_name",
+    "cluster_domain"                            : "deploy-name.local",
     "reclass_repository"                        : "https://github.com/Mirantis/mk-lab-salt-model.git",
 
     "salt_master_ip"                            : "10.167.4.90",
