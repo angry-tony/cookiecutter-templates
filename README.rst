@@ -31,15 +31,10 @@ Available Clusters
 ==================
 
 **kubernetes_mk**
-
     Standalone Kubernetes Mk control plane
-
 **openstack_mk_contrail**
-
     OpenStack MkXX control plane with Contrail SDN
-
 **openstack_mk_ovs**
-
     OpenStack MkXX control plane with OpenVSwitch networking
 
 
