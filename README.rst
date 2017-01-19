@@ -3,41 +3,149 @@
 OpenStack Cluster Cookiecutter Templates
 ========================================
 
-A cookiecutter_ templates for generating OpenStack infrastructure models (cluster level).
+A cookiecutter_ templates for generating OpenStack infrastructure models
+(cluster level).
 
 .. _cookiecutter: https://github.com/audreyr/cookiecutter
 
 
-Installation
-============
+Installation Steps
+==================
+
+First install fresh cookiecutter:
 
 .. code-block:: bash
 
+    apt-get install python-pip
+
     pip install cookiecutter
+
+Then clone the template repository:
+
+.. code-block:: bash
 
     git clone https://github.com/Mirantis/mk2x-cookiecutter-reclass-model.git
 
 
-Usage
-=====
+Available Clusters
+==================
 
-Create new environment definition from `cookiecutter.json.example` and process:
+**kubernetes_mk**
+
+    Standalone Kubernetes Mk control plane
+
+**openstack_mk_contrail**
+
+    OpenStack MkXX control plane with Contrail SDN
+
+**openstack_mk_ovs**
+
+    OpenStack MkXX control plane with OpenVSwitch networking
+
+
+Generate the Cluster
+====================
+
+Update new environment definition at `cookiecutter.json` in your cluster you
+want to generate to fit your needs. The parametes you can set are described
+later in Deployment Parameters chapter of this document.
 
 .. code-block:: bash
 
-    CUSTOMER_ENV=<Name>
-    cp cookiecutter.json.example ${CUSTOMER_ENV}.json
-    ln -s ${CUSTOMER_ENV}.json cookiecutter.json
+    vim cluster/openstack_mk_contrail/cookiecutter.json
 
-    # update [FIXME, 'Company.com', etc...]
-    $EDITOR cookiecutter.json
+And then generate the actual new cluster
 
-    cookiecutter $PWD --output-dir ../../reclass-models [--config-file ${CUSTOMER_ENV}.yaml] [-f] [--no-input]
+.. code-block:: bash
+
+    cookiecutter cluster/openstack_mk_contrail --output-dir output --no-input
+
+Generate the Config Node
+------------------------
+
+The config node definition is the same for all deployments. Open and edit new
+file with following command. Replace `cluster_domain` with the parameter you
+set when generating your cluster.
+
+.. code-block:: bash
+
+   vim output/cfg01.{{ cluster_domain }}.yml
+
+   # for default setup command would look like:
+   # vim output/cfg01.deploy-name.local.yml
+
+Use following YAML template, replace `cluster_name` and `cluster_domain` with
+the parameters you set to your cluster. This is important step as salt master
+node is the only static definition in your new cluster.
+
+.. code-block:: yaml
+
+    classes:
+    - cluster.{{ cluster_name }}.infra.config
+    parameters:
+      _param:
+        linux_system_codename: xenial
+        reclass_data_revision: master
+      linux:
+        system:
+          name: cfg01
+          domain: {{ cluster_domain }}
+
+And for the default cookiecutter parameters this would look like:
+
+.. code-block:: yaml
+
+    classes:
+    - cluster.deployment_name.infra.config
+    parameters:
+      _param:
+        linux_system_codename: xenial
+        reclass_data_revision: master
+      linux:
+        system:
+          name: cfg01
+          domain: deploy-name.local
 
 
-Available deployments
+Apply to VCS Repository
+=======================
+
+Thera are now 2 options, either you add new cluster to existing client
+repository or you create completely new one.
+
+
+Adding to Existing repository
+-----------------------------
+
+Clone your existing repository and then copy generated files to the proper
+locations.
+
+To copy the master model use following command, you copy it `/nodes`
+directory.
+
+.. code-block:: bash
+
+   cp output/cfg01.{{ cluster_domain }}.yml cloned_repo/nodes
+
+To copy the cluster definition use following command, you copy it
+`/classes/cluster` directory.
+
+.. code-block:: bash
+
+   cp output/{{ cluster_name }} cloned_repo/classes/cluster -r
+
+
+Adding to New repository
+------------------------
+
+YET TO BE WRITTEN
+
+
+Deployment Paramaters
 =====================
 
+This chapter describes all parameters that can be changed for generated
+environments.
 
 kubernetes_mk
 -------------
