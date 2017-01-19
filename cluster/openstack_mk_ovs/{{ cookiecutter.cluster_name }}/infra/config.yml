@@ -2,7 +2,6 @@ classes:
 - system.linux.system.repo.tcp_salt
 - system.openssh.client.lab
 - system.salt.master.pkg
-- system.salt.master.formula.git.foundation
 - system.salt.minion.pki.authority
 - system.reclass.storage.salt
 - system.reclass.storage.system.physical_control_cluster
@@ -18,7 +17,7 @@ classes:
 parameters:
   _param:
     salt_master_base_environment: prd
-    reclass_data_repository: "{{ cookiecutter.reclass_repository }}"
+    reclass_data_repository: {{ cookiecutter.reclass_repository }}
     reclass_data_revision: master
     reclass_config_master: ${_param:infra_config_deploy_address}
     single_address: ${_param:infra_config_address}

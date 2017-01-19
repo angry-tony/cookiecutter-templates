@@ -95,8 +95,6 @@ parameters:
     openstack_compute_node04_control_address: {{ cookiecutter.openstack_compute_node04_control_address }}
     openstack_compute_node05_control_address: {{ cookiecutter.openstack_compute_node05_control_address }}
 
-
-
     # openstack service hostnames
     openstack_proxy_hostname: {{ cookiecutter.openstack_proxy_hostname }}
     openstack_proxy_node01_hostname: {{ cookiecutter.openstack_proxy_node01_hostname }}

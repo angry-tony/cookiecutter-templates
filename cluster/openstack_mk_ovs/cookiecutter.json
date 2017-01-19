@@ -110,6 +110,4 @@
     "openstack_compute_node03_hostname"   : "cmp003",
     "openstack_compute_node04_hostname"   : "cmp004",
     "openstack_compute_node05_hostname"   : "cmp005"
-
-
 }
