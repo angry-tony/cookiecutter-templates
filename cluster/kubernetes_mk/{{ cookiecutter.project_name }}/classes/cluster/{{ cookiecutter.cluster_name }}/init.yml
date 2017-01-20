@@ -18,7 +18,7 @@ parameters:
     # infra service addresses
     infra_config_address: {{ cookiecutter.salt_master_ip }}
     infra_config_deploy_address: {{ cookiecutter.salt_master_management_ip }}
-    infra_config_hostname: {{ cookiecutter.cluster_name }}
+    infra_config_hostname: {{ cookiecutter.cfg01_name }}
 
     # node hostnames
     kubernetes_compute_node01_hostname: {{ cookiecutter.cmp01_name }}
@@ -47,4 +47,4 @@ parameters:
 
     ##FIXME if ntp defined
     #ntp_strata_host1: 
-    #ntp_strata_host2: 
+    #ntp_strata_host2:
