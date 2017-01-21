@@ -21,12 +21,9 @@ parameters:
     heat_domain_admin_password: {{ password(16) }}
     cinder_version: ${_param:openstack_version}
     cinder_service_host: ${_param:openstack_control_address}
-    ##Definition for rabbit
-    #ceilometer_version: ${_param:openstack_version}
-    #ceilometer_service_host: ${_param:openstack_telemetry_address}
-    #ceilometer_graphite_publisher_host: ${_param:openstack_billing_address}
-    #ceilometer_graphite_publisher_port: 2023
-    #ceilometer_influxdb_password: {{ password(16) }} 
+    ceilometer_version: ${_param:openstack_version}
+    ceilometer_service_host: ${_param:openstack_telemetry_address}
+    ceilometer_influxdb_password: {{ password(16) }} 
     nova_version: ${_param:openstack_version}
     nova_service_host: ${_param:openstack_control_address}
     neutron_version: ${_param:openstack_version}
