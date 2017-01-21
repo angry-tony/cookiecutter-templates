@@ -28,6 +28,15 @@ parameters:
   reclass:
     storage:
       node:
+        infra_compute_node01:
+          params:
+            keepalived_vip_priority: 100
+        infra_compute_node02:
+          params:
+            keepalived_vip_priority: 101
+        infra_compute_node03:
+          params:
+            keepalived_vip_priority: 102
         openstack_control_node01:
           classes:
           - cluster.${_param:cluster_name}.openstack.control_init

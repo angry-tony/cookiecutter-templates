@@ -20,6 +20,8 @@ parameters:
     cluster_node01_address: ${_param:infra_compute_node01_address}
     cluster_node02_address: ${_param:infra_compute_node02_address}
     cluster_node03_address: ${_param:infra_compute_node03_address}
+    keepalived_vip_interface: eth1
+    keepalived_vip_virtual_router_id: 69
   salt:
     control:
       size: #RAM 4096,8192,16384,32768,65536
