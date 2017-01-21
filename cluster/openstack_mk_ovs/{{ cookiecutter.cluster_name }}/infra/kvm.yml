@@ -14,6 +14,11 @@ classes:
 - system.salt.control.cluster.stacklight_telemetry_cluster
 - cluster.{{ cookiecutter.cluster_name }}
 parameters:
+  _param:
+    cluster_vip_address: ${_param:infra_compute_address}
+    cluster_node01_address: ${_param:infra_compute_node01_address}
+    cluster_node02_address: ${_param:infra_compute_node02_address}
+    cluster_node03_address: ${_param:infra_compute_node03_address}
   salt:
     control:
       size: #RAM 4096,8192,16384,32768,65536
