@@ -5,7 +5,7 @@ classes:
 - system.nginx.server.proxy.openstack_vnc
 - system.nginx.server.proxy.openstack_web
 - system.horizon.server.single
-- system.salt.minion.pki.certificate
+- system.salt.minion.cert.proxy
 - system.sphinx.server.doc.reclass
 - service.keepalived.cluster.single
 - cluster.{{ cookiecutter.cluster_name }}
