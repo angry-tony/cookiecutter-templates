@@ -1,5 +1,5 @@
 classes:
-- system.linux.system.repo.tcp-liberty
+- system.linux.system.repo.tcp_mk20
 - system.nginx.server.single
 - system.nginx.server.proxy.openstack_api
 - system.nginx.server.proxy.openstack_vnc
@@ -13,6 +13,7 @@ classes:
 - cluster.{{ cookiecutter.cluster_name }}.stacklight.proxy
 parameters:
   _param:
+    openstack_version: liberty
     keepalived_vip_interface: eth1
     keepalived_vip_virtual_router_id: 240
     nginx_proxy_ssl:
