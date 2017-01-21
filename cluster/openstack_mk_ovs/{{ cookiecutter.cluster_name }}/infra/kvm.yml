@@ -23,8 +23,8 @@ parameters:
     keepalived_vip_virtual_router_id: 69
   salt:
     control:
-      size: #RAM 4096,8192,16384,32768,65536
-      ##Default production sizing
+      size:
+      # Default production sizing
         openstack.control:
           cpu: 8
           ram: 32768
