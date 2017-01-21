@@ -57,16 +57,16 @@ parameters:
     openstack_message_queue_node01_address: {{ cookiecutter.openstack_message_queue_node01_address }}
     openstack_message_queue_node02_address: {{ cookiecutter.openstack_message_queue_node02_address }}
     openstack_message_queue_node03_address: {{ cookiecutter.openstack_message_queue_node03_address }}
-    ##Nodes for ceilometer (not generic use case)
-    #openstack_telemetry_address: 
-    #openstack_telemetry_node01_address: 
-    #openstack_telemetry_node02_address: 
-    #openstack_telemetry_node03_address: 
+
+    openstack_telemetry_address: {{ cookiecutter.openstack_control_address }}
+    openstack_telemetry_node01_address: {{ cookiecutter.openstack_control_node01_address }}
+    openstack_telemetry_node02_address: {{ cookiecutter.openstack_control_node02_address }}
+    openstack_telemetry_node03_address: {{ cookiecutter.openstack_control_node03_address }}
     
-    ##Node for billing (only if billing node used)
+    # Billing
     #openstack_billing_address: 
     
-    # stacklight service addresses
+    # Stacklight Monitor
     stacklight_monitor_address: {{ cookiecutter.stacklight_monitor_address }}
     stacklight_monitor_node01_address: {{ cookiecutter.stacklight_monitor_node01_address }}
     stacklight_monitor_node02_address: {{ cookiecutter.stacklight_monitor_node02_address }}
@@ -80,7 +80,7 @@ parameters:
     stacklight_telemetry_node02_address: {{ cookiecutter.stacklight_telemetry_node02_address }}
     stacklight_telemetry_node03_address: {{ cookiecutter.stacklight_telemetry_node03_address }}
     
-    # openstack compute
+    # OpenStack Compute
     openstack_compute_node01_single_address: {{ cookiecutter.openstack_compute_node01_single_address }}
     openstack_compute_node02_single_address: {{ cookiecutter.openstack_compute_node02_single_address }}
     openstack_compute_node03_single_address: {{ cookiecutter.openstack_compute_node03_single_address }}

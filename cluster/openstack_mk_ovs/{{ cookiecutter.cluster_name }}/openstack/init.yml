@@ -70,8 +70,7 @@ parameters:
     mongodb_admin_password: {{ password(16) }}
     mongodb_shared_key: {{ password(64) }}
     metadata_password: {{ password(16) }}
-
-    ##Billing (soon deprecated)
+    # Billing
     #keystone_billometer_password: {{ password(16) }}
     #keystone_billometer_address: ${_param:billometer_service_host}
     #billometer_service_host: ${_param:openstack_billing_address}
@@ -80,7 +79,6 @@ parameters:
     #billometer_identity_password: ${_param:keystone_billometer_password}
     #billometer_identity_host: ${_param:openstack_control_address}
     #billometer_identity_token: ${_param:keystone_service_token}
-
   linux:
     network:
       host:
