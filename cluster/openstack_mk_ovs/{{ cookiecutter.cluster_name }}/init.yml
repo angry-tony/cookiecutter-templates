@@ -7,8 +7,9 @@ classes:
 - cluster.{{ cookiecutter.cluster_name }}.openstack
 - cluster.{{ cookiecutter.cluster_name }}.stacklight
 - cluster.{{ cookiecutter.cluster_name }}.stacklight.client
-parameters: 
+parameters:
   _param:
+    openstack_version: {{ cookiecutter.openstack_version }}
     cluster_domain: {{ cookiecutter.cluster_domain }}
     stacklight_environment: ${_param:cluster_domain}
     reclass_data_revision: master
@@ -25,10 +26,13 @@ parameters:
 
     openstack_gateway_node01_address: {{ cookiecutter.openstack_gateway_node01_address }}
     openstack_gateway_node02_address: {{ cookiecutter.openstack_gateway_node02_address }}
+    openstack_gateway_node03_address: {{ cookiecutter.openstack_gateway_node03_address }}
     openstack_gateway_node01_tenant_address: {{ cookiecutter.openstack_gateway_node01_tenant_address }}
     openstack_gateway_node02_tenant_address: {{ cookiecutter.openstack_gateway_node02_tenant_address }}
+    openstack_gateway_node03_tenant_address: {{ cookiecutter.openstack_gateway_node03_tenant_address }}
     openstack_gateway_node01_hostname: {{ cookiecutter.openstack_gateway_node01_hostname }}
     openstack_gateway_node02_hostname: {{ cookiecutter.openstack_gateway_node02_hostname }}
+    openstack_gateway_node03_hostname: {{ cookiecutter.openstack_gateway_node03_hostname }}
 
     infra_compute_address: {{ cookiecutter.kvm_vip_ip }}
     infra_compute_node01_address: {{ cookiecutter.kvm01_control_ip }}
@@ -44,7 +48,7 @@ parameters:
     # openstack service addresses
     openstack_proxy_address: {{ cookiecutter.openstack_proxy_address }}
     openstack_proxy_node01_address: {{ cookiecutter.openstack_proxy_node01_address }}
-    openstack_proxy_node02_address: {{ cookiecutter.openstack_proxy_node02_address }}     
+    openstack_proxy_node02_address: {{ cookiecutter.openstack_proxy_node02_address }}
     openstack_control_address: {{ cookiecutter.openstack_control_address }}
     openstack_control_node01_address: {{ cookiecutter.openstack_control_node01_address }}
     openstack_control_node02_address: {{ cookiecutter.openstack_control_node02_address }}
@@ -58,14 +62,14 @@ parameters:
     openstack_message_queue_node02_address: {{ cookiecutter.openstack_message_queue_node02_address }}
     openstack_message_queue_node03_address: {{ cookiecutter.openstack_message_queue_node03_address }}
 
-    openstack_telemetry_address: {{ cookiecutter.openstack_control_address }}
-    openstack_telemetry_node01_address: {{ cookiecutter.openstack_control_node01_address }}
-    openstack_telemetry_node02_address: {{ cookiecutter.openstack_control_node02_address }}
-    openstack_telemetry_node03_address: {{ cookiecutter.openstack_control_node03_address }}
-    
+    openstack_telemetry_address: {{ cookiecutter.openstack_telemetry_address }}
+    openstack_telemetry_node01_address: {{ cookiecutter.openstack_telemetry_node01_address }}
+    openstack_telemetry_node02_address: {{ cookiecutter.openstack_telemetry_node02_address }}
+    openstack_telemetry_node03_address: {{ cookiecutter.openstack_telemetry_node03_address }}
+
     # Billing
-    #openstack_billing_address: 
-    
+    # openstack_billing_address:
+
     # Stacklight Monitor
     stacklight_monitor_address: {{ cookiecutter.stacklight_monitor_address }}
     stacklight_monitor_node01_address: {{ cookiecutter.stacklight_monitor_node01_address }}
@@ -79,7 +83,7 @@ parameters:
     stacklight_telemetry_node01_address: {{ cookiecutter.stacklight_telemetry_node01_address }}
     stacklight_telemetry_node02_address: {{ cookiecutter.stacklight_telemetry_node02_address }}
     stacklight_telemetry_node03_address: {{ cookiecutter.stacklight_telemetry_node03_address }}
-    
+
     # OpenStack Compute
     openstack_compute_node01_single_address: {{ cookiecutter.openstack_compute_node01_single_address }}
     openstack_compute_node02_single_address: {{ cookiecutter.openstack_compute_node02_single_address }}
@@ -90,6 +94,7 @@ parameters:
     openstack_compute_node01_tenant_address: {{ cookiecutter.openstack_compute_node01_tenant_address }}
     openstack_compute_node02_tenant_address: {{ cookiecutter.openstack_compute_node02_tenant_address }}
     openstack_compute_node03_tenant_address: {{ cookiecutter.openstack_compute_node03_tenant_address }}
+
 
     # openstack service hostnames
     openstack_proxy_hostname: {{ cookiecutter.openstack_proxy_hostname }}
@@ -107,7 +112,7 @@ parameters:
     openstack_message_queue_node01_hostname: {{ cookiecutter.openstack_message_queue_node01_hostname }}
     openstack_message_queue_node02_hostname: {{ cookiecutter.openstack_message_queue_node02_hostname }}
     openstack_message_queue_node03_hostname: {{ cookiecutter.openstack_message_queue_node03_hostname }}
-  
+
     # stacklight service hostnames
     stacklight_monitor_hostname: {{ cookiecutter.stacklight_monitor_hostname }}
     stacklight_monitor_node01_hostname: {{ cookiecutter.stacklight_monitor_node01_hostname }}
@@ -126,18 +131,17 @@ parameters:
     openstack_compute_node01_hostname: {{ cookiecutter.openstack_compute_node01_hostname }}
     openstack_compute_node02_hostname: {{ cookiecutter.openstack_compute_node02_hostname }}
     openstack_compute_node03_hostname: {{ cookiecutter.openstack_compute_node03_hostname }}
-    openstack_compute_node04_hostname: {{ cookiecutter.openstack_compute_node04_hostname }}
-    openstack_compute_node05_hostname: {{ cookiecutter.openstack_compute_node05_hostname }}
+
 
     ##CI/CD
-    #infra_integration_node01_single_address: 
-    #infra_version_control_node01_single_address: 
-    #infra_storage_node01_single_address: 
-    #infra_benchmark_node01_single_address: 
+    #infra_integration_node01_single_address:
+    #infra_version_control_node01_single_address:
+    #infra_storage_node01_single_address:
+    #infra_benchmark_node01_single_address:
 
     ##FIXME if ntp defined
-    #ntp_strata_host1: 
-    #ntp_strata_host2: 
+    #ntp_strata_host1:
+    #ntp_strata_host2:
 
     # Interface definitions
     linux_dhcp_interface:

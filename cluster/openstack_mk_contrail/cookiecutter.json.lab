@@ -1,4 +1,5 @@
 {
+    "openstack_version"                         : "mitaka",
     "cluster_name"                              : "deployment_name",
     "cluster_domain"                            : "deploy-name.local",
     "public_host"                               : "public-name",
@@ -80,7 +81,7 @@
     "opencontrail_compute_gateway"              : "172.16.10.1",
     "opencontrail_compute_iface"                : "bond0",
     "opencontrail_compute_iface_mask"           : "24",
-        
+
     "stacklight_monitor_address"                : "172.16.10.70",
     "stacklight_monitor_node01_address"         : "172.16.10.71",
     "stacklight_monitor_node02_address"         : "172.16.10.72",
@@ -107,21 +108,15 @@
     "stacklight_telemetry_node01_hostname"      : "mtr01",
     "stacklight_telemetry_node02_hostname"      : "mtr02",
     "stacklight_telemetry_node03_hostname"      : "mtr03",
-    
+
     "openstack_compute_node01_single_address"   : "10.167.2.101",
     "openstack_compute_node02_single_address"   : "10.167.2.102",
     "openstack_compute_node03_single_address"   : "10.167.2.103",
-    "openstack_compute_node04_single_address"   : "10.167.2.104",
-    "openstack_compute_node05_single_address"   : "10.167.2.105",
     "openstack_compute_node01_control_address"  : "172.16.10.101",
     "openstack_compute_node02_control_address"  : "172.16.10.102",
     "openstack_compute_node03_control_address"  : "172.16.10.103",
-    "openstack_compute_node04_control_address"  : "172.16.10.104",
-    "openstack_compute_node05_control_address"  : "172.16.10.105",
 
     "openstack_compute_node01_hostname"   : "cmp001",
     "openstack_compute_node02_hostname"   : "cmp002",
-    "openstack_compute_node03_hostname"   : "cmp003",
-    "openstack_compute_node04_hostname"   : "cmp004",
-    "openstack_compute_node05_hostname"   : "cmp005"
+    "openstack_compute_node03_hostname"   : "cmp003"
 }

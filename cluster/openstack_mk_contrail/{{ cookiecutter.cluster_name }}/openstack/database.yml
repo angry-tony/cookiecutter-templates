@@ -1,7 +1,12 @@
 classes:
+{% if cookiecutter.openstack_version == "mitaka" %}
 - system.linux.system.repo.mos9
+{% elif cookiecutter.openstack_version == "liberty" %}
+- system.linux.system.repo.mos8
+{% endif %}
 - system.linux.system.repo.tcp_extra
 - system.galera.server.cluster
+- system.galera.server.database.aodh
 - system.galera.server.database.ceilometer
 - system.galera.server.database.cinder
 - system.galera.server.database.glance

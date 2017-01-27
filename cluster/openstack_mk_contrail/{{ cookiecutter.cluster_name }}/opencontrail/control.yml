@@ -1,6 +1,10 @@
 classes:
-- system.linux.system.repo.contrail
+{% if cookiecutter.openstack_version == "mitaka" %}
 - system.linux.system.repo.mos9
+{% elif cookiecutter.openstack_version == "liberty" %}
+- system.linux.system.repo.mos8
+{% endif %}
+- system.linux.system.repo.contrail
 - system.neutron.control.opencontrail.cluster
 - system.opencontrail.control.control
 - cluster.{{ cookiecutter.cluster_name }}

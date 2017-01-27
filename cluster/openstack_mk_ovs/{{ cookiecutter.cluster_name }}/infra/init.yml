@@ -16,20 +16,20 @@ parameters:
         cfg:
           address: ${_param:infra_config_address}
           names:
-          - cfg
-          - cfg.${_param:cluster_domain}
+          - ${_param:infra_config_hostname}
+          - ${_param:infra_config_hostname}.${_param:cluster_domain}
         kvm01:
           address: ${_param:infra_compute_node01_address}
           names:
-          - kvm01
-          - kvm01.${_param:cluster_domain}
+          - ${_param:infra_compute_node01_hostname}
+          - ${_param:infra_compute_node01_hostname}.${_param:cluster_domain}
         kvm02:
           address: ${_param:infra_compute_node02_address}
           names:
-          - kvm02
-          - kvm02.${_param:cluster_domain}
+          - ${_param:infra_compute_node02_hostname}
+          - ${_param:infra_compute_node02_hostname}.${_param:cluster_domain}
         kvm03:
           address: ${_param:infra_compute_node03_address}
           names:
-          - kvm03
-          - kvm03.${_param:cluster_domain}
+          - ${_param:infra_compute_node03_hostname}
+          - ${_param:infra_compute_node03_hostname}.${_param:cluster_domain}

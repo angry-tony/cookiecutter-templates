@@ -12,6 +12,7 @@ classes:
 - system.reclass.storage.system.openstack_proxy_cluster
 - system.reclass.storage.system.openstack_database_cluster
 - system.reclass.storage.system.openstack_message_queue_cluster
+- system.reclass.storage.system.openstack_telemetry_cluster
 - system.reclass.storage.system.stacklight_log_cluster
 - system.reclass.storage.system.stacklight_monitor_cluster
 - system.reclass.storage.system.stacklight_telemetry_cluster
@@ -44,7 +45,7 @@ parameters:
           classes:
           - cluster.${_param:cluster_name}.openstack.database_init
         openstack_compute_node01:
-          name: cmp01
+          name: ${_param:openstack_compute_node01_hostname}
           domain: ${_param:cluster_domain}
           classes:
           - cluster.${_param:cluster_name}.openstack.compute
@@ -54,7 +55,7 @@ parameters:
             control_address: ${_param:openstack_compute_node01_control_address}
             single_address: ${_param:openstack_compute_node01_single_address}
         openstack_compute_node02:
-          name: cmp02
+          name: ${_param:openstack_compute_node02_hostname}
           domain: ${_param:cluster_domain}
           classes:
           - cluster.${_param:cluster_name}.openstack.compute
@@ -64,7 +65,7 @@ parameters:
             control_address: ${_param:openstack_compute_node02_control_address}
             single_address: ${_param:openstack_compute_node02_single_address}
         openstack_compute_node03:
-          name: cmp03
+          name: ${_param:openstack_compute_node03_hostname}
           domain: ${_param:cluster_domain}
           classes:
           - cluster.${_param:cluster_name}.openstack.compute
@@ -73,13 +74,3 @@ parameters:
             linux_system_codename: trusty
             control_address: ${_param:openstack_compute_node03_control_address}
             single_address: ${_param:openstack_compute_node03_single_address}
-        openstack_compute_node04:
-          name: cmp04
-          domain: ${_param:cluster_domain}
-          classes:
-          - cluster.${_param:cluster_name}.openstack.compute
-          params:
-            salt_master_host: ${_param:reclass_config_master}
-            linux_system_codename: trusty
-            control_address: ${_param:openstack_compute_node04_control_address}
-            single_address: ${_param:openstack_compute_node04_single_address}

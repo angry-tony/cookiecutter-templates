@@ -1,4 +1,5 @@
 {
+    "openstack_version"                         : "mitaka",
     "cluster_name"                              : "deployment_name",
     "cluster_domain"                            : "deploy-name.local",
     "public_host"                               : "public-name",
@@ -60,13 +61,25 @@
     "openstack_message_queue_node02_hostname"   : "msg02",
     "openstack_message_queue_node03_hostname"   : "msg03",
 
+    "openstack_telemetry_address"               : "10.167.4.75",
+    "openstack_telemetry_node01_address"        : "10.167.4.76",
+    "openstack_telemetry_node02_address"        : "10.167.4.77",
+    "openstack_telemetry_node03_address"        : "10.167.4.78",
+    "openstack_telemetry_hostname"              : "mdb",
+    "openstack_telemetry_node01_hostname"       : "mdb01",
+    "openstack_telemetry_node02_hostname"       : "mdb02",
+    "openstack_telemetry_node03_hostname"       : "mdb03",
+
     "openstack_gateway_node01_address"          : "10.167.4.224",
     "openstack_gateway_node02_address"          : "10.167.4.225",
+    "openstack_gateway_node03_address"          : "10.167.4.226",
     "openstack_gateway_node01_tenant_address"   : "192.168.50.6",
     "openstack_gateway_node02_tenant_address"   : "192.168.50.7",
+    "openstack_gateway_node03_tenant_address"   : "192.168.50.9",
     "openstack_gateway_node01_hostname"         : "gtw01",
     "openstack_gateway_node02_hostname"         : "gtw02",
-        
+    "openstack_gateway_node03_hostname"         : "gtw03",
+
     "stacklight_monitor_address"                : "10.167.4.70",
     "stacklight_monitor_node01_address"         : "10.167.4.71",
     "stacklight_monitor_node02_address"         : "10.167.4.72",
@@ -84,7 +97,7 @@
     "stacklight_log_node01_hostname"            : "log01",
     "stacklight_log_node02_hostname"            : "log02",
     "stacklight_log_node03_hostname"            : "log03",
-    
+
     "stacklight_telemetry_address"              : "10.167.4.85",
     "stacklight_telemetry_node01_address"       : "10.167.4.86",
     "stacklight_telemetry_node02_address"       : "10.167.4.87",
@@ -93,7 +106,7 @@
     "stacklight_telemetry_node01_hostname"      : "mtr01",
     "stacklight_telemetry_node02_hostname"      : "mtr02",
     "stacklight_telemetry_node03_hostname"      : "mtr03",
-    
+
     "openstack_compute_node01_single_address"   : "10.167.2.101",
     "openstack_compute_node02_single_address"   : "10.167.2.102",
     "openstack_compute_node03_single_address"   : "10.167.2.103",
@@ -106,7 +119,5 @@
 
     "openstack_compute_node01_hostname"   : "cmp001",
     "openstack_compute_node02_hostname"   : "cmp002",
-    "openstack_compute_node03_hostname"   : "cmp003",
-    "openstack_compute_node04_hostname"   : "cmp004",
-    "openstack_compute_node05_hostname"   : "cmp005"
+    "openstack_compute_node03_hostname"   : "cmp003"
 }

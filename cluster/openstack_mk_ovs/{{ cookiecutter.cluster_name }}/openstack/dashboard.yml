@@ -1,7 +1,6 @@
 classes:
 - system.horizon.server.single
 - system.horizon.server.plugin.theme
-- system.horizon.server.plugin.contrail
 - system.horizon.server.plugin.overrides
 - cluster.{{ cookiecutter.cluster_name }}
 parameters:

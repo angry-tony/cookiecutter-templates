@@ -8,8 +8,9 @@ classes:
 - cluster.{{ cookiecutter.cluster_name }}.opencontrail
 - cluster.{{ cookiecutter.cluster_name }}.stacklight
 - cluster.{{ cookiecutter.cluster_name }}.stacklight.client
-parameters: 
+parameters:
   _param:
+    openstack_version: {{ cookiecutter.openstack_version }}
     cluster_domain: {{ cookiecutter.cluster_domain }}
     stacklight_environment: ${_param:cluster_domain}
     reclass_data_revision: master
@@ -52,14 +53,14 @@ parameters:
     openstack_message_queue_node02_address: {{ cookiecutter.openstack_message_queue_node02_address }}
     openstack_message_queue_node03_address: {{ cookiecutter.openstack_message_queue_node03_address }}
 
-    openstack_telemetry_address: {{ cookiecutter.openstack_control_address }}
-    openstack_telemetry_node01_address: {{ cookiecutter.openstack_control_node01_address }}
-    openstack_telemetry_node02_address: {{ cookiecutter.openstack_control_node02_address }}
-    openstack_telemetry_node03_address: {{ cookiecutter.openstack_control_node03_address }}
-    
+    openstack_telemetry_address: {{ cookiecutter.openstack_telemetry_address }}
+    openstack_telemetry_node01_address: {{ cookiecutter.openstack_telemetry_node01_address }}
+    openstack_telemetry_node02_address: {{ cookiecutter.openstack_telemetry_node02_address }}
+    openstack_telemetry_node03_address: {{ cookiecutter.openstack_telemetry_node03_address }}
+
     # Billing
-    #openstack_billing_address: 
-    
+    #openstack_billing_address:
+
     # OpenContrail Control
     opencontrail_analytics_address: {{ cookiecutter.opencontrail_analytics_address }}
     opencontrail_analytics_node01_address: {{ cookiecutter.opencontrail_analytics_node01_address }}
@@ -86,13 +87,9 @@ parameters:
     openstack_compute_node01_single_address: {{ cookiecutter.openstack_compute_node01_single_address }}
     openstack_compute_node02_single_address: {{ cookiecutter.openstack_compute_node02_single_address }}
     openstack_compute_node03_single_address: {{ cookiecutter.openstack_compute_node03_single_address }}
-    openstack_compute_node04_single_address: {{ cookiecutter.openstack_compute_node04_single_address }}
-    openstack_compute_node05_single_address: {{ cookiecutter.openstack_compute_node05_single_address }}
     openstack_compute_node01_control_address: {{ cookiecutter.openstack_compute_node01_control_address }}
     openstack_compute_node02_control_address: {{ cookiecutter.openstack_compute_node02_control_address }}
     openstack_compute_node03_control_address: {{ cookiecutter.openstack_compute_node03_control_address }}
-    openstack_compute_node04_control_address: {{ cookiecutter.openstack_compute_node04_control_address }}
-    openstack_compute_node05_control_address: {{ cookiecutter.openstack_compute_node05_control_address }}
 
     # openstack service hostnames
     openstack_proxy_hostname: {{ cookiecutter.openstack_proxy_hostname }}
@@ -110,7 +107,7 @@ parameters:
     openstack_message_queue_node01_hostname: {{ cookiecutter.openstack_message_queue_node01_hostname }}
     openstack_message_queue_node02_hostname: {{ cookiecutter.openstack_message_queue_node02_hostname }}
     openstack_message_queue_node03_hostname: {{ cookiecutter.openstack_message_queue_node03_hostname }}
-  
+
     # opencontrail service hostnames
     opencontrail_analytics_hostname: {{ cookiecutter.opencontrail_analytics_hostname }}
     opencontrail_analytics_node01_hostname: {{ cookiecutter.opencontrail_analytics_node01_hostname }}
@@ -137,18 +134,16 @@ parameters:
     openstack_compute_node01_hostname: {{ cookiecutter.openstack_compute_node01_hostname }}
     openstack_compute_node02_hostname: {{ cookiecutter.openstack_compute_node02_hostname }}
     openstack_compute_node03_hostname: {{ cookiecutter.openstack_compute_node03_hostname }}
-    openstack_compute_node04_hostname: {{ cookiecutter.openstack_compute_node04_hostname }}
-    openstack_compute_node05_hostname: {{ cookiecutter.openstack_compute_node05_hostname }}
 
     ##CI/CD
-    #infra_integration_node01_single_address: 
-    #infra_version_control_node01_single_address: 
-    #infra_storage_node01_single_address: 
-    #infra_benchmark_node01_single_address: 
+    #infra_integration_node01_single_address:
+    #infra_version_control_node01_single_address:
+    #infra_storage_node01_single_address:
+    #infra_benchmark_node01_single_address:
 
     ##FIXME if ntp defined
-    #ntp_strata_host1: 
-    #ntp_strata_host2: 
+    #ntp_strata_host1:
+    #ntp_strata_host2:
 
     # Interface definitions
     linux_dhcp_interface:

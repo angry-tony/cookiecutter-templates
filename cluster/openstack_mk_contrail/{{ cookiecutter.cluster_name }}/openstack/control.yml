@@ -1,7 +1,14 @@
 classes:
+{% if cookiecutter.openstack_version == "mitaka" %}
 - system.linux.system.repo.mos9
+{% elif cookiecutter.openstack_version == "liberty" %}
+- system.linux.system.repo.mos8
+{% endif %}
 - system.linux.system.repo.tcp_extra
 - system.memcached.server.single
+- system.linux.system.repo.saltstack_2016_3_trusty 
+- system.ceilometer.client
+- system.ceilometer.client.neutron
 - system.keystone.server.cluster
 - system.glance.control.cluster
 - system.nova.control.cluster

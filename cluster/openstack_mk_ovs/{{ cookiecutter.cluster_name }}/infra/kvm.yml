@@ -1,5 +1,7 @@
 classes:
+{% if cookiecutter.openstack_version == "mitaka" %}
 - system.linux.system.repo.mos9
+{% endif %}
 - system.linux.system.repo.saltstack_2016_3_trusty
 - system.glusterfs.server.volume.glance
 - system.glusterfs.server.volume.keystone
@@ -9,6 +11,7 @@ classes:
 - system.salt.control.cluster.openstack_proxy_cluster
 - system.salt.control.cluster.openstack_database_cluster
 - system.salt.control.cluster.openstack_message_queue_cluster
+- system.salt.control.cluster.openstack_telemetry_cluster
 - system.salt.control.cluster.stacklight_server_cluster
 - system.salt.control.cluster.stacklight_log_cluster
 - system.salt.control.cluster.stacklight_telemetry_cluster
@@ -39,6 +42,11 @@ parameters:
           cpu: 8
           ram: 32768
           disk_profile: small
+          net_profile: default
+        openstack.telemetry:
+          cpu: 8
+          ram: 32768
+          disk_profile: xxlarge
           net_profile: default
         openstack.proxy:
           cpu: 4
@@ -108,7 +116,7 @@ parameters:
   #         - eth2
   #         slaves: eth1 eth2
   #         mode: active-backup
-  #       br_ctl: 
+  #       br_ctl:
   #         enabled: true
   #         type: bridge
   #         proto: static
@@ -121,4 +129,4 @@ parameters:
   #         use_interfaces:
   #         - bond0
 
-          
+
