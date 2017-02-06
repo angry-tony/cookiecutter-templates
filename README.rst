@@ -1,69 +1,194 @@
-cookiecutter-reclass-model
-============================
 
-A cookiecutter_ template for tcp cloud OpenStack infrastructure model full
-possible setup.
+========================================
+OpenStack Cluster Cookiecutter Templates
+========================================
+
+A cookiecutter_ templates for generating OpenStack infrastructure models
+(cluster level).
 
 .. _cookiecutter: https://github.com/audreyr/cookiecutter
 
 
-Installation
-============
+Installation Steps
+==================
+
+First install fresh cookiecutter:
 
 .. code-block:: bash
+
+    apt-get install python-pip
 
     pip install cookiecutter
 
-    git clone git@git.tcpcloud.eu:cookiecutter-templates/cookiecutter-openstack-full-reclass-model.git
-
-
-Usage
-=====
-
-Create new environment definition from `cookiecutter.json.example` and process:
+Then clone the template repository:
 
 .. code-block:: bash
 
-    CUSTOMER_ENV=<Name>
-    cp cookiecutter.json.example ${CUSTOMER_ENV}.json
-    ln -s ${CUSTOMER_ENV}.json cookiecutter.json
+    git clone https://github.com/Mirantis/mk2x-cookiecutter-reclass-model.git
 
-    # update [FIXME, 'Company.com', etc...]
-    $EDITOR cookiecutter.json
 
-    cookiecutter $PWD --output-dir ../../reclass-models [--config-file ${CUSTOMER_ENV}.yaml] [-f] [--no-input]
+Available Clusters
+==================
 
-Advanced, on additional runs, revert files containing generated credentials (ensure you have current state committed in git repo before cookiecutter updates). 
-Use `git diff` to find out possible updates:
+**kubernetes_mk**
+    Standalone Kubernetes Mk control plane
+**openstack_mk_contrail**
+    OpenStack MkXX control plane with Contrail SDN
+**openstack_mk_ovs**
+    OpenStack MkXX control plane with OpenVSwitch networking
+
+
+Generate the Cluster
+====================
+
+Update new environment definition at `cookiecutter.json` in your cluster you
+want to generate to fit your needs. The parametes you can set are described
+later in Deployment Parameters chapter of this document.
 
 .. code-block:: bash
 
-  M=$(find . -name credentials.yml;ls classes/system/openssh/client/*)
-  git diff $M
-  git checkout -- $M
+    vim cluster/openstack_mk_contrail/cookiecutter.json
 
-  #find . -name credentials.yml |xargs -I'{}' "git checkout -- {}"
-  #git checkout -- classes/system/openssh/client/*
+And then generate the actual new cluster
+
+.. code-block:: bash
+
+    cookiecutter cluster/openstack_mk_contrail --output-dir output --no-input
+
+Generate the Config Node
+------------------------
+
+The config node definition is the same for all deployments. Open and edit new
+file with following command. Replace `cluster_domain` with the parameter you
+set when generating your cluster.
+
+.. code-block:: bash
+
+   vim output/cfg01.{{ cluster_domain }}.yml
+
+   # for default setup command would look like:
+   # vim output/cfg01.deploy-name.local.yml
+
+Use following YAML template, replace `cluster_name` and `cluster_domain` with
+the parameters you set to your cluster. This is important step as salt master
+node is the only static definition in your new cluster.
+
+.. code-block:: yaml
+
+    classes:
+    - cluster.{{ cluster_name }}.infra.config
+    parameters:
+      _param:
+        linux_system_codename: xenial
+        reclass_data_revision: master
+      linux:
+        system:
+          name: cfg01
+          domain: {{ cluster_domain }}
+
+And for the default cookiecutter parameters this would look like:
+
+.. code-block:: yaml
+
+    classes:
+    - cluster.deployment_name.infra.config
+    parameters:
+      _param:
+        linux_system_codename: xenial
+        reclass_data_revision: master
+      linux:
+        system:
+          name: cfg01
+          domain: deploy-name.local
 
 
-
-Development and testing
+Apply to VCS Repository
 =======================
 
-Before you commit and push back to repo run a test run:
+Thera are now 2 options, either you add new cluster to existing client
+repository or you create completely new one.
+
+
+Adding to Existing repository
+-----------------------------
+
+Clone your existing repository and then copy generated files to the proper
+locations.
+
+To copy the master model use following command, you copy it `/nodes`
+directory.
 
 .. code-block:: bash
 
-  cookiecutter $PWD --output-dir /tmp -f --no-input
+   cp output/cfg01.{{ cluster_domain }}.yml cloned_repo/nodes
+
+To copy the cluster definition use following command, you copy it
+`/classes/cluster` directory.
+
+.. code-block:: bash
+
+   cp output/{{ cluster_name }} cloned_repo/classes/cluster -r
 
 
-Parameters
-----------
+Adding to New repository
+------------------------
 
-Following parameters need to be provided
+YET TO BE WRITTEN
 
-* "project_name": "project--salt-model", name of
-* "domain_name": "cloud.company.com", domain part of FQDN
+
+Deployment Paramaters
+=====================
+
+This chapter describes all parameters that can be changed for generated
+environments.
+
+kubernetes_mk
+-------------
+
+* "cluster_domain"
+* "cluster_name"
+* "reclass_repository": Repository for this cluster model.
+
+* "salt_master_ip": Management IP of salt master, leave blank if not present.
+* "salt_master_management_ip": IP that is use for salt communication.
+
+* "kubernetes_control_address": VIP of control cluster.
+* "kubernetes_control_node01_address": IP address of Kubernetes control node.
+* "kubernetes_control_node02_address": IP address of Kubernetes control node.
+* "kubernetes_control_node03_address": IP address of Kubernetes control node.
+* "kubernetes_control_node01_deploy_address": PXE IP address of Kubernetes control node, leave blank if not present.
+* "kubernetes_control_node02_deploy_address": PXE IP address of Kubernetes control node, leave blank if not present.
+* "kubernetes_control_node03_deploy_address": PXE IP address of Kubernetes control node, leave blank if not present.
+
+* "kubernetes_keepalived_vip_interface": Interface that will be used for kubernetes_control_address.
+
+* "kubernetes_compute_node01_single_address": IP address of Kubernetes compute node.
+* "kubernetes_compute_node02_single_address": IP address of Kubernetes compute node.
+* "kubernetes_compute_node01_deploy_address": PXE IP address of Kubernetes compute node, leave blank if not present.
+* "kubernetes_compute_node02_deploy_address": PXE IP address of Kubernetes compute node, leave blank if not present.
+
+* "cfg01_name": salt master hostname.
+* "ctl01_name": ctl01 hostname.
+* "ctl02_name": ctl02 hostname.
+* "ctl03_name": ctl03 hostname.
+* "ctl_name": VIP hostname.
+* "cmp01_name": cmp01 hostname.
+* "cmp02_name": cmp02 hostname.
+
+* "calico_network": network used for calico containers.
+* "calico_netmask": netmask for calico_network.
+* "calico_enable_nat": enable NAT from calico containers.
+
+* "hyperkube_image": image used for kubernetes services.
+* "calico_cni_image": image with Calico cni plugins.
+* "calico_image": image of calico.
+
+
+openstack_mk_contrail and openstack_mk_ovs
+------------------------------------------
+
+* "cluster_domain": "cloud.company.com", domain part of FQDN
+* "cluster_name": "cloud_deploy01"
 * "admin_email": "root@localhost", keystone admin
 * "openstack_version": "kilo", openstack version
 * "cluster_public_host": "cloud.company.com", openstack API endpoint

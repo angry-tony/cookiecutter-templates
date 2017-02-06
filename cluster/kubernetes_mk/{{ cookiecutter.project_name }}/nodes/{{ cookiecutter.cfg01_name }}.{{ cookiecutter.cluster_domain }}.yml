@@ -1,2 +1,0 @@
-classes:
-  - cluster.{{ cookiecutter.cluster_name }}.infra.config

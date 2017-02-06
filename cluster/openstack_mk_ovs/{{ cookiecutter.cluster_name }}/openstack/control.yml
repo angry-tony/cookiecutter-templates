@@ -1,0 +1,38 @@
+classes:
+{% if cookiecutter.openstack_version == "mitaka" %}
+- system.linux.system.repo.mos9
+{% endif %}
+- system.linux.system.repo.tcp_extra
+- system.linux.system.repo.saltstack_2016_3_trusty
+- system.ceilometer.client
+- system.ceilometer.client.neutron
+- system.memcached.server.single
+- system.keystone.server.cluster
+- system.glance.control.cluster
+- system.neutron.control.openvswitch.cluster
+- system.nova.control.cluster
+- system.cinder.control.cluster
+- system.cinder.volume.single
+- system.heat.server.cluster
+- system.glusterfs.client.cluster
+- system.glusterfs.client.volume.glance
+- system.glusterfs.client.volume.keystone
+- cluster.{{ cookiecutter.cluster_name }}
+parameters:
+  _param:
+    keepalived_vip_interface: eth1
+    keepalived_vip_virtual_router_id: 50
+    cluster_vip_address: ${_param:openstack_control_address}
+    cluster_local_address: ${_param:single_address}
+    cluster_node01_hostname: ctl01
+    cluster_node01_address: ${_param:openstack_control_node01_address}
+    cluster_node02_hostname: ctl02
+    cluster_node02_address: ${_param:openstack_control_node02_address}
+    cluster_node03_hostname: ctl03
+    cluster_node03_address: ${_param:openstack_control_node03_address}
+    nova_vncproxy_url: http://${_param:openstack_proxy_address}:6080
+    
+  linux:
+    network:
+      interface:
+        eth1: ${_param:linux_single_interface}
