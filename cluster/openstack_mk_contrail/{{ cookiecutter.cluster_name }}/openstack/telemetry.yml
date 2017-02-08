@@ -1,7 +1,6 @@
 classes:
 {% if cookiecutter.openstack_version == "mitaka" %}
 - system.linux.system.repo.mos9
-- system.linux.system.repo.influxdb
 - system.ceilometer.server.backend.influxdb
 - system.heka.ceilometer_collector.single
 {% elif cookiecutter.openstack_version == "liberty" %}
@@ -15,8 +14,9 @@ classes:
 - cluster.{{ cookiecutter.cluster_name }}
 parameters:
   _param:
-    keepalived_vip_interface: eth1
-    keepalived_vip_virtual_router_id: 230
+    keepalived_openstack_telemetry_vip_address: ${_param:openstack_telemetry_address}
+    keepalived_openstack_telemetry_vip_password: {{ password(16) }}
+    keepalived_openstack_telemetry_vip_interface: eth1
     cluster_vip_address: ${_param:openstack_telemetry_address}
     cluster_local_address: ${_param:single_address}
     cluster_node01_hostname: mdb01

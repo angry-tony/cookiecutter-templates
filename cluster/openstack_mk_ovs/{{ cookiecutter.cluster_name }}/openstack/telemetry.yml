@@ -1,10 +1,7 @@
 classes:
-{%- if cookiecutter.openstack_version == "mitaka" -%}
 - system.linux.system.repo.mos9
-- system.linux.system.repo.influxdb
 - system.ceilometer.server.backend.influxdb
 - system.heka.ceilometer_collector.single
-{% endif %}
 - system.ceilometer.server.cluster
 - cluster.{{ cookiecutter.cluster_name }}
 parameters:

@@ -1,13 +1,18 @@
 classes:
-- system.linux.system.repo.grafana
 - system.linux.system.repo.influxdb
 - system.linux.system.repo.tcp_base
 - system.influxdb.server.single
+- system.influxdb.database.ceilometer
+- system.influxdb.database.stacklight
+- system.haproxy.proxy.listen.stacklight.influxdb
+- service.haproxy.proxy.single
+- system.keepalived.cluster.instance.stacklight_telemetry_vip
 - cluster.{{ cookiecutter.cluster_name }}
 parameters:
   _param:
-    keepalived_vip_interface: ens4
-    keepalived_vip_virtual_router_id: 120
+    keepalived_stacklight_telemetry_vip_address: ${_param:stacklight_telemetry_address}
+    keepalived_stacklight_telemetry_vip_password: {{ password(16) }}
+    keepalived_stacklight_telemetry_vip_interface: ens4
     cluster_vip_address: ${_param:stacklight_telemetry_address}
     cluster_local_address: ${_param:single_address}
     cluster_node01_hostname: mtr01
