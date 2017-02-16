@@ -57,6 +57,7 @@ parameters:
     mongodb_admin_password: {{ password(16) }}
     mongodb_shared_key: {{ password(64) }}
     metadata_password: {{ password(16) }}
+    openstack_telemetry_keepalived_password: {{ password(16) }}
     # Billing
     #keystone_billometer_password: {{ password(16) }}
     #keystone_billometer_address: ${_param:billometer_service_host}

@@ -28,6 +28,9 @@ parameters:
     nagios_notification_smtp_server: 127.0.0.1
     nagios_notification_from: 'nagios@localhost'
     nagios_notification_email: 'root@localhost'
+    stacklight_log_keepalived_password: {{ password(16) }}
+    stacklight_monitor_keepalived_password: {{ password(16) }}
+    stacklight_telemetry_keepalived_password: {{ password(16) }}
     ##Billing
     #collectd_backend_carbon_host: ${_param:openstack_billing_address}
     #collectd_backend_carbon_port: 2023
