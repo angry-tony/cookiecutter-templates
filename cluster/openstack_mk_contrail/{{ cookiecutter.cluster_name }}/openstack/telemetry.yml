@@ -15,7 +15,7 @@ classes:
 parameters:
   _param:
     keepalived_openstack_telemetry_vip_address: ${_param:openstack_telemetry_address}
-    keepalived_openstack_telemetry_vip_password: {{ password(16) }}
+    keepalived_openstack_telemetry_vip_password: ${_param:openstack_telemetry_keepalived_password}
     keepalived_openstack_telemetry_vip_interface: eth1
     cluster_vip_address: ${_param:openstack_telemetry_address}
     cluster_local_address: ${_param:single_address}

@@ -20,7 +20,7 @@ parameters:
   _param:
     collectd_remote_collector_host: ${_param:stacklight_monitor_address}
     keepalived_stacklight_monitor_vip_address: ${_param:stacklight_monitor_address}
-    keepalived_stacklight_monitor_vip_password: 'password'
+    keepalived_stacklight_monitor_vip_password: ${_param:stacklight_monitor_keepalived_password}
     keepalived_stacklight_monitor_vip_interface: ens4
     cluster_vip_address: ${_param:stacklight_monitor_address}
     cluster_local_address: ${_param:single_address}
