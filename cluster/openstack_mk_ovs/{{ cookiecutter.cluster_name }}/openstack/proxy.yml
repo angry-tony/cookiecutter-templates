@@ -1,5 +1,5 @@
 classes:
-{%- if cookiecutter.openstack_version == "mitaka" -%}
+{% if cookiecutter.openstack_version == "mitaka" %}
 - system.linux.system.repo.mos9
 {% endif %}
 - system.linux.system.repo.tcp_base
