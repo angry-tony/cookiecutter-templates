@@ -112,6 +112,10 @@ parameters:
     openstack_message_queue_node01_hostname: {{ cookiecutter.openstack_message_queue_node01_hostname }}
     openstack_message_queue_node02_hostname: {{ cookiecutter.openstack_message_queue_node02_hostname }}
     openstack_message_queue_node03_hostname: {{ cookiecutter.openstack_message_queue_node03_hostname }}
+    openstack_telemetry_hostname: {{ cookiecutter.openstack_telemetry_hostname }}
+    openstack_telemetry_node01_hostname: {{ cookiecutter.openstack_message_queue_node01_hostname }}
+    openstack_telemetry_node02_hostname: {{ cookiecutter.openstack_message_queue_node02_hostname }}
+    openstack_telemetry_node03_hostname: {{ cookiecutter.openstack_message_queue_node03_hostname }}
 
     # stacklight service hostnames
     stacklight_monitor_hostname: {{ cookiecutter.stacklight_monitor_hostname }}

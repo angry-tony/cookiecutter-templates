@@ -2,7 +2,7 @@ classes:
 - system.linux.system.repo.tcp_salt
 - system.openssh.client.lab
 - system.salt.master.pkg
-- system.salt.master.formula.git.foundation
+- system.salt.master.formula.pkg.foundation
 - system.salt.minion.ca.salt_master
 - system.reclass.storage.salt
 - system.reclass.storage.system.physical_control_cluster
