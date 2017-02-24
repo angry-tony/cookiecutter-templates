@@ -38,6 +38,15 @@ parameters:
         infra_compute_node03:
           params:
             keepalived_vip_priority: 102
+        openstack_telemetry_node01:
+          params:
+            linux_system_codename: xenial
+        openstack_telemetry_node02:
+          params:
+            linux_system_codename: xenial
+        openstack_telemetry_node03:
+          params:
+            linux_system_codename: xenial
         openstack_control_node01:
           classes:
           - cluster.${_param:cluster_name}.openstack.control_init
