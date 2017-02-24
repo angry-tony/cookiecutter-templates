@@ -146,7 +146,7 @@ parameters:
           - ${_param:openstack_database_node03_hostname}
           - ${_param:openstack_database_node03_hostname}.${_param:cluster_domain}
         mdb:
-         address: ${_param:openstack_telemetry_address}
+          address: ${_param:openstack_telemetry_address}
           names:
           - ${_param:openstack_telemetry_hostname}
           - ${_param:openstack_telemetry_hostname}.${_param:cluster_domain}
