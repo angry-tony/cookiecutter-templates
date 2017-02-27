@@ -17,11 +17,10 @@ classes:
 - cluster.{{ cookiecutter.cluster_name }}
 parameters:
   _param:
-    linux_system_codename: xenial
-    cluster_vip_address: ${_param:infra_compute_address}
-    cluster_node01_address: ${_param:infra_compute_node01_address}
-    cluster_node02_address: ${_param:infra_compute_node02_address}
-    cluster_node03_address: ${_param:infra_compute_node03_address}
+    cluster_vip_address: ${_param:infra_kvm_address}
+    cluster_node01_address: ${_param:infra_kvm_node01_address}
+    cluster_node02_address: ${_param:infra_kvm_node02_address}
+    cluster_node03_address: ${_param:infra_kvm_node03_address}
     keepalived_vip_interface: br-ctl
     keepalived_vip_virtual_router_id: 69
     deploy_nic: enp2s0f0
