@@ -42,6 +42,7 @@ parameters:
     glusterfs_service_host: ${_param:infra_compute_address}
     mysql_admin_user: root
     mysql_admin_password: {{ password(16) }}
+    mysql_aodh_password: {{ password(16) }}
     mysql_cinder_password: {{ password(16) }}
     mysql_ceilometer_password: {{ password(16) }}
     mysql_glance_password: {{ password(16) }}
