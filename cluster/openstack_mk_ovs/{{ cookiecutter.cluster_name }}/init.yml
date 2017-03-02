@@ -42,7 +42,7 @@ parameters:
     infra_compute_node02_deploy_address: {{ cookiecutter.kvm02_deploy_ip }}
     infra_compute_node03_deploy_address: {{ cookiecutter.kvm03_deploy_ip }}
     infra_compute_node01_hostname: {{ cookiecutter.kvm01_name }}
-    infra_computenode02_hostname: {{ cookiecutter.kvm02_name }}
+    infra_compute_node02_hostname: {{ cookiecutter.kvm02_name }}
     infra_compute_node03_hostname: {{ cookiecutter.kvm03_name }}
 
     # openstack service addresses
@@ -113,9 +113,9 @@ parameters:
     openstack_message_queue_node02_hostname: {{ cookiecutter.openstack_message_queue_node02_hostname }}
     openstack_message_queue_node03_hostname: {{ cookiecutter.openstack_message_queue_node03_hostname }}
     openstack_telemetry_hostname: {{ cookiecutter.openstack_telemetry_hostname }}
-    openstack_telemetry_node01_hostname: {{ cookiecutter.openstack_message_queue_node01_hostname }}
-    openstack_telemetry_node02_hostname: {{ cookiecutter.openstack_message_queue_node02_hostname }}
-    openstack_telemetry_node03_hostname: {{ cookiecutter.openstack_message_queue_node03_hostname }}
+    openstack_telemetry_node01_hostname: {{ cookiecutter.openstack_telemetry_node01_hostname }}
+    openstack_telemetry_node02_hostname: {{ cookiecutter.openstack_telemetry_node02_hostname }}
+    openstack_telemetry_node03_hostname: {{ cookiecutter.openstack_telemetry_node03_hostname }}
 
     # stacklight service hostnames
     stacklight_monitor_hostname: {{ cookiecutter.stacklight_monitor_hostname }}
