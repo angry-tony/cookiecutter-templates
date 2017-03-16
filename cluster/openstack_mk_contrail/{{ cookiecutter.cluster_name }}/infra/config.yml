@@ -5,6 +5,7 @@ classes:
 - system.salt.master.formula.pkg.foundation
 - system.salt.minion.ca.salt_master
 - system.reclass.storage.salt
+- system.salt.minion.cert.pki
 - system.reclass.storage.system.physical_control_cluster
 - system.reclass.storage.system.opencontrail_analytics_cluster
 - system.reclass.storage.system.opencontrail_control_cluster
@@ -26,6 +27,8 @@ parameters:
     single_address: ${_param:infra_config_address}
     deploy_address: ${_param:infra_config_deploy_address}
     salt_master_host: ${_param:infra_config_address}
+    salt_minion_ca_authority: salt_master_ca
+    salt_minion_ca_host: cfg01.${_param:cluster_domain}
   reclass:
     storage:
       node:
