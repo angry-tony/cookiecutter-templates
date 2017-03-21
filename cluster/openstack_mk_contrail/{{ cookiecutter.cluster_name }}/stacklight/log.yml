@@ -4,6 +4,7 @@
 classes:
 - system.linux.system.repo.tcp_elastic
 - system.linux.system.repo.tcp_base
+- system.linux.system.repo.saltstack_2016_3_trusty
 - system.elasticsearch.server.cluster
 - system.haproxy.proxy.listen.elasticsearch
 - service.haproxy.proxy.single
@@ -13,7 +14,7 @@ parameters:
   _param:
     keepalived_stacklight_log_vip_address: ${_param:stacklight_log_address}
     keepalived_stacklight_log_vip_password: ${_param:stacklight_log_keepalived_password}
-    keepalived_stacklight_log_vip_interface: ens4
+    keepalived_stacklight_log_vip_interface: ens3
     cluster_vip_address: ${_param:stacklight_log_address}
     cluster_local_address: ${_param:single_address}
     cluster_node01_hostname: log01
@@ -25,7 +26,7 @@ parameters:
   linux:
     network:
       interface:
-        ens4: ${_param:linux_single_interface}
+        ens3: ${_param:linux_single_interface}
   elasticsearch:
     server:
       master: true

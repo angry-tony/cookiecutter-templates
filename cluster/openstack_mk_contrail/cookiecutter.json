@@ -68,6 +68,8 @@
     "opencontrail_analytics_node02_hostname"    : "nal02",
     "opencontrail_analytics_node03_hostname"    : "nal03",
 
+    "opencontrail_gateway_node01_address"       : "10.167.4.200",
+
     "opencontrail_control_address"              : "10.167.4.20",
     "opencontrail_control_node01_address"       : "10.167.4.21",
     "opencontrail_control_node02_address"       : "10.167.4.22",
@@ -125,7 +127,10 @@
     "openstack_compute_node02_control_address"  : "10.167.4.102",
     "openstack_compute_node03_control_address"  : "10.167.4.103",
 
-    "openstack_compute_node01_hostname"   : "cmp001",
-    "openstack_compute_node02_hostname"   : "cmp002",
-    "openstack_compute_node03_hostname"   : "cmp003"
+    "openstack_nova_compute_nfv"                : "True",
+    "openstack_opencontrail_compute_dpdk"       : "True",
+
+    "openstack_compute_node01_hostname"         : "cmp001",
+    "openstack_compute_node02_hostname"         : "cmp002",
+    "openstack_compute_node03_hostname"         : "cmp003"
 }

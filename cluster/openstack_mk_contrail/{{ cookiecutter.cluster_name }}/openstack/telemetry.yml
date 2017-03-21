@@ -2,16 +2,10 @@
 {% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'|random }}{% endfor %}
 {%- endmacro %}
 classes:
-{% if cookiecutter.openstack_version == "mitaka" %}
-- system.linux.system.repo.mos9
+- system.linux.system.repo.mcp10
 - system.ceilometer.server.backend.influxdb
 - system.heka.ceilometer_collector.single
-{% elif cookiecutter.openstack_version == "liberty" %}
-- system.linux.system.repo.mos8
-- system.ceilometer.server.backend.mongodb
-- system.mongodb.server.cluster
-- system.mongodb.server.database.ceilometer
-{% endif %}
+- system.linux.system.repo.saltstack_2016_3_trusty
 - system.aodh.server.cluster
 - system.ceilometer.server.cluster
 - cluster.{{ cookiecutter.cluster_name }}

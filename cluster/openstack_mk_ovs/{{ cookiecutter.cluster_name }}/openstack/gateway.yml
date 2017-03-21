@@ -1,7 +1,5 @@
 classes:
-{% if cookiecutter.openstack_version == "mitaka" %}
-- system.linux.system.repo.mos9
-{% endif %}
+- system.linux.system.repo.mcp10
 - system.linux.system.repo.tcp_extra
 - system.linux.system.repo.saltstack_2016_3_trusty
 - system.neutron.gateway.cluster
@@ -10,16 +8,21 @@ parameters:
   _param:
     interface_mtu: 1500
     cluster_vip_address: ${_param:openstack_control_address}
-##FIXME
+## TO BE DONE
+  #   linux_system_codename: xenial
+  #   keepalived_vip_interface: br-ctl
+  #   keepalived_vip_virtual_router_id: 69
+  #   primary_second_nic: enp2s0f0
+  #   primary_first_nic: eno2
   # linux:
   #   network:
   #     bridge: openvswitch
   #     interface:
-  #       primary_second_nic:
-  #         name: ${_param:primary_second_nic}
+  #       primary_first_nic:
   #         enabled: true
   #         type: slave
-  #         mtu: 9000
+  #         proto: manual
+  #         name: ${_param:primary_first_nic}
   #         master: bond0
   #       bond0:
   #         enabled: true
@@ -28,19 +31,18 @@ parameters:
   #         ovs_type: OVSPort
   #         type: bond
   #         use_interfaces:
-  #         - ${_param:primary_second_nic}
-  #         slaves: ${_param:primary_second_nic}
+  #         - ${_param:primary_first_nic}
+  #         slaves: ${_param:primary_first_nic}
   #         mode: active-backup
-  #         mtu: 9000
   #       br-floating:
   #         enabled: true
   #         type: ovs_bridge
-  #       br-mgmt:
+  #       br-ctl:
   #         enabled: true
   #         type: ovs_port
   #         bridge: br-floating
   #         proto: static
-  #         ovs_options: tag=1800
+  #         ovs_options: tag=2408
   #         address: ${_param:single_address}
   #         netmask: 255.255.255.0
   #       br-mesh:
@@ -48,6 +50,6 @@ parameters:
   #         type: ovs_port
   #         bridge: br-floating
   #         proto: static
-  #         ovs_options: tag=1801
+  #         ovs_options: tag=2409
   #         address: ${_param:tenant_address}
   #         netmask: 255.255.255.0

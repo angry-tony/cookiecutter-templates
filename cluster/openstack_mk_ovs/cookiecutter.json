@@ -113,11 +113,16 @@
     "openstack_compute_node01_control_address"  : "10.167.4.101",
     "openstack_compute_node02_control_address"  : "10.167.4.102",
     "openstack_compute_node03_control_address"  : "10.167.4.103",
-    "openstack_compute_node01_tenant_address"  : "10.167.6.101",
-    "openstack_compute_node02_tenant_address"  : "10.167.6.102",
-    "openstack_compute_node03_tenant_address"  : "10.167.6.103",
+    "openstack_compute_node01_tenant_address"   : "10.167.6.101",
+    "openstack_compute_node02_tenant_address"   : "10.167.6.102",
+    "openstack_compute_node03_tenant_address"   : "10.167.6.103",
 
-    "openstack_compute_node01_hostname"   : "cmp001",
-    "openstack_compute_node02_hostname"   : "cmp002",
-    "openstack_compute_node03_hostname"   : "cmp003"
+    "ovs_type"                                  : "non_dvr_vlan",
+    "neutron_tenant_vlan_range"                 : "2416:2420",
+    "openstack_nova_compute_nfv"                : "True",
+    "openstack_neutron_compute_dpdk"            : "True",
+
+    "openstack_compute_node01_hostname"         : "cmp001",
+    "openstack_compute_node02_hostname"         : "cmp002",
+    "openstack_compute_node03_hostname"         : "cmp003"
 }

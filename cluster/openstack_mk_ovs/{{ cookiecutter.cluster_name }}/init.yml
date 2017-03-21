@@ -3,6 +3,7 @@
 classes:
 - system.linux.system.single
 - system.openssh.server.team.tcpcloud
+- system.openssh.server.team.mmo_devops
 - cluster.{{ cookiecutter.cluster_name }}.infra
 - cluster.{{ cookiecutter.cluster_name }}.openstack
 - cluster.{{ cookiecutter.cluster_name }}.stacklight
@@ -62,10 +63,10 @@ parameters:
     openstack_message_queue_node02_address: {{ cookiecutter.openstack_message_queue_node02_address }}
     openstack_message_queue_node03_address: {{ cookiecutter.openstack_message_queue_node03_address }}
 
-    openstack_telemetry_address: {{ cookiecutter.openstack_telemetry_address }}
-    openstack_telemetry_node01_address: {{ cookiecutter.openstack_telemetry_node01_address }}
-    openstack_telemetry_node02_address: {{ cookiecutter.openstack_telemetry_node02_address }}
-    openstack_telemetry_node03_address: {{ cookiecutter.openstack_telemetry_node03_address }}
+    openstack_telemetry_hostname: {{ cookiecutter.openstack_telemetry_hostname }}
+    openstack_telemetry_node01_hostname: {{ cookiecutter.openstack_telemetry_node01_hostname }}
+    openstack_telemetry_node02_hostname: {{ cookiecutter.openstack_telemetry_node02_hostname }}
+    openstack_telemetry_node03_hostname: {{ cookiecutter.openstack_telemetry_node03_hostname }}
 
     # Billing
     # openstack_billing_address:

@@ -1,11 +1,10 @@
 classes:
-{% if cookiecutter.openstack_version == "mitaka" %}
-- system.linux.system.repo.mos9
-{% endif %}
+- system.linux.system.repo.mcp10
 - system.linux.system.repo.tcp_extra
+- system.linux.system.repo.glusterfs
 - system.linux.system.repo.saltstack_2016_3_trusty
 - system.ceilometer.client
-- system.ceilometer.client.neutron
+#- system.ceilometer.client.neutron
 - system.memcached.server.single
 - system.keystone.server.cluster
 - system.glance.control.cluster
@@ -30,8 +29,7 @@ parameters:
     cluster_node02_address: ${_param:openstack_control_node02_address}
     cluster_node03_hostname: ctl03
     cluster_node03_address: ${_param:openstack_control_node03_address}
-    nova_vncproxy_url: http://${_param:openstack_proxy_address}:6080
-    
+    nova_vncproxy_url: https://${_param:cluster_public_host}:6080
   linux:
     network:
       interface:
