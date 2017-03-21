@@ -8,6 +8,7 @@ classes:
 - cluster.{{ cookiecutter.cluster_name }}.opencontrail
 - cluster.{{ cookiecutter.cluster_name }}.stacklight
 - cluster.{{ cookiecutter.cluster_name }}.stacklight.client
+- cluster.{{ cookiecutter.cluster_name }}.cicd
 parameters:
   _param:
     openstack_version: {{ cookiecutter.openstack_version }}
