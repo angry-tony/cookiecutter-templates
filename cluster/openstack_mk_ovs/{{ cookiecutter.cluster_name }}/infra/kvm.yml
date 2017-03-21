@@ -17,6 +17,7 @@ classes:
 - cluster.{{ cookiecutter.cluster_name }}
 parameters:
   _param:
+    linux_system_codename: xenial
     cluster_vip_address: ${_param:infra_kvm_address}
     cluster_node01_address: ${_param:infra_kvm_node01_address}
     cluster_node02_address: ${_param:infra_kvm_node02_address}
