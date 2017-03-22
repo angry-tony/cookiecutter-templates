@@ -5,7 +5,6 @@ classes:
 - system.salt.master.formula.pkg.foundation
 - system.salt.minion.ca.salt_master
 - system.reclass.storage.salt
-- system.salt.minion.cert.pki
 - system.reclass.storage.system.physical_control_cluster
 - system.reclass.storage.system.opencontrail_analytics_cluster
 - system.reclass.storage.system.opencontrail_control_cluster
