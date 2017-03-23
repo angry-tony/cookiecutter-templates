@@ -5,6 +5,31 @@ parameters:
   _param:
     salt_control_trusty_image: http://apt.tcpcloud.eu/images/ubuntu-14-04-x64-201612140957.qcow2
     salt_control_xenial_image: http://apt.tcpcloud.eu/images/ubuntu-16-04-x64-201612140953.qcow2
+    
+    # infra service addresses
+    infra_config_address: {{ cookiecutter.salt_master_ip }}
+    infra_config_deploy_address: {{ cookiecutter.salt_master_management_ip }}
+
+    openstack_gateway_node01_address: {{ cookiecutter.openstack_gateway_node01_address }}
+    openstack_gateway_node02_address: {{ cookiecutter.openstack_gateway_node02_address }}
+    openstack_gateway_node03_address: {{ cookiecutter.openstack_gateway_node03_address }}
+    openstack_gateway_node01_tenant_address: {{ cookiecutter.openstack_gateway_node01_tenant_address }}
+    openstack_gateway_node02_tenant_address: {{ cookiecutter.openstack_gateway_node02_tenant_address }}
+    openstack_gateway_node03_tenant_address: {{ cookiecutter.openstack_gateway_node03_tenant_address }}
+    openstack_gateway_node01_hostname: {{ cookiecutter.openstack_gateway_node01_hostname }}
+    openstack_gateway_node02_hostname: {{ cookiecutter.openstack_gateway_node02_hostname }}
+    openstack_gateway_node03_hostname: {{ cookiecutter.openstack_gateway_node03_hostname }}
+
+    infra_kvm_address: {{ cookiecutter.kvm_vip_ip }}
+    infra_kvm_node01_address: {{ cookiecutter.kvm01_control_ip }}
+    infra_kvm_node02_address: {{ cookiecutter.kvm02_control_ip }}
+    infra_kvm_node03_address: {{ cookiecutter.kvm03_control_ip }}
+    infra_kvm_node01_deploy_address: {{ cookiecutter.kvm01_deploy_ip }}
+    infra_kvm_node02_deploy_address: {{ cookiecutter.kvm02_deploy_ip }}
+    infra_kvm_node03_deploy_address: {{ cookiecutter.kvm03_deploy_ip }}
+    infra_kvm_node01_hostname: {{ cookiecutter.kvm01_name }}
+    infra_kvm_node02_hostname: {{ cookiecutter.kvm02_name }}
+    infra_kvm_node03_hostname: {{ cookiecutter.kvm03_name }}  
   linux:
     network:
       host:

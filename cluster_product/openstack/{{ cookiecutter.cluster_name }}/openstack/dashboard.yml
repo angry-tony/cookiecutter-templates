@@ -1,0 +1,14 @@
+classes:
+- system.horizon.server.single
+- system.horizon.server.plugin.theme
+- system.horizon.server.plugin.contrail
+- cluster.{{ cookiecutter.cluster_name }}
+parameters:
+  _param:
+    horizon_site_branding: OpenStack Dashboard
+    horizon_dashboard_theme: mirantis
+    openstack_version: liberty
+  linux:
+    network:
+      interface:
+        eth1: ${_param:linux_single_interface}
