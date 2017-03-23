@@ -1,8 +1,13 @@
 classes:
-{% if cookiecutter.openstack_version == "mitaka" %}
-- system.linux.system.repo.mos9
-{% endif %}
+- system.linux.system.repo.mcp10
 - system.linux.system.repo.saltstack_2016_3_trusty
+{% if cookiecutter.openstack_nova_compute_nfv %}
+- system.nova.compute.nfv.hugepages
+- system.nova.compute.nfv.cpu_pinning
+{% endif %}
+{% if cookiecutter.openstack_neutron_compute_dpdk %}
+- system.neutron.compute.nfv.dpdk
+{% endif %}
 - system.nova.compute.cluster
 - system.neutron.compute.cluster
 - system.ceilometer.agent.cluster
@@ -17,10 +22,11 @@ parameters:
     cluster_node02_address: ${_param:openstack_control_node02_address}
     cluster_node03_hostname: ctl03
     cluster_node03_address: ${_param:openstack_control_node03_address}
-    nova_vncproxy_url: http://${_param:openstack_proxy_address}:6080
-    primary_interface: eth0
-    external_interface: eth1
-##FIXME
+    nova_vncproxy_url: https://${_param:cluster_public_host}:6080
+    primary_second_nic: enp5s0f0
+    primary_first_nic: enp3s0f1
+    linux_system_codename: xenial
+  # TO BE DONE
   # linux:
   #   network:
   #     bridge: openvswitch
@@ -29,7 +35,13 @@ parameters:
   #         name: ${_param:primary_second_nic}
   #         enabled: true
   #         type: slave
-  #         mtu: 9000
+  #         mtu: 1500
+  #         master: bond0
+  #       primary_first_nic:
+  #         name: ${_param:primary_first_nic}
+  #         enabled: true
+  #         type: slave
+  #         mtu: 1500
   #         master: bond0
   #       bond0:
   #         enabled: true
@@ -37,23 +49,24 @@ parameters:
   #         type: bond
   #         use_interfaces:
   #         - ${_param:primary_second_nic}
-  #         slaves: ${_param:primary_second_nic}
+  #         - ${_param:primary_first_nic}
+  #         slaves: ${_param:primary_second_nic} ${_param:primary_first_nic}
   #         mode: active-backup
-  #         mtu: 9000
-  #       bond0.1800:
+  #         mtu: 1500
+  #       bond0.2408:
   #         enabled: true
   #         type: vlan
   #         proto: static
   #         address: ${_param:single_address}
   #         netmask: 255.255.255.0
-  #         mtu: 9000
+  #         mtu: 1500
   #         use_interfaces:
   #         - bond0
-  #       bond0.1801:
+  #       bond0.2409:
   #         enabled: true
   #         type: vlan
   #         proto: manual
-  #         mtu: 9000
+  #         mtu: 1500
   #         use_interfaces:
   #         - bond0
   #       br-mesh:
@@ -61,6 +74,6 @@ parameters:
   #         type: bridge
   #         address: ${_param:tenant_address}
   #         netmask: 255.255.255.0
-  #         mtu: 9000
+  #         mtu: 1500
   #         use_interfaces:
-  #         - bond0.1801
+  #         - bond0.2409

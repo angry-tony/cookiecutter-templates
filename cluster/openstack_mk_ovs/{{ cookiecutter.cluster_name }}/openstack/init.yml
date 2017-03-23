@@ -5,7 +5,7 @@ parameters:
   _param:
     openstack_region: RegionOne
     admin_email: root@localhost
-    ##Neutron osv/nodvr
+{% if cookiecutter.ovs_type == 'non_dvr' %}
     neutron_control_dvr: False
     neutron_tenant_network_types: "flat,vxlan"
     neutron_l3_ha: True
@@ -16,7 +16,41 @@ parameters:
     neutron_compute_dvr: False
     neutron_compute_agent_mode: legacy
     neutron_compute_external_access: False
-#    neutron_tenant_vlan_range: "1810:1840" not needed
+{% endif %}
+{% if cookiecutter.ovs_type == 'dvr' %}
+    neutron_control_dvr: True
+    neutron_tenant_network_types: "flat,vxlan"
+    neutron_l3_ha: False
+    neutron_global_physnet_mtu: 9000
+    neutron_external_mtu: 9000
+    neutron_gateway_dvr: True
+    neutron_gateway_agent_mode: dvr_snat
+    neutron_compute_dvr: True
+    neutron_compute_agent_mode: dvr
+    neutron_compute_external_access: False
+{% endif %}
+{% if cookiecutter.ovs_type == 'non_dvr_vlan' %}
+    neutron_control_dvr: False
+    neutron_tenant_network_types: "flat,vlan"
+    neutron_l3_ha: True
+    neutron_global_physnet_mtu: 9000
+    neutron_external_mtu: 9000
+    neutron_gateway_dvr: False
+    neutron_gateway_agent_mode: legacy
+    neutron_compute_dvr: False
+    neutron_compute_agent_mode: legacy
+    neutron_compute_external_access: False
+    neutron_tenant_vlan_range: "{{ cookiecutter.neutron_tenant_vlan_range }}"
+{% endif %}
+## TODO - PARAMETRIZE
+{% if cookiecutter.openstack_neutron_compute_dpdk %}
+    nova_cpu_pinning: "1,2,3,4,5,7,8,9,10,11"
+    compute_hugepages_size: 1G
+    compute_hugepages_count: 16
+    compute_hugepages_mount: /mnt/hugepages_1G
+    compute_kernel_isolcpu: ${_param:nova_cpu_pinning}
+{% endif %}
+
     galera_server_cluster_name: openstack_cluster
     galera_server_maintenance_password: {{ password(16) }}
     galera_server_admin_password: {{ password(16) }}
@@ -181,11 +215,21 @@ parameters:
           names:
           - ${_param:openstack_telemetry_node03_hostname}
           - ${_param:openstack_telemetry_node03_hostname}.${_param:cluster_domain}
+        gtw01:
+          address: ${_param:openstack_gateway_node01_address}
+          names:
+          - ${_param:openstack_gateway_node01_hostname}
+          - ${_param:openstack_gateway_node01_hostname}.${_param:cluster_domain}
+        gtw02:
+          address: ${_param:openstack_gateway_node02_address}
+          names:
+          - ${_param:openstack_gateway_node02_hostname}
+          - ${_param:openstack_gateway_node02_hostname}.${_param:cluster_domain}
         cmp01:
           address: ${_param:openstack_compute_node01_control_address}
           names:
           - ${_param:openstack_compute_node01_hostname}
-          - ${_param:openstack_compute_node01_hostname}${_param:cluster_domain}
+          - ${_param:openstack_compute_node01_hostname}.${_param:cluster_domain}
         cmp02:
           address: ${_param:openstack_compute_node02_control_address}
           names:

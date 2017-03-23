@@ -1,8 +1,10 @@
 classes:
-- system.linux.system.repo.mos9
+- system.linux.system.repo.mcp10
+- system.linux.system.repo.saltstack_2016_3_trusty
 - system.ceilometer.server.backend.influxdb
 - system.heka.ceilometer_collector.single
 - system.ceilometer.server.cluster
+- system.aodh.server.cluster
 - cluster.{{ cookiecutter.cluster_name }}
 parameters:
   _param:

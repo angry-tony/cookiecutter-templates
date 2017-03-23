@@ -21,7 +21,7 @@ parameters:
     collectd_remote_collector_host: ${_param:stacklight_monitor_address}
     keepalived_stacklight_monitor_vip_address: ${_param:stacklight_monitor_address}
     keepalived_stacklight_monitor_vip_password: ${_param:stacklight_monitor_keepalived_password}
-    keepalived_stacklight_monitor_vip_interface: ens4
+    keepalived_stacklight_monitor_vip_interface: ens3
     cluster_vip_address: ${_param:stacklight_monitor_address}
     cluster_local_address: ${_param:single_address}
     cluster_node01_hostname: mon01
@@ -33,4 +33,4 @@ parameters:
   linux:
     network:
       interface:
-        ens4: ${_param:linux_single_interface}
+        ens3: ${_param:linux_single_interface}

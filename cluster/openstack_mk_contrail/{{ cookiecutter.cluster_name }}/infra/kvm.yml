@@ -1,9 +1,6 @@
 classes:
-{% if cookiecutter.openstack_version == "mitaka" %}
-- system.linux.system.repo.mos9
-{% elif cookiecutter.openstack_version == "liberty" %}
-- system.linux.system.repo.mos8
-{% endif %}
+- system.linux.system.repo.mcp10
+- service.keepalived.cluster.single
 - system.glusterfs.server.volume.glance
 - system.glusterfs.server.volume.keystone
 - system.glusterfs.server.cluster
@@ -31,8 +28,11 @@ parameters:
     cluster_node01_address: ${_param:infra_compute_node01_address}
     cluster_node02_address: ${_param:infra_compute_node02_address}
     cluster_node03_address: ${_param:infra_compute_node03_address}
-    keepalived_vip_interface: eth1
+    keepalived_vip_interface: br_ctl
     keepalived_vip_virtual_router_id: 69
+    deploy_nic: enp2s0f0
+    primary_first_nic: enp2s0f1
+    primary_second_nic: enp5s0f0
   salt:
     control:
       size: #RAM 4096,8192,16384,32768,65536
@@ -92,7 +92,25 @@ parameters:
           node:
             prx02:
               provider: kvm03.${_param:cluster_domain}
-  ##FIXME
+  ## TO BE DONE
+
+  # virt:
+  #   nic:
+  #     default:
+  #       eth1:
+  #         bridge: br_mgm
+  #       eth0:
+  #         bridge: br_ctl
+  #     opencontrail:
+  #       - name: eth0
+  #         bridge: br_mgm
+  #         model: virtio
+  #       - name: eth1
+  #         bridge: br_ctl
+  #         model: virtio
+  #       - name: eth2
+  #         bridge: br_data
+  #         model: virtio
   # linux:
   #   network:
   #     interface:
@@ -100,40 +118,81 @@ parameters:
   #         enabled: true
   #         type: eth
   #         proto: manual
+  #         name: ${_param:deploy_nic}
   #       eth1:
   #         enabled: true
-  #         type: eth
+  #         type: slave
   #         proto: manual
+  #         name: ${_param:primary_first_nic}
+  #         master: bond0
   #       eth2:
   #         enabled: true
-  #         type: eth
+  #         type: slave
   #         proto: manual
+  #         name: ${_param:primary_second_nic}
+  #         master: bond0
   #       br_mgm:
   #         enabled: true
   #         proto: static
   #         type: bridge
   #         address: ${_param:deploy_address}
-  #         netmask: 255.255.255.0
+  #         netmask: 255.255.255.192
+  #         gateway: 172.16.49.65
+  #         name_servers:
+  #         - 8.8.8.8
+  #         - 8.8.4.4
   #         use_interfaces:
-  #         - eth0
+  #         - ${_param:deploy_nic}
   #       bond0:
   #         enabled: true
   #         proto: manual
   #         type: bond
   #         use_interfaces:
-  #         - eth1
-  #         - eth2
-  #         slaves: eth1 eth2
+  #         - ${_param:primary_first_nic}
+  #         - ${_param:primary_second_nic}
+  #         slaves: ${_param:primary_first_nic} ${_param:primary_second_nic}
   #         mode: active-backup
+  #       bond0.2422:
+  #         enabled: true
+  #         proto: manual
+  #         type: vlan
+  #         use_interfaces:
+  #         - bond0
+  #       bond0.2423:
+  #         enabled: true
+  #         proto: manual
+  #         type: vlan
+  #         use_interfaces:
+  #         - bond0
   #       br_ctl:
   #         enabled: true
   #         type: bridge
   #         proto: static
   #         address: ${_param:single_address}
-  #         gateway: {{ cookiecutter.control_network_gateway }}
-  #         netmask: {{ cookiecutter.control_network_netmask }}
-  #         name_servers:
-  #         - {{ cookiecutter.dns_server01 }}
-  #         - {{ cookiecutter.dns_server02 }}
+  #         netmask: 255.255.255.0
   #         use_interfaces:
-  #         - bond0
+  #         - bond0.2422
+  #       br_data:
+  #         enabled: true
+  #         type: bridge
+  #         proto: manual
+  #         use_interfaces:
+  #         - bond0.2423
+  #   system:
+  #     package:
+  #       linux-image-4.8.0-39-generic:
+  #         version: latest
+  #       linux-headers-4.8.0-39-generic:
+  #         version: latest
+  #       linux-image-extra-4.8.0-39-generic:
+  #         version: latest
+  #       linux-headers-4.8.0-39:
+  #         version: latest
+  #     user:
+  #       root:
+  #         enabled: true
+  #         name: root
+  #         home: /root
+  #         # Password is cloudlab, comment out, configure your SSH key bellow
+  #         # and disable password auth
+  #         password: $6$0Qqj.6l.$T9k9Onm9pIDo6ULABVBRNogyizG.9CnwQ4bvI4xH.AWeIGHbLyFU87ejMTtKvAAyd3dncRYbeUV.VbnXJU2u./

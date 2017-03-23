@@ -15,7 +15,7 @@ parameters:
   _param:
     keepalived_stacklight_telemetry_vip_address: ${_param:stacklight_telemetry_address}
     keepalived_stacklight_telemetry_vip_password: ${_param:stacklight_telemetry_keepalived_password}
-    keepalived_stacklight_telemetry_vip_interface: ens4
+    keepalived_stacklight_telemetry_vip_interface: ens3
     cluster_vip_address: ${_param:stacklight_telemetry_address}
     cluster_local_address: ${_param:single_address}
     cluster_node01_hostname: mtr01
@@ -27,7 +27,7 @@ parameters:
   linux:
     network:
       interface:
-        ens4: ${_param:linux_single_interface}
+        ens3: ${_param:linux_single_interface}
     system:
       package:
         apt-transport-https:

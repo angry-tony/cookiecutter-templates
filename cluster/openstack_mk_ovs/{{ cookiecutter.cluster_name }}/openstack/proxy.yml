@@ -1,7 +1,6 @@
 classes:
-{% if cookiecutter.openstack_version == "mitaka" %}
-- system.linux.system.repo.mos9
-{% endif %}
+- system.linux.system.repo.mcp10
+- system.linux.system.repo.saltstack_2016_3_trusty
 - system.linux.system.repo.tcp_base
 - system.linux.system.repo.tcp_mk20
 - system.nginx.server.single
@@ -22,7 +21,7 @@ parameters:
     keepalived_vip_virtual_router_id: 240
     nginx_proxy_ssl:
       enabled: true
-      authority: mk_lab_ca
+      authority: ${_param:salt_minion_ca_authority}
       engine: salt
       mode: secure
     cluster_vip_address: ${_param:openstack_proxy_address}

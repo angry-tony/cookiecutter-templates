@@ -3,6 +3,7 @@
 classes:
 - system.linux.system.single
 - system.openssh.server.team.tcpcloud
+- system.openssh.server.team.mmo_devops
 - cluster.{{ cookiecutter.cluster_name }}.infra
 - cluster.{{ cookiecutter.cluster_name }}.openstack
 - cluster.{{ cookiecutter.cluster_name }}.opencontrail

@@ -30,6 +30,17 @@ parameters:
     glusterfs_service_host: ${_param:infra_compute_address}
     aodh_version: ${_param:openstack_version}
     aodh_service_host: ${_param:openstack_telemetry_address}
+## TODO - PARAMETRIZE
+{% if cookiecutter.openstack_opencontrail_compute_dpdk %}
+    nova_cpu_pinning: "1,2,3,4,5,7,8,9,10,11"
+    compute_hugepages_size: 1G
+    compute_hugepages_count: 40
+    compute_hugepages_mount: /mnt/hugepages_1G
+    compute_kernel_isolcpu: ${_param:nova_cpu_pinning}
+    compute_vrouter_taskset: "-c 1,2"
+    compute_vrouter_socket_mem: "1024"
+{% endif %}
+
     mysql_admin_user: root
     mysql_aodh_password: {{ password(16) }}
     mysql_admin_password: {{ password(16) }}
@@ -169,11 +180,16 @@ parameters:
           names:
           - ${_param:openstack_telemetry_node03_hostname}
           - ${_param:openstack_telemetry_node03_hostname}.${_param:cluster_domain}
+          gtw01:
+            address: ${_param:openstack_gateway_node01_address}
+            names:
+            - ${_param:openstack_gateway_node01_hostname}
+            - ${_param:openstack_gateway_node01_hostname}.${_param:cluster_domain}
         cmp01:
           address: ${_param:openstack_compute_node01_control_address}
           names:
           - ${_param:openstack_compute_node01_hostname}
-          - ${_param:openstack_compute_node01_hostname}${_param:cluster_domain}
+          - ${_param:openstack_compute_node01_hostname}.${_param:cluster_domain}
         cmp02:
           address: ${_param:openstack_compute_node02_control_address}
           names:
