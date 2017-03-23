@@ -6,16 +6,21 @@ classes:
 - system.salt.minion.ca.salt_master
 - system.reclass.storage.salt
 - system.reclass.storage.system.physical_control_cluster
+###Include if opencontrail
 - system.reclass.storage.system.opencontrail_analytics_cluster
 - system.reclass.storage.system.opencontrail_control_cluster
+###Include if openstack
 - system.reclass.storage.system.openstack_control_cluster
 - system.reclass.storage.system.openstack_proxy_cluster
 - system.reclass.storage.system.openstack_database_cluster
 - system.reclass.storage.system.openstack_message_queue_cluster
 - system.reclass.storage.system.openstack_telemetry_cluster
+###Include if stacklight
 - system.reclass.storage.system.stacklight_log_cluster
 - system.reclass.storage.system.stacklight_monitor_cluster
 - system.reclass.storage.system.stacklight_telemetry_cluster
+###Include if cicd
+- system.reclass.storage.system.cicd_control_cluster
 - cluster.{{ cookiecutter.cluster_name }}
 parameters:
   _param:

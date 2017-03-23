@@ -8,16 +8,22 @@ classes:
 - system.glusterfs.server.volume.keystone
 - system.glusterfs.server.cluster
 - system.salt.control.virt
+###Include if opencontrail
 - system.salt.control.cluster.opencontrail_analytics_cluster
 - system.salt.control.cluster.opencontrail_control_cluster
+###Include if openstack
 - system.salt.control.cluster.openstack_control_cluster
 - system.salt.control.cluster.openstack_proxy_cluster
 - system.salt.control.cluster.openstack_database_cluster
 - system.salt.control.cluster.openstack_message_queue_cluster
 - system.salt.control.cluster.openstack_telemetry_cluster
+###Include if stacklight
 - system.salt.control.cluster.stacklight_server_cluster
 - system.salt.control.cluster.stacklight_log_cluster
 - system.salt.control.cluster.stacklight_telemetry_cluster
+###Include if cicd
+- system.salt.control.cluster.cicd_control_cluster
+- cluster.{{ cookiecutter.cluster_name }}.cicd.gluster
 - cluster.{{ cookiecutter.cluster_name }}
 parameters:
   _param:
