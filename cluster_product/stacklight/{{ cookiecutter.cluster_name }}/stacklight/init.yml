@@ -1,0 +1,128 @@
+{%- macro password(size=16) -%}
+{% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'|random }}{% endfor %}
+{%- endmacro %}
+parameters:
+  _param:
+    kibana_elasticsearch_host: ${_param:stacklight_log_address}
+    heka_elasticsearch_host: ${_param:stacklight_log_address}
+    heka_influxdb_host: ${_param:stacklight_telemetry_address}
+    heka_aggregator_host: ${_param:stacklight_monitor_address}
+    aggregator_port: 5565
+    grafana_user: admin
+    cluster_elasticsearch_port: 9200
+    cluster_kibana_port: 5601
+    cluster_grafana_port: 3000
+    mysql_grafana_password: {{ password(16) }}
+    grafana_influxdb_host: ${_param:stacklight_telemetry_address}
+    elasticsearch_port: 9200
+    influxdb_stacklight_password: {{ password(16) }}
+    influxdb_admin_password: {{ password(16) }}
+    influxdb_port: 8086
+    influxdb_database: lma
+    influxdb_user: lma
+    influxdb_password: {{ password(16) }}
+    nagios_host: ${_param:stacklight_monitor_address}
+    nagios_status_port: 8001
+    nagios_username: nagiosadmin
+    nagios_password: {{ password(16) }}
+    nagios_notification_smtp_server: 127.0.0.1
+    nagios_notification_from: 'nagios@localhost'
+    nagios_notification_email: 'root@localhost'
+    stacklight_log_keepalived_password: {{ password(16) }}
+    stacklight_monitor_keepalived_password: {{ password(16) }}
+    stacklight_telemetry_keepalived_password: {{ password(16) }}
+    
+    # Stacklight Monitor
+    stacklight_monitor_address: {{ cookiecutter.stacklight_monitor_address }}
+    stacklight_monitor_node01_address: {{ cookiecutter.stacklight_monitor_node01_address }}
+    stacklight_monitor_node02_address: {{ cookiecutter.stacklight_monitor_node02_address }}
+    stacklight_monitor_node03_address: {{ cookiecutter.stacklight_monitor_node03_address }}
+    stacklight_log_address: {{ cookiecutter.stacklight_log_address }}
+    stacklight_log_node01_address: {{ cookiecutter.stacklight_log_node01_address }}
+    stacklight_log_node02_address: {{ cookiecutter.stacklight_log_node02_address }}
+    stacklight_log_node03_address: {{ cookiecutter.stacklight_log_node03_address }}
+    stacklight_telemetry_address: {{ cookiecutter.stacklight_telemetry_address }}
+    stacklight_telemetry_node01_address: {{ cookiecutter.stacklight_telemetry_node01_address }}
+    stacklight_telemetry_node02_address: {{ cookiecutter.stacklight_telemetry_node02_address }}
+    stacklight_telemetry_node03_address: {{ cookiecutter.stacklight_telemetry_node03_address }}
+
+    # stacklight service hostnames
+    stacklight_monitor_hostname: {{ cookiecutter.stacklight_monitor_hostname }}
+    stacklight_monitor_node01_hostname: {{ cookiecutter.stacklight_monitor_node01_hostname }}
+    stacklight_monitor_node02_hostname: {{ cookiecutter.stacklight_monitor_node02_hostname }}
+    stacklight_monitor_node03_hostname: {{ cookiecutter.stacklight_monitor_node03_hostname }}
+    stacklight_log_hostname: {{ cookiecutter.stacklight_log_hostname }}
+    stacklight_log_node01_hostname: {{ cookiecutter.stacklight_log_node01_hostname }}
+    stacklight_log_node02_hostname: {{ cookiecutter.stacklight_log_node02_hostname }}
+    stacklight_log_node03_hostname: {{ cookiecutter.stacklight_log_node03_hostname }}
+    stacklight_telemetry_hostname: {{ cookiecutter.stacklight_telemetry_hostname }}
+    stacklight_telemetry_node01_hostname: {{ cookiecutter.stacklight_telemetry_node01_hostname }}
+    stacklight_telemetry_node02_hostname: {{ cookiecutter.stacklight_telemetry_node02_hostname }}
+    stacklight_telemetry_node03_hostname: {{ cookiecutter.stacklight_telemetry_node03_hostname }}
+
+    ##Billing
+    #collectd_backend_carbon_host: ${_param:openstack_billing_address}
+    #collectd_backend_carbon_port: 2023
+  linux:
+    network:
+      host:
+        mon01:
+          address: ${_param:stacklight_monitor_node01_address}
+          names:
+          - ${_param:stacklight_monitor_node01_hostname}
+          - ${_param:stacklight_monitor_node01_hostname}.${_param:cluster_domain}
+        mon02:
+          address: ${_param:stacklight_monitor_node02_address}
+          names:
+          - ${_param:stacklight_monitor_node02_hostname}
+          - ${_param:stacklight_monitor_node02_hostname}.${_param:cluster_domain}
+        mon03:
+          address: ${_param:stacklight_monitor_node03_address}
+          names:
+          - ${_param:stacklight_monitor_node03_hostname}
+          - ${_param:stacklight_monitor_node03_hostname}.${_param:cluster_domain}
+        mon:
+          address: ${_param:stacklight_monitor_address}
+          names:
+          - ${_param:stacklight_monitor_hostname}
+          - ${_param:stacklight_monitor_hostname}.${_param:cluster_domain}
+        log01:
+          address: ${_param:stacklight_log_node01_address}
+          names:
+          - ${_param:stacklight_log_node01_hostname}
+          - ${_param:stacklight_log_node01_hostname}.${_param:cluster_domain}
+        log02:
+          address: ${_param:stacklight_log_node02_address}
+          names:
+          - ${_param:stacklight_log_node02_hostname}
+          - ${_param:stacklight_log_node02_hostname}.${_param:cluster_domain}
+        log03:
+          address: ${_param:stacklight_log_node03_address}
+          names:
+          - ${_param:stacklight_log_node03_hostname}
+          - ${_param:stacklight_log_node03_hostname}.${_param:cluster_domain}
+        log:
+          address: ${_param:stacklight_log_address}
+          names:
+          - ${_param:stacklight_log_hostname}
+          - ${_param:stacklight_log_hostname}.${_param:cluster_domain}
+        mtr01:
+          address: ${_param:stacklight_telemetry_node01_address}
+          names:
+          - ${_param:stacklight_telemetry_node01_hostname}
+          - ${_param:stacklight_telemetry_node01_hostname}.${_param:cluster_domain}
+        mtr02:
+          address: ${_param:stacklight_telemetry_node02_address}
+          names:
+          - ${_param:stacklight_telemetry_node02_hostname}
+          - ${_param:stacklight_telemetry_node02_hostname}.${_param:cluster_domain}
+        mtr03:
+          address: ${_param:stacklight_telemetry_node03_address}
+          names:
+          - ${_param:stacklight_telemetry_node03_hostname}
+          - ${_param:stacklight_telemetry_node03_hostname}.${_param:cluster_domain}
+        mtr:
+          address: ${_param:stacklight_telemetry_address}
+          names:
+          - ${_param:stacklight_telemetry_hostname}
+          - ${_param:stacklight_telemetry_hostname}.${_param:cluster_domain}

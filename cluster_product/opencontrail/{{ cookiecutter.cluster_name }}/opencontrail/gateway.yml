@@ -1,0 +1,43 @@
+classes:
+- system.linux.system.repo.saltstack_2016_3_trusty
+- cluster.{{ cookiecutter.cluster_name }}
+## TO BE DONE
+# parameters:
+#   _param:
+#     deploy_nic: enp9s0f0
+#     primary_first_nic: enp9s0f1
+#   linux:
+#     network:
+#       interface:
+#         eth0:
+#           enabled: true
+#           type: eth
+#           proto: manual
+#           name: ${_param:deploy_nic}
+#         eth1:
+#           enabled: true
+#           type: eth
+#           proto: manual
+#           name: ${_param:primary_first_nic}
+#           master: bond0
+#         eth0.2422:
+#           enabled: true
+#           name: ${_param:primary_first_nic}.2422
+#           proto: manual
+#           type: vlan
+#           use_interfaces:
+#           - ${_param:primary_first_nic}
+#         br_mgm:
+#           enabled: true
+#           proto: dhcp
+#           type: bridge
+#           use_interfaces:
+#           - ${_param:deploy_nic}
+#         br_ctl:
+#           enabled: true
+#           type: bridge
+#           proto: static
+#           address: ${_param:single_address}
+#           netmask: 255.255.255.0
+#           use_interfaces:
+#           - ${_param:primary_first_nic}.2422

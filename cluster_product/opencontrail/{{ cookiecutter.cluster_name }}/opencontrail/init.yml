@@ -1,0 +1,54 @@
+{%- macro password(size=16) -%}
+{% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'|random }}{% endfor %}
+{%- endmacro %}
+parameters:
+  _param:
+    opencontrail_version: 3.0
+    opencontrail_stats_password: {{ password(16) }}
+    opencontrail_compute_dns: {{ cookiecutter.opencontrail_compute_dns }}
+    opencontrail_compute_gateway: {{ cookiecutter.opencontrail_compute_gateway }}
+    opencontrail_compute_iface: {{ cookiecutter.opencontrail_compute_iface }}
+    opencontrail_compute_iface_mask: {{ cookiecutter.opencontrail_compute_iface_mask }}
+  linux:
+    network:
+      host:
+        ntw:
+          address: ${_param:opencontrail_control_address}
+          names:
+          - ${_param:opencontrail_control_hostname}
+          - ${_param:opencontrail_control_hostname}.${_param:cluster_domain}
+        ntw01:
+          address: ${_param:opencontrail_control_node01_address}
+          names:
+          - ${_param:opencontrail_control_node01_hostname}
+          - ${_param:opencontrail_control_node01_hostname}.${_param:cluster_domain}
+        ntw02:
+          address: ${_param:opencontrail_control_node02_address}
+          names:
+          - ${_param:opencontrail_control_node02_hostname}
+          - ${_param:opencontrail_control_node02_hostname}.${_param:cluster_domain}
+        ntw03:
+          address: ${_param:opencontrail_control_node03_address}
+          names:
+          - ${_param:opencontrail_control_node03_hostname}
+          - ${_param:opencontrail_control_node03_hostname}.${_param:cluster_domain}
+        nal:
+          address: ${_param:opencontrail_analytics_address}
+          names:
+          - ${_param:opencontrail_analytics_hostname}
+          - ${_param:opencontrail_analytics_hostname}.${_param:cluster_domain}
+        nal01:
+          address: ${_param:opencontrail_analytics_node01_address}
+          names:
+          - ${_param:opencontrail_analytics_node01_hostname}
+          - ${_param:opencontrail_analytics_node01_hostname}.${_param:cluster_domain}
+        nal02:
+          address: ${_param:opencontrail_analytics_node02_address}
+          names:
+          - ${_param:opencontrail_analytics_node02_hostname}
+          - ${_param:opencontrail_analytics_node02_hostname}.${_param:cluster_domain}
+        nal03:
+          address: ${_param:opencontrail_analytics_node03_address}
+          names:
+          - ${_param:opencontrail_analytics_node03_hostname}
+          - ${_param:opencontrail_analytics_node03_hostname}.${_param:cluster_domain}
