@@ -3,6 +3,7 @@ classes:
 - system.openssh.client.lab
 - system.salt.master.pkg
 - system.salt.minion.ca.salt_master
+- system.salt.minion.cert.k8s_server
 - system.reclass.storage.salt
 - system.reclass.storage.system.kubernetes_control_cluster
 - cluster.{{ cookiecutter.cluster_name }}
@@ -14,7 +15,7 @@ parameters:
     reclass_config_master: ${_param:infra_config_deploy_address}
     single_address: ${_param:infra_config_address}
     deploy_address: ${_param:infra_config_deploy_address}
-    salt_master_host: ${_param:infra_config_address}
+    salt_master_host: ${_param:infra_config_deploy_address}
     linux_system_codename: xenial
   reclass:
     storage:

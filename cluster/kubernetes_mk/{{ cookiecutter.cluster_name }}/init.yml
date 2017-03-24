@@ -5,7 +5,7 @@ classes:
 - system.openssh.server.team.tcpcloud
 - cluster.{{ cookiecutter.cluster_name }}.infra
 - cluster.{{ cookiecutter.cluster_name }}.kubernetes
-parameters: 
+parameters:
   _param:
     cluster_domain: {{ cookiecutter.cluster_domain }}
     reclass_data_revision: master
@@ -44,7 +44,3 @@ parameters:
     # kubernetes compute
     kubernetes_compute_node01_single_address: {{ cookiecutter.kubernetes_compute_node01_single_address }}
     kubernetes_compute_node02_single_address: {{ cookiecutter.kubernetes_compute_node02_single_address }}
-
-    ##FIXME if ntp defined
-    #ntp_strata_host1: 
-    #ntp_strata_host2:
