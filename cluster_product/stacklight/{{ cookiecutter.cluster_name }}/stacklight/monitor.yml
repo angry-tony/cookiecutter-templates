@@ -1,9 +1,8 @@
 classes:
-- system.linux.system.repo.tcp_elastic
+- system.linux.system.repo.ubuntu
+- system.linux.system.repo.elasticsearch
 - system.linux.system.repo.grafana
-- system.linux.system.repo.tcp_salt
-- system.linux.system.repo.tcp_base
-- system.linux.system.repo.saltstack_2016_3_trusty
+- system.linux.system.repo.saltstack.xenial
 - system.collectd.remote_client.cluster
 - system.heka.remote_collector.cluster
 - system.heka.aggregator.cluster

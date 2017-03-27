@@ -1,7 +1,8 @@
 classes:
-- system.linux.system.repo.mcp10
-- system.linux.system.repo.mcp_contrail
-- system.linux.system.repo.saltstack_2016_3_trusty
+- system.linux.system.repo.ubuntu
+- system.linux.system.repo.mcp.openstack
+- system.linux.system.repo.mcp.contrail
+- system.linux.system.repo.saltstack.trusty
 - system.linux.system.repo.cassandra
 - system.opencontrail.client.cluster
 - system.opencontrail.client.resource.analytics_node

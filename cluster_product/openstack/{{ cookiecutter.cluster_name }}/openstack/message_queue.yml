@@ -1,7 +1,7 @@
 classes:
-- system.linux.system.repo.mcp10
-- system.linux.system.repo.saltstack_2016_3_trusty
-- system.linux.system.repo.tcp_extra
+- system.linux.system.repo.mcp.openstack
+- system.linux.system.repo.mcp.extra
+- system.linux.system.repo.saltstack.trusty
 - system.rabbitmq.server.cluster
 - system.rabbitmq.server.vhost.openstack
 - cluster.{{ cookiecutter.cluster_name }}
