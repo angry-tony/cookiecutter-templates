@@ -1,13 +1,13 @@
 parameters:
   _param:
-    cicd_control_address: {{ cookiecutter.cicd_vip_ip }}
-    cicd_control_node01_address: {{ cookiecutter.cicd01_control_ip }}
-    cicd_control_node02_address: {{ cookiecutter.cicd02_control_ip }}
-    cicd_control_node03_address: {{ cookiecutter.cicd03_control_ip }}
-    cicd_control_hostname: {{ cookiecutter.cicd_hostname }}
-    cicd_control_node01_hostname: {{ cookiecutter.cicd_node01_hostname }}
-    cicd_control_node02_hostname: {{ cookiecutter.cicd_node02_hostname }}
-    cicd_control_node03_hostname: {{ cookiecutter.cicd_node03_hostname }}
+    cicd_control_address: {{ cookiecutter.cicd_control_vip_address }}
+    cicd_control_node01_address: {{ cookiecutter.cicd_control_node01_address }}
+    cicd_control_node02_address: {{ cookiecutter.cicd_control_node02_address }}
+    cicd_control_node03_address: {{ cookiecutter.cicd_control_node03_address }}
+    cicd_control_hostname: {{ cookiecutter.cicd_control_vip_hostname }}
+    cicd_control_node01_hostname: {{ cookiecutter.cicd_control_node01_hostname }}
+    cicd_control_node02_hostname: {{ cookiecutter.cicd_control_node02_hostname }}
+    cicd_control_node03_hostname: {{ cookiecutter.cicd_control_node03_hostname }}
   linux:
     network:
       host:
