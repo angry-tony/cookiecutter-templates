@@ -10,16 +10,6 @@ parameters:
     infra_config_address: {{ cookiecutter.salt_master_ip }}
     infra_config_deploy_address: {{ cookiecutter.salt_master_management_ip }}
 
-    openstack_gateway_node01_address: {{ cookiecutter.openstack_gateway_node01_address }}
-    openstack_gateway_node02_address: {{ cookiecutter.openstack_gateway_node02_address }}
-    openstack_gateway_node03_address: {{ cookiecutter.openstack_gateway_node03_address }}
-    openstack_gateway_node01_tenant_address: {{ cookiecutter.openstack_gateway_node01_tenant_address }}
-    openstack_gateway_node02_tenant_address: {{ cookiecutter.openstack_gateway_node02_tenant_address }}
-    openstack_gateway_node03_tenant_address: {{ cookiecutter.openstack_gateway_node03_tenant_address }}
-    openstack_gateway_node01_hostname: {{ cookiecutter.openstack_gateway_node01_hostname }}
-    openstack_gateway_node02_hostname: {{ cookiecutter.openstack_gateway_node02_hostname }}
-    openstack_gateway_node03_hostname: {{ cookiecutter.openstack_gateway_node03_hostname }}
-
     infra_kvm_address: {{ cookiecutter.kvm_vip_ip }}
     infra_kvm_node01_address: {{ cookiecutter.kvm01_control_ip }}
     infra_kvm_node02_address: {{ cookiecutter.kvm02_control_ip }}

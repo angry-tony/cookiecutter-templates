@@ -31,6 +31,17 @@ parameters:
     aodh_version: ${_param:openstack_version}
     aodh_service_host: ${_param:openstack_telemetry_address}
 ## TODO - PARAMETRIZE
+    openstack_gateway_node01_address: {{ cookiecutter.openstack_gateway_node01_address }}
+    openstack_gateway_node02_address: {{ cookiecutter.openstack_gateway_node02_address }}
+    openstack_gateway_node03_address: {{ cookiecutter.openstack_gateway_node03_address }}
+    openstack_gateway_node01_tenant_address: {{ cookiecutter.openstack_gateway_node01_tenant_address }}
+    openstack_gateway_node02_tenant_address: {{ cookiecutter.openstack_gateway_node02_tenant_address }}
+    openstack_gateway_node03_tenant_address: {{ cookiecutter.openstack_gateway_node03_tenant_address }}
+    openstack_gateway_node01_hostname: {{ cookiecutter.openstack_gateway_node01_hostname }}
+    openstack_gateway_node02_hostname: {{ cookiecutter.openstack_gateway_node02_hostname }}
+    openstack_gateway_node03_hostname: {{ cookiecutter.openstack_gateway_node03_hostname }}
+
+
 {% if cookiecutter.openstack_opencontrail_compute_dpdk %}
     nova_cpu_pinning: "1,2,3,4,5,7,8,9,10,11"
     compute_hugepages_size: 1G
