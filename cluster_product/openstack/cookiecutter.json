@@ -1,29 +1,25 @@
 {
-    "openstack_version"                         : "mitaka",
     "cluster_name"                              : "deployment_name",
-    "cluster_domain"                            : "deploy-name.local",
-    "public_host"                               : "public-name",
-    "reclass_repository"                        : "https://github.com/Mirantis/mk-lab-salt-model.git",
 
-    "control_network_netmask"                   : "255.255.255.0",
-    "control_network_gateway"                   : "10.167.4.1",
+    "openstack_network_engine"                  : "opencontrail",
+    "openstack_ovs_dvr_enabled"                 : "False",
+    
+    "openstack_ovs_encapsulation_type"          : "vxlan",
+    "openstack_ovs_encapsulation_vlan_range"    : "2416:2420",
+
+    "openstack_nova_compute_nfv_enabled"        : "False",
+    "openstack_nova_cpu_pinning"                : "1,2,3,4,5,7,8,9,10,11",
+    "openstack_nova_compute_hugepages_count"    : "16",
+    "openstack_nfv_dpdk_enabled"                : "False",
+    "openstack_nfv_sriov_enabled"               : "False",
+    "openstack_nfv_sriov_pf_nic"                : "eth7",
+    "openstack_nfv_sriov_numvfs"                : "7",
+    "stacklight_enabled"                        : "True",
+
     "dns_server01"                              : "8.8.8.8",
     "dns_server02"                              : "8.8.4.4",
 
-    "salt_master_ip"                            : "10.167.4.90",
-    "salt_master_management_ip"                 : "10.167.5.90",
-    "salt_master_hostname"                      : "cfg01",
-
-    "kvm_vip_ip"                                : "10.167.4.240",
-    "kvm01_control_ip"                          : "10.167.4.241",
-    "kvm02_control_ip"                          : "10.167.4.242",
-    "kvm03_control_ip"                          : "10.167.4.243",
-    "kvm01_deploy_ip"                           : "10.167.5.241",
-    "kvm02_deploy_ip"                           : "10.167.5.242",
-    "kvm03_deploy_ip"                           : "10.167.5.243",
-    "kvm01_name"                                : "kvm01",
-    "kvm02_name"                                : "kvm02",
-    "kvm03_name"                                : "kvm03",
+    "openstack_version"                         : "mitaka",
 
     "openstack_proxy_address"                   : "10.167.4.80",
     "openstack_proxy_node01_address"            : "10.167.4.81",
@@ -59,26 +55,6 @@
     "openstack_message_queue_node02_hostname"   : "msg02",
     "openstack_message_queue_node03_hostname"   : "msg03",
 
-    "opencontrail_analytics_address"            : "10.167.4.30",
-    "opencontrail_analytics_node01_address"     : "10.167.4.31",
-    "opencontrail_analytics_node02_address"     : "10.167.4.32",
-    "opencontrail_analytics_node03_address"     : "10.167.4.33",
-    "opencontrail_analytics_hostname"           : "nal",
-    "opencontrail_analytics_node01_hostname"    : "nal01",
-    "opencontrail_analytics_node02_hostname"    : "nal02",
-    "opencontrail_analytics_node03_hostname"    : "nal03",
-
-    "opencontrail_gateway_node01_address"       : "10.167.4.200",
-
-    "opencontrail_control_address"              : "10.167.4.20",
-    "opencontrail_control_node01_address"       : "10.167.4.21",
-    "opencontrail_control_node02_address"       : "10.167.4.22",
-    "opencontrail_control_node03_address"       : "10.167.4.23",
-    "opencontrail_control_hostname"             : "ntw",
-    "opencontrail_control_node01_hostname"      : "ntw01",
-    "opencontrail_control_node02_hostname"      : "ntw02",
-    "opencontrail_control_node03_hostname"      : "ntw03",
-
     "openstack_telemetry_address"               : "10.167.4.75",
     "openstack_telemetry_node01_address"        : "10.167.4.76",
     "openstack_telemetry_node02_address"        : "10.167.4.77",
@@ -88,38 +64,6 @@
     "openstack_telemetry_node02_hostname"       : "mdb02",
     "openstack_telemetry_node03_hostname"       : "mdb03",
 
-    "opencontrail_compute_dns"                  : "8.8.8.8",
-    "opencontrail_compute_gateway"              : "10.167.2.1",
-    "opencontrail_compute_iface"                : "bond0",
-    "opencontrail_compute_iface_mask"           : "24",
-
-    "stacklight_monitor_address"                : "10.167.4.70",
-    "stacklight_monitor_node01_address"         : "10.167.4.71",
-    "stacklight_monitor_node02_address"         : "10.167.4.72",
-    "stacklight_monitor_node03_address"         : "10.167.4.73",
-    "stacklight_monitor_hostname"               : "mon",
-    "stacklight_monitor_node01_hostname"        : "mon01",
-    "stacklight_monitor_node02_hostname"        : "mon02",
-    "stacklight_monitor_node03_hostname"        : "mon03",
-
-    "stacklight_log_address"                    : "10.167.4.60",
-    "stacklight_log_node01_address"             : "10.167.4.61",
-    "stacklight_log_node02_address"             : "10.167.4.62",
-    "stacklight_log_node03_address"             : "10.167.4.63",
-    "stacklight_log_hostname"                   : "log",
-    "stacklight_log_node01_hostname"            : "log01",
-    "stacklight_log_node02_hostname"            : "log02",
-    "stacklight_log_node03_hostname"            : "log03",
-
-    "stacklight_telemetry_address"              : "10.167.4.85",
-    "stacklight_telemetry_node01_address"       : "10.167.4.86",
-    "stacklight_telemetry_node02_address"       : "10.167.4.87",
-    "stacklight_telemetry_node03_address"       : "10.167.4.88",
-    "stacklight_telemetry_hostname"             : "mtr",
-    "stacklight_telemetry_node01_hostname"      : "mtr01",
-    "stacklight_telemetry_node02_hostname"      : "mtr02",
-    "stacklight_telemetry_node03_hostname"      : "mtr03",
-
     "openstack_compute_node01_single_address"   : "10.167.2.101",
     "openstack_compute_node02_single_address"   : "10.167.2.102",
     "openstack_compute_node03_single_address"   : "10.167.2.103",
@@ -127,10 +71,20 @@
     "openstack_compute_node02_control_address"  : "10.167.4.102",
     "openstack_compute_node03_control_address"  : "10.167.4.103",
 
-    "openstack_nova_compute_nfv"                : "True",
-    "openstack_opencontrail_compute_dpdk"       : "True",
-
     "openstack_compute_node01_hostname"         : "cmp001",
     "openstack_compute_node02_hostname"         : "cmp002",
-    "openstack_compute_node03_hostname"         : "cmp003"
+    "openstack_compute_node03_hostname"         : "cmp003",
+    "openstack_compute_node01_tenant_address"   : "10.167.6.101",
+    "openstack_compute_node02_tenant_address"   : "10.167.6.102",
+    "openstack_compute_node03_tenant_address"   : "10.167.6.103",
+
+    "openstack_gateway_node01_address"          : "10.167.4.224",
+    "openstack_gateway_node02_address"          : "10.167.4.225",
+    "openstack_gateway_node03_address"          : "10.167.4.226",
+    "openstack_gateway_node01_tenant_address"   : "10.167.6.6",
+    "openstack_gateway_node02_tenant_address"   : "10.167.6.7",
+    "openstack_gateway_node03_tenant_address"   : "10.167.6.8",
+    "openstack_gateway_node01_hostname"         : "gtw01",
+    "openstack_gateway_node02_hostname"         : "gtw02",
+    "openstack_gateway_node03_hostname"         : "gtw03"
 }

@@ -1,7 +1,8 @@
 classes:
-- system.linux.system.repo.mcp10
-- system.linux.system.repo.mcp_contrail
-- system.linux.system.repo.saltstack_2016_3_trusty
+- system.linux.system.repo.ubuntu
+- system.linux.system.repo.mcp.openstack
+- system.linux.system.repo.mcp.contrail
+- system.linux.system.repo.saltstack.trusty
 - system.linux.system.repo.cassandra
 - system.neutron.control.opencontrail.cluster
 - system.opencontrail.control.control
@@ -24,12 +25,10 @@ parameters:
     cluster_node02_address: ${_param:opencontrail_control_node02_address}
     cluster_node03_hostname: ntw03
     cluster_node03_address: ${_param:opencontrail_control_node03_address}
-
-    ###Parametrize physical routers
-    opencontrail_router01_hostname: vsrx1
-    opencontrail_router01_address: 10.167.4.100
-    opencontrail_router02_hostname: vsrx2
-    opencontrail_router02_address: 10.167.4.101
+    opencontrail_router01_hostname: {{ cookiecutter.opencontrail_router01_hostname }}
+    opencontrail_router01_address: {{ cookiecutter.opencontrail_router01_address }}
+    opencontrail_router02_hostname: {{ cookiecutter.opencontrail_router02_hostname }}
+    opencontrail_router02_address: {{ cookiecutter.opencontrail_router02_address }}
   linux:
     network:
       interface:

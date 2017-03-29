@@ -1,9 +1,11 @@
 classes:
-- system.linux.system.repo.mcp10
-- system.linux.system.repo.saltstack_2016_3_trusty
-- system.linux.system.repo.tcp_mk20
+- system.linux.system.repo.ubuntu
+- system.linux.system.repo.mcp.openstack
+- system.linux.system.repo.saltstack.trusty
 - system.nginx.server.single
+{%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
 - system.nginx.server.proxy.opencontrail_web
+{%- endif %}
 - system.nginx.server.proxy.openstack_api
 - system.nginx.server.proxy.openstack_vnc
 - system.nginx.server.proxy.openstack_web
@@ -13,10 +15,11 @@ classes:
 - service.keepalived.cluster.single
 - cluster.{{ cookiecutter.cluster_name }}
 - cluster.{{ cookiecutter.cluster_name }}.openstack.dashboard
+{%- if cookiecutter.stacklight_enabled == 'True' %}
 - cluster.{{ cookiecutter.cluster_name }}.stacklight.proxy
+{%- endif %}
 parameters:
   _param:
-    openstack_version: liberty
     keepalived_vip_interface: eth1
     keepalived_vip_virtual_router_id: 240
     nginx_proxy_ssl:

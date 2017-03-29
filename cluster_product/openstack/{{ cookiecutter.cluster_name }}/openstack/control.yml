@@ -1,10 +1,15 @@
 classes:
-- system.linux.system.repo.mcp10
-- system.linux.system.repo.tcp_extra
+- system.linux.system.repo.ubuntu
+- system.linux.system.repo.mcp.extra
+- system.linux.system.repo.mcp.openstack
+- system.linux.system.repo.saltstack.trusty
 - system.linux.system.repo.glusterfs
 - system.memcached.server.single
-- system.linux.system.repo.saltstack_2016_3_trusty 
 - system.ceilometer.client
+{%- if cookiecutter.openstack_network_engine == 'ovs' %}
+- system.ceilometer.client.neutron
+- system.neutron.control.openvswitch.cluster
+{%- endif %}
 - system.keystone.server.cluster
 - system.glance.control.cluster
 - system.nova.control.cluster
