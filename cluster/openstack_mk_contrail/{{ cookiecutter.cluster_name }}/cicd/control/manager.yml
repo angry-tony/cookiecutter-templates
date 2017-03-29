@@ -1,3 +1,0 @@
-classes:
-  - system.docker.swarm.manager
-  - cluster.{{ cookiecutter.cluster_name }}.cicd.control
