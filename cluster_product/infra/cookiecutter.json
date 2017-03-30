@@ -10,9 +10,9 @@
     "dns_server01"                              : "8.8.8.8",
     "dns_server02"                              : "8.8.4.4",
     "control_vlan"                              : "10",
-    "data_vlan"                                 : "20",
-    "data_network_netmask"                      : "255.255.255.0",
-    "data_network_gateway"                      : "",
+    "tenant_vlan"                               : "20",
+    "tenant_network_netmask"                    : "255.255.255.0",
+    "tenant_network_gateway"                    : "",
 
     "infra_deploy_nic"                          : "eth0",
     "infra_primary_first_nic"                   : "eth1",
