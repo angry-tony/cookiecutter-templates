@@ -22,10 +22,10 @@
     "opencontrail_router01_hostname"            : "rtr01",
     "opencontrail_router01_address"             : "10.167.4.100",
     "opencontrail_router02_hostname"            : "rtr02",
-    "opencontrail_router02_address"             : "10.167.4.101",              
+    "opencontrail_router02_address"             : "10.167.4.101",
 
-    "opencontrail_compute_dns"                  : "8.8.8.8",
-    "opencontrail_compute_gateway"              : "10.167.2.1",
-    "opencontrail_compute_iface"                : "bond0",
-    "opencontrail_compute_iface_mask"           : "24"
+    "opencontrail_compute_iface"                : "bond0.${_param:tenant_vlan}",
+    "opencontrail_compute_iface_mask"           : "24",
+
+    "openstack_nfv_dpdk_enabled"                : "False"
 }

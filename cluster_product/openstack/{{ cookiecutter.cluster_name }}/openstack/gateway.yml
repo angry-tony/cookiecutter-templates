@@ -58,9 +58,9 @@ parameters:
           type: ovs_port
           bridge: br-floating
           proto: static
-          ovs_options: tag=${_param:data_vlan}
+          ovs_options: tag=${_param:tenant_vlan}
           address: ${_param:tenant_address}
-          netmask: ${_param:data_network_netmask}
+          netmask: ${_param:tenant_network_netmask}
         {%- elif cookiecutter.openstack_ovs_encapsulation_type == 'vlan' %}
         br-prv:
           enabled: true

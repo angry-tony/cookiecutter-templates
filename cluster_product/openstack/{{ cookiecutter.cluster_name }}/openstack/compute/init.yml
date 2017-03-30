@@ -74,7 +74,7 @@ parameters:
           use_interfaces:
           - bond0
         bond0.2:
-          name: bond0.${_param:data_vlan}
+          name: bond0.${_param:tenant_vlan}
           enabled: true
           type: vlan
           proto: manual
@@ -84,9 +84,9 @@ parameters:
           enabled: true
           type: bridge
           address: ${_param:tenant_address}
-          netmask: ${_param:data_network_netmask}
+          netmask: ${_param:tenant_network_netmask}
           use_interfaces:
-          - bond0.${_param:data_vlan}
+          - bond0.${_param:tenant_vlan}
         {%- elif cookiecutter.openstack_ovs_encapsulation_type == 'vlan' %}
         bond0:
           enabled: true
@@ -139,9 +139,9 @@ parameters:
           type: ovs_port
           bridge: br-floating
           proto: static
-          ovs_options: tag=${_param:data_vlan}
+          ovs_options: tag=${_param:tenant_vlan}
           address: ${_param:tenant_address}
-          netmask: ${_param:data_network_netmask}
+          netmask: ${_param:tenant_network_netmask}
         {%- elif cookiecutter.openstack_ovs_encapsulation_type == 'vlan' %}
         br-prv:
           enabled: true
@@ -184,7 +184,7 @@ parameters:
           netmask: ${_param:control_network_netmask}
         bond0.2:
           mtu: 9000
-          name: bond0.${_param:data_vlan}
+          name: bond0.${_param:tenant_vlan}
           enabled: true
           proto: manual
           type: vlan
@@ -195,12 +195,12 @@ parameters:
           type: eth
           mtu: 9000
           address: ${_param:tenant_address}
-          netmask: ${_param:data_network_netmask}
-          gateway: ${_param:data_network_gateway}
+          netmask: ${_param:tenant_network_netmask}
+          gateway: ${_param:tenant_network_gateway}
           pre_up_cmds:
           - /usr/lib/contrail/if-vhost0
           use_interfaces:
-          - bond0.${_param:data_vlan}
+          - bond0.${_param:tenant_vlan}
           name_servers:
           - ${_param:dns_server01}
           - ${_param:dns_server02}

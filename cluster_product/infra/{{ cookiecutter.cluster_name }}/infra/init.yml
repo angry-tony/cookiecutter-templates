@@ -46,15 +46,15 @@ parameters:
     infra_kvm_node03_hostname: {{ cookiecutter.infra_kvm03_hostname }}
 
     control_network_netmask: {{ cookiecutter.control_network_netmask }}
-    data_network_netmask: {{ cookiecutter.data_network_netmask }}
+    tenant_network_netmask: {{ cookiecutter.tenant_network_netmask }}
     control_vlan: {{ cookiecutter.control_vlan }}
-    data_vlan: {{ cookiecutter.data_vlan }}
+    tenant_vlan: {{ cookiecutter.tenant_vlan }}
     dns_server01: {{ cookiecutter.dns_server01 }}
     dns_server02: {{ cookiecutter.dns_server02 }}
     deploy_network_netmask: {{ cookiecutter.deploy_network_netmask }}
     deploy_network_gateway: {{ cookiecutter.deploy_network_gateway }}
     {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
-    data_network_gateway: {{ cookiecutter.data_network_gateway }}
+    tenant_network_gateway: {{ cookiecutter.tenant_network_gateway }}
     {%- endif %}
 
     linux_dhcp_interface:
