@@ -1,6 +1,25 @@
 {%- macro password(size=16) -%}
 {% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'|random }}{% endfor %}
 {%- endmacro %}
+classes:
+- system.linux.system.single
+- system.openssh.server.team.lab
+- system.openssh.server.team.tcpcloud
+- system.openssh.server.team.mcp_qa
+- cluster.{{ cookiecutter.cluster_name }}.infra
+{%- if cookiecutter.openstack_enabled == 'True' %}
+- cluster.{{ cookiecutter.cluster_name }}.openstack
+{%- endif %}
+{%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
+- cluster.{{ cookiecutter.cluster_name }}.opencontrail
+{%- endif %}
+{%- if cookiecutter.stacklight_enabled == 'True' %}
+- cluster.{{ cookiecutter.cluster_name }}.stacklight
+- cluster.{{ cookiecutter.cluster_name }}.stacklight.client
+{%- endif %}
+{%- if cookiecutter.cicd_enabled == 'True' %}
+- cluster.{{ cookiecutter.cluster_name }}.cicd
+{%- endif %}
 parameters:
   _param:
     salt_control_trusty_image: http://apt-mk.mirantis.com/images/ubuntu-14-04-x64-mcp1.0.qcow2
@@ -10,6 +29,10 @@ parameters:
     infra_config_hostname: {{ cookiecutter.salt_master_hostname }}
     infra_config_address: {{ cookiecutter.salt_master_address}}
     infra_config_deploy_address: {{ cookiecutter.salt_master_management_address }}
+
+    cluster_domain: {{ cookiecutter.cluster_domain }}
+    cluster_name: {{ cookiecutter.cluster_name }}
+    cluster_public_host: {{ cookiecutter.public_host }}
 
     infra_kvm_address: {{ cookiecutter.infra_kvm_vip_address }}
     infra_kvm_node01_address: {{ cookiecutter.infra_kvm01_control_address }}
@@ -33,6 +56,21 @@ parameters:
     {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
     data_network_gateway: {{ cookiecutter.data_network_gateway }}
     {%- endif %}
+
+    linux_dhcp_interface:
+      enabled: true
+      type: eth
+      proto: dhcp
+    linux_single_interface:
+      enabled: true
+      type: eth
+      proto: static
+      address: ${_param:single_address}
+      netmask: ${_param:control_network_netmask}
+      gateway: ${_param:control_network_gateway}
+      name_servers:
+        - ${_param:dns_server01}
+        - ${_param:dns_server02}
 
   linux:
     network:

@@ -66,19 +66,9 @@
     "openstack_telemetry_node02_hostname"       : "mdb02",
     "openstack_telemetry_node03_hostname"       : "mdb03",
 
-    "openstack_compute_node01_single_address"   : "10.167.2.101",
-    "openstack_compute_node02_single_address"   : "10.167.2.102",
-    "openstack_compute_node03_single_address"   : "10.167.2.103",
-    "openstack_compute_node01_control_address"  : "10.167.4.101",
-    "openstack_compute_node02_control_address"  : "10.167.4.102",
-    "openstack_compute_node03_control_address"  : "10.167.4.103",
-
-    "openstack_compute_node01_hostname"         : "cmp001",
-    "openstack_compute_node02_hostname"         : "cmp002",
-    "openstack_compute_node03_hostname"         : "cmp003",
-    "openstack_compute_node01_data_address"     : "10.167.6.101",
-    "openstack_compute_node02_data_address"     : "10.167.6.102",
-    "openstack_compute_node03_data_address"     : "10.167.6.103",
+    "openstack_compute_rack01_sigle_subnet"     : "10.167.4",
+    "openstack_compute_rack01_tenant_subnet "   : "10.167.6",
+    "openstack_compute_rack01_hostname"         : "cmp",
 
     "openstack_gateway_node01_address"          : "10.167.4.224",
     "openstack_gateway_node02_address"          : "10.167.4.225",
@@ -90,11 +80,9 @@
     "openstack_gateway_node02_hostname"         : "gtw02",
     "openstack_gateway_node03_hostname"         : "gtw03",
 
-    "gateway_deploy_nic"                        : "eth0",
     "gateway_primary_first_nic"                 : "eth1",
     "gateway_primary_second_nic"                : "eth2",
 
-    "compute_deploy_nic"                        : "eth0",
     "compute_primary_first_nic"                 : "eth1",
     "compute_primary_second_nic"                : "eth2"
 }

@@ -12,18 +12,12 @@ parameters:
     linux_system_codename: xenial
     keepalived_vip_interface: br-ctl
     keepalived_vip_virtual_router_id: 69
-    deploy_nic: {{ cookiecutter.gateway_deploy_nic }}
     primary_first_nic: {{ cookiecutter.gateway_primary_first_nic }}
     primary_second_nic: {{ cookiecutter.gateway_primary_second_nic }}
   linux:
     network:
       bridge: openvswitch
       interface:
-        eth0:
-          enabled: true
-          type: eth
-          proto: dhcp
-          name: ${_param:deploy_nic}
         eth1:
           enabled: true
           type: slave
@@ -65,7 +59,7 @@ parameters:
           bridge: br-floating
           proto: static
           ovs_options: tag=${_param:data_vlan}
-          address: ${_param:data_address}
+          address: ${_param:tenant_address}
           netmask: ${_param:data_network_netmask}
         {%- elif cookiecutter.openstack_ovs_encapsulation_type == 'vlan' %}
         br-prv:

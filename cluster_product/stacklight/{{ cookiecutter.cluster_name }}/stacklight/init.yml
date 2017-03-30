@@ -31,7 +31,8 @@ parameters:
     stacklight_log_keepalived_password: {{ password(16) }}
     stacklight_monitor_keepalived_password: {{ password(16) }}
     stacklight_telemetry_keepalived_password: {{ password(16) }}
-    
+    stacklight_environment: ${_param:cluster_domain}
+
     # Stacklight Monitor
     stacklight_monitor_address: {{ cookiecutter.stacklight_monitor_address }}
     stacklight_monitor_node01_address: {{ cookiecutter.stacklight_monitor_node01_address }}

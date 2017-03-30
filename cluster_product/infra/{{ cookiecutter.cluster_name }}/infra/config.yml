@@ -124,23 +124,37 @@ parameters:
         openstack_database_node01:
           classes:
           - cluster.${_param:cluster_name}.openstack.database_init
-        openstack_compute_node01:
-          name: ${_param:openstack_compute_node01_hostname}
+        openstack_compute_rack01:
+          name: ${_param:openstack_compute_rack01_hostname}<<count>>
           domain: ${_param:cluster_domain}
           classes:
         {%- if cookiecutter.openstack_nfv_sriov_enabled == 'True' %}
           - cluster.${_param:cluster_name}.openstack.compute.sriov
-        {%- elif cookiecutter.openstack_nfv_dpdk_enabled == 'True' %}
+        {%- endif %}
+        {%- if cookiecutter.openstack_nfv_dpdk_enabled == 'True' %}
           - cluster.${_param:cluster_name}.openstack.compute.dpdk
-        {%- else %}
+        {%- endif %}
+        {%- if not cookiecutter.openstack_nfv_dpdk_enabled == 'True' and not cookiecutter.openstack_nfv_sriov_enabled == 'True' %}
           - cluster.${_param:cluster_name}.openstack.compute
         {%- endif %}
+          repeat:
+            count: {{ cookiecutter.openstack_compute_count }}
+            start: 1
+            digits: 3
+            params:
+              single_address:
+                value: ${_param:openstack_compute_rack01_sigle_subnet}.<<count>>
+                start: 101
+              tenant_address:
+                value: ${_param:openstack_compute_rack01_tenant_subnet}.<<count>>
+                start: 101
           params:
             salt_master_host: ${_param:reclass_config_master}
+          {%- if cookiecutter.openstack_nfv_dpdk_enabled == 'True' and cookiecutter.openstack_network_engine == 'opencontrail' %}
+            linux_system_codename: trusty
+          {%- else %}
             linux_system_codename: xenial
-            control_address: ${_param:openstack_compute_node01_control_address}
-            single_address: ${_param:openstack_compute_node01_single_address}
-            tenant_address: ${_param:openstack_compute_node01_tenant_address}
+          {%- endif %}
         {%- if cookiecutter.openstack_nfv_sriov_enabled == 'True' %}
             # sriov_nic01_device_name: eth7
             # sriov_nic01_numvfs: 7
