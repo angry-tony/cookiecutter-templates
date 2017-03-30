@@ -128,11 +128,40 @@ parameters:
           name: ${_param:openstack_compute_node01_hostname}
           domain: ${_param:cluster_domain}
           classes:
+        {%- if cookiecutter.openstack_nfv_sriov_enabled == 'True' %}
+          - cluster.${_param:cluster_name}.openstack.compute.sriov
+        {%- elif cookiecutter.openstack_nfv_dpdk_enabled == 'True' %}
+          - cluster.${_param:cluster_name}.openstack.compute.dpdk
+        {%- else %}
           - cluster.${_param:cluster_name}.openstack.compute
+        {%- endif %}
           params:
             salt_master_host: ${_param:reclass_config_master}
             linux_system_codename: xenial
             control_address: ${_param:openstack_compute_node01_control_address}
             single_address: ${_param:openstack_compute_node01_single_address}
             tenant_address: ${_param:openstack_compute_node01_tenant_address}
+        {%- if cookiecutter.openstack_nfv_sriov_enabled == 'True' %}
+            # sriov_nic01_device_name: eth7
+            # sriov_nic01_numvfs: 7
+            # sriov_nic01_physical_network: physnet3
+            # sriov_unsafe_interrupts: False
+        {%- elif cookiecutter.openstack_nfv_dpdk_enabled == 'True' %}
+        {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
+            # compute_vrouter_dpdk_mac_address: 00:1b:21:87:21:99
+            # compute_vrouter_dpdk_pci: "'0000:05:00.1'"
+            # compute_vrouter_taskset: "-c 1,2"
+            # compute_vrouter_socket_mem: "1024"
+        {%- elif cookiecutter.openstack_network_engine == 'ovs' %}
+            # dpdk0_name: enp5s0f1
+            # dpdk1_name: enp5s0f2
+            # dpdk0_pci: '"0000:05:00.1"'
+            # dpdk1_pci: '"0000:05:00.2"'
+            # compute_dpdk_driver: uio
+            # compute_ovs_pmd_cpu_mask: "0x6"
+            # compute_ovs_dpdk_socket_mem: "1024"
+            # compute_ovs_dpdk_lcore_mask: "0x400"
+            # compute_ovs_memory_channels: "2"
+        {%- endif %}
+        {%- endif %}
         {%- endif %}

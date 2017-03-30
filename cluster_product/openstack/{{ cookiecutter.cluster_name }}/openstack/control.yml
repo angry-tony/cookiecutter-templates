@@ -9,6 +9,9 @@ classes:
 {%- if cookiecutter.openstack_network_engine == 'ovs' %}
 - system.ceilometer.client.neutron
 - system.neutron.control.openvswitch.cluster
+{%- if cookiecutter.openstack_nfv_sriov_enabled == 'True' %}
+- system.neutron.control.openvswitch.sriov
+{%- endif %}
 {%- endif %}
 - system.keystone.server.cluster
 - system.glance.control.cluster

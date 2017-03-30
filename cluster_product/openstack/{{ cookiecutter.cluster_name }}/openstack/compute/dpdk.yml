@@ -1,0 +1,7 @@
+classes:
+- cluster.{{ cookiecutter.cluster_name }}.openstack.compute
+{%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
+- system.opencontrail.compute.dpdk
+{%- elif cookiecutter.openstack_network_engine == 'ovs' %}
+- system.neutron.compute.nfv.dpdk
+{%- endif %}

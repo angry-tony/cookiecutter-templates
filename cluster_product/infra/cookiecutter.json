@@ -35,5 +35,8 @@
     "openstack_enabled"                         : "True",
     "stacklight_enabled"                        : "True",
     "cicd_enabled"                              : "True",
-    "k8s_enabled"                               : "False"
+    "k8s_enabled"                               : "False",
+
+    "openstack_nfv_dpdk_enabled"                : "False",
+    "openstack_nfv_sriov_enabled"               : "False"
 }

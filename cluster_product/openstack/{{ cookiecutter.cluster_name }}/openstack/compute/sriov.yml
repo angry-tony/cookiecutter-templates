@@ -1,0 +1,6 @@
+classes:
+- system.nova.compute.nfv.sriov
+- cluster.{{ cookiecutter.cluster_name }}.openstack.compute
+{%- if cookiecutter.openstack_network_engine == 'ovs' %}
+- system.neutron.compute.nfv.sriov
+{%- endif %}
