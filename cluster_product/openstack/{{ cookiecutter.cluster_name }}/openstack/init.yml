@@ -50,12 +50,19 @@ parameters:
     compute_vrouter_socket_mem: "1024"
     {%- endif %}
 {%- endif %}
-{%- if cookiecutter.openstack_nova_compute_nfv_enabled == 'True' %}
+{%- if cookiecutter.openstack_nova_compute_nfv_req_enabled == 'True' or cookiecutter.openstack_nfv_dpdk_enabled== 'True' %}
     compute_hugepages_size: 1G
     nova_cpu_pinning: {{ cookiecutter.openstack_nova_cpu_pinning }}
     compute_hugepages_count: {{ cookiecutter.openstack_nova_compute_hugepages_count }}
     compute_hugepages_mount: /mnt/hugepages_1G
     compute_kernel_isolcpu: ${_param:nova_cpu_pinning}
+{%- endif %}
+
+{%- if cookiecutter.openstack_nfv_sriov_enabled == 'True' %}
+    sriov_nic01_device_name: {{ cookiecutter.openstack_nfv_sriov_pf_nic }}
+    sriov_nic01_numvfs: {{ cookiecutter.openstack_nfv_sriov_numvfs }}
+    sriov_nic01_physical_network: {{ cookiecutter.openstack_nfv_sriov_network }}
+    sriov_unsafe_interrupts: False
 {%- endif %}
 
     galera_server_cluster_name: openstack_cluster
