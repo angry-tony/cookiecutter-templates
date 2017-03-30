@@ -9,7 +9,7 @@ classes:
 {%- if cookiecutter.openstack_network_engine == 'ovs' %}
 - system.ceilometer.client.neutron
 - system.neutron.control.openvswitch.cluster
-{%- if cookiecutter.openstack_nfv_sriov_enabled == 'True' %}
+{%- if cookiecutter.get('openstack_nfv_sriov_enabled', 'False') == 'True' %}
 - system.neutron.control.openvswitch.sriov
 {%- endif %}
 {%- endif %}

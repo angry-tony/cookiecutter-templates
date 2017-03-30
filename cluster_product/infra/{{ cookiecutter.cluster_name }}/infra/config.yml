@@ -128,13 +128,13 @@ parameters:
           name: ${_param:openstack_compute_rack01_hostname}<<count>>
           domain: ${_param:cluster_domain}
           classes:
-        {%- if cookiecutter.openstack_nfv_sriov_enabled == 'True' %}
+        {%- if cookiecutter.get('openstack_nfv_sriov_enabled', 'False') == 'True' %}
           - cluster.${_param:cluster_name}.openstack.compute.sriov
         {%- endif %}
-        {%- if cookiecutter.openstack_nfv_dpdk_enabled == 'True' %}
+        {%- if cookiecutter.get('openstack_nfv_dpdk_enabled', 'False') == 'True' %}
           - cluster.${_param:cluster_name}.openstack.compute.dpdk
         {%- endif %}
-        {%- if not cookiecutter.openstack_nfv_dpdk_enabled == 'True' and not cookiecutter.openstack_nfv_sriov_enabled == 'True' %}
+        {%- if not cookiecutter.get('openstack_nfv_dpdk_enabled', 'False') == 'True' and not cookiecutter.get('openstack_nfv_sriov_enabled', 'False') == 'True' %}
           - cluster.${_param:cluster_name}.openstack.compute
         {%- endif %}
           repeat:
@@ -150,17 +150,18 @@ parameters:
                 start: 101
           params:
             salt_master_host: ${_param:reclass_config_master}
-          {%- if cookiecutter.openstack_nfv_dpdk_enabled == 'True' and cookiecutter.openstack_network_engine == 'opencontrail' %}
+          {%- if cookiecutter.get('openstack_nfv_dpdk_enabled', 'False') == 'True' and cookiecutter.openstack_network_engine == 'opencontrail' %}
             linux_system_codename: trusty
           {%- else %}
             linux_system_codename: xenial
           {%- endif %}
-        {%- if cookiecutter.openstack_nfv_sriov_enabled == 'True' %}
+        {%- if cookiecutter.get('openstack_nfv_sriov_enabled', 'False') == 'True' %}
             # sriov_nic01_device_name: eth7
             # sriov_nic01_numvfs: 7
             # sriov_nic01_physical_network: physnet3
             # sriov_unsafe_interrupts: False
-        {%- elif cookiecutter.openstack_nfv_dpdk_enabled == 'True' %}
+        {%- endif %}
+        {%- if cookiecutter.get('openstack_nfv_dpdk_enabled', 'False') == 'True' %}
         {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
             # compute_vrouter_dpdk_mac_address: 00:1b:21:87:21:99
             # compute_vrouter_dpdk_pci: "'0000:05:00.1'"

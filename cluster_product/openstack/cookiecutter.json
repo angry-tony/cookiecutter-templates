@@ -18,9 +18,6 @@
 
     "stacklight_enabled"                        : "True",
 
-    "dns_server01"                              : "8.8.8.8",
-    "dns_server02"                              : "8.8.4.4",
-
     "openstack_version"                         : "mitaka",
 
     "openstack_proxy_address"                   : "10.167.4.80",
@@ -67,7 +64,7 @@
     "openstack_telemetry_node03_hostname"       : "mdb03",
 
     "openstack_compute_rack01_sigle_subnet"     : "10.167.4",
-    "openstack_compute_rack01_tenant_subnet "   : "10.167.6",
+    "openstack_compute_rack01_tenant_subnet"    : "10.167.6",
     "openstack_compute_rack01_hostname"         : "cmp",
 
     "openstack_gateway_node01_address"          : "10.167.4.224",
