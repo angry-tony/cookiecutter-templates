@@ -1,3 +1,4 @@
+{%- if cookiecutter.openstack_network_engine == 'ovs' %}
 classes:
 - system.linux.system.repo.mcp.openstack
 - system.linux.system.repo.mcp.extra
@@ -78,3 +79,4 @@ parameters:
           bridge: br-prv
           peer: floating-to-prv
         {%- endif %}
+{%- endif %}

@@ -3,7 +3,7 @@ classes:
 {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
 - system.linux.system.repo.mcp.contrail
 {%- endif %}
-{%- if cookiecutter.openstack_nova_compute_nfv_req_enabled == 'True' %}
+{%- if cookiecutter.get('openstack_nova_compute_nfv_req_enabled', 'False') == 'True' %}
 - system.nova.compute.nfv.hugepages
 - system.nova.compute.nfv.cpu_pinning
 {%- endif %}
@@ -37,7 +37,7 @@ parameters:
   linux:
     network:
       interface:
-  {%- if not cookiecutter.openstack_nfv_dpdk_enabled == 'True' %}
+  {%- if not cookiecutter.get('openstack_nfv_dpdk_enabled', 'False') == 'True' %}
         eth1:
           mtu: 9000
           enabled: true

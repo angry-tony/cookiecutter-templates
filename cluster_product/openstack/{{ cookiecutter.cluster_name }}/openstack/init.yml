@@ -31,7 +31,7 @@ parameters:
 
     neutron_l3_ha: True
     {%- endif %}
-    {%- if cookiecutter.openstack_nfv_dpdk_enabled == 'True'  %}
+    {%- if cookiecutter.get('openstack_nfv_dpdk_enabled', 'False') == 'True'  %}
     compute_dpdk_driver: uio
     compute_ovs_pmd_cpu_mask: "0x6"
     compute_ovs_dpdk_socket_mem: "1024"
@@ -45,12 +45,12 @@ parameters:
     neutron_tenant_network_types: "flat,vxlan"
     {%- endif %}
 {%- elif cookiecutter.openstack_network_engine == 'opencontrail' %}
-    {%- if cookiecutter.openstack_nfv_dpdk_enabled == 'True' %}
+    {%- if cookiecutter.get('openstack_nfv_dpdk_enabled', 'False') == 'True' %}
     compute_vrouter_taskset: "-c 1,2"
     compute_vrouter_socket_mem: "1024"
     {%- endif %}
 {%- endif %}
-{%- if cookiecutter.openstack_nova_compute_nfv_req_enabled == 'True' or cookiecutter.openstack_nfv_dpdk_enabled== 'True' %}
+{%- if cookiecutter.get('openstack_nova_compute_nfv_req_enabled', 'False') == 'True' or cookiecutter.get('openstack_nfv_dpdk_enabled', 'False') == 'True' %}
     compute_hugepages_size: 1G
     nova_cpu_pinning: {{ cookiecutter.openstack_nova_cpu_pinning }}
     compute_hugepages_count: {{ cookiecutter.openstack_nova_compute_hugepages_count }}
@@ -58,7 +58,7 @@ parameters:
     compute_kernel_isolcpu: ${_param:nova_cpu_pinning}
 {%- endif %}
 
-{%- if cookiecutter.openstack_nfv_sriov_enabled == 'True' %}
+{%- if cookiecutter.get('openstack_nfv_sriov_enabled', 'False') == 'True' %}
     sriov_nic01_device_name: {{ cookiecutter.openstack_nfv_sriov_pf_nic }}
     sriov_nic01_numvfs: {{ cookiecutter.openstack_nfv_sriov_numvfs }}
     sriov_nic01_physical_network: {{ cookiecutter.openstack_nfv_sriov_network }}
