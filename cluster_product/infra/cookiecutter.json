@@ -1,5 +1,7 @@
 {
     "cluster_name"                              : "deployment_name",
+    "cluster_domain"                            : "deploy-name.local",
+    "public_host"                               : "${_param:openstack_proxy_address}",
     "reclass_repository"                        : "https://github.com/Mirantis/mk-lab-salt-model.git",
 
     "deploy_network_netmask"                    : "255.255.255.0",
@@ -38,5 +40,7 @@
     "k8s_enabled"                               : "False",
 
     "openstack_nfv_dpdk_enabled"                : "False",
-    "openstack_nfv_sriov_enabled"               : "False"
+    "openstack_nfv_sriov_enabled"               : "False",
+
+    "openstack_compute_count"                   : "100"
 }

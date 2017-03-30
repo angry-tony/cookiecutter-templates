@@ -28,21 +28,15 @@ parameters:
     cluster_node03_hostname: ctl03
     cluster_node03_address: ${_param:openstack_control_node03_address}
 {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
-    opencontrail_compute_address: ${_param:single_address}
+    opencontrail_compute_address: ${_param:tenant_address}
 {%- endif %}
     nova_vncproxy_url: https://${_param:cluster_public_host}:6080
-    deploy_nic: {{ cookiecutter.compute_deploy_nic }}
     primary_first_nic: {{ cookiecutter.compute_primary_first_nic }}
     primary_second_nic: {{ cookiecutter.compute_primary_second_nic }}
 
   linux:
     network:
       interface:
-        eth0:
-          enabled: true
-          type: eth
-          proto: manual
-          name: ${_param:deploy_nic}
   {%- if not cookiecutter.openstack_nfv_dpdk_enabled == 'True' %}
         eth1:
           mtu: 9000
@@ -89,7 +83,7 @@ parameters:
         br-mesh:
           enabled: true
           type: bridge
-          address: ${_param:data_address}
+          address: ${_param:tenant_address}
           netmask: ${_param:data_network_netmask}
           use_interfaces:
           - bond0.${_param:data_vlan}
@@ -146,7 +140,7 @@ parameters:
           bridge: br-floating
           proto: static
           ovs_options: tag=${_param:data_vlan}
-          address: ${_param:data_address}
+          address: ${_param:tenant_address}
           netmask: ${_param:data_network_netmask}
         {%- elif cookiecutter.openstack_ovs_encapsulation_type == 'vlan' %}
         br-prv:
@@ -200,7 +194,7 @@ parameters:
           enabled: true
           type: eth
           mtu: 9000
-          address: ${_param:data_address}
+          address: ${_param:tenant_address}
           netmask: ${_param:data_network_netmask}
           gateway: ${_param:data_network_gateway}
           pre_up_cmds:
@@ -212,3 +206,4 @@ parameters:
           - ${_param:dns_server02}
     {%- endif %}
   {%- endif %}
+    

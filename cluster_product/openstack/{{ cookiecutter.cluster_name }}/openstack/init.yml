@@ -5,7 +5,7 @@ parameters:
   _param:
     openstack_region: RegionOne
     admin_email: root@localhost
-
+    openstack_version: {{ cookiecutter.openstack_version }}
 {%- if cookiecutter.openstack_network_engine == 'ovs' %}
     ##Neutron osv/nodvr + dpdk
     neutron_global_physnet_mtu: 1500
@@ -169,18 +169,9 @@ parameters:
     openstack_gateway_node03_hostname: {{ cookiecutter.openstack_gateway_node03_hostname }}
 
     # OpenStack Compute
-    openstack_compute_node01_single_address: {{ cookiecutter.openstack_compute_node01_single_address }}
-    openstack_compute_node02_single_address: {{ cookiecutter.openstack_compute_node02_single_address }}
-    openstack_compute_node03_single_address: {{ cookiecutter.openstack_compute_node03_single_address }}
-    openstack_compute_node01_control_address: {{ cookiecutter.openstack_compute_node01_control_address }}
-    openstack_compute_node02_control_address: {{ cookiecutter.openstack_compute_node02_control_address }}
-    openstack_compute_node03_control_address: {{ cookiecutter.openstack_compute_node03_control_address }}
-    openstack_compute_node01_data_address: {{ cookiecutter.openstack_compute_node01_data_address }}
-    openstack_compute_node02_data_address: {{ cookiecutter.openstack_compute_node02_data_address }}
-    openstack_compute_node03_data_address: {{ cookiecutter.openstack_compute_node03_data_address }}
-    openstack_compute_node01_hostname: {{ cookiecutter.openstack_compute_node01_hostname }}
-    openstack_compute_node02_hostname: {{ cookiecutter.openstack_compute_node02_hostname }}
-    openstack_compute_node03_hostname: {{ cookiecutter.openstack_compute_node03_hostname }}
+    openstack_compute_rack01_sigle_subnet: {{ cookiecutter.openstack_compute_rack01_sigle_subnet }}
+    openstack_compute_rack01_tenant_subnet: {{ cookiecutter.openstack_compute_rack01_tenant_subnet }}
+    openstack_compute_rack01_hostname: {{ cookiecutter.openstack_compute_rack01_hostname }}
 
     # openstack service hostnames
     openstack_proxy_hostname: {{ cookiecutter.openstack_proxy_hostname }}
@@ -310,21 +301,6 @@ parameters:
           names:
           - ${_param:openstack_telemetry_node03_hostname}
           - ${_param:openstack_telemetry_node03_hostname}.${_param:cluster_domain}
-        cmp01:
-          address: ${_param:openstack_compute_node01_control_address}
-          names:
-          - ${_param:openstack_compute_node01_hostname}
-          - ${_param:openstack_compute_node01_hostname}.${_param:cluster_domain}
-        cmp02:
-          address: ${_param:openstack_compute_node02_control_address}
-          names:
-          - ${_param:openstack_compute_node02_hostname}
-          - ${_param:openstack_compute_node02_hostname}.${_param:cluster_domain}
-        cmp03:
-          address: ${_param:openstack_compute_node03_control_address}
-          names:
-          - ${_param:openstack_compute_node03_hostname}
-          - ${_param:openstack_compute_node03_hostname}.${_param:cluster_domain}
 {%- if cookiecutter.openstack_network_engine == 'ovs' %}
         gtw01:
           address: ${_param:openstack_gateway_node01_address}
