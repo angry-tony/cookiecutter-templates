@@ -109,10 +109,6 @@ parameters:
           bridge: br_mgm
         eth1:
           bridge: br_ctl
-        {%- if cookiecutter.storage_network_enabled == 'True' %}
-        eth0:
-          bridge: br_stor
-        {%- endif %}
   linux:
     network:
       interface:
@@ -138,11 +134,11 @@ parameters:
           proto: static
           type: bridge
           address: ${_param:deploy_address}
-          netmask: {{ cookiecutter.deploy_network_netmask }}
-          gateway: {{ cookiecutter.deploy_network_gateway }}
+          netmask: ${_param:deploy_network_netmask}
+          gateway: ${_param:deploy_network_gateway}
           name_servers:
-          - {{ cookiecutter.dns_server01 }}
-          - {{ cookiecutter.dns_server02 }}
+          - ${_param:dns_server01}
+          - ${_param:dns_server02}
           use_interfaces:
           - ${_param:deploy_nic}
         bond0:
@@ -155,7 +151,7 @@ parameters:
           slaves: ${_param:primary_first_nic} ${_param:primary_second_nic}
           mode: active-backup
         bond0.1:
-          name: bond0.{{ cookiecutter.control_vlan }}
+          name: bond0.${_param:control_vlan}
           enabled: true
           proto: manual
           type: vlan
@@ -166,26 +162,9 @@ parameters:
           type: bridge
           proto: static
           address: ${_param:single_address}
-          netmask: {{ cookiecutter.control_network_netmask }}
+          netmask: ${_param:control_network_netmask}
           use_interfaces:
-          - bond0.{{ cookiecutter.control_vlan }}
-        {%- if cookiecutter.storage_network_enabled == 'True' %}
-        bond0.2:
-          name: bond0.{{ cookiecutter.storage_vlan }}
-          enabled: true
-          proto: manual
-          type: vlan
-          use_interfaces:
-          - bond0
-        br_stor:
-          enabled: true
-          address: ${_param:storage_address}
-          netmask: {{ cookiecutter.storage_network_netmask }}
-          type: bridge
-          proto: static
-          use_interfaces:
-          - bond0.{{ cookiecutter.storage_vlan }}
-        {%- endif %}
+          - bond0.${_param:control_vlan}
   #   system:
   #     package:
   #       linux-image-4.8.0-39-generic:
