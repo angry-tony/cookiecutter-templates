@@ -22,10 +22,16 @@ parameters:
     infra_kvm_node02_hostname: {{ cookiecutter.infra_kvm02_hostname }}
     infra_kvm_node03_hostname: {{ cookiecutter.infra_kvm03_hostname }}
 
-    {%- if cookiecutter.storage_network_enabled == 'True' %}
-    infra_compute_node01_storage_address: {{ cookiecutter.infra_kvm01_storage_address }}
-    infra_compute_node02_storage_address: {{ cookiecutter.infra_kvm02_storage_address }}
-    infra_compute_node03_storage_address: {{ cookiecutter.infra_kvm03_storage_address }}
+    control_network_netmask: {{ cookiecutter.control_network_netmask }}
+    data_network_netmask: {{ cookiecutter.data_network_netmask }}
+    control_vlan: {{ cookiecutter.control_vlan }}
+    data_vlan: {{ cookiecutter.data_vlan }}
+    dns_server01: {{ cookiecutter.dns_server01 }}
+    dns_server02: {{ cookiecutter.dns_server02 }}
+    deploy_network_netmask: {{ cookiecutter.deploy_network_netmask }}
+    deploy_network_gateway: {{ cookiecutter.deploy_network_gateway }}
+    {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
+    data_network_gateway: {{ cookiecutter.data_network_gateway }}
     {%- endif %}
 
   linux:

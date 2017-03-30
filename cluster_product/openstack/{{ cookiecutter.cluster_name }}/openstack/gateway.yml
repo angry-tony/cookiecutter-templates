@@ -1,0 +1,86 @@
+classes:
+- system.linux.system.repo.mcp.openstack
+- system.linux.system.repo.mcp.extra
+- system.linux.system.repo.saltstack.xenial
+- system.neutron.gateway.cluster
+- cluster.{{ cookiecutter.cluster_name }}
+parameters:
+  _param:
+    interface_mtu: 1500
+    cluster_vip_address: ${_param:openstack_control_address}
+
+    linux_system_codename: xenial
+    keepalived_vip_interface: br-ctl
+    keepalived_vip_virtual_router_id: 69
+    deploy_nic: {{ cookiecutter.gateway_deploy_nic }}
+    primary_first_nic: {{ cookiecutter.gateway_primary_first_nic }}
+    primary_second_nic: {{ cookiecutter.gateway_primary_second_nic }}
+  linux:
+    network:
+      bridge: openvswitch
+      interface:
+        eth0:
+          enabled: true
+          type: eth
+          proto: dhcp
+          name: ${_param:deploy_nic}
+        eth1:
+          enabled: true
+          type: slave
+          proto: manual
+          name: ${_param:primary_first_nic}
+          master: bond0
+        eth2:
+          enabled: true
+          type: slave
+          proto: manual
+          name: ${_param:primary_second_nic}
+          master: bond0
+        bond0:
+          enabled: true
+          proto: manual
+          ovs_bridge: br-floating
+          ovs_type: OVSPort
+          type: bond
+          use_interfaces:
+          - ${_param:primary_first_nic}
+          - ${_param:primary_second_nic}
+          slaves: ${_param:primary_first_nic} ${_param:primary_second_nic}
+          mode: active-backup
+        br-floating:
+          enabled: true
+          type: ovs_bridge
+        br-ctl:
+          enabled: true
+          type: ovs_port
+          bridge: br-floating
+          proto: static
+          ovs_options: tag=${_param:control_vlan}
+          address: ${_param:single_address}
+          netmask: ${_param:control_network_netmask}
+        {%- if cookiecutter.openstack_ovs_encapsulation_type == 'vxlan' %}
+        br-mesh:
+          enabled: true
+          type: ovs_port
+          bridge: br-floating
+          proto: static
+          ovs_options: tag=${_param:data_vlan}
+          address: ${_param:data_address}
+          netmask: ${_param:data_network_netmask}
+        {%- elif cookiecutter.openstack_ovs_encapsulation_type == 'vlan' %}
+        br-prv:
+          enabled: true
+          type: ovs_bridge
+        floating-to-prv:
+          enabled: true
+          type: ovs_port
+          port_type: patch
+          bridge: br-floating
+          peer: prv-to-floating
+        prv-to-floating:
+          enabled: true
+          type: ovs_port
+          port_type: patch
+          bridge: br-prv
+          peer: floating-to-prv
+        {%- endif %}
