@@ -1,5 +1,5 @@
 classes:
-- system.linux.system.repo.tcp_salt
+- system.linux.system.repo.mcp.salt
 - system.openssh.client.lab
 - system.salt.master.pkg
 - system.salt.minion.ca.salt_master
@@ -17,6 +17,7 @@ parameters:
     deploy_address: ${_param:infra_config_deploy_address}
     salt_master_host: ${_param:infra_config_deploy_address}
     linux_system_codename: xenial
+    apt_mk_version: nightly
   reclass:
     storage:
       node:
