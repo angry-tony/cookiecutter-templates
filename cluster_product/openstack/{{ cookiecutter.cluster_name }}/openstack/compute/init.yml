@@ -1,5 +1,6 @@
 classes:
 - system.linux.system.repo.mcp.openstack
+- system.linux.system.repo.mcp.extra
 {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
 - system.linux.system.repo.mcp.contrail
 {%- endif %}
