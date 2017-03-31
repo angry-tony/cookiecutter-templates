@@ -3,6 +3,7 @@ classes:
 - system.linux.system.repo.elasticsearch
 - system.linux.system.repo.grafana
 - system.linux.system.repo.saltstack.xenial
+- system.linux.system.repo.kibana
 - system.collectd.remote_client.cluster
 - system.heka.remote_collector.cluster
 - system.heka.aggregator.cluster

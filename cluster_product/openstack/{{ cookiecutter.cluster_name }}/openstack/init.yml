@@ -10,9 +10,9 @@ parameters:
     ##Neutron osv/nodvr + dpdk
     neutron_global_physnet_mtu: 1500
     neutron_external_mtu: 1500
-    neutron_compute_external_access: False
 
     {%- if cookiecutter.openstack_ovs_dvr_enabled == 'True' %}
+    neutron_compute_external_access: True
     neutron_control_dvr: True
     neutron_gateway_dvr: True
     neutron_compute_dvr: True
@@ -22,6 +22,7 @@ parameters:
 
     neutron_l3_ha: False
     {%- else %}
+    neutron_compute_external_access: False
     neutron_control_dvr: False
     neutron_gateway_dvr: False
     neutron_compute_dvr: False
