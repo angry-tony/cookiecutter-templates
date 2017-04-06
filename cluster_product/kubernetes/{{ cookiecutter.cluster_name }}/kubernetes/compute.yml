@@ -15,7 +15,7 @@ parameters:
       network:
         etcd:
           ssl:
-            enabled: true
+            enabled: {{ cookiecutter.etcd_ssl }}
         image: {{ cookiecutter.calico_image }}
         calicoctl:
           image: {{ cookiecutter.calicoctl_image }}

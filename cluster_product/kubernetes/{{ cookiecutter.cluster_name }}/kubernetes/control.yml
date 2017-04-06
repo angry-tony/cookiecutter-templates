@@ -16,7 +16,7 @@ parameters:
       source:
         engine: docker_hybrid
       ssl:
-        enabled: true
+        enabled: {{ cookiecutter.etcd_ssl }}
       setup:
         calico:
           key: /calico/v1/ipam/v4/pool/${_param:calico_private_network}-${_param:calico_private_netmask}
@@ -25,11 +25,11 @@ parameters:
     master:
       etcd:
         ssl:
-          enabled: true
+          enabled: {{ cookiecutter.etcd_ssl }}
       network:
         etcd:
           ssl:
-            enabled: true
+            enabled: {{ cookiecutter.etcd_ssl }}
       namespace:
         netchecker:
           enabled: true

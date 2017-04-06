@@ -1,5 +1,5 @@
 {
-    "cluster_name"				 : "deployment_name",
+    "cluster_name"                               : "deployment_name",
 
     "kubernetes_control_address"                 : "10.167.4.10",
     "kubernetes_control_node01_address"          : "10.167.4.11",
@@ -16,20 +16,21 @@
     "kubernetes_compute_node01_deploy_address"   : "10.167.5.101",
     "kubernetes_compute_node02_deploy_address"   : "10.167.5.102",
 
-    "cfg01_name"                                : "cfg01",
-    "ctl01_name"                                : "ctl01",
-    "ctl02_name"                                : "ctl02",
-    "ctl03_name"                                : "ctl03",
-    "ctl_name"                                  : "ctl",
-    "cmp01_name"                                : "cmp01",
-    "cmp02_name"                                : "cmp02",
+    "cfg01_name"                                 : "cfg01",
+    "ctl01_name"                                 : "ctl01",
+    "ctl02_name"                                 : "ctl02",
+    "ctl03_name"                                 : "ctl03",
+    "ctl_name"                                   : "ctl",
+    "cmp01_name"                                 : "cmp01",
+    "cmp02_name"                                 : "cmp02",
 
-    "calico_network"                            : "192.168.0.0",
-    "calico_netmask"                            : "16",
-    "calico_enable_nat"                         : "true",
+    "calico_network"                             : "192.168.0.0",
+    "calico_netmask"                             : "16",
+    "calico_enable_nat"                          : "true",
 
-    "hyperkube_image"                           : "docker-prod-virtual.docker.mirantis.net/mirantis/kubernetes/hyperkube-amd64:v1.4.6-6",
-    "calico_cni_image"                          : "docker-prod-virtual.docker.mirantis.net/mirantis/projectcalico/calico/cni:latest",
-    "calico_image"                              : "docker-prod-virtual.docker.mirantis.net/mirantis/projectcalico/calico/node:latest",
-    "calicoctl_image"                           : "docker-prod-virtual.docker.mirantis.net/mirantis/projectcalico/calico/ctl:latest"
+    "hyperkube_image"                            : "docker-prod-virtual.docker.mirantis.net/mirantis/kubernetes/hyperkube-amd64:v1.4.6-6",
+    "calico_cni_image"                           : "docker-prod-virtual.docker.mirantis.net/mirantis/projectcalico/calico/cni:latest",
+    "calico_image"                               : "docker-prod-virtual.docker.mirantis.net/mirantis/projectcalico/calico/node:latest",
+    "calicoctl_image"                            : "docker-prod-virtual.docker.mirantis.net/mirantis/projectcalico/calico/ctl:latest",
+    "etcd_ssl"                                   : "true"
 }
