@@ -7,6 +7,9 @@ classes:
 - system.openssh.server.team.tcpcloud
 - system.openssh.server.team.mcp_qa
 - cluster.{{ cookiecutter.cluster_name }}.infra
+{%- if cookiecutter.kubernetes_enabled == 'True' %}
+- cluster.{{ cookiecutter.cluster_name }}.kubernetes
+{%- endif %}
 {%- if cookiecutter.openstack_enabled == 'True' %}
 - cluster.{{ cookiecutter.cluster_name }}.openstack
 {%- endif %}
@@ -24,7 +27,7 @@ parameters:
   _param:
     salt_control_trusty_image: http://apt-mk.mirantis.com/images/ubuntu-14-04-x64-mcp1.0.qcow2
     salt_control_xenial_image: http://apt-mk.mirantis.com/images/ubuntu-16-04-x64-mcp1.0.qcow2
-    
+
     # infra service addresses
     infra_config_hostname: {{ cookiecutter.salt_master_hostname }}
     infra_config_address: {{ cookiecutter.salt_master_address}}
