@@ -11,7 +11,6 @@ classes:
 - system.grafana.server.single
 - system.grafana.client.single
 - system.nagios.server.cluster
-- system.haproxy.proxy.listen.stacklight.elasticsearch
 - system.haproxy.proxy.listen.stacklight.kibana
 - system.haproxy.proxy.listen.stacklight.grafana
 - service.haproxy.proxy.single
