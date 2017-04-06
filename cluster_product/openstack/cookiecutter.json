@@ -3,7 +3,7 @@
 
     "openstack_network_engine"                  : "opencontrail",
     "openstack_ovs_dvr_enabled"                 : "False",
-    
+
     "openstack_ovs_encapsulation_type"          : "vxlan",
     "openstack_ovs_encapsulation_vlan_range"    : "2416:2420",
 

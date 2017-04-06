@@ -1,10 +1,5 @@
 {
-    "cluster_name"                              : "deployment_name",
-    "cluster_domain"                            : "deploy-name.local",
-    "reclass_repository"                        : "https://github.com/Mirantis/mk-lab-salt-model.git",
-
-    "salt_master_ip"                            : "10.167.4.90",
-    "salt_master_management_ip"                 : "10.167.5.90",
+    "cluster_name"				 : "deployment_name",
 
     "kubernetes_control_address"                 : "10.167.4.10",
     "kubernetes_control_node01_address"          : "10.167.4.11",
