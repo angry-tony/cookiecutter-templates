@@ -29,6 +29,10 @@ parameters:
         etcd:
           ssl:
             enabled: {{ cookiecutter.etcd_ssl }}
+        {%- if cookiecutter.stacklight_enabled == 'True' %}
+        prometheus:
+          enabled: true
+        {%- endif %}
       namespace:
         netchecker:
           enabled: true
