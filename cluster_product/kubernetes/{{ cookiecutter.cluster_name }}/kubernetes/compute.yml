@@ -21,6 +21,10 @@ parameters:
           image: {{ cookiecutter.calicoctl_image }}
         cni:
           image: {{ cookiecutter.calico_cni_image }}
+        {%- if cookiecutter.stacklight_enabled == 'True' %}
+        prometheus:
+          enabled: true
+        {%- endif %}
     common:
       hyperkube:
         image: {{ cookiecutter.hyperkube_image }}
