@@ -2,6 +2,7 @@ classes:
 - system.linux.system.repo.ubuntu
 - system.linux.system.repo.mcp.openstack
 - system.linux.system.repo.saltstack.trusty
+- system.glusterfs.client.volume.salt_pki
 - system.nginx.server.single
 {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
 - system.nginx.server.proxy.opencontrail_web
@@ -10,7 +11,8 @@ classes:
 - system.nginx.server.proxy.openstack_vnc
 - system.nginx.server.proxy.openstack_web
 - system.horizon.server.single
-- system.salt.minion.cert.proxy
+- system.salt.minion.cert.proxy.openstack
+- system.salt.minion.cert.proxy.pki
 - system.sphinx.server.doc.reclass
 - service.keepalived.cluster.single
 - cluster.{{ cookiecutter.cluster_name }}
