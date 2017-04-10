@@ -1,5 +1,5 @@
 classes:
-- cluster.{{ cookiecutter.cluster_name }}
+- cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   linux:
     network:

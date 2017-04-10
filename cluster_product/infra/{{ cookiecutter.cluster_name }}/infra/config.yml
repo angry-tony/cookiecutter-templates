@@ -30,7 +30,7 @@ classes:
 {%- if cookiecutter.kubernetes_enabled == 'True' %}
 - system.reclass.storage.system.kubernetes_control_cluster
 {%- endif %}
-- cluster.{{ cookiecutter.cluster_name }}
+- cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
     salt_master_base_environment: prd

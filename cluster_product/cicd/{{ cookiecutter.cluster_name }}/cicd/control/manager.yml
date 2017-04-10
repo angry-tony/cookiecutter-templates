@@ -1,4 +1,4 @@
 classes:
   - system.docker.swarm.manager
-  - cluster.{{ cookiecutter.cluster_name }}
+  - cluster.{{ cookiecutter.cluster_name }}.infra
   - cluster.{{ cookiecutter.cluster_name }}.cicd.control

@@ -3,4 +3,4 @@ classes:
 - system.nginx.server.proxy.kibana_web
 - system.nginx.server.proxy.nagios_web
 - system.salt.minion.cert.proxy
-- cluster.{{ cookiecutter.cluster_name }}
+- cluster.{{ cookiecutter.cluster_name }}.infra

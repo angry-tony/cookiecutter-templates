@@ -11,7 +11,7 @@ classes:
 - system.haproxy.proxy.listen.stacklight.influxdb
 - service.haproxy.proxy.single
 - system.keepalived.cluster.instance.stacklight_telemetry_vip
-- cluster.{{ cookiecutter.cluster_name }}
+- cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
     keepalived_stacklight_telemetry_vip_address: ${_param:stacklight_telemetry_address}

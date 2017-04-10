@@ -9,7 +9,7 @@ classes:
 - system.haproxy.proxy.listen.elasticsearch
 - service.haproxy.proxy.single
 - system.keepalived.cluster.instance.stacklight_log_vip
-- cluster.{{ cookiecutter.cluster_name }}
+- cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
     keepalived_stacklight_log_vip_address: ${_param:stacklight_log_address}

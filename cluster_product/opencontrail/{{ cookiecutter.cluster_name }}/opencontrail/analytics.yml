@@ -8,7 +8,7 @@ classes:
 - system.opencontrail.client.resource.analytics_node
 - system.opencontrail.client.resource.database_node
 - system.opencontrail.control.analytics
-- cluster.{{ cookiecutter.cluster_name }}
+- cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
     keepalived_vip_interface: eth1
