@@ -6,7 +6,9 @@ classes:
 - system.openssh.server.team.lab
 - system.openssh.server.team.tcpcloud
 - system.openssh.server.team.mcp_qa
-- cluster.{{ cookiecutter.cluster_name }}.infra
+{%- if cookiecutter.kubernetes_enabled == 'True' %}
+- cluster.{{ cookiecutter.cluster_name }}.kubernetes
+{%- endif %}
 {%- if cookiecutter.openstack_enabled == 'True' %}
 - cluster.{{ cookiecutter.cluster_name }}.openstack
 {%- endif %}
@@ -22,9 +24,11 @@ classes:
 {%- endif %}
 parameters:
   _param:
+    {%- if cookiecutter.kubernetes_enabled != 'True' %}
     salt_control_trusty_image: http://apt-mk.mirantis.com/images/ubuntu-14-04-x64-mcp1.0.qcow2
     salt_control_xenial_image: http://apt-mk.mirantis.com/images/ubuntu-16-04-x64-mcp1.0.qcow2
-    
+    {%- endif %}
+
     # infra service addresses
     infra_config_hostname: {{ cookiecutter.salt_master_hostname }}
     infra_config_address: {{ cookiecutter.salt_master_address}}
@@ -34,6 +38,7 @@ parameters:
     cluster_name: {{ cookiecutter.cluster_name }}
     cluster_public_host: {{ cookiecutter.public_host }}
 
+    {%- if cookiecutter.kubernetes_enabled != 'True' %}
     infra_kvm_address: {{ cookiecutter.infra_kvm_vip_address }}
     infra_kvm_node01_address: {{ cookiecutter.infra_kvm01_control_address }}
     infra_kvm_node02_address: {{ cookiecutter.infra_kvm02_control_address }}
@@ -49,13 +54,11 @@ parameters:
     tenant_network_netmask: {{ cookiecutter.tenant_network_netmask }}
     control_vlan: {{ cookiecutter.control_vlan }}
     tenant_vlan: {{ cookiecutter.tenant_vlan }}
+
     dns_server01: {{ cookiecutter.dns_server01 }}
     dns_server02: {{ cookiecutter.dns_server02 }}
     deploy_network_netmask: {{ cookiecutter.deploy_network_netmask }}
     deploy_network_gateway: {{ cookiecutter.deploy_network_gateway }}
-    {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
-    tenant_network_gateway: {{ cookiecutter.tenant_network_gateway }}
-    {%- endif %}
 
     linux_dhcp_interface:
       enabled: true
@@ -71,6 +74,12 @@ parameters:
       name_servers:
         - ${_param:dns_server01}
         - ${_param:dns_server02}
+    {%- endif %}
+
+    {%- if cookiecutter.openstack_enabled == 'True' and cookiecutter.openstack_network_engine == 'opencontrail' %}
+    tenant_network_gateway: {{ cookiecutter.tenant_network_gateway }}
+    {%- endif %}
+
 
   linux:
     network:
@@ -85,6 +94,8 @@ parameters:
           names:
           - cfg
           - cfg.${_param:cluster_domain}
+
+        {%- if not cookiecutter.kubernetes_enabled == 'True' %}
         kvm01:
           address: ${_param:infra_compute_node01_address}
           names:
@@ -100,6 +111,7 @@ parameters:
           names:
           - ${_param:infra_compute_node03_hostname}
           - ${_param:infra_compute_node03_hostname}.${_param:cluster_domain}
+        {%- endif %}
     system:
       name: ${_param:infra_config_hostname}
       domain: ${_param:cluster_domain}

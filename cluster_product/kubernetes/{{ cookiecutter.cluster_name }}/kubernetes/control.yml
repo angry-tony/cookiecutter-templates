@@ -5,7 +5,7 @@ classes:
 - system.salt.minion.cert.etcd_server
 - system.kubernetes.master.cluster
 - cluster.{{ cookiecutter.cluster_name }}.kubernetes.compute
-- cluster.{{ cookiecutter.cluster_name }}
+- cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
     keepalived_vip_interface: {{ cookiecutter.kubernetes_keepalived_vip_interface }}

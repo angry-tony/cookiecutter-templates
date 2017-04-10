@@ -15,7 +15,7 @@ classes:
 - system.salt.minion.cert.proxy.pki
 - system.sphinx.server.doc.reclass
 - service.keepalived.cluster.single
-- cluster.{{ cookiecutter.cluster_name }}
+- cluster.{{ cookiecutter.cluster_name }}.infra
 - cluster.{{ cookiecutter.cluster_name }}.openstack.dashboard
 {%- if cookiecutter.stacklight_enabled == 'True' %}
 - cluster.{{ cookiecutter.cluster_name }}.stacklight.proxy

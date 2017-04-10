@@ -37,7 +37,7 @@
     "openstack_enabled"                         : "True",
     "stacklight_enabled"                        : "True",
     "cicd_enabled"                              : "True",
-    "k8s_enabled"                               : "False",
+    "kubernetes_enabled"                        : "False",
 
     "openstack_nfv_dpdk_enabled"                : "False",
     "openstack_nfv_sriov_enabled"               : "False",
@@ -61,7 +61,7 @@
 
     "openstack_network_engine"                  : "ovs",
     "openstack_ovs_dvr_enabled"                 : "False",
-    
+
     "openstack_ovs_encapsulation_type"          : "vlan",
     "openstack_ovs_encapsulation_vlan_range"    : "2416:2420",
 

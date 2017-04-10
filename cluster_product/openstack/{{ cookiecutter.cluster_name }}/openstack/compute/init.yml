@@ -17,7 +17,7 @@ classes:
 - system.neutron.compute.cluster
 {%- endif %}
 - system.ceilometer.agent.cluster
-- cluster.{{ cookiecutter.cluster_name }}
+- cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
     cluster_vip_address: ${_param:openstack_control_address}

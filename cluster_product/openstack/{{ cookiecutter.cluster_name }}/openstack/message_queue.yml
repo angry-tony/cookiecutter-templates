@@ -4,7 +4,7 @@ classes:
 - system.linux.system.repo.saltstack.trusty
 - system.rabbitmq.server.cluster
 - system.rabbitmq.server.vhost.openstack
-- cluster.{{ cookiecutter.cluster_name }}
+- cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
     keepalived_vip_interface: eth1

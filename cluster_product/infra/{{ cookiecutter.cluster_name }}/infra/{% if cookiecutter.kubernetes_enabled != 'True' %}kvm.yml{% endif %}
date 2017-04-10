@@ -24,7 +24,7 @@ classes:
 {%- if cookiecutter.cicd_enabled == 'True' %}
 - system.salt.control.cluster.cicd_control_cluster
 - cluster.{{ cookiecutter.cluster_name }}.cicd.gluster
-- cluster.{{ cookiecutter.cluster_name }}
+- cluster.{{ cookiecutter.cluster_name }}.infra
 {%- endif %}
 parameters:
   _param:

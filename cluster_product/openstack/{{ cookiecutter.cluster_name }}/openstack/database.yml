@@ -13,7 +13,7 @@ classes:
 - system.galera.server.database.keystone
 - system.galera.server.database.nova
 - system.galera.server.database.neutron
-- cluster.{{ cookiecutter.cluster_name }}
+- cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
     keepalived_vip_interface: eth1

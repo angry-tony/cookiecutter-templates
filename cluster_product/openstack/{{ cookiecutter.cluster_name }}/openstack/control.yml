@@ -22,7 +22,7 @@ classes:
 - system.glusterfs.client.cluster
 - system.glusterfs.client.volume.glance
 - system.glusterfs.client.volume.keystone
-- cluster.{{ cookiecutter.cluster_name }}
+- cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
     keepalived_vip_interface: eth1
