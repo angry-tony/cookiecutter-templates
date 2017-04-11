@@ -1,5 +1,6 @@
 classes:
 - system.linux.system.repo.mcp.salt
+- system.linux.system.repo.ubuntu
 - system.openssh.client.lab
 - system.salt.master.pkg
 - system.salt.minion.ca.salt_master
