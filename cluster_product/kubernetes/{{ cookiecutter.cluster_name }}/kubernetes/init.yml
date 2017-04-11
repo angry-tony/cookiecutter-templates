@@ -3,6 +3,10 @@
 {%- endmacro %}
 parameters:
   _param:
+    salt_minion_ca_host: ${_param:infra_config_hostname}.${_param:cluster_domain}
+    salt_minion_ca_authority: salt_master_ca
+
+    # kubernetes settings
     kubernetes_admin_user: admin
     kubernetes_admin_password: {{ password(16) }}
     kubernetes_admin_token: {{ password(32) }}
@@ -12,9 +16,26 @@ parameters:
     kubernetes_controller-manager_token: {{ password(32) }}
     kubernetes_dns_token: {{ password(32) }}
     etcd_initial_token: {{ password(32) }}
+
+    # addresses and hostnames
     kubernetes_internal_api_address: 10.254.0.1
+    kubernetes_control_hostname: ctl
+    kubernetes_control_address: {{ cookiecutter.kubernetes_control_address }}
+    kubernetes_control_node01_hostname: {{ cookiecutter.kubernetes_control_node01_hostname }}
+    kubernetes_control_node02_hostname: {{ cookiecutter.kubernetes_control_node02_hostname }}
+    kubernetes_control_node03_hostname: {{ cookiecutter.kubernetes_control_node03_hostname }}
+    kubernetes_compute_node01_hostname: {{ cookiecutter.kubernetes_compute_node01_hostname }}
+    kubernetes_compute_node02_hostname: {{ cookiecutter.kubernetes_compute_node02_hostname }}
+    kubernetes_control_node01_address: {{ cookiecutter.kubernetes_control_node01_address }}
+    kubernetes_control_node02_address: {{ cookiecutter.kubernetes_control_node02_address }}
+    kubernetes_control_node03_address: {{ cookiecutter.kubernetes_control_node03_address }}
+    kubernetes_compute_node01_address: {{ cookiecutter.kubernetes_compute_node01_address }}
+    kubernetes_compute_node02_address: {{ cookiecutter.kubernetes_compute_node02_address }}
+
     cluster_vip_address: ${_param:kubernetes_control_address}
     cluster_local_address: ${_param:single_address}
+
+    # etcd stuff
     cluster_node01_hostname: ${_param:kubernetes_control_node01_hostname}
     cluster_node01_address: ${_param:kubernetes_control_node01_address}
     cluster_node01_port: 4001
@@ -24,8 +45,11 @@ parameters:
     cluster_node03_hostname: ${_param:kubernetes_control_node03_hostname}
     cluster_node03_address: ${_param:kubernetes_control_node03_address}
     cluster_node03_port: 4001
+
+    # calico
     calico_private_network: {{ cookiecutter.calico_network }}
     calico_private_netmask: {{ cookiecutter.calico_netmask }}
+
   linux:
     network:
       host:
@@ -50,12 +74,12 @@ parameters:
           - ${_param:kubernetes_control_node03_hostname}
           - ${_param:kubernetes_control_node03_hostname}.${_param:cluster_domain}
         cmp01:
-          address: ${_param:kubernetes_compute_node01_single_address}
+          address: ${_param:kubernetes_compute_node01_address}
           names:
           - ${_param:kubernetes_compute_node01_hostname}
           - ${_param:kubernetes_compute_node01_hostname}.${_param:cluster_domain}
         cmp02:
-          address: ${_param:kubernetes_compute_node02_single_address}
+          address: ${_param:kubernetes_compute_node02_address}
           names:
           - ${_param:kubernetes_compute_node02_hostname}
           - ${_param:kubernetes_compute_node02_hostname}.${_param:cluster_domain}

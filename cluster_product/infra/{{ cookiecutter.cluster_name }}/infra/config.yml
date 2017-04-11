@@ -29,6 +29,7 @@ classes:
 - system.reclass.storage.system.cicd_control_cluster
 {%- endif %}
 {%- if cookiecutter.kubernetes_enabled == 'True' %}
+- system.salt.minion.cert.k8s_server
 - system.reclass.storage.system.kubernetes_control_cluster
 {%- endif %}
 - cluster.{{ cookiecutter.cluster_name }}.infra
@@ -40,7 +41,6 @@ parameters:
     reclass_config_master: ${_param:infra_config_deploy_address}
     single_address: ${_param:infra_config_address}
     deploy_address: ${_param:infra_config_deploy_address}
-    salt_master_host: ${_param:infra_config_address}
     linux_system_codename: xenial
   reclass:
     storage:
@@ -60,35 +60,24 @@ parameters:
             linux_system_codename: xenial
         {%- endif %}
         {%- if cookiecutter.kubernetes_enabled == 'True' %}
-        kubernetes_control_node01:
-          params:
-            deploy_address: ${_param:kubernetes_control_node01_deploy_address}
-        kubernetes_control_node02:
-          params:
-            deploy_address: ${_param:kubernetes_control_node02_deploy_address}
-        kubernetes_control_node03:
-          params:
-            deploy_address: ${_param:kubernetes_control_node03_deploy_address}
         kubernetes_compute_node01:
           name: ${_param:kubernetes_compute_node01_hostname}
           domain: ${_param:cluster_domain}
           classes:
           - cluster.${_param:cluster_name}.kubernetes.compute
           params:
-            salt_master_host: ${_param:reclass_config_master}
+            salt_master_host: ${_param:infra_config_address}
             linux_system_codename: xenial
-            deploy_address: ${_param:kubernetes_compute_node01_deploy_address}
-            single_address: ${_param:kubernetes_compute_node01_single_address}
+            single_address: ${_param:kubernetes_compute_node01_address}
         kubernetes_compute_node02:
           name: ${_param:kubernetes_compute_node02_hostname}
           domain: ${_param:cluster_domain}
           classes:
           - cluster.${_param:cluster_name}.kubernetes.compute
           params:
-            salt_master_host: ${_param:reclass_config_master}
+            salt_master_host: ${_param:infra_config_address}
             linux_system_codename: xenial
-            deploy_address: ${_param:kubernetes_compute_node02_deploy_address}
-            single_address: ${_param:kubernetes_compute_node02_single_address}
+            single_address: ${_param:kubernetes_compute_node02_address}
         {%- endif %}
         {%- if cookiecutter.openstack_enabled == 'True' %}
         openstack_control_node01:

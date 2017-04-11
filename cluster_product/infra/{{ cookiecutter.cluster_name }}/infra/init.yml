@@ -11,9 +11,9 @@ classes:
 {%- endif %}
 {%- if cookiecutter.openstack_enabled == 'True' %}
 - cluster.{{ cookiecutter.cluster_name }}.openstack
-{%- endif %}
 {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
 - cluster.{{ cookiecutter.cluster_name }}.opencontrail
+{%- endif %}
 {%- endif %}
 {%- if cookiecutter.stacklight_enabled == 'True' %}
 - cluster.{{ cookiecutter.cluster_name }}.stacklight
