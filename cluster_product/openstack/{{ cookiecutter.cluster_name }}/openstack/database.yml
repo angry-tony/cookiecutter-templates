@@ -3,7 +3,7 @@ classes:
 - system.linux.system.repo.mcp.openstack
 - system.linux.system.repo.mcp.extra
 - system.galera.server.database.aodh
-- system.linux.system.repo.saltstack.trusty
+- system.linux.system.repo.saltstack.xenial
 - system.galera.server.cluster
 - system.galera.server.database.ceilometer
 - system.galera.server.database.cinder
@@ -16,7 +16,7 @@ classes:
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
-    keepalived_vip_interface: eth1
+    keepalived_vip_interface: ens3
     keepalived_vip_virtual_router_id: 80
     galera_server_cluster_name: openstack_cluster
     cluster_vip_address: ${_param:openstack_database_address}
@@ -30,4 +30,4 @@ parameters:
   linux:
     network:
       interface:
-        eth1: ${_param:linux_single_interface}
+        ens3: ${_param:linux_single_interface}

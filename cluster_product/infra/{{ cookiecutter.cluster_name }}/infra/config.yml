@@ -85,9 +85,25 @@ parameters:
         openstack_control_node01:
           classes:
           - cluster.${_param:cluster_name}.openstack.control_init
+          params:
+            linux_system_codename: xenial
+        openstack_control_node02:
+          params:
+            linux_system_codename: xenial
+        openstack_control_node03:
+          params:
+            linux_system_codename: xenial
         openstack_database_node01:
           classes:
           - cluster.${_param:cluster_name}.openstack.database_init
+          params:
+            linux_system_codename: xenial
+        openstack_database_node02:
+          params:
+            linux_system_codename: xenial
+        openstack_database_node03:
+          params:
+            linux_system_codename: xenial
         stacklight_log_node01:
           classes:
           - system.elasticsearch.client.single
@@ -98,15 +114,27 @@ parameters:
         openstack_telemetry_node01:
           params:
             linux_system_codename: xenial
-            keepalived_vip_priority: 100
         openstack_telemetry_node02:
           params:
             linux_system_codename: xenial
-            keepalived_vip_priority: 101
         openstack_telemetry_node03:
           params:
             linux_system_codename: xenial
-            keepalived_vip_priority: 102
+        openstack_message_queue_node01:
+          params:
+            linux_system_codename: xenial
+        openstack_message_queue_node02:
+          params:
+            linux_system_codename: xenial
+        openstack_message_queue_node03:
+          params:
+            linux_system_codename: xenial
+        openstack_proxy_node01:
+          params:
+            linux_system_codename: xenial
+        openstack_proxy_node02:
+          params:
+            linux_system_codename: xenial
         stacklight_log_node01:
           classes:
           - system.elasticsearch.client.single

@@ -1,20 +1,22 @@
 classes:
+- service.haproxy.proxy.single
 - system.linux.system.repo.ubuntu
 - system.linux.system.repo.mcp.openstack
 - system.linux.system.repo.mcp.contrail
+- system.linux.system.repo.mcp.extra
 - system.linux.system.repo.saltstack.trusty
 - system.linux.system.repo.cassandra
-- system.neutron.control.opencontrail.cluster
 - system.opencontrail.control.control
 - system.opencontrail.client.cluster
 - system.opencontrail.client.resource.edge_routers
 - system.opencontrail.client.resource.control_node
 - system.opencontrail.client.resource.config_node
 - system.opencontrail.client.resource.database_node
-- system.ceilometer.client.neutron
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
+    openstack_version: mitaka
+    mcp_repo_version: 1.0
     keepalived_vip_interface: eth1
     keepalived_vip_virtual_router_id: 60
     cluster_vip_address: ${_param:opencontrail_control_address}
@@ -39,3 +41,13 @@ parameters:
           names:
           - ctl
           - ctl.${_param:cluster_domain}
+  opencontrail:
+    web:
+      network:
+        host: ${_param:openstack_control_address}
+    common:
+      network:
+        host: ${_param:openstack_control_address}
+    config:
+      network:
+        host: ${_param:openstack_control_address}

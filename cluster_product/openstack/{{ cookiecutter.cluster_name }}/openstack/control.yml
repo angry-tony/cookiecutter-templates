@@ -2,18 +2,22 @@ classes:
 - system.linux.system.repo.ubuntu
 - system.linux.system.repo.mcp.extra
 - system.linux.system.repo.mcp.openstack
-- system.linux.system.repo.saltstack.trusty
-- system.linux.system.repo.glusterfs
+- system.linux.system.repo.saltstack.xenial
+- system.linux.system.repo.mcp.contrail
 - system.memcached.server.single
 - system.ceilometer.client
-{%- if cookiecutter.openstack_network_engine == 'ovs' %}
 - system.ceilometer.client.neutron
+{%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
+- system.neutron.control.opencontrail.cluster
+{%- endif %}
+{%- if cookiecutter.openstack_network_engine == 'ovs' %}
 - system.neutron.control.openvswitch.cluster
 {%- if cookiecutter.get('openstack_nfv_sriov_enabled', 'False') == 'True' %}
 - system.neutron.control.openvswitch.sriov
 {%- endif %}
 {%- endif %}
 - system.keystone.server.cluster
+- system.keystone.server.wsgi
 - system.glance.control.cluster
 - system.nova.control.cluster
 - system.cinder.control.cluster
@@ -25,7 +29,7 @@ classes:
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
-    keepalived_vip_interface: eth1
+    keepalived_vip_interface: ens3
     keepalived_vip_virtual_router_id: 50
     cluster_vip_address: ${_param:openstack_control_address}
     cluster_local_address: ${_param:single_address}
@@ -39,4 +43,4 @@ parameters:
   linux:
     network:
       interface:
-        eth1: ${_param:linux_single_interface}
+        ens3: ${_param:linux_single_interface}

@@ -29,7 +29,3 @@ parameters:
     network:
       interface:
         ens3: ${_param:linux_single_interface}
-    system:
-      package:
-        apt-transport-https:
-          version: latest

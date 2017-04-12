@@ -1,4 +1,5 @@
 classes:
+- service.haproxy.proxy.single
 - system.linux.system.repo.ubuntu
 - system.linux.system.repo.mcp.openstack
 - system.linux.system.repo.mcp.contrail
@@ -11,6 +12,8 @@ classes:
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
+    openstack_version: mitaka
+    mcp_repo_version: 1.0
     keepalived_vip_interface: eth1
     keepalived_vip_virtual_router_id: 70
     cluster_vip_address: ${_param:opencontrail_analytics_address}

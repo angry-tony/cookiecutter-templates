@@ -1,5 +1,5 @@
 classes:
-- system.linux.system.repo.mcp10
+- system.linux.system.repo.mcp.openstack
 - system.linux.system.repo.ubuntu
 - service.keepalived.cluster.single
 - system.glusterfs.server.cluster
@@ -102,6 +102,28 @@ parameters:
             mdb02:
               image: ${_param:salt_control_xenial_image}
             mdb03:
+              image: ${_param:salt_control_xenial_image}
+            ctl01:
+              image: ${_param:salt_control_xenial_image}
+            ctl02:
+              image: ${_param:salt_control_xenial_image}
+            ctl03:
+              image: ${_param:salt_control_xenial_image}
+            dbs01:
+              image: ${_param:salt_control_xenial_image}
+            dbs02:
+              image: ${_param:salt_control_xenial_image}
+            dbs03:
+              image: ${_param:salt_control_xenial_image}
+            msg01:
+              image: ${_param:salt_control_xenial_image}
+            msg02:
+              image: ${_param:salt_control_xenial_image}
+            msg03:
+              image: ${_param:salt_control_xenial_image}
+            prx01:
+              image: ${_param:salt_control_xenial_image}
+            prx02:
               image: ${_param:salt_control_xenial_image}
   virt:
     nic:

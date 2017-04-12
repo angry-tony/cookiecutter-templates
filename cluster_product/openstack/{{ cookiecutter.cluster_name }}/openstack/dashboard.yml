@@ -13,4 +13,4 @@ parameters:
   linux:
     network:
       interface:
-        eth1: ${_param:linux_single_interface}
+        ens3: ${_param:linux_single_interface}

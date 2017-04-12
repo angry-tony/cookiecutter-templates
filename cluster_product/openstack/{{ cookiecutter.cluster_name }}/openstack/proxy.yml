@@ -1,7 +1,7 @@
 classes:
 - system.linux.system.repo.ubuntu
 - system.linux.system.repo.mcp.openstack
-- system.linux.system.repo.saltstack.trusty
+- system.linux.system.repo.saltstack.xenial
 - system.glusterfs.client.volume.salt_pki
 - system.nginx.server.single
 {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
@@ -22,7 +22,7 @@ classes:
 {%- endif %}
 parameters:
   _param:
-    keepalived_vip_interface: eth1
+    keepalived_vip_interface: ens3
     keepalived_vip_virtual_router_id: 240
     nginx_proxy_ssl:
       enabled: true
@@ -34,4 +34,4 @@ parameters:
   linux:
     network:
       interface:
-        eth1: ${_param:linux_single_interface}
+        ens3: ${_param:linux_single_interface}

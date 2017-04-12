@@ -25,14 +25,16 @@ classes:
 parameters:
   _param:
     {%- if cookiecutter.kubernetes_enabled != 'True' %}
-    salt_control_trusty_image: http://apt-mk.mirantis.com/images/ubuntu-14-04-x64-mcp1.0.qcow2
-    salt_control_xenial_image: http://apt-mk.mirantis.com/images/ubuntu-16-04-x64-mcp1.0.qcow2
+    salt_control_trusty_image: http://apt-mk.mirantis.com/images/ubuntu-14-04-x64-mcp1.1.qcow2
+    salt_control_xenial_image: http://apt-mk.mirantis.com/images/ubuntu-16-04-x64-mcp1.1.qcow2
     {%- endif %}
 
     # infra service addresses
     infra_config_hostname: {{ cookiecutter.salt_master_hostname }}
     infra_config_address: {{ cookiecutter.salt_master_address}}
     infra_config_deploy_address: {{ cookiecutter.salt_master_management_address }}
+    
+    mcp_repo_version: 1.1
 
     cluster_domain: {{ cookiecutter.cluster_domain }}
     cluster_name: {{ cookiecutter.cluster_name }}
