@@ -1,6 +1,5 @@
 default_context:
 # infra
-    openstack_network_engine: opencontrail
     openstack_enabled: false
     stacklight_enabled: false
     cicd_enabled:  false
@@ -19,20 +18,8 @@ default_context:
 
     public_host: ""
 
-    kubernetes_control_address: 172.16.10.253
-    kubernetes_control_node01_address: 172.16.10.107
-    kubernetes_control_node02_address: 172.16.10.108
-    kubernetes_control_node03_address: 172.16.10.109
-    kubernetes_control_node01_deploy_address: 192.168.10.107
-    kubernetes_control_node02_deploy_address: 192.168.10.108
-    kubernetes_control_node03_deploy_address: 192.168.10.109
-
     kubernetes_keepalived_vip_interface: ens4
-
-    kubernetes_compute_node01_single_address: 172.16.10.105
-    kubernetes_compute_node02_single_address: 172.16.10.106
-    kubernetes_compute_node01_deploy_address: 192.168.10.105
-    kubernetes_compute_node02_deploy_address: 192.168.10.106
+    kubernetes_control_address: 172.16.10.253
 
     kubernetes_compute_node01_address: 172.16.10.105
     kubernetes_compute_node01_hostname: cmp01
@@ -53,5 +40,3 @@ default_context:
     calico_cni_image: "docker-prod-virtual.docker.mirantis.net/mirantis/projectcalico/calico/cni:latest"
     calico_image: "docker-prod-virtual.docker.mirantis.net/mirantis/projectcalico/calico/node:latest"
     calicoctl_image: "docker-prod-virtual.docker.mirantis.net/mirantis/projectcalico/calico/ctl:latest"
-
-

@@ -43,6 +43,7 @@ parameters:
     deploy_address: ${_param:infra_config_deploy_address}
     linux_system_codename: xenial
     salt_api_password_hash: "{{ cookiecutter.salt_api_password_hash }}"
+    salt_master_host: ${_param:infra_config_address}
   reclass:
     storage:
       node:
