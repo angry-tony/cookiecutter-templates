@@ -87,21 +87,14 @@ parameters:
     nova_version: ${_param:openstack_version}
     nova_service_host: ${_param:openstack_control_address}
     neutron_version: ${_param:openstack_version}
+    {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
     neutron_service_host: ${_param:opencontrail_control_address}
+    {%- elif cookiecutter.openstack_network_engine == 'ovs' %}
+    neutron_service_host: ${_param:openstack_control_address}
+    {%- endif %}
     glusterfs_service_host: ${_param:infra_kvm_address}
     aodh_version: ${_param:openstack_version}
     aodh_service_host: ${_param:openstack_telemetry_address}
-
-    openstack_gateway_node01_address: {{ cookiecutter.openstack_gateway_node01_address }}
-    openstack_gateway_node02_address: {{ cookiecutter.openstack_gateway_node02_address }}
-    openstack_gateway_node03_address: {{ cookiecutter.openstack_gateway_node03_address }}
-    openstack_gateway_node01_tenant_address: {{ cookiecutter.openstack_gateway_node01_tenant_address }}
-    openstack_gateway_node02_tenant_address: {{ cookiecutter.openstack_gateway_node02_tenant_address }}
-    openstack_gateway_node03_tenant_address: {{ cookiecutter.openstack_gateway_node03_tenant_address }}
-    openstack_gateway_node01_hostname: {{ cookiecutter.openstack_gateway_node01_hostname }}
-    openstack_gateway_node02_hostname: {{ cookiecutter.openstack_gateway_node02_hostname }}
-    openstack_gateway_node03_hostname: {{ cookiecutter.openstack_gateway_node03_hostname }}
-
 
     mysql_admin_user: root
     mysql_aodh_password: {{ password(16) }}
@@ -154,20 +147,19 @@ parameters:
     openstack_message_queue_node02_address: {{ cookiecutter.openstack_message_queue_node02_address }}
     openstack_message_queue_node03_address: {{ cookiecutter.openstack_message_queue_node03_address }}
 
-    openstack_telemetry_hostname: {{ cookiecutter.openstack_telemetry_hostname }}
-    openstack_telemetry_node01_hostname: {{ cookiecutter.openstack_telemetry_node01_hostname }}
-    openstack_telemetry_node02_hostname: {{ cookiecutter.openstack_telemetry_node02_hostname }}
-    openstack_telemetry_node03_hostname: {{ cookiecutter.openstack_telemetry_node03_hostname }}
+    openstack_telemetry_address: {{ cookiecutter.openstack_telemetry_address }}
+    openstack_telemetry_node01_address: {{ cookiecutter.openstack_telemetry_node01_address }}
+    openstack_telemetry_node02_address: {{ cookiecutter.openstack_telemetry_node02_address }}
+    openstack_telemetry_node03_address: {{ cookiecutter.openstack_telemetry_node03_address }}
     
+    {%- if cookiecutter.openstack_network_engine == 'ovs' %}
     openstack_gateway_node01_address: {{ cookiecutter.openstack_gateway_node01_address }}
     openstack_gateway_node02_address: {{ cookiecutter.openstack_gateway_node02_address }}
     openstack_gateway_node03_address: {{ cookiecutter.openstack_gateway_node03_address }}
     openstack_gateway_node01_tenant_address: {{ cookiecutter.openstack_gateway_node01_tenant_address }}
     openstack_gateway_node02_tenant_address: {{ cookiecutter.openstack_gateway_node02_tenant_address }}
     openstack_gateway_node03_tenant_address: {{ cookiecutter.openstack_gateway_node03_tenant_address }}
-    openstack_gateway_node01_hostname: {{ cookiecutter.openstack_gateway_node01_hostname }}
-    openstack_gateway_node02_hostname: {{ cookiecutter.openstack_gateway_node02_hostname }}
-    openstack_gateway_node03_hostname: {{ cookiecutter.openstack_gateway_node03_hostname }}
+    {%- endif %}
 
     # OpenStack Compute
     openstack_compute_rack01_sigle_subnet: {{ cookiecutter.openstack_compute_rack01_sigle_subnet }}
@@ -194,6 +186,11 @@ parameters:
     openstack_telemetry_node01_hostname: {{ cookiecutter.openstack_telemetry_node01_hostname }}
     openstack_telemetry_node02_hostname: {{ cookiecutter.openstack_telemetry_node02_hostname }}
     openstack_telemetry_node03_hostname: {{ cookiecutter.openstack_telemetry_node03_hostname }}
+    {%- if cookiecutter.openstack_network_engine == 'ovs' %}
+    openstack_gateway_node01_hostname: {{ cookiecutter.openstack_gateway_node01_hostname }}
+    openstack_gateway_node02_hostname: {{ cookiecutter.openstack_gateway_node02_hostname }}
+    openstack_gateway_node03_hostname: {{ cookiecutter.openstack_gateway_node03_hostname }}
+    {%- endif %}
     
     # Billing
     #keystone_billometer_password: {{ password(16) }}
@@ -309,8 +306,13 @@ parameters:
           - ${_param:openstack_gateway_node01_hostname}
           - ${_param:openstack_gateway_node01_hostname}.${_param:cluster_domain}
         gtw02:
-          address: ${_param:openstack_gateway_node01_address}
+          address: ${_param:openstack_gateway_node02_address}
           names:
-          - ${_param:openstack_gateway_node01_hostname}
-          - ${_param:openstack_gateway_node01_hostname}.${_param:cluster_domain}
+          - ${_param:openstack_gateway_node02_hostname}
+          - ${_param:openstack_gateway_node02_hostname}.${_param:cluster_domain}
+        gtw03:
+          address: ${_param:openstack_gateway_node03_address}
+          names:
+          - ${_param:openstack_gateway_node03_hostname}
+          - ${_param:openstack_gateway_node03_hostname}.${_param:cluster_domain}
 {%- endif %}
