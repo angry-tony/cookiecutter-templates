@@ -36,6 +36,11 @@ parameters:
     infra_config_address: {{ cookiecutter.salt_master_address }}
     infra_config_deploy_address: {{ cookiecutter.salt_master_management_address }}
     
+<<<<<<< 5c03670fa4e6a81e666b78499c22e5746acafd30
+=======
+    mcp_repo_version: 1.1
+
+>>>>>>> initial mcp11 changes
     cluster_domain: {{ cookiecutter.cluster_domain }}
     cluster_name: {{ cookiecutter.cluster_name }}
     cluster_public_host: {{ cookiecutter.public_host }}
