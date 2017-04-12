@@ -53,5 +53,3 @@ default_context:
     calico_cni_image: "docker-prod-virtual.docker.mirantis.net/mirantis/projectcalico/calico/cni:latest"
     calico_image: "docker-prod-virtual.docker.mirantis.net/mirantis/projectcalico/calico/node:latest"
     calicoctl_image: "docker-prod-virtual.docker.mirantis.net/mirantis/projectcalico/calico/ctl:latest"
-
-
