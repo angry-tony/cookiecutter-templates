@@ -21,6 +21,7 @@
     "salt_master_address"                       : "10.167.4.90",
     "salt_master_management_address"            : "10.167.5.90",
     "salt_master_hostname"                      : "cfg01",
+    "salt_api_password_hash"                    : "$6$Qr0XdRvdciun2ucl$osj7gvaoxoOsV9BSiZLD0cqYysOCxA/i8CYTgSpCTnqGF25n8.m/QgP5xrOxE46RtJkY4Ta1AaGODHuiA/iwt1",
 
     "infra_kvm_vip_address"                     : "10.167.4.240",
     "infra_kvm01_control_address"               : "10.167.4.241",
