@@ -87,11 +87,7 @@ parameters:
     nova_version: ${_param:openstack_version}
     nova_service_host: ${_param:openstack_control_address}
     neutron_version: ${_param:openstack_version}
-    {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
-    neutron_service_host: ${_param:opencontrail_control_address}
-    {%- elif cookiecutter.openstack_network_engine == 'ovs' %}
     neutron_service_host: ${_param:openstack_control_address}
-    {%- endif %}
     glusterfs_service_host: ${_param:infra_kvm_address}
     aodh_version: ${_param:openstack_version}
     aodh_service_host: ${_param:openstack_telemetry_address}
