@@ -52,6 +52,10 @@ parameters:
     infra_kvm_node02_hostname: {{ cookiecutter.infra_kvm02_hostname }}
     infra_kvm_node03_hostname: {{ cookiecutter.infra_kvm03_hostname }}
 
+    glusterfs_node01_address: ${_param:infra_kvm_node01_address}
+    glusterfs_node02_address: ${_param:infra_kvm_node02_address}
+    glusterfs_node03_address: ${_param:infra_kvm_node03_address}
+
     control_network_netmask: {{ cookiecutter.control_network_netmask }}
     tenant_network_netmask: {{ cookiecutter.tenant_network_netmask }}
     control_vlan: {{ cookiecutter.control_vlan }}
