@@ -11,6 +11,27 @@ parameters:
     opencontrail_compute_iface: {{ cookiecutter.opencontrail_compute_iface }}
     {%- endif %}
     opencontrail_compute_iface_mask: {{ cookiecutter.opencontrail_compute_iface_mask }}
+
+    # OpenContrail control
+    opencontrail_control_address: {{ cookiecutter.opencontrail_control_address }}
+    opencontrail_control_node01_address: {{ cookiecutter.opencontrail_control_node01_address }}
+    opencontrail_control_node02_address: {{ cookiecutter.opencontrail_control_node02_address }}
+    opencontrail_control_node03_address: {{ cookiecutter.opencontrail_control_node03_address }}
+    opencontrail_analytics_address: {{ cookiecutter.opencontrail_control_address }}
+    opencontrail_analytics_node01_address: {{ cookiecutter.opencontrail_analytics_node01_address }}
+    opencontrail_analytics_node02_address: {{ cookiecutter.opencontrail_analytics_node02_address }}
+    opencontrail_analytics_node03_address: {{ cookiecutter.opencontrail_analytics_node03_address }}
+
+    #OpenContrail hostnames
+    opencontrail_control_hostname: {{ cookiecutter.opencontrail_control_hostname }}
+    opencontrail_control_node01_hostname: {{ cookiecutter.opencontrail_control_node01_hostname }}
+    opencontrail_control_node02_hostname: {{ cookiecutter.opencontrail_control_node02_hostname }}
+    opencontrail_control_node03_hostname: {{ cookiecutter.opencontrail_control_node03_hostname }}
+    opencontrail_analytics_hostname: {{ cookiecutter.opencontrail_control_address }}
+    opencontrail_analytics_node01_hostname: {{ cookiecutter.opencontrail_analytics_node01_hostname }}
+    opencontrail_analytics_node02_hostname: {{ cookiecutter.opencontrail_analytics_node02_hostname }}
+    opencontrail_analytics_node03_hostname: {{ cookiecutter.opencontrail_analytics_node03_hostname }}
+
   linux:
     network:
       host:
