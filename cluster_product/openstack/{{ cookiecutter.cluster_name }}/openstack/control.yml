@@ -23,6 +23,8 @@ classes:
 - system.cinder.control.cluster
 - system.cinder.volume.single
 - system.heat.server.cluster
+- system.haproxy.proxy.listen.openstack.nova-placement
+- system.haproxy.proxy.listen.openstack.glare
 - system.glusterfs.client.cluster
 - system.glusterfs.client.volume.glance
 - system.glusterfs.client.volume.keystone
