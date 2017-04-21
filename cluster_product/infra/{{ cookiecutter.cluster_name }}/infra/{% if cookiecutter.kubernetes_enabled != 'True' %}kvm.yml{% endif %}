@@ -96,7 +96,7 @@ parameters:
         internal:
           node:
             prx02:
-              provider: ${_param:infra_compute_node03_address}.${_param:cluster_domain}
+              provider: ${_param:infra_kvm_node03_address}.${_param:cluster_domain}
             mdb01:
               image: ${_param:salt_control_xenial_image}
             mdb02:

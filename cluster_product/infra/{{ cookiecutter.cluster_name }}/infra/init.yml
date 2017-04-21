@@ -74,7 +74,6 @@ parameters:
       proto: static
       address: ${_param:single_address}
       netmask: ${_param:control_network_netmask}
-      gateway: ${_param:control_network_gateway}
       name_servers:
         - ${_param:dns_server01}
         - ${_param:dns_server02}
@@ -101,20 +100,20 @@ parameters:
 
         {%- if not cookiecutter.kubernetes_enabled == 'True' %}
         kvm01:
-          address: ${_param:infra_compute_node01_address}
+          address: ${_param:infra_kvm_node01_address}
           names:
-          - ${_param:infra_compute_node01_hostname}
-          - ${_param:infra_compute_node01_hostname}.${_param:cluster_domain}
+          - ${_param:infra_kvm_node01_hostname}
+          - ${_param:infra_kvm_node01_hostname}.${_param:cluster_domain}
         kvm02:
-          address: ${_param:infra_compute_node02_address}
+          address: ${_param:infra_kvm_node02_address}
           names:
-          - ${_param:infra_compute_node02_hostname}
-          - ${_param:infra_compute_node02_hostname}.${_param:cluster_domain}
+          - ${_param:infra_kvm_node02_hostname}
+          - ${_param:infra_kvm_node02_hostname}.${_param:cluster_domain}
         kvm03:
-          address: ${_param:infra_compute_node03_address}
+          address: ${_param:infra_kvm_node03_address}
           names:
-          - ${_param:infra_compute_node03_hostname}
-          - ${_param:infra_compute_node03_hostname}.${_param:cluster_domain}
+          - ${_param:infra_kvm_node03_hostname}
+          - ${_param:infra_kvm_node03_hostname}.${_param:cluster_domain}
         {%- endif %}
     system:
       name: ${_param:infra_config_hostname}

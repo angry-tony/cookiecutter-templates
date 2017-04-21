@@ -45,12 +45,12 @@ parameters:
     cluster_node03_name: ${_param:cicd_control_node03_hostname}
     cluster_node03_address: ${_param:cicd_control_node03_address}
     keepalived_vip_virtual_router_id: 180
-    keepalived_vip_password: password
+    keepalived_vip_password: {{ password(16) }}
     keepalived_vip_interface: ens3
     cluster_vip_address: ${_param:control_vip_address}
     control_vip_address: ${_param:cicd_control_address}
     cluster_public_host: ${_param:control_vip_address}
-    salt_api_password: password
+    salt_api_password: {{ cookiecutter.salt_api_password }}
     # Docker images and versions
     docker_registry_http_secret: {{ password(16) }}
     # CI/CD service databases
@@ -64,6 +64,13 @@ parameters:
     haproxy_bind_address: ${_param:cluster_vip_address}
     haproxy_mysql_source_port: 13306
     salt_minion_ca_host: ${_param:infra_config_hostname}.${_param:cluster_domain}
+
+    # Aptly
+    aptly_gpg_keypair_id: none
+    aptly_gpg_passphrase: none
+    aptly_server_secure: false
+    aptly_gpg_public_key: none
+    aptly_gpg_private_key: none
 
     # Jenkins
     jenkins_slave_user: admin

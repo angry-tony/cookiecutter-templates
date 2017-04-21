@@ -10,6 +10,8 @@
     "cicd_control_node02_hostname"              : "cid02",
     "cicd_control_node03_hostname"              : "cid03",
 
+
+    "salt_api_pasword"                          : "<<WILL_BE_GENERATED>>",
     "cicd_private_key"                          : "<<WILL_BE_GENERATED>>",
     "cicd_public_key"                           : "<<WILL_BE_GENERATED>>",
 
