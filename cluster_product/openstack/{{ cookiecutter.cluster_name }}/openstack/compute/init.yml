@@ -4,7 +4,7 @@ classes:
 {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
 - system.linux.system.repo.mcp.contrail
 {%- endif %}
-{%- if cookiecutter.get('openstack_nova_compute_nfv_req_enabled', 'False') == 'True' %}
+{%- if cookiecutter.get('openstack_nova_compute_nfv_req_enabled', 'False') == 'True' or cookiecutter.get('openstack_nfv_dpdk_enabled', 'False') == 'True' %}
 - system.nova.compute.nfv.hugepages
 - system.nova.compute.nfv.cpu_pinning
 {%- endif %}
