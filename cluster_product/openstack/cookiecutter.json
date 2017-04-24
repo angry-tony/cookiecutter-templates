@@ -63,7 +63,7 @@
     "openstack_telemetry_node02_hostname"       : "mdb02",
     "openstack_telemetry_node03_hostname"       : "mdb03",
 
-    "openstack_compute_rack01_sigle_subnet"     : "10.167.4",
+    "openstack_compute_rack01_single_subnet"     : "10.167.4",
     "openstack_compute_rack01_tenant_subnet"    : "10.167.6",
     "openstack_compute_rack01_hostname"         : "cmp",
 

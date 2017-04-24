@@ -158,7 +158,7 @@ parameters:
     {%- endif %}
 
     # OpenStack Compute
-    openstack_compute_rack01_sigle_subnet: {{ cookiecutter.openstack_compute_rack01_sigle_subnet }}
+    openstack_compute_rack01_single_subnet: {{ cookiecutter.openstack_compute_rack01_single_subnet }}
     openstack_compute_rack01_tenant_subnet: {{ cookiecutter.openstack_compute_rack01_tenant_subnet }}
     openstack_compute_rack01_hostname: {{ cookiecutter.openstack_compute_rack01_hostname }}
 

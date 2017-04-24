@@ -167,7 +167,7 @@ parameters:
             digits: 3
             params:
               single_address:
-                value: ${_param:openstack_compute_rack01_sigle_subnet}.<<count>>
+                value: ${_param:openstack_compute_rack01_single_subnet}.<<count>>
                 start: 101
               tenant_address:
                 value: ${_param:openstack_compute_rack01_tenant_subnet}.<<count>>

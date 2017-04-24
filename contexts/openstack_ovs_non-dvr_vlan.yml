@@ -39,7 +39,7 @@ default_context:
   openldap_enabled: 'False'
   openstack_compute_count: '100'
   openstack_compute_rack01_hostname: cmp
-  openstack_compute_rack01_sigle_subnet: 10.167.4
+  openstack_compute_rack01_single_subnet: 10.167.4
   openstack_compute_rack01_tenant_subnet: 10.167.6
   openstack_control_address: 10.167.4.10
   openstack_control_hostname: ctl
