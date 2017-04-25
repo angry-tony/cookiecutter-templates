@@ -87,7 +87,7 @@ parameters:
     openldap_admin_password: {{ password(16) }}
     openldap_config_password: {{ password(16) }}
     openldap_readonly_password: {{ password(16) }}
-    {%₋ endif %}
+    {%- endif %}
 
     # Jenkins
     jenkins_slave_user: admin
