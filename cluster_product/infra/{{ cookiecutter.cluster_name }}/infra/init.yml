@@ -31,7 +31,7 @@ parameters:
 
     # infra service addresses
     infra_config_hostname: {{ cookiecutter.salt_master_hostname }}
-    infra_config_address: {{ cookiecutter.salt_master_address}}
+    infra_config_address: {{ cookiecutter.salt_master_address }}
     infra_config_deploy_address: {{ cookiecutter.salt_master_management_address }}
     
     cluster_domain: {{ cookiecutter.cluster_domain }}
