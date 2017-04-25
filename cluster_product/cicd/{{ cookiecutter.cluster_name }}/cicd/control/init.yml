@@ -79,12 +79,26 @@ parameters:
     aptly_gpg_public_key: none
     aptly_gpg_private_key: none
 
+    {%- if cookiecutter.openldap_enabled == 'True' %}
+    # OpenLDAP
+    openldap_organisation: "{{ cookiecutter.openldap_organisation }}"
+    openldap_dn: "{{ cookiecutter.openldap_dn }}"
+    openldap_domain: "{{ cookiecutter.openldap_domain }}"
+    openldap_admin_password: {{ password(16) }}
+    openldap_config_password: {{ password(16) }}
+    openldap_readonly_password: {{ password(16) }}
+    {%₋ endif %}
+
     # Jenkins
     jenkins_slave_user: admin
     jenkins_client_user: admin
 
     {%- if cookiecutter.openldap_enabled == 'True' %}
     jenkins_admin_password: ${_param:openldap_admin_password}
+    jenkins_security_ldap_server: ${_param:cluster_vip_address}
+    jenkins_security_ldap_root_dn: ${_param:openldap_dn}
+    jenkins_security_ldap_manager_dn: "cn=admin,${_param:openldap_dn}"
+    jenkins_security_ldap_manager_password: ${_param:openldap_admin_password}
     {%- else %}
     jenkins_admin_password: {{ password(16) }}
     {%- endif %}
@@ -106,14 +120,12 @@ parameters:
     gerrit_admin_private_key: ${_param:jenkins_admin_private_key}
     gerrit_admin_password: {{ password(16) }}
     {%- if cookiecutter.openldap_enabled == 'True' %}
-    ### Add condition for OpenLDAP
-    # OpenLDAP
-    openldap_organisation: "{{ cookiecutter.openldap_organisation }}"
-    openldap_dn: "{{ cookiecutter.openldap_dn }}"
-    openldap_domain: "{{ cookiecutter.openldap_domain }}"
-    openldap_admin_password: {{ password(16) }}
-    openldap_config_password: {{ password(16) }}
-    openldap_readonly_password: {{ password(16) }}
+    gerrit_auth_type: LDAP
+    gerrit_ldap_server: "ldap://${_param:cluster_vip_address}"
+    gerrit_ldap_bind_user: "cn=admin,${_param:openldap_dn}"
+    gerrit_ldap_bind_password: ${_param:openldap_admin_password}
+    gerrit_ldap_account_base: ou=people,${_param:openldap_dn}
+    gerrit_ldap_group_base: ou=groups,${_param:openldap_dn}
     {%- else %}
     gerrit_auth_type: DEVELOPMENT_BECOME_ANY_ACCOUNT
     {%- endif %}
