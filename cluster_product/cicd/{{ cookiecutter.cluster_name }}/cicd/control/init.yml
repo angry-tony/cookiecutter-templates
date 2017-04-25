@@ -3,24 +3,27 @@
 {%- endmacro %}
 classes:
   - system.linux.system.haveged
- #- system.glusterfs.server.volume.salt
   - system.glusterfs.client.cluster
   - system.glusterfs.client.volume.aptly
   - system.glusterfs.client.volume.gerrit
   - system.glusterfs.client.volume.jenkins
   - system.glusterfs.client.volume.mysql
   - system.glusterfs.client.volume.registry
+  {%- if cookiecutter.openldap_enabled == 'True' %}
+  - system.glusterfs.client.volume.openldap
+  {%- endif %}
  #- system.glusterfs.client.volume.salt
   # Docker
   - system.docker.host
+
   # Docker services
-  - system.docker.swarm.service.aptly
-  - system.docker.swarm.service.docker
-  - system.docker.swarm.service.gerrit
-  - system.docker.swarm.service.jenkins
-  - system.docker.swarm.service.mysql
-  # - system.docker.swarm.service.openldap
-  - system.docker.swarm.service.visualizer
+  - system.docker.swarm.stack.aptly
+  - system.docker.swarm.stack.docker
+  - system.docker.swarm.stack.gerrit
+  - system.docker.swarm.stack.jenkins
+  {%- if cookiecutter.openldap_enabled == 'True' %}
+  - system.docker.swarm.stack.ldap
+  {%- endif %}
 
   # Keepalived
   - system.keepalived.cluster.instance.cicd_control_vip
@@ -33,6 +36,10 @@ classes:
   - system.haproxy.proxy.listen.cicd.jenkins
   - system.haproxy.proxy.listen.docker.registry
   - system.haproxy.proxy.listen.docker.visualizer
+  {%- if cookiecutter.openldap_enabled == 'True' %}
+  - system.haproxy.proxy.listen.openldap
+  - system.haproxy.proxy.listen.phpldapadmin
+  {%- endif %}
   - system.haproxy.proxy.listen.mysql
   - system.haproxy.proxy.listen.stats
 
@@ -75,7 +82,12 @@ parameters:
     # Jenkins
     jenkins_slave_user: admin
     jenkins_client_user: admin
+
+    {%- if cookiecutter.openldap_enabled == 'True' %}
+    jenkins_admin_password: ${_param:openldap_admin_password}
+    {%- else %}
     jenkins_admin_password: {{ password(16) }}
+    {%- endif %}
     jenkins_slave_password: ${_param:jenkins_admin_password}
     jenkins_client_password: ${_param:jenkins_admin_password}
     jenkins_admin_email: ${_param:admin_email}
@@ -96,8 +108,9 @@ parameters:
     {%- if cookiecutter.openldap_enabled == 'True' %}
     ### Add condition for OpenLDAP
     # OpenLDAP
-    openldap_organisation: ${_param:cluster_name}
-    openldap_domain: ${_param:cluster_public_host}
+    openldap_organisation: "{{ cookiecutter.openldap_organisation }}"
+    openldap_dn: "{{ cookiecutter.openldap_dn }}"
+    openldap_domain: "{{ cookiecutter.openldap_domain }}"
     openldap_admin_password: {{ password(16) }}
     openldap_config_password: {{ password(16) }}
     openldap_readonly_password: {{ password(16) }}

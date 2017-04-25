@@ -14,7 +14,19 @@ classes:
   - system.jenkins.client.job.deploy.openstack
   - system.jenkins.client.job.deploy.update.package
   - system.jenkins.client.job.deploy.update.config
+  # Security
+  {%- if cookiecutter.openldap_enabled == 'True' %}
+  - system.jenkins.client.security.ldap
+  - system.jenkins.client.security.matrix
+  {%- else %}
   - system.jenkins.client.user.admin
+  {%- endif %}
+
+  {%- if cookiecutter.openldap_enabled == 'True' %}
+  # OpenLDAP
+  - system.openldap.client
+  - system.openldap.client.people.admin
+  {%- endif %}
 
   # Gerrit
   - system.gerrit.client

@@ -15,5 +15,8 @@
     "cicd_private_key"                          : "<<WILL_BE_GENERATED>>",
     "cicd_public_key"                           : "<<WILL_BE_GENERATED>>",
 
-    "openldap_enabled"                          : "False"
+    "openldap_enabled"                          : "True",
+    "openldap_organisation"                     : "${_param:cluster_name}",
+    "openldap_dn"                               : "dc=${_param:cluster_name},dc=local",
+    "openldap_domain"                           : "${_param:cluster_public_host}"
 }
