@@ -29,14 +29,17 @@ if __name__ == '__main__':
                         help='path to cookiecutter template')
     parser.add_argument('--config-file',
                         help='path to YAML config file')
+    parser.add_argument('--output-dir',
+                        help='path to output model')
     args = parser.parse_args()
     template = args.template
     config_file = getattr(args, 'config_file', None)
+    output_dir = getattr(args, 'output_dir', '.')
 
     cookiecutter(
         args.template,
         extra_context=(read_ctx_file(config_file) if config_file else {}),
-        output_dir='.',
+        output_dir=output_dir,
         no_input=True,
         overwrite_if_exists=True
     )
