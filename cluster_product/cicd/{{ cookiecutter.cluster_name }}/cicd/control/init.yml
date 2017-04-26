@@ -7,7 +7,6 @@ classes:
   - system.glusterfs.client.volume.aptly
   - system.glusterfs.client.volume.gerrit
   - system.glusterfs.client.volume.jenkins
-  - system.glusterfs.client.volume.mysql
   - system.glusterfs.client.volume.registry
   {%- if cookiecutter.openldap_enabled == 'True' %}
   - system.glusterfs.client.volume.openldap
@@ -114,11 +113,15 @@ parameters:
     jenkins_aptly_url: http://${_param:haproxy_aptly_public_bind_host}:${_param:haproxy_aptly_public_bind_port}
     # Gerrit
 
+    {%- if cookiecutter.openldap_enabled == 'True' %}
+    gerrit_admin_password: ${_param:openldap_admin_password}
+    {%- else %}
+    gerrit_admin_password: {{ password(16) }}
+    {%- endif %}
     gerrit_admin_email: ${_param:admin_email}
     gerrit_public_host: ${_param:control_vip_address}
     gerrit_admin_public_key: ${_param:jenkins_admin_public_key}
     gerrit_admin_private_key: ${_param:jenkins_admin_private_key}
-    gerrit_admin_password: {{ password(16) }}
     {%- if cookiecutter.openldap_enabled == 'True' %}
     gerrit_auth_type: LDAP
     gerrit_ldap_server: "ldap://${_param:cluster_vip_address}"
