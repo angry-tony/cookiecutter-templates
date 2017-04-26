@@ -128,9 +128,9 @@ parameters:
   virt:
     nic:
       default:
-        eth2:
-          bridge: br_mgm
         eth1:
+          bridge: br_mgm
+        eth0:
           bridge: br_ctl
   linux:
     network:
