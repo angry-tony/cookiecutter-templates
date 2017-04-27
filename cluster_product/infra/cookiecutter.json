@@ -34,6 +34,8 @@
     "infra_kvm02_hostname"                      : "kvm02",
     "infra_kvm03_hostname"                      : "kvm03",
 
+    "infra_bond_mode"                           : "active-backup",
+
     "openstack_network_engine"                  : "opencontrail",
     "openstack_enabled"                         : "True",
     "stacklight_enabled"                        : "True",

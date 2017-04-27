@@ -172,7 +172,7 @@ parameters:
           - ${_param:primary_first_nic}
           - ${_param:primary_second_nic}
           slaves: ${_param:primary_first_nic} ${_param:primary_second_nic}
-          mode: active-backup
+          mode: {{ cookiecutter.infra_bond_mode }}
         bond0.1:
           name: bond0.${_param:control_vlan}
           enabled: true

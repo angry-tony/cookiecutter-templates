@@ -81,5 +81,7 @@
     "gateway_primary_second_nic"                : "eth2",
 
     "compute_primary_first_nic"                 : "eth1",
-    "compute_primary_second_nic"                : "eth2"
+    "compute_primary_second_nic"                : "eth2",
+
+    "compute_bond_mode"                         : "active-backup"
 }
