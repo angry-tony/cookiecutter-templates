@@ -5,6 +5,11 @@ classes:
 - system.salt.minion.cert.etcd_client
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
+  _param:
+    kubernetes_calicoctl_image: {{ cookiecutter.calicoctl_image }}
+    kubernetes_calico_image: {{ cookiecutter.calico_image }}
+    kubernetes_calico_cni_image: {{ cookiecutter.calico_cni_image }}
+    kubernetes_hyperkube_image: {{ cookiecutter.hyperkube_image }}
   docker:
     host:
       pkgs:
@@ -16,15 +21,15 @@ parameters:
         etcd:
           ssl:
             enabled: {{ cookiecutter.etcd_ssl }}
-        image: {{ cookiecutter.calico_image }}
+        image: ${_param:kubernetes_calico_image}
         calicoctl:
-          image: {{ cookiecutter.calicoctl_image }}
+          image: ${_param:kubernetes_calicoctl_image}
         cni:
-          image: {{ cookiecutter.calico_cni_image }}
+          image: ${_param:kubernetes_calico_cni_image}
         {%- if cookiecutter.stacklight_enabled == 'True' %}
         prometheus:
           enabled: true
         {%- endif %}
     common:
       hyperkube:
-        image: {{ cookiecutter.hyperkube_image }}
+        image: ${_param:kubernetes_hyperkube_image}
