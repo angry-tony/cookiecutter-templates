@@ -1,5 +1,13 @@
 default_context:
   cicd_enabled: 'True'
+  cicd_control_vip_address: 10.167.4.90
+  cicd_control_vip_hostname: cid
+  cicd_control_node01_address: 10.167.4.91
+  cicd_control_node01_hostname: cid01
+  cicd_control_node02_address: 10.167.4.92
+  cicd_control_node02_hostname: cid02
+  cicd_control_node03_address: 10.167.4.93
+  cicd_control_node03_hostname: cid03
   cluster_domain: deploy-name.local
   cluster_name: deployment_name
   compute_primary_first_nic: eth1
