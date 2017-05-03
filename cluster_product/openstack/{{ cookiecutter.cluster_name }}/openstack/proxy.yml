@@ -5,6 +5,8 @@ classes:
 - system.linux.system.repo.glusterfs
 - system.glusterfs.client.cluster
 - system.linux.system.repo.saltstack.xenial
+- system.linux.system.repo.glusterfs
+- system.glusterfs.client.cluster
 - system.glusterfs.client.volume.salt_pki
 - system.nginx.server.single
 {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
