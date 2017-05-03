@@ -1,8 +1,10 @@
 classes:
 - system.linux.system.repo.mcp.openstack
 - system.linux.system.repo.ubuntu
+- system.linux.system.repo.glusterfs
 - service.keepalived.cluster.single
 - system.glusterfs.server.cluster
+- system.glusterfs.server.volume.salt_pki
 - system.salt.control.virt
 {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
 - system.salt.control.cluster.opencontrail_analytics_cluster

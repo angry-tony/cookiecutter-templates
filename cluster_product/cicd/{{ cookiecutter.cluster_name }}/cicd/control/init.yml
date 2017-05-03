@@ -8,6 +8,7 @@ classes:
   - system.glusterfs.client.volume.gerrit
   - system.glusterfs.client.volume.jenkins
   - system.glusterfs.client.volume.registry
+  - system.glusterfs.client.volume.salt_pki
   {%- if cookiecutter.openldap_enabled == 'True' %}
   - system.glusterfs.client.volume.openldap
   {%- endif %}
