@@ -27,8 +27,8 @@ classes:
 {%- if cookiecutter.cicd_enabled == 'True' %}
 - system.salt.control.cluster.cicd_control_cluster
 - cluster.{{ cookiecutter.cluster_name }}.cicd.gluster
-- cluster.{{ cookiecutter.cluster_name }}.infra
 {%- endif %}
+- cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
     cluster_vip_address: ${_param:infra_kvm_address}

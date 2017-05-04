@@ -18,5 +18,5 @@
     "openldap_enabled"                          : "True",
     "openldap_organisation"                     : "${_param:cluster_name}",
     "openldap_dn"                               : "dc=${_param:cluster_name},dc=local",
-    "openldap_domain"                           : "${_param:cluster_public_host}"
+    "openldap_domain"                           : "${_param:cluster_domain}"
 }
