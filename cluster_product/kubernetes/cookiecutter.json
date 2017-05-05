@@ -32,6 +32,7 @@
     "calico_network"                             : "192.168.0.0",
     "calico_netmask"                             : "16",
     "calico_enable_nat"                          : "true",
+    "calico_no_default_pools"                    : "false",
 
     "hyperkube_image"                            : "docker-prod-virtual.docker.mirantis.net/mirantis/kubernetes/hyperkube-amd64:v1.4.6-6",
     "calico_cni_image"                           : "docker-prod-virtual.docker.mirantis.net/mirantis/projectcalico/calico/cni:latest",

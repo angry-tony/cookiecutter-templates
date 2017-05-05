@@ -18,6 +18,7 @@ parameters:
   kubernetes:
     pool:
       network:
+        no_default_pools: {{ cookiecutter.calico_no_default_pools }}
         etcd:
           ssl:
             enabled: {{ cookiecutter.etcd_ssl }}
