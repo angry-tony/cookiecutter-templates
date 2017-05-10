@@ -1,4 +1,5 @@
 classes:
+- system.linux.system.repo.mcp.extra
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   linux:

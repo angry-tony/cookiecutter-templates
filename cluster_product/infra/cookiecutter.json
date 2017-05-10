@@ -4,6 +4,9 @@
     "public_host"                               : "${_param:openstack_proxy_address}",
     "reclass_repository"                        : "https://github.com/Mirantis/mk-lab-salt-model.git",
 
+    "local_repositories"                        : "False",
+    "local_repo_url"                            : "${_param:cicd_control_vip_address}",
+
     "deploy_network_netmask"                    : "255.255.255.0",
     "deploy_network_gateway"                    : "",
     "control_network_netmask"                   : "255.255.255.0",

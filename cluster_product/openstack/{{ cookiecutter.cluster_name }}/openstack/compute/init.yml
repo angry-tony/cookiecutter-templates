@@ -1,10 +1,19 @@
 classes:
+{%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
+- system.linux.system.repo_local.ubuntu
+- system.linux.system.repo_local.mcp.openstack
+- system.linux.system.repo_local.mcp.extra
+{%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
+- system.linux.system.repo_local.mcp.contrail
+{%- endif %}
+{%- else -%}
 - system.linux.system.repo.ubuntu
 - system.linux.system.repo.saltstack.xenial
 - system.linux.system.repo.mcp.openstack
 - system.linux.system.repo.mcp.extra
 {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
 - system.linux.system.repo.mcp.contrail
+{%- endif %}
 {%- endif %}
 {%- if cookiecutter.get('openstack_nova_compute_nfv_req_enabled', 'False') == 'True' or cookiecutter.get('openstack_nfv_dpdk_enabled', 'False') == 'True' %}
 - system.nova.compute.nfv.hugepages

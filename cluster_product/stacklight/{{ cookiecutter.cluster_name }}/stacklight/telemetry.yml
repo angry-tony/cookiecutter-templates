@@ -2,9 +2,17 @@
 {% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'|random }}{% endfor %}
 {%- endmacro -%}
 classes:
+{%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
+- system.linux.system.repo_local.ubuntu
+- system.linux.system.repo_local.influxdb
+- system.linux.system.repo_local.saltstack.xenial
+- system.linux.system.repo_local.mcp.extra
+{%- else -%}
 - system.linux.system.repo.ubuntu
 - system.linux.system.repo.influxdb
 - system.linux.system.repo.saltstack.xenial
+- system.linux.system.repo.mcp.extra
+{%- endif %}
 - system.influxdb.server.single
 - system.influxdb.database.ceilometer
 - system.influxdb.database.stacklight
