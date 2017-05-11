@@ -109,7 +109,7 @@ parameters:
     jenkins_admin_private_key: |
       {{ cookiecutter.cicd_private_key|indent(6) }}
     # Jobs params
-    jenkins_gerrit_url: ssh://admin@${_param:gerrit_public_host}:${_param:haproxy_gerrit_ssh_bind_port}
+    jenkins_gerrit_url: ssh://admin@${_param:haproxy_gerrit_bind_host}:${_param:haproxy_gerrit_ssh_bind_port}
     jenkins_aptly_api_url: http://${_param:haproxy_aptly_api_bind_host}:${_param:haproxy_aptly_api_bind_port}
     jenkins_aptly_url: http://${_param:haproxy_aptly_public_bind_host}:${_param:haproxy_aptly_public_bind_port}
     # Gerrit
@@ -120,7 +120,7 @@ parameters:
     gerrit_admin_password: {{ password(16) }}
     {%- endif %}
     gerrit_admin_email: ${_param:admin_email}
-    gerrit_public_host: ${_param:control_vip_address}
+    gerrit_public_host: http://${_param:haproxy_gerrit_bind_host}:${_param:haproxy_gerrit_bind_port}
     gerrit_admin_public_key: ${_param:jenkins_admin_public_key}
     gerrit_admin_private_key: ${_param:jenkins_admin_private_key}
     {%- if cookiecutter.openldap_enabled == 'True' %}
