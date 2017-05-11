@@ -28,6 +28,7 @@ classes:
 - system.reclass.storage.system.openstack_telemetry_cluster
 {%- endif %}
 {%- if cookiecutter.stacklight_enabled == 'True' %}
+- system.linux.system.repo.mcp.extra
 - system.reclass.storage.system.stacklight_log_cluster
 - system.reclass.storage.system.stacklight_monitor_cluster
 - system.reclass.storage.system.stacklight_telemetry_cluster
