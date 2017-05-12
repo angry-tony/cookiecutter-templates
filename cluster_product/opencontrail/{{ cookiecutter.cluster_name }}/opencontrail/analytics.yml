@@ -17,11 +17,11 @@ parameters:
     keepalived_vip_virtual_router_id: 70
     cluster_vip_address: ${_param:opencontrail_analytics_address}
     cluster_local_address: ${_param:single_address}
-    cluster_node01_hostname: nal01
+    cluster_node01_hostname: ${_param:opencontrail_analytics_node01_hostname}
     cluster_node01_address: ${_param:opencontrail_analytics_node01_address}
-    cluster_node02_hostname: nal02
+    cluster_node02_hostname: ${_param:opencontrail_analytics_node02_hostname}
     cluster_node02_address: ${_param:opencontrail_analytics_node02_address}
-    cluster_node03_hostname: nal03
+    cluster_node03_hostname: ${_param:opencontrail_analytics_node03_hostname}
     cluster_node03_address: ${_param:opencontrail_analytics_node03_address}
   linux:
     network:

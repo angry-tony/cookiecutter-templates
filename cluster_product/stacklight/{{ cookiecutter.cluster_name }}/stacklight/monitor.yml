@@ -24,11 +24,11 @@ parameters:
     keepalived_stacklight_monitor_vip_interface: ens3
     cluster_vip_address: ${_param:stacklight_monitor_address}
     cluster_local_address: ${_param:single_address}
-    cluster_node01_hostname: mon01
+    cluster_node01_hostname: ${_param:stacklight_monitor_node01_hostname}
     cluster_node01_address: ${_param:stacklight_monitor_node01_address}
-    cluster_node02_hostname: mon02
+    cluster_node02_hostname: ${_param:stacklight_monitor_node02_hostname}
     cluster_node02_address: ${_param:stacklight_monitor_node02_address}
-    cluster_node03_hostname: mon03
+    cluster_node03_hostname: ${_param:stacklight_monitor_node03_hostname}
     cluster_node03_address: ${_param:stacklight_monitor_node03_address}
   linux:
     network:
