@@ -89,29 +89,7 @@ parameters:
             linux_system_codename: xenial
             single_address: ${_param:kubernetes_compute_node02_address}
         {%- endif %}
-        {%- if cookiecutter.openstack_enabled == 'True' %}
-        openstack_control_node01:
-          classes:
-          - cluster.${_param:cluster_name}.openstack.control_init
-          params:
-            linux_system_codename: xenial
-        openstack_control_node02:
-          params:
-            linux_system_codename: xenial
-        openstack_control_node03:
-          params:
-            linux_system_codename: xenial
-        openstack_database_node01:
-          classes:
-          - cluster.${_param:cluster_name}.openstack.database_init
-          params:
-            linux_system_codename: xenial
-        openstack_database_node02:
-          params:
-            linux_system_codename: xenial
-        openstack_database_node03:
-          params:
-            linux_system_codename: xenial
+        {%- if cookiecutter.stacklight_enabled == 'True' %}
         stacklight_log_node01:
           classes:
           - system.elasticsearch.client.single
@@ -119,6 +97,14 @@ parameters:
           classes:
           - system.grafana.client.single
           - system.kibana.client.single
+        {%- endif %}
+        {%- if cookiecutter.openstack_enabled == 'True' %}
+        openstack_control_node01:
+          classes:
+          - cluster.${_param:cluster_name}.openstack.control_init
+        openstack_database_node01:
+          classes:
+          - cluster.${_param:cluster_name}.openstack.database_init
         openstack_telemetry_node01:
           params:
             linux_system_codename: xenial
@@ -143,13 +129,6 @@ parameters:
         openstack_proxy_node02:
           params:
             linux_system_codename: xenial
-        stacklight_log_node01:
-          classes:
-          - system.elasticsearch.client.single
-        stacklight_monitor_node01:
-          classes:
-          - system.grafana.client.single
-          - system.kibana.client.single
         openstack_control_node01:
           classes:
           - cluster.${_param:cluster_name}.openstack.control_init
