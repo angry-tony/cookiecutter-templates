@@ -1,5 +1,5 @@
 classes:
-- system.linux.system.repo.mcp.salt
+- system.linux.system.repo.saltstack.xenial
 - system.linux.system.repo.mcp.openstack
 - system.linux.system.repo.ubuntu
 - system.linux.system.repo.glusterfs
