@@ -9,6 +9,8 @@ classes:
 - system.ceilometer.client.neutron
 {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
 - system.neutron.control.opencontrail.cluster
+- system.opencontrail.client.cluster
+- system.heat.server.resource.contrail
 {%- endif %}
 {%- if cookiecutter.openstack_network_engine == 'ovs' %}
 - system.neutron.control.openvswitch.cluster
