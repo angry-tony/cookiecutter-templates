@@ -1,5 +1,6 @@
 classes:
 - system.linux.system.repo.ubuntu
+- system.linux.system.repo.saltstack.xenial
 - system.linux.system.repo.mcp.openstack
 - system.linux.system.repo.mcp.extra
 {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
