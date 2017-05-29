@@ -24,6 +24,7 @@ default_context:
   infra_primary_first_nic: eth1
   infra_primary_second_nic: eth2
   kubernetes_enabled: 'False'
+  opencontrail_enabled: 'True'
   opencontrail_analytics_address: 10.167.4.30
   opencontrail_analytics_hostname: nal
   opencontrail_analytics_node01_address: 10.167.4.31

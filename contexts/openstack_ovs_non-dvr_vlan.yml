@@ -36,6 +36,7 @@ default_context:
   infra_primary_first_nic: eth1
   infra_primary_second_nic: eth2
   kubernetes_enabled: 'False'
+  opencontrail_enabled: 'False'
   openldap_enabled: 'False'
   openstack_compute_count: '100'
   openstack_compute_rack01_hostname: cmp
