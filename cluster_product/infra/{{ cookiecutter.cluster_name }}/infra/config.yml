@@ -12,6 +12,7 @@ classes:
 {%- if cookiecutter.openstack_enabled == 'True' %}
 - system.linux.system.repo.glusterfs
 {%- endif %}
+{%- endif %}
 - system.openssh.client.lab
 {%- if cookiecutter.openstack_enabled == 'True' %}
 - system.glusterfs.client.cluster
