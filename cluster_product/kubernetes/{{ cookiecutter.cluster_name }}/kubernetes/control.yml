@@ -1,7 +1,11 @@
 classes:
 - service.etcd.server.cluster
 - system.haproxy.proxy.listen.kubernetes.apiserver
+{%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
+- system.linux.system.repo_local.docker
+{%- else -%}
 - system.linux.system.repo.docker
+{%- endif %}
 - system.salt.minion.cert.etcd_server
 - system.kubernetes.master.cluster
 - cluster.{{ cookiecutter.cluster_name }}.kubernetes.compute

@@ -1,8 +1,17 @@
 classes:
+{%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
+- system.linux.system.repo_local.ubuntu
+- system.linux.system.repo_local.mcp.openstack
+- system.linux.system.repo_local.mcp.extra
+- system.linux.system.repo_local.saltstack.xenial
+- system.linux.system.repo_local.glusterfs
+{%- else -%}
 - system.linux.system.repo.ubuntu
 - system.linux.system.repo.mcp.openstack
+- system.linux.system.repo.mcp.extra
 - system.linux.system.repo.saltstack.xenial
 - system.linux.system.repo.glusterfs
+{%- endif %}
 - system.glusterfs.client.cluster
 - system.glusterfs.client.volume.salt_pki
 - system.nginx.server.single

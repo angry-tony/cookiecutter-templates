@@ -31,8 +31,12 @@ parameters:
     salt_control_xenial_image: http://apt-mk.mirantis.com/images/ubuntu-16-04-x64-mcp1.1.qcow2
     {%- endif %}
 
-    # infra service addresses
+
+    {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
+    local_repo_url: {{ cookiecutter.local_repo_url}}
+    {%- endif %}
     infra_config_hostname: {{ cookiecutter.salt_master_hostname }}
+    # infra service addresses
     infra_config_address: {{ cookiecutter.salt_master_address }}
     infra_config_deploy_address: {{ cookiecutter.salt_master_management_address }}
     

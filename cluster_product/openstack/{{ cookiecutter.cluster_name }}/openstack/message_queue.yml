@@ -1,7 +1,13 @@
 classes:
+{%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
+- system.linux.system.repo_local.mcp.openstack
+- system.linux.system.repo_local.mcp.extra
+- system.linux.system.repo_local.saltstack.xenial
+{%- else -%}
 - system.linux.system.repo.mcp.openstack
 - system.linux.system.repo.mcp.extra
 - system.linux.system.repo.saltstack.xenial
+{%- endif %}
 - system.rabbitmq.server.cluster
 - system.rabbitmq.server.vhost.openstack
 - cluster.{{ cookiecutter.cluster_name }}.infra

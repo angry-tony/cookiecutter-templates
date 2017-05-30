@@ -5,7 +5,7 @@ general_params_action:
     doc: |
       Base
       ====
-  
+
       This section covers basic deployment parameters. Supported deployment type is currently Physical for OpenStack. Kubernetes works with both Physical and Heat.
 
     fields:
@@ -49,13 +49,13 @@ general_params_action:
             - "Send to e-mail address"
           - - "commit"
             - "Commit to repository"
-  
+
   - name: "services"
     label: "Services"
     doc: |
       Services
       ========
-  
+
       Here you can choose for which platform you want to generate the model. You can choose eighter OpenStack or Kubernetes. OpenContrail enabled parameter is for network engine of chosen platform. Right now supported only with OpenStack. If not enabled, OpenStack will have ovs as network engine. Kubernetes goes with Calico. Both platforms can go with CI/CD and StackLight.
     fields:
       - name: "platform"
@@ -88,7 +88,7 @@ general_params_action:
     doc: |
       Networking
       ==========
-  
+
       This section covers basic Networking setup. Cookiecutter handles generic setup that includes dedicated management interface and two interfaces for workload. These two interfaces are in bond and have tagged subinterfaces for Control plane (Control network/VLAN) and Data plane (Tenant network/VLAN) traffic. The pxe interface is not managed and it is leaved to default DHCP from installation. Control plane and Data plane has static assign. Setup for NFV scenarios is not covered and needs to be done manually.
 
       .. figure:: https://github.com/mceloud/images/blob/master/cookiecutter%20-%20network.png?raw=true
@@ -174,32 +174,32 @@ infra_params_action:
       - name: "email_address"
         type: "TEXT"
         help_text: "Generated reclass model will be sent to this address."
-        requires: 
+        requires:
           - publication_method: "email"
       - name: "reclass_model_url"
         type: "TEXT"
         initial: {{ reclass_repository }}
         help_text: "Generated reclass model will be commited to this repo."
-        requires: 
+        requires:
           - publication_method: "commit"
       - name: "reclass_model_branch"
         type: "TEXT"
         initial: "master"
         help_text: "Generated reclass model will be commited to this branch."
-        requires: 
+        requires:
           - publication_method: "commit"
       - name: "reclass_model_credentials"
         type: "TEXT"
         initial: github-credentials
         help_text: "These credentials will be used to commit generated reclass."
-        requires: 
+        requires:
           - publication_method: "commit"
   - name: "openstack_networking"
     label: "OpenStack Networking"
     doc: |
       OpenStack Networking
       ====================
-      NFV feature generation is experimental. nfv req enabled parameter is for enabling hugepages and cpu pinning without dpdk. 
+      NFV feature generation is experimental. nfv req enabled parameter is for enabling hugepages and cpu pinning without dpdk.
     requires:
       - platform: "openstack_enabled"
     fields:
@@ -247,15 +247,22 @@ infra_params_action:
       initial: true
       name: openldap_enabled
       type: BOOL
+  - name: "repo_params"
+    label: "Repositories"
+    fields:
+    - help_text: enable local repositories
+      initial: False
+      name: local_repositories
+      type: BOOL
 product_params_action:
   - fields:
     - help_text: IP mask of control network
-      hidden: true
+      hidden: True
       initial: '{{ control_network_subnet | netmask }}'
       name: control_network_netmask
       type: IP
     - help_text: IP mask of deploy network
-      hidden: true
+      hidden: True
       initial: '{{ deploy_network_subnet | netmask }}'
       name: deploy_network_netmask
       type: IP
@@ -371,12 +378,12 @@ product_params_action:
       - platform: openstack_enabled
       type: TEXT
     - help_text: Hash of salt_api_passfor
-      hidden: true
+      hidden: True
       initial: '{{ salt_api_password|hash_password }}'
       name: salt_api_password_hash
       type: TEXT
     - help_text: IP mask of tenant network
-      hidden: true
+      hidden: True
       initial: '{{ tenant_network_subnet | netmask }}'
       name: tenant_network_netmask
       type: IP
@@ -385,7 +392,7 @@ product_params_action:
     doc: |
       Infrastructure product parameters
       =================================
-  
+
       This section covers KVM nodes which hosts Control plane VMs. By default cookicutter uses three KVM nodes. These nodes can host OpenStack Control plane, CI/CD, StackLight or OpenContrail VMs based on previous selection.
 
       .. figure:: https://github.com/mceloud/images/blob/master/cookiecutter%20-%20kvm.png?raw=true
@@ -435,13 +442,13 @@ product_params_action:
       type: TEXT
       width: half
     - help_text: Private key for Jenkins. It is generated automatically.
-      hidden: true
+      hidden: True
       initial: |-
         {{ private_key|indent(8) }}
       name: cicd_private_key
       type: LONG_TEXT
     - help_text: Public key for Jenkins. It is generated automatically.
-      hidden: true
+      hidden: True
       initial: '{{ public_key }}'
       name: cicd_public_key
       type: LONG_TEXT
@@ -449,37 +456,43 @@ product_params_action:
       name: openldap_organisation
       type: TEXT
       requires:
-      - openldap_enabled: True 
+      - openldap_enabled: True
     - initial: "dc=${_param:cluster_name},dc=local"
       name: openldap_dn
       type: TEXT
       requires:
-      - openldap_enabled: True 
+      - openldap_enabled: True
     - initial: "${_param:cluster_public_host}"
       name: openldap_domain
       type: TEXT
       requires:
-      - openldap_enabled: True 
+      - openldap_enabled: True
+      help_text: IP addres for local apptly reposiotries
+      initial: "${_param:cicd_control_vip_address}"
+      name: Local Repositories
+      type: TEXT
+      requires:
+      - local_repositories: True
     label: CI/CD product parameters
     name: cicd
     doc: |
       CI/CD product parameters
       =================================
-  
+
       .. figure:: https://github.com/mceloud/images/blob/master/cookiecutter%20-%20cicd.png?raw=true
         :width: 70 %
         :align: center
         :alt: StackLight control diagram
 
     requires:
-    - cicd_enabled: true
+    - cicd_enabled: True
   - fields:
     - help_text: Image with CNI binaries
       initial: docker-prod-virtual.docker.mirantis.net/mirantis/projectcalico/calico/cni:latest
       name: calico_cni_image
       type: TEXT
     - help_text: ''
-      initial: 'true'
+      initial: True
       name: calico_enable_nat
       type: BOOL
     - help_text: Image with Calico
@@ -499,7 +512,7 @@ product_params_action:
       name: calicoctl_image
       type: TEXT
     - help_text: enable ssl for etcd
-      initial: 'true'
+      initial: True
       name: etcd_ssl
       type: BOOL
     - help_text: Image with Kubernetes.
@@ -631,7 +644,7 @@ product_params_action:
       width: half
     - help_text: mask that is used in opencontrail. Automatically taken from tenant
         network.
-      hidden: true
+      hidden: True
       initial: '{{ tenant_network_subnet[-2:] }}'
       name: opencontrail_compute_iface_mask
       type: TEXT
@@ -700,7 +713,7 @@ product_params_action:
     doc: |
       OpenContrail service parameters
       =================================
-  
+
       OpenContrail Control plane runs on six VMs in total - three for Control and three for Analytics.
 
       .. figure:: https://github.com/mceloud/images/blob/master/cookiecutter%20-%20opencontrail.png?raw=true
@@ -716,7 +729,7 @@ product_params_action:
         :alt: compute diagram
 
     requires:
-    - opencontrail_enabled: true
+    - opencontrail_enabled: True
   - fields:
     - help_text: First NIC in OpenStack compute bond
       initial: eth1
@@ -894,6 +907,7 @@ product_params_action:
       initial: '{{ tenant_network_subnet | subnet(7) }}'
       name: openstack_gateway_node02_tenant_address
       type: IP
+      width: half
       requires:
         - openstack_network_engine: 'ovs'
     - help_text: IP address of gateway node03
@@ -960,33 +974,33 @@ product_params_action:
       initial: physnet1
       name: openstack_nfv_sriov_network
       requires:
-      - openstack_nfv_sriov_enabled: true
+      - openstack_nfv_sriov_enabled: True
       type: TEXT
     - help_text: number of allocated Virtual Function interfaces
       initial: '7'
       name: openstack_nfv_sriov_numvfs
       requires:
-      - openstack_nfv_sriov_enabled: true
+      - openstack_nfv_sriov_enabled: True
       type: TEXT
     - help_text: Physical Function interface providing the Virtual Functions
       initial: eth7
       name: openstack_nfv_sriov_pf_nic
       requires:
-      - openstack_nfv_sriov_enabled: true
+      - openstack_nfv_sriov_enabled: True
       type: TEXT
     - help_text: number of Hugepages if dpdk enabled
       initial: '16'
       name: openstack_nova_compute_hugepages_count
       requires_or:
-      - openstack_nfv_dpdk_enabled: true
-      - openstack_nova_compute_nfv_req_enabled: true
+      - openstack_nfv_dpdk_enabled: True
+      - openstack_nova_compute_nfv_req_enabled: True
       type: TEXT
     - help_text: pinned cpu's for nova
       initial: 1,2,3,4,5,7,8,9,10,11
       name: openstack_nova_cpu_pinning
       requires_or:
-      - openstack_nfv_dpdk_enabled: true
-      - openstack_nova_compute_nfv_req_enabled: true
+      - openstack_nfv_dpdk_enabled: True
+      - openstack_nova_compute_nfv_req_enabled: True
       type: TEXT
     - help_text: If openstack_network_engine == ovs. Enables dvr.
       initial: false
@@ -1080,7 +1094,7 @@ product_params_action:
     doc: |
       OpenStack product parameters
       =================================
-  
+
       .. figure:: https://github.com/mceloud/images/blob/master/cookiecutter%20-%20openstack.png?raw=true
         :width: 70 %
         :align: center
@@ -1214,11 +1228,11 @@ product_params_action:
     doc: |
       StackLight product parameters
       =================================
-  
+
       .. figure:: https://github.com/mceloud/images/blob/master/cookiecutter%20-%20stacklight.png?raw=true
         :width: 70 %
         :align: center
         :alt: StackLight control diagram
 
     requires:
-    - stacklight_enabled: true
+    - stacklight_enabled: True
