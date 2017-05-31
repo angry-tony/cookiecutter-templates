@@ -7,7 +7,7 @@ classes:
 - system.linux.system.repo_local.elasticsearch
 - system.linux.system.repo_local.saltstack.xenial
 - system.linux.system.repo_local.mcp.extra
-{%- else -%}
+{%- else %}
 - system.linux.system.repo.ubuntu
 - system.linux.system.repo.elasticsearch
 - system.linux.system.repo.saltstack.xenial

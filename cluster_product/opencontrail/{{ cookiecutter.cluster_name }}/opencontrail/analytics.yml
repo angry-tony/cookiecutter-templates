@@ -7,7 +7,7 @@ classes:
 - system.linux.system.repo_local.mcp.contrail
 - system.linux.system.repo_local.saltstack.trusty
 - system.linux.system.repo_local.cassandra
-{%- else -%}
+{%- else %}
 - system.linux.system.repo.ubuntu
 - system.linux.system.repo.mcp.openstack
 - system.linux.system.repo.mcp.extra
