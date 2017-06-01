@@ -5,7 +5,7 @@ classes:
 - system.linux.system.repo_local.ubuntu
 - system.linux.system.repo_local.glusterfs
 - system.linux.system.repo_local.saltstack.xenial
-{%- else -%}
+{%- else %}
 - system.linux.system.repo.mcp.openstack
 - system.linux.system.repo.mcp.extra
 - system.linux.system.repo.ubuntu
