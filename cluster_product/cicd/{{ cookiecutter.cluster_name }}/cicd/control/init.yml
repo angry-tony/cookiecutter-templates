@@ -70,7 +70,6 @@ parameters:
       pem_file: /etc/haproxy/ssl/${_param:cluster_public_host}-all.pem
     haproxy_bind_address: ${_param:cluster_vip_address}
     haproxy_mysql_source_port: 13306
-    salt_minion_ca_host: ${_param:infra_config_hostname}.${_param:cluster_domain}
 
     # Aptly
     aptly_gpg_keypair_id: none

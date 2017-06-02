@@ -44,7 +44,6 @@ parameters:
       cert_file: /srv/salt/pki/${_param:cluster_name}/${salt:minion:cert:proxy:common_name}.crt
       chain_file: /srv/salt/pki/${_param:cluster_name}/${salt:minion:cert:proxy:common_name}-with-chain.crt
     cluster_vip_address: ${_param:openstack_proxy_address}
-    salt_minion_ca_host: cfg01.${_param:cluster_domain}
   linux:
     network:
       interface:
