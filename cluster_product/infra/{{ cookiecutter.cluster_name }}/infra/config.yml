@@ -22,6 +22,7 @@ classes:
 - system.salt.minion.ca.salt_master
 - system.salt.master.api
 - system.reclass.storage.salt
+- system.xtrabackup.server.single
 {%- if cookiecutter.kubernetes_enabled != 'True' %}
 - system.reclass.storage.system.physical_control_cluster
 {%- endif %}
