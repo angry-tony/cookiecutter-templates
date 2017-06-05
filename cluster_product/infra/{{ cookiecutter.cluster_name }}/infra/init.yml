@@ -101,7 +101,7 @@ parameters:
   salt:
     minion:
       trusted_ca_minions:
-        - cfg
+        - ${_param:salt_minion_ca_host}
 
   linux:
     network:
