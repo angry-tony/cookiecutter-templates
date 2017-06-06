@@ -2,7 +2,6 @@ classes:
   # Services
   - system.docker.client
   - system.aptly.server.docker
-  - system.aptly.client.publisher
   # Jenkins
   - system.jenkins.master.config
   - system.jenkins.client
@@ -21,6 +20,8 @@ classes:
   {%- else %}
   - system.jenkins.client.user.admin
   {%- endif %}
+  # Slaves
+  system.jenkins.client.node
 
   {%- if cookiecutter.openldap_enabled == 'True' %}
   # OpenLDAP

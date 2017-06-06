@@ -16,6 +16,9 @@ classes:
   # Docker
   - system.docker.host
 
+  # Generate aptly-publisher config to use for jenkins slaves
+  - system.aptly.client.publisher
+
   # Docker services
   - system.docker.swarm.stack.aptly
   - system.docker.swarm.stack.docker
