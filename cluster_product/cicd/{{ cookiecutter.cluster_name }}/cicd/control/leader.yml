@@ -21,7 +21,7 @@ classes:
   - system.jenkins.client.user.admin
   {%- endif %}
   # Slaves
-  system.jenkins.client.node
+  - system.jenkins.client.node
 
   {%- if cookiecutter.openldap_enabled == 'True' %}
   # OpenLDAP
