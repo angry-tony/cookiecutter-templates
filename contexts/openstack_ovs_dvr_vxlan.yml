@@ -23,6 +23,8 @@ default_context:
   gateway_primary_first_nic: eth1
   gateway_primary_second_nic: eth2
   infra_deploy_nic: eth0
+  maas_deploy_address: 10.167.4.91
+  maas_hostname: mas01
   infra_kvm01_control_address: 10.167.4.241
   infra_kvm01_deploy_address: 10.167.5.241
   infra_kvm01_hostname: kvm01

@@ -168,6 +168,19 @@ infra_params_action:
         name: salt_api_password
         type: TEXT
         hidden: True
+  - name: "maas"
+    label: "Ubuntu MaaS"
+    fields:
+      - help_text: "hostname of a MaaS node"
+        initial: "mas01"
+        name: maas_hostname
+        requires:
+        - deployment_type: physical
+      - help_text: "IP address of maas on deploy network"
+        initial: "{{ deploy_network_subnet | subnet(16) }}"
+        name: maas_deploy_address
+        requires:
+        - deployment_type: physical
   - name: "publication"
     label: "Publication Options"
     fields:

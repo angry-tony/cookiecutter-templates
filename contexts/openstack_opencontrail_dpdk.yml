@@ -11,6 +11,8 @@ default_context:
   dns_server01: 8.8.8.8
   dns_server02: 8.8.4.4
   infra_deploy_nic: eth0
+  maas_deploy_address: 10.167.4.91
+  maas_hostname: mas01
   infra_kvm01_control_address: 10.167.4.241
   infra_kvm01_deploy_address: 10.167.5.241
   infra_kvm01_hostname: kvm01
