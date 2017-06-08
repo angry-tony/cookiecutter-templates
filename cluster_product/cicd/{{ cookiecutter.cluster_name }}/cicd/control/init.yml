@@ -84,7 +84,7 @@ parameters:
     {%- if cookiecutter.openldap_enabled == 'True' %}
     # OpenLDAP
     openldap_organisation: "{{ cookiecutter.openldap_organisation }}"
-    openldap_dn: "{{ cookiecutter.openldap_dn }}"
+    openldap_dn: "{{ cookiecutter.openldap_domain|replace('.', ',dc=') }}"
     openldap_domain: "{{ cookiecutter.openldap_domain }}"
     openldap_admin_password: {{ password(16) }}
     openldap_config_password: {{ password(16) }}
