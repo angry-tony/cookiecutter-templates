@@ -117,7 +117,7 @@ parameters:
     horizon_secret_key: {{ password(64) }}
     horizon_identity_host: ${_param:openstack_control_address}
     horizon_identity_encryption: none
-    horizon_identity_version: 3
+    horizon_identity_version: 2
     mongodb_server_replica_set: ceilometer
     mongodb_ceilometer_password: {{ password(16) }}
     mongodb_admin_password: {{ password(16) }}
