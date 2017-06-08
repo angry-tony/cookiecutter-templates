@@ -9,9 +9,6 @@ classes:
 - system.linux.system.repo.mcp.extra
 - system.linux.system.repo.ubuntu
 - system.linux.system.repo.glusterfs
-{%- if cookiecutter.openstack_enabled == 'True' %}
-- system.linux.system.repo.glusterfs
-{%- endif %}
 {%- endif %}
 - system.openssh.client.lab
 {%- if cookiecutter.openstack_enabled == 'True' %}
@@ -36,6 +33,7 @@ classes:
 - system.reclass.storage.system.openstack_database_cluster
 - system.reclass.storage.system.openstack_message_queue_cluster
 - system.reclass.storage.system.openstack_telemetry_cluster
+- system.reclass.storage.system.openstack_benchmark_single
 {%- endif %}
 {%- if cookiecutter.stacklight_enabled == 'True' %}
 - system.linux.system.repo.mcp.extra

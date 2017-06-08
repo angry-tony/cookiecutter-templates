@@ -48,6 +48,12 @@ parameters:
 
   linux:
     network:
+      host:
+        hostname:
+          address: ${_param:single_address}
+          names:
+          - ${linux:network:hostname}
+          - ${linux:network:fqdn}
       interface:
   {%- if not cookiecutter.get('openstack_nfv_dpdk_enabled', 'False') == 'True' %}
         eth1:

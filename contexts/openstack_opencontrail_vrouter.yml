@@ -103,7 +103,9 @@ default_context:
   openstack_telemetry_node02_hostname: mdb02
   openstack_telemetry_node03_address: 10.167.4.78
   openstack_telemetry_node03_hostname: mdb03
-  openstack_version: mitaka
+  openstack_benchmark_node01_hostname: bmk01
+  openstack_benchmark_node01_address: 10.167.4.85
+  openstack_version: ocata
   public_host: ${_param:openstack_proxy_address}
   reclass_repository: https://github.com/Mirantis/mk-lab-salt-model.git
   salt_master_address: 10.167.4.90

@@ -188,6 +188,9 @@ parameters:
     openstack_gateway_node03_hostname: {{ cookiecutter.openstack_gateway_node03_hostname }}
     {%- endif %}
     
+    openstack_benchmark_node01_hostname: {{ cookiecutter.openstack_benchmark_node01_hostname }}
+    openstack_benchmark_node01_address: {{ cookiecutter.openstack_benchmark_node01_address }}
+    
     # Billing
     #keystone_billometer_password: {{ password(16) }}
     #keystone_billometer_address: ${_param:billometer_service_host}

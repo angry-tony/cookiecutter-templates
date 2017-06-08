@@ -983,6 +983,16 @@ product_params_action:
       name: openstack_message_queue_node03_hostname
       type: TEXT
       width: half
+    - help_text: IP address of a benchmark node on control network
+      initial: '{{ control_network_subnet | subnet(95) }}'
+      name: openstack_benchmark_node01_address
+      type: IP
+      width: half
+    - help_text: hostname of a benchmark node
+      initial: bmk01
+      name: openstack_benchmark_node01_hostname
+      type: TEXT
+      width: half
     - help_text: Tag of the physical network the sriov interface belongs to
       initial: physnet1
       name: openstack_nfv_sriov_network
