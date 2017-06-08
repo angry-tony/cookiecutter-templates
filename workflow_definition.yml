@@ -173,14 +173,16 @@ infra_params_action:
     fields:
       - help_text: "hostname of a MaaS node"
         initial: "mas01"
-        name: maas_hostname
+        name: "maas_hostname"
+        type: "TEXT"
         requires:
-        - deployment_type: physical
+          - deployment_type: "physical"
       - help_text: "IP address of maas on deploy network"
         initial: "{{ deploy_network_subnet | subnet(16) }}"
-        name: maas_deploy_address
+        name: "maas_deploy_address"
+        type: "IP"
         requires:
-        - deployment_type: physical
+          - deployment_type: "physical"
   - name: "publication"
     label: "Publication Options"
     fields:
