@@ -1,6 +1,6 @@
 classes:
 - system.maas.region.single
-- cluster.cz-bud-mirantis-net.infra
+- cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   linux:
     network:
