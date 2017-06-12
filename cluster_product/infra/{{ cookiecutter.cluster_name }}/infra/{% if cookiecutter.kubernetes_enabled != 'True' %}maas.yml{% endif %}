@@ -10,7 +10,7 @@ parameters:
           name: ens2
           type: eth
           proto: static
-          netmask: ${_param:deploy_network_gateway}
+          netmask: ${_param:deploy_network_netmask}
           address: ${_param:single_address}
           gateway: ${_param:deploy_network_gateway}
           name_servers:
