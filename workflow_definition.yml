@@ -472,13 +472,13 @@ product_params_action:
       type: TEXT
       requires:
       - openldap_enabled: True
-    - initial: "${_param:cluster_public_host}"
+    - initial: "deploy-name.local"
       name: openldap_domain
       type: TEXT
       requires:
       - openldap_enabled: True
-      help_text: IP addres for local apptly reposiotries
-      initial: "${_param:cicd_control_vip_address}"
+      help_text: LDAP domain
+    - initial: "${_param:cicd_control_vip_address}"
       name: Local Repositories
       type: TEXT
       requires:
