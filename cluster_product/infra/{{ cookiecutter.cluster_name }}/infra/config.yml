@@ -28,6 +28,9 @@ classes:
 - system.reclass.storage.system.opencontrail_analytics_cluster
 - system.reclass.storage.system.opencontrail_control_cluster
 {%- endif %}
+{%- if cookiecutter.openstack_enabled == 'True' and cookiecutter.openstack_network_engine == 'ovs' %}
+- system.reclass.storage.system.openstack_gateway_cluster
+{%- endif %}
 {%- if cookiecutter.openstack_enabled == 'True' %}
 - system.reclass.storage.system.openstack_control_cluster
 - system.reclass.storage.system.openstack_proxy_cluster
