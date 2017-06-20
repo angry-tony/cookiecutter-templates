@@ -1,5 +1,14 @@
 classes:
 - system.collectd.client.output.heka
 - system.heka.log_collector.single
+- system.heka.log_collector.output.sensu
 - system.heka.metric_collector.single
+- system.heka.metric_collector.output.sensu
+- system.sensu.client.stacklight
 - service.grafana.collector
+parameters:
+  _param:
+    rabbitmq_monitor_password: ${_param:stacklight_monitor_rabbitmq_password}
+  sensu:
+    client:
+      use_shortname: true

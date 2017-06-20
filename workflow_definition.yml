@@ -1243,6 +1243,14 @@ product_params_action:
       name: stacklight_telemetry_node03_hostname
       type: TEXT
       width: half
+    - help_text: Address of the SMTP host (for alert notifications)
+      initial: 127.0.0.1
+      name: stacklight_notification_smtp_host
+      type: TEXT
+    - help_text: Recipient mail address (for alert notifications)
+      initial: alerts@localhost
+      name: stacklight_notification_address
+      type: TEXT
     label: StackLight product parameters
     name: stacklight
     doc: |
