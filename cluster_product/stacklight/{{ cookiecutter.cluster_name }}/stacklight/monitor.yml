@@ -21,6 +21,7 @@ classes:
 - system.heka.aggregator.output.sensu
 - system.kibana.server.single
 - system.grafana.server.single
+- system.grafana.server.plugin.piechart
 - system.grafana.client.single
 - system.sensu.client.unsubscribe.collectd
 - system.sensu.server.cluster
