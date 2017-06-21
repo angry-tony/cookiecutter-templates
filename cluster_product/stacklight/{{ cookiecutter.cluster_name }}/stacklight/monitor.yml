@@ -48,6 +48,7 @@ parameters:
     cluster_node03_hostname: ${_param:stacklight_monitor_node03_hostname}
     cluster_node03_address: ${_param:stacklight_monitor_node03_address}
     # Sensu parameters
+    cluster_redis_port: 6379
     cluster_uchiwa_port: 3001
   linux:
     network:
@@ -71,7 +72,7 @@ parameters:
           enabled: true
           domain: ${_param:cluster_domain}
           mail_to: {{ cookiecutter.stacklight_notification_address }}
-          host: {{ cookiecutter.stacklight_notification_host }}
+          host: {{ cookiecutter.stacklight_notification_smtp_host }}
     dashboard:
       enabled: true
       backend:
