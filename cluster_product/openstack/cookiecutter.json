@@ -16,6 +16,8 @@
     "openstack_nfv_sriov_numvfs"                : "7",
     "openstack_nfv_sriov_network"               : "physnet1",
 
+    "openstack_neutron_qos"                     : "False",
+
     "stacklight_enabled"                        : "True",
 
     "openstack_version"                         : "ocata",

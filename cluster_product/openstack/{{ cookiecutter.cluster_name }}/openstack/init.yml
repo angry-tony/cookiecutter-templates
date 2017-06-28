@@ -66,6 +66,8 @@ parameters:
     sriov_unsafe_interrupts: False
 {%- endif %}
 
+    neutron_enable_qos: {{ cookiecutter.openstack_neutron_qos }}
+
     galera_server_cluster_name: openstack_cluster
     galera_server_maintenance_password: {{ password(16) }}
     galera_server_admin_password: {{ password(16) }}
