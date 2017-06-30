@@ -20,5 +20,52 @@
     "openldap_domain"                           : "deployment-name.local",
 
     "stacklight_enabled"                        : "False",
-    "stacklight_version"                        : "1"
+    "stacklight_version"                        : "1",
+
+    "oss_enabled"                               : "True",
+    "oss_openstack_auth_url"                    : "http://172.17.16.190:5000/v3",
+    "oss_openstack_username"                    : "admin",
+    "oss_openstack_password"                    : "nova",
+    "oss_openstack_project"                     : "admin",
+    "oss_openstack_domain_id"                   : "default",
+
+    "oss_runbook_public_key"                    : "<<WILL_BE_GENERATED>>",
+    "oss_runbook_private_key"                   : "<<WILL_BE_GENERATED>>",
+
+    "oss_notification_email_from"               : "",
+    "oss_notification_email_recipients"         : "",
+    "oss_notification_saleforce_username"       : "",
+
+    "oss_cis_enabled"                           : "True",
+    "oss_cis_username"                          : "${_param:oss_openstack_username}",
+    "oss_cis_password"                          : "${_param:oss_openstack_password}",
+    "oss_cis_project"                           : "${_param:oss_openstack_project}",
+    "oss_cis_domain_id"                         : "${_param:oss_openstack_domain_id}",
+    "oss_cis_jobs_repository"                   : "https://github.com/Mirantis/rundeck-cis-jobs.git",
+    "oss_cis_jobs_repository_branch"            : "master",
+
+    "oss_security_audit_enabled"                : "True",
+    "oss_security_audit_username"               : "${_param:oss_openstack_username}",
+    "oss_security_audit_password"               : "${_param:oss_openstack_password}",
+    "oss_security_audit_project"                : "${_param:oss_openstack_project}",
+    "oss_security_audit_user_domain_id"         : "${_param:oss_openstack_domain_id}",
+    "oss_security_audit_project_domain_id"      : "${_param:oss_openstack_domain_id}",
+
+    "oss_capacity_service_enabled"                : "True",
+    "oss_capacity_service_username"               : "${_param:oss_openstack_username}",
+    "oss_capacity_service_password"               : "${_param:oss_openstack_password}",
+    "oss_capacity_service_project"                : "${_param:oss_openstack_project}",
+    "oss_capacity_service_user_domain_id"         : "${_param:oss_openstack_domain_id}",
+    "oss_capacity_service_project_domain_id"      : "${_param:oss_openstack_domain_id}",
+
+    "oss_portal_image"                          : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/devops-portal:latest",
+    "oss_rundeck_image"                         : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/rundeck:latest",
+    "oss_cis_openstack_image"                   : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/cis-openstack:latest",
+    "oss_pushkin_image"                         : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/pushkin:latest",
+    "oss_security_monkey_api_image"             : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/security-monkey-api:latest",
+    "oss_security_monkey_scheduler_image"       : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/security-monkey-scheduler:latest",
+    "oss_janitor_monkey_image"                  : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/janitor-monkey:latest",
+    "oss_mongodb_image"                         : "library/mongo:3.4",
+    "oss_postgresql_image"                      : "library/postgres:9.6",
+    "oss_elasticsearch_image"                   : "docker.elastic.co/elasticsearch/elasticsearch:5.4.1"
 }
