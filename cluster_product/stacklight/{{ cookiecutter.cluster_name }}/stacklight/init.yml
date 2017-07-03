@@ -3,6 +3,7 @@
 {%- endmacro -%}
 parameters:
   _param:
+    alarming_service: sensu
     kibana_elasticsearch_host: ${_param:stacklight_log_address}
     heka_elasticsearch_host: ${_param:stacklight_log_address}
     heka_influxdb_host: ${_param:stacklight_telemetry_address}
