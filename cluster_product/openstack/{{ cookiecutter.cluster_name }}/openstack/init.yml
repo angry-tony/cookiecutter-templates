@@ -11,6 +11,8 @@ parameters:
     neutron_global_physnet_mtu: 1500
     neutron_external_mtu: 1500
 
+    neutron_enable_qos: {{ cookiecutter.openstack_neutron_qos }}
+
     {%- if cookiecutter.openstack_ovs_dvr_enabled == 'True' %}
     neutron_compute_external_access: True
     neutron_control_dvr: True
@@ -65,8 +67,6 @@ parameters:
     sriov_nic01_physical_network: {{ cookiecutter.openstack_nfv_sriov_network }}
     sriov_unsafe_interrupts: False
 {%- endif %}
-
-    neutron_enable_qos: {{ cookiecutter.openstack_neutron_qos }}
 
     galera_server_cluster_name: openstack_cluster
     galera_server_maintenance_password: {{ password(16) }}
