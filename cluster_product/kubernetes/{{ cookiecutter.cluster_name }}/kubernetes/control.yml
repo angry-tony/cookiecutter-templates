@@ -3,8 +3,14 @@ classes:
 - system.haproxy.proxy.listen.kubernetes.apiserver
 {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
 - system.linux.system.repo_local.docker
+- system.linux.system.repo_local.ubuntu
+- system.linux.system.repo_local.mcp.extra
+- system.linux.system.repo_local.saltstack.xenial
 {%- else %}
 - system.linux.system.repo.docker
+- system.linux.system.repo.ubuntu
+- system.linux.system.repo.mcp.extra
+- system.linux.system.repo.saltstack.xenial
 {%- endif %}
 - system.salt.minion.cert.etcd_server
 - system.kubernetes.master.cluster
@@ -20,10 +26,12 @@ parameters:
         engine: docker_hybrid
       ssl:
         enabled: {{ cookiecutter.etcd_ssl }}
+      {%- if cookiecutter.kubernetes_network_engine == 'calico' %}
       setup:
         calico:
           key: /calico/v1/ipam/v4/pool/${_param:calico_private_network}-${_param:calico_private_netmask}
           value: '{"masquerade":{{ cookiecutter.calico_enable_nat|lower }},"cidr":"${_param:calico_private_network}/${_param:calico_private_netmask}"}'
+      {%- endif %}
   kubernetes:
     master:
       etcd:
@@ -37,6 +45,15 @@ parameters:
         prometheus:
           enabled: true
         {%- endif %}
+        {%- if cookiecutter.kubernetes_network_engine == 'opencontrail' %}
+        engine: opencontrail
+        public_ip_range: {{ cookiecutter.opencontrail_public_ip_range }}
+        public_network: {{ cookiecutter.get('opencontrail_public_ip_network', 'default-domain:default-project:Public') }}
+        private_ip_range: {{ cookiecutter.opencontrail_private_ip_range }}
+        config:
+          api:
+            host: ${_param:opencontrail_control_address}
+        {%- endif %}
       namespace:
         netchecker:
           enabled: true
@@ -45,3 +62,11 @@ parameters:
           enabled: true
         helm:
           enabled: true
+        {%- if cookiecutter.kubernetes_network_engine == 'opencontrail' %}
+        dashboard:
+          enabled: False
+        contrail_network_controller:
+          namespace: kube-system
+          enabled: true
+          image: ${_param:kubernetes_contrail_network_controller_image}
+        {%- endif %}

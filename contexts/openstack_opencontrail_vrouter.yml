@@ -10,6 +10,7 @@ default_context:
   cicd_control_node03_hostname: cid03
   cluster_domain: deploy-name.local
   cluster_name: deployment_name
+  deployment_type: physical
   compute_primary_first_nic: eth1
   compute_primary_second_nic: eth2
   control_network_netmask: 255.255.255.0

@@ -1,5 +1,6 @@
 {
     "cluster_name"                              : "deployment_name",
+    "deployment_type"                           : "physical",
     "opencontrail_analytics_address"            : "10.167.4.30",
     "opencontrail_analytics_node01_address"     : "10.167.4.31",
     "opencontrail_analytics_node02_address"     : "10.167.4.32",

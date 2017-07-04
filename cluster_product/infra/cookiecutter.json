@@ -6,7 +6,7 @@
 
     "local_repositories"                        : "False",
     "local_repo_url"                            : "${_param:cicd_control_vip_address}",
-
+    "deployment_type"                           : "physical",
     "deploy_network_netmask"                    : "255.255.255.0",
     "deploy_network_gateway"                    : "",
     "control_network_netmask"                   : "255.255.255.0",
@@ -44,10 +44,11 @@
 
     "openstack_network_engine"                  : "opencontrail",
     "openstack_enabled"                         : "True",
+    "opencontrail_enabled"                      : "True",
     "stacklight_enabled"                        : "True",
     "cicd_enabled"                              : "True",
     "kubernetes_enabled"                        : "False",
-
+    "kubernetes_network_engine"                 : "calico",
     "openstack_nfv_dpdk_enabled"                : "False",
     "openstack_nfv_sriov_enabled"               : "False",
 

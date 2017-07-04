@@ -13,9 +13,9 @@ classes:
 {%- endif %}
 {%- if cookiecutter.openstack_enabled == 'True' %}
 - cluster.{{ cookiecutter.cluster_name }}.openstack
-{%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
-- cluster.{{ cookiecutter.cluster_name }}.opencontrail
 {%- endif %}
+{%- if cookiecutter.opencontrail_enabled == 'True' %}
+- cluster.{{ cookiecutter.cluster_name }}.opencontrail
 {%- endif %}
 {%- if cookiecutter.stacklight_enabled == 'True' %}
 - cluster.{{ cookiecutter.cluster_name }}.stacklight
@@ -45,6 +45,26 @@ parameters:
     cluster_name: {{ cookiecutter.cluster_name }}
     cluster_public_host: {{ cookiecutter.public_host }}
 
+    {%- if cookiecutter.openstack_enabled == 'True' or cookiecutter.opencontrail_enabled == 'True' %}
+    control_network_netmask: {{ cookiecutter.control_network_netmask }}
+    tenant_network_netmask: {{ cookiecutter.tenant_network_netmask }}
+
+    dns_server01: {{ cookiecutter.dns_server01 }}
+    dns_server02: {{ cookiecutter.dns_server02 }}
+    {%- endif %}
+
+    {%- if cookiecutter.opencontrail_enabled == 'True' %}
+    tenant_network_gateway: {{ cookiecutter.tenant_network_gateway }}
+    {%- endif %}
+
+    {%- if cookiecutter.deployment_type == 'physical' %}
+    control_vlan: {{ cookiecutter.control_vlan }}
+    tenant_vlan: {{ cookiecutter.tenant_vlan }}
+
+    deploy_network_netmask: {{ cookiecutter.deploy_network_netmask }}
+    deploy_network_gateway: {{ cookiecutter.deploy_network_gateway }}
+    {%- endif %}
+
     {%- if cookiecutter.kubernetes_enabled != 'True' %}
 
     # MaaS parameters
@@ -69,16 +89,6 @@ parameters:
     glusterfs_node02_address: ${_param:infra_kvm_node02_address}
     glusterfs_node03_address: ${_param:infra_kvm_node03_address}
 
-    control_network_netmask: {{ cookiecutter.control_network_netmask }}
-    tenant_network_netmask: {{ cookiecutter.tenant_network_netmask }}
-    control_vlan: {{ cookiecutter.control_vlan }}
-    tenant_vlan: {{ cookiecutter.tenant_vlan }}
-
-    dns_server01: {{ cookiecutter.dns_server01 }}
-    dns_server02: {{ cookiecutter.dns_server02 }}
-    deploy_network_netmask: {{ cookiecutter.deploy_network_netmask }}
-    deploy_network_gateway: {{ cookiecutter.deploy_network_gateway }}
-
     linux_dhcp_interface:
       enabled: true
       type: eth
@@ -94,9 +104,6 @@ parameters:
         - ${_param:dns_server02}
     {%- endif %}
 
-    {%- if cookiecutter.openstack_enabled == 'True' and cookiecutter.openstack_network_engine == 'opencontrail' %}
-    tenant_network_gateway: {{ cookiecutter.tenant_network_gateway }}
-    {%- endif %}
 
   salt:
     minion:

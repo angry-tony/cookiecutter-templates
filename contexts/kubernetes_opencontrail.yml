@@ -1,0 +1,68 @@
+default_context:
+# infra
+    openstack_enabled: false
+    stacklight_enabled: false
+    cicd_enabled:  false
+    kubernetes_enabled: true
+    opencontrail_enabled: true
+    openstack_nfv_dpdk_enabled: false
+    openstack_nfv_sriov_enabled: false
+    deployment_type: virtual
+    control_network_netmask: 255.255.255.0
+    tenant_network_netmask: 255.255.255.0
+
+# kubernetes
+    cluster_name: k8s-salt-model
+    cluster_domain: mcp-fuel-aio.local
+    reclass_repository: "https://github.com/mceloud/k8s-salt-model.git"
+    kubernetes_network_engine: opencontrail
+    salt_master_address: 192.168.10.100
+    salt_master_management_address: 192.168.10.100
+
+    public_host: ""
+
+    kubernetes_keepalived_vip_interface: ens4
+    kubernetes_control_address: 172.16.10.253
+
+    kubernetes_compute_node01_address: 172.16.10.105
+    kubernetes_compute_node01_hostname: cmp01
+    kubernetes_compute_node02_address: 172.16.10.106
+    kubernetes_compute_node02_hostname: cmp02
+    kubernetes_control_node01_address: 172.16.10.107
+    kubernetes_control_node01_hostname: ctl01
+    kubernetes_control_node02_address: 172.16.10.108
+    kubernetes_control_node02_hostname: ctl02
+    kubernetes_control_node03_address: 172.16.10.109
+    kubernetes_control_node03_hostname: ctl03
+    kubernetes_network_engine: opencontrail
+    kubernetes_compute_node01_tenant_address: 172.16.11.105
+    kubernetes_compute_node02_tenant_address: 172.16.11.106
+    kubernetes_control_node01_tenant_address: 172.16.11.107
+    kubernetes_control_node02_tenant_address: 172.16.11.108
+    kubernetes_control_node03_tenant_address: 172.16.11.109
+    opencontrail_public_ip_range: 10.0.0.0/24
+    opencontrail_private_ip_range: 10.1.0.0/24
+
+# opencontrail
+    opencontrail_analytics_address: 10.167.4.30
+    opencontrail_analytics_hostname: nal
+    opencontrail_analytics_node01_address: 10.167.4.31
+    opencontrail_analytics_node01_hostname: nal01
+    opencontrail_analytics_node02_address: 10.167.4.32
+    opencontrail_analytics_node02_hostname: nal02
+    opencontrail_analytics_node03_address: 10.167.4.33
+    opencontrail_analytics_node03_hostname: nal03
+    opencontrail_compute_iface: ens4
+    opencontrail_compute_iface_mask: '24'
+    opencontrail_control_address: 10.167.4.20
+    opencontrail_control_hostname: ntw
+    opencontrail_control_node01_address: 10.167.4.21
+    opencontrail_control_node01_hostname: ntw01
+    opencontrail_control_node02_address: 10.167.4.22
+    opencontrail_control_node02_hostname: ntw02
+    opencontrail_control_node03_address: 10.167.4.23
+    opencontrail_control_node03_hostname: ntw03
+    opencontrail_router01_address: 10.167.4.100
+    opencontrail_router01_hostname: rtr01
+    opencontrail_router02_address: 10.167.4.101
+    opencontrail_router02_hostname: rtr02

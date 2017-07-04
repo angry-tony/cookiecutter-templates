@@ -46,9 +46,17 @@ parameters:
     cluster_node03_address: ${_param:kubernetes_control_node03_address}
     cluster_node03_port: 4001
 
+    {%- if cookiecutter.kubernetes_network_engine == 'calico' %}
     # calico
     calico_private_network: {{ cookiecutter.calico_network }}
     calico_private_netmask: {{ cookiecutter.calico_netmask }}
+    {%- elif cookiecutter.kubernetes_network_engine == 'opencontrail' %}
+    kubernetes_control_node01_tenant_address: {{ cookiecutter.kubernetes_control_node01_tenant_address }}
+    kubernetes_control_node02_tenant_address: {{ cookiecutter.kubernetes_control_node02_tenant_address }}
+    kubernetes_control_node03_tenant_address: {{ cookiecutter.kubernetes_control_node03_tenant_address }}
+    kubernetes_compute_node01_tenant_address: {{ cookiecutter.kubernetes_compute_node01_tenant_address }}
+    kubernetes_compute_node02_tenant_address: {{ cookiecutter.kubernetes_compute_node02_tenant_address }}
+    {%- endif %}
 
   linux:
     network:

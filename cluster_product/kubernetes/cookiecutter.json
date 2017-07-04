@@ -1,5 +1,6 @@
 {
     "cluster_name"                               : "deployment_name",
+    "deployment_type"                            : "virtual",
 
     "kubernetes_keepalived_vip_interface"        : "ens4",
 
@@ -11,6 +12,11 @@
     "kubernetes_control_node02_deploy_address"   : "10.167.5.12",
     "kubernetes_control_node03_deploy_address"   : "10.167.5.13",
 
+    "kubernetes_compute_node01_tenant_address"   : "172.16.11.105",
+    "kubernetes_compute_node02_tenant_address"   : "172.16.11.106",
+    "kubernetes_control_node01_tenant_address"   : "172.16.11.107",
+    "kubernetes_control_node02_tenant_address"   : "172.16.11.108",
+    "kubernetes_control_node03_tenant_address"   : "172.16.11.109",
 
     "kubernetes_compute_node01_single_address"   : "10.167.2.101",
     "kubernetes_compute_node02_single_address"   : "10.167.2.102",
@@ -39,6 +45,8 @@
     "calico_image"                               : "docker-prod-virtual.docker.mirantis.net/mirantis/projectcalico/calico/node:latest",
     "calicoctl_image"                            : "docker-prod-virtual.docker.mirantis.net/mirantis/projectcalico/calico/ctl:latest",
     "etcd_ssl"                                   : "true",
-
+    "kubernetes_network_engine"                  : "calico",
+    "opencontrail_public_ip_range"               : "172.16.0.0/24",
+    "opencontrail_private_ip_range"              : "10.150.0.0/16",
     "stacklight_enabled"                         : "true"
 }

@@ -8,6 +8,7 @@ default_context:
   cicd_control_vip_address: 10.167.4.90
   cicd_control_vip_hostname: cid
   cicd_enabled: 'True'
+  deployment_type: physical
   cicd_private_key: <<WILL_BE_GENERATED>>
   cicd_public_key: <<WILL_BE_GENERATED>>
   cluster_domain: deploy-name.local

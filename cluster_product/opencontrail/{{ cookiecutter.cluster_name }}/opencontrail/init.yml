@@ -7,8 +7,10 @@ parameters:
     opencontrail_stats_password: {{ password(16) }}
     opencontrail_compute_dns: ${_param:dns_server01}
     opencontrail_compute_gateway: ${_param:tenant_network_gateway}
-    {%- if not cookiecutter.get('openstack_nfv_dpdk_enabled', 'False') == 'True' %}
+    {%- if not cookiecutter.get('openstack_nfv_dpdk_enabled', 'False') == 'True' and cookiecutter.deployment_type == 'physical' %}
     opencontrail_compute_iface: bond0.${_param:tenant_vlan}
+    {%- else %}
+    opencontrail_compute_iface: {{ cookiecutter.opencontrail_compute_iface }}
     {%- endif %}
     opencontrail_compute_iface_mask: {{ cookiecutter.opencontrail_compute_iface_mask }}
 

@@ -1,19 +1,27 @@
 classes:
 {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
 - system.linux.system.repo_local.docker
+- system.linux.system.repo_local.ubuntu
+- system.linux.system.repo_local.mcp.extra
+- system.linux.system.repo_local.saltstack.xenial
 {%- else %}
 - system.linux.system.repo.docker
+- system.linux.system.repo.ubuntu
+- system.linux.system.repo.mcp.extra
+- system.linux.system.repo.saltstack.xenial
 {%- endif %}
 - system.kubernetes.pool.cluster
 - system.salt.minion.cert.k8s_client
 - system.salt.minion.cert.etcd_client
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
+  {%- if cookiecutter.kubernetes_network_engine == 'calico' %}
   _param:
     kubernetes_calicoctl_image: {{ cookiecutter.calicoctl_image }}
     kubernetes_calico_image: {{ cookiecutter.calico_image }}
     kubernetes_calico_cni_image: {{ cookiecutter.calico_cni_image }}
     kubernetes_hyperkube_image: {{ cookiecutter.hyperkube_image }}
+  {%- endif %}
   docker:
     host:
       pkgs:
@@ -26,11 +34,18 @@ parameters:
         etcd:
           ssl:
             enabled: {{ cookiecutter.etcd_ssl }}
+        {%- if cookiecutter.kubernetes_network_engine == 'calico' %}
         image: ${_param:kubernetes_calico_image}
         calicoctl:
           image: ${_param:kubernetes_calicoctl_image}
         cni:
           image: ${_param:kubernetes_calico_cni_image}
+        {%- elif cookiecutter.kubernetes_network_engine == 'opencontrail' %}}
+        engine: opencontrail
+        config:
+          api:
+            host: ${_param:opencontrail_control_address}
+        {%- endif %}
         {%- if cookiecutter.stacklight_enabled == 'True' %}
         prometheus:
           enabled: true
@@ -38,3 +53,66 @@ parameters:
     common:
       hyperkube:
         image: ${_param:kubernetes_hyperkube_image}
+  {%- if cookiecutter.kubernetes_network_engine == 'opencontrail' %}
+  linux:
+    network:
+      interface:
+        {%- if cookiecutter.deployment_type == 'physical' %}
+        eth1:
+          mtu: 9000
+          enabled: true
+          type: slave
+          proto: manual
+          name: ${_param:primary_first_nic}
+          master: bond0
+        eth2:
+          mtu: 9000
+          enabled: true
+          type: slave
+          proto: manual
+          name: ${_param:primary_second_nic}
+          master: bond0
+        bond0:
+          mtu: 9000
+          enabled: true
+          proto: manual
+          type: bond
+          use_interfaces:
+          - ${_param:primary_first_nic}
+          - ${_param:primary_second_nic}
+          slaves: ${_param:primary_first_nic} ${_param:primary_second_nic}
+          mode: {{ cookiecutter.compute_bond_mode }}
+        bond0.1:
+          mtu: 9000
+          name: bond0.${_param:control_vlan}
+          enabled: true
+          proto: static
+          type: vlan
+          use_interfaces:
+          - bond0
+          address: ${_param:single_address}
+          netmask: ${_param:control_network_netmask}
+        bond0.2:
+          mtu: 9000
+          name: bond0.${_param:tenant_vlan}
+          enabled: true
+          proto: manual
+          type: vlan
+          use_interfaces:
+          - bond0
+        {%- endif %}
+        vhost0:
+          enabled: true
+          type: eth
+          mtu: 9000
+          address: ${_param:tenant_address}
+          netmask: ${_param:tenant_network_netmask}
+          gateway: ${_param:opencontrail_compute_gateway}
+          pre_up_cmds:
+          - /usr/lib/contrail/if-vhost0
+          use_interfaces:
+          - ${_param:opencontrail_compute_iface}
+          name_servers:
+          - ${_param:dns_server01}
+          - ${_param:dns_server02}
+  {%- endif %}
