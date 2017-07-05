@@ -12,6 +12,7 @@ parameters:
     neutron_external_mtu: 1500
 
     neutron_enable_qos: {{ cookiecutter.openstack_neutron_qos }}
+    neutron_enable_vlan_aware_vms: {{ cookiecutter.openstack_neutron_vlan_aware_vms }}
 
     {%- if cookiecutter.openstack_ovs_dvr_enabled == 'True' %}
     neutron_compute_external_access: True

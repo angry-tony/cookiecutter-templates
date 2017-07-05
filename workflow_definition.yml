@@ -1332,6 +1332,12 @@ product_params_action:
       - openstack_network_engine: ovs
       - openstack_ovs_encapsulation_type: vlan
       type: TEXT
+    - help_text: If openstack_network_engine == ovs. Enables VLAN-aware VMs.
+      initial: false
+      name: openstack_neutron_vlan_aware_vms
+      requires:
+      - openstack_network_engine: ovs
+      type: BOOL
     - help_text: IP VIP address of proxy cluster on control network
       initial: '{{ control_network_subnet | subnet(80) }}'
       name: openstack_proxy_address

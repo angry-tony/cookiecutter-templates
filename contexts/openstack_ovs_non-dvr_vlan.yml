@@ -84,6 +84,7 @@ default_context:
   openstack_nfv_sriov_enabled: 'False'
   openstack_ovs_dvr_enabled: 'False'
   openstack_neutron_qos: 'False'
+  openstack_neutron_vlan_aware_vms: 'False'
   openstack_ovs_encapsulation_type: vlan
   openstack_ovs_encapsulation_vlan_range: 2416:2420
   openstack_proxy_address: 10.167.4.80
