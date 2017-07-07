@@ -19,6 +19,7 @@
     "openstack_neutron_qos"                     : "False",
 
     "stacklight_enabled"                        : "True",
+    "stacklight_version"                        : "1",
 
     "openstack_version"                         : "ocata",
 

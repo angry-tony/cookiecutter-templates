@@ -5,7 +5,7 @@ classes:
 - system.linux.system.repo_local.mcp.extra
 - system.linux.system.repo_local.saltstack.xenial
 - system.linux.system.repo_local.glusterfs
-{%- if cookiecutter.stacklight_enabled == 'True' %}
+{%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
 - system.linux.system.repo_local.sensu
 {%- endif %}
 {%- else %}
@@ -14,7 +14,7 @@ classes:
 - system.linux.system.repo.mcp.extra
 - system.linux.system.repo.saltstack.xenial
 - system.linux.system.repo.glusterfs
-{%- if cookiecutter.stacklight_enabled == 'True' %}
+{%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
 - system.linux.system.repo.sensu
 {%- endif %}
 {%- endif %}

@@ -29,5 +29,6 @@
 
     "openstack_nfv_dpdk_enabled"                : "False",
 
-    "stacklight_enabled"                        : "True"
+    "stacklight_enabled"                        : "True",
+    "stacklight_version"                        : "1"
 }

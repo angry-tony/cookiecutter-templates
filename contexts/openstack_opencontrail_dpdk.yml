@@ -111,6 +111,7 @@ default_context:
   salt_master_hostname: cfg01
   salt_master_management_address: 10.167.5.90
   stacklight_enabled: 'True'
+  stacklight_version: '1'
   tenant_network_gateway: ''
   tenant_network_netmask: 255.255.255.0
   tenant_vlan: '20'

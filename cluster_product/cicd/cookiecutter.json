@@ -17,5 +17,8 @@
 
     "openldap_enabled"                          : "True",
     "openldap_organisation"                     : "${_param:cluster_name}",
-    "openldap_domain"                           : "deployment-name.local"
+    "openldap_domain"                           : "deployment-name.local",
+
+    "stacklight_enabled"                        : "False",
+    "stacklight_version"                        : "1"
 }

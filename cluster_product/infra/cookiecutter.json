@@ -46,6 +46,7 @@
     "openstack_enabled"                         : "True",
     "opencontrail_enabled"                      : "True",
     "stacklight_enabled"                        : "True",
+    "stacklight_version"                        : "1",
     "cicd_enabled"                              : "True",
     "kubernetes_enabled"                        : "False",
     "kubernetes_network_engine"                 : "calico",

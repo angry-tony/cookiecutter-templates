@@ -7,7 +7,7 @@ classes:
 - system.linux.system.repo_local.mcp.openstack
 - system.linux.system.repo_local.mcp.extra
 - system.linux.system.repo_local.saltstack.xenial
-{%- if cookiecutter.stacklight_enabled == 'True' %}
+{%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
 - system.linux.system.repo_local.sensu
 {%- endif %}
 {%- else %}
@@ -15,7 +15,7 @@ classes:
 - system.linux.system.repo.mcp.openstack
 - system.linux.system.repo.mcp.extra
 - system.linux.system.repo.saltstack.xenial
-{%- if cookiecutter.stacklight_enabled == 'True' %}
+{%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
 - system.linux.system.repo.sensu
 {%- endif %}
 {%- endif %}

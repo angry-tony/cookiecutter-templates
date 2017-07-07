@@ -1,0 +1,22 @@
+{
+    "cluster_name"                              : "deployment_name",
+    "stacklight_log_address"                    : "10.167.4.60",
+    "stacklight_log_node01_address"             : "10.167.4.61",
+    "stacklight_log_node02_address"             : "10.167.4.62",
+    "stacklight_log_node03_address"             : "10.167.4.63",
+    "stacklight_log_hostname"                   : "log",
+    "stacklight_log_node01_hostname"            : "log01",
+    "stacklight_log_node02_hostname"            : "log02",
+    "stacklight_log_node03_hostname"            : "log03",
+    "stacklight_telemetry_address"              : "10.167.4.85",
+    "stacklight_telemetry_node01_address"       : "10.167.4.86",
+    "stacklight_telemetry_node02_address"       : "10.167.4.87",
+    "stacklight_telemetry_node03_address"       : "10.167.4.88",
+    "stacklight_telemetry_hostname"             : "mtr",
+    "stacklight_telemetry_node01_hostname"      : "mtr01",
+    "stacklight_telemetry_node02_hostname"      : "mtr02",
+    "stacklight_telemetry_node03_hostname"      : "mtr03",
+
+    "openstack_enabled"                         : "True",
+    "kubernetes_enabled"                        : "False"
+}

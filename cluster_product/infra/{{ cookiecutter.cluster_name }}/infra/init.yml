@@ -19,7 +19,16 @@ classes:
 {%- endif %}
 {%- if cookiecutter.stacklight_enabled == 'True' %}
 - cluster.{{ cookiecutter.cluster_name }}.stacklight
+{%- if cookiecutter.stacklight_version == '1' %}
 - cluster.{{ cookiecutter.cluster_name }}.stacklight.client
+{%- endif %}
+{%- if cookiecutter.stacklight_version == '2' %}
+- system.telegraf.agent
+- system.prometheus.collector
+- service.grafana.collector
+#- system.heka.log_collector.single
+#- system.heka.log_collector.output.telegraf
+{%- endif %}
 {%- endif %}
 {%- if cookiecutter.cicd_enabled == 'True' %}
 - cluster.{{ cookiecutter.cluster_name }}.cicd

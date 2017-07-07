@@ -7,7 +7,7 @@ classes:
 - system.linux.system.repo_local.mcp.contrail
 - system.linux.system.repo_local.saltstack.trusty
 - system.linux.system.repo_local.cassandra
-{%- if cookiecutter.stacklight_enabled == 'True' %}
+{%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
 - system.linux.system.repo_local.sensu
 {%- endif %}
 {%- else %}
@@ -17,7 +17,7 @@ classes:
 - system.linux.system.repo.mcp.extra
 - system.linux.system.repo.saltstack.trusty
 - system.linux.system.repo.cassandra
-{%- if cookiecutter.stacklight_enabled == 'True' %}
+{%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
 - system.linux.system.repo.sensu
 {%- endif %}
 {%- endif %}

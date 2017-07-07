@@ -4,7 +4,7 @@ classes:
 - system.linux.system.repo_local.mcp.extra
 - system.linux.system.repo_local.ubuntu
 - system.linux.system.repo_local.glusterfs
-{%- if cookiecutter.stacklight_enabled == 'True' %}
+{%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
 - system.linux.system.repo_local.sensu
 {%- endif %}
 {%- else %}
@@ -12,7 +12,7 @@ classes:
 - system.linux.system.repo.mcp.extra
 - system.linux.system.repo.ubuntu
 - system.linux.system.repo.glusterfs
-{%- if cookiecutter.stacklight_enabled == 'True' %}
+{%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
 - system.linux.system.repo.sensu
 {%- endif %}
 {%- endif %}
@@ -52,8 +52,10 @@ classes:
 {%- if cookiecutter.stacklight_enabled == 'True' %}
 - system.linux.system.repo.mcp.extra
 - system.reclass.storage.system.stacklight_log_cluster
-- system.reclass.storage.system.stacklight_monitor_cluster
 - system.reclass.storage.system.stacklight_telemetry_cluster
+{%- if cookiecutter.stacklight_version == '1' %}
+- system.reclass.storage.system.stacklight_monitor_cluster
+{%- endif %}
 {%- endif %}
 {%- if cookiecutter.cicd_enabled == 'True' %}
 - system.reclass.storage.system.cicd_control_cluster
@@ -128,7 +130,7 @@ parameters:
             tenant_address: ${_param:kubernetes_compute_node02_tenant_address}
             {%- endif %}
         {%- endif %}
-        {%- if cookiecutter.stacklight_enabled == 'True' %}
+        {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
         stacklight_log_node01:
           classes:
           - system.elasticsearch.client.single
@@ -136,6 +138,23 @@ parameters:
           classes:
           - system.grafana.client.single
           - system.kibana.client.single
+        {%- endif %}
+        {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '2' and cookiecutter.kubernetes_enabled == 'True' %}
+        stacklight_telemetry_node01:
+          classes:
+          - service.galera.master.cluster
+          params:
+            mysql_cluster_role: master
+        stacklight_telemetry_node02:
+          classes:
+          - service.galera.slave.cluster
+          params:
+            mysql_cluster_role: slave
+        stacklight_telemetry_node03:
+          classes:
+          - service.galera.slave.cluster
+          params:
+            mysql_cluster_role: slave
         {%- endif %}
         {%- if cookiecutter.openstack_enabled == 'True' and cookiecutter.openstack_network_engine == 'opencontrail' %}
         opencontrail_control_node01:

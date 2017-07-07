@@ -78,6 +78,15 @@ general_params_action:
         help_text: "Enable StackLight sub-cluster"
         initial: True
         label: "StackLight enabled"
+      - name: "stacklight_version"
+        type: "CHOICE"
+        help_text: "Enable either Stacklight or Stacklight V2"
+        choices:
+          - - "1"
+            - "1"
+          - - "2"
+            - "2"
+        initial: "1"
       - name: "cicd_enabled"
         type: "BOOL"
         help_text: "Enable CI/CD sub-cluster"

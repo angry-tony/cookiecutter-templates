@@ -5,7 +5,7 @@ classes:
 - system.linux.system.repo_local.ubuntu
 - system.linux.system.repo_local.glusterfs
 - system.linux.system.repo_local.saltstack.xenial
-{%- if cookiecutter.stacklight_enabled == 'True' %}
+{%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
 - system.linux.system.repo_local.sensu
 {%- endif %}
 {%- else %}
@@ -14,7 +14,7 @@ classes:
 - system.linux.system.repo.ubuntu
 - system.linux.system.repo.glusterfs
 - system.linux.system.repo.saltstack.xenial
-{%- if cookiecutter.stacklight_enabled == 'True' %}
+{%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
 - system.linux.system.repo.sensu
 {%- endif %}
 {%- endif %}
@@ -37,7 +37,9 @@ classes:
 - system.salt.control.cluster.openstack_benchmark_single
 {%- endif %}
 {%- if cookiecutter.stacklight_enabled == 'True' %}
+{%- if cookiecutter.stacklight_version == '1' %}
 - system.salt.control.cluster.stacklight_server_cluster
+{%- endif %}
 - system.salt.control.cluster.stacklight_log_cluster
 - system.salt.control.cluster.stacklight_telemetry_cluster
 {%- endif %}
