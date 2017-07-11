@@ -26,6 +26,7 @@ classes:
 {%- if cookiecutter.get('openstack_enabled') == 'True' %}
 - system.opencontrail.client.resource.openstack_metadata
 {%- endif %}
+- system.zookeeper.backup.client.single
 - system.opencontrail.client.resource.edge_routers
 - system.opencontrail.client.resource.control_node
 - system.opencontrail.client.resource.config_node
