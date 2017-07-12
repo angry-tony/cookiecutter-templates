@@ -20,6 +20,7 @@ classes:
 - system.galera.server.database.keystone
 - system.galera.server.database.nova
 - system.galera.server.database.neutron
+#- haproxy.proxy.listen.openstack.galera.clustercheck
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
