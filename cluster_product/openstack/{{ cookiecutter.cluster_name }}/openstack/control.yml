@@ -5,6 +5,9 @@ classes:
 - system.linux.system.repo_local.mcp.openstack
 - system.linux.system.repo_local.saltstack.xenial
 - system.linux.system.repo_local.glusterfs
+{%- if cookiecutter.stacklight_enabled == 'True' %}
+- system.linux.system.repo_local.sensu
+{%- endif %}
 {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
 - system.linux.system.repo_local.mcp.contrail
 {%- endif %}
@@ -14,6 +17,9 @@ classes:
 - system.linux.system.repo.mcp.openstack
 - system.linux.system.repo.saltstack.xenial
 - system.linux.system.repo.glusterfs
+{%- if cookiecutter.stacklight_enabled == 'True' %}
+- system.linux.system.repo.sensu
+{%- endif %}
 {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
 - system.linux.system.repo.mcp.contrail
 {%- endif %}

@@ -5,12 +5,18 @@ classes:
 - system.linux.system.repo_local.mcp.extra
 - system.linux.system.repo_local.saltstack.xenial
 - system.linux.system.repo_local.glusterfs
+{%- if cookiecutter.stacklight_enabled == 'True' %}
+- system.linux.system.repo_local.sensu
+{%- endif %}
 {%- else %}
 - system.linux.system.repo.ubuntu
 - system.linux.system.repo.mcp.openstack
 - system.linux.system.repo.mcp.extra
 - system.linux.system.repo.saltstack.xenial
 - system.linux.system.repo.glusterfs
+{%- if cookiecutter.stacklight_enabled == 'True' %}
+- system.linux.system.repo.sensu
+{%- endif %}
 {%- endif %}
 - system.glusterfs.client.cluster
 - system.glusterfs.client.volume.salt_pki

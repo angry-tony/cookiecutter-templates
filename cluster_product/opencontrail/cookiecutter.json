@@ -27,5 +27,7 @@
     "opencontrail_compute_iface"                : "bond0.${_param:tenant_vlan}",
     "opencontrail_compute_iface_mask"           : "24",
 
-    "openstack_nfv_dpdk_enabled"                : "False"
+    "openstack_nfv_dpdk_enabled"                : "False",
+
+    "stacklight_enabled"                        : "True"
 }
