@@ -213,7 +213,7 @@ infra_params_action:
     label: "Kubernetes Networking"
     doc: |
       Kubernetes Networking
-      ====================
+      =====================
     requires:
       - platform: "kubernetes_enabled"
     fields:
@@ -668,14 +668,14 @@ product_params_action:
       requires:
         - kubernetes_network_engine: 'opencontrail'
     - help_text: 'Public floating IP pool'
-      initial: ''
+      initial: '10.151.0.0/16'
       name: opencontrail_public_ip_range
       type: TEXT
       width: half
       requires:
         - kubernetes_network_engine: 'opencontrail'
     - help_text: 'Private range used for pods'
-      initial: ''
+      initial: '10.150.0.0/16'
       name: opencontrail_private_ip_range
       type: TEXT
       width: half

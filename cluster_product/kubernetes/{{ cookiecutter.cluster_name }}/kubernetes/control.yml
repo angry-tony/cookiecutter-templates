@@ -19,7 +19,7 @@ classes:
 parameters:
   _param:
     keepalived_vip_interface: {{ cookiecutter.kubernetes_keepalived_vip_interface }}
-    keepalived_vip_virtual_router_id: 60
+    keepalived_vip_virtual_router_id: 65
   etcd:
     server:
       source:
