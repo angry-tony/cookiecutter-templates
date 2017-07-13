@@ -2,6 +2,16 @@ classes:
   # Services
   - system.docker.client
   - system.aptly.server.docker
+  # Docker services
+  - system.docker.swarm.stack.aptly
+  - system.docker.swarm.stack.docker
+  - system.docker.swarm.stack.gerrit
+  - system.docker.swarm.stack.jenkins
+  {%- if cookiecutter.openldap_enabled == 'True' %}
+  - system.docker.swarm.stack.ldap
+  {%- endif %}
+
+
   # Jenkins
   - system.jenkins.master.config
   - system.jenkins.client

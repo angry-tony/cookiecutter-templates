@@ -19,15 +19,6 @@ classes:
   # Generate aptly-publisher config to use for jenkins slaves
   - system.aptly.client.publisher
 
-  # Docker services
-  - system.docker.swarm.stack.aptly
-  - system.docker.swarm.stack.docker
-  - system.docker.swarm.stack.gerrit
-  - system.docker.swarm.stack.jenkins
-  {%- if cookiecutter.openldap_enabled == 'True' %}
-  - system.docker.swarm.stack.ldap
-  {%- endif %}
-
   # Keepalived
   - system.keepalived.cluster.instance.cicd_control_vip
 
