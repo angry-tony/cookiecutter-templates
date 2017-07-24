@@ -8,6 +8,7 @@ classes:
 - system.openssh.server.team.mcp_qa
 - system.openssh.server.team.l1_support
 - system.openssh.server.team.l2_support
+- system.rsyslog.client.single
 {%- if cookiecutter.kubernetes_enabled == 'True' %}
 - cluster.{{ cookiecutter.cluster_name }}.kubernetes
 {%- endif %}
