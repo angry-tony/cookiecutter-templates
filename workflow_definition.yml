@@ -1,4 +1,4 @@
-{% set private_key, public_key = generate_ssh_keypair() %}
+{% set private_key, public_key = generate_ssh_keypair(context_seed) %}
 general_params_action:
   - name: "base"
     label: "Base"
@@ -9,6 +9,10 @@ general_params_action:
       This section covers basic deployment parameters. Supported deployment type is currently Physical for OpenStack. Kubernetes works with both Physical and Heat.
 
     fields:
+      - initial: "{{ 64|generate_password }}"
+        name: context_seed
+        type: TEXT
+        hidden: True
       - name: "cluster_name"
         type: "TEXT"
         help_text: "Name of the cluster, used as cluster/<cluster_name>/ in directory structure."
