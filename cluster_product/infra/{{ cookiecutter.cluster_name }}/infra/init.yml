@@ -44,6 +44,7 @@ parameters:
 
     {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
     local_repo_url: {{ cookiecutter.local_repo_url}}
+    linux_repo_refresh_db: true
     {%- endif %}
     infra_config_hostname: {{ cookiecutter.salt_master_hostname }}
     salt_minion_ca_host: ${_param:infra_config_hostname}.${_param:cluster_domain}
