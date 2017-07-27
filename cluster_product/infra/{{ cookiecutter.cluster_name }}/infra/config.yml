@@ -10,6 +10,9 @@ classes:
 {%- else %}
 - system.linux.system.repo.mcp.salt
 - system.linux.system.repo.mcp.extra
+{%- if cookiecutter.openstack_enabled == 'True' %}
+- system.linux.system.repo.mcp.openstack
+{%- endif %}
 - system.linux.system.repo.ubuntu
 - system.linux.system.repo.glusterfs
 {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
