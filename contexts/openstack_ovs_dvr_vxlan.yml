@@ -108,7 +108,7 @@ default_context:
   salt_master_hostname: cfg01
   salt_master_management_address: 10.167.5.90
   stacklight_enabled: 'True'
-  stacklight_version: '1'
+  stacklight_version: '2'
   stacklight_log_address: 10.167.4.60
   stacklight_log_hostname: log
   stacklight_log_node01_address: 10.167.4.61
