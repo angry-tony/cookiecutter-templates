@@ -29,5 +29,8 @@
     "stacklight_telemetry_node03_hostname"      : "mtr03",
 
     "stacklight_notification_smtp_host"         : "127.0.0.1",
-    "stacklight_notification_address"           : "alerts@localhost"
+    "stacklight_notification_address"           : "alerts@localhost",
+
+    "openstack_enabled"                       : "True",
+    "kubernetes_enabled"                        : "False"
 }

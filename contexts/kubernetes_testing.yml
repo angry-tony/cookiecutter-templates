@@ -2,7 +2,8 @@ default_context:
 # infra
     openstack_enabled: false
     opencontrail_enabled: false
-    stacklight_enabled: false
+    stacklight_enabled: true
+    stacklight_version: '1'
     cicd_enabled:  false
     kubernetes_enabled: true
     deployment_type: virtual

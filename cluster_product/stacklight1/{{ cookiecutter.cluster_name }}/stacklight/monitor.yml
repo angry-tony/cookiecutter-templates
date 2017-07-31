@@ -32,6 +32,9 @@ classes:
 - system.haproxy.proxy.listen.stacklight.uchiwa
 - service.haproxy.proxy.single
 - system.keepalived.cluster.instance.stacklight_monitor_vip
+{%- if cookiecutter.get('kubernetes_enabled', 'False') == 'True' %}
+- system.salt.minion.cert.k8s_client
+{%- endif %}
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
@@ -54,6 +57,10 @@ parameters:
     network:
       interface:
         ens3: ${_param:linux_single_interface}
+  grafana:
+    server:
+      database:
+        host: ${_param:stacklight_telemetry_address}
   heka:
     aggregator:
       sensu_notification_handler: 'mail'
