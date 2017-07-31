@@ -18,7 +18,7 @@ classes:
 - system.prometheus.server.alertmanager.dns
 - system.docker.swarm.stack.monitoring
 {%- if cookiecutter.openstack_enabled == 'True' %}
-#- system.docker.swarm.stack.monitoring.remote_collector
+- system.docker.swarm.stack.monitoring.remote_collector
 {%- endif %}
 - system.docker.swarm.stack.dashboard
 parameters:

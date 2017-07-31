@@ -5,7 +5,6 @@ parameters:
   _param:
     stacklight_monitor_address: ${_param:cicd_control_address}
     prometheus_control_address: ${_param:cicd_control_address}
-    #
     kibana_elasticsearch_host: ${_param:stacklight_log_address}
     heka_elasticsearch_host: ${_param:stacklight_log_address}
     heka_influxdb_host: ${_param:stacklight_telemetry_address}
