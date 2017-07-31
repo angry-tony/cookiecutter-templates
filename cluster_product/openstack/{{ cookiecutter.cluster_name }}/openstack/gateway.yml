@@ -16,6 +16,7 @@ classes:
 {%- endif %}
 {%- endif %}
 - system.neutron.gateway.cluster
+- system.neutron.gateway.notification.messagingv2
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:

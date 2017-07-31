@@ -20,6 +20,7 @@ classes:
 - system.nova.compute.nfv.cpu_pinning
 {%- endif %}
 - system.nova.compute.cluster
+- system.nova.compute.notification.messagingv2
 {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
 - system.opencontrail.compute.cluster
 - system.opencontrail.client.cluster

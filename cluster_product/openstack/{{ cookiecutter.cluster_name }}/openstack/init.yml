@@ -128,6 +128,13 @@ parameters:
     openstack_telemetry_keepalived_password: {{ password(16) }}
     salt_pki_proxy_alt_names: IP:${_param:cluster_public_host},DNS:${_param:cluster_public_host},IP:${_param:openstack_proxy_address},DNS:horizon.${_param:cluster_domain}
 
+{%- if cookiecutter.stacklight_enabled == 'True' %}
+    stacklight_notification_topic: stacklight_notifications
+    openstack_notification_topics: "notifications,${_param:stacklight_notification_topic}"
+{%- else %}
+    openstack_notification_topics: notifications
+{%- endif %}
+
     # openstack service addresses
     openstack_proxy_address: {{ cookiecutter.openstack_proxy_address }}
     openstack_proxy_node01_address: {{ cookiecutter.openstack_proxy_node01_address }}

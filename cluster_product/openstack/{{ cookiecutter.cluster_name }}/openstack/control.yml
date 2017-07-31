@@ -25,8 +25,6 @@ classes:
 {%- endif %}
 {%- endif %}
 - system.memcached.server.single
-- system.ceilometer.client
-- system.ceilometer.client.neutron
 {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
 - system.neutron.control.opencontrail.cluster
 - system.opencontrail.client.cluster
@@ -40,11 +38,17 @@ classes:
 {%- endif %}
 - system.keystone.server.cluster
 - system.keystone.server.wsgi
+- system.keystone.server.notification.messagingv2
 - system.glance.control.cluster
+- system.glance.control.notification.messagingv2
 - system.nova.control.cluster
+- system.nova.control.notification.messagingv2
 - system.cinder.control.cluster
+- system.cinder.control.notification.messagingv2
 - system.cinder.volume.single
+- system.cinder.volume.notification.messagingv2
 - system.heat.server.cluster
+- system.heat.server.notification.messagingv2
 - system.haproxy.proxy.listen.openstack.nova-placement
 - system.haproxy.proxy.listen.openstack.glare
 - system.glusterfs.client.cluster
