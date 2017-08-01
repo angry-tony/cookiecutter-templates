@@ -214,7 +214,6 @@ parameters:
           mtu: 9000
           address: ${_param:tenant_address}
           netmask: ${_param:tenant_network_netmask}
-          gateway: ${_param:tenant_network_gateway}
           pre_up_cmds:
           - /usr/lib/contrail/if-vhost0
           use_interfaces:
