@@ -33,7 +33,7 @@ classes:
 - system.cassandra.backup.server.single
 - system.zookeeper.backup.server.single
 {%- endif %}
-{%- if cookiecutter.kubernetes_enabled != 'True' %}
+{%- if cookiecutter.openstack_enabled == 'True' or (cookiecutter.kubernetes_enabled == 'True' and (cookiecutter.stacklight_enabled == 'True' or cookiecutter.cicd_enabled == 'True')) %}
 - system.reclass.storage.system.physical_control_cluster
 - system.reclass.storage.system.infra_maas_single
 {%- endif %}
