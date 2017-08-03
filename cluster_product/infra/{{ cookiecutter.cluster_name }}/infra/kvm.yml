@@ -1,3 +1,4 @@
+{%- if cookiecutter.openstack_enabled == 'True' or (cookiecutter.kubernetes_enabled == 'True' and (cookiecutter.stacklight_enabled == 'True' or cookiecutter.cicd_enabled == 'True')) %}
 classes:
 {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
 - system.linux.system.repo_local.mcp.openstack
@@ -225,3 +226,4 @@ parameters:
   #         # Password is cloudlab, comment out, configure your SSH key bellow
   #         # and disable password auth
   #         password: $6$0Qqj.6l.$T9k9Onm9pIDo6ULABVBRNogyizG.9CnwQ4bvI4xH.AWeIGHbLyFU87ejMTtKvAAyd3dncRYbeUV.VbnXJU2u./
+{% endif %}

@@ -82,7 +82,7 @@ parameters:
   reclass:
     storage:
       node:
-        {%- if cookiecutter.kubernetes_enabled != 'True' %}
+        {%- if cookiecutter.openstack_enabled == 'True' or (cookiecutter.kubernetes_enabled == 'True' and (cookiecutter.stacklight_enabled == 'True' or cookiecutter.cicd_enabled == 'True')) %}
         infra_kvm_node01:
           params:
             keepalived_vip_priority: 100
@@ -97,7 +97,6 @@ parameters:
             linux_system_codename: xenial
         {%- endif %}
         {%- if cookiecutter.kubernetes_enabled == 'True' %}
-        {%- if cookiecutter.kubernetes_network_engine == 'opencontrail' %}
         kubernetes_control_node01:
           params:
             tenant_address: ${_param:kubernetes_control_node01_tenant_address}
@@ -107,7 +106,6 @@ parameters:
         kubernetes_control_node03:
           params:
             tenant_address: ${_param:kubernetes_control_node03_tenant_address}
-        {%- endif %}
         kubernetes_compute_node01:
           name: ${_param:kubernetes_compute_node01_hostname}
           domain: ${_param:cluster_domain}
@@ -117,9 +115,7 @@ parameters:
             salt_master_host: ${_param:infra_config_address}
             linux_system_codename: xenial
             single_address: ${_param:kubernetes_compute_node01_address}
-            {%- if cookiecutter.kubernetes_network_engine == 'opencontrail' %}
             tenant_address: ${_param:kubernetes_compute_node01_tenant_address}
-            {%- endif %}
         kubernetes_compute_node02:
           name: ${_param:kubernetes_compute_node02_hostname}
           domain: ${_param:cluster_domain}
@@ -129,9 +125,7 @@ parameters:
             salt_master_host: ${_param:infra_config_address}
             linux_system_codename: xenial
             single_address: ${_param:kubernetes_compute_node02_address}
-            {%- if cookiecutter.kubernetes_network_engine == 'opencontrail' %}
             tenant_address: ${_param:kubernetes_compute_node02_tenant_address}
-            {%- endif %}
         {%- endif %}
         {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
         stacklight_log_node01:

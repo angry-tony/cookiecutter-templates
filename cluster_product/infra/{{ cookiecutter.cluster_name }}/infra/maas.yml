@@ -1,3 +1,4 @@
+{%- if cookiecutter.deployment_type == 'physical' %}
 classes:
 - system.maas.region.single
 - cluster.{{ cookiecutter.cluster_name }}.infra
@@ -39,3 +40,4 @@ parameters:
 #            power_password: password
 #            power_type: ipmi
 #            power_user: engineer
+{%- endif %}

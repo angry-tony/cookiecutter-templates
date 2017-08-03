@@ -8,6 +8,8 @@ default_context:
     deployment_type: virtual
     openstack_nfv_dpdk_enabled: false
     openstack_nfv_sriov_enabled: false
+    dns_server01: 8.8.8.8
+    dns_server02: 8.8.4.4
 
 # kubernetes
     cluster_name: k8s-salt-model
@@ -33,6 +35,12 @@ default_context:
     kubernetes_control_node02_hostname: ctl02
     kubernetes_control_node03_address: 172.16.10.109
     kubernetes_control_node03_hostname: ctl03
+    kubernetes_compute_node01_tenant_address: 172.16.11.105
+    kubernetes_compute_node02_tenant_address: 172.16.11.106
+    kubernetes_control_node01_tenant_address: 172.16.11.107
+    kubernetes_control_node02_tenant_address: 172.16.11.108
+    kubernetes_control_node03_tenant_address: 172.16.11.109
+
     calico_network: 192.168.0.0
     calico_netmask: 16
     calico_enable_nat: True
