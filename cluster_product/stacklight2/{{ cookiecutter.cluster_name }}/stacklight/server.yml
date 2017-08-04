@@ -11,7 +11,6 @@ classes:
 - system.prometheus.server.alert.labels_add.route
 - system.prometheus.server.remote_write.docker
 {%- if cookiecutter.kubernetes_enabled == 'True' %}
-- system.prometheus.server.target.etcd
 - system.prometheus.server.target.kubernetes
 {%- endif %}
 - system.prometheus.server.target.dns
