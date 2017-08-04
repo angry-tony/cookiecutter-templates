@@ -16,7 +16,7 @@ parameters:
     cluster_elasticsearch_port: 9200
     cluster_kibana_port: 5601
     kibana_elasticsearch_host: ${_param:stacklight_log_address}
-    cluster_vip_address: ${_param:stacklight_telemetry_address}
+    cluster_vip_address: ${_param:stacklight_log_address}
     cluster_node01_hostname: ${_param:stacklight_log_node01_hostname}
     cluster_node01_address: ${_param:stacklight_log_node01_address}
     cluster_node02_hostname: ${_param:stacklight_log_node02_hostname}
