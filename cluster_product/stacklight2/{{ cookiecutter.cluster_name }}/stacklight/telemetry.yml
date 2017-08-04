@@ -25,3 +25,7 @@ parameters:
     openstack_version: newton
     galera_server_cluster_name: monitoring_cluster
     {%- endif %}
+  linux:
+    network:
+      interface:
+        ens3: ${_param:linux_single_interface}

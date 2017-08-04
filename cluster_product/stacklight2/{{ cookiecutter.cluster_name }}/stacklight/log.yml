@@ -23,3 +23,7 @@ parameters:
     cluster_node02_address: ${_param:stacklight_log_node02_address}
     cluster_node03_hostname: ${_param:stacklight_log_node03_hostname}
     cluster_node03_address: ${_param:stacklight_log_node03_address}
+  linux:
+    network:
+      interface:
+        ens3: ${_param:linux_single_interface}
