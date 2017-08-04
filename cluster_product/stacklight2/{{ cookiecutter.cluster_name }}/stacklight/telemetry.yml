@@ -2,7 +2,7 @@ classes:
 - system.keepalived.cluster.instance.stacklight_telemetry_vip
 - system.haproxy.proxy.listen.stacklight.influxdb
 - system.influxdb.server.single
-- system.influxdb.database.stacklight
+- system.influxdb.database.prometheus
 {%- if cookiecutter.kubernetes_enabled == 'True' %}
 - system.galera.server.cluster
 - system.galera.server.database.grafana
