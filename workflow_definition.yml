@@ -102,7 +102,12 @@ general_params_action:
         help_text: "Enable CI/CD sub-cluster"
         initial: True
         label: "CI/CD enabled"
-  - name: "networking"
+       - name: "oss_enabled"
+        type: "BOOL"
+        help_text: "Enable OSS sub-cluster"
+        initial: True
+        label: "OSS enabled"
+ - name: "networking"
     label: "Networking"
     doc: |
       Networking
@@ -303,6 +308,23 @@ infra_params_action:
       initial: true
       name: openldap_enabled
       type: BOOL
+  - name: "oss_params"
+    label: "OSS"
+    requires:
+      - oss_enabled: True
+    fields:
+      - help_text: enable cis service
+        initial: true
+        name: oss_cis_enabled
+        type: BOOL
+      - help_text: enable security audit service
+        initial: true
+        name: oss_security_audit_enabled
+        type: BOOL
+      - help_text: enable capacity service
+        initial: true
+        name: oss_capacity_service_enabled
+        type: BOOL
   - name: "repo_params"
     label: "Repositories"
     fields:
@@ -537,6 +559,166 @@ product_params_action:
 
     requires:
     - cicd_enabled: True
+  - fields:
+    - help_text: OpenStack auth URL for OSS tools
+      initial: "http://172.17.16.190:5000/v3"
+      name: oss_openstack_auth_url
+      type: TEXT
+      requires:
+        - oss_enabled: True
+    - help_text: Username for access to OpenStack
+      initial: "admin"
+      name: oss_openstack_username
+      type: TEXT
+      requires:
+        - oss_enabled: True
+    - help_text: Password for access to OpenStack
+      initial: "nova"
+      name: oss_openstack_password
+      type: TEXT
+      requires:
+        - oss_enabled: True
+    - help_text: OpenStack project
+      initial: "admin"
+      name: oss_openstack_project
+      type: TEXT
+      requires:
+        - oss_enabled: True
+    - help_text: OpenStack domain id
+      initial: "default"
+      name: oss_openstack_domain_id
+      type: TEXT
+      requires:
+        - oss_enabled: True
+    - help_text: Private key for Rundeck. It is generated automatically.
+      hidden: True
+      initial: |-
+        {{ private_key|indent(8) }}
+      name: oss_runbook_private_key
+      type: LONG_TEXT
+      requires:
+        - oss_enabled: True
+    - help_text: Public key for Rundeck. It is generated automatically.
+      hidden: True
+      initial: '{{ public_key }}'
+      name: oss_runbook_public_key
+      type: LONG_TEXT
+      requires:
+        - oss_enabled: True
+    - help_text: Notification email sender
+      initial: ""
+      name: oss_notification_email_from
+      type: TEXT
+      requires:
+        - oss_enabled: True
+    - help_text: Notification email recipients
+      initial: ""
+      name: oss_notification_email_recipients
+      type: TEXT
+      requires:
+        - oss_enabled: True
+    - help_text: Notification salesforce username
+      initial: ""
+      name: oss_notification_saleforce_username
+      type: TEXT
+      requires:
+        - oss_enabled: True
+    - help_text: CIS username
+      initial: "${_param:oss_openstack_username}"
+      name: oss_cis_username
+      type: TEXT
+      requires:
+        - oss_cis_enabled: True
+    - help_text: CIS password
+      initial: "${_param:oss_openstack_password}"
+      name: oss_cis_password
+      type: TEXT
+      requires:
+        - oss_cis_enabled: True
+    - help_text: CIS OpenStack project
+      initial: "${_param:oss_openstack_project}"
+      name: oss_cis_project
+      type: TEXT
+      requires:
+        - oss_cis_enabled: True
+    - help_text: CIS OpenStack domain id
+      initial: "${_param:oss_openstack_domain_id}"
+      name: oss_cis_domain_id
+      type: TEXT
+      requires:
+        - oss_cis_enabled: True
+    - help_text: CIS jobs repository
+      initial: "https://github.com/Mirantis/rundeck-cis-jobs.git"
+      name: oss_cis_jobs_repository
+      type: TEXT
+      requires:
+        - oss_cis_enabled: True
+    - help_text: CIS jobs repository branch
+      initial: "master"
+      name: oss_cis_jobs_repository_branch
+      type: TEXT
+      requires:
+        - oss_cis_enabled: True
+    - help_text: Security audit username
+      initial: "${_param:oss_openstack_username}"
+      name: oss_security_audit_username
+      type: TEXT
+      requires:
+        - oss_security_audit_enabled: True
+    - help_text: Security audit password
+      initial: "${_param:oss_openstack_password}"
+      name: oss_security_audit_password
+      type: TEXT
+      requires:
+        - oss_security_audit_enabled: True
+    - help_text: Security audit project
+      initial: "${_param:oss_openstack_project}"
+      name: oss_security_audit_project
+      type: TEXT
+      requires:
+        - oss_security_audit_enabled: True
+    - help_text: Security audit user domain id
+      initial: "${_param:oss_openstack_domain_id}"
+      name: oss_security_audit_user_domain_id
+      type: TEXT
+      requires:
+        - oss_security_audit_enabled: True
+    - help_text: Security audit project domain id
+      initial: "${_param:oss_openstack_domain_id}"
+      name: oss_security_audit_project_domain_id
+      type: TEXT
+      requires:
+        - oss_security_audit_enabled: True
+    - help_text: Capacity service username
+      initial: "${_param:oss_openstack_username}"
+      name: oss_capacity_service_username
+      type: TEXT
+      requires:
+        - oss_capacity_service_enabled: True
+    - help_text: Capacity service password
+      initial: "${_param:oss_openstack_password}"
+      name: oss_capacity_service_password
+      type: TEXT
+      requires:
+        - oss_capacity_service_enabled: True
+    - help_text: Capacity service project
+      initial: "${_param:oss_openstack_project}"
+      name: oss_capacity_service_project
+      type: TEXT
+      requires:
+        - oss_capacity_service_enabled: True
+    - help_text: Capacity service user domain id
+      initial: "${_param:oss_openstack_domain_id"
+      name: oss_capacity_service_user_domain_id
+      type: TEXT
+      requires:
+        - oss_capacity_service_enabled: True
+    - help_text: Capacity service project domain id
+      initial: "${_param:oss_openstack_username_domain_id}"
+      name: oss_capacity_service_project_domain_id
+      type: TEXT
+      requires:
+        - oss_capacity_service_enabled: True
   - fields:
     - help_text: Image with CNI binaries
       initial: artifactory.mirantis.com/docker-prod-local/mirantis/projectcalico/calico/cni:latest

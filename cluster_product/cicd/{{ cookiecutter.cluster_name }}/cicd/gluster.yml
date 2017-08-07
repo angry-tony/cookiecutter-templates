@@ -10,3 +10,16 @@ classes:
   {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '2' %}
   - system.glusterfs.server.volume.prometheus
   {%- endif %}
+  {%- if cookiecutter.oss_enabled == 'True' %}
+  - system.glusterfs.server.volume.devops_portal
+  - system.glusterfs.server.volume.elasticsearch
+  - system.glusterfs.server.volume.postgresql
+  - system.glusterfs.server.volume.pushkin
+  - system.glusterfs.server.volume.rundeck
+  {%- if cookiecutter.oss_security_audit_enabled == 'True' %}
+  - system.glusterfs.server.volume.security_monkey
+  {%- endif %}
+  {%- if cookiecutter.oss_capacity_service_enabled == 'True' %}
+  - system.glusterfs.server.volume.mongodb
+  {%- endif %}
+  {%- endif %}
