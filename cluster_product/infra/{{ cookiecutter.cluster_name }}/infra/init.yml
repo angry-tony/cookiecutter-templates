@@ -3,10 +3,13 @@
 {%- endmacro %}
 classes:
 - system.linux.system.single
-- system.openssh.server.team.lab
-- system.openssh.server.team.tcpcloud
-- system.openssh.server.team.mcp_qa
-- system.openssh.server.team.support
+#- system.openssh.server.team.lab
+#- system.openssh.server.team.support
+#- system.openssh.server.team.presales
+#- system.openssh.server.team.services
+#- system.openssh.server.team.networking
+#- system.openssh.server.team.stacklight
+#- system.openssh.server.team.mmo_devops
 - system.rsyslog.client.single
 {%- if cookiecutter.kubernetes_enabled == 'True' %}
 - cluster.{{ cookiecutter.cluster_name }}.kubernetes
@@ -35,8 +38,8 @@ classes:
 {%- endif %}
 parameters:
   _param:
-    # TOOD: Disable linux_system_user_sudo for everyone after a deployment or configure it per node.
-    linux_system_user_sudo: true
+    # TODO: Uncomment next line "linux_system_user_sudo: true" during the deployment. Don't set it "false" after, but rather remove at all.
+    # linux_system_user_sudo: true
     {%- if cookiecutter.kubernetes_enabled != 'True' %}
     salt_control_trusty_image: http://apt-mk.mirantis.com/images/ubuntu-14-04-x64-mcp1.1.qcow2
     salt_control_xenial_image: http://apt-mk.mirantis.com/images/ubuntu-16-04-x64-mcp1.1.qcow2
