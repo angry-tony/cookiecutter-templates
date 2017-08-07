@@ -1,0 +1,20 @@
+---
+other:
+  - |
+      Support team classes changes structure under ``system.openssh.server.team``.
+
+      To apply the change on existing deployment.
+      #. Fetch the latest stable system-level reclass
+      #. Remove openssh team classes (on cluster level):
+         * ``system.openssh.server.team.l2_support``
+         * ``system.openssh.server.team.l1_support``
+
+         and replace with:
+         * ``system.openssh.server.team.support``
+
+      To deploy the change across the environment apply following states:
+
+      .. code-block:: yaml
+
+        salt \* state.apply linux.system.group,linux.system.user,openssh,linux.system.sudo
+
