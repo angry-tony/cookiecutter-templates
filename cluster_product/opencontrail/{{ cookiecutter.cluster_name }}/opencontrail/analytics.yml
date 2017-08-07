@@ -28,7 +28,6 @@ classes:
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
-    openstack_version: mitaka
     keepalived_vip_interface: eth1
     keepalived_vip_virtual_router_id: 70
     cluster_vip_address: ${_param:opencontrail_analytics_address}

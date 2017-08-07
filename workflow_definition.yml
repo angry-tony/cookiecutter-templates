@@ -1209,7 +1209,7 @@ product_params_action:
       type: TEXT
       width: half
     - help_text: version of OpenStack
-      initial: mitaka
+      initial: ocata
       name: openstack_version
       type: TEXT
     label: OpenStack product parameters
