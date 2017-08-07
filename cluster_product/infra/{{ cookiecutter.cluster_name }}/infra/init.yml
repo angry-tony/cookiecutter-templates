@@ -35,6 +35,8 @@ classes:
 {%- endif %}
 parameters:
   _param:
+    # TOOD: Disable linux_system_user_sudo for everyone after a deployment or configure it per node.
+    linux_system_user_sudo: true
     {%- if cookiecutter.kubernetes_enabled != 'True' %}
     salt_control_trusty_image: http://apt-mk.mirantis.com/images/ubuntu-14-04-x64-mcp1.1.qcow2
     salt_control_xenial_image: http://apt-mk.mirantis.com/images/ubuntu-16-04-x64-mcp1.1.qcow2

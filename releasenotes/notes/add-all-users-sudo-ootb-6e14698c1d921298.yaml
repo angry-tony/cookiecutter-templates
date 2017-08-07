@@ -1,0 +1,5 @@
+---
+other:
+  - By default, for the deployment purposes, model has under ``infra/init.yml`` configured
+    ``linux_system_user_sudo`` set ``true`` which allows any defined user to reach root shell.
+    This variable is expected to be set ``false`` for production environments.
