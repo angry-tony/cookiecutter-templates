@@ -5,8 +5,6 @@ classes:
 - system.kibana.client.single
 parameters:
   _param:
-    # Elasticsearch/Kibana client parameters
-    stacklight_log_address: ${_param:stacklight_monitor_address}
     # Grafana client parameters
     grafana_address: ${_param:stacklight_monitor_address}
     grafana_port: 15013
