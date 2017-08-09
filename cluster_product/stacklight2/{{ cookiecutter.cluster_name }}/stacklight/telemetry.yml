@@ -1,5 +1,10 @@
 classes:
 - system.keepalived.cluster.instance.stacklight_telemetry_vip
+{%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
+- system.linux.system.repo_local.influxdb
+{%- else %}
+- system.linux.system.repo.influxdb
+{%- endif %}
 - system.haproxy.proxy.listen.stacklight.influxdb
 - system.influxdb.server.single
 - system.influxdb.database.prometheus
