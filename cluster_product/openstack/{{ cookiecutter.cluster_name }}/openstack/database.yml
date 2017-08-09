@@ -21,7 +21,9 @@ classes:
 - system.galera.server.database.ceilometer
 - system.galera.server.database.cinder
 - system.galera.server.database.glance
+{%- if cookiecutter.stacklight_enabled == 'True' %}
 - system.galera.server.database.grafana
+{%- endif %}
 - system.galera.server.database.heat
 - system.galera.server.database.keystone
 - system.galera.server.database.nova

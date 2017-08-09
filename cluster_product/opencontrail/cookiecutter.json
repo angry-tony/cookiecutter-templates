@@ -1,6 +1,7 @@
 {
     "cluster_name"                              : "deployment_name",
     "deployment_type"                           : "physical",
+    "compute_bond_mode"                         : "active-backup",
     "opencontrail_analytics_address"            : "10.167.4.30",
     "opencontrail_analytics_node01_address"     : "10.167.4.31",
     "opencontrail_analytics_node02_address"     : "10.167.4.32",
@@ -30,5 +31,6 @@
     "openstack_nfv_dpdk_enabled"                : "False",
 
     "stacklight_enabled"                        : "True",
-    "stacklight_version"                        : "1"
+    "stacklight_version"                        : "1",
+    "kubernetes_enabled"                        : "False"
 }

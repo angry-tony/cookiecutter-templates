@@ -13,6 +13,9 @@ classes:
 - system.kubernetes.pool.cluster
 - system.salt.minion.cert.k8s_client
 - system.salt.minion.cert.etcd_client
+{%- if cookiecutter.kubernetes_network_engine == 'opencontrail' %}
+- cluster.{{ cookiecutter.cluster_name }}.opencontrail.compute
+{%- endif %}
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   {%- if cookiecutter.kubernetes_network_engine == 'calico' %}
@@ -53,36 +56,18 @@ parameters:
     common:
       hyperkube:
         image: ${_param:kubernetes_hyperkube_image}
+  {%- if cookiecutter.kubernetes_network_engine == 'calico' %}
   linux:
     network:
       interface:
       {%- if cookiecutter.deployment_type == 'virtual' %}
         ens3: ${_param:linux_single_interface}
-        {%- if cookiecutter.kubernetes_network_engine == 'calico' %}
         ens4:
           enabled: true
           type: eth
           proto: static
           address: ${_param:tenant_address}
           netmask: ${_param:tenant_network_netmask}
-        {%- elif cookiecutter.kubernetes_network_engine == 'opencontrail' %}
-        ens4:
-          mtu: 9000
-          enabled: true
-          proto: manual
-          type: eth
-        vhost0:
-          enabled: true
-          type: eth
-          mtu: 9000
-          address: ${_param:tenant_address}
-          netmask: ${_param:tenant_network_netmask}
-          gateway: ${_param:opencontrail_compute_gateway}
-          pre_up_cmds:
-          - /usr/lib/contrail/if-vhost0
-          use_interfaces:
-          - ${_param:opencontrail_compute_iface}
-        {%- endif %}
       {%- else %}
         eth1:
           mtu: 9000
@@ -118,7 +103,6 @@ parameters:
           - bond0
           address: ${_param:single_address}
           netmask: ${_param:control_network_netmask}
-        {%- if cookiecutter.kubernetes_network_engine == 'calico' %}
         bond0.2:
           mtu: 9000
           name: bond0.${_param:tenant_vlan}
@@ -129,27 +113,5 @@ parameters:
           - bond0
           address: ${_param:tenant_address}
           netmask: ${_param:tenant_network_netmask}
-        {%- elif cookiecutter.kubernetes_network_engine == 'opencontrail' %}
-        bond0.2:
-          mtu: 9000
-          name: bond0.${_param:tenant_vlan}
-          enabled: true
-          proto: manual
-          type: vlan
-          use_interfaces:
-          - bond0
-        vhost0:
-          enabled: true
-          type: eth
-          mtu: 9000
-          address: ${_param:tenant_address}
-          netmask: ${_param:tenant_network_netmask}
-          pre_up_cmds:
-          - /usr/lib/contrail/if-vhost0
-          use_interfaces:
-          - ${_param:opencontrail_compute_iface}
-          name_servers:
-          - ${_param:dns_server01}
-          - ${_param:dns_server02}
-        {%- endif %}
       {%- endif %}
+  {%- endif %}

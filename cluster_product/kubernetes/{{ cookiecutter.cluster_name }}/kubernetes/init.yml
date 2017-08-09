@@ -50,6 +50,12 @@ parameters:
     # calico
     calico_private_network: {{ cookiecutter.calico_network }}
     calico_private_netmask: {{ cookiecutter.calico_netmask }}
+    {%- elif cookiecutter.kubernetes_network_engine == 'opencontrail' %}
+    openstack_control_address: None
+    keystone_admin_password: None
+    openstack_version: None
+    keystone_service_token: None
+    openstack_region: None
     {%- endif %}
     kubernetes_control_node01_tenant_address: {{ cookiecutter.kubernetes_control_node01_tenant_address }}
     kubernetes_control_node02_tenant_address: {{ cookiecutter.kubernetes_control_node02_tenant_address }}

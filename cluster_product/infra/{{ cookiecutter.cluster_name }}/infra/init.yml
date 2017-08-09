@@ -120,6 +120,11 @@ parameters:
   linux:
     network:
       host:
+        hostname:
+          address: ${_param:single_address}
+          names:
+          - ${linux:network:hostname}
+          - ${linux:network:fqdn}
         cfg01:
           address: ${_param:infra_config_address}
           names:
