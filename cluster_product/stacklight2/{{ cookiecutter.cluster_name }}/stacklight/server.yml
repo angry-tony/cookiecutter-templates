@@ -1,5 +1,4 @@
 classes:
-- system.linux.system.repo.mcp.salt
 - system.glusterfs.client.cluster
 - system.glusterfs.client.volume.prometheus
 {%- if cookiecutter.kubernetes_enabled == 'True' %}

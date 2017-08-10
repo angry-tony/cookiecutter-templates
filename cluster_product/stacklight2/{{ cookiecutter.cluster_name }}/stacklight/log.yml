@@ -1,5 +1,9 @@
 classes:
+{%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
+- system.linux.system.repo_local.elasticsearch
+{%- else %}
 - system.linux.system.repo.elasticsearch
+{%- endif %}
 - system.haproxy.proxy.listen.stacklight.elasticsearch
 - system.haproxy.proxy.listen.stacklight.kibana
 - service.haproxy.proxy.single
