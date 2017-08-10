@@ -152,4 +152,4 @@ default_context:
   oss_cis_jobs_repository: https://github.com/Mirantis/rundeck-cis-jobs.git
   oss_cis_jobs_repository_branch: master
   oss_security_audit_enabled: 'True'
-  oss_capacity_service_enabled: 'True'
+  oss_cleanup_service_enabled: 'True'

@@ -321,9 +321,9 @@ infra_params_action:
       initial: True
       name: oss_security_audit_enabled
       type: BOOL
-    - help_text: "enable capacity service"
+    - help_text: "enable cleanup service"
       initial: True
-      name: oss_capacity_service_enabled
+      name: oss_cleanup_service_enabled
       type: BOOL
   - name: "repo_params"
     label: "Repositories"
@@ -695,36 +695,36 @@ product_params_action:
       type: TEXT
       requires:
       - oss_security_audit_enabled: True
-    - help_text: "Capacity service username"
+    - help_text: "Cleanup service username"
       initial: "${_param:oss_openstack_username}"
-      name: oss_capacity_service_username
+      name: oss_cleanup_service_username
       type: TEXT
       requires:
-      - oss_capacity_service_enabled: True
-    - help_text: "Capacity service password"
+      - oss_cleanup_service_enabled: True
+    - help_text: "Cleanup service password"
       initial: "${_param:oss_openstack_password}"
-      name: oss_capacity_service_password
+      name: oss_cleanup_service_password
       type: TEXT
       requires:
-      - oss_capacity_service_enabled: True
-    - help_text: "Capacity service project"
+      - oss_cleanup_service_enabled: True
+    - help_text: "Cleanup service project"
       initial: "${_param:oss_openstack_project}"
-      name: oss_capacity_service_project
+      name: oss_cleanup_service_project
       type: TEXT
       requires:
-      - oss_capacity_service_enabled: True
-    - help_text: "Capacity service user domain id"
+      - oss_cleanup_service_enabled: True
+    - help_text: "Cleanup service user domain id"
       initial: "${_param:oss_openstack_domain_id"
-      name: oss_capacity_service_user_domain_id
+      name: oss_cleanup_service_user_domain_id
       type: TEXT
       requires:
-      - oss_capacity_service_enabled: True
-    - help_text: "Capacity service project domain id"
+      - oss_cleanup_service_enabled: True
+    - help_text: "Cleanup service project domain id"
       initial: "${_param:oss_openstack_username_domain_id}"
-      name: oss_capacity_service_project_domain_id
+      name: oss_cleanup_service_project_domain_id
       type: TEXT
       requires:
-      - oss_capacity_service_enabled: True
+      - oss_cleanup_service_enabled: True
   - fields:
     - help_text: Image with CNI binaries
       initial: artifactory.mirantis.com/docker-prod-local/mirantis/projectcalico/calico/cni:latest

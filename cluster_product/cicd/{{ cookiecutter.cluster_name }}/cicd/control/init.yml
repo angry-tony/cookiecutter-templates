@@ -22,7 +22,7 @@ classes:
   {%- if cookiecutter.oss_security_audit_enabled == 'True' %}
   - system.glusterfs.client.volume.security_monkey
   {%- endif %}
-  {%- if cookiecutter.oss_capacity_service_enabled == 'True' %}
+  {%- if cookiecutter.oss_cleanup_service_enabled == 'True' %}
   - system.glusterfs.client.volume.mongodb
   {%- endif %}
   {%- endif %}
@@ -59,7 +59,7 @@ classes:
   {%- if cookiecutter.oss_security_audit_enabled == 'True' %}
   - system.haproxy.proxy.listen.oss.security_monkey
   {%- endif %}
-  {%- if cookiecutter.oss_capacity_service_enabled == 'True' %}
+  {%- if cookiecutter.oss_cleanup_service_enabled == 'True' %}
   - system.haproxy.proxy.listen.oss.janitor_monkey
   - system.haproxy.proxy.listen.oss.mongodb
   {%- endif %}
@@ -74,7 +74,7 @@ classes:
   {%- if cookiecutter.oss_security_audit_enabled == 'True' %}
   - system.docker.swarm.stack.security_monkey
   {%- endif %}
-  {%- if cookiecutter.oss_capacity_service_enabled == 'True' %}
+  {%- if cookiecutter.oss_cleanup_service_enabled == 'True' %}
   - system.docker.swarm.stack.janitor_monkey
   {%- endif %}
 
@@ -90,7 +90,7 @@ classes:
   {%- if cookiecutter.oss_security_audit_enabled == 'True' %}
   - system.devops_portal.service.security_monkey
   {%- endif %}
-  {%- if cookiecutter.oss_capacity_service_enabled == 'True' %}
+  {%- if cookiecutter.oss_cleanup_service_enabled == 'True' %}
   - system.devops_portal.service.janitor_monkey
   {%- endif %}
 
@@ -236,7 +236,7 @@ parameters:
       project_domain_name: {{ cookiecutter.oss_security_audit_project_domain_id }}
     {%- endif %}
 
-    {%- if cookiecutter.oss_capacity_service_enabled == 'True' %}
+    {%- if cookiecutter.oss_cleanup_service_enabled == 'True' %}
     # JanitorMonkey
     docker_image_janitor_monkey: {{ cookiecutter.oss_janitor_monkey_image }}
     docker_image_mongodb: {{ cookiecutter.oss_mongodb_image }}
@@ -244,11 +244,11 @@ parameters:
     docker_mongodb_admin_password: {{ password(16) }}
     janitor_monkey_mongodb_host: ${_param:haproxy_mongodb_bind_host}
     janitor_monkey_openstack:
-      username: {{ cookiecutter.oss_capacity_service_username }}
-      password: {{ cookiecutter.oss_capacity_service_password }}
+      username: {{ cookiecutter.oss_cleanup_service_username }}
+      password: {{ cookiecutter.oss_cleanup_service_password }}
       auth_url: {{ cookiecutter.oss_openstack_auth_url }}
-      user_domain_name: {{ cookiecutter.oss_capacity_service_user_domain_id }}
-      project_domain_name: {{ cookiecutter.oss_capacity_service_project_domain_id }}
+      user_domain_name: {{ cookiecutter.oss_cleanup_service_user_domain_id }}
+      project_domain_name: {{ cookiecutter.oss_cleanup_service_project_domain_id }}
     {%- endif %}
 
     # Rundeck

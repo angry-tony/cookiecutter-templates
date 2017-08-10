@@ -23,7 +23,7 @@
     "stacklight_version"                        : "1",
 
     "oss_enabled"                               : "True",
-    "oss_openstack_auth_url"                    : "http://172.17.16.190:5000/v3",
+    "oss_openstack_auth_url"                    : "http://172.17.16.190/identity/v3",
     "oss_openstack_username"                    : "admin",
     "oss_openstack_password"                    : "nova",
     "oss_openstack_project"                     : "admin",
@@ -51,12 +51,12 @@
     "oss_security_audit_user_domain_id"         : "${_param:oss_openstack_domain_id}",
     "oss_security_audit_project_domain_id"      : "${_param:oss_openstack_domain_id}",
 
-    "oss_capacity_service_enabled"                : "True",
-    "oss_capacity_service_username"               : "${_param:oss_openstack_username}",
-    "oss_capacity_service_password"               : "${_param:oss_openstack_password}",
-    "oss_capacity_service_project"                : "${_param:oss_openstack_project}",
-    "oss_capacity_service_user_domain_id"         : "${_param:oss_openstack_domain_id}",
-    "oss_capacity_service_project_domain_id"      : "${_param:oss_openstack_domain_id}",
+    "oss_cleanup_service_enabled"                : "True",
+    "oss_cleanup_service_username"               : "${_param:oss_openstack_username}",
+    "oss_cleanup_service_password"               : "${_param:oss_openstack_password}",
+    "oss_cleanup_service_project"                : "${_param:oss_openstack_project}",
+    "oss_cleanup_service_user_domain_id"         : "${_param:oss_openstack_domain_id}",
+    "oss_cleanup_service_project_domain_id"      : "${_param:oss_openstack_domain_id}",
 
     "oss_portal_image"                          : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/devops-portal:latest",
     "oss_rundeck_image"                         : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/rundeck:latest",

@@ -19,7 +19,7 @@ classes:
   {%- if cookiecutter.oss_security_audit_enabled == 'True' %}
   - system.glusterfs.server.volume.security_monkey
   {%- endif %}
-  {%- if cookiecutter.oss_capacity_service_enabled == 'True' %}
+  {%- if cookiecutter.oss_cleanup_service_enabled == 'True' %}
   - system.glusterfs.server.volume.mongodb
   {%- endif %}
   {%- endif %}
