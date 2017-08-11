@@ -1319,6 +1319,12 @@ product_params_action:
       requires:
       - openstack_network_engine: ovs
       type: BOOL
+    - help_text: If openstack_network_engine == ovs. Enables QoS.
+      initial: false
+      name: openstack_neutron_qos
+      requires:
+      - openstack_network_engine: ovs
+      type: BOOL
     - help_text: vlan range for OVS networks, valid for vlan encapslulation_type
       initial: 2416:2420
       name: openstack_ovs_encapsulation_vlan_range
