@@ -34,6 +34,11 @@ parameters:
     opencontrail_analytics_node02_hostname: {{ cookiecutter.opencontrail_analytics_node02_hostname }}
     opencontrail_analytics_node03_hostname: {{ cookiecutter.opencontrail_analytics_node03_hostname }}
 
+    {%- if cookiecutter.get('kubernetes_enabled','False') == 'True' %}
+    rabbitmq_secret_key: {{ password(16) }}
+    rabbitmq_admin_password: {{ password(16) }}
+    {%- endif %}
+
   linux:
     network:
       host:

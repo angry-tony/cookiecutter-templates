@@ -3,32 +3,24 @@ classes:
 - system.linux.system.repo_local.ubuntu
 - system.linux.system.repo_local.mcp.openstack
 - system.linux.system.repo_local.mcp.extra
-{%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
-- system.linux.system.repo_local.mcp.contrail
-{%- endif %}
 {%- else %}
 - system.linux.system.repo.ubuntu
 - system.linux.system.repo.saltstack.xenial
 - system.linux.system.repo.mcp.openstack
 - system.linux.system.repo.mcp.extra
-{%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
-- system.linux.system.repo.mcp.contrail
-{%- endif %}
 {%- endif %}
 {%- if cookiecutter.get('openstack_nova_compute_nfv_req_enabled', 'False') == 'True' or cookiecutter.get('openstack_nfv_dpdk_enabled', 'False') == 'True' %}
 - system.nova.compute.nfv.hugepages
 - system.nova.compute.nfv.cpu_pinning
 {%- endif %}
 - system.nova.compute.cluster
-- system.nova.compute.notification.messagingv2
-{%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
-- system.opencontrail.compute.cluster
-- system.opencontrail.client.cluster
-- system.opencontrail.client.resource.virtual_router
-{%- elif cookiecutter.openstack_network_engine == 'ovs' %}
-- system.neutron.compute.cluster
-{%- endif %}
 - system.ceilometer.agent.cluster
+- system.nova.compute.notification.messagingv2
+{%- if cookiecutter.openstack_network_engine == 'ovs' %}
+- system.neutron.compute.cluster
+{%- elif cookiecutter.openstack_network_engine == 'opencontrail' %}
+- cluster.{{ cookiecutter.cluster_name }}.opencontrail.compute
+{%- endif %}
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
@@ -40,21 +32,13 @@ parameters:
     cluster_node02_address: ${_param:openstack_control_node02_address}
     cluster_node03_hostname: ${_param:openstack_control_node03_hostname}
     cluster_node03_address: ${_param:openstack_control_node03_address}
-{%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
-    opencontrail_compute_address: ${_param:tenant_address}
-{%- endif %}
     nova_vncproxy_url: https://${_param:cluster_public_host}:6080
     primary_first_nic: {{ cookiecutter.compute_primary_first_nic }}
     primary_second_nic: {{ cookiecutter.compute_primary_second_nic }}
 
+{%- if cookiecutter.openstack_network_engine == 'ovs' %}
   linux:
     network:
-      host:
-        hostname:
-          address: ${_param:single_address}
-          names:
-          - ${linux:network:hostname}
-          - ${linux:network:fqdn}
       interface:
   {%- if not cookiecutter.get('openstack_nfv_dpdk_enabled', 'False') == 'True' %}
         eth1:
@@ -71,7 +55,6 @@ parameters:
           proto: manual
           name: ${_param:primary_second_nic}
           master: bond0
-    {%- if cookiecutter.openstack_network_engine == 'ovs' %}
       {%- if not cookiecutter.openstack_ovs_dvr_enabled == 'True' %}
         {%- if cookiecutter.openstack_ovs_encapsulation_type == 'vxlan' %}
         bond0:
@@ -180,47 +163,5 @@ parameters:
         {%- endif %}
       {%- endif %}
       bridge: openvswitch
-    {%- elif cookiecutter.openstack_network_engine == 'opencontrail' %}
-        bond0:
-          mtu: 9000
-          enabled: true
-          proto: manual
-          type: bond
-          use_interfaces:
-          - ${_param:primary_first_nic}
-          - ${_param:primary_second_nic}
-          slaves: ${_param:primary_first_nic} ${_param:primary_second_nic}
-          mode: {{ cookiecutter.compute_bond_mode }}
-        bond0.1:
-          mtu: 9000
-          name: bond0.${_param:control_vlan}
-          enabled: true
-          proto: static
-          type: vlan
-          use_interfaces:
-          - bond0
-          address: ${_param:single_address}
-          netmask: ${_param:control_network_netmask}
-        bond0.2:
-          mtu: 9000
-          name: bond0.${_param:tenant_vlan}
-          enabled: true
-          proto: manual
-          type: vlan
-          use_interfaces:
-          - bond0
-        vhost0:
-          enabled: true
-          type: eth
-          mtu: 9000
-          address: ${_param:tenant_address}
-          netmask: ${_param:tenant_network_netmask}
-          pre_up_cmds:
-          - /usr/lib/contrail/if-vhost0
-          use_interfaces:
-          - bond0.${_param:tenant_vlan}
-          name_servers:
-          - ${_param:dns_server01}
-          - ${_param:dns_server02}
-    {%- endif %}
   {%- endif %}
+{%- endif %}

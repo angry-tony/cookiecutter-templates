@@ -33,11 +33,11 @@ classes:
 - system.cassandra.backup.server.single
 - system.zookeeper.backup.server.single
 {%- endif %}
-{%- if cookiecutter.openstack_enabled == 'True' or (cookiecutter.kubernetes_enabled == 'True' and (cookiecutter.stacklight_enabled == 'True' or cookiecutter.cicd_enabled == 'True')) %}
+{%- if cookiecutter.deployment_type == 'physical' and (cookiecutter.openstack_enabled == 'True' or (cookiecutter.kubernetes_enabled == 'True' and (cookiecutter.stacklight_enabled == 'True' or cookiecutter.cicd_enabled == 'True'))) %}
 - system.reclass.storage.system.physical_control_cluster
 - system.reclass.storage.system.infra_maas_single
 {%- endif %}
-{%- if cookiecutter.openstack_enabled == 'True' and cookiecutter.openstack_network_engine == 'opencontrail' %}
+{%- if (cookiecutter.kubernetes_enabled == 'True' and cookiecutter.kubernetes_network_engine == 'opencontrail') or (cookiecutter.openstack_enabled == 'True' and cookiecutter.openstack_network_engine == 'opencontrail') %}
 - system.reclass.storage.system.opencontrail_analytics_cluster
 - system.reclass.storage.system.opencontrail_control_cluster
 {%- endif %}
@@ -82,7 +82,7 @@ parameters:
   reclass:
     storage:
       node:
-        {%- if cookiecutter.openstack_enabled == 'True' or (cookiecutter.kubernetes_enabled == 'True' and (cookiecutter.stacklight_enabled == 'True' or cookiecutter.cicd_enabled == 'True')) %}
+        {%- if cookiecutter.deployment_type == 'physical' and (cookiecutter.openstack_enabled == 'True' or (cookiecutter.kubernetes_enabled == 'True' and (cookiecutter.stacklight_enabled == 'True' or cookiecutter.cicd_enabled == 'True'))) %}
         infra_kvm_node01:
           params:
             keepalived_vip_priority: 100
@@ -126,6 +126,17 @@ parameters:
             linux_system_codename: xenial
             single_address: ${_param:kubernetes_compute_node02_address}
             tenant_address: ${_param:kubernetes_compute_node02_tenant_address}
+        {%- if cookiecutter.kubernetes_network_engine == 'opencontrail' %}
+        opencontrail_control_node01:
+          params:
+            rabbitmq_cluster_role: master
+        opencontrail_control_node02:
+          params:
+            rabbitmq_cluster_role: slave
+        opencontrail_control_node03:
+          params:
+            rabbitmq_cluster_role: slave
+        {%- endif %}
         {%- endif %}
         {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
         stacklight_log_node01:

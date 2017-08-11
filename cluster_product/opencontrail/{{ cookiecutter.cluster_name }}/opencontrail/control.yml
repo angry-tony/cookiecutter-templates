@@ -21,6 +21,11 @@ classes:
 - system.linux.system.repo.sensu
 {%- endif %}
 {%- endif %}
+{%- if cookiecutter.get('kubernetes_enabled','False') == 'True' %}
+- system.rabbitmq.server.cluster
+- system.rabbitmq.server.vhost.opencontrail
+- system.opencontrail.client.resource.k8s_api
+{%- endif %}
 - system.opencontrail.control.control
 - system.opencontrail.client.cluster
 {%- if cookiecutter.get('openstack_enabled') == 'True' %}
@@ -48,6 +53,11 @@ parameters:
     opencontrail_router01_address: {{ cookiecutter.opencontrail_router01_address }}
     opencontrail_router02_hostname: {{ cookiecutter.opencontrail_router02_hostname }}
     opencontrail_router02_address: {{ cookiecutter.opencontrail_router02_address }}
+    {%- if cookiecutter.get('kubernetes_enabled','False') == 'True' %}
+    opencontrail_message_queue_node01_address: ${_param:opencontrail_control_node01_address}
+    opencontrail_message_queue_node02_address: ${_param:opencontrail_control_node02_address}
+    opencontrail_message_queue_node03_address: ${_param:opencontrail_control_node03_address}
+    {%- endif %}
   linux:
     network:
       interface:
