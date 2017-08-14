@@ -61,7 +61,7 @@ parameters:
         netchecker:
           enabled: true
         helm:
-          enabled: true
+          enabled: false
         {%- if cookiecutter.kubernetes_network_engine == 'opencontrail' %}
         dashboard:
           enabled: False
