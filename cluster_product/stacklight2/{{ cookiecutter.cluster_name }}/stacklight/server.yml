@@ -28,7 +28,7 @@ parameters:
     {%- endif %}
     keepalived_prometheus_vip_address: ${_param:stacklight_monitor_address}
     keepalived_prometheus_vip_password: 'password'
-    keepalived_prometheus_vip_interface: ens4
+    keepalived_prometheus_vip_interface: ens3
     alertmanager_notification_pushkin_host: localhost
     alertmanager_notification_pushkin_port: 18887
     cluster_vip_address: ${_param:stacklight_monitor_address}
@@ -49,8 +49,9 @@ parameters:
   linux:
     network:
       interface:
-        ens4:
+        primary_interface:
           enabled: true
+          name: ${_param:keepalived_prometheus_vip_interface}
           type: eth
           proto: static
           address: ${_param:single_address}
