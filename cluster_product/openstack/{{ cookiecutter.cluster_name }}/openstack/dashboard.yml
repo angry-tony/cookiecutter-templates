@@ -10,7 +10,3 @@ parameters:
   _param:
     horizon_site_branding: OpenStack Dashboard
     # horizon_dashboard_theme: mirantis
-  linux:
-    network:
-      interface:
-        ens3: ${_param:linux_single_interface}
