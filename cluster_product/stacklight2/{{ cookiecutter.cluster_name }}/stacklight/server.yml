@@ -56,3 +56,8 @@ parameters:
           proto: static
           address: ${_param:single_address}
           netmask: 255.255.255.0
+  prometheus:
+    server:
+      storage:
+        local:
+          target_heap_size: 33554432
