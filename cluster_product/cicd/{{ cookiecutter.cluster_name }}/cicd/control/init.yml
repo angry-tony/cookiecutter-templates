@@ -247,7 +247,7 @@ parameters:
       username: {{ cookiecutter.oss_cleanup_service_username }}
       password: {{ cookiecutter.oss_cleanup_service_password }}
       auth_url: {{ cookiecutter.oss_openstack_auth_url }}
-      user_domain_name: {{ cookiecutter.oss_cleanup_service_user_domain_id }}
+      project_name: {{ cookiecutter.oss_cleanup_service_project }}
       project_domain_name: {{ cookiecutter.oss_cleanup_service_project_domain_id }}
     {%- endif %}
 

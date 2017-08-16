@@ -43,8 +43,6 @@ classes:
   - system.gerrit.client.project.ci
 
   - system.docker.swarm.master
-  - cluster.{{ cookiecutter.cluster_name }}.infra
-  - cluster.{{ cookiecutter.cluster_name }}.cicd.control
 
   {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '2' %}
   - cluster.{{ cookiecutter.cluster_name }}.stacklight.server
@@ -70,4 +68,7 @@ classes:
   - system.rundeck.server.docker
   - system.rundeck.client
   - system.rundeck.client.project.cicd
+
+  - cluster.{{ cookiecutter.cluster_name }}.infra
+  - cluster.{{ cookiecutter.cluster_name }}.cicd.control
   {%- endif %}

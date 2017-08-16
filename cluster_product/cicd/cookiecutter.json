@@ -55,7 +55,6 @@
     "oss_cleanup_service_username"               : "${_param:oss_openstack_username}",
     "oss_cleanup_service_password"               : "${_param:oss_openstack_password}",
     "oss_cleanup_service_project"                : "${_param:oss_openstack_project}",
-    "oss_cleanup_service_user_domain_id"         : "${_param:oss_openstack_domain_id}",
     "oss_cleanup_service_project_domain_id"      : "${_param:oss_openstack_domain_id}",
 
     "oss_portal_image"                          : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/devops-portal:latest",
