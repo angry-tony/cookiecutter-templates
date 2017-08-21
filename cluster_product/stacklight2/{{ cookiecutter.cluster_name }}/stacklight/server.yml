@@ -9,9 +9,6 @@ classes:
 - system.prometheus.alertmanager.notification.pushkin
 - system.prometheus.server.alert.labels_add.route
 - system.prometheus.server.remote_write.docker
-{%- if cookiecutter.kubernetes_enabled == 'True' %}
-- system.prometheus.server.target.kubernetes
-{%- endif %}
 - system.prometheus.server.target.dns
 - system.prometheus.server.alertmanager.dns
 - system.docker.swarm.stack.monitoring
