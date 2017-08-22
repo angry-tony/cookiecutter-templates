@@ -151,7 +151,7 @@ parameters:
           - system.grafana.client.single
           - system.kibana.client.single
         {%- endif %}
-        {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '2' and cookiecutter.kubernetes_enabled == 'True' %}
+        {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.kubernetes_enabled == 'True' %}
         stacklight_telemetry_node01:
           classes:
           - service.galera.master.cluster
