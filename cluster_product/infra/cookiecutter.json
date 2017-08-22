@@ -52,6 +52,7 @@
     "kubernetes_network_engine"                 : "calico",
     "openstack_nfv_dpdk_enabled"                : "False",
     "openstack_nfv_sriov_enabled"               : "False",
+    "analytics_pipeline_enabled"                : "False",
 
     "openstack_compute_count"                   : "100"
 }

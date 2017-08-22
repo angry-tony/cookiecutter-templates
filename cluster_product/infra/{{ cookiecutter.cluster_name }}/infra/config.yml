@@ -98,6 +98,10 @@ parameters:
         {%- endif %}
         {%- if cookiecutter.kubernetes_enabled == 'True' %}
         kubernetes_control_node01:
+          {%- if cookiecutter.analytics_pipeline_enabled == 'True' %}
+          classes:
+          - system.helm.analytics_pipeline
+          {%- endif %}
           params:
             tenant_address: ${_param:kubernetes_control_node01_tenant_address}
         kubernetes_control_node02:
