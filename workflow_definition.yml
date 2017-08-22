@@ -713,12 +713,6 @@ product_params_action:
       type: TEXT
       requires:
       - oss_cleanup_service_enabled: True
-    - help_text: "Cleanup service user domain id"
-      initial: "${_param:oss_openstack_domain_id"
-      name: oss_cleanup_service_user_domain_id
-      type: TEXT
-      requires:
-      - oss_cleanup_service_enabled: True
     - help_text: "Cleanup service project domain id"
       initial: "${_param:oss_openstack_username_domain_id}"
       name: oss_cleanup_service_project_domain_id
