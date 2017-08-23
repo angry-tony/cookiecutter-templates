@@ -1,6 +1,7 @@
 ---
 others:
-  - Changed the structure of the support team classes under
+  - |
+    Changed the structure of the support team classes under
     ``system.openssh.server.team``.
 
     To apply the change on an existing deployment.
@@ -19,7 +20,7 @@ others:
 
           - system.openssh.server.team.support
 
-     #. Apply the changes to your MCP cluster environment:
+     #. Apply the changes to your MCP cluster:
 
       .. code-block:: bash
 
