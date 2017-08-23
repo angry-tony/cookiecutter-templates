@@ -5,11 +5,12 @@ summary: >
   bug fixes released for Cookicutter templates on a sprint basis.
 
 others:
-  - Added `Reno <https://docs.openstack.org/reno/latest>_`, a release notes
+  - |
+    Added `Reno <https://docs.openstack.org/reno/latest>_`, a release notes
     configuration tool, to track release notes within the ``reclass-system``
     Git repository.
 
-    To list/create/show release notes:
+    To list, create, or show release notes:
 
     .. code-block:: shell
 
