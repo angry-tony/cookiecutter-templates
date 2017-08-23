@@ -3,7 +3,7 @@
 {%- endmacro %}
 classes:
   - system.linux.system.haveged
-  - system.linux.repo.glusterfs
+  - system.linux.system.repo.glusterfs
   - system.glusterfs.client.cluster
   - system.glusterfs.client.volume.aptly
   - system.glusterfs.client.volume.gerrit

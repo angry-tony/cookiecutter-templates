@@ -1076,7 +1076,7 @@ product_params_action:
     - help_text: control plane network prefix for compute nodes
       initial: '{{ ".".join(control_network_subnet.split(".")[:3]) }}'
       name: openstack_compute_rack01_single_subnet
-      type: IP
+      type: TEXT
       width: half
     - help_text: data plane network prefix for compute nodes
       initial: '{{ ".".join(tenant_network_subnet.split(".")[:3]) }}'
