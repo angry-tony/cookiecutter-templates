@@ -19,7 +19,7 @@ classes:
 parameters:
   _param:
     {%- if cookiecutter.openstack_enabled == 'True' %}
-    heka_amqp_host: ${_param:openstack_control_address}
+    heka_amqp_host: ${_param:openstack_message_queue_address}
     docker_image_remote_collector: docker-prod-local.artifactory.mirantis.com/openstack-docker/heka:latest
     remote_collector_telegraf_host: monitoring_remote_agent
     {%- endif %}
