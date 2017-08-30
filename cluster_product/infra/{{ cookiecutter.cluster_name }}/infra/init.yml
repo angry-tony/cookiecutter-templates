@@ -38,13 +38,14 @@ classes:
 {%- endif %}
 parameters:
   _param:
-    # TODO: Uncomment next line "linux_system_user_sudo: true" during the deployment. Don't set it "false" after, but rather remove at all.
+    # TODO: Uncomment next line "linux_system_user_sudo: true" during the deployment.
+    # Don't set it "false" before you configure sudo policies and enable power users.
     # linux_system_user_sudo: true
+
     {%- if cookiecutter.kubernetes_enabled != 'True' %}
     salt_control_trusty_image: http://apt-mk.mirantis.com/images/ubuntu-14-04-x64-mcp1.1.qcow2
     salt_control_xenial_image: http://apt-mk.mirantis.com/images/ubuntu-16-04-x64-mcp1.1.qcow2
     {%- endif %}
-
 
     {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
     local_repo_url: {{ cookiecutter.local_repo_url}}
