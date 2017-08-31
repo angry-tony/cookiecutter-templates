@@ -97,6 +97,11 @@ general_params_action:
           - - "2"
             - "2"
         initial: "1"
+      - name: "ceph_enabled"
+        type: "BOOL"
+        help_text: "Enable ceph sub-cluster"
+        initial: True
+        label: "Ceph enabled"
       - name: "cicd_enabled"
         type: "BOOL"
         help_text: "Enable CI/CD sub-cluster"
@@ -1655,3 +1660,120 @@ product_params_action:
 
     requires:
     - stacklight_enabled: True
+  - fields:
+    - help_text: IP VIP address of ceph mon storage cluster
+      initial: '{{ control_network_subnet | subnet(65) }}'
+      name: ceph_mon_address
+      type: IP
+      width: half
+    - help_text: hostname of ceph mon storage cluster
+      initial: cmn
+      name: ceph_mon_hostname
+      type: TEXT
+      width: half
+    - help_text: IP address of ceph mon storage node01
+      initial: '{{ control_network_subnet | subnet(66) }}'
+      name: ceph_mon_node01_address
+      type: IP
+      width: half
+    - help_text: hostname of ceph mon storage node01
+      initial: cmn01
+      name: ceph_mon_node01_hostname
+      type: TEXT
+      width: half
+    - help_text: IP address of ceph mon storage node02
+      initial: '{{ control_network_subnet | subnet(67) }}'
+      name: ceph_mon_node02_address
+      type: IP
+      width: half
+    - help_text: hostname of ceph mon storage node02
+      initial: cmn02
+      name: ceph_mon_node02_hostname
+      type: TEXT
+      width: half
+    - help_text: IP address of ceph mon storage node03
+      initial: '{{ control_network_subnet | subnet(63) }}'
+      name: ceph_mon_node03_address
+      type: IP
+      width: half
+    - help_text: hostname of ceph mon storage node03
+      initial: cmn03
+      name: ceph_mon_node03_hostname
+      type: TEXT
+      width: half
+    - help_text: number of OSDs
+      initial: '10'
+      name: ceph_osd_count
+      type: TEXT
+      width: half
+    - name: "ceph_osd_backend"
+      type: "CHOICE"
+      help_text: "OSD backend type"
+      choices:
+        - - "bluestore"
+          - "bluestore"
+        - - "filestore"
+          - "filestore"
+      initial: "bluestore"
+    - help_text: OSD rack01 hostname
+      initial: osd
+      name: ceph_osd_rack01_hostname
+      type: TEXT
+      width: half
+    - help_text: control plane network prefix for ceph OSDs
+      initial: '{{ ".".join(control_network_subnet.split(".")[:3]) }}'
+      name: ceph_osd_rack01_single_subnet
+      type: TEXT
+      width: half
+    - help_text: deploy network prefix for ceph OSDs
+      initial: '{{ ".".join(deploy_network_subnet.split(".")[:3]) }}'
+      name: ceph_osd_rack01_backend_subnet
+      type: TEXT
+      width: half
+    - name: "ceph_public_network"
+      type: IP
+      help_text: "IP address of ceph public network with network mask"
+      initial: "{{ control_network_subnet }}"
+      mask: True
+    - name: "ceph_cluster_network"
+      type: IP
+      help_text: "IP address of ceph cluster network with network mask"
+      initial: "{{ deploy_network_subnet }}"
+      mask: True
+    - help_text: ceph OSD journal size in GB
+      initial: '20'
+      name: ceph_osd_journal_size
+      type: TEXT
+      width: half
+      requires:
+      - ceph_osd_backend: "filestore"
+    - help_text: ceph OSD block db size in GB
+      initial: '20'
+      name: ceph_osd_block_db_size
+      type: TEXT
+      width: half
+      requires:
+      - ceph_osd_backend: "bluestore"
+    - help_text: comma separated list of OSD data disks
+      initial: '/dev/vdd,/dev/vde,/dev/vdf'
+      name: ceph_osd_data_disks
+      type: TEXT
+      width: half
+    - help_text: comma separated list of fast disks for journal or block_db
+      initial: '/dev/vdb,/dev/vdc,/dev/vdd'
+      name: ceph_osd_journal_or_block_db_disks
+      type: TEXT
+      width: half
+    label: Ceph product parameters
+    name: ceph
+    doc: |
+      Ceph product parameters
+      ========================
+
+      .. figure:: https://raw.githubusercontent.com/jiribroulik/images/master/ceph-diagram-2-1.png?raw=true
+        :width: 70 %
+        :align: center
+        :alt: Ceph storage diagram
+
+    requires:
+    - ceph_enabled: True

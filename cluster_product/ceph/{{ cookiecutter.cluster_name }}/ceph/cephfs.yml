@@ -1,0 +1,3 @@
+classes:
+- system.linux.system.repo.ubuntu
+- cluster.{{ cookiecutter.cluster_name }}.infra

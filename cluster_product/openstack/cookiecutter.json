@@ -21,6 +21,7 @@
 
     "cicd_enabled"                              : "True",
     "stacklight_enabled"                        : "True",
+    "ceph_enabled"                              : "False",
     "stacklight_version"                        : "1",
 
     "openstack_version"                         : "ocata",

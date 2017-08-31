@@ -1,6 +1,9 @@
 {%- macro password(size=16) -%}
 {% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'|random }}{% endfor %}
 {%- endmacro -%}
+{%- macro secret(size=8) -%}
+{% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyz0123456789'|random }}{% endfor %}
+{%- endmacro -%}
 parameters:
   _param:
     openstack_region: RegionOne
@@ -200,6 +203,17 @@ parameters:
 
     openstack_benchmark_node01_hostname: {{ cookiecutter.openstack_benchmark_node01_hostname }}
     openstack_benchmark_node01_address: {{ cookiecutter.openstack_benchmark_node01_address }}
+
+    {%- if cookiecutter.get('ceph_enabled', 'False') == 'True'  %}
+    cinder_storage_secret_uuid: {{ secret(8) }}-{{ secret(8) }}-{{ secret(8) }}-{{ secret(8) }}-{{ secret(8) }}
+    nova_storage_secret_uuid: {{ secret(8) }}-{{ secret(8) }}-{{ secret(8) }}-{{ secret(8) }}-{{ secret(8) }}
+    nova_storage_pool: vms
+    nova_storage_user: nova
+    cinder_storage_pool: volumes
+    cinder_storage_user: volumes
+    glance_storage_pool: images
+    glance_storage_user: images
+    {%- endif %}
 
     # Billing
     #keystone_billometer_password: {{ password(16) }}

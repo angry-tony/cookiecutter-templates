@@ -1,0 +1,34 @@
+classes:
+- service.ceph.osd.cluster
+- cluster.{{ cookiecutter.cluster_name }}.ceph.common
+parameters:
+  ceph:
+    osd:
+      enabled: true
+      copy_admin_key: true
+{%- if cookiecutter.ceph_osd_backend == 'bluestore' %}
+      bluestore_block_db_size: {{ (cookiecutter.ceph_osd_block_db_size|int*1073741824) }}
+{%- else %}
+      journal_size: {{ (cookiecutter.ceph_osd_journal_size|int*1024) }}
+{%- endif %}
+      backend:
+        {{ cookiecutter.ceph_osd_backend }}:
+          disks:
+{%- if cookiecutter.ceph_osd_mode == 'separated' %}
+{%- set disks = cookiecutter.ceph_osd_data_disks.split(',') %}
+{%- set journals = cookiecutter.ceph_osd_journal_or_block_db_disks.split(',') %}
+{%- set current_journal = 0 %}
+
+{%- for id in range(disks|length) %}
+            - dev: {{ disks[id] }}
+              rule: hdd
+{%- if cookiecutter.ceph_osd_backend == 'bluestore' %}
+              block_db: {{ journals[current_journal] }}
+{%- else %}
+              journal: {{ journals[current_journal] }}
+{%- endif %}
+              class: hdd
+              weight: 1.5
+{%- endfor %}
+
+{%- endif %}

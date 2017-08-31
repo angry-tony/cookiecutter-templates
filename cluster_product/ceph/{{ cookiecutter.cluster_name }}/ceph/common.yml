@@ -1,0 +1,11 @@
+classes:
+- system.linux.system.repo.mcp.extra
+- system.linux.system.repo.ubuntu
+- system.linux.system.repo.saltstack.xenial
+- system.linux.system.repo.ceph
+- cluster.{{ cookiecutter.cluster_name }}.infra
+parameters:
+  ceph:
+    common:
+      public_network: {{ cookiecutter.ceph_public_network }}
+      cluster_network: {{ cookiecutter.ceph_cluster_network }}

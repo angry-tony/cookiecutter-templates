@@ -36,6 +36,13 @@ classes:
 - system.neutron.control.openvswitch.sriov
 {%- endif %}
 {%- endif %}
+{%- if cookiecutter.get('ceph_enabled', 'False') == 'True'  %}
+- system.glance.control.storage.ceph
+- system.cinder.control.backend.ceph
+- system.cinder.volume.backend.ceph
+- service.ceph.common.cluster
+- cluster.{{ cookiecutter.cluster_name }}.ceph
+{%- endif %}
 - system.keystone.server.cluster
 - system.keystone.server.wsgi
 - system.keystone.server.notification.messagingv2

@@ -25,6 +25,11 @@ classes:
 {%- elif cookiecutter.openstack_network_engine == 'opencontrail' %}
 - cluster.{{ cookiecutter.cluster_name }}.opencontrail.compute
 {%- endif %}
+{%- if cookiecutter.get('ceph_enabled', 'False') == 'True'  %}
+- system.nova.compute.storage.ceph
+- service.ceph.common.cluster
+- cluster.{{ cookiecutter.cluster_name }}.ceph
+{%- endif %}
 - system.linux.network.dynamic_hosts
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:

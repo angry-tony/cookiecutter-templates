@@ -1,0 +1,33 @@
+classes:
+- system.ceph.mon.cluster
+{%- if cookiecutter.ceph_version == 'luminous' %}
+- service.ceph.mgr.cluster
+{%- endif %}
+- cluster.{{ cookiecutter.cluster_name }}.ceph.common
+parameters:
+  linux:
+    network:
+      interface:
+        ens3: ${_param:linux_single_interface}
+{%- if cookiecutter.ceph_osd_count|int < 5 %}
+{% set num = 128 %}
+{%- elif cookiecutter.ceph_osd_count|int >= 5 and cookiecutter.ceph_osd_count|int <= 10 %}
+{% set num = 512 %}
+{%- else %}
+{% set num = 1024 %}
+{%- endif %}
+  ceph:
+    setup:
+      pool:
+        images:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+        volumes:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+        vms:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated

@@ -1,0 +1,12 @@
+classes:
+- system.ceph.rgw.cluster
+- system.haproxy.proxy.single
+- system.haproxy.proxy.listen.radosgw
+- system.linux.system.repo.ceph
+- system.linux.system.repo.ubuntu
+- service.keepalived.cluster.single
+- cluster.{{ cookiecutter.cluster_name }}.ceph.common
+- cluster.{{ cookiecutter.cluster_name }}.infra
+parameters:
+  _param:
+    ceph_radosgw_hostname: ${linux:system:name}

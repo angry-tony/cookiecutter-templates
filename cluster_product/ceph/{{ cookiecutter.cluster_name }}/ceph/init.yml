@@ -1,0 +1,56 @@
+{%- macro secret(size=12) -%}
+{% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyz0123456789'|random }}{% endfor %}
+{%- endmacro -%}
+parameters:
+  _param:
+    linux_repo_ceph_component: ${_param:ceph_version}
+    ceph_version: {{ cookiecutter.ceph_version }}
+
+    ceph_mon_node01_hostname: {{ cookiecutter.ceph_mon_node01_hostname }}
+    ceph_mon_node02_hostname: {{ cookiecutter.ceph_mon_node02_hostname }}
+    ceph_mon_node03_hostname: {{ cookiecutter.ceph_mon_node03_hostname }}
+    ceph_mon_node01_address: {{ cookiecutter.ceph_mon_node01_address }}
+    ceph_mon_node02_address: {{ cookiecutter.ceph_mon_node02_address }}
+    ceph_mon_node03_address: {{ cookiecutter.ceph_mon_node03_address }}
+
+    ceph_cluster_fsid: {{ secret(8) }}-{{ secret(4) }}-{{ secret(4) }}-{{ secret(4) }}-{{ secret(12) }}
+    ceph_osd_rack01_single_subnet: {{ cookiecutter.ceph_osd_rack01_single_subnet }}
+    ceph_osd_rack01_backend_subnet: {{ cookiecutter.ceph_osd_rack01_backend_subnet }}
+    ceph_osd_rack01_hostname: {{ cookiecutter.ceph_osd_rack01_hostname }}
+
+  ceph:
+    common:
+      keyring:
+        bootstrap-osd:
+          caps:
+            mon: "allow profile bootstrap-osd"
+        images:
+          caps:
+            mon: "allow r"
+            osd: "allow class-read object_prefix rdb_children, allow rwx pool=images"
+        volumes:
+          caps:
+            mon: "allow r"
+            osd: "allow class-read object_prefix rbd_children, allow rwx pool=volumes, allow rx pool=images"
+        nova:
+          caps:
+            mon: "allow r"
+            osd: "allow class-read object_prefix rbd_children, allow rwx pool=vms, allow rx pool=images"
+  linux:
+    network:
+      host:
+        cmn01:
+          address: ${_param:ceph_mon_node01_address}
+          names:
+          - ${_param:ceph_mon_node01_hostname}
+          - ${_param:ceph_mon_node01_hostname}.${_param:cluster_domain}
+        cmn02:
+          address: ${_param:ceph_mon_node02_address}
+          names:
+          - ${_param:ceph_mon_node02_hostname}
+          - ${_param:ceph_mon_node02_hostname}.${_param:cluster_domain}
+        cmn03:
+          address: ${_param:ceph_mon_node03_address}
+          names:
+          - ${_param:ceph_mon_node03_hostname}
+          - ${_param:ceph_mon_node03_hostname}.${_param:cluster_domain}

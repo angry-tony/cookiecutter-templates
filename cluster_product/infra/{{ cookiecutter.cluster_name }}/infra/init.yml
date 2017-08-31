@@ -33,6 +33,9 @@ classes:
 - service.grafana.collector
 {%- endif %}
 {%- endif %}
+{%- if cookiecutter.get('ceph_enabled', 'False') == 'True' %}
+- cluster.{{ cookiecutter.cluster_name }}.ceph
+{%- endif %}
 {%- if cookiecutter.cicd_enabled == 'True' %}
 - cluster.{{ cookiecutter.cluster_name }}.cicd
 {%- endif %}
