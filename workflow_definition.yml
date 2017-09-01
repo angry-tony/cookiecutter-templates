@@ -721,7 +721,7 @@ product_params_action:
       - oss_cleanup_service_enabled: True
   - fields:
     - help_text: Image with CNI binaries
-      initial: artifactory.mirantis.com/docker-prod-local/mirantis/projectcalico/calico/cni:latest
+      initial: docker-prod-local.artifactory.mirantis.com/mirantis/projectcalico/calico/cni:latest
       name: calico_cni_image
       type: TEXT
       requires:
@@ -733,7 +733,7 @@ product_params_action:
       requires:
         - kubernetes_network_engine: 'calico'
     - help_text: Image with Calico
-      initial: artifactory.mirantis.com/docker-prod-local/mirantis/projectcalico/calico/node:latest
+      initial: docker-prod-local.artifactory.mirantis.com/mirantis/projectcalico/calico/node:latest
       name: calico_image
       type: TEXT
       requires:
@@ -751,7 +751,7 @@ product_params_action:
       requires:
         - kubernetes_network_engine: 'calico'
     - help_text: Image with Calicoctl command
-      initial: artifactory.mirantis.com/docker-prod-local/mirantis/projectcalico/calico/ctl:latest
+      initial: docker-prod-local.artifactory.mirantis.com/mirantis/projectcalico/calico/ctl:latest
       name: calicoctl_image
       type: TEXT
       requires:
@@ -761,7 +761,7 @@ product_params_action:
       name: etcd_ssl
       type: BOOL
     - help_text: Image with Kubernetes.
-      initial: artifactory.mirantis.com/docker-prod-local/mirantis/kubernetes/hyperkube-amd64:v1.4.6-6
+      initial: docker-prod-local.artifactory.mirantis.com/mirantis/kubernetes/hyperkube-amd64:v1.7.3-1
       name: hyperkube_image
       type: TEXT
     - help_text: hostname of kubernetes compute node01
