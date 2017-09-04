@@ -56,6 +56,7 @@ parameters:
     docker_image_prometheus: docker-prod-local.artifactory.mirantis.com/openstack-docker/prometheus:latest
     docker_image_remote_agent: docker-prod-local.artifactory.mirantis.com/openstack-docker/telegraf:latest
     docker_image_remote_storage_adapter: docker-prod-local.artifactory.mirantis.com/openstack-docker/remote_storage_adapter:latest
+    docker_image_prometheus_relay: docker-prod-local.artifactory.mirantis.com/openstack-docker/prometheus_relay:latest
     docker_image_grafana: grafana/grafana:4.3.2
     prometheus_influxdb_url: "http://${_param:stacklight_telemetry_address}:${_param:influxdb_port}/"
     prometheus_influxdb_db: prometheus

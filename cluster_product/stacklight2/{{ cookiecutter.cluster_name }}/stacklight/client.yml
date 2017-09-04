@@ -175,5 +175,4 @@ parameters:
     grafana_user: admin
     grafana_password: ${_param:grafana_admin_password}
     grafana_prometheus_address: ${_param:stacklight_monitor_address}
-    grafana_prometheus_port: 15010
-
+    grafana_prometheus_port: 15016
