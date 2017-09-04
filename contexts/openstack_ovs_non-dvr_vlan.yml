@@ -26,6 +26,9 @@ default_context:
   deployment_type: physical
   maas_deploy_address: 10.167.4.91
   maas_hostname: mas01
+  upstream_proxy_enabled: True
+  upstream_proxy_address: 10.167.5.1
+  upstream_proxy_port: 8080
   infra_kvm01_control_address: 10.167.4.241
   infra_kvm01_deploy_address: 10.167.5.241
   infra_kvm01_hostname: kvm01

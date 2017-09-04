@@ -202,12 +202,12 @@ infra_params_action:
     requires:
     - deployment_type: "physical"
     fields:
-      - help_text: "hostname of a MaaS node"
-        initial: "mas01"
+      - help_text: "Hostname of a MaaS node"
+        initial: "cfg01"
         name: "maas_hostname"
         type: "TEXT"
       - help_text: "IP address of maas on deploy network"
-        initial: "{{ deploy_network_subnet | subnet(16) }}"
+        initial: "{{ deploy_network_subnet | subnet(15) }}"
         name: "maas_deploy_address"
         type: "IP"
       - help_text: "Address of upstream proxy"

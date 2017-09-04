@@ -20,8 +20,7 @@ classes:
   - system.jenkins.client.job.aptly
   - system.jenkins.client.job.git-mirrors.downstream.pipelines
   - system.jenkins.client.job.deploy.openstack
-  - system.jenkins.client.job.deploy.update.package
-  - system.jenkins.client.job.deploy.update.config
+  - system.jenkins.client.job.deploy.update
   # Security
   {%- if cookiecutter.openldap_enabled == 'True' %}
   - system.jenkins.client.security.ldap

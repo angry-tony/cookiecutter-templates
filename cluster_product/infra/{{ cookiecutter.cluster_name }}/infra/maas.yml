@@ -2,28 +2,28 @@
 classes:
 - system.maas.region.single
 - cluster.{{ cookiecutter.cluster_name }}.infra
-parameters:
 {%- if cookiecutter.upstream_proxy_enabled %}
+parameters:
   maas:
     region:
       upstream_proxy:
         address: {{ cookiecutter.upstream_proxy_address }}
         port: {{ cookiecutter.upstream_proxy_port }}
 {%- endif %}
-  linux:
-    network:
-      interface:
-        primary_interface:
-          enabled: true
-          name: ens2
-          type: eth
-          proto: static
-          netmask: ${_param:deploy_network_netmask}
-          address: ${_param:single_address}
-          gateway: ${_param:deploy_network_gateway}
-          name_servers:
-          - ${_param:dns_server01}
-          - ${_param:dns_server02}
+# linux:
+#   network:
+#     interface:
+#       primary_interface:
+#         enabled: true
+#         name: ens2
+#         type: eth
+#         proto: static
+#         netmask: ${_param:deploy_network_netmask}
+#         address: ${_param:single_address}
+#         gateway: ${_param:deploy_network_gateway}
+#         name_servers:
+#         - ${_param:dns_server01}
+#         - ${_param:dns_server02}
 ### Sample MaaS Configuration
 #  maas:
 #    region:

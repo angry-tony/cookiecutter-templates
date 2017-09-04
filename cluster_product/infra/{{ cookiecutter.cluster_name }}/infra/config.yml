@@ -35,7 +35,6 @@ classes:
 {%- endif %}
 {%- if cookiecutter.deployment_type == 'physical' and (cookiecutter.openstack_enabled == 'True' or (cookiecutter.kubernetes_enabled == 'True' and (cookiecutter.stacklight_enabled == 'True' or cookiecutter.cicd_enabled == 'True'))) %}
 - system.reclass.storage.system.physical_control_cluster
-- system.reclass.storage.system.infra_maas_single
 {%- endif %}
 {%- if (cookiecutter.kubernetes_enabled == 'True' and cookiecutter.kubernetes_network_engine == 'opencontrail') or (cookiecutter.openstack_enabled == 'True' and cookiecutter.openstack_network_engine == 'opencontrail') %}
 - system.reclass.storage.system.opencontrail_analytics_cluster
@@ -70,6 +69,9 @@ classes:
 - system.salt.minion.cert.k8s_server
 - system.reclass.storage.system.kubernetes_control_cluster
 {%- endif %}
+{%- if cookiecutter.deployment_type == 'physical' %}
+- cluster.{{ cookiecutter.cluster_name }}.infra.maas
+{%- endif %}
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
@@ -82,8 +84,39 @@ parameters:
     linux_system_codename: xenial
     salt_api_password_hash: "{{ cookiecutter.salt_api_password_hash }}"
     salt_master_host: ${_param:infra_config_deploy_address}
+  {%- if cookiecutter.kubernetes_enabled != 'True' %}
+  linux:
+    network:
+      interface:
+        ens3:
+          enabled: true
+          type: eth
+          proto: static
+          address: ${_param:deploy_address}
+          netmask: ${_param:deploy_network_netmask}
+          gateway: ${_param:deploy_network_gateway}
+          name_servers:
+            - ${_param:dns_server01}
+            - ${_param:dns_server02}
+        ens4: ${_param:linux_single_interface}
+  {%- endif %}
+  salt:
+    master:
+      command_timeout: 600
+      user:
+        deploy:
+          permissions: ${_param:salt_master_api_permissions}
+  maas:
+    cluster:
+      region:
+        host: ${_param:deploy_address}
+    region:
+      bind:
+        host: ${_param:deploy_address}
   reclass:
     storage:
+      data_source:
+        engine: local
       node:
         {%- if cookiecutter.deployment_type == 'physical' and (cookiecutter.openstack_enabled == 'True' or (cookiecutter.kubernetes_enabled == 'True' and (cookiecutter.stacklight_enabled == 'True' or cookiecutter.cicd_enabled == 'True'))) %}
         infra_kvm_node01:
