@@ -286,6 +286,3 @@ parameters:
       package:
         ca-certificates-java:
           version: latest
-    network:
-      interface:
-        ens3: ${_param:linux_single_interface}
