@@ -143,13 +143,21 @@ default_context:
   oss_openstack_password: password
   oss_openstack_project: admin
   oss_openstack_domain_id: default
+  oss_openstack_cert: ''
   oss_runbook_public_key: <<WILL_BE_GENERATED>>
   oss_runbook_private_key: <<WILL_BE_GENERATED>>
   oss_notification_email_from: ''
   oss_notification_email_recipients: ''
   oss_notification_salesforce_username: ''
+  oss_notification_sender_password: ''
+  oss_notification_smtp_host: ''
+  oss_notification_smtp_port: ''
+  oss_notification_webhook_login_id: '13'
+  oss_notification_webhook_app_id: '24'
   oss_cis_enabled: 'True'
   oss_cis_jobs_repository: https://github.com/Mirantis/rundeck-cis-jobs.git
   oss_cis_jobs_repository_branch: master
   oss_security_audit_enabled: 'True'
+  oss_security_audit_os_ssl_verify: 'True'
+  oss_security_audit_os_cacert_path: '/srv/volumes/rundeck/storage/content/keys/cis/openstack/cert.pem'
   oss_cleanup_service_enabled: 'True'

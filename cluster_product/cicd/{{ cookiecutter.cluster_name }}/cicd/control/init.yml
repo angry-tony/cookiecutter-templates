@@ -209,18 +209,23 @@ parameters:
     pushkin_db_user: pushkin
     pushkin_db_user_password: {{ password(16) }}
     pushkin_db_host: ${_param:haproxy_postgresql_bind_host}
+    pushkin_smtp_host: {{ cookiecutter.oss_notification_smtp_host }}
+    pushkin_smtp_port: {{ cookiecutter.oss_notification_smtp_port }}
+    pushkin_email_sender_password: {{ cookiecutter.oss_notification_sender_password }}
     #..WebHook notification senders
     webhook_from: {{ cookiecutter.oss_notification_email_from }}
     webhook_recipients: {{ cookiecutter.oss_notification_email_recipients }}
     webhook_sfdc_username: {{ cookiecutter.oss_notification_saleforce_username }}
-    webhook_login_id: 11
-    webhook_application_id: 23
+    webhook_login_id: {{ cookiecutter.oss_notification_webhook_login_id }}
+    webhook_application_id: {{ cookiecutter.oss_notification_webhook_app_id }}
 
     # OSS OpenStack
     oss_openstack_username: {{ cookiecutter.oss_openstack_username }}
     oss_openstack_password: {{ cookiecutter.oss_openstack_password }}
     oss_openstack_project: {{ cookiecutter.oss_openstack_project }}
     oss_openstack_domain_id: {{ cookiecutter.oss_openstack_domain_id }}
+    oss_openstack_cert: |
+      {{ cookiecutter.oss_openstack_cert }}
 
     {%- if cookiecutter.oss_security_audit_enabled == 'True' %}
     # SecurityMonkey
@@ -229,12 +234,14 @@ parameters:
     secmonkey_db_user: secmonkey
     secmonkey_db_user_password: {{ password(16) }}
     secmonkey_db_host: ${_param:haproxy_postgresql_bind_host}
+    security_monkey_os_ssl_verify: {{ cookiecutter.oss_security_audit_os_ssl_verify }}
     security_monkey_openstack:
       username: {{ cookiecutter.oss_security_audit_username }}
       password: {{ cookiecutter.oss_security_audit_password }}
       auth_url: {{ cookiecutter.oss_openstack_auth_url }}
       user_domain_name: {{ cookiecutter.oss_security_audit_user_domain_id }}
       project_domain_name: {{ cookiecutter.oss_security_audit_project_domain_id }}
+      cacert_path: {{ cookiecutter.oss_security_audit_os_cacert_path }}
     {%- endif %}
 
     {%- if cookiecutter.oss_cleanup_service_enabled == 'True' %}

@@ -53,6 +53,7 @@ classes:
   # PostgreSQL
   - system.postgresql.client.pushkin
   - system.postgresql.client.rundeck
+  - system.postgresql.client.alertmanager
   {%- if cookiecutter.oss_security_audit_enabled == 'True' %}
   - system.postgresql.client.security_monkey
   {%- endif %}

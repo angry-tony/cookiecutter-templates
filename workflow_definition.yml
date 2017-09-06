@@ -653,6 +653,12 @@ product_params_action:
       type: TEXT
       requires:
       - oss_cis_enabled: True
+    - help_text: "CIS OpenStack CA Certificate"
+      initial: "${_param:oss_openstack_cert}"
+      name: oss_cis_cert
+      type: TEXT
+      requires:
+      - oss_cis_enabled: True
     - help_text: "CIS jobs repository"
       initial: "https://github.com/Mirantis/rundeck-cis-jobs.git"
       name: oss_cis_jobs_repository
@@ -692,6 +698,18 @@ product_params_action:
     - help_text: "Security audit project domain id"
       initial: "${_param:oss_openstack_domain_id}"
       name: oss_security_audit_project_domain_id
+      type: TEXT
+      requires:
+      - oss_security_audit_enabled: True
+    - help_text: "Security audit OS-cloud ssl verify"
+      initial: "${_param:oss_security_audit_os_ssl_verify}"
+      name: oss_security_audit_os_ssl_verify
+      type: TEXT
+      requires:
+      - oss_security_audit_enabled: True
+    - help_text: "Security audit OS-cloud CA cert path"
+      initial: "${_param:oss_security_audit_os_cacert_path}"
+      name: oss_security_audit_os_cacert_path
       type: TEXT
       requires:
       - oss_security_audit_enabled: True
@@ -1543,6 +1561,22 @@ product_params_action:
     - help_text: Address of the SMTP host (for alert notifications)
       initial: 127.0.0.1
       name: stacklight_notification_smtp_host
+      type: TEXT
+    - help_text: Address of the SMTP port (for alert notifications)
+      initial: 587
+      name: oss_notification_smtp_port
+      type: TEXT
+    - help_text: Sender-mail password (for alert notifications)
+      initial: password
+      name: oss_notification_sender_password
+      type: TEXT
+    - help_text: Webhook login id (for alert notifications)
+      initial: 13
+      name: oss_notification_webhook_login_id
+      type: TEXT
+    - help_text: Webhook application id (for alert notifications)
+      initial: 24
+      name: oss_notification_app_id
       type: TEXT
     - help_text: Recipient mail address (for alert notifications)
       initial: alerts@localhost
