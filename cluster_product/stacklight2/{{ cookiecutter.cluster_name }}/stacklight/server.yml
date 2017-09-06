@@ -43,16 +43,6 @@ parameters:
     prometheus_influxdb_db: prometheus
     prometheus_influxdb_username: lma
     prometheus_influxdb_password: ${_param:influxdb_stacklight_password}
-  linux:
-    network:
-      interface:
-        primary_interface:
-          enabled: true
-          name: ${_param:keepalived_prometheus_vip_interface}
-          type: eth
-          proto: static
-          address: ${_param:single_address}
-          netmask: 255.255.255.0
   prometheus:
     server:
       storage:
