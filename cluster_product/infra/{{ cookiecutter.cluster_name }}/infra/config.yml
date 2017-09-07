@@ -59,6 +59,9 @@ classes:
 {%- if cookiecutter.stacklight_version == '1' %}
 - system.reclass.storage.system.stacklight_monitor_cluster
 {%- endif %}
+{%- if cookiecutter.stacklight_version == '2' %}
+- system.reclass.storage.system.stacklightv2_server_cluster
+{%- endif %}
 {%- endif %}
 {%- if cookiecutter.cicd_enabled == 'True' %}
 - system.reclass.storage.system.cicd_control_cluster
@@ -220,6 +223,12 @@ parameters:
         openstack_proxy_node02:
           params:
             linux_system_codename: xenial
+{%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '2' %}
+        stacklight_log_node01:
+          classes:
+          - system.elasticsearch.client.single
+          - system.kibana.client.single
+{%- endif %}
         openstack_compute_rack01:
           name: ${_param:openstack_compute_rack01_hostname}<<count>>
           domain: ${_param:cluster_domain}

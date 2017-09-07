@@ -1,19 +1,58 @@
 classes:
+# Docker
+- system.docker.host
+# Keepalived
+- system.keepalived.cluster.instance.stacklight_monitor_vip
+- system.salt.minion.cert.proxy.cicd
+
+{%- if cookiecutter.oss_enabled == 'True' %}
+- system.linux.system.repo.glusterfs
+- system.glusterfs.client.cluster
+- system.glusterfs.server.cluster
+- system.glusterfs.client.volume.devops_portal
+- system.glusterfs.client.volume.elasticsearch
+- system.glusterfs.client.volume.postgresql
+- system.glusterfs.client.volume.pushkin
+- system.glusterfs.client.volume.rundeck
+- system.haproxy.proxy.listen.oss.devops_portal
+- system.haproxy.proxy.listen.oss.elasticsearch
+- system.haproxy.proxy.listen.oss.postgresql
+- system.haproxy.proxy.listen.oss.pushkin
+- system.haproxy.proxy.listen.oss.rundeck
+- system.glusterfs.server.volume.devops_portal
+- system.glusterfs.server.volume.elasticsearch
+- system.glusterfs.server.volume.postgresql
+- system.glusterfs.server.volume.pushkin
+- system.glusterfs.server.volume.rundeck
+{%- if cookiecutter.oss_security_audit_enabled == 'True' %}
+- system.glusterfs.client.volume.security_monkey
+- system.glusterfs.server.volume.security_monkey
+- system.haproxy.proxy.listen.oss.security_monkey
+{%- endif %}
+{%- if cookiecutter.oss_cleanup_service_enabled == 'True' %}
+- system.glusterfs.client.volume.mongodb
+- system.glusterfs.server.volume.mongodb
+- system.haproxy.proxy.listen.oss.janitor_monkey
+- system.haproxy.proxy.listen.oss.mongodb
+{%- endif %}
+{%- endif %}
+
 {%- if cookiecutter.kubernetes_enabled == 'True' %}
 - system.salt.minion.cert.prometheus_server
 {%- endif %}
-- system.keepalived.cluster.instance.prometheus_server_vip
+- system.haproxy.proxy.single
 - system.telegraf.agent.remote
 - system.prometheus.alertmanager.notification.pushkin
 - system.prometheus.server.alert.labels_add.route
 - system.prometheus.server.remote_write.docker
 - system.prometheus.server.target.dns
 - system.prometheus.server.alertmanager.dns
-- system.docker.swarm.stack.monitoring
-{%- if cookiecutter.openstack_enabled == 'True' %}
-- system.docker.swarm.stack.monitoring.remote_collector
-{%- endif %}
-- system.docker.swarm.stack.dashboard
+- system.prometheus.pushgateway.container
+- system.prometheus.server.container
+- system.prometheus.alertmanager.container
+- system.prometheus.remote_storage_adapter.container
+
+- cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
     {%- if cookiecutter.openstack_enabled == 'True' %}
@@ -27,22 +66,43 @@ parameters:
     alertmanager_notification_pushkin_host: localhost
     alertmanager_notification_pushkin_port: 18887
     cluster_vip_address: ${_param:stacklight_monitor_address}
-    grafana_admin_password: admin
-    grafana_database_type: mysql
-    grafana_database_host: ${_param:openstack_database_address}
-    grafana_database_password: ${_param:mysql_grafana_password}
-    docker_image_alertmanager: docker-prod-local.artifactory.mirantis.com/openstack-docker/alertmanager:latest
-    docker_image_pushgateway: docker-prod-local.artifactory.mirantis.com/openstack-docker/pushgateway:latest
-    docker_image_prometheus: docker-prod-local.artifactory.mirantis.com/openstack-docker/prometheus:latest
-    docker_image_remote_agent: docker-prod-local.artifactory.mirantis.com/openstack-docker/telegraf:latest
-    docker_image_remote_storage_adapter: docker-prod-local.artifactory.mirantis.com/openstack-docker/remote_storage_adapter:latest
-    docker_image_grafana: grafana/grafana:4.3.2
-    prometheus_influxdb_url: "http://${_param:stacklight_log_address}:${_param:influxdb_port}/"
-    prometheus_influxdb_db: prometheus
-    prometheus_influxdb_username: lma
-    prometheus_influxdb_password: ${_param:influxdb_stacklight_password}
+
+{%- if cookiecutter.oss_enabled == 'True' %}
+    haproxy_gerrit_bind_host: ${_param:cicd_control_address}
+    haproxy_gerrit_bind_port: 8080
+    haproxy_gerrit_ssl:
+      enabled: false
+
+    haproxy_jenkins_ssl:
+      enabled: false
+    haproxy_jenkins_bind_host: ${_param:cicd_control_address}
+    haproxy_jenkins_bind_port: 8081
+{%- endif %}
+    keepalived_stacklight_monitor_vip_address: ${_param:stacklight_monitor_address}
+
+    control_vip_address: ${_param:stacklight_monitor_address}
+    cluster_node01_name: ${_param:stacklight_monitor_node01_hostname}
+    cluster_node01_address: ${_param:stacklight_monitor_node01_address}
+    cluster_node02_name: ${_param:stacklight_monitor_node02_hostname}
+    cluster_node02_address: ${_param:stacklight_monitor_node02_address}
+    cluster_node03_name: ${_param:stacklight_monitor_node03_hostname}
+    cluster_node03_address: ${_param:stacklight_monitor_node03_address}
+    keepalived_vip_virtual_router_id: 280
+    keepalived_stacklight_monitor_vip_password: odMPiBZBzGiL7FR3
+    keepalived_stacklight_monitor_vip_interface: ens3
+    cluster_public_host: ${_param:cluster_vip_address}
+    docker_registry_http_secret: fx13spNlA8ezEaiT
+    # Proxy
+    cluster_ssl_certificate:
+      enabled: true
+      pem_file: /etc/haproxy/ssl/${_param:cluster_public_host}-all.pem
+    haproxy_bind_address: ${_param:cluster_vip_address}
   prometheus:
     server:
       storage:
         local:
           target_heap_size: 33554432
+  linux:
+    network:
+      interface:
+        ens3: ${_param:linux_single_interface}

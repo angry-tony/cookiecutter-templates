@@ -38,9 +38,7 @@ classes:
 - system.salt.control.cluster.openstack_benchmark_single
 {%- endif %}
 {%- if cookiecutter.stacklight_enabled == 'True' %}
-{%- if cookiecutter.stacklight_version == '1' %}
 - system.salt.control.cluster.stacklight_server_cluster
-{%- endif %}
 - system.salt.control.cluster.stacklight_log_cluster
 - system.salt.control.cluster.stacklight_telemetry_cluster
 {%- endif %}
@@ -113,6 +111,11 @@ parameters:
           cpu: 4
           ram: 8192
           disk_profile: xxlarge
+          net_profile: default
+        cicd.control:
+          cpu: 8
+          ram: 12288
+          disk_profile: large
           net_profile: default
       cluster:
         internal:

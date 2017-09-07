@@ -2,6 +2,4 @@ classes:
   - system.docker.swarm.manager
   - cluster.{{ cookiecutter.cluster_name }}.infra
   - cluster.{{ cookiecutter.cluster_name }}.cicd.control
-  {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '2' %}
-  - cluster.{{ cookiecutter.cluster_name }}.stacklight.server
-  {%- endif %}
+
