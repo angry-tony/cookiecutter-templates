@@ -19,8 +19,13 @@ classes:
 {%- endif %}
 - system.influxdb.database.stacklight
 {%- if cookiecutter.kubernetes_enabled == 'True' %}
-- system.galera.server.cluster
+- system.haproxy.proxy.listen.openstack.galera
 - system.galera.server.database.grafana
+{%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
+- system.linux.system.repo_local.mcp.openstack
+{%- else %}
+- system.linux.system.repo.mcp.openstack
+{%- endif %}
 {%- endif %}
 - system.haproxy.proxy.listen.stacklight.influxdb
 - service.haproxy.proxy.single
