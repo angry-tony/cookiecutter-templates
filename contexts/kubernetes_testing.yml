@@ -47,7 +47,7 @@ default_context:
     calico_enable_nat: True
     calico_no_default_pools: false
 
-    hyperkube_image: "artifactory.mirantis.com/docker-prod-local/mirantis/kubernetes/hyperkube-amd64:v1.6.2-2"
-    calico_cni_image: "artifactory.mirantis.com/docker-prod-local/mirantis/projectcalico/calico/cni:latest"
-    calico_image: "artifactory.mirantis.com/docker-prod-local/mirantis/projectcalico/calico/node:latest"
-    calicoctl_image: "artifactory.mirantis.com/docker-prod-local/mirantis/projectcalico/calico/ctl:latest"
+    hyperkube_image: "docker-prod-local.artifactory.mirantis.com/mirantis/kubernetes/hyperkube-amd64:v1.7.3-1"
+    calico_cni_image: "docker-prod-local.artifactory.mirantis.com/mirantis/projectcalico/calico/cni:latest"
+    calico_image: "docker-prod-local.artifactory.mirantis.com/mirantis/projectcalico/calico/node:latest"
+    calicoctl_image: "docker-prod-local.artifactory.mirantis.com/mirantis/projectcalico/calico/ctl:latest"
