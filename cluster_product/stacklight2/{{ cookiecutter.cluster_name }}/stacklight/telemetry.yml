@@ -8,7 +8,8 @@ classes:
 - system.linux.system.repo.influxdb
 - system.linux.system.repo.sensu
 {%- endif %}
-- system.haproxy.proxy.listen.stacklight.influxdb
+- system.haproxy.proxy.listen.stacklight.influxdb_relay
+- system.influxdb.relay.cluster
 - system.influxdb.server.single
 - system.influxdb.database.prometheus
 {%- if cookiecutter.kubernetes_enabled == 'True' %}
@@ -23,6 +24,7 @@ parameters:
     keepalived_stacklight_telemetry_vip_password: ${_param:stacklight_telemetry_keepalived_password}
     keepalived_stacklight_telemetry_vip_interface: ens3
     cluster_vip_address: ${_param:stacklight_telemetry_address}
+    cluster_local_address: ${_param:single_address}
     cluster_node01_hostname: ${_param:stacklight_telemetry_node01_hostname}
     cluster_node01_address: ${_param:stacklight_telemetry_node01_address}
     cluster_node02_hostname: ${_param:stacklight_telemetry_node02_hostname}
