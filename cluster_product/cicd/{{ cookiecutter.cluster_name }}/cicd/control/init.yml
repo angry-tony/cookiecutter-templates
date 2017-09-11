@@ -119,6 +119,9 @@ parameters:
     # CI/CD service databases
     mysql_admin_password: {{ password(16) }}
     mysql_gerrit_password: {{ password(16) }}
+    nginx_proxy_gerrit_server_site_host: ${_param:openstack_proxy_address}
+    nginx_proxy_gerrit_server_site_port: 8080
+    gerrit_http_listen_url: proxy-https://*:8080/
 
     # Proxy
     cluster_ssl_certificate:
@@ -175,7 +178,7 @@ parameters:
     gerrit_admin_password: {{ password(16) }}
     {%- endif %}
     gerrit_admin_email: ${_param:admin_email}
-    gerrit_public_host: http://${_param:haproxy_gerrit_bind_host}:${_param:haproxy_gerrit_bind_port}
+    gerrit_public_host: https://${_param:nginx_proxy_gerrit_server_site_host}:${_param:nginx_proxy_gerrit_server_site_port}
     gerrit_admin_public_key: ${_param:jenkins_admin_public_key}
     gerrit_admin_private_key: ${_param:jenkins_admin_private_key}
     {%- if cookiecutter.openldap_enabled == 'True' %}

@@ -19,6 +19,7 @@
     "openstack_neutron_qos"                     : "False",
     "openstack_neutron_vlan_aware_vms"          : "False",
 
+    "cicd_enabled"                              : "True",
     "stacklight_enabled"                        : "True",
     "stacklight_version"                        : "1",
 

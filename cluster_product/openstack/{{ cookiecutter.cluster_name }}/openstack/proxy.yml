@@ -24,6 +24,10 @@ classes:
 {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
 - system.nginx.server.proxy.opencontrail_web
 {%- endif %}
+{%- if cookiecutter.cicd_enabled == 'True' %}
+- system.nginx.server.proxy.cicd.gerrit
+- system.nginx.server.proxy.cicd.jenkins
+{%- endif %}
 - system.nginx.server.proxy.openstack_api
 - system.nginx.server.proxy.openstack_vnc
 - system.nginx.server.proxy.openstack_web
