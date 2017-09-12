@@ -31,6 +31,8 @@ parameters:
         calico:
           key: /calico/v1/ipam/v4/pool/${_param:calico_private_network}-${_param:calico_private_netmask}
           value: '{"masquerade":{{ cookiecutter.calico_enable_nat|lower }},"cidr":"${_param:calico_private_network}/${_param:calico_private_netmask}"}'
+          # if IP-in-IP is required
+          # value: '{"ipip":"tunl0","ipip_mode":"always","ipam":true,"disabled":false, "masquerade":{{ cookiecutter.calico_enable_nat|lower }},"cidr":"${_param:calico_private_network}/${_param:calico_private_netmask}"}'
       {%- endif %}
   kubernetes:
     master:
