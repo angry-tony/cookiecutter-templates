@@ -1,6 +1,4 @@
 classes:
-- system.glusterfs.client.cluster
-- system.glusterfs.client.volume.prometheus
 {%- if cookiecutter.kubernetes_enabled == 'True' %}
 - system.salt.minion.cert.prometheus_server
 {%- endif %}
