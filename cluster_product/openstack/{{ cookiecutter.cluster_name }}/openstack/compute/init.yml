@@ -16,6 +16,9 @@ classes:
 - system.nova.compute.cluster
 - system.ceilometer.agent.cluster
 - system.nova.compute.notification.messagingv2
+{%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '2' %}
+- system.prometheus.exporters.libvirt
+{%- endif %}
 {%- if cookiecutter.openstack_network_engine == 'ovs' %}
 - system.neutron.compute.cluster
 {%- elif cookiecutter.openstack_network_engine == 'opencontrail' %}

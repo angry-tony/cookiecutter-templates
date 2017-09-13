@@ -17,8 +17,13 @@ classes:
 - system.linux.system.repo.mcp.extra
 - system.linux.system.repo.saltstack.trusty
 - system.linux.system.repo.cassandra
-{%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
+{%- if cookiecutter.stacklight_enabled == 'True' %}
+{%- if cookiecutter.stacklight_version == '1' %}
 - system.linux.system.repo.sensu
+{%- endif %}
+{%- if cookiecutter.stacklight_version == '2' %}
+- system.prometheus.exporters.jmx
+{%- endif %}
 {%- endif %}
 {%- endif %}
 {%- if cookiecutter.get('kubernetes_enabled','False') == 'True' %}
