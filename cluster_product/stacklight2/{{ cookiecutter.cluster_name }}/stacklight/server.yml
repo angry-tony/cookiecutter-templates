@@ -68,6 +68,11 @@ parameters:
     cluster_vip_address: ${_param:stacklight_monitor_address}
 
 {%- if cookiecutter.oss_enabled == 'True' %}
+    glusterfs_service_host: ${_param:stacklight_monitor_address}
+    glusterfs_node01_address: ${_param:stacklight_monitor_node01_address}
+    glusterfs_node02_address: ${_param:stacklight_monitor_node02_address}
+    glusterfs_node03_address: ${_param:stacklight_monitor_node03_address}
+
     haproxy_gerrit_bind_host: ${_param:cicd_control_address}
     haproxy_gerrit_bind_port: 8080
     haproxy_gerrit_ssl:
