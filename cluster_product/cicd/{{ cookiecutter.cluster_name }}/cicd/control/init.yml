@@ -46,6 +46,9 @@ parameters:
     cluster_node02_address: ${_param:cicd_control_node02_address}
     cluster_node03_name: ${_param:cicd_control_node03_hostname}
     cluster_node03_address: ${_param:cicd_control_node03_address}
+    glusterfs_node01_address: ${_param:infra_kvm_node01_address}
+    glusterfs_node02_address: ${_param:infra_kvm_node02_address}
+    glusterfs_node03_address: ${_param:infra_kvm_node03_address}
     keepalived_vip_virtual_router_id: 180
     keepalived_vip_password: {{ password(16) }}
     keepalived_vip_interface: ens3
@@ -130,13 +133,11 @@ parameters:
     {%- else %}
     gerrit_auth_type: DEVELOPMENT_BECOME_ANY_ACCOUNT
     {%- endif %}
-
   linux:
     system:
       package:
         ca-certificates-java:
           version: latest
-  linux:
     network:
       interface:
         ens3: ${_param:linux_single_interface}

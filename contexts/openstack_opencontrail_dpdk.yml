@@ -107,9 +107,9 @@ default_context:
   openstack_version: ocata
   public_host: ${_param:openstack_proxy_address}
   reclass_repository: https://github.com/Mirantis/mk-lab-salt-model.git
-  salt_master_address: 10.167.4.90
+  salt_master_address: 10.167.4.15
   salt_master_hostname: cfg01
-  salt_master_management_address: 10.167.5.90
+  salt_master_management_address: 10.167.5.15
   stacklight_enabled: 'True'
   stacklight_version: '1'
   tenant_network_gateway: ''

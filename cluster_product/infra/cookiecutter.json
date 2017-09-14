@@ -21,8 +21,8 @@
     "infra_primary_first_nic"                   : "eth1",
     "infra_primary_second_nic"                  : "eth2",
 
-    "salt_master_address"                       : "10.167.4.90",
-    "salt_master_management_address"            : "10.167.5.90",
+    "salt_master_address"                       : "10.167.4.15",
+    "salt_master_management_address"            : "10.167.5.15",
     "salt_master_hostname"                      : "cfg01",
     "salt_api_password_hash"                    : "<<WILL_BE_GENERATED>>",
 
