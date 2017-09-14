@@ -596,6 +596,30 @@ product_params_action:
       type: TEXT
       requires:
       - oss_enabled: True
+    - help_text: "OpenStack ssl verification mechanism"
+      initial: "False"
+      name: oss_openstack_ssl_verify
+      type: TEXT
+      requires:
+      - oss_enabled: True
+    - help_text: "OpenStack plain CA certificate"
+      initial: ""
+      name: oss_openstack_cert
+      type: TEXT
+      requires:
+      - oss_enabled: True
+    - help_text: "OpenStack plain CA certificate path"
+      initial: "/srv/volumes/rundeck/storage/content/keys/cis/openstack/cert.pem"
+      name: oss_openstack_cert_path
+      type: TEXT
+      requires:
+      - oss_enabled: True
+    - help_text: "OpenStack endpoint type interface for service connections"
+      initial: "public"
+      name: oss_openstack_endpoint_type
+      type: TEXT
+      requires:
+      - oss_enabled: True
     - help_text: "Private key for Rundeck. It is generated automatically."
       hidden: True
       initial: |-
@@ -698,12 +722,6 @@ product_params_action:
     - help_text: "Security audit project domain id"
       initial: "${_param:oss_openstack_domain_id}"
       name: oss_security_audit_project_domain_id
-      type: TEXT
-      requires:
-      - oss_security_audit_enabled: True
-    - help_text: "Security audit OS-cloud ssl verify"
-      initial: "${_param:oss_security_audit_os_ssl_verify}"
-      name: oss_security_audit_os_ssl_verify
       type: TEXT
       requires:
       - oss_security_audit_enabled: True

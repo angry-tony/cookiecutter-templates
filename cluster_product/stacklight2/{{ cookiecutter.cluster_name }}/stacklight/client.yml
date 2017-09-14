@@ -105,6 +105,9 @@ parameters:
     oss_openstack_project: {{ cookiecutter.oss_openstack_project }}
     oss_openstack_domain_id: {{ cookiecutter.oss_openstack_domain_id }}
     oss_openstack_username_domain_id: {{ cookiecutter.oss_openstack_username_domain_id }}
+    oss_openstack_ssl_verify: {{ cookiecutter.oss_openstack_ssl_verify }}
+    oss_openstack_endpoint_type: {{ cookiecutter.oss_openstack_endpoint_type }}
+    oss_openstack_cert_path: {{ cookiecutter.oss_openstack_cert_path }}
     oss_openstack_cert: |
       {{ cookiecutter.oss_openstack_cert }}
 
@@ -115,13 +118,14 @@ parameters:
     secmonkey_db_user: secmonkey
     secmonkey_db_user_password: {{ password(16) }}
     secmonkey_db_host: ${_param:haproxy_postgresql_bind_host}
-    security_monkey_os_ssl_verify: {{ cookiecutter.oss_security_audit_os_ssl_verify }}
     security_monkey_openstack:
       username: {{ cookiecutter.oss_security_audit_username }}
       password: {{ cookiecutter.oss_security_audit_password }}
       auth_url: {{ cookiecutter.oss_openstack_auth_url }}
       user_domain_name: {{ cookiecutter.oss_security_audit_user_domain_id }}
       project_domain_name: {{ cookiecutter.oss_security_audit_project_domain_id }}
+      ssl_verify: {{ cookiecutter.oss_security_audit_ssl_verify }}
+      endpoint_type: {{ cookiecutter.oss_security_audit_endpoint_type }}
       cacert_path: {{ cookiecutter.oss_security_audit_os_cacert_path }}
     {%- endif %}
 
@@ -138,6 +142,8 @@ parameters:
       auth_url: {{ cookiecutter.oss_openstack_auth_url }}
       project_name: {{ cookiecutter.oss_cleanup_service_project }}
       project_domain_name: {{ cookiecutter.oss_cleanup_service_project_domain_id }}
+      ssl_verify: {{ cookiecutter.oss_cleanup_service_ssl_verify }}
+      cacert_path: {{ cookiecutter.oss_cleanup_service_os_cacert_path }}
     {%- endif %}
 
     # Rundeck
@@ -159,11 +165,13 @@ parameters:
     rundeck_cis_enabled: {{ cookiecutter.oss_cis_enabled }}
     rundeck_cis_jobs_repository: {{ cookiecutter.oss_cis_jobs_repository }}
     rundeck_cis_jobs_revision: {{ cookiecutter.oss_cis_jobs_repository_branch }}
-    rundeck_cis_os_auth_url: {{ cookiecutter.oss_openstack_auth_url }}/auth/tokens
-    rundeck_cis_os_username: {{ cookiecutter.oss_cis_username }}
-    rundeck_cis_os_password: {{ cookiecutter.oss_cis_password }}
-    rundeck_cis_os_project_name: {{ cookiecutter.oss_cis_project }}
-    rundeck_cis_os_domain_id: {{ cookiecutter.oss_cis_domain_id }}
+    rundeck_cis_openstack:
+      auth_url: {{ cookiecutter.oss_openstack_auth_url }}/auth/tokens
+      username: {{ cookiecutter.oss_cis_username }}
+      password: {{ cookiecutter.oss_cis_password }}
+      project_name: {{ cookiecutter.oss_cis_project }}
+      domain_id: {{ cookiecutter.oss_cis_domain_id }}
+      cert: {{ cookiecutter.oss_cis_cacert }}
     rundeck_cis_os_docker_image: {{ cookiecutter.oss_cis_openstack_image }}
     rundeck_cis_elasticsearch_url: http://${_param:haproxy_elasticsearch_bind_host}:${_param:haproxy_elasticsearch_http_bind_port}
     {%- endif %}
