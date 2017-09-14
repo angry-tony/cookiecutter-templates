@@ -1,0 +1,5 @@
+---
+
+fixes:
+  - Added the missing ``system.influxdb.database.ceilometer`` class
+    for an InfluxDB database creation for Tenant Telemetry of OpenStack environments.
