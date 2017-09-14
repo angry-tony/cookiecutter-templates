@@ -172,6 +172,11 @@ general_params_action:
         initial: "20"
         label: "Tenant VLAN"
         width: half
+      - initial: False
+        name: upstream_proxy_enabled
+        label: "Upstream proxy"
+        help_text: "Enable upstream proxy for MaaS and cicd services"
+        type: BOOL
 infra_params_action:
   - name: "salt"
     label: "Salt Master"
@@ -194,19 +199,29 @@ infra_params_action:
         hidden: True
   - name: "maas"
     label: "Ubuntu MaaS"
+    requires:
+    - deployment_type: "physical"
     fields:
       - help_text: "hostname of a MaaS node"
         initial: "mas01"
         name: "maas_hostname"
         type: "TEXT"
-        requires:
-          - deployment_type: "physical"
       - help_text: "IP address of maas on deploy network"
         initial: "{{ deploy_network_subnet | subnet(16) }}"
         name: "maas_deploy_address"
         type: "IP"
+      - help_text: "Address of upstream proxy"
+        initial: ""
+        name: "upstream_proxy_address"
+        type: "IP"
         requires:
-          - deployment_type: "physical"
+        - upstream_proxy_enabled: True
+      - help_text: "Port of upstream proxy"
+        initial: ""
+        name: "upstream_proxy_port"
+        type: "TEXT"
+        requires:
+        - upstream_proxy_enabled: True
   - name: "publication"
     label: "Publication Options"
     fields:

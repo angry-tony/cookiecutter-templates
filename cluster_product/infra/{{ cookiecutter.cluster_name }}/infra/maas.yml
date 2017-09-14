@@ -3,6 +3,13 @@ classes:
 - system.maas.region.single
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
+{%- if cookiecutter.upstream_proxy_enabled %}
+  maas:
+    region:
+      upstream_proxy:
+        address: {{ cookiecutter.upstream_proxy_address }}
+        port: {{ cookiecutter.upstream_proxy_port }}
+{%- endif %}
   linux:
     network:
       interface:

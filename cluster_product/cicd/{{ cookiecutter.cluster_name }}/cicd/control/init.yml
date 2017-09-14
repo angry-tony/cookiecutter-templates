@@ -66,6 +66,10 @@ parameters:
     nginx_proxy_gerrit_server_site_port: 8080
     gerrit_http_listen_url: proxy-https://*:8080/
 
+{%- if cookiecutter.upstream_proxy_enabled %}
+    http_proxy: 'http://${_param:infra_config_deploy_address}:8000'
+{%- endif %}
+
     # Proxy
     cluster_ssl_certificate:
       enabled: true
