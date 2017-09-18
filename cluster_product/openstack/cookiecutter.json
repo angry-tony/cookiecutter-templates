@@ -25,6 +25,9 @@
 
     "openstack_version"                         : "ocata",
 
+    "local_repositories"                        : "False",
+    "local_repo_url"                            : "${_param:cicd_control_address}",
+    
     "openstack_proxy_address"                   : "10.167.4.80",
     "openstack_proxy_node01_address"            : "10.167.4.81",
     "openstack_proxy_node02_address"            : "10.167.4.82",

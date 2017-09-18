@@ -5,7 +5,7 @@ classes:
 - system.linux.system.repo_local.mcp.openstack
 - system.linux.system.repo_local.mcp.extra
 - system.linux.system.repo_local.mcp.contrail
-- system.linux.system.repo_local.saltstack.trusty
+- system.linux.system.repo_local.mcp.salt
 - system.linux.system.repo_local.cassandra
 {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
 - system.linux.system.repo_local.sensu

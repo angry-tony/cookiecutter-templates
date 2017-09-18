@@ -52,7 +52,6 @@ classes:
 - system.reclass.storage.system.openstack_benchmark_single
 {%- endif %}
 {%- if cookiecutter.stacklight_enabled == 'True' %}
-- system.linux.system.repo.mcp.extra
 - system.reclass.storage.system.stacklight_log_cluster
 - system.reclass.storage.system.stacklight_telemetry_cluster
 {%- if cookiecutter.stacklight_version == '1' %}
@@ -106,13 +105,6 @@ parameters:
       user:
         deploy:
           permissions: ${_param:salt_master_api_permissions}
-  maas:
-    cluster:
-      region:
-        host: ${_param:deploy_address}
-    region:
-      bind:
-        host: ${_param:deploy_address}
   reclass:
     storage:
       data_source:

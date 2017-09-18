@@ -2,6 +2,9 @@
 {% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'|random }}{% endfor %}
 {%- endmacro %}
 classes:
+  {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+  - service.python.environment
+  {%- endif %}
   # Services
   - system.docker.client
   - system.aptly.server.docker
@@ -51,13 +54,6 @@ classes:
 
 parameters:
   _param:
-    # Aptly
-    aptly_gpg_keypair_id: none
-    aptly_gpg_passphrase: none
-    aptly_server_secure: false
-    aptly_gpg_public_key: none
-    aptly_gpg_private_key: none
-
     {%- if cookiecutter.openldap_enabled == 'True' %}
     # OpenLDAP
     openldap_organisation: "{{ cookiecutter.openldap_organisation }}"
@@ -112,3 +108,20 @@ parameters:
     {%- else %}
     gerrit_auth_type: DEVELOPMENT_BECOME_ANY_ACCOUNT
     {%- endif %}
+{%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+parameters:
+  gerrit:
+    client:
+      repo:
+        gerritlib: git+http://${_param:aptly_server_hostname}:8088/gerritlib.git
+        jeepyb: git+http://${_param:aptly_server_hostname}:8088/jeepyb.git
+  python:
+    environment:
+      user:
+        - root:
+          name: root
+          pypi_mirror:
+            host: ${_param:aptly_server_hostname}
+            port: 8084
+            upstream_fallback: False
+{%- endif %}

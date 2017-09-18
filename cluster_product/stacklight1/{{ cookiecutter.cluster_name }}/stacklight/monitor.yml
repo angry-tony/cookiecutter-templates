@@ -4,7 +4,6 @@ classes:
 - system.linux.system.repo_local.elasticsearch
 - system.linux.system.repo_local.grafana
 - system.linux.system.repo_local.saltstack.xenial
-- system.linux.system.repo_local.kibana
 - system.linux.system.repo_local.sensu
 - system.linux.system.repo_local.mcp.extra
 {%- else %}

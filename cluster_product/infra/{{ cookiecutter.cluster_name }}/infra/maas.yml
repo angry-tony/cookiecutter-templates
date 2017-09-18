@@ -2,13 +2,27 @@
 classes:
 - system.maas.region.single
 - cluster.{{ cookiecutter.cluster_name }}.infra
-{%- if cookiecutter.upstream_proxy_enabled == 'True' %}
 parameters:
   maas:
     region:
+      bind:
+        host: ${_param:deploy_address}
+{%- if cookiecutter.upstream_proxy_enabled == 'True' %}
       upstream_proxy:
         address: {{ cookiecutter.upstream_proxy_address }}
         port: {{ cookiecutter.upstream_proxy_port }}
+{%- endif %}
+{%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
+      maas_config:
+        main_archive: http://${_param:local_repo_url}/ubuntu
+{%- endif %}
+    cluster:
+      region:
+        host: ${_param:deploy_address}
+{%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
+      saltstack_repo_key: ${_param:aptly_gpg_public_key}
+      saltstack_repo_trusty: "http://${_param:local_repo_url}/ubuntu-trusty stable salt"
+      saltstack_repo_xenial: "http://${_param:local_repo_url}/ubuntu-xenial stable salt"
 {%- endif %}
 # linux:
 #   network:

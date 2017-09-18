@@ -8,6 +8,62 @@ parameters:
     cicd_control_node01_hostname: {{ cookiecutter.cicd_control_node01_hostname }}
     cicd_control_node02_hostname: {{ cookiecutter.cicd_control_node02_hostname }}
     cicd_control_node03_hostname: {{ cookiecutter.cicd_control_node03_hostname }}
+    {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+    git_pipeline_library_upstream: http://${_param:aptly_server_hostname}:8088/pipeline-library
+    git_mk_pipelines_upstream: http://${_param:aptly_server_hostname}:8088/Mirantis/mk-pipelines
+    docker_image_registry: ${_param:aptly_server_hostname}:5000/registry:2
+    docker_image_visualizer: ${_param:aptly_server_hostname}:5000/visualizer
+    docker_image_gerrit: ${_param:aptly_server_hostname}:5000/gerrit:2.13.6
+    docker_image_mysql: ${_param:aptly_server_hostname}:5000/mysql:5.6
+    docker_image_jenkins: ${_param:aptly_server_hostname}:5000/jenkins:2.73
+    docker_image_jenkins_slave: ${_param:aptly_server_hostname}:5000/jnlp-slave
+    docker_image_openldap: ${_param:aptly_server_hostname}:5000/openldap:1.1.8
+    docker_image_phpldapadmin: ${_param:aptly_server_hostname}:5000/phpldapadmin:0.6.12
+    aptly_publisher_image: ${_param:aptly_server_hostname}:5000/aptly-publisher
+    docker_image_aptly:
+      api: ${_param:aptly_server_hostname}:5000/aptly-api
+      public: ${_param:aptly_server_hostname}:5000/aptly-public
+    {%- endif %}
+    # Aptly
+    aptly_gpg_keypair_id: none
+    aptly_gpg_passphrase: none
+    aptly_server_secure: false
+    aptly_gpg_private_key: none
+    {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+    aptly_gpg_public_key: |
+      -----BEGIN PGP PUBLIC KEY BLOCK-----
+      Version: GnuPG v1
+
+      mQENBFmtOJQBCADQz9rkAd3Xbktncit1DrJHGAygniC5yVIGyWWwg7+0TLgP/ZNj
+      RwpJ2i59/oCSpGlzXWHKd1kIaapUxz9kn7+VdSrtZZgdzgO7EweGL95jbpxz1ECV
+      6ddGs9KezXHRz8RiCtBwYvdN3021hKG7YU70wK8FsuJFWiRjkQ8GZsmA8AACiHFK
+      GQ4CIYDme8nunJwCrcdGauMoamPmTWGGTtbg7Ra85FX/emO7IqLpOjFUV+7SG+2N
+      LCr8kivnpomhI9QFeI2Pa/HKO4XJTMnOs6OTPcwD70Ha3iN3CO/bx5w+wWGbxZwe
+      EAb6vl/+aDcFX3KqtgeUe5vGxPxnjugq5+e7ABEBAAG0H0FwdGx5IE9mZmxpbmUg
+      TGFiIDxhcHRseUBsb2NhbD6JATgEEwECACIFAlmtOJQCGwMGCwkIBwMCBhUIAgkK
+      CwQWAgMBAh4BAheAAAoJEKr0EYOX6Z6pAJ8H/3GEMdKX3L52tXKeojqBvOMKi3wN
+      vlyfUL10KOANIzmpLkeDGq2+q78PfO6bJaeNHAXovOyniw6PId1wtyCVHK/Zr3oV
+      Vt1WpkTqKlUnZ7gwjb8idIQwMV6FGyzuW7QsvQeIWusETC0jOokINmxsrKxhYFnl
+      7zByPkwTavrvGt5Qw5q8yYOzYh/VD1DlmcpcaWF4fCdE9vwM+tFhnI2CONaR+xaq
+      InR6a3Ro7m9kpNk5g+zKQNNU7oZtDIVjvlBUpsysGRDONPB4vzSxJdCGW5uEEWkH
+      N1JjWhAlIfuLlHVnNbHJIYW7pcFT+THedP4thCXbZI9hw2Q988uQ4FvWKWC5AQ0E
+      Wa04lAEIAMjovrpja847GDUcPVh0Ix0V5B/pgU4psSipwI5/ZvSdt2d5EnQJBJoP
+      C3NM0tWcnqJGErgA67fxLSW5y96FB9G6cBiojMllkNajKucPUWveNDq6h6NA90/u
+      u1s3PSUq3moQ2ldJeAaUFDp+5AWwyEASADCopkJahkCRYqyyQHPX/xrKmD1Qwk6P
+      wKxpPO9e7kUOKTpO5sY6U6JxDY95LbeshEAeZzufizigByYa+J2CxBbTK1AUbhdw
+      HmELJCUrf7Jn/mqInlGEbXbyqC2Bk3mgNBU8yEBTO2QgXXflQs/qixS4HBHtc1xi
+      y5fOoFydmTo6I/8bsbObjGu4yrnNxOsAEQEAAYkBHwQYAQIACQUCWa04lAIbDAAK
+      CRCq9BGDl+meqQ2/B/43+fB2VCXsp+ew+atBMTWJRp5Y7bHF5doyZsOUB7yFyOqe
+      3XoZU3XWqyFAQj1DirybjwVwiWOuU45slgM2Rwt8OhH4cKRvG2Sj4jyTILiVKl9E
+      1Ze/hR5UBaXDJHqwbveSJd5CeztFlTJ5bKF2RE1BrHy2Q1XjKaEoe7Ox1YbEQ9y2
+      lil245bwZsP6d4dwEAHKiljPvu/Yy1I1hO+jAg6SDPK5Nh/pghP+s8mTCw8G86wh
+      iv0J4G/p03z/ijTJWSZE4lCZFejy3b85Rq5+5PHC71n6j5AD5khzgI7gtwlu02sC
+      UFStojSYh1YmZiG4HxEy7QDKF/gWr2/aMXcHgQYS
+      =sdaC
+      -----END PGP PUBLIC KEY BLOCK-----
+    {%- else %}
+    aptly_gpg_public_key: none
+    {%- endif %}
   linux:
     network:
       host:

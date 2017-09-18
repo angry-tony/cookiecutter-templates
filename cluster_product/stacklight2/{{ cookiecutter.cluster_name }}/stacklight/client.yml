@@ -67,17 +67,37 @@ classes:
 - system.rundeck.client.runbook
 {%- endif %}
 {%- endif %}
+- cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
+    {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+    docker_image_elasticsearch: ${_param:aptly_server_hostname}:5000/elasticsearch:5.4.1
+    docker_image_security_monkey_api: ${_param:aptly_server_hostname}:5000/security-monkey-api:latest
+    docker_image_security_monkey_scheduler: ${_param:aptly_server_hostname}:5000/security-monkey-scheduler:latest
+    docker_image_janitor_monkey: ${_param:aptly_server_hostname}:5000/janitor-monkey:latest
+    docker_image_mongodb: ${_param:aptly_server_hostname}:5000/mongo:3.4
+    docker_image_rundeck: ${_param:aptly_server_hostname}:5000/rundeck:latest
+    docker_image_devops_portal: ${_param:aptly_server_hostname}:5000/devops-portal:latest
+    docker_image_postgresql: ${_param:aptly_server_hostname}:5000/postgres:9.6
+    docker_image_pushkin: ${_param:aptly_server_hostname}:5000/pushkin:latest
+    docker_image_alertmanager: ${_param:aptly_server_hostname}:5000/alertmanager:latest
+    docker_image_pushgateway: ${_param:aptly_server_hostname}:5000/pushgateway:latest
+    docker_image_prometheus: ${_param:aptly_server_hostname}:5000/prometheus:latest
+    docker_image_remote_agent: ${_param:aptly_server_hostname}:5000/telegraf:latest
+    docker_image_remote_storage_adapter: ${_param:aptly_server_hostname}:5000/remote_storage_adapter:latest
+    docker_image_grafana: ${_param:aptly_server_hostname}:5000/grafana:4.3.2
+    {%- else %}
+    docker_image_alertmanager: docker-prod-local.artifactory.mirantis.com/openstack-docker/alertmanager:latest
+    docker_image_pushgateway: docker-prod-local.artifactory.mirantis.com/openstack-docker/pushgateway:latest
+    docker_image_prometheus: docker-prod-local.artifactory.mirantis.com/openstack-docker/prometheus:latest
+    docker_image_remote_agent: docker-prod-local.artifactory.mirantis.com/openstack-docker/telegraf:latest
+    docker_image_remote_storage_adapter: docker-prod-local.artifactory.mirantis.com/openstack-docker/remote_storage_adapter:latest
+    docker_image_prometheus_relay: docker-prod-local.artifactory.mirantis.com/openstack-docker/prometheus_relay:latest
+    docker_image_grafana: grafana/grafana:4.3.2
+    {%- endif %}
     {%- if cookiecutter.oss_enabled == 'True' %}
-    # DevOps Portal
-    docker_image_devops_portal: {{ cookiecutter.oss_portal_image }}
-
-    # ElasticSearch
-    docker_image_elasticsearch: {{ cookiecutter.oss_elasticsearch_image }}
 
     # PostgreSQL
-    docker_image_postgresql: {{ cookiecutter.oss_postgresql_image }}
     postgresql_admin_user_password: {{ password(16) }}
     postgresql_client_user: ${_param:postgresql_admin_user}
     postgresql_client_password: ${_param:postgresql_admin_user_password}
@@ -85,7 +105,6 @@ parameters:
     postgresql_client_port: ${_param:haproxy_postgresql_bind_port}
 
     # Pushkin
-    docker_image_pushkin: {{ cookiecutter.oss_pushkin_image }}
     pushkin_db_user: pushkin
     pushkin_db_user_password: {{ password(16) }}
     pushkin_db_host: ${_param:haproxy_postgresql_bind_host}
@@ -113,8 +132,6 @@ parameters:
 
     {%- if cookiecutter.oss_security_audit_enabled == 'True' %}
     # SecurityMonkey
-    docker_image_security_monkey_api: {{ cookiecutter.oss_security_monkey_api_image }}
-    docker_image_security_monkey_scheduler: {{ cookiecutter.oss_security_monkey_scheduler_image }}
     secmonkey_db_user: secmonkey
     secmonkey_db_user_password: {{ password(16) }}
     secmonkey_db_host: ${_param:haproxy_postgresql_bind_host}
@@ -131,8 +148,6 @@ parameters:
 
     {%- if cookiecutter.oss_cleanup_service_enabled == 'True' %}
     # JanitorMonkey
-    docker_image_janitor_monkey: {{ cookiecutter.oss_janitor_monkey_image }}
-    docker_image_mongodb: {{ cookiecutter.oss_mongodb_image }}
     docker_mongodb_admin_username: admin
     docker_mongodb_admin_password: {{ password(16) }}
     janitor_monkey_mongodb_host: ${_param:haproxy_mongodb_bind_host}
@@ -147,7 +162,6 @@ parameters:
     {%- endif %}
 
     # Rundeck
-    docker_image_rundeck: {{ cookiecutter.oss_rundeck_image }}
     rundeck_db_user: rundeck
     rundeck_db_user_password: {{ password(16) }}
     rundeck_db_host: ${_param:haproxy_postgresql_bind_host}

@@ -5,8 +5,20 @@ classes:
 - system.keepalived.cluster.instance.stacklight_monitor_vip
 - system.salt.minion.cert.proxy.cicd
 
+{%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
+- system.linux.system.repo_local.docker
+- system.linux.system.repo_local.ubuntu
+- system.linux.system.repo_local.mcp.extra
+{%- else %}
+- system.linux.system.repo.docker
+{%- endif %}
+
 {%- if cookiecutter.oss_enabled == 'True' %}
+{%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
+- system.linux.system.repo_local.glusterfs
+{%- else %}
 - system.linux.system.repo.glusterfs
+{%- endif %}
 - system.glusterfs.client.cluster
 - system.glusterfs.server.cluster
 - system.glusterfs.client.volume.devops_portal
@@ -57,7 +69,11 @@ parameters:
   _param:
     {%- if cookiecutter.openstack_enabled == 'True' %}
     heka_amqp_host: ${_param:openstack_message_queue_address}
+    {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+    docker_image_remote_collector: ${_param:aptly_server_hostname}:5000/heka:latest
+    {%- else %}
     docker_image_remote_collector: docker-prod-local.artifactory.mirantis.com/openstack-docker/heka:latest
+    {%- endif %}
     remote_collector_telegraf_host: monitoring_remote_agent
     {%- endif %}
     keepalived_prometheus_vip_address: ${_param:stacklight_monitor_address}
@@ -102,6 +118,12 @@ parameters:
       enabled: true
       pem_file: /etc/haproxy/ssl/${_param:cluster_public_host}-all.pem
     haproxy_bind_address: ${_param:cluster_vip_address}
+  {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+  docker:
+    host:
+      insecure_registries:
+        - ${_param:aptly_server_hostname}:5000
+  {%- endif %}
   prometheus:
     server:
       storage:

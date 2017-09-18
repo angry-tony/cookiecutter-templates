@@ -3,7 +3,18 @@
 {%- endmacro %}
 classes:
   - system.linux.system.haveged
+  {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
+  - system.linux.system.repo_local.ubuntu
+  - system.linux.system.repo_local.glusterfs
+  - system.linux.system.repo_local.docker
+  - system.linux.system.repo_local.mcp.salt
+  - system.linux.system.repo_local.mcp.extra
+  {%- else %}
+  - system.linux.system.repo.ubuntu
   - system.linux.system.repo.glusterfs
+  - system.linux.system.repo.docker
+  - system.linux.system.repo.mcp.salt
+  {%- endif %}
   - system.glusterfs.client.cluster
   - system.glusterfs.client.volume.aptly
   - system.glusterfs.client.volume.gerrit
@@ -76,6 +87,16 @@ parameters:
       pem_file: /etc/haproxy/ssl/${_param:cluster_public_host}-all.pem
     haproxy_bind_address: ${_param:cluster_vip_address}
     haproxy_mysql_source_port: 13306
+  {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+  aptly:
+    publisher:
+      source:
+        image: ${_param:aptly_server_hostname}:5000/aptly-publisher
+  docker:
+    host:
+      insecure_registries:
+        - ${_param:aptly_server_hostname}:5000
+  {%- endif %}
   linux:
     system:
       package:

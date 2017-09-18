@@ -25,6 +25,11 @@
     "stacklight_telemetry_node02_hostname"      : "mtr02",
     "stacklight_telemetry_node03_hostname"      : "mtr03",
 
+    "local_repositories"                        : "False",
+    "local_repo_url"                            : "${_param:cicd_control_address}",
+
+    "offline_deployment"                        : "False",
+
     "stacklight_enabled"                        : "True",
     "stacklight_version"                        : "2",
 
@@ -83,14 +88,5 @@
     "oss_cleanup_service_project"                : "${_param:oss_openstack_project}",
     "oss_cleanup_service_project_domain_id"      : "${_param:oss_openstack_domain_id}",
 
-    "oss_portal_image"                          : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/devops-portal:latest",
-    "oss_rundeck_image"                         : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/rundeck:latest",
-    "oss_cis_openstack_image"                   : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/cis-openstack:latest",
-    "oss_pushkin_image"                         : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/pushkin:latest",
-    "oss_security_monkey_api_image"             : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/security-monkey-api:latest",
-    "oss_security_monkey_scheduler_image"       : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/security-monkey-scheduler:latest",
-    "oss_janitor_monkey_image"                  : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/janitor-monkey:latest",
-    "oss_mongodb_image"                         : "library/mongo:3.4",
-    "oss_postgresql_image"                      : "library/postgres:9.6",
-    "oss_elasticsearch_image"                   : "docker.elastic.co/elasticsearch/elasticsearch:5.4.1"    
+    "oss_cis_openstack_image"                   : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/cis-openstack:latest" 
 }

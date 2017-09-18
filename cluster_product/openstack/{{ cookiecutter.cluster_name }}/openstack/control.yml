@@ -3,7 +3,7 @@ classes:
 - system.linux.system.repo_local.ubuntu
 - system.linux.system.repo_local.mcp.extra
 - system.linux.system.repo_local.mcp.openstack
-- system.linux.system.repo_local.saltstack.xenial
+- system.linux.system.repo_local.mcp.salt
 - system.linux.system.repo_local.glusterfs
 {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
 - system.linux.system.repo_local.sensu

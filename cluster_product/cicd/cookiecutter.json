@@ -5,13 +5,17 @@
     "cicd_control_node02_address"               : "10.167.4.92",
     "cicd_control_node03_address"               : "10.167.4.93",
 
+    "offline_deployment"                        : "False",
+    "local_repositories"                        : "False",
+    "local_repo_url"                            : "${_param:cicd_control_address}",
+
     "cicd_control_vip_hostname"                 : "cid",
     "cicd_control_node01_hostname"              : "cid01",
     "cicd_control_node02_hostname"              : "cid02",
     "cicd_control_node03_hostname"              : "cid03",
 
     "upstream_proxy_enabled"                    : "False",
-
+    
     "salt_api_password"                         : "<<WILL_BE_GENERATED>>",
     "cicd_private_key"                          : "<<WILL_BE_GENERATED>>",
     "cicd_public_key"                           : "<<WILL_BE_GENERATED>>",

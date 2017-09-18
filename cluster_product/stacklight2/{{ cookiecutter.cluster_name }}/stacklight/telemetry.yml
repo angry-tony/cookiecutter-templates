@@ -4,6 +4,8 @@ classes:
 {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
 - system.linux.system.repo_local.influxdb
 - system.linux.system.repo_local.sensu
+- system.linux.system.repo_local.ubuntu
+- system.linux.system.repo_local.mcp.extra
 {%- if cookiecutter.kubernetes_enabled == 'True' %}
 - system.linux.system.repo_local.mcp.openstack
 {%- endif %}

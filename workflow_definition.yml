@@ -347,6 +347,10 @@ infra_params_action:
       initial: False
       name: local_repositories
       type: BOOL
+    - help_text: Offline deployment
+      initial: False
+      name: offline_deployment
+      type: BOOL
 product_params_action:
   - fields:
     - help_text: IP mask of control network
@@ -359,6 +363,18 @@ product_params_action:
       initial: '{{ deploy_network_subnet | netmask }}'
       name: deploy_network_netmask
       type: IP
+    - help_text: "IP address of a mirror VM"
+      initial: "{{ deploy_network_subnet | subnet(14) }}"
+      name: "aptly_server_address"
+      type: "IP"
+      requires:
+      - offline_deployment: True
+    - help_text: "Hostname of a mirror VM"
+      initial: "apt"
+      name: "aptly_server_hostname"
+      type: "TEXT"
+      requires:
+      - offline_deployment: True
     - help_text: hostname of a KVM node01
       initial: kvm01
       name: infra_kvm01_hostname
@@ -557,7 +573,8 @@ product_params_action:
       - openldap_enabled: True
       help_text: LDAP domain
     - initial: "${_param:cicd_control_vip_address}"
-      name: Local Repositories
+      help_text: Local Repositories
+      name: local_repo_url
       type: TEXT
       requires:
       - local_repositories: True

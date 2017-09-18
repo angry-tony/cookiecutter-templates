@@ -6,6 +6,7 @@
 
     "local_repositories"                        : "False",
     "local_repo_url"                            : "${_param:cicd_control_address}",
+
     "deployment_type"                           : "physical",
     "deploy_network_netmask"                    : "255.255.255.0",
     "deploy_network_gateway"                    : "",
@@ -17,6 +18,10 @@
     "tenant_network_netmask"                    : "255.255.255.0",
     "tenant_network_gateway"                    : "",
 
+    "aptly_server_hostname"                     : "apt",
+    "aptly_server_address"                      : "10.167.4.14",
+    "offline_deployment"                        : "False",
+    
     "infra_deploy_nic"                          : "eth0",
     "infra_primary_first_nic"                   : "eth1",
     "infra_primary_second_nic"                  : "eth2",
