@@ -106,7 +106,7 @@ parameters:
     server:
       storage:
         local:
-          target_heap_size: 33554432
+          target_heap_size: 3221225472
   linux:
     network:
       interface:
