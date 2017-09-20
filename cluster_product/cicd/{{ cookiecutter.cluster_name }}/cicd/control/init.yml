@@ -40,6 +40,7 @@ classes:
   - system.haproxy.proxy.listen.stats
 parameters:
   _param:
+    admin_email: root@localhost
     cluster_node01_name: ${_param:cicd_control_node01_hostname}
     cluster_node01_address: ${_param:cicd_control_node01_address}
     cluster_node02_name: ${_param:cicd_control_node02_hostname}
