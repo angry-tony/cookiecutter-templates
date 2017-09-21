@@ -1,4 +1,7 @@
 ---
+summary: >
+  Changed the structure of the support team classes
+
 others:
   - |
     Changed the structure of the support team classes under
@@ -14,15 +17,15 @@ others:
           - system.openssh.server.team.l2_support
           - system.openssh.server.team.l1_support
 
-     #. On a cluster level, add the following class:
+    #. On a cluster level, add the following class:
 
        .. code-block:: yaml
 
           - system.openssh.server.team.support
 
-     #. Apply the changes to your MCP cluster:
+    #. Apply the changes to your MCP cluster:
 
-      .. code-block:: bash
+       .. code-block:: bash
 
-         salt \* state.apply linux.system.group,linux.system.user,openssh,linux.system.sudo
+          salt \* state.apply linux.system.group,linux.system.user,openssh,linux.system.sudo
 
