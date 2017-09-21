@@ -17,6 +17,9 @@ classes:
 - system.haproxy.proxy.listen.stacklight.influxdb_relay
 - system.influxdb.relay.cluster
 - system.influxdb.server.single
+{%- if cookiecutter.openstack_enabled == 'True' %}
+- system.influxdb.database.ceilometer
+{%- endif %}
 - system.influxdb.database.prometheus
 {%- if cookiecutter.kubernetes_enabled == 'True' %}
 - system.haproxy.proxy.listen.openstack.galera
