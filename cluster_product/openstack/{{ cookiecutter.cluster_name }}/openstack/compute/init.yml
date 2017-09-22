@@ -24,6 +24,7 @@ classes:
 {%- elif cookiecutter.openstack_network_engine == 'opencontrail' %}
 - cluster.{{ cookiecutter.cluster_name }}.opencontrail.compute
 {%- endif %}
+- system.linux.network.hosts
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
