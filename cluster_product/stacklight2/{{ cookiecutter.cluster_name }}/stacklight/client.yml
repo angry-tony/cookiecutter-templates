@@ -107,7 +107,7 @@ parameters:
     oss_openstack_username_domain_id: {{ cookiecutter.oss_openstack_username_domain_id }}
     oss_openstack_ssl_verify: {{ cookiecutter.oss_openstack_ssl_verify }}
     oss_openstack_endpoint_type: {{ cookiecutter.oss_openstack_endpoint_type }}
-    oss_openstack_cert_path: {{ cookiecutter.oss_openstack_cert_path }}
+    oss_openstack_credentials_path: {{ cookiecutter.oss_openstack_credentials_path }}
     oss_openstack_cert: |
       {{ cookiecutter.oss_openstack_cert }}
 
@@ -126,7 +126,7 @@ parameters:
       project_domain_name: {{ cookiecutter.oss_security_audit_project_domain_id }}
       ssl_verify: {{ cookiecutter.oss_security_audit_ssl_verify }}
       endpoint_type: {{ cookiecutter.oss_security_audit_endpoint_type }}
-      cacert_path: {{ cookiecutter.oss_security_audit_os_cacert_path }}
+      source_credentials: {{ cookiecutter.oss_security_audit_os_credentials_path }}
     {%- endif %}
 
     {%- if cookiecutter.oss_cleanup_service_enabled == 'True' %}
@@ -143,7 +143,7 @@ parameters:
       project_name: {{ cookiecutter.oss_cleanup_service_project }}
       project_domain_name: {{ cookiecutter.oss_cleanup_service_project_domain_id }}
       ssl_verify: {{ cookiecutter.oss_cleanup_service_ssl_verify }}
-      cacert_path: {{ cookiecutter.oss_cleanup_service_os_cacert_path }}
+      source_credentials: {{ cookiecutter.oss_cleanup_service_os_credentials_path }}
     {%- endif %}
 
     # Rundeck
