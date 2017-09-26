@@ -740,12 +740,18 @@ product_params_action:
       type: TEXT
       requires:
       - oss_security_audit_enabled: True
-    - help_text: "Security audit OS-cloud CA cert path"
-      initial: "${_param:oss_security_audit_os_cacert_path}"
-      name: oss_security_audit_os_cacert_path
+    - help_text: "Security audit OS-cloud credentials path"
+      initial: "${_param:oss_openstack_credentials_path}"
+      name: oss_security_audit_os_credentials_path
       type: TEXT
       requires:
       - oss_security_audit_enabled: True
+    - help_text: "Cleanup service OS-cloud credentials path"
+      initial: "${_param:oss_openstack_credentials_path}"
+      name: oss_cleanup_service_os_credentials_path
+      type: TEXT
+      requires:
+      - oss_cleanup_service_enabled: True
     - help_text: "Cleanup service username"
       initial: "${_param:oss_openstack_username}"
       name: oss_cleanup_service_username
