@@ -2,7 +2,7 @@
 classes:
 - system.maas.region.single
 - cluster.{{ cookiecutter.cluster_name }}.infra
-{%- if cookiecutter.upstream_proxy_enabled %}
+{%- if cookiecutter.upstream_proxy_enabled == 'True' %}
 parameters:
   maas:
     region:
