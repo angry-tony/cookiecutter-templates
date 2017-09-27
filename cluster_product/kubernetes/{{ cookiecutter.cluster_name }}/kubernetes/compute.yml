@@ -56,8 +56,14 @@ parameters:
     common:
       hyperkube:
         image: ${_param:kubernetes_hyperkube_image}
-  {%- if cookiecutter.kubernetes_network_engine == 'calico' %}
   linux:
+    system:
+      kernel:
+        sysctl:
+          # The default operating system limits on mmap counts is likely to be too low, which may result in out of memory exceptions.
+          vm.max_map_count: 262144
+
+  {%- if cookiecutter.kubernetes_network_engine == 'calico' %}
     network:
       interface:
       {%- if cookiecutter.deployment_type == 'virtual' %}
