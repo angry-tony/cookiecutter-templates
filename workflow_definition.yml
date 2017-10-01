@@ -370,6 +370,10 @@ infra_params_action:
       initial: True
       name: oss_cleanup_service_enabled
       type: BOOL
+    - help_text: "enable support of SalesForce account synchronization"
+      initial: True
+      name: oss_sfdc_support_enabled
+      type: BOOL
   - name: "repo_params"
     label: "Repositories"
     fields:
@@ -709,12 +713,48 @@ product_params_action:
       type: TEXT
       requires:
       - oss_enabled: True
-    - help_text: "Notification salesforce username"
+    - help_text: "Authentication url for SalesForce Service"
       initial: ""
-      name: oss_notification_saleforce_username
+      name: sfdc_auth_url
       type: TEXT
       requires:
-      - oss_enabled: True
+      - oss_sfdc_support_enabled: True
+    - help_text: "Username for SalesForce Service"
+      initial: ""
+      name: sfdc_username
+      type: TEXT
+      requires:
+      - oss_sfdc_support_enabled: True
+    - help_text: "Password for SalesForce Service"
+      initial: ""
+      name: sfdc_password
+      type: TEXT
+      requires:
+      - oss_sfdc_support_enabled: True
+    - help_text: "Consumer key for SalesForce Service"
+      initial: ""
+      name: sfdc_consumer_key
+      type: TEXT
+      requires:
+      - oss_sfdc_support_enabled: True
+    - help_text: "Consumer secret for SalesForce Service"
+      initial: ""
+      name: sfdc_consumer_secret
+      type: TEXT
+      requires:
+      - oss_sfdc_support_enabled: True
+    - help_text: "Organization id for SalesForce Service"
+      initial: ""
+      name: sfdc_organization_id
+      type: TEXT
+      requires:
+      - oss_sfdc_support_enabled: True
+    - help_text: "Enable sandbox support for SalesForce Service"
+      initial: True
+      name: sfdc_sandbox_enabled
+      type: BOOL
+      requires:
+      - oss_sfdc_support_enabled: True
     - help_text: "CIS username"
       initial: "${_param:oss_openstack_username}"
       name: oss_cis_username
