@@ -46,6 +46,8 @@ parameters:
     cluster_node03_address: ${_param:kubernetes_control_node03_address}
     cluster_node03_port: 4001
 
+    kubernetes_virtlet_enabled: {{ cookiecutter.kubernetes_virtlet_enabled }}
+
     {%- if cookiecutter.kubernetes_network_engine == 'calico' %}
     # calico
     calico_private_network: {{ cookiecutter.calico_network }}
