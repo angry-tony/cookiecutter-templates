@@ -53,7 +53,16 @@ classes:
 - system.salt.minion.cert.prometheus_server
 {%- endif %}
 - system.haproxy.proxy.single
+{%- if cookiecutter.openstack_enabled == 'True' %}
+- system.heka.remote_collector.container
+- system.heka.remote_collector.input.amqp
+- system.heka.remote_collector.output.elasticsearch
+- system.heka.remote_collector.output.telegraf
+{%- endif %}
 - system.telegraf.agent.remote
+{%- if cookiecutter.openstack_enabled == 'True' %}
+- system.telegraf.agent.remote.input.http_listener
+{%- endif %}
 - system.prometheus.alertmanager.notification.pushkin
 - system.prometheus.server.alert.labels_add.route
 - system.prometheus.server.remote_write.docker
@@ -63,7 +72,6 @@ classes:
 - system.prometheus.server.container
 - system.prometheus.alertmanager.container
 - system.prometheus.remote_storage_adapter.container
-
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
