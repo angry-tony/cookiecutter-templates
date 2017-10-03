@@ -44,6 +44,8 @@ classes:
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
+    ### latest OpenStack repo on Trusty is Mitaka
+    openstack_version: mitaka
     keepalived_vip_interface: eth1
     keepalived_vip_virtual_router_id: 60
     cluster_vip_address: ${_param:opencontrail_control_address}
