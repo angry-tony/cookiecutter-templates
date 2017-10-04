@@ -157,7 +157,7 @@ parameters:
           - ${_param:aptly_server_hostname}
           - ${_param:aptly_server_hostname}.${_param:cluster_domain}
         {%- endif %}
-        {%- if not cookiecutter.kubernetes_enabled == 'True' %}
+        {%- if cookiecutter.deployment_type == 'physical' %}
         kvm01:
           address: ${_param:infra_kvm_node01_address}
           names:
