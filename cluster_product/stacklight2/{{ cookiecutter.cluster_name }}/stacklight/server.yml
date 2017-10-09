@@ -22,17 +22,24 @@ classes:
 - system.glusterfs.client.cluster
 - system.glusterfs.server.cluster
 - system.glusterfs.client.volume.devops_portal
+{%- if (cookiecutter.stacklight_enabled == 'False') and (cookiecutter.oss_enabled == 'True') %}
 - system.glusterfs.client.volume.elasticsearch
+{%- endif %}
 - system.glusterfs.client.volume.postgresql
 - system.glusterfs.client.volume.pushkin
 - system.glusterfs.client.volume.rundeck
 - system.haproxy.proxy.listen.oss.devops_portal
+{%- if (cookiecutter.stacklight_enabled == 'False') and (cookiecutter.oss_enabled == 'True') %}
 - system.haproxy.proxy.listen.oss.elasticsearch
+{%- endif %}
 - system.haproxy.proxy.listen.oss.postgresql
 - system.haproxy.proxy.listen.oss.pushkin
 - system.haproxy.proxy.listen.oss.rundeck
 - system.glusterfs.server.volume.devops_portal
+#Switch to generic Elasticsearch
+{%- if (cookiecutter.stacklight_enabled == 'False') and (cookiecutter.oss_enabled == 'True') %}
 - system.glusterfs.server.volume.elasticsearch
+{%- endif %}
 - system.glusterfs.server.volume.postgresql
 - system.glusterfs.server.volume.pushkin
 - system.glusterfs.server.volume.rundeck

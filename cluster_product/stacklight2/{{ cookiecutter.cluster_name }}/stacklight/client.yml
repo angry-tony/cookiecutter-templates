@@ -36,7 +36,10 @@ classes:
 
 # OSS Tooling
 - system.docker.swarm.stack.devops_portal
+
+{%- if (cookiecutter.stacklight_enabled == 'False') and (cookiecutter.oss_enabled == 'True') %}
 - system.docker.swarm.stack.elasticsearch
+{%- endif %}
 - system.docker.swarm.stack.postgresql
 - system.docker.swarm.stack.pushkin
 - system.docker.swarm.stack.rundeck
@@ -51,7 +54,9 @@ classes:
 - system.docker.swarm.network.runbook
 - system.docker.swarm.network.oss_backend
 
+{%- if (cookiecutter.stacklight_enabled == 'False') and (cookiecutter.oss_enabled == 'True') %}
 - system.devops_portal.service.elasticsearch
+{%- endif %}
 - system.devops_portal.service.gerrit
 - system.devops_portal.service.jenkins
 - system.devops_portal.service.pushkin
@@ -198,3 +203,10 @@ parameters:
     grafana_password: ${_param:grafana_admin_password}
     grafana_prometheus_address: ${_param:stacklight_monitor_address}
     grafana_prometheus_port: 15016
+
+# Switch to generic ElasticSearch
+{%- if (cookiecutter.stacklight_enabled == 'False') and (cookiecutter.oss_enabled == 'True') %}
+    elasticsearch_bind_host: ${_param:haproxy_elasticsearch_bind_host}
+    elasticsearch_binary_bind_port: ${_param:haproxy_elasticsearch_binary_bind_port}
+    elasticsearch_cluster_name: ${_param:elasticsearch_cluster_name}
+{%- endif %}

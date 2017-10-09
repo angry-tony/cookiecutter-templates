@@ -1,0 +1,18 @@
+---
+prelude: >
+    Configured the Elasticsearch cluster to ensure its work in OSS and StackLight deployed simultaneously.
+
+features:
+  - |
+    Implemented the capability for the Elasticsearch service to work with OSS and StackLight deployed simultaneously.
+    Now, when Cookiecutter generates a Reclass model with both StackLight and OSS enabled, all OSS services are automatically switched to use the generic Elasticsearch.
+    In this case, the OSS Elasticsearch Docker stack and the GlusterFS volume do not start and the OSS Elasticsearch endpoints and indices switch to the StackLight Elasticsearch cluster.
+
+    Example:
+    .. code-block:: yaml
+        # Switch to generic ElasticSearch
+        {%- if (cookiecutter.stacklight_enabled == 'False') and (cookiecutter.oss_enabled == 'True') %}
+            elasticsearch_bind_host: ${_param:haproxy_elasticsearch_bind_host}
+            elasticsearch_binary_bind_port: ${_param:haproxy_elasticsearch_binary_bind_port}
+            elasticsearch_cluster_name: ${_param:elasticsearch_cluster_name}
+        {%- endif %}
