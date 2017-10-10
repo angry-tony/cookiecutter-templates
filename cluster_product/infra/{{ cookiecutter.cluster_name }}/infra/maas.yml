@@ -1,5 +1,10 @@
 {%- if cookiecutter.deployment_type == 'physical' %}
 classes:
+{%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
+- system.linux.system.repo_local.maas
+{%- else %}
+- system.linux.system.repo.maas
+{%- endif %}
 - system.maas.region.single
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
