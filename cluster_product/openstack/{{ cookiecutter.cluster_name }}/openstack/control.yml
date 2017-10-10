@@ -40,8 +40,8 @@ classes:
 - system.glance.control.storage.ceph
 - system.cinder.control.backend.ceph
 - system.cinder.volume.backend.ceph
-- service.ceph.common.cluster
-- cluster.{{ cookiecutter.cluster_name }}.ceph
+- system.ceph.common.cluster
+- cluster.{{ cookiecutter.cluster_name }}.ceph.common
 {%- endif %}
 - system.keystone.server.cluster
 - system.keystone.server.wsgi

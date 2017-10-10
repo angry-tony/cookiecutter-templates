@@ -9,3 +9,19 @@ parameters:
     common:
       public_network: {{ cookiecutter.ceph_public_network }}
       cluster_network: {{ cookiecutter.ceph_cluster_network }}
+      keyring:
+        bootstrap-osd:
+          caps:
+            mon: "allow profile bootstrap-osd"
+        images:
+          caps:
+            mon: "allow r"
+            osd: "allow class-read object_prefix rdb_children, allow rwx pool=images"
+        volumes:
+          caps:
+            mon: "allow r"
+            osd: "allow class-read object_prefix rbd_children, allow rwx pool=volumes, allow rx pool=images"
+        nova:
+          caps:
+            mon: "allow r"
+            osd: "allow class-read object_prefix rbd_children, allow rwx pool=vms, allow rx pool=images"

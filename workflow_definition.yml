@@ -319,6 +319,33 @@ infra_params_action:
         label: "OpenStack Nova compute NFV req enabled"
         help_text: "enable cpu pinning and hugepages without dpdk"
         type: BOOL
+  - name: "ceph_params"
+    label: "Ceph"
+    requires:
+    - platform: "ceph_enabled"
+    fields:
+    - name: "ceph_version"
+      initial: "luminous"
+      type: "CHOICE"
+      help_text: "Ceph version"
+      choices:
+        - - "luminous"
+          - "luminous"
+        - - "kraken"
+          - "kraken"
+        - - "jewel"
+          - "jewel"
+      width: half
+    - name: "ceph_osd_backend"
+      initial: "bluestore"
+      type: "CHOICE"
+      help_text: "OSD backend type"
+      choices:
+        - - "bluestore"
+          - "bluestore"
+        - - "filestore"
+          - "filestore"
+      width: half
   - name: "cicd_params"
     label: "CI/CD"
     requires:
@@ -1692,7 +1719,7 @@ product_params_action:
       type: TEXT
       width: half
     - help_text: IP address of ceph mon storage node03
-      initial: '{{ control_network_subnet | subnet(63) }}'
+      initial: '{{ control_network_subnet | subnet(68) }}'
       name: ceph_mon_node03_address
       type: IP
       width: half
@@ -1706,15 +1733,6 @@ product_params_action:
       name: ceph_osd_count
       type: TEXT
       width: half
-    - name: "ceph_osd_backend"
-      type: "CHOICE"
-      help_text: "OSD backend type"
-      choices:
-        - - "bluestore"
-          - "bluestore"
-        - - "filestore"
-          - "filestore"
-      initial: "bluestore"
     - help_text: OSD rack01 hostname
       initial: osd
       name: ceph_osd_rack01_hostname
@@ -1735,11 +1753,13 @@ product_params_action:
       help_text: "IP address of ceph public network with network mask"
       initial: "{{ control_network_subnet }}"
       mask: True
+      width: half
     - name: "ceph_cluster_network"
       type: IP
       help_text: "IP address of ceph cluster network with network mask"
       initial: "{{ deploy_network_subnet }}"
       mask: True
+      width: half
     - help_text: ceph OSD journal size in GB
       initial: '20'
       name: ceph_osd_journal_size
@@ -1758,12 +1778,10 @@ product_params_action:
       initial: '/dev/vdd,/dev/vde,/dev/vdf'
       name: ceph_osd_data_disks
       type: TEXT
-      width: half
     - help_text: comma separated list of fast disks for journal or block_db
       initial: '/dev/vdb,/dev/vdc,/dev/vdd'
       name: ceph_osd_journal_or_block_db_disks
       type: TEXT
-      width: half
     label: Ceph product parameters
     name: ceph
     doc: |

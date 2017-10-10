@@ -27,8 +27,8 @@ classes:
 {%- endif %}
 {%- if cookiecutter.get('ceph_enabled', 'False') == 'True'  %}
 - system.nova.compute.storage.ceph
-- service.ceph.common.cluster
-- cluster.{{ cookiecutter.cluster_name }}.ceph
+- system.ceph.common.cluster
+- cluster.{{ cookiecutter.cluster_name }}.ceph.common
 {%- endif %}
 - system.linux.network.dynamic_hosts
 - cluster.{{ cookiecutter.cluster_name }}.infra

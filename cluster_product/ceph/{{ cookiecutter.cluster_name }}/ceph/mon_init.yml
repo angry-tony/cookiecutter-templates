@@ -1,3 +1,29 @@
+classes:
+- system.ceph.mon.cluster_init
+parameters:
+{%- if cookiecutter.ceph_osd_count|int < 5 %}
+{% set num = 128 %}
+{%- elif cookiecutter.ceph_osd_count|int >= 5 and cookiecutter.ceph_osd_count|int <= 10 %}
+{% set num = 512 %}
+{%- else %}
+{% set num = 1024 %}
+{%- endif %}
+  ceph:
+    setup:
+      pool:
+        images:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+        volumes:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+        vms:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+
 # parameters:
 #   ceph:
 #     setup:
