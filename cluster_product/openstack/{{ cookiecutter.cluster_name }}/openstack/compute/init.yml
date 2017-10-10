@@ -175,3 +175,7 @@ parameters:
       bridge: openvswitch
   {%- endif %}
 {%- endif %}
+## Best practice configure high speed interface for live migrations
+#  nova:
+#    libvirt:
+#      migration_inbound_addr: ${_param:single_address}
