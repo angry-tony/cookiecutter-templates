@@ -85,7 +85,7 @@ parameters:
     docker_image_prometheus: ${_param:aptly_server_hostname}:5000/prometheus:latest
     docker_image_remote_agent: ${_param:aptly_server_hostname}:5000/telegraf:latest
     docker_image_remote_storage_adapter: ${_param:aptly_server_hostname}:5000/remote_storage_adapter:latest
-    docker_image_grafana: ${_param:aptly_server_hostname}:5000/grafana:4.3.2
+    docker_image_grafana: ${_param:aptly_server_hostname}:5000/grafana:4.5.2
     {%- else %}
     docker_image_alertmanager: docker-prod-local.artifactory.mirantis.com/openstack-docker/alertmanager:latest
     docker_image_pushgateway: docker-prod-local.artifactory.mirantis.com/openstack-docker/pushgateway:latest
@@ -93,7 +93,7 @@ parameters:
     docker_image_remote_agent: docker-prod-local.artifactory.mirantis.com/openstack-docker/telegraf:latest
     docker_image_remote_storage_adapter: docker-prod-local.artifactory.mirantis.com/openstack-docker/remote_storage_adapter:latest
     docker_image_prometheus_relay: docker-prod-local.artifactory.mirantis.com/openstack-docker/prometheus_relay:latest
-    docker_image_grafana: grafana/grafana:4.3.2
+    docker_image_grafana: grafana/grafana:4.5.2
     {%- endif %}
     {%- if cookiecutter.oss_enabled == 'True' %}
 
