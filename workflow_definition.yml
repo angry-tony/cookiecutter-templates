@@ -335,17 +335,15 @@ infra_params_action:
           - "kraken"
         - - "jewel"
           - "jewel"
-      width: half
     - name: "ceph_osd_backend"
-      initial: "bluestore"
       type: "CHOICE"
+      initial: "bluestore"
       help_text: "OSD backend type"
       choices:
         - - "bluestore"
           - "bluestore"
         - - "filestore"
           - "filestore"
-      width: half
   - name: "cicd_params"
     label: "CI/CD"
     requires:

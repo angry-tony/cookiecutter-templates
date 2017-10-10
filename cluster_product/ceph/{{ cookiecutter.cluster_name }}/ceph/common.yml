@@ -10,9 +10,6 @@ parameters:
       public_network: {{ cookiecutter.ceph_public_network }}
       cluster_network: {{ cookiecutter.ceph_cluster_network }}
       keyring:
-        bootstrap-osd:
-          caps:
-            mon: "allow profile bootstrap-osd"
         images:
           caps:
             mon: "allow r"

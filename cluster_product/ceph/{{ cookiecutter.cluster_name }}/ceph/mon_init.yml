@@ -5,8 +5,19 @@ parameters:
 {% set num = 128 %}
 {%- elif cookiecutter.ceph_osd_count|int >= 5 and cookiecutter.ceph_osd_count|int <= 10 %}
 {% set num = 512 %}
-{%- else %}
+{%- elif cookiecutter.ceph_osd_count|int > 10 and cookiecutter.ceph_osd_count|int <= 50 %}
 {% set num = 1024 %}
+{%- else %}
+{% set num_to_round = (cookiecutter.ceph_osd_count|int * 100) / 3 %}
+{%- if num_to_round <= 2048 %}
+{% set num = 2048 %}
+{%- elif num_to_round <= 4096 %}
+{% set num = 4096 %}
+{%- elif num_to_round <= 8192 %}
+{% set num = 8192 %}
+{%- else %}
+{% set num = 16384 %}
+{%- endif %}
 {%- endif %}
   ceph:
     setup:
