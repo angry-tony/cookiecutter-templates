@@ -24,10 +24,7 @@ parameters:
           pgp_num: {{ num }}
           type: replicated
 
-# parameters:
-#   ceph:
-#     setup:
-#       enabled: true
+# customize to setup crush map
 #       pool:
 #         rbd:
 #           pg_num: 2084
@@ -57,7 +54,7 @@ parameters:
 #         region:
 #           - name: eu-1
 #             parent: root1
-#           - name: eU-2
+#           - name: eu-2
 #             parent: root1
 #           - name: us-1
 #             parent: root2
@@ -76,5 +73,5 @@ parameters:
 #             max_size: 10
 #             steps:
 #               - take crushroot.performanceblock.satahss.1
-#               - choseleaf firstn 0 type failure_domain
+#               - chooseleaf firstn 0 type failure_domain
 #               - emit

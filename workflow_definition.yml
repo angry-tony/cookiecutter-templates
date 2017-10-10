@@ -322,7 +322,7 @@ infra_params_action:
   - name: "ceph_params"
     label: "Ceph"
     requires:
-    - platform: "ceph_enabled"
+    - ceph_enabled: True
     fields:
     - name: "ceph_version"
       initial: "luminous"
