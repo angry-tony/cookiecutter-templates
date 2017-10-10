@@ -48,7 +48,6 @@ classes:
 {%- endif %}
 
 # Docker networks
-- system.docker.swarm.network.runbook
 - system.docker.swarm.network.oss_backend
 
 - system.devops_portal.service.elasticsearch
