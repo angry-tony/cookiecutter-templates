@@ -49,6 +49,8 @@
     "etcd_ssl"                                   : "true",
     "kubernetes_network_engine"                  : "calico",
     "kubernetes_virtlet_enabled"                 : "false",
+    "kubernetes_externaldns_enabled"             : "false",
+    "kubernetes_externaldns_provider"            : "coredns",
     "opencontrail_public_ip_range"               : "172.16.0.0/24",
     "opencontrail_private_ip_range"              : "10.150.0.0/16",
     "stacklight_enabled"                         : "true",

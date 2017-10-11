@@ -872,6 +872,16 @@ product_params_action:
       initial: False
       name: kubernetes_virtlet_enabled
       type: BOOL
+    - help_text: Enable External DNS Kubernetes addon
+      initial: False
+      name: kubernetes_externaldns_enabled
+      type: BOOL
+    - help_text: DNS provider for External DNS
+      initial: coredns
+      name: kubernetes_externaldns_provider
+      type: TEXT
+      requires:
+        - kubernetes_externaldns_provider: True
     - help_text: hostname of kubernetes compute node01
       initial: cmp01
       name: kubernetes_compute_node01_hostname
