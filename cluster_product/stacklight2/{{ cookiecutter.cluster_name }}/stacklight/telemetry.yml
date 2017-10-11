@@ -43,7 +43,9 @@ parameters:
     cluster_node03_hostname: ${_param:stacklight_telemetry_node03_hostname}
     cluster_node03_address: ${_param:stacklight_telemetry_node03_address}
     {%- if cookiecutter.kubernetes_enabled == 'True' %}
-    openstack_version: newton
+    openstack_version: ocata
+    galera_innodb_buffer_pool_size: 1024M
+    galera_max_connections: 200
     galera_server_cluster_name: monitoring_cluster
     {%- endif %}
   linux:

@@ -7,11 +7,17 @@ classes:
 - system.linux.system.repo_local.influxdb
 - system.linux.system.repo_local.saltstack.xenial
 - system.linux.system.repo_local.mcp.extra
+{%- if cookiecutter.kubernetes_enabled == 'True' %}
+- system.linux.system.repo_local.mcp.openstack
+{%- endif %}
 {%- else %}
 - system.linux.system.repo.ubuntu
 - system.linux.system.repo.influxdb
 - system.linux.system.repo.saltstack.xenial
 - system.linux.system.repo.mcp.extra
+{%- if cookiecutter.kubernetes_enabled == 'True' %}
+- system.linux.system.repo.mcp.openstack
+{%- endif %}
 {%- endif %}
 - system.influxdb.server.single
 {%- if cookiecutter.openstack_enabled == 'True' %}
@@ -21,11 +27,6 @@ classes:
 {%- if cookiecutter.kubernetes_enabled == 'True' %}
 - system.haproxy.proxy.listen.openstack.galera
 - system.galera.server.database.grafana
-{%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
-- system.linux.system.repo_local.mcp.openstack
-{%- else %}
-- system.linux.system.repo.mcp.openstack
-{%- endif %}
 {%- endif %}
 - system.haproxy.proxy.listen.stacklight.influxdb
 - service.haproxy.proxy.single
@@ -45,7 +46,9 @@ parameters:
     cluster_node03_hostname: ${_param:stacklight_telemetry_node03_hostname}
     cluster_node03_address: ${_param:stacklight_telemetry_node03_address}
     {%- if cookiecutter.kubernetes_enabled == 'True' %}
-    openstack_version: newton
+    openstack_version: ocata
+    galera_innodb_buffer_pool_size: 1024M
+    galera_max_connections: 200
     galera_server_cluster_name: monitoring_cluster
     {%- endif %}
   linux:
