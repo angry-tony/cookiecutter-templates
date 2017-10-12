@@ -48,6 +48,7 @@ classes:
 {%- endif %}
 {%- if cookiecutter.get('ceph_enabled', 'False') == 'True' %}
 - system.salt.control.cluster.ceph_mon_cluster
+- system.salt.control.cluster.ceph_rgw_cluster
 {%- endif %}
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
@@ -124,6 +125,11 @@ parameters:
           cpu: 8
           ram: 16384
           disk_profile: large
+          net_profile: default
+        ceph.rgw:
+          cpu: 8
+          ram: 16384
+          disk_profile: small
           net_profile: default
       cluster:
         internal:

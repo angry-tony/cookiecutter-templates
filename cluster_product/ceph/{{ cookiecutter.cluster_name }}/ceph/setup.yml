@@ -1,0 +1,241 @@
+classes:
+- system.ceph.mon.cluster_init
+parameters:
+{%- if cookiecutter.ceph_osd_count|int < 5 %}
+{%- set num = 128 %}
+{%- elif cookiecutter.ceph_osd_count|int >= 5 and cookiecutter.ceph_osd_count|int <= 10 %}
+{%- set num = 512 %}
+{%- elif cookiecutter.ceph_osd_count|int > 10 and cookiecutter.ceph_osd_count|int <= 50 %}
+{%- set num = 1024 %}
+{%- else %}
+{%- set num_to_round = (cookiecutter.ceph_osd_count|int * 100) / 3 %}
+{%- if num_to_round <= 2048 %}
+{%- set num = 2048 %}
+{%- elif num_to_round <= 4096 %}
+{%- set num = 4096 %}
+{%- elif num_to_round <= 8192 %}
+{%- set num = 8192 %}
+{%- else %}
+{%- set num = 16384 %}
+{%- endif %}
+{%- endif %}
+  ceph:
+    setup:
+      pool:
+{%- if cookiecutter.ceph_version not in ['kraken', 'jewel'] %}
+        images:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+          application: rbd
+#          crush_rule: sata (uncomment these lines if you setup crush map)
+        volumes:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+          application: rbd
+#          crush_rule: sata
+        vms:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+          application: rbd
+#          crush_rule: sata
+        .rgw.root:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+          application: rgw
+#          crush_rule: sata
+        default.rgw.control:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+          application: rgw
+#          crush_rule: sata
+        default.rgw.meta:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+          application: rgw
+#          crush_rule: sata
+        default.rgw.log:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+          application: rgw
+#          crush_rule: sata
+        default.rgw.buckets.index:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+          application: rgw
+#          crush_rule: sata
+        default.rgw.buckets.data:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+          application: rgw
+#          crush_rule: sata
+{%- else %}
+        images:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+#          crush_rule: 0 (uncomment these lines and set crush_ruleset number if you setup crush map)
+        volumes:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+#          crush_rule: 0
+        vms:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+#          crush_rule: 0
+        rbd:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+#          crush_rule: 0
+        .rgw.root:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+#          crush_rule: 0
+        default.rgw.control:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+#          crush_rule: 0
+        default.rgw.data.root:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+#          crush_rule: 0
+        default.rgw.gc:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+#          crush_rule: 0
+        default.rgw.lc:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+#          crush_rule: 0
+        default.rgw.log:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+#          crush_rule: 0
+        default.rgw.buckets.index:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+#          crush_rule: 0
+        default.rgw.buckets.data:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+#          crush_rule: 0
+        default.rgw.users.uid:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+#          crush_rule: 0
+        .rgw.root:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+#          crush_rule: 0
+        default.rgw.control:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+#          crush_rule: 0
+        default.rgw.meta:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+#          crush_rule: 0
+        default.rgw.log:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+#          crush_rule: 0
+        default.rgw.buckets.index:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+#          crush_rule: 0
+        default.rgw.buckets.data:
+          pg_num: {{ num }}
+          pgp_num: {{ num }}
+          type: replicated
+#          crush_rule: 0
+{%- endif %}
+# customize to setup crush map
+#       crush:
+#         enforce: false # uncomment this line and set it to true only if you want to enforce crushmap with ceph.setup state !
+#         tunables:
+{%- if cookiecutter.ceph_version not in ['kraken', 'jewel'] %}
+#           choose_total_tries: 50
+#           choose_local_tries: 0
+#           choose_local_fallback_tries: 0
+#           chooseleaf_descend_once: 1
+#           chooseleaf_vary_r: 1
+#           chooseleaf_stable: 1
+#           straw_calc_version: 1
+#           allowed_bucket_algs: 54
+{%- else %}
+#           choose_local_tries: 0
+#           choose_local_fallback_tries: 0
+#           choose_total_tries: 50
+#           chooseleaf_descend_once: 1
+#           chooseleaf_vary_r: 1
+#           straw_calc_version: 1
+{%- endif %}
+#         type:
+#           - root
+#           - region
+#           - rack
+#           - host
+#           - osd
+#         root:
+#           - name: root-ssd
+#           - name: root-sata
+#          region:
+#            - name: eu-1
+#              parent: root-sata
+#            - name: eu-2
+#              parent: root-sata
+#            - name: eu-3
+#              parent: root-ssd
+#            - name: us-1
+#              parent: root-sata
+#          rack:
+#            - name: rack01
+#              parent: eu-1
+#            - name: rack02
+#              parent: eu-2
+#            - name: rack03
+#              parent: us-1
+#          rule:
+#            sata:
+#              ruleset: 0
+#              type: replicated
+#              min_size: 1
+#              max_size: 10
+#              steps:
+#                - take take root-ssd
+#                - chooseleaf firstn 0 type region
+#                - emit
+#            ssd:
+#              ruleset: 1
+#              type: replicated
+#              min_size: 1
+#              max_size: 10
+#              steps:
+#                - take take root-sata
+#                - chooseleaf firstn 0 type region
+#                - emit

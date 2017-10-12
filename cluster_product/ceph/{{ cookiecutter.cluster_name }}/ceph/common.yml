@@ -10,15 +10,18 @@ parameters:
       public_network: {{ cookiecutter.ceph_public_network }}
       cluster_network: {{ cookiecutter.ceph_cluster_network }}
       keyring:
-        images:
+        glance:
+          name: ${_param:glance_storage_user}
           caps:
             mon: "allow r"
             osd: "allow class-read object_prefix rdb_children, allow rwx pool=images"
-        volumes:
+        cinder:
+          name: ${_param:cinder_storage_user}
           caps:
             mon: "allow r"
             osd: "allow class-read object_prefix rbd_children, allow rwx pool=volumes, allow rx pool=images"
         nova:
+          name: ${_param:nova_storage_user}
           caps:
             mon: "allow r"
             osd: "allow class-read object_prefix rbd_children, allow rwx pool=vms, allow rx pool=images"

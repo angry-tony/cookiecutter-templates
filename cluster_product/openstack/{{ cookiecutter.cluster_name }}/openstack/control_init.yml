@@ -1,3 +1,6 @@
+{%- macro password(size=16) -%}
+{% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'|random }}{% endfor %}
+{%- endmacro -%}
 classes:
 - system.keystone.client.core
 - system.keystone.client.service.cinder
@@ -14,3 +17,11 @@ classes:
 - system.keystone.client.service.glare
 - system.keystone.client.service.cinder3
 - system.keystone.client.service.keystone
+{%- if cookiecutter.get('ceph_enabled', 'False') == 'True'  %}
+- system.keystone.client.service.radosgw-swift
+parameters:
+  _param:
+    radosgw_swift_cluster_port: 8080
+    radosgw_service_host: ${_param:ceph_rgw_address}
+    keystone_swift_password: {{ password(16) }}
+{%- endif %}

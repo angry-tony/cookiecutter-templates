@@ -1736,16 +1736,6 @@ product_params_action:
     requires:
     - stacklight_enabled: True
   - fields:
-    - help_text: IP VIP address of ceph mon storage cluster
-      initial: '{{ control_network_subnet | subnet(65) }}'
-      name: ceph_mon_address
-      type: IP
-      width: half
-    - help_text: hostname of ceph mon storage cluster
-      initial: cmn
-      name: ceph_mon_hostname
-      type: TEXT
-      width: half
     - help_text: IP address of ceph mon storage node01
       initial: '{{ control_network_subnet | subnet(66) }}'
       name: ceph_mon_node01_address
@@ -1774,6 +1764,46 @@ product_params_action:
     - help_text: hostname of ceph mon storage node03
       initial: cmn03
       name: ceph_mon_node03_hostname
+      type: TEXT
+      width: half
+    - help_text: IP VIP address of ceph rados gateway storage cluster
+      initial: '{{ control_network_subnet | subnet(105) }}'
+      name: ceph_rgw_address
+      type: IP
+      width: half
+    - help_text: hostname of ceph rados gateway storage cluster
+      initial: rgw
+      name: ceph_rgw_hostname
+      type: TEXT
+      width: half
+    - help_text: IP address of ceph rados gateway storage node01
+      initial: '{{ control_network_subnet | subnet(106) }}'
+      name: ceph_rgw_node01_address
+      type: IP
+      width: half
+    - help_text: hostname of ceph rados gateway storage node01
+      initial: rgw01
+      name: ceph_rgw_node01_hostname
+      type: TEXT
+      width: half
+    - help_text: IP address of ceph rados gateway storage node02
+      initial: '{{ control_network_subnet | subnet(107) }}'
+      name: ceph_rgw_node02_address
+      type: IP
+      width: half
+    - help_text: hostname of ceph rados gateway storage node02
+      initial: rgw02
+      name: ceph_rgw_node02_hostname
+      type: TEXT
+      width: half
+    - help_text: IP address of ceph rados gateway storage node03
+      initial: '{{ control_network_subnet | subnet(108) }}'
+      name: ceph_rgw_node03_address
+      type: IP
+      width: half
+    - help_text: hostname of ceph rados gateway storage node03
+      initial: rgw03
+      name: ceph_rgw_node03_hostname
       type: TEXT
       width: half
     - help_text: number of OSDs

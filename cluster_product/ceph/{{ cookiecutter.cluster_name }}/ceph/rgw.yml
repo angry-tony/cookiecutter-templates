@@ -1,12 +1,41 @@
+{%- macro password(size=11) -%}
+{% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'|random }}{% endfor %}
+{%- endmacro -%}
 classes:
 - system.ceph.rgw.cluster
-- system.haproxy.proxy.single
-- system.haproxy.proxy.listen.radosgw
-- system.linux.system.repo.ceph
-- system.linux.system.repo.ubuntu
-- service.keepalived.cluster.single
+- system.ceph.rgw.keystone
+- cluster.{{ cookiecutter.cluster_name }}.ceph
 - cluster.{{ cookiecutter.cluster_name }}.ceph.common
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
-    ceph_radosgw_hostname: ${linux:system:name}
+    keepalived_vip_interface: ens3
+    keepalived_vip_virtual_router_id: 51
+    haproxy_radosgw_bind_port: 8080
+    haproxy_radosgw_source_port: 8080
+    ceph_radosgw_bind_port: 8080
+    keepalived_vip_password: {{ password(11) }}
+    cluster_vip_address: {{ cookiecutter.ceph_rgw_address }}
+    cluster_node01_hostname: ${_param:ceph_rgw_node01_hostname}
+    cluster_node01_address: ${_param:ceph_rgw_node01_address}
+    cluster_node02_hostname: ${_param:ceph_rgw_node02_hostname}
+    cluster_node02_address: ${_param:ceph_rgw_node02_address}
+    cluster_node03_hostname: ${_param:ceph_rgw_node03_hostname}
+    cluster_node03_address: ${_param:ceph_rgw_node03_address}
+    ceph_radosgw_keystone_host: ${_param:openstack_control_address}
+    ceph_radosgw_keystone_password: ${_param:keystone_admin_password}
+  ceph:
+    common:
+      keyring:
+        rgw.rgw01:
+          caps:
+            mon: "allow *"
+            osd: "allow *"
+        rgw.rgw02:
+          caps:
+            mon: "allow *"
+            osd: "allow *"
+        rgw.rgw03:
+          caps:
+            mon: "allow *"
+            osd: "allow *"

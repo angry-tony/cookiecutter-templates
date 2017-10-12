@@ -66,6 +66,7 @@ classes:
 {%- endif %}
 {%- if cookiecutter.get('ceph_enabled', 'False') == 'True' %}
 - system.reclass.storage.system.ceph_mon_cluster
+- system.reclass.storage.system.ceph_rgw_cluster
 {%- endif %}
 {%- if cookiecutter.kubernetes_enabled == 'True' %}
 - system.salt.minion.cert.k8s_server
@@ -330,9 +331,6 @@ parameters:
               backend_address:
                 value: ${_param:ceph_osd_rack01_backend_subnet}.<<count>>
                 start: 201
-              ceph_host_id:
-                value: <<count>>
-                start: 1
           params:
             salt_master_host: ${_param:reclass_config_master}
             ceph_crush_parent: rack01

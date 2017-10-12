@@ -21,14 +21,13 @@ parameters:
 
 {%- for id in range(disks|length) %}
             - dev: {{ disks[id] }}
-              rule: hdd
 {%- if cookiecutter.ceph_osd_backend == 'bluestore' %}
               block_db: {{ journals[current_journal] }}
 {%- else %}
               journal: {{ journals[current_journal] }}
 {%- endif %}
-              class: hdd
-              weight: 1.5
+#              class: hdd
+#              weight: 1.5
 {%- endfor %}
 
 {%- endif %}

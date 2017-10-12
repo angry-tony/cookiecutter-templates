@@ -13,7 +13,16 @@ parameters:
     ceph_mon_node02_address: {{ cookiecutter.ceph_mon_node02_address }}
     ceph_mon_node03_address: {{ cookiecutter.ceph_mon_node03_address }}
 
-    ceph_cluster_fsid: {{ secret(8) }}-{{ secret(4) }}-{{ secret(4) }}-{{ secret(4) }}-{{ secret(12) }}
+    ceph_rgw_hostname: {{ cookiecutter.ceph_rgw_hostname }}
+    ceph_rgw_node01_hostname: {{ cookiecutter.ceph_rgw_node01_hostname }}
+    ceph_rgw_node02_hostname: {{ cookiecutter.ceph_rgw_node02_hostname }}
+    ceph_rgw_node03_hostname: {{ cookiecutter.ceph_rgw_node03_hostname }}
+    ceph_rgw_address: {{ cookiecutter.ceph_rgw_address }}
+    ceph_rgw_node01_address: {{ cookiecutter.ceph_rgw_node01_address }}
+    ceph_rgw_node02_address: {{ cookiecutter.ceph_rgw_node02_address }}
+    ceph_rgw_node03_address: {{ cookiecutter.ceph_rgw_node03_address }}
+
+    ceph_cluster_fsid: "{{ secret(8) }}-{{ secret(4) }}-{{ secret(4) }}-{{ secret(4) }}-{{ secret(12) }}"
     ceph_osd_rack01_single_subnet: {{ cookiecutter.ceph_osd_rack01_single_subnet }}
     ceph_osd_rack01_backend_subnet: {{ cookiecutter.ceph_osd_rack01_backend_subnet }}
     ceph_osd_rack01_hostname: {{ cookiecutter.ceph_osd_rack01_hostname }}
@@ -35,3 +44,23 @@ parameters:
           names:
           - ${_param:ceph_mon_node03_hostname}
           - ${_param:ceph_mon_node03_hostname}.${_param:cluster_domain}
+        rgw:
+          address: ${_param:ceph_rgw_address}
+          names:
+          - ${_param:ceph_rgw_hostname}
+          - ${_param:ceph_rgw_hostname}.${_param:cluster_domain}
+        rgw01:
+          address: ${_param:ceph_rgw_node01_address}
+          names:
+          - ${_param:ceph_rgw_node01_hostname}
+          - ${_param:ceph_rgw_node01_hostname}.${_param:cluster_domain}
+        rgw02:
+          address: ${_param:ceph_rgw_node02_address}
+          names:
+          - ${_param:ceph_rgw_node02_hostname}
+          - ${_param:ceph_rgw_node02_hostname}.${_param:cluster_domain}
+        rgw03:
+          address: ${_param:ceph_rgw_node03_address}
+          names:
+          - ${_param:ceph_rgw_node03_hostname}
+          - ${_param:ceph_rgw_node03_hostname}.${_param:cluster_domain}

@@ -15,7 +15,7 @@
     "cicd_control_node03_hostname"              : "cid03",
 
     "upstream_proxy_enabled"                    : "False",
-    
+
     "salt_api_password"                         : "<<WILL_BE_GENERATED>>",
     "cicd_private_key"                          : "<<WILL_BE_GENERATED>>",
     "cicd_public_key"                           : "<<WILL_BE_GENERATED>>",
@@ -24,5 +24,6 @@
     "openldap_organisation"                     : "${_param:cluster_name}",
     "openldap_domain"                           : "deployment-name.local",
 
-    "stacklight_enabled"                        : "False"
+    "stacklight_enabled"                        : "False",
+    "ceph_enabled"                              : "False"
 }

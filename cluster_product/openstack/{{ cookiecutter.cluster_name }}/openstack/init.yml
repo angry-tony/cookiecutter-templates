@@ -1,7 +1,7 @@
 {%- macro password(size=16) -%}
 {% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'|random }}{% endfor %}
 {%- endmacro -%}
-{%- macro secret(size=8) -%}
+{%- macro secret(size=12) -%}
 {% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyz0123456789'|random }}{% endfor %}
 {%- endmacro -%}
 parameters:
@@ -205,16 +205,19 @@ parameters:
     openstack_benchmark_node01_address: {{ cookiecutter.openstack_benchmark_node01_address }}
 
     {%- if cookiecutter.get('ceph_enabled', 'False') == 'True'  %}
-    cinder_storage_secret_uuid: {{ secret(8) }}-{{ secret(8) }}-{{ secret(8) }}-{{ secret(8) }}-{{ secret(8) }}
-    nova_storage_secret_uuid: {{ secret(8) }}-{{ secret(8) }}-{{ secret(8) }}-{{ secret(8) }}-{{ secret(8) }}
+    # Ceph
+    cinder_storage_secret_uuid: "{{ secret(8) }}-{{ secret(4) }}-{{ secret(4) }}-{{ secret(4) }}-{{ secret(12) }}"
+    nova_storage_secret_uuid: "{{ secret(8) }}-{{ secret(4) }}-{{ secret(4) }}-{{ secret(4) }}-{{ secret(12) }}"
     nova_storage_pool: vms
     nova_storage_user: nova
     cinder_storage_pool: volumes
-    cinder_storage_user: volumes
+    cinder_storage_user: cinder
     glance_storage_pool: images
-    glance_storage_user: images
+    glance_storage_user: glance
     {%- endif %}
-
+    {%- if cookiecutter.get('cicd_enabled', 'False') == 'True'  %}
+    nginx_proxy_gerrit_server_site_port: 8070
+    {%- endif %}
     # Billing
     #keystone_billometer_password: {{ password(16) }}
     #keystone_billometer_address: ${_param:billometer_service_host}
