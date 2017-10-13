@@ -1,0 +1,8 @@
+---
+summary: >
+  Added ExternalDNS for Kubernetes
+
+features:
+  - Added the ``kubernetes_externaldns_enabled`` parameter. The default
+    value is ``False``.
+
