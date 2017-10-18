@@ -41,6 +41,7 @@ classes:
 - system.opencontrail.client.resource.control_node
 - system.opencontrail.client.resource.config_node
 - system.opencontrail.client.resource.database_node
+- system.opencontrail.client.resource.global_vrouter_config
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
