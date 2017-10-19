@@ -1,0 +1,15 @@
+---
+prelude: >
+    Implemented the ability of the ElasticSearch service to operate in the
+    deployments with StackLight with the DevOps Portal enabled
+
+features:
+  - Implemented the ability of the ElasticSearch service to operate in the
+    deployments with Stacklight with the DevOps Portal enabled.
+    Now, when Cookiecutter generates a Reclass deployment model with both
+    StackLight and OSS services enabled, all OSS services are automatically
+    switched to use the generic ElasticSearch.
+    Namely, the OSS ElasticSearch Docker stack and the GlusterFS volume do not
+    start, and the OSS ElasticSearch endpoints and indices switch to the
+    StackLight ElasticSearch cluster.
+
