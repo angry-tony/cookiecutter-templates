@@ -28,6 +28,7 @@ classes:
 - system.glusterfs.client.volume.postgresql
 - system.glusterfs.client.volume.pushkin
 - system.glusterfs.client.volume.rundeck
+- system.haproxy.proxy.single
 - system.haproxy.proxy.listen.oss.devops_portal
 {%- if (cookiecutter.stacklight_enabled == 'False') and (cookiecutter.oss_enabled == 'True') %}
 - system.haproxy.proxy.listen.oss.elasticsearch
@@ -59,7 +60,6 @@ classes:
 {%- if cookiecutter.kubernetes_enabled == 'True' %}
 - system.salt.minion.cert.prometheus_server
 {%- endif %}
-- system.haproxy.proxy.single
 {%- if cookiecutter.openstack_enabled == 'True' %}
 - system.heka.remote_collector.container
 - system.heka.remote_collector.input.amqp
