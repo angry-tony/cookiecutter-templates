@@ -112,7 +112,6 @@ parameters:
     gerrit_auth_type: DEVELOPMENT_BECOME_ANY_ACCOUNT
     {%- endif %}
 {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
-parameters:
   gerrit:
     client:
       repo:

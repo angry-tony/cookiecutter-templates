@@ -87,6 +87,7 @@ parameters:
     docker_image_alertmanager: ${_param:aptly_server_hostname}:5000/alertmanager:latest
     docker_image_pushgateway: ${_param:aptly_server_hostname}:5000/pushgateway:latest
     docker_image_prometheus: ${_param:aptly_server_hostname}:5000/prometheus:latest
+    docker_image_prometheus_relay: ${_param:aptly_server_hostname}:5000/prometheus_relay:latest
     docker_image_remote_agent: ${_param:aptly_server_hostname}:5000/telegraf:latest
     docker_image_remote_storage_adapter: ${_param:aptly_server_hostname}:5000/remote_storage_adapter:latest
     docker_image_grafana: ${_param:aptly_server_hostname}:5000/grafana:4.5.2
