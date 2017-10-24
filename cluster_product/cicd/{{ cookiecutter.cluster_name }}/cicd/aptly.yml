@@ -1,0 +1,376 @@
+{%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+classes:
+- system.aptly.server.single
+- system.aptly.server.mirror.debian
+- system.aptly.server.mirror.ubuntu.trusty.mcp.apt_mk.salt
+- system.aptly.server.mirror.ubuntu.trusty.mcp.apt_mk.extra
+- system.aptly.server.mirror.ubuntu.trusty.mcp.apt_mk.mitaka
+- system.aptly.server.mirror.ubuntu.trusty.mcp.apt_mk.oc323
+- system.aptly.server.mirror.ubuntu.trusty.grafana
+- system.aptly.server.mirror.ubuntu.trusty.haproxy
+- system.aptly.server.mirror.ubuntu.trusty.rabbitmq
+- system.aptly.server.mirror.ubuntu.trusty.salt
+- system.aptly.server.mirror.ubuntu.trusty.ubuntu.trusty.main
+- system.aptly.server.repo.ubuntu.trusty.extra
+- system.aptly.server.repo.ubuntu.trusty.openstack
+- system.aptly.server.repo.ubuntu.trusty.salt
+- system.aptly.server.repo.ubuntu.trusty.opencontrail
+- system.aptly.server.mirror.ubuntu.xenial.mcp.openstack_ocata
+- system.aptly.server.mirror.ubuntu.xenial.mcp.apt_mk.salt
+- system.aptly.server.mirror.ubuntu.xenial.mcp.apt_mk.extra
+- system.aptly.server.mirror.ubuntu.xenial.mcp.apt_mk.ocata
+- system.aptly.server.mirror.ubuntu.xenial.mcp.apt_mk.oc323
+- system.aptly.server.mirror.ubuntu.xenial.influxdb
+- system.aptly.server.mirror.ubuntu.xenial.glusterfs
+- system.aptly.server.mirror.ubuntu.xenial.maas
+- system.aptly.server.mirror.ubuntu.xenial.docker
+- system.aptly.server.mirror.ubuntu.xenial.grafana
+- system.aptly.server.mirror.ubuntu.xenial.ubuntu
+- system.aptly.server.mirror.ubuntu.xenial.salt
+- system.aptly.server.repo.ubuntu.xenial.extra
+- system.aptly.server.repo.ubuntu.xenial.openstack
+- system.aptly.server.repo.ubuntu.xenial.salt
+- system.linux.system.repo.docker
+- system.git.server.single
+- service.docker.host
+- system.docker.client
+- service.docker.registry
+- cluster.{{ cookiecutter.cluster_name }}.infra
+parameters:
+  _param:
+    aptly_gpg_keypair_id: A8272E04
+    aptly_gpg_passphrase: ""
+    aptly_server_secure: true
+    aptly_gpg_private_key: |
+      -----BEGIN PGP PRIVATE KEY BLOCK-----
+      Version: GnuPG v1
+
+      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
+      =QgPA
+      -----END PGP PRIVATE KEY BLOCK-----
+    aptly_gpg_public_key: |
+      -----BEGIN PGP PUBLIC KEY BLOCK-----
+      Version: GnuPG v1
+
+      mQENBFnU98YBCACdTxOkxAJJQaQ4B9sEsh9s4MMOMxPSCwvzgGbk6HECDBhz2auF
+      FfVydNbjLfoih8qdaLSmBQg8+FtdYJHEG1lekeiUETOxJnkhUFXq85KGNj9BbGBr
+      m3/6Jo58pdMNdUMurAs807STvH3iTAhYymggX1u9GyjKbv24p2KMGuK1gC3W04NG
+      qOQX3iwjmBWq87fX7tNLafptCq5A9TAv4Dvt1XZgGCiLI+EcPyfgNB1W/+EOOkFu
+      jFdM43nm0YE3Bf4uuVR/u0REprYJfChdS6qYYgI3n2LuPyi9WMVVee+1RZmTwFcB
+      cS53h+gq1GHOhj+YOwm3+ctmIoTNi26siutdABEBAAG0Kk1pcmFudGlzIE9mZmxp
+      bmUgQXB0bHkgPGluZm9AbWlyYW50aXMuY29tPokBOAQTAQIAIgUCWdT3xgIbAwYL
+      CQgHAwIGFQgCCQoLBBYCAwECHgECF4AACgkQpIXB3agnLgS9wQf7B2LiR4wQh7Vq
+      Vwx1dKrhj0AXF7jSYfYJ/vtV6mXb0AxAxC3BVoW+KLPB+W9lHCXBRYXf1pJZIYcx
+      v0rTGeqzpcxVmMIT1E4OAmZp8pFlBsFNTERG2z01kdnd3oddF3GSiP1cTg2+c9hJ
+      UGJR0tAbPXDm0dXhuDD428IuSx5o4bdNdCshPYRe/P3CGG+KrySLL0/06UU2I5Mx
+      f4pctRouWfrQDA6sIS+P58NKwIpXdWj1pPogJzVUJqHHyAUM8Ri+AZoXtKjqXAqN
+      QNCd/xPaL9dtGxKTMDDKHvqyF5MpU3eYcEFIi79nunfC6Iaw+Izo+hYpiBlb2s6Q
+      kCgR2y/f17kBDQRZ1PfGAQgA1NqQorh2cvogoU4DbRwnQKZDCCt4WnbvcJf8WZw7
+      sINbqJm3pd/UjVwcPG0GFe9w7/eEdKv6N/fVMJYo/Dj34j2waN46sIBBaXi8pPuC
+      rs/fV+KFGmdXNrOED8LeJ835+6eAm3W/930P1o/Rncfi7ANQr4nuSkzCoXhwo9n8
+      RX70L1pYtGw1v3qMaDBKHGpZ0ZqSewSlQYclWG5EKg6ecR0wnLK9W62b5uExbexh
+      7d+W22NTZ9j7SVfwHG4IleZ03B+ak0NqlKpdEA9+8QLdrQsqFN8qDHqJ46ag+5xt
+      pAPmw1S2va7Gkr0BMxzdxwA5d4ZauevaEKTi5NLGdNZuHQARAQABiQEfBBgBAgAJ
+      BQJZ1PfGAhsMAAoJEKSFwd2oJy4E5R4H/3XjYvsalh2g4iYEOjZ1Ld55AA+NDlnp
+      eXJfEOlhxdnAvkTc1CfKdT3qaN5hG0m7sVowaeVbf4cDNwIQy+R75V73h2DQpno3
+      746DDC0C2jRzDBwKrUU9Y/du3REcq4kMCnhtVBMSX6rbJoxSFdCzLu/XJd9oeXbb
+      kObIeoe9FWIrswFB4NUhTHLn1bk5p8zsVbsRm3jl6ofoQmFKFoK6FauuNeB+Fc/1
+      UdMpUb1Y9dpE/akgRm/79NRHKA4plQ2X/CGZu+KIw4XVn/0ilU8FbsX+KXcp8ui0
+      XRqg8z44wtlroFTrnR+DgqplsellsrM+xGtZb9VrjFLeP89jzhrBWgE=
+      =GLje
+  docker:
+    client:
+      registry:
+        target_registry: apt:5000
+        image:
+          - registry: ""
+            name: registry:2
+          - registry: docker
+            name: compose
+          - registry: osixia
+            name: openldap:1.1.8
+          - registry: tcpcloud
+            name: aptly:latest
+          - registry: tcpcloud
+            name: aptly-public:latest
+          - registry: tcpcloud
+            name: aptly-api:latest
+          - registry: tcpcloud
+            name: aptly-publisher:latest
+          - registry: tcpcloud
+            name: jnlp-slave:latest
+          - registry: tcpcloud
+            name: phpldapadmin:0.6.12
+          - registry: tcpcloud
+            name: jenkins:2.73
+          - registry: tcpcloud
+            name: gerrit:2.13.6
+          - registry: tcpcloud
+            name: mysql:5.6
+          - registry: grafana
+            name: grafana:4.5.2
+          - registry: docker-prod-local.artifactory.mirantis.com/openstack-docker
+            name: heka:latest
+          - registry: dockersamples
+            name: visualizer:latest
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/oss
+            name: security-monkey-api:latest
+          - registry: docker.elastic.co/elasticsearch
+            name: elasticsearch:5.4.1
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/oss
+            name: security-monkey-scheduler:latest
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/oss
+            name: janitor-monkey:latest
+          - registry: library
+            name: mongo:3.4
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/oss
+            name: rundeck:latest
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/oss
+            name: devops-portal:latest
+          - registry: library
+            name: postgres:9.6
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/oss
+            name: pushkin:latest
+          - registry: docker-prod-local.artifactory.mirantis.com/openstack-docker
+            name: alertmanager:latest
+          - registry: docker-prod-local.artifactory.mirantis.com/openstack-docker
+            name: pushgateway:latest
+          - registry: docker-prod-local.artifactory.mirantis.com/openstack-docker
+            name: prometheus:latest
+          - registry: docker-prod-local.artifactory.mirantis.com/openstack-docker
+            name: telegraf:latest
+          - registry: docker-prod-local.artifactory.mirantis.com/openstack-docker
+            name: remote_storage_adapter:latest
+          - registry: docker-prod-local.artifactory.mirantis.com/openstack-docker
+            name: prometheus_relay:latest
+    host:
+      insecure_registries:
+        - apt:5000
+    registry:
+      bind:
+        host: 0.0.0.0
+        port: 5000
+  git:
+    server:
+       directory: /srv/git/
+       repos:
+        - name: pipeline-library
+          url: https://github.com/Mirantis/pipeline-library
+        - name: mk-pipelines
+          url: https://github.com/Mirantis/mk-pipelines
+        - name: gerritlib
+          url: https://github.com/openstack-infra/gerritlib.git
+        - name: jeepyb
+          url: https://github.com/openstack-infra/jeepyb.git
+  aptly:
+    server:
+      mirror:
+        # xenial
+        xenial-main:
+          publisher:
+            architectures:
+              - amd64
+              - source
+        xenial-multiverse:
+          publisher:
+            architectures:
+              - amd64
+              - source
+        xenial-restricted:
+          publisher:
+            architectures:
+              - amd64
+              - source
+        xenial-universe:
+          publisher:
+            architectures:
+              - amd64
+              - source
+
+        # xenial-updates
+        xenial-updates-main:
+          publisher:
+            architectures:
+              - amd64
+              - source
+        xenial-updates-multiverse:
+          publisher:
+            architectures:
+              - amd64
+              - source
+        xenial-updates-restricted:
+          publisher:
+            architectures:
+              - amd64
+              - source
+        xenial-updates-universe:
+          publisher:
+            architectures:
+              - amd64
+              - source
+
+        #xenial-security:
+        xenial-security-main:
+          publisher:
+            architectures:
+              - amd64
+              - source
+        xenial-security-multiverse:
+          publisher:
+            architectures:
+              - amd64
+              - source
+        xenial-security-restricted:
+          publisher:
+            architectures:
+              - amd64
+              - source
+        xenial-security-universe:
+          publisher:
+            architectures:
+              - amd64
+              - source
+
+        #xenial-proposed:
+        xenial-proposed-main:
+          publisher:
+            architectures:
+              - amd64
+              - source
+        xenial-proposed-multiverse:
+          publisher:
+            architectures:
+              - amd64
+              - source
+        xenial-proposed-restricted:
+          publisher:
+            architectures:
+              - amd64
+              - source
+        xenial-proposed-universe:
+          publisher:
+            architectures:
+              - amd64
+              - source
+
+        #xenial-backports:
+        xenial-backports-main:
+          publisher:
+            architectures:
+              - amd64
+              - source
+        xenial-backports-multiverse:
+          publisher:
+            architectures:
+              - amd64
+              - source
+        xenial-backports-restricted:
+          publisher:
+            architectures:
+              - amd64
+              - source
+        xenial-backports-universe:
+          publisher:
+            architectures:
+              - amd64
+              - source
+        #Trusty
+        trusty-main:
+          publisher:
+            architectures:
+              - amd64
+              - source
+        trusty-multiverse:
+          publisher:
+            architectures:
+              - amd64
+              - source
+        trusty-restricted:
+          publisher:
+            architectures:
+              - amd64
+              - source
+        trusty-universe:
+          publisher:
+            architectures:
+              - amd64
+              - source
+  nginx:
+    server:
+      site:
+        pip_server:
+          enabled: true
+          type: nginx_static
+          name: pip_server
+          root: /srv/pypi_mirror/packages/simple
+          autoindex: True
+          access_policy:
+            allow:
+            - all
+          host:
+            name: pipy.apt.local
+            port: 8084
+        http_server:
+          enabled: true
+          type: nginx_static
+          name: http_server
+          root: /srv/http
+          autoindex: True
+          access_policy:
+            allow:
+            - all
+          host:
+            name: http.apt.local
+            port: 8078
+{%- endif %}

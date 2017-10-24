@@ -252,12 +252,23 @@ parameters:
         openstack_proxy_node02:
           params:
             linux_system_codename: xenial
-{%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '2' %}
+        {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '2' %}
         stacklight_log_node01:
           classes:
           - system.elasticsearch.client.single
           - system.kibana.client.single
-{%- endif %}
+        {%- endif %}
+        {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+        aptly_server_node01:
+          name: ${_param:aptly_server_hostname}01
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.cicd.aptly
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            linux_system_codename: xenial
+            single_address: ${_param:aptly_server_address}
+        {%- endif %}
         openstack_compute_rack01:
           name: ${_param:openstack_compute_rack01_hostname}<<count>>
           domain: ${_param:cluster_domain}
