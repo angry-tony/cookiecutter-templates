@@ -28,7 +28,7 @@
 
     "local_repositories"                        : "False",
     "local_repo_url"                            : "${_param:cicd_control_address}",
-    
+
     "openstack_proxy_address"                   : "10.167.4.80",
     "openstack_proxy_node01_address"            : "10.167.4.81",
     "openstack_proxy_node02_address"            : "10.167.4.82",
@@ -62,15 +62,6 @@
     "openstack_message_queue_node01_hostname"   : "msg01",
     "openstack_message_queue_node02_hostname"   : "msg02",
     "openstack_message_queue_node03_hostname"   : "msg03",
-
-    "openstack_telemetry_address"               : "10.167.4.75",
-    "openstack_telemetry_node01_address"        : "10.167.4.76",
-    "openstack_telemetry_node02_address"        : "10.167.4.77",
-    "openstack_telemetry_node03_address"        : "10.167.4.78",
-    "openstack_telemetry_hostname"              : "mdb",
-    "openstack_telemetry_node01_hostname"       : "mdb01",
-    "openstack_telemetry_node02_hostname"       : "mdb02",
-    "openstack_telemetry_node03_hostname"       : "mdb03",
 
     "openstack_compute_rack01_single_subnet"    : "10.167.4",
     "openstack_compute_rack01_tenant_subnet"    : "10.167.6",

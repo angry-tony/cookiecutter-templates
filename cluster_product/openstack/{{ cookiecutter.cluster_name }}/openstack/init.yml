@@ -155,11 +155,6 @@ parameters:
     openstack_message_queue_node02_address: {{ cookiecutter.openstack_message_queue_node02_address }}
     openstack_message_queue_node03_address: {{ cookiecutter.openstack_message_queue_node03_address }}
 
-    openstack_telemetry_address: {{ cookiecutter.openstack_telemetry_address }}
-    openstack_telemetry_node01_address: {{ cookiecutter.openstack_telemetry_node01_address }}
-    openstack_telemetry_node02_address: {{ cookiecutter.openstack_telemetry_node02_address }}
-    openstack_telemetry_node03_address: {{ cookiecutter.openstack_telemetry_node03_address }}
-
     {%- if cookiecutter.openstack_network_engine == 'ovs' %}
     openstack_gateway_node01_address: {{ cookiecutter.openstack_gateway_node01_address }}
     openstack_gateway_node02_address: {{ cookiecutter.openstack_gateway_node02_address }}
@@ -190,10 +185,6 @@ parameters:
     openstack_message_queue_node01_hostname: {{ cookiecutter.openstack_message_queue_node01_hostname }}
     openstack_message_queue_node02_hostname: {{ cookiecutter.openstack_message_queue_node02_hostname }}
     openstack_message_queue_node03_hostname: {{ cookiecutter.openstack_message_queue_node03_hostname }}
-    openstack_telemetry_hostname: {{ cookiecutter.openstack_telemetry_hostname }}
-    openstack_telemetry_node01_hostname: {{ cookiecutter.openstack_telemetry_node01_hostname }}
-    openstack_telemetry_node02_hostname: {{ cookiecutter.openstack_telemetry_node02_hostname }}
-    openstack_telemetry_node03_hostname: {{ cookiecutter.openstack_telemetry_node03_hostname }}
     {%- if cookiecutter.openstack_network_engine == 'ovs' %}
     openstack_gateway_node01_hostname: {{ cookiecutter.openstack_gateway_node01_hostname }}
     openstack_gateway_node02_hostname: {{ cookiecutter.openstack_gateway_node02_hostname }}
@@ -304,26 +295,6 @@ parameters:
           names:
           - ${_param:openstack_database_node03_hostname}
           - ${_param:openstack_database_node03_hostname}.${_param:cluster_domain}
-        mdb:
-          address: ${_param:openstack_telemetry_address}
-          names:
-          - ${_param:openstack_telemetry_hostname}
-          - ${_param:openstack_telemetry_hostname}.${_param:cluster_domain}
-        mdb01:
-          address: ${_param:openstack_telemetry_node01_address}
-          names:
-          - ${_param:openstack_telemetry_node01_hostname}
-          - ${_param:openstack_telemetry_node01_hostname}.${_param:cluster_domain}
-        mdb02:
-          address: ${_param:openstack_telemetry_node02_address}
-          names:
-          - ${_param:openstack_telemetry_node02_hostname}
-          - ${_param:openstack_telemetry_node02_hostname}.${_param:cluster_domain}
-        mdb03:
-          address: ${_param:openstack_telemetry_node03_address}
-          names:
-          - ${_param:openstack_telemetry_node03_hostname}
-          - ${_param:openstack_telemetry_node03_hostname}.${_param:cluster_domain}
 {%- if cookiecutter.openstack_network_engine == 'ovs' %}
         gtw01:
           address: ${_param:openstack_gateway_node01_address}
