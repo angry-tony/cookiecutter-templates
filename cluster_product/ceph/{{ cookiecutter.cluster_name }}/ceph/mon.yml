@@ -1,5 +1,6 @@
 classes:
 - system.ceph.mon.cluster
+- system.ceph.monitoring.node_stats
 {%- if cookiecutter.ceph_version == 'luminous' %}
 - service.ceph.mgr.cluster
 {%- endif %}

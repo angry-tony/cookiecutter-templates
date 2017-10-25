@@ -1,5 +1,6 @@
 classes:
 - system.ceph.osd.cluster
+- system.ceph.monitoring.node_stats
 - cluster.{{ cookiecutter.cluster_name }}.ceph.common
 parameters:
   ceph:

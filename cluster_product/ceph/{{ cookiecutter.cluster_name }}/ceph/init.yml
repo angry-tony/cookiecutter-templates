@@ -23,6 +23,7 @@ parameters:
     ceph_rgw_node03_address: {{ cookiecutter.ceph_rgw_node03_address }}
 
     ceph_cluster_fsid: "{{ secret(8) }}-{{ secret(4) }}-{{ secret(4) }}-{{ secret(4) }}-{{ secret(12) }}"
+    ceph_monitoring_user: admin
     ceph_osd_rack01_single_subnet: {{ cookiecutter.ceph_osd_rack01_single_subnet }}
     ceph_osd_rack01_backend_subnet: {{ cookiecutter.ceph_osd_rack01_backend_subnet }}
     ceph_osd_rack01_hostname: {{ cookiecutter.ceph_osd_rack01_hostname }}
