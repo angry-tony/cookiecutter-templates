@@ -12,6 +12,7 @@ parameters:
     git_pipeline_library_upstream: http://${_param:aptly_server_hostname}:8088/pipeline-library
     git_mk_pipelines_upstream: http://${_param:aptly_server_hostname}:8088/Mirantis/mk-pipelines
     docker_image_registry: ${_param:aptly_server_hostname}:5000/registry:2
+    docker_image_compose: ${_param:aptly_server_hostname}:5000/compose:1.8.0
     docker_image_visualizer: ${_param:aptly_server_hostname}:5000/visualizer
     docker_image_gerrit: ${_param:aptly_server_hostname}:5000/gerrit:2.13.6
     docker_image_mysql: ${_param:aptly_server_hostname}:5000/mysql:5.6
