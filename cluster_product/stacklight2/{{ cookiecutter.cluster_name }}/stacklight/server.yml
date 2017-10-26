@@ -11,6 +11,7 @@ classes:
 - system.linux.system.repo_local.mcp.extra
 {%- else %}
 - system.linux.system.repo.docker
+- system.linux.system.repo.mcp.extra
 {%- endif %}
 
 {%- if cookiecutter.oss_enabled == 'True' %}

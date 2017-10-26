@@ -6,6 +6,7 @@ classes:
 {%- else %}
 - system.linux.system.repo.elasticsearch
 - system.linux.system.repo.kibana
+- system.linux.system.repo.mcp.extra
 {%- endif %}
 - system.haproxy.proxy.listen.stacklight.elasticsearch
 - system.haproxy.proxy.listen.stacklight.kibana
