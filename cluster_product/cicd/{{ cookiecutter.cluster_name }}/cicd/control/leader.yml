@@ -123,6 +123,7 @@ parameters:
         - root:
           name: root
           pypi_mirror:
+            protocol: http
             host: ${_param:aptly_server_hostname}
             port: 8084
             upstream_fallback: False
