@@ -19,16 +19,9 @@ classes:
 - system.linux.system.repo.sensu
 {%- endif %}
 {%- endif %}
-- system.ceilometer.server.backend.influxdb
-- system.heka.ceilometer_collector.single
-- system.aodh.server.cluster
-- system.ceilometer.server.cluster
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
-    keepalived_openstack_telemetry_vip_address: ${_param:openstack_telemetry_address}
-    keepalived_openstack_telemetry_vip_password: ${_param:openstack_telemetry_keepalived_password}
-    keepalived_openstack_telemetry_vip_interface: ens3
     cluster_vip_address: ${_param:openstack_telemetry_address}
     cluster_local_address: ${_param:single_address}
     cluster_node01_hostname: ${_param:openstack_telemetry_node01_hostname}

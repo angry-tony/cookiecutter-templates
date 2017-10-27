@@ -88,7 +88,7 @@ parameters:
     cinder_version: ${_param:openstack_version}
     cinder_service_host: ${_param:openstack_control_address}
     ceilometer_version: ${_param:openstack_version}
-    ceilometer_service_host: ${_param:openstack_telemetry_address}
+    ceilometer_service_host: ${_param:openstack_control_address}
     ceilometer_influxdb_password: {{ password(16) }}
     nova_version: ${_param:openstack_version}
     nova_service_host: ${_param:openstack_control_address}
@@ -96,7 +96,7 @@ parameters:
     neutron_service_host: ${_param:openstack_control_address}
     glusterfs_service_host: ${_param:infra_kvm_address}
     aodh_version: ${_param:openstack_version}
-    aodh_service_host: ${_param:openstack_telemetry_address}
+    aodh_service_host: ${_param:openstack_control_address}
 
     mysql_admin_user: root
     mysql_aodh_password: {{ password(16) }}
@@ -129,7 +129,6 @@ parameters:
     mongodb_admin_password: {{ password(16) }}
     mongodb_shared_key: {{ password(64) }}
     metadata_password: {{ password(16) }}
-    openstack_telemetry_keepalived_password: {{ password(16) }}
     salt_pki_proxy_alt_names: IP:${_param:cluster_public_host},DNS:${_param:cluster_public_host},IP:${_param:openstack_proxy_address},DNS:horizon.${_param:cluster_domain}
 
 {%- if cookiecutter.stacklight_enabled == 'True' %}

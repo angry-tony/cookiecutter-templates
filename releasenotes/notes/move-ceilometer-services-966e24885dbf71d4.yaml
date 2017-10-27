@@ -1,0 +1,43 @@
+---
+summary: >
+  Moved Openstack Telemetry components from ``mdb`` nodes to ``ctl`` nodes
+
+features:
+  - |
+    Moved Openstack Telemetry components from ``mdb`` nodes to ``ctl`` nodes
+    as there are only the Openstack Telemetry services running on the  ``mdb``
+    nodes. The full list of the transfered services:
+
+    * ``ceilometer-agent-central``
+    * ``ceilometer-agent-notification``
+    * ``ceilometer-api`` (running under Apache)
+    * ``aodh-evaluator``
+    * ``aodh-listener``
+    * ``aodh-notifier``
+    * ``aodh-api`` (running under Apache)
+    * ``ceilometer_collector``
+
+    To apply the changes for existing deployments:
+
+    #. Change your cluster model according to these fixes.
+    #. Update your system model from master.
+    #. Update the Keepalived salt-formula.
+    #. Stop the services listed above on ``mdb`` nodes:
+
+       .. code-block:: bash
+
+          service ceilometer-agent-central stop
+          service ceilometer-agent-notification stop
+          service apache2 stop
+          service aodh-evaluator stop
+          service aodh-listener stop
+          service aodh-notifier stop
+          service ceilometer_collector stop
+
+    #. Apply the ``ceilometer``, ``aodh``, ``heka.ceilometer_collector`` states on ``ctl`` nodes:
+
+       .. code-block:: bash
+
+          salt 'ctl*' state.sls ceilometer -b 1
+          salt 'ctl*' state.sls aodh -b 1
+          salt 'ctl*' state.sls heka.ceilometer_collector
