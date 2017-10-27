@@ -6,7 +6,7 @@ parameters:
   ceph:
     osd:
       enabled: true
-      copy_admin_key: true
+      crush_parent: ${_param:ceph_crush_parent}
 {%- if cookiecutter.ceph_osd_backend == 'bluestore' %}
       bluestore_block_db_size: {{ (cookiecutter.ceph_osd_block_db_size|int*1073741824) }}
 {%- else %}
