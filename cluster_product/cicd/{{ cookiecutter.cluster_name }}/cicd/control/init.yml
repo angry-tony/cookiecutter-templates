@@ -77,10 +77,13 @@ parameters:
     nginx_proxy_gerrit_server_site_host: ${_param:openstack_proxy_address}
     nginx_proxy_gerrit_server_site_port: 8080
     gerrit_http_listen_url: proxy-https://*:8080/
-
-{%- if cookiecutter.upstream_proxy_enabled == 'True' %}
+    {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+    gerrit_pipeline_library_repo: http://${_param:aptly_server_hostname}:8088/pipeline-library.git
+    gerrit_mk_pipelines_repo: http://${_param:aptly_server_hostname}:8088/mk-pipelines.git
+    {%- endif %}
+    {%- if cookiecutter.upstream_proxy_enabled == 'True' %}
     http_proxy: 'http://${_param:infra_config_deploy_address}:8000'
-{%- endif %}
+    {%- endif %}
 
     # Proxy
     cluster_ssl_certificate:
