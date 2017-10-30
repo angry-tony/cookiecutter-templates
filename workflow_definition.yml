@@ -917,9 +917,18 @@ product_params_action:
       name: kubernetes_externaldns_enabled
       type: BOOL
     - help_text: DNS provider for External DNS
-      initial: coredns
+      initial: "coredns"
       name: kubernetes_externaldns_provider
-      type: TEXT
+      type: CHOICE
+      choices:
+        - - "coredns"
+          - "CoreDNS"
+        - - "designate"
+          - "Designate"
+        - - "aws"
+          - "AWS"
+        - - "google"
+          - "Google"
       requires:
         - kubernetes_externaldns_provider: True
     - help_text: hostname of kubernetes compute node01
