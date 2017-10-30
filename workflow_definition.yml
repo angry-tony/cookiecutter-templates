@@ -1529,46 +1529,6 @@ product_params_action:
       name: openstack_proxy_node02_hostname
       type: TEXT
       width: half
-    - help_text: IP VIP address of telemetry cluster on control network
-      initial: '{{ control_network_subnet | subnet(75) }}'
-      name: openstack_telemetry_address
-      type: IP
-      width: half
-    - help_text: hostname of VIP telemetry cluster
-      initial: mdb
-      name: openstack_telemetry_hostname
-      type: TEXT
-      width: half
-    - help_text: IP address of a telemetry node01 on control network
-      initial: '{{ control_network_subnet | subnet(76) }}'
-      name: openstack_telemetry_node01_address
-      type: IP
-      width: half
-    - help_text: hostname of a telemetry node01
-      initial: mdb01
-      name: openstack_telemetry_node01_hostname
-      type: TEXT
-      width: half
-    - help_text: IP address of a telemetry node02 on control network
-      initial: '{{ control_network_subnet | subnet(77) }}'
-      name: openstack_telemetry_node02_address
-      type: IP
-      width: half
-    - help_text: hostname of a telemetry node02
-      initial: mdb02
-      name: openstack_telemetry_node02_hostname
-      type: TEXT
-      width: half
-    - help_text: IP address of a telemetry node03 on control network
-      initial: '{{ control_network_subnet | subnet(78) }}'
-      name: openstack_telemetry_node03_address
-      type: IP
-      width: half
-    - help_text: hostname of a telemetry node03
-      initial: mdb03
-      name: openstack_telemetry_node03_hostname
-      type: TEXT
-      width: half
     - help_text: version of OpenStack
       initial: ocata
       name: openstack_version

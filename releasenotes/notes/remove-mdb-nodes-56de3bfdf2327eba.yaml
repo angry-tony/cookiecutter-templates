@@ -1,0 +1,8 @@
+---
+summary: >
+  Removed the ``mdb`` nodes
+
+deprecations:
+  - Removed the ``mdb`` nodes because no other services were running on these
+    nodes after moving the OpenStack Telemetry services from ``mdb`` to ``ctl``
+    nodes.
