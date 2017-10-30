@@ -10,6 +10,7 @@ classes:
 {%- endif %}
 {%- else %}
 - system.linux.system.repo.influxdb
+- system.linux.system.repo.mcp.extra
 {%- if cookiecutter.kubernetes_enabled == 'True' %}
 - system.linux.system.repo.mcp.openstack
 {%- endif %}
