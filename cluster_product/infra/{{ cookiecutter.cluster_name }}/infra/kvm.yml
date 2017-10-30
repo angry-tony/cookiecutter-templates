@@ -128,12 +128,6 @@ parameters:
       cluster:
         internal:
           node:
-            mdb01:
-              image: ${_param:salt_control_xenial_image}
-            mdb02:
-              image: ${_param:salt_control_xenial_image}
-            mdb03:
-              image: ${_param:salt_control_xenial_image}
             ctl01:
               image: ${_param:salt_control_xenial_image}
             ctl02:
