@@ -161,6 +161,7 @@ parameters:
           - ${_param:aptly_server_hostname}.${_param:cluster_domain}
         {%- endif %}
         {%- if cookiecutter.deployment_type == 'physical' %}
+        {%- if cookiecutter.openstack_enabled == 'True' or (cookiecutter.kubernetes_enabled == 'True' and (cookiecutter.stacklight_enabled == 'True' or cookiecutter.cicd_enabled == 'True')) %}
         kvm01:
           address: ${_param:infra_kvm_node01_address}
           names:
@@ -176,6 +177,7 @@ parameters:
           names:
           - ${_param:infra_kvm_node03_hostname}
           - ${_param:infra_kvm_node03_hostname}.${_param:cluster_domain}
+        {%- endif %}
         {%- endif %}
     system:
       name: ${_param:infra_config_hostname}
