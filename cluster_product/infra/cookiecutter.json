@@ -21,7 +21,7 @@
     "aptly_server_hostname"                     : "apt",
     "aptly_server_address"                      : "10.167.4.14",
     "offline_deployment"                        : "False",
-    
+
     "infra_deploy_nic"                          : "eth0",
     "infra_primary_first_nic"                   : "eth1",
     "infra_primary_second_nic"                  : "eth2",
@@ -63,6 +63,7 @@
     "openstack_nfv_sriov_enabled"               : "False",
     "analytics_pipeline_enabled"                : "False",
     "ceph_enabled"                              : "False",
+    "oss_enabled"                               : "True",
 
     "openstack_compute_count"                   : "100",
     "ceph_osd_count"                            : "10"

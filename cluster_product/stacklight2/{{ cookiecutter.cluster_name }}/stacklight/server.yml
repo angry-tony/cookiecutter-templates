@@ -14,50 +14,6 @@ classes:
 - system.linux.system.repo.mcp.extra
 {%- endif %}
 
-{%- if cookiecutter.oss_enabled == 'True' %}
-{%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
-- system.linux.system.repo_local.glusterfs
-{%- else %}
-- system.linux.system.repo.glusterfs
-{%- endif %}
-- system.glusterfs.client.cluster
-- system.glusterfs.server.cluster
-- system.glusterfs.client.volume.devops_portal
-{%- if (cookiecutter.stacklight_enabled == 'False') and (cookiecutter.oss_enabled == 'True') %}
-- system.glusterfs.client.volume.elasticsearch
-{%- endif %}
-- system.glusterfs.client.volume.postgresql
-- system.glusterfs.client.volume.pushkin
-- system.glusterfs.client.volume.rundeck
-- system.haproxy.proxy.single
-- system.haproxy.proxy.listen.oss.devops_portal
-{%- if (cookiecutter.stacklight_enabled == 'False') and (cookiecutter.oss_enabled == 'True') %}
-- system.haproxy.proxy.listen.oss.elasticsearch
-{%- endif %}
-- system.haproxy.proxy.listen.oss.postgresql
-- system.haproxy.proxy.listen.oss.pushkin
-- system.haproxy.proxy.listen.oss.rundeck
-- system.glusterfs.server.volume.devops_portal
-#Switch to generic Elasticsearch
-{%- if (cookiecutter.stacklight_enabled == 'False') and (cookiecutter.oss_enabled == 'True') %}
-- system.glusterfs.server.volume.elasticsearch
-{%- endif %}
-- system.glusterfs.server.volume.postgresql
-- system.glusterfs.server.volume.pushkin
-- system.glusterfs.server.volume.rundeck
-{%- if cookiecutter.oss_security_audit_enabled == 'True' %}
-- system.glusterfs.client.volume.security_monkey
-- system.glusterfs.server.volume.security_monkey
-- system.haproxy.proxy.listen.oss.security_monkey
-{%- endif %}
-{%- if cookiecutter.oss_cleanup_service_enabled == 'True' %}
-- system.glusterfs.client.volume.mongodb
-- system.glusterfs.server.volume.mongodb
-- system.haproxy.proxy.listen.oss.janitor_monkey
-- system.haproxy.proxy.listen.oss.mongodb
-{%- endif %}
-{%- endif %}
-
 {%- if cookiecutter.kubernetes_enabled == 'True' %}
 - system.salt.minion.cert.prometheus_server
 {%- endif %}
@@ -80,6 +36,7 @@ classes:
 - system.prometheus.server.container
 - system.prometheus.alertmanager.container
 - system.prometheus.remote_storage_adapter.container
+
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
@@ -99,22 +56,6 @@ parameters:
     alertmanager_notification_pushkin_port: 18887
     cluster_vip_address: ${_param:stacklight_monitor_address}
 
-{%- if cookiecutter.oss_enabled == 'True' %}
-    glusterfs_service_host: ${_param:stacklight_monitor_address}
-    glusterfs_node01_address: ${_param:stacklight_monitor_node01_address}
-    glusterfs_node02_address: ${_param:stacklight_monitor_node02_address}
-    glusterfs_node03_address: ${_param:stacklight_monitor_node03_address}
-
-    haproxy_gerrit_bind_host: ${_param:cicd_control_address}
-    haproxy_gerrit_bind_port: 8080
-    haproxy_gerrit_ssl:
-      enabled: false
-
-    haproxy_jenkins_ssl:
-      enabled: false
-    haproxy_jenkins_bind_host: ${_param:cicd_control_address}
-    haproxy_jenkins_bind_port: 8081
-{%- endif %}
     keepalived_stacklight_monitor_vip_address: ${_param:stacklight_monitor_address}
 
     control_vip_address: ${_param:stacklight_monitor_address}

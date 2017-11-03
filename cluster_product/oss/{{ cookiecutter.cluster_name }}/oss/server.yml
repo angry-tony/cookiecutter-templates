@@ -1,0 +1,85 @@
+classes:
+# Docker
+- system.docker.host
+# Keepalived
+- system.keepalived.cluster.instance.stacklight_monitor_vip
+- system.salt.minion.cert.proxy.cicd
+{%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
+- system.linux.system.repo_local.docker
+- system.linux.system.repo_local.glusterfs
+- system.linux.system.repo_local.ubuntu
+- system.linux.system.repo_local.mcp.extra
+{%- else %}
+- system.linux.system.repo.docker
+- system.linux.system.repo.glusterfs
+{%- endif %}
+
+- system.glusterfs.client.cluster
+- system.glusterfs.server.cluster
+- system.haproxy.proxy.single
+
+# DevOps Portal
+- system.glusterfs.client.volume.devops_portal
+- system.glusterfs.server.volume.devops_portal
+- system.haproxy.proxy.listen.oss.devops_portal
+{%- if (cookiecutter.stacklight_enabled == 'False') %}
+# OSS ElasticSearch
+- system.glusterfs.client.volume.elasticsearch
+- system.glusterfs.server.volume.elasticsearch
+- system.haproxy.proxy.listen.oss.elasticsearch
+{%- endif %}
+# PostgreSQL
+- system.glusterfs.client.volume.postgresql
+- system.glusterfs.server.volume.postgresql
+- system.haproxy.proxy.listen.oss.postgresql
+# Pushkin
+- system.glusterfs.client.volume.pushkin
+- system.glusterfs.server.volume.pushkin
+- system.haproxy.proxy.listen.oss.pushkin
+# Rundeck
+- system.glusterfs.client.volume.rundeck
+- system.glusterfs.server.volume.rundeck
+- system.haproxy.proxy.listen.oss.rundeck
+{%- if cookiecutter.oss_security_audit_enabled == 'True' %}
+# SecurityMonkey
+- system.glusterfs.client.volume.security_monkey
+- system.glusterfs.server.volume.security_monkey
+- system.haproxy.proxy.listen.oss.security_monkey
+{%- endif %}
+{%- if cookiecutter.oss_cleanup_service_enabled == 'True' %}
+# JanitorMonkey
+- system.glusterfs.client.volume.mongodb
+- system.glusterfs.server.volume.mongodb
+- system.haproxy.proxy.listen.oss.janitor_monkey
+- system.haproxy.proxy.listen.oss.mongodb
+{%- endif %}
+
+# Rundeck
+- system.rundeck.client.runbook
+
+
+parameters:
+  _param:
+
+    keepalived_prometheus_vip_address: ${_param:stacklight_monitor_address}
+    keepalived_prometheus_vip_password: 'password'
+    keepalived_prometheus_vip_interface: ens3
+
+    glusterfs_service_host: ${_param:stacklight_monitor_address}
+    glusterfs_node01_address: ${_param:stacklight_monitor_node01_address}
+    glusterfs_node02_address: ${_param:stacklight_monitor_node02_address}
+    glusterfs_node03_address: ${_param:stacklight_monitor_node03_address}
+
+    haproxy_gerrit_bind_host: ${_param:cicd_control_address}
+    haproxy_gerrit_bind_port: 8080
+    haproxy_gerrit_ssl:
+      enabled: false
+
+    haproxy_jenkins_ssl:
+      enabled: false
+    haproxy_jenkins_bind_host: ${_param:cicd_control_address}
+    haproxy_jenkins_bind_port: 8081
+
+    rundeck_runbook_public_key: {{ cookiecutter.oss_runbook_public_key }}
+    rundeck_runbook_private_key: |
+          {{ cookiecutter.oss_runbook_private_key|indent(6) }}

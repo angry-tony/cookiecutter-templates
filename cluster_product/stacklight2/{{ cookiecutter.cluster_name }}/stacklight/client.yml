@@ -1,6 +1,3 @@
-{%- macro password(size=16) -%}
-{% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'|random }}{% endfor %}
-{%- endmacro -%}
 classes:
 - system.grafana.client
 - system.grafana.client.datasource.prometheus
@@ -11,79 +8,14 @@ classes:
 - system.docker.swarm.stack.monitoring.remote_collector
 {%- endif %}
 
-{%- if cookiecutter.oss_enabled == 'True' %}
-# PostgreSQL
-- system.postgresql.client.pushkin
-- system.postgresql.client.rundeck
-- system.postgresql.client.alertmanager
-{%- if cookiecutter.oss_security_audit_enabled == 'True' %}
-- system.postgresql.client.security_monkey
-
-# Elasticsearch
-- system.elasticsearch.client
-- system.elasticsearch.client.index.pushkin
-- system.elasticsearch.client.index.janitor_monkey
-
-# DevOps Portal
-- service.devops_portal.config
-# Rundeck
-- system.rundeck.server.docker
-- system.rundeck.client
-- system.rundeck.client.project.cicd
 
 #- cluster.{{ cookiecutter.cluster_name }}.infra
 #- cluster.{{ cookiecutter.cluster_name }}.cicd.control
 
-# OSS Tooling
-- system.docker.swarm.stack.devops_portal
-
-{%- if (cookiecutter.stacklight_enabled == 'False') and (cookiecutter.oss_enabled == 'True') %}
-- system.docker.swarm.stack.elasticsearch
-{%- endif %}
-- system.docker.swarm.stack.postgresql
-- system.docker.swarm.stack.pushkin
-- system.docker.swarm.stack.rundeck
-{%- if cookiecutter.oss_security_audit_enabled == 'True' %}
-- system.docker.swarm.stack.security_monkey
-{%- endif %}
-{%- if cookiecutter.oss_cleanup_service_enabled == 'True' %}
-- system.docker.swarm.stack.janitor_monkey
-{%- endif %}
-
-# Docker networks
-- system.docker.swarm.network.oss_backend
-
-{%- if (cookiecutter.stacklight_enabled == 'False') and (cookiecutter.oss_enabled == 'True') %}
-- system.devops_portal.service.elasticsearch
-{%- endif %}
-- system.devops_portal.service.gerrit
-- system.devops_portal.service.jenkins
-- system.devops_portal.service.pushkin
-- system.devops_portal.service.rundeck
-{%- if cookiecutter.oss_security_audit_enabled == 'True' %}
-- system.devops_portal.service.security_monkey
-{%- endif %}
-{%- if cookiecutter.oss_cleanup_service_enabled == 'True' %}
-- system.devops_portal.service.janitor_monkey
-{%- endif %}
-
-# Rundeck
-- system.rundeck.client.runbook
-{%- endif %}
-{%- endif %}
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
     {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
-    docker_image_elasticsearch: ${_param:aptly_server_hostname}:5000/elasticsearch:5.4.1
-    docker_image_security_monkey_api: ${_param:aptly_server_hostname}:5000/security-monkey-api:latest
-    docker_image_security_monkey_scheduler: ${_param:aptly_server_hostname}:5000/security-monkey-scheduler:latest
-    docker_image_janitor_monkey: ${_param:aptly_server_hostname}:5000/janitor-monkey:latest
-    docker_image_mongodb: ${_param:aptly_server_hostname}:5000/mongo:3.4
-    docker_image_rundeck: ${_param:aptly_server_hostname}:5000/rundeck:latest
-    docker_image_devops_portal: ${_param:aptly_server_hostname}:5000/devops-portal:latest
-    docker_image_postgresql: ${_param:aptly_server_hostname}:5000/postgres:9.6
-    docker_image_pushkin: ${_param:aptly_server_hostname}:5000/pushkin:latest
     docker_image_alertmanager: ${_param:aptly_server_hostname}:5000/alertmanager:latest
     docker_image_pushgateway: ${_param:aptly_server_hostname}:5000/pushgateway:latest
     docker_image_prometheus: ${_param:aptly_server_hostname}:5000/prometheus:latest
@@ -100,110 +32,6 @@ parameters:
     docker_image_prometheus_relay: docker-prod-local.artifactory.mirantis.com/openstack-docker/prometheus_relay:latest
     docker_image_grafana: grafana/grafana:4.5.2
     {%- endif %}
-    {%- if cookiecutter.oss_enabled == 'True' %}
-
-    # PostgreSQL
-    postgresql_admin_user_password: {{ password(16) }}
-    postgresql_client_user: ${_param:postgresql_admin_user}
-    postgresql_client_password: ${_param:postgresql_admin_user_password}
-    postgresql_client_host: ${_param:haproxy_postgresql_bind_host}
-    postgresql_client_port: ${_param:haproxy_postgresql_bind_port}
-
-    # Pushkin
-    pushkin_db_user: pushkin
-    pushkin_db_user_password: {{ password(16) }}
-    pushkin_db_host: ${_param:haproxy_postgresql_bind_host}
-    pushkin_smtp_host: {{ cookiecutter.oss_notification_smtp_host }}
-    pushkin_smtp_port: {{ cookiecutter.oss_notification_smtp_port }}
-    pushkin_email_sender_password: {{ cookiecutter.oss_notification_sender_password }}
-    #..WebHook notification senders
-    webhook_from: {{ cookiecutter.oss_notification_email_from }}
-    webhook_recipients: {{ cookiecutter.oss_notification_email_recipients }}
-    webhook_login_id: {{ cookiecutter.oss_notification_webhook_login_id }}
-    webhook_application_id: {{ cookiecutter.oss_notification_webhook_app_id }}
-    {%- if cookiecutter.oss_sfdc_support_enabled == 'True' %}
-    # SFDC configuration
-    sfdc_auth_url: {{ cookiecutter.sfdc_auth_url }}
-    sfdc_username: {{ cookiecutter.sfdc_username }}
-    sfdc_password: {{ cookiecutter.sfdc_password }}
-    sfdc_consumer_key: {{ cookiecutter.sfdc_consumer_key }}
-    sfdc_consumer_secret: {{ cookiecutter.sfdc_consumer_secret }}
-    sfdc_organization_id: {{ cookiecutter.sfdc_organization_id }}
-    sfdc_sandbox_enabled: {{ cookiecutter.sfdc_sandbox_enabled }}
-    {%- endif %}
-
-    # OSS OpenStack
-    oss_openstack_username: {{ cookiecutter.oss_openstack_username }}
-    oss_openstack_password: {{ cookiecutter.oss_openstack_password }}
-    oss_openstack_project: {{ cookiecutter.oss_openstack_project }}
-    oss_openstack_domain_id: {{ cookiecutter.oss_openstack_domain_id }}
-    oss_openstack_username_domain_id: {{ cookiecutter.oss_openstack_username_domain_id }}
-    oss_openstack_ssl_verify: {{ cookiecutter.oss_openstack_ssl_verify }}
-    oss_openstack_endpoint_type: {{ cookiecutter.oss_openstack_endpoint_type }}
-    oss_openstack_credentials_path: {{ cookiecutter.oss_openstack_credentials_path }}
-    oss_openstack_cert: |
-      {{ cookiecutter.oss_openstack_cert }}
-
-    {%- if cookiecutter.oss_security_audit_enabled == 'True' %}
-    # SecurityMonkey
-    secmonkey_db_user: secmonkey
-    secmonkey_db_user_password: {{ password(16) }}
-    secmonkey_db_host: ${_param:haproxy_postgresql_bind_host}
-    security_monkey_openstack:
-      username: {{ cookiecutter.oss_security_audit_username }}
-      password: {{ cookiecutter.oss_security_audit_password }}
-      auth_url: {{ cookiecutter.oss_openstack_auth_url }}
-      user_domain_name: {{ cookiecutter.oss_security_audit_user_domain_id }}
-      project_domain_name: {{ cookiecutter.oss_security_audit_project_domain_id }}
-      ssl_verify: {{ cookiecutter.oss_security_audit_ssl_verify }}
-      endpoint_type: {{ cookiecutter.oss_security_audit_endpoint_type }}
-      source_credentials: {{ cookiecutter.oss_security_audit_os_credentials_path }}
-    {%- endif %}
-
-    {%- if cookiecutter.oss_cleanup_service_enabled == 'True' %}
-    # JanitorMonkey
-    docker_mongodb_admin_username: admin
-    docker_mongodb_admin_password: {{ password(16) }}
-    janitor_monkey_mongodb_host: ${_param:haproxy_mongodb_bind_host}
-    janitor_monkey_openstack:
-      username: {{ cookiecutter.oss_cleanup_service_username }}
-      password: {{ cookiecutter.oss_cleanup_service_password }}
-      auth_url: {{ cookiecutter.oss_openstack_auth_url }}
-      project_name: {{ cookiecutter.oss_cleanup_service_project }}
-      project_domain_name: {{ cookiecutter.oss_cleanup_service_project_domain_id }}
-      ssl_verify: {{ cookiecutter.oss_cleanup_service_ssl_verify }}
-      source_credentials: {{ cookiecutter.oss_cleanup_service_os_credentials_path }}
-    {%- endif %}
-
-    # Rundeck
-    rundeck_db_user: rundeck
-    rundeck_db_user_password: {{ password(16) }}
-    rundeck_db_host: ${_param:haproxy_postgresql_bind_host}
-    rundeck_postgresql_username: ${_param:rundeck_db_user}
-    rundeck_postgresql_password: ${_param:rundeck_db_user_password}
-    rundeck_postgresql_database: rundeck
-    rundeck_postgresql_host: ${_param:rundeck_db_host}
-
-    rundeck_runbook_public_key: {{ cookiecutter.oss_runbook_public_key }}
-    rundeck_runbook_private_key: |
-      {{ cookiecutter.oss_runbook_private_key|indent(6) }}
-
-    {%- if cookiecutter.oss_cis_enabled == 'True' %}
-    # CIS
-    rundeck_cis_enabled: {{ cookiecutter.oss_cis_enabled }}
-    rundeck_cis_jobs_repository: {{ cookiecutter.oss_cis_jobs_repository }}
-    rundeck_cis_jobs_revision: {{ cookiecutter.oss_cis_jobs_repository_branch }}
-    rundeck_cis_openstack:
-      auth_url: {{ cookiecutter.oss_openstack_auth_url }}/auth/tokens
-      username: {{ cookiecutter.oss_cis_username }}
-      password: {{ cookiecutter.oss_cis_password }}
-      project_name: {{ cookiecutter.oss_cis_project }}
-      domain_id: {{ cookiecutter.oss_cis_domain_id }}
-      cert: {{ cookiecutter.oss_cis_cacert }}
-    rundeck_cis_os_docker_image: {{ cookiecutter.oss_cis_openstack_image }}
-    rundeck_cis_elasticsearch_url: http://${_param:haproxy_elasticsearch_bind_host}:${_param:haproxy_elasticsearch_http_bind_port}
-    {%- endif %}
-    {%- endif %}
 
     # Grafana client parameters
     grafana_address: ${_param:stacklight_monitor_address}
@@ -212,6 +40,7 @@ parameters:
     grafana_password: ${_param:grafana_admin_password}
     grafana_prometheus_address: ${_param:stacklight_monitor_address}
     grafana_prometheus_port: 15016
+    stacklight_prometheus_port: 15010
 
 # Switch to generic ElasticSearch
 {%- if (cookiecutter.stacklight_enabled == 'True') and (cookiecutter.oss_enabled == 'True') %}

@@ -1,0 +1,3 @@
+classes:
+- cluster.{{ cookiecutter.cluster_name }}.oss.server
+- cluster.{{ cookiecutter.cluster_name }}.oss.client

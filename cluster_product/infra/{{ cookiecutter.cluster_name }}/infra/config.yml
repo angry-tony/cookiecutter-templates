@@ -60,6 +60,9 @@ classes:
 - system.reclass.storage.system.stacklightv2_server_cluster
 {%- endif %}
 {%- endif %}
+{%- if cookiecutter.oss_enabled == 'True' %}
+- system.reclass.storage.system.oss_cluster
+{%- endif %}
 {%- if cookiecutter.cicd_enabled == 'True' %}
 - system.reclass.storage.system.cicd_control_cluster
 {%- endif %}
