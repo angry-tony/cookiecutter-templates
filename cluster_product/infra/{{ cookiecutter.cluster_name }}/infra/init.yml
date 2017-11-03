@@ -4,12 +4,10 @@
 classes:
 - system.linux.system.single
 #- system.openssh.server.team.lab
-#- system.openssh.server.team.support
 #- system.openssh.server.team.presales
 #- system.openssh.server.team.services
 #- system.openssh.server.team.networking
 #- system.openssh.server.team.stacklight
-#- system.openssh.server.team.mmo_devops
 - system.rsyslog.client.single
 {%- if cookiecutter.kubernetes_enabled == 'True' %}
 - cluster.{{ cookiecutter.cluster_name }}.kubernetes
