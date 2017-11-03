@@ -120,7 +120,7 @@ parameters:
   python:
     environment:
       user:
-        - root:
+        root:
           name: root
           pypi_mirror:
             protocol: http
