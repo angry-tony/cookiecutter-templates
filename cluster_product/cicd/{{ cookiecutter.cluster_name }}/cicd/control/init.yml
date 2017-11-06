@@ -68,6 +68,8 @@ parameters:
     cluster_vip_address: ${_param:control_vip_address}
     control_vip_address: ${_param:cicd_control_address}
     salt_api_password: {{ cookiecutter.salt_api_password }}
+    jenkins_slave_user_id: 10000
+    jenkins_slave_group_id: ${_param:jenkins_slave_user_id}
     # Docker images and versions
     docker_registry_http_secret: {{ password(16) }}
     # CI/CD service databases
@@ -105,6 +107,10 @@ parameters:
       package:
         ca-certificates-java:
           version: latest
+      directory:
+         /var/lib/jenkins/:
+            user: ${_param:jenkins_slave_user_id}
+            group: ${_param:jenkins_slave_group_id}
     network:
       interface:
         ens3: ${_param:linux_single_interface}
