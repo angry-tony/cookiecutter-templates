@@ -2,6 +2,7 @@
 classes:
 - system.aptly.server.single
 - system.aptly.server.mirror.debian
+- system.aptly.server.mirror.ubuntu.trusty.mcp.openstack_mitaka
 - system.aptly.server.mirror.ubuntu.trusty.mcp.apt_mk.salt
 - system.aptly.server.mirror.ubuntu.trusty.mcp.apt_mk.extra
 - system.aptly.server.mirror.ubuntu.trusty.mcp.apt_mk.mitaka
@@ -11,10 +12,7 @@ classes:
 - system.aptly.server.mirror.ubuntu.trusty.rabbitmq
 - system.aptly.server.mirror.ubuntu.trusty.salt
 - system.aptly.server.mirror.ubuntu.trusty.ubuntu.trusty.main
-- system.aptly.server.repo.ubuntu.trusty.extra
-- system.aptly.server.repo.ubuntu.trusty.openstack
-- system.aptly.server.repo.ubuntu.trusty.salt
-- system.aptly.server.repo.ubuntu.trusty.opencontrail
+- system.aptly.server.mirror.ubuntu.xenial.mcp.openstack_mitaka
 - system.aptly.server.mirror.ubuntu.xenial.mcp.openstack_ocata
 - system.aptly.server.mirror.ubuntu.xenial.mcp.apt_mk.salt
 - system.aptly.server.mirror.ubuntu.xenial.mcp.apt_mk.extra
@@ -27,10 +25,13 @@ classes:
 - system.aptly.server.mirror.ubuntu.xenial.grafana
 - system.aptly.server.mirror.ubuntu.xenial.ubuntu
 - system.aptly.server.mirror.ubuntu.xenial.salt
+- system.aptly.server.repo.ubuntu.trusty.extra
+- system.aptly.server.repo.ubuntu.trusty.openstack
+- system.aptly.server.repo.ubuntu.trusty.salt
+- system.aptly.server.repo.ubuntu.trusty.opencontrail
 - system.aptly.server.repo.ubuntu.xenial.extra
 - system.aptly.server.repo.ubuntu.xenial.openstack
 - system.aptly.server.repo.ubuntu.xenial.salt
-- system.linux.system.repo.docker
 - system.git.server.single
 - service.docker.host
 - system.docker.client
@@ -129,6 +130,7 @@ parameters:
       UdMpUb1Y9dpE/akgRm/79NRHKA4plQ2X/CGZu+KIw4XVn/0ilU8FbsX+KXcp8ui0
       XRqg8z44wtlroFTrnR+DgqplsellsrM+xGtZb9VrjFLeP89jzhrBWgE=
       =GLje
+      -----END PGP PUBLIC KEY BLOCK-----
   docker:
     client:
       registry:
@@ -215,6 +217,8 @@ parameters:
           url: https://github.com/openstack-infra/jeepyb.git
   aptly:
     server:
+      mirror_update:
+        enabled: False
       mirror:
         # xenial
         xenial-main:
