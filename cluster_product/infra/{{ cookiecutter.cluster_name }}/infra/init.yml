@@ -37,6 +37,7 @@ classes:
 {%- if cookiecutter.cicd_enabled == 'True' %}
 - cluster.{{ cookiecutter.cluster_name }}.cicd
 {%- endif %}
+#- cluster.{{ cookiecutter.cluster_name }}.infra.proxy
 parameters:
   _param:
     # Don't set it "false" before you configure sudo policies and enable power users.
