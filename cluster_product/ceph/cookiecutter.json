@@ -32,6 +32,7 @@
     "ceph_osd_journal_size"                : 20,
     "ceph_osd_block_db_size"               : 20,
     "ceph_osd_data_disks"                  : "/dev/vdd,/dev/vde",
-    "ceph_osd_journal_or_block_db_disks"   : "/dev/vdb,/dev/vdc"
+    "ceph_osd_journal_or_block_db_disks"   : "/dev/vdb,/dev/vdc",
 
+    "local_repositories"                   : "False"
 }
