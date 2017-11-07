@@ -61,14 +61,10 @@ classes:
 parameters:
   _param:
 
-    keepalived_prometheus_vip_address: ${_param:stacklight_monitor_address}
-    keepalived_prometheus_vip_password: 'password'
-    keepalived_prometheus_vip_interface: ens3
-
     glusterfs_service_host: ${_param:stacklight_monitor_address}
-    glusterfs_node01_address: ${_param:stacklight_monitor_node01_address}
-    glusterfs_node02_address: ${_param:stacklight_monitor_node02_address}
-    glusterfs_node03_address: ${_param:stacklight_monitor_node03_address}
+    glusterfs_node01_address: ${_param:oss_node01_address}
+    glusterfs_node02_address: ${_param:oss_node02_address}
+    glusterfs_node03_address: ${_param:oss_node03_address}
 
     haproxy_gerrit_bind_host: ${_param:cicd_control_address}
     haproxy_gerrit_bind_port: 8080
@@ -79,6 +75,14 @@ parameters:
       enabled: false
     haproxy_jenkins_bind_host: ${_param:cicd_control_address}
     haproxy_jenkins_bind_port: 8081
+
+    haproxy_kibana_bind_host: ${_param:cluster_vip_address}
+    haproxy_kibana_bind_port: ${_param:cluster_kibana_port}
+    haproxy_kibana_ssl:
+      enabled: false
+
+    elasticsearch_ssl:
+      enabled: false
 
     rundeck_runbook_public_key: {{ cookiecutter.oss_runbook_public_key }}
     rundeck_runbook_private_key: |

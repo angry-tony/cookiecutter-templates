@@ -1,6 +1,11 @@
 {
     "cluster_name"                              : "deployment_name",
     "oss_enabled"                               : "True",
+    "oss_address"                               : "${_param:stacklight_monitor_address}",
+    "oss_node01_address"                        : "${_param:stacklight_monitor_node01_address}",
+    "oss_node02_address"                        : "${_param:stacklight_monitor_node02_address}",
+    "oss_node03_address"                        : "${_param:stacklight_monitor_node03_address}",
+
     "oss_openstack_auth_url"                    : "http://172.17.16.190/identity/v3",
     "oss_openstack_username"                    : "admin",
     "oss_openstack_password"                    : "nova",

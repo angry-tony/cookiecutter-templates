@@ -632,6 +632,22 @@ product_params_action:
       ==============
 
     fields:
+    - help_text: IP VIP address of OSS cluster
+      initial: '${_param:stacklight_monitor_address}'
+      name: oss_address
+      type: TEXT
+    - help_text: IP address of OSS node01
+      initial: '${_param:stacklight_monitor_node01_address}'
+      name: stacklight_monitor_node01_address
+      type: TEXT
+    - help_text: IP address of OSS node02
+      initial: '${_param:stacklight_monitor_node02_address}'
+      name: stacklight_monitor_node02_address
+      type: TEXT
+    - help_text: IP address of OSS node03
+      initial: '${_param:stacklight_monitor_node03_address}'
+      name: stacklight_monitor_node03_address
+      type: TEXT
     - help_text: "OpenStack auth URL for OSS tools"
       initial: "http://172.17.16.190:5000/v3"
       name: oss_openstack_auth_url
