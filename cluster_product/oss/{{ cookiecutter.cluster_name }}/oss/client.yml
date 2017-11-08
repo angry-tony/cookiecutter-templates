@@ -129,7 +129,7 @@ parameters:
     oss_openstack_endpoint_type: {{ cookiecutter.oss_openstack_endpoint_type }}
     oss_openstack_credentials_path: {{ cookiecutter.oss_openstack_credentials_path }}
     oss_openstack_cert: |
-      {{ cookiecutter.oss_openstack_cert }}
+      {{ cookiecutter.oss_openstack_cert|indent(6) }}
 
     {%- if cookiecutter.oss_security_audit_enabled == 'True' %}
     # SecurityMonkey
