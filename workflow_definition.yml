@@ -958,7 +958,7 @@ product_params_action:
       width: half
     - help_text: ''
       initial: '{{ control_network_subnet | subnet(101) }}'
-      name: kubernetes_compute_node01_single_address
+      name: kubernetes_compute_node01_address
       type: IP
       width: half
     - help_text: ''
@@ -978,7 +978,7 @@ product_params_action:
       width: half
     - help_text: ''
       initial: '{{ control_network_subnet | subnet(102) }}'
-      name: kubernetes_compute_node02_single_address
+      name: kubernetes_compute_node02_address
       type: IP
       width: half
     - help_text: ''
