@@ -86,4 +86,4 @@ parameters:
 
     rundeck_runbook_public_key: {{ cookiecutter.oss_runbook_public_key }}
     rundeck_runbook_private_key: |
-          {{ cookiecutter.oss_runbook_private_key|indent(6) }}
+      {{ cookiecutter.oss_runbook_private_key|indent(6) }}
