@@ -63,6 +63,7 @@ classes:
 {%- if cookiecutter.oss_cleanup_service_enabled == 'True' %}
 - system.devops_portal.service.janitor_monkey
 {%- endif %}
+- cluster.{{ cookiecutter.cluster_name }}.infra
 
 parameters:
   _param:
