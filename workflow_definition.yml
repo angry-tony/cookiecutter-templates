@@ -92,11 +92,9 @@ general_params_action:
         type: "CHOICE"
         help_text: "Enable either Stacklight or Stacklight V2"
         choices:
-          - - "1"
-            - "1"
           - - "2"
             - "2"
-        initial: "1"
+        initial: "2"
       - name: "ceph_enabled"
         type: "BOOL"
         help_text: "Enable ceph sub-cluster"
