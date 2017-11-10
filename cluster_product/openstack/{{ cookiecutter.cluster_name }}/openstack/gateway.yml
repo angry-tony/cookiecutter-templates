@@ -30,6 +30,12 @@ parameters:
     keepalived_vip_virtual_router_id: 69
     primary_first_nic: {{ cookiecutter.gateway_primary_first_nic }}
     primary_second_nic: {{ cookiecutter.gateway_primary_second_nic }}
+  {%- if cookiecutter.openstack_ovs_encapsulation_type == 'vlan' %}
+  neutron:
+    gateway:
+      backend:
+        tenant_vlan_range: "${_param:neutron_tenant_vlan_range}"
+  {%- endif %}
   linux:
     network:
       bridge: openvswitch

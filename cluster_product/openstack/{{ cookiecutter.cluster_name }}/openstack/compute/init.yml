@@ -49,6 +49,12 @@ parameters:
     primary_second_nic: {{ cookiecutter.compute_primary_second_nic }}
 
 {%- if cookiecutter.openstack_network_engine == 'ovs' %}
+  {%- if cookiecutter.openstack_ovs_encapsulation_type == 'vlan' %}
+  neutron:
+    compute:
+      backend:
+        tenant_vlan_range: "${_param:neutron_tenant_vlan_range}"
+  {%- endif %}
   linux:
     network:
       interface:
