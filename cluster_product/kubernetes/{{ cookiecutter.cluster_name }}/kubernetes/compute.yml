@@ -3,7 +3,7 @@ classes:
 - system.linux.system.repo_local.docker_legacy
 - system.linux.system.repo_local.ubuntu
 - system.linux.system.repo_local.mcp.extra
-- system.linux.system.repo_local.saltstack.xenial
+- system.linux.system.repo_local.mcp.salt
 {%- else %}
 - system.linux.system.repo.docker_legacy
 - system.linux.system.repo.ubuntu
