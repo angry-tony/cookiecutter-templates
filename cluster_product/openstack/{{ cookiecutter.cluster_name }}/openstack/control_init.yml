@@ -9,13 +9,15 @@ classes:
 - system.keystone.client.service.heat
 - system.keystone.client.service.heat-cfn
 - system.keystone.client.service.neutron
-- system.keystone.client.service.ceilometer
 - system.keystone.client.service.nova21
 - system.keystone.client.service.nova-placement
-- system.keystone.client.service.aodh
 - system.keystone.client.service.glare
 - system.keystone.client.service.cinder3
 - system.keystone.client.service.keystone
+{%- if cookiecutter.stacklight_enabled == 'True' %}
+- system.keystone.client.service.aodh
+- system.keystone.client.service.ceilometer
+{%- endif %}
 {%- if cookiecutter.get('ceph_enabled', 'False') == 'True'  %}
 - system.keystone.client.service.radosgw-swift
 parameters:

@@ -15,10 +15,12 @@ classes:
 - system.nova.compute.nfv.cpu_pinning
 {%- endif %}
 - system.nova.compute.cluster
-- system.ceilometer.agent.cluster
 - system.nova.compute.notification.messagingv2
-{%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '2' %}
+{%- if cookiecutter.stacklight_enabled == 'True' %}
+- system.ceilometer.agent.cluster
+{%- if cookiecutter.stacklight_version == '2' %}
 - system.prometheus.exporters.libvirt
+{%- endif %}
 {%- endif %}
 {%- if cookiecutter.openstack_network_engine == 'ovs' %}
 - system.neutron.compute.cluster

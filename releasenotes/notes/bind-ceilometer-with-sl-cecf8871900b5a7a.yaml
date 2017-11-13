@@ -1,0 +1,10 @@
+---
+
+summary: >
+  Made Ceilometer available only if StackLight deployed.
+
+fixes:
+  - The OpenStack Telemetry services depend on StackLight back ends.
+    OpenStack Telemetry works only if InfluxDB and Elasticsearch are running.
+    Therefore, the OpenStack Telemetry services should not be deployed if
+    Stacklight was disabled.

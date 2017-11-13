@@ -60,10 +60,12 @@ classes:
 - system.glusterfs.client.cluster
 - system.glusterfs.client.volume.glance
 - system.glusterfs.client.volume.keystone
+{%- if cookiecutter.stacklight_enabled == 'True' %}
 - system.ceilometer.server.backend.influxdb
 - system.heka.ceilometer_collector.single
 - system.aodh.server.cluster
 - system.ceilometer.server.cluster
+{%- endif %}
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
