@@ -154,6 +154,8 @@ parameters:
     openstack_message_queue_node01_address: {{ cookiecutter.openstack_message_queue_node01_address }}
     openstack_message_queue_node02_address: {{ cookiecutter.openstack_message_queue_node02_address }}
     openstack_message_queue_node03_address: {{ cookiecutter.openstack_message_queue_node03_address }}
+    openstack_upgrade_node01_hostname: upg01
+    openstack_upgrade_node01_address: {{ cookiecutter.openstack_upgrade_node01_address }}
 
     {%- if cookiecutter.openstack_network_engine == 'ovs' %}
     openstack_gateway_node01_address: {{ cookiecutter.openstack_gateway_node01_address }}
@@ -295,6 +297,11 @@ parameters:
           names:
           - ${_param:openstack_database_node03_hostname}
           - ${_param:openstack_database_node03_hostname}.${_param:cluster_domain}
+        upg01:
+          address: ${_param:openstack_upgrade_node01_address}
+          names:
+          - ${_param:openstack_upgrade_node01_hostname}
+          - ${_param:openstack_upgrade_node01_hostname}.${_param:cluster_domain}
 {%- if cookiecutter.openstack_network_engine == 'ovs' %}
         gtw01:
           address: ${_param:openstack_gateway_node01_address}

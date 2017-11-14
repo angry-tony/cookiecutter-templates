@@ -76,6 +76,7 @@
     "openstack_gateway_node01_hostname"         : "gtw01",
     "openstack_gateway_node02_hostname"         : "gtw02",
     "openstack_gateway_node03_hostname"         : "gtw03",
+    "openstack_upgrade_node01_address"          : "10.167.6.19",
 
     "openstack_benchmark_node01_hostname"       : "bmk01",
     "openstack_benchmark_node01_address"        : "10.167.4.85",

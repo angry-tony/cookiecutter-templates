@@ -49,6 +49,7 @@ classes:
 - system.reclass.storage.system.openstack_database_cluster
 - system.reclass.storage.system.openstack_message_queue_cluster
 - system.reclass.storage.system.openstack_benchmark_single
+- system.reclass.storage.system.openstack_control_upgrade_single
 {%- endif %}
 {%- if cookiecutter.stacklight_enabled == 'True' %}
 - system.reclass.storage.system.stacklight_log_cluster

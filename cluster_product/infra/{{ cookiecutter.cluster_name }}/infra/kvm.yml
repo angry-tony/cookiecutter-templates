@@ -35,6 +35,7 @@ classes:
 - system.salt.control.cluster.openstack_database_cluster
 - system.salt.control.cluster.openstack_message_queue_cluster
 - system.salt.control.cluster.openstack_benchmark_single
+#- system.salt.control.cluster.openstack_upgrade_single
 {%- endif %}
 {%- if cookiecutter.stacklight_enabled == 'True' %}
 - system.salt.control.cluster.stacklight_server_cluster
@@ -84,6 +85,11 @@ parameters:
           cpu: 4
           ram: 8192
           disk_profile: small
+          net_profile: default
+        openstack.upgrade:
+          cpu: 8
+          ram: 16384
+          disk_profile: medium
           net_profile: default
         opencontrail.control:
           cpu: 8

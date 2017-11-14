@@ -1456,6 +1456,10 @@ product_params_action:
       name: openstack_benchmark_node01_hostname
       type: TEXT
       width: half
+    - help_text: IP address of a upgrade node on control network
+      initial: '{{ control_network_subnet | subnet(19) }}'
+      name: openstack_upgrade_node01_address
+      type: IP
     - help_text: Tag of the physical network the sriov interface belongs to
       initial: physnet1
       name: openstack_nfv_sriov_network

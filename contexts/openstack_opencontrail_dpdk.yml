@@ -99,6 +99,7 @@ default_context:
   openstack_proxy_node02_hostname: prx02
   openstack_benchmark_node01_hostname: bmk01
   openstack_benchmark_node01_address: 10.167.4.85
+  openstack_upgrade_node01_address: 10.167.4.19
   openstack_version: ocata
   public_host: ${_param:openstack_proxy_address}
   reclass_repository: https://github.com/Mirantis/mk-lab-salt-model.git
