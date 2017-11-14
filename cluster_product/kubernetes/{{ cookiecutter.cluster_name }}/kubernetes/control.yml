@@ -59,7 +59,14 @@ parameters:
       namespace:
         netchecker:
           enabled: true
+    common:
       addons:
+        externaldns:
+          enabled: {{ cookiecutter.kubernetes_externaldns_enabled }}
+          namespace: kube-system
+          image: mirantis/external-dns:latest
+          domain: ${_param:kubernetes_cluster_domain}
+          provider: {{ cookiecutter.kubernetes_externaldns_provider }}
         netchecker:
           enabled: true
         helm:
@@ -72,11 +79,3 @@ parameters:
           enabled: true
           image: ${_param:kubernetes_contrail_network_controller_image}
         {%- endif %}
-    common:
-      addons:
-        externaldns:
-          enabled: {{ cookiecutter.kubernetes_externaldns_enabled }}
-          namespace: kube-system
-          image: mirantis/external-dns:latest
-          domain: ${_param:kubernetes_cluster_domain}
-          provider: {{ cookiecutter.kubernetes_externaldns_provider }}
