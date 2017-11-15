@@ -2,7 +2,7 @@
 {% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'|random }}{% endfor %}
 {%- endmacro -%}
 {%- macro secret(size=12) -%}
-{% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyz0123456789'|random }}{% endfor %}
+{% for index in range(size) %}{{ 'abcdef0123456789'|random }}{% endfor %}
 {%- endmacro -%}
 parameters:
   _param:
