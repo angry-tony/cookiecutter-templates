@@ -194,6 +194,11 @@ parameters:
 
     elasticsearch_http_bind_port: 9200
 
+    {%- if cookiecutter.cicd_enabled == 'True' %}
+    oss_jenkins_password: ${_param:jenkins_admin_password}
+    #TODO: set password for CICD gerrit login
+    {%- endif %}
+
     {%- if (cookiecutter.stacklight_enabled == 'True') %}
     # Switch to generic ElasticSearch
     haproxy_elasticsearch_bind_host: ${_param:stacklight_monitor_address}
@@ -202,6 +207,7 @@ parameters:
     elasticsearch_binary_bind_port: 9300
     elasticsearch_cluster_name: elasticsearch
     rundeck_cis_elasticsearch_url: http://${_param:stacklight_monitor_address}:9200
+
 
   devops_portal:
     config:
