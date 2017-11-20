@@ -54,6 +54,9 @@ parameters:
     keepalived_prometheus_vip_interface: ens3
     alertmanager_notification_pushkin_host: ${_param:stacklight_monitor_address}
     alertmanager_notification_pushkin_port: 8887
+    {%- if cookiecutter.oss_sfdc_support_enabled == 'True' %}
+    prometheus_server_alert_label_route: 'email,salesforce'
+    {%- endif %}
     cluster_vip_address: ${_param:stacklight_monitor_address}
 
     keepalived_stacklight_monitor_vip_address: ${_param:stacklight_monitor_address}
