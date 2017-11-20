@@ -10,6 +10,8 @@ classes:
 parameters:
   maas:
     region:
+      commissioning_scripts:
+        00-maas-05-simplify-network-interfaces: /etc/maas/files/commisioning_scripts/00-maas-05-simplify-network-interfaces
       bind:
         host: ${_param:deploy_address}
 {%- if cookiecutter.upstream_proxy_enabled == 'True' %}
