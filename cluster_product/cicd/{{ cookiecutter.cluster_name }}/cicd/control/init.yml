@@ -67,15 +67,14 @@ parameters:
     keepalived_vip_interface: ens3
     cluster_vip_address: ${_param:control_vip_address}
     control_vip_address: ${_param:cicd_control_address}
-    cluster_public_host: ${_param:control_vip_address}
     salt_api_password: {{ cookiecutter.salt_api_password }}
     # Docker images and versions
     docker_registry_http_secret: {{ password(16) }}
     # CI/CD service databases
     mysql_admin_password: {{ password(16) }}
     mysql_gerrit_password: {{ password(16) }}
-    nginx_proxy_gerrit_server_site_host: ${_param:openstack_proxy_address}
-    nginx_proxy_gerrit_server_site_port: 8080
+    nginx_proxy_gerrit_server_site_host: ${_param:cluster_public_host}
+    nginx_proxy_gerrit_server_site_port: 8070
     gerrit_http_listen_url: proxy-https://*:8080/
     {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
     gerrit_pipeline_library_repo: http://${_param:aptly_server_hostname}:8088/pipeline-library.git
