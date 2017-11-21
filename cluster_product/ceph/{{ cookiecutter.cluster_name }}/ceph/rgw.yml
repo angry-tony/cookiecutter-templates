@@ -39,3 +39,7 @@ parameters:
           caps:
             mon: "allow *"
             osd: "allow *"
+  linux:
+    network:
+      interface:
+        ens3: ${_param:linux_single_interface}

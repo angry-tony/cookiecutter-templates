@@ -1754,7 +1754,7 @@ product_params_action:
       type: TEXT
       width: half
     - help_text: IP VIP address of ceph rados gateway storage cluster
-      initial: '{{ control_network_subnet | subnet(105) }}'
+      initial: '{{ control_network_subnet | subnet(75) }}'
       name: ceph_rgw_address
       type: IP
       width: half
@@ -1764,7 +1764,7 @@ product_params_action:
       type: TEXT
       width: half
     - help_text: IP address of ceph rados gateway storage node01
-      initial: '{{ control_network_subnet | subnet(106) }}'
+      initial: '{{ control_network_subnet | subnet(76) }}'
       name: ceph_rgw_node01_address
       type: IP
       width: half
@@ -1774,7 +1774,7 @@ product_params_action:
       type: TEXT
       width: half
     - help_text: IP address of ceph rados gateway storage node02
-      initial: '{{ control_network_subnet | subnet(107) }}'
+      initial: '{{ control_network_subnet | subnet(77) }}'
       name: ceph_rgw_node02_address
       type: IP
       width: half
@@ -1784,7 +1784,7 @@ product_params_action:
       type: TEXT
       width: half
     - help_text: IP address of ceph rados gateway storage node03
-      initial: '{{ control_network_subnet | subnet(108) }}'
+      initial: '{{ control_network_subnet | subnet(78) }}'
       name: ceph_rgw_node03_address
       type: IP
       width: half
