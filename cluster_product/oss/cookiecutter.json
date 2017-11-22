@@ -48,6 +48,10 @@
     "oss_cis_domain_id"                         : "${_param:oss_openstack_domain_id}",
     "oss_cis_jobs_repository"                   : "https://github.com/Mirantis/rundeck-cis-jobs.git",
     "oss_cis_jobs_repository_branch"            : "master",
+    "rundeck_forward_iframe"                    : "False",
+    "rundeck_iframe_host"                       : "",
+    "rundeck_iframe_port"                       : "",
+    "rundeck_iframe_ssl"                        : "False",
 
     "oss_security_audit_enabled"                : "True",
     "oss_security_audit_ssl_verify"             : "${_param:oss_openstack_ssl_verify}",

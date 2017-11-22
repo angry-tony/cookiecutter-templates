@@ -191,6 +191,12 @@ parameters:
       cert: {{ cookiecutter.oss_cis_cacert }}
       ssl_cert_file: {{ cookiecutter.oss_cis_cacert_file_type }}
     rundeck_cis_os_docker_image: {{ cookiecutter.oss_cis_openstack_image }}
+
+    # In case of using DOP through external proxy address
+    rundeck_forward_iframe: {{ cookiecutter.rundeck_forward_iframe }}
+    rundeck_iframe_host: {{ cookiecutter.rundeck_iframe_host }}
+    rundeck_iframe_port: {{ cookiecutter.rundeck_iframe_port }}
+    rundeck_iframe_ssl: {{ cookiecutter.rundeck_iframe_ssl }}
     {%- endif %}
 
     elasticsearch_http_bind_port: 9200
