@@ -36,5 +36,6 @@
     "openstack_enabled"                         : "True",
     "kubernetes_enabled"                        : "False",
 
-    "oss_enabled"                               : "True"
+    "oss_enabled"                               : "True",
+    "oss_sfdc_support_enabled"                  : "True"
 }
