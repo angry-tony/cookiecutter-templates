@@ -188,6 +188,7 @@ parameters:
       project_name: {{ cookiecutter.oss_cis_project }}
       domain_id: {{ cookiecutter.oss_cis_domain_id }}
       cert: {{ cookiecutter.oss_cis_cacert }}
+      ssl_cert_file: {{ cookiecutter.oss_cis_cacert_file_type }}
     rundeck_cis_os_docker_image: {{ cookiecutter.oss_cis_openstack_image }}
     rundeck_cis_elasticsearch_url: http://${_param:haproxy_elasticsearch_bind_host}:${_param:haproxy_elasticsearch_http_bind_port}
     {%- endif %}
