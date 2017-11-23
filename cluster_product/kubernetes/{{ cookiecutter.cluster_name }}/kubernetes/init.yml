@@ -24,13 +24,9 @@ parameters:
     kubernetes_control_node01_hostname: {{ cookiecutter.kubernetes_control_node01_hostname }}
     kubernetes_control_node02_hostname: {{ cookiecutter.kubernetes_control_node02_hostname }}
     kubernetes_control_node03_hostname: {{ cookiecutter.kubernetes_control_node03_hostname }}
-    kubernetes_compute_node01_hostname: {{ cookiecutter.kubernetes_compute_node01_hostname }}
-    kubernetes_compute_node02_hostname: {{ cookiecutter.kubernetes_compute_node02_hostname }}
     kubernetes_control_node01_address: {{ cookiecutter.kubernetes_control_node01_address }}
     kubernetes_control_node02_address: {{ cookiecutter.kubernetes_control_node02_address }}
     kubernetes_control_node03_address: {{ cookiecutter.kubernetes_control_node03_address }}
-    kubernetes_compute_node01_address: {{ cookiecutter.kubernetes_compute_node01_address }}
-    kubernetes_compute_node02_address: {{ cookiecutter.kubernetes_compute_node02_address }}
 
     cluster_vip_address: ${_param:kubernetes_control_address}
     cluster_local_address: ${_param:single_address}
@@ -62,8 +58,6 @@ parameters:
     kubernetes_control_node01_tenant_address: {{ cookiecutter.kubernetes_control_node01_tenant_address }}
     kubernetes_control_node02_tenant_address: {{ cookiecutter.kubernetes_control_node02_tenant_address }}
     kubernetes_control_node03_tenant_address: {{ cookiecutter.kubernetes_control_node03_tenant_address }}
-    kubernetes_compute_node01_tenant_address: {{ cookiecutter.kubernetes_compute_node01_tenant_address }}
-    kubernetes_compute_node02_tenant_address: {{ cookiecutter.kubernetes_compute_node02_tenant_address }}
 
   linux:
     network:
@@ -88,13 +82,3 @@ parameters:
           names:
           - ${_param:kubernetes_control_node03_hostname}
           - ${_param:kubernetes_control_node03_hostname}.${_param:cluster_domain}
-        cmp01:
-          address: ${_param:kubernetes_compute_node01_address}
-          names:
-          - ${_param:kubernetes_compute_node01_hostname}
-          - ${_param:kubernetes_compute_node01_hostname}.${_param:cluster_domain}
-        cmp02:
-          address: ${_param:kubernetes_compute_node02_address}
-          names:
-          - ${_param:kubernetes_compute_node02_hostname}
-          - ${_param:kubernetes_compute_node02_hostname}.${_param:cluster_domain}

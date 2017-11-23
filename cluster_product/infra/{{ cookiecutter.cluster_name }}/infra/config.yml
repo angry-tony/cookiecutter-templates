@@ -114,25 +114,36 @@ parameters:
       user:
         deploy:
           permissions: ${_param:salt_master_api_permissions}
+      reactor:
+        reclass/minion/classify:
+        - salt://reclass/reactor/node_register.sls
   reclass:
     storage:
+      {%- if cookiecutter.kubernetes_enabled == 'True' %}
+      class_mapping:
+        common_node:
+          expression: all
+          node_param:
+            single_address:
+              value_template: <<node_control_ip>>
+            linux_system_codename:
+              value_template: <<node_os>>
+            salt_master_host:
+              value_template: <<node_master_ip>>
+            deploy_address:
+              value_template: <<node_deploy_ip>>
+        kubernetes_compute:
+          expression: <<node_hostname>>__startswith__cmp
+          node_class:
+            value_template:
+              - cluster.<<node_cluster>>.kubernetes.compute
+          node_param:
+            deploy_address:
+              value_template: <<node_deploy_ip>>
+      {%- endif %}
       data_source:
         engine: local
       node:
-        {%- if cookiecutter.deployment_type == 'physical' and (cookiecutter.openstack_enabled == 'True' or (cookiecutter.kubernetes_enabled == 'True' and (cookiecutter.stacklight_enabled == 'True' or cookiecutter.cicd_enabled == 'True'))) %}
-        infra_kvm_node01:
-          params:
-            keepalived_vip_priority: 100
-            linux_system_codename: xenial
-        infra_kvm_node02:
-          params:
-            keepalived_vip_priority: 101
-            linux_system_codename: xenial
-        infra_kvm_node03:
-          params:
-            keepalived_vip_priority: 102
-            linux_system_codename: xenial
-        {%- endif %}
         {%- if cookiecutter.kubernetes_enabled == 'True' %}
         kubernetes_control_node01:
           {%- if cookiecutter.analytics_pipeline_enabled == 'True' %}
@@ -147,26 +158,6 @@ parameters:
         kubernetes_control_node03:
           params:
             tenant_address: ${_param:kubernetes_control_node03_tenant_address}
-        kubernetes_compute_node01:
-          name: ${_param:kubernetes_compute_node01_hostname}
-          domain: ${_param:cluster_domain}
-          classes:
-          - cluster.${_param:cluster_name}.kubernetes.compute
-          params:
-            salt_master_host: ${_param:infra_config_address}
-            linux_system_codename: xenial
-            single_address: ${_param:kubernetes_compute_node01_address}
-            tenant_address: ${_param:kubernetes_compute_node01_tenant_address}
-        kubernetes_compute_node02:
-          name: ${_param:kubernetes_compute_node02_hostname}
-          domain: ${_param:cluster_domain}
-          classes:
-          - cluster.${_param:cluster_name}.kubernetes.compute
-          params:
-            salt_master_host: ${_param:infra_config_address}
-            linux_system_codename: xenial
-            single_address: ${_param:kubernetes_compute_node02_address}
-            tenant_address: ${_param:kubernetes_compute_node02_tenant_address}
         {%- if cookiecutter.kubernetes_network_engine == 'opencontrail' %}
         opencontrail_control_node01:
           params:
@@ -178,6 +169,20 @@ parameters:
           params:
             rabbitmq_cluster_role: slave
         {%- endif %}
+        {%- endif %}
+        {%- if cookiecutter.deployment_type == 'physical' and (cookiecutter.openstack_enabled == 'True' or (cookiecutter.kubernetes_enabled == 'True' and (cookiecutter.stacklight_enabled == 'True' or cookiecutter.cicd_enabled == 'True'))) %}
+        infra_kvm_node01:
+          params:
+            keepalived_vip_priority: 100
+            linux_system_codename: xenial
+        infra_kvm_node02:
+          params:
+            keepalived_vip_priority: 101
+            linux_system_codename: xenial
+        infra_kvm_node03:
+          params:
+            keepalived_vip_priority: 102
+            linux_system_codename: xenial
         {%- endif %}
         {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
         stacklight_log_node01:
