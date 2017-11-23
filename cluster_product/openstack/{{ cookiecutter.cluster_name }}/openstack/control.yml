@@ -80,6 +80,12 @@ parameters:
     cluster_node03_hostname: ${_param:openstack_control_node03_hostname}
     cluster_node03_address: ${_param:openstack_control_node03_address}
     nova_vncproxy_url: https://${_param:cluster_public_host}:6080
+  {%- if cookiecutter.openstack_ovs_encapsulation_type == 'vlan' %}
+  neutron:
+    server:
+      backend:
+        tenant_vlan_range: "${_param:neutron_tenant_vlan_range}"
+  {%- endif %}
   linux:
     network:
       interface:
