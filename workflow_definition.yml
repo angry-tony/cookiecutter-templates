@@ -110,6 +110,11 @@ general_params_action:
         help_text: "Enable OSS sub-cluster"
         initial: True
         label: "OSS enabled"
+      - name: "bmk_enabled"
+        type: "BOOL"
+        help_text: "Enable benchmark node"
+        initial: False
+        label: "Benchmark node enabled"
   - name: "networking"
     label: "Networking"
     doc: |

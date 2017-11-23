@@ -64,6 +64,7 @@
     "analytics_pipeline_enabled"                : "False",
     "ceph_enabled"                              : "False",
     "oss_enabled"                               : "True",
+    "bmk_enabled"                               : "False",
 
     "openstack_compute_count"                   : "100",
     "ceph_osd_count"                            : "10"

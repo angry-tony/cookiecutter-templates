@@ -1,3 +1,4 @@
+{%- if cookiecutter.bmk_enabled == 'True' %}
 classes:
 {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
 - system.linux.system.repo_local.mcp.extra
@@ -13,3 +14,4 @@ parameters:
       interface:
         eth0: ${_param:linux_dhcp_interface}
         eth1: ${_param:linux_single_interface}
+{%- endif %}

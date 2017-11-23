@@ -34,7 +34,9 @@ classes:
 - system.salt.control.cluster.openstack_proxy_cluster
 - system.salt.control.cluster.openstack_database_cluster
 - system.salt.control.cluster.openstack_message_queue_cluster
+{%- if cookiecutter.bmk_enabled == 'True' %}
 - system.salt.control.cluster.openstack_benchmark_single
+{%- endif %}
 #- system.salt.control.cluster.openstack_upgrade_single
 {%- endif %}
 {%- if cookiecutter.stacklight_enabled == 'True' %}
@@ -134,8 +136,10 @@ parameters:
       cluster:
         internal:
           node:
+            {%- if cookiecutter.bmk_enabled == 'True' %}
             bmk01:
               image: ${_param:salt_control_xenial_image}
+            {%- endif %}
             ctl01:
               image: ${_param:salt_control_xenial_image}
             ctl02:

@@ -23,6 +23,7 @@
     "stacklight_enabled"                        : "True",
     "ceph_enabled"                              : "False",
     "stacklight_version"                        : "1",
+    "bmk_enabled"                               : "False",
 
     "openstack_version"                         : "ocata",
 
