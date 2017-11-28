@@ -7,6 +7,9 @@ classes:
 {%- if cookiecutter.openstack_enabled == 'True' %}
 - system.docker.swarm.stack.monitoring.remote_collector
 {%- endif %}
+{%- if cookiecutter.get('ceph_enabled', 'False') == 'True'  %}
+- system.docker.swarm.stack.monitoring.remote_agent.ceph_common
+{%- endif %}
 
 
 #- cluster.{{ cookiecutter.cluster_name }}.infra

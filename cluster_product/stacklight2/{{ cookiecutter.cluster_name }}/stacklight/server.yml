@@ -36,7 +36,12 @@ classes:
 - system.prometheus.server.container
 - system.prometheus.alertmanager.container
 - system.prometheus.remote_storage_adapter.container
-
+{%- if cookiecutter.get('ceph_enabled', 'False') == 'True'  %}
+- system.ceph.common.cluster
+- system.ceph.common.container
+- cluster.{{ cookiecutter.cluster_name }}.ceph
+- cluster.{{ cookiecutter.cluster_name }}.ceph.common
+{%- endif %}
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:

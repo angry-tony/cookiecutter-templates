@@ -37,5 +37,7 @@
     "kubernetes_enabled"                        : "False",
 
     "oss_enabled"                               : "True",
-    "oss_sfdc_support_enabled"                  : "True"
+    "oss_sfdc_support_enabled"                  : "True",
+
+    "ceph_enabled"                              : "False"
 }
