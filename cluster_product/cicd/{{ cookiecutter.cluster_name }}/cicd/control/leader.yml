@@ -57,29 +57,9 @@ classes:
 
 parameters:
   _param:
-    {%- if cookiecutter.openldap_enabled == 'True' %}
-    # OpenLDAP
-    openldap_organisation: "{{ cookiecutter.openldap_organisation }}"
-    openldap_dn: "dc={{ cookiecutter.openldap_domain|replace('.', ',dc=') }}"
-    openldap_domain: "{{ cookiecutter.openldap_domain }}"
-    openldap_admin_password: {{ password(16) }}
-    openldap_config_password: {{ password(16) }}
-    openldap_readonly_password: {{ password(16) }}
-    {%- endif %}
-
     # Jenkins
     jenkins_slave_user: admin
     jenkins_client_user: admin
-
-    {%- if cookiecutter.openldap_enabled == 'True' %}
-    jenkins_admin_password: ${_param:openldap_admin_password}
-    jenkins_security_ldap_server: ${_param:cluster_vip_address}
-    jenkins_security_ldap_root_dn: ${_param:openldap_dn}
-    jenkins_security_ldap_manager_dn: "cn=admin,${_param:openldap_dn}"
-    jenkins_security_ldap_manager_password: ${_param:openldap_admin_password}
-    {%- else %}
-    jenkins_admin_password: {{ password(16) }}
-    {%- endif %}
     jenkins_slave_password: ${_param:jenkins_admin_password}
     jenkins_client_password: ${_param:jenkins_admin_password}
     jenkins_admin_email: ${_param:admin_email}
@@ -90,13 +70,8 @@ parameters:
     jenkins_gerrit_url: ssh://admin@${_param:haproxy_gerrit_bind_host}:${_param:haproxy_gerrit_ssh_bind_port}
     jenkins_aptly_api_url: http://${_param:haproxy_aptly_api_bind_host}:${_param:haproxy_aptly_api_bind_port}
     jenkins_aptly_url: http://${_param:haproxy_aptly_public_bind_host}:${_param:haproxy_aptly_public_bind_port}
-    # Gerrit
 
-    {%- if cookiecutter.openldap_enabled == 'True' %}
-    gerrit_admin_password: ${_param:openldap_admin_password}
-    {%- else %}
-    gerrit_admin_password: {{ password(16) }}
-    {%- endif %}
+    # Gerrit
     gerrit_admin_email: ${_param:admin_email}
     gerrit_public_host: https://${_param:nginx_proxy_gerrit_server_site_host}:${_param:nginx_proxy_gerrit_server_site_port}
     gerrit_admin_public_key: ${_param:jenkins_admin_public_key}

@@ -1,5 +1,6 @@
 {
     "cluster_name"                              : "deployment_name",
+    "cicd_enabled"                              : "False",
     "oss_enabled"                               : "True",
     "oss_address"                               : "${_param:stacklight_monitor_address}",
     "oss_node01_address"                        : "${_param:stacklight_monitor_node01_address}",
