@@ -252,4 +252,6 @@ parameters:
       service:
         elasticsearch:
           resolve_hostname: false
+    {%- else %}
+    rundeck_cis_elasticsearch_url: http://${_param:haproxy_elasticsearch_bind_host}:${_param:haproxy_elasticsearch_http_bind_port}
     {%- endif %}
