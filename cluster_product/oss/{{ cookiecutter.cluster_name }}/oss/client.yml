@@ -136,7 +136,7 @@ parameters:
     # SecurityMonkey
     secmonkey_db_user: secmonkey
     secmonkey_db_user_password: {{ password(16) }}
-    secmonkey_db_host: ${_param:haproxy_postgresql_bind_host}
+    secmonkey_db_host: ${_param:postgresql_bind_host}
     security_monkey_openstack:
       username: {{ cookiecutter.oss_security_audit_username }}
       password: {{ cookiecutter.oss_security_audit_password }}
