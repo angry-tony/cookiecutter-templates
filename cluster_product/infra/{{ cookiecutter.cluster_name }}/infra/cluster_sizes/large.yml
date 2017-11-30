@@ -1,0 +1,66 @@
+
+        openstack.control:
+          cpu: 24
+          ram: 131072
+          disk_profile: large
+          net_profile: default
+        openstack.database:
+          cpu: 24
+          ram: 65536
+          disk_profile: huge
+          net_profile: default
+        openstack.message_queue:
+          cpu: 32
+          ram: 200704
+          disk_profile: xxlarge
+          net_profile: default
+        openstack.proxy:
+          cpu: 8
+          ram: 32768
+          disk_profile: large
+          net_profile: default
+        openstack.upgrade:
+          cpu: 8
+          ram: 16384
+          disk_profile: medium
+          net_profile: default
+        opencontrail.control:
+          cpu: 16
+          ram: 65536
+          disk_profile: large
+          net_profile: default
+        opencontrail.analytics:
+          cpu: 24
+          ram: 131072
+          disk_profile: xxhuge
+          net_profile: default
+        stacklight.log:
+          cpu: 16
+          ram: 49152
+          disk_profile: xxhuge
+          net_profile: default
+        stacklight.server:
+          cpu: 24
+          ram: 262144
+          disk_profile: huge
+          net_profile: default
+        stacklight.telemetry:
+          cpu: 16
+          ram: 200704
+          disk_profile: xxhuge
+          net_profile: default
+        cicd.control:
+          cpu: 8
+          ram: 32768
+          disk_profile: xxlarge
+          net_profile: default
+        ceph.mon:
+          cpu: 8
+          ram: 16384
+          disk_profile: large
+          net_profile: default
+        ceph.rgw:
+          cpu: 8
+          ram: 16384
+          disk_profile: small
+          net_profile: default
