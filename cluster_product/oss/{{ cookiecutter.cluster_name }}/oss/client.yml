@@ -116,6 +116,7 @@ parameters:
     sfdc_consumer_key: {{ cookiecutter.sfdc_consumer_key }}
     sfdc_consumer_secret: {{ cookiecutter.sfdc_consumer_secret }}
     sfdc_organization_id: {{ cookiecutter.sfdc_organization_id }}
+    sfdc_environment_id: {{ cookiecutter.sfdc_environment_id }}
     sfdc_sandbox_enabled: {{ cookiecutter.sfdc_sandbox_enabled }}
     {%- endif %}
 

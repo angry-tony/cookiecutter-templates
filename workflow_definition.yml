@@ -768,6 +768,12 @@ product_params_action:
       type: TEXT
       requires:
       - oss_sfdc_support_enabled: True
+    - help_text: "The Cloud ID in Salesforce."
+      initial: ""
+      name: sfdc_environment_id
+      type: TEXT
+      requires:
+      - oss_sfdc_support_enabled: True
     - help_text: "Enable sandbox support for SalesForce Service"
       initial: True
       name: sfdc_sandbox_enabled

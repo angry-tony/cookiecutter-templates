@@ -1,0 +1,41 @@
+---
+summary: >
+  Added a new  ``sfdc_environment_id`` parameter for SFDC integration with
+  the DevOps Portal
+
+features:
+  - |
+    Added the ``sfdc_environment_id`` parameter to specify the Cloud ID in
+    Salesforce.
+
+    .. note:: The detailed information on a Salesforce Cloud is provided by
+              a Cloud object creator that is either a Mirantis support
+              engineer or customer.
+
+    To apply the change to an existing MCP deployment:
+
+    #. In the ``classes/cluster/<cluster_name>/oss/client.yml`` file of the
+       Reclass model, specify the ``sfdc_environment_id: <YOUR_CLOUD_ID>``
+       parameter.
+    #. Apply the changes on the cluster level of the model.
+    #. Update the system level of the model from master using
+       :command:`git pull`.
+    #. Update the docker image for ``pushkin`` to latest:
+
+       .. code-block:: bash
+
+          salt -C 'I@docker:swarm' cmd.run 'docker pull docker-prod-local.artifactory.mirantis.com/mirantis/oss/pushkin:latest'
+
+    #. Remove the ``pushkin`` docker stack:
+
+       .. code-block:: bash
+
+          salt -C 'I@docker:swarm:role:master' cmd.run 'docker stack rm pushkin'
+
+    #. Apply the :command:`docker.client` state to start the Push Notification
+       service:
+
+       .. code-block:: bash
+
+          salt -C 'I@docker:swarm:role:master' state.sls docker.client
+
