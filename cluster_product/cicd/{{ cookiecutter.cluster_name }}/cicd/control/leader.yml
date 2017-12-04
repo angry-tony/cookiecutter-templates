@@ -88,6 +88,11 @@ parameters:
     gerrit_auth_type: DEVELOPMENT_BECOME_ANY_ACCOUNT
     {%- endif %}
 {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+  jenkins:
+    client:
+      globalenvprop:
+        OFFLINE_DEPLOYMENT:
+          value: "true"
   gerrit:
     client:
       repo:
