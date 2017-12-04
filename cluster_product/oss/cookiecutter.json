@@ -73,6 +73,7 @@
     "oss_rundeck_image"                         : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/rundeck:latest",
     "oss_cis_openstack_image"                   : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/cis-openstack:latest",
     "oss_pushkin_image"                         : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/pushkin:latest",
+    "oss_hce_image"                             : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/hce:latest",
     "oss_security_monkey_api_image"             : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/security-monkey-api:latest",
     "oss_security_monkey_scheduler_image"       : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/security-monkey-scheduler:latest",
     "oss_janitor_monkey_image"                  : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/janitor-monkey:latest",

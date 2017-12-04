@@ -32,6 +32,9 @@ classes:
 {%- if cookiecutter.stacklight_enabled == 'False' %}
 - system.docker.swarm.stack.elasticsearch
 {%- endif %}
+{%- if cookiecutter.stacklight_enabled == 'True' %}
+- system.docker.swarm.stack.hce
+{%- endif %}
 - system.docker.swarm.stack.postgresql
 - system.docker.swarm.stack.pushkin
 - system.docker.swarm.stack.rundeck
@@ -52,6 +55,7 @@ classes:
 - system.devops_portal.service.pushkin
 - system.devops_portal.service.rundeck
 {%- if cookiecutter.stacklight_enabled == 'True' %}
+- system.devops_portal.service.hce
 - system.devops_portal.service.stacklight-grafana
 - system.devops_portal.service.stacklight-kibana
 - system.devops_portal.service.stacklight-prometheus
@@ -77,11 +81,17 @@ parameters:
     docker_image_devops_portal: ${_param:aptly_server_hostname}:5000/devops-portal:latest
     docker_image_postgresql: ${_param:aptly_server_hostname}:5000/postgres:9.6
     docker_image_pushkin: ${_param:aptly_server_hostname}:5000/pushkin:latest
+    {%- if cookiecutter.stacklight_enabled == 'True' %}
+    docker_image_hce: ${_param:aptly_server_hostname}:5000/hce:latest
+    {%- endif %}
     {%- else %}
     docker_image_devops_portal: {{ cookiecutter.oss_portal_image }}
     docker_image_elasticsearch: {{ cookiecutter.oss_elasticsearch_image }}
     docker_image_postgresql: {{ cookiecutter.oss_postgresql_image }}
     docker_image_pushkin: {{ cookiecutter.oss_pushkin_image }}
+    {%- if cookiecutter.stacklight_enabled == 'True' %}
+    docker_image_hce: {{ cookiecutter.oss_hce_image }}
+    {%- endif %}
     docker_image_security_monkey_api: {{ cookiecutter.oss_security_monkey_api_image }}
     docker_image_security_monkey_scheduler: {{ cookiecutter.oss_security_monkey_scheduler_image }}
     docker_image_janitor_monkey: {{ cookiecutter.oss_janitor_monkey_image }}
@@ -95,6 +105,14 @@ parameters:
     postgresql_client_password: ${_param:postgresql_admin_user_password}
     postgresql_client_host: ${_param:haproxy_postgresql_bind_host}
     postgresql_client_port: ${_param:haproxy_postgresql_bind_port}
+
+    {%- if cookiecutter.stacklight_enabled == 'True' %}
+    # HCE
+    hce_elasticsearch_host: ${_param:elasticsearch_bind_host}
+    hce_elasticsearch_port: ${_param:elasticsearch_http_bind_port}
+    hce_prometheus_host: ${_param:stacklight_monitor_address}
+    hce_prometheus_port: ${_param:stacklight_prometheus_port}
+    {%- endif %}
 
     # Pushkin
     pushkin_db_user: pushkin

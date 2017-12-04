@@ -36,6 +36,12 @@ classes:
 - system.glusterfs.client.volume.pushkin
 - system.glusterfs.server.volume.pushkin
 - system.haproxy.proxy.listen.oss.pushkin
+
+{%- if cookiecutter.stacklight_enabled == 'True' %}
+# HCE
+- system.haproxy.proxy.listen.oss.hce
+{%- endif %}
+
 # Rundeck
 - system.glusterfs.client.volume.rundeck
 - system.glusterfs.server.volume.rundeck
