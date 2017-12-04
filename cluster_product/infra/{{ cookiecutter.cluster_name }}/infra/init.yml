@@ -201,6 +201,12 @@ parameters:
         {%- endif %}
         {%- endif %}
     system:
+      {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+      apt:
+        config:
+          nosrvrecords:
+            'Acquire::EnableSrvRecords': 'false'
+      {%- endif %}
       name: ${_param:infra_config_hostname}
       domain: ${_param:cluster_domain}
       {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
