@@ -14,7 +14,7 @@
     "local_pipelines"                           : "False",
     "local_docker_images"                       : "False",
     "local_python_repo"                         : "False",
-    "local_repo_url"                            : "${_param:cicd_control_address}",
+    "local_repo_url"                            : "${_param:aptly_server_deploy_address}",
 
     "cicd_control_vip_hostname"                 : "cid",
     "cicd_control_node01_hostname"              : "cid01",

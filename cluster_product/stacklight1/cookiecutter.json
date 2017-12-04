@@ -2,7 +2,7 @@
     "cluster_name"                              : "deployment_name",
     
     "local_repositories"                        : "False",
-    "local_repo_url"                            : "${_param:cicd_control_address}",
+    "local_repo_url"                            : "${_param:aptly_server_deploy_address}",
 
     "mcp_version"                               : "stable",
 

@@ -655,7 +655,7 @@ product_params_action:
       requires:
       - openldap_enabled: True
       help_text: LDAP domain
-    - initial: "${_param:cicd_control_vip_address}"
+    - initial: "${_param:aptly_server_deploy_address}"
       help_text: Local Repositories
       name: local_repo_url
       type: TEXT
