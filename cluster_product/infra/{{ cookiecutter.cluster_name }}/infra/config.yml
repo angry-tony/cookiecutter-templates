@@ -183,6 +183,8 @@ parameters:
           params:
             keepalived_vip_priority: 102
             linux_system_codename: xenial
+          classes:
+          - system.ceph.backup.server.single
         {%- endif %}
         {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
         stacklight_log_node01:

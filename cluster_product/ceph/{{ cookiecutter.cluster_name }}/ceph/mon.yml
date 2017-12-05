@@ -1,11 +1,13 @@
 classes:
 - system.ceph.mon.cluster
-- system.ceph.monitoring.node_stats
+- system.ceph.backup.client.single
 {%- if cookiecutter.ceph_version == 'luminous' %}
 - service.ceph.mgr.cluster
 {%- endif %}
 - cluster.{{ cookiecutter.cluster_name }}.ceph.common
 parameters:
+  _param:
+    ceph_remote_backup_server: ${_param:infra_kvm_node03_address}
   linux:
     network:
       interface:
