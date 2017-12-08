@@ -49,7 +49,11 @@ parameters:
     stacklight_monitor_node03_address: {{ cookiecutter.stacklight_monitor_node03_address }}
     grafana_admin_password: admin
     grafana_database_type: mysql
+    {%- if cookiecutter.kubernetes_enabled == 'True' %}
+    grafana_database_host: ${_param:stacklight_monitor_address}
+    {%- else %}
     grafana_database_host: ${_param:openstack_database_address}
+    {%- endif %}
     grafana_database_password: ${_param:mysql_grafana_password}
 
     prometheus_influxdb_url: "http://${_param:stacklight_telemetry_address}:${_param:influxdb_port}/"
