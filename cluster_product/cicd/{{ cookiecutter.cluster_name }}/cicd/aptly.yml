@@ -189,6 +189,8 @@ parameters:
             name: postgres:9.6
           - registry: docker-prod-local.artifactory.mirantis.com/mirantis/oss
             name: pushkin:latest
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/oss
+            name: hce:latest
           - registry: docker-prod-local.artifactory.mirantis.com/openstack-docker
             name: alertmanager:latest
           - registry: docker-prod-local.artifactory.mirantis.com/openstack-docker
