@@ -720,6 +720,30 @@ product_params_action:
       type: LONG_TEXT
       requires:
       - oss_enabled: True
+    - help_text: "Forward proxy-endpoint for Rundeck dashboard to provide access from external network"
+      initial: False
+      name: rundeck_forward_iframe
+      type: BOOL
+      requires:
+      - oss_enabled: True
+    - help_text: "Define proxy-endpoint ip address for Rundeck dashboard to provide access from external network"
+      initial: ""
+      name: rundeck_iframe_host
+      type: TEXT
+      requires:
+      - oss_enabled: True
+    - help_text: "Define proxy-endpoint port for Rundeck dashboard to provide access from external network"
+      initial: ""
+      name: rundeck_iframe_port
+      type: TEXT
+      requires:
+      - oss_enabled: True
+    - help_text: "Use ssl proxy-endpoint for Rundeck dashboard to provide access from external network"
+      initial: False
+      name: rundeck_iframe_ssl
+      type: BOOL
+      requires:
+      - oss_enabled: True
     - help_text: "Notification email sender"
       initial: ""
       name: oss_notification_email_from
