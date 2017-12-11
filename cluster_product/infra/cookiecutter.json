@@ -5,6 +5,7 @@
     "reclass_repository"                        : "https://github.com/Mirantis/mk-lab-salt-model.git",
 
     "local_repositories"                        : "False",
+    "local_docker_images"                       : "False",
     "local_repo_url"                            : "${_param:cicd_control_address}",
 
     "deployment_type"                           : "physical",

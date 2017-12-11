@@ -1,4 +1,4 @@
-{%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+{%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
 classes:
 - system.aptly.server.single
 - system.aptly.server.mirror.debian

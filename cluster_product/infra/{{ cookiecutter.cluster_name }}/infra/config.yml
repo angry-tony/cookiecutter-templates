@@ -259,7 +259,7 @@ parameters:
           - system.elasticsearch.client.single
           - system.kibana.client.single
         {%- endif %}
-        {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+        {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
         aptly_server_node01:
           name: ${_param:aptly_server_hostname}01
           domain: ${_param:cluster_domain}

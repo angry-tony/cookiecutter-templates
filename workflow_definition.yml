@@ -615,6 +615,24 @@ product_params_action:
       type: TEXT
       requires:
       - local_repositories: True
+    - initial: True
+      help_text: enable local pipelines
+      name: local_pipelines
+      type: BOOL
+      requires:
+      - local_repositories: True
+    - initial: True
+      help_text: enable local docker images
+      name: local_docker_images
+      type: BOOL
+      requires:
+      - local_repositories: True
+    - initial: True
+      help_text: enable local python repo
+      name: local_python_repo
+      type: BOOL
+      requires:
+      - local_repositories: True
     label: CI/CD product parameters
     name: cicd
     doc: |

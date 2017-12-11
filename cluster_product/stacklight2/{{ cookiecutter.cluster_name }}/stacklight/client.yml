@@ -18,7 +18,7 @@ classes:
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
-    {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+    {%- if cookiecutter.get('local_docker_images', 'False') == 'True' %}
     docker_image_alertmanager: ${_param:aptly_server_hostname}:5000/alertmanager:latest
     docker_image_pushgateway: ${_param:aptly_server_hostname}:5000/pushgateway:latest
     docker_image_prometheus: ${_param:aptly_server_hostname}:5000/prometheus:latest

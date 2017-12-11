@@ -2,14 +2,12 @@
 {% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'|random }}{% endfor %}
 {%- endmacro %}
 classes:
-  {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+  {%- if cookiecutter.get('local_python_repo', 'False') == 'True' %}
   - service.python.environment
   {%- endif %}
   # Services
   - system.docker.client
-  - system.aptly.server.docker
   # Docker services
-  - system.docker.swarm.stack.aptly
   - system.docker.swarm.stack.docker
   - system.docker.swarm.stack.gerrit
   - system.docker.swarm.stack.jenkins
@@ -23,7 +21,9 @@ classes:
   - system.jenkins.client.credential.gerrit
   - system.jenkins.client.credential.salt
   # Jobs
+  {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
   - system.jenkins.client.job.aptly
+  {%- endif %}
   - system.jenkins.client.job.git-mirrors.downstream.pipelines
   - system.jenkins.client.job.deploy.openstack
   - system.jenkins.client.job.deploy.update
@@ -63,14 +63,18 @@ parameters:
     jenkins_slave_password: ${_param:jenkins_admin_password}
     jenkins_client_password: ${_param:jenkins_admin_password}
     jenkins_admin_email: ${_param:admin_email}
+    aptly_api_port: 8080
+    aptly_public_port: 80
     jenkins_admin_public_key: {{ cookiecutter.cicd_public_key }}
     jenkins_admin_private_key: |
       {{ cookiecutter.cicd_private_key|indent(6) }}
     # Jobs params
     jenkins_gerrit_url: ssh://admin@${_param:haproxy_gerrit_bind_host}:${_param:haproxy_gerrit_ssh_bind_port}
-    jenkins_aptly_api_url: http://${_param:haproxy_aptly_api_bind_host}:${_param:haproxy_aptly_api_bind_port}
-    jenkins_aptly_url: http://${_param:haproxy_aptly_public_bind_host}:${_param:haproxy_aptly_public_bind_port}
+    {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
+    jenkins_aptly_api_url: http://${_param:aptly_server_hostname}:${_param:aptly_api_port}
+    jenkins_aptly_url: http://${_param:aptly_server_hostname}:${_param:aptly_public_port}
     jenkins_aptly_storages: "local"
+    {%- endif %}
 
     # Gerrit
     gerrit_admin_email: ${_param:admin_email}
@@ -93,6 +97,8 @@ parameters:
       globalenvprop:
         OFFLINE_DEPLOYMENT:
           value: "true"
+{%- endif %}
+{%- if cookiecutter.get('local_python_repo', 'False') == 'True' %}
   gerrit:
     client:
       repo:

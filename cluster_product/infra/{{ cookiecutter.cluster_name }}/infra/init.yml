@@ -56,15 +56,15 @@ parameters:
     {%- endif %}
     {%- endif %}
 
-    {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+    {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
     local_repos: true
-    docker_compose_image: ${_param:aptly_server_hostname}:5000/compose:1.8.0
     aptly_server_hostname: {{ cookiecutter.aptly_server_hostname }}
     aptly_server_address: {{ cookiecutter.aptly_server_address }}
-    {%- endif %}
-    {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
     local_repo_url: {{ cookiecutter.local_repo_url}}
     linux_repo_refresh_db: true
+    {%- if cookiecutter.get('local_docker_images', 'False') == 'True' %}
+    docker_compose_image: ${_param:aptly_server_hostname}:5000/compose:1.8.0
+    {%- endif %}
     {%- endif %}
     infra_config_hostname: {{ cookiecutter.salt_master_hostname }}
     salt_minion_ca_host: ${_param:infra_config_hostname}.${_param:cluster_domain}
@@ -174,7 +174,7 @@ parameters:
           names:
           - cfg
           - cfg.${_param:cluster_domain}
-        {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+        {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
         apt:
           address: ${_param:aptly_server_address}
           names:
@@ -201,7 +201,7 @@ parameters:
         {%- endif %}
         {%- endif %}
     system:
-      {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+      {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
       apt:
         config:
           nosrvrecords:
@@ -209,7 +209,7 @@ parameters:
       {%- endif %}
       name: ${_param:infra_config_hostname}
       domain: ${_param:cluster_domain}
-      {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+      {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
       local_repos: ${_param:local_repos}
       purge_repos: True
       {%- endif %}

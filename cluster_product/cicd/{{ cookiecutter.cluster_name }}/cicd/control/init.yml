@@ -78,7 +78,7 @@ parameters:
     nginx_proxy_gerrit_server_site_host: ${_param:cluster_public_host}
     nginx_proxy_gerrit_server_site_port: 8070
     gerrit_http_listen_url: proxy-https://*:8080/
-    {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+    {%- if cookiecutter.get('local_pipelines', 'False') == 'True' %}
     gerrit_pipeline_library_repo: http://${_param:aptly_server_hostname}:8088/pipeline-library.git
     gerrit_mk_pipelines_repo: http://${_param:aptly_server_hostname}:8088/mk-pipelines.git
     {%- endif %}
@@ -92,7 +92,7 @@ parameters:
       pem_file: /etc/haproxy/ssl/${_param:cluster_public_host}-all.pem
     haproxy_bind_address: ${_param:cluster_vip_address}
     haproxy_mysql_source_port: 13306
-  {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+  {%- if cookiecutter.get('local_docker_images', 'False') == 'True' %}
   aptly:
     publisher:
       source:

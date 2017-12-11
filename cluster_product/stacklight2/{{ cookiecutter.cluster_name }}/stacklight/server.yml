@@ -47,7 +47,7 @@ parameters:
   _param:
     {%- if cookiecutter.openstack_enabled == 'True' %}
     heka_amqp_host: ${_param:openstack_message_queue_address}
-    {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+    {%- if cookiecutter.get('local_docker_images', 'False') == 'True' %}
     docker_image_remote_collector: ${_param:aptly_server_hostname}:5000/heka:latest
     {%- else %}
     docker_image_remote_collector: docker-prod-local.artifactory.mirantis.com/openstack-docker/heka:latest
@@ -83,7 +83,7 @@ parameters:
       enabled: true
       pem_file: /etc/haproxy/ssl/${_param:cluster_public_host}-all.pem
     haproxy_bind_address: ${_param:cluster_vip_address}
-  {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+  {%- if cookiecutter.get('local_docker_images', 'False') == 'True' %}
   docker:
     host:
       insecure_registries:

@@ -11,7 +11,7 @@ parameters:
     cicd_control_node01_hostname: {{ cookiecutter.cicd_control_node01_hostname }}
     cicd_control_node02_hostname: {{ cookiecutter.cicd_control_node02_hostname }}
     cicd_control_node03_hostname: {{ cookiecutter.cicd_control_node03_hostname }}
-    {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+    {%- if cookiecutter.get('local_docker_images', 'False') == 'True' %}
     git_pipeline_library_upstream: http://${_param:aptly_server_hostname}:8088/pipeline-library
     git_mk_pipelines_upstream: http://${_param:aptly_server_hostname}:8088/Mirantis/mk-pipelines
     docker_image_registry: ${_param:aptly_server_hostname}:5000/registry:2
@@ -56,7 +56,7 @@ parameters:
     aptly_gpg_passphrase: none
     aptly_server_secure: false
     aptly_gpg_private_key: none
-    {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+    {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
     aptly_gpg_public_key: |
       -----BEGIN PGP PUBLIC KEY BLOCK-----
       Version: GnuPG v1

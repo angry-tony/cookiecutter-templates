@@ -71,7 +71,7 @@ classes:
 
 parameters:
   _param:
-    {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+    {%- if cookiecutter.get('local_docker_images', 'False') == 'True' %}
     docker_image_elasticsearch: ${_param:aptly_server_hostname}:5000/elasticsearch:5.4.1
     docker_image_security_monkey_api: ${_param:aptly_server_hostname}:5000/security-monkey-api:latest
     docker_image_security_monkey_scheduler: ${_param:aptly_server_hostname}:5000/security-monkey-scheduler:latest
