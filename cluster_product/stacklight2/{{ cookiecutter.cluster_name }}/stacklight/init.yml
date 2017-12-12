@@ -23,7 +23,7 @@ parameters:
     influxdb_database: lma
     influxdb_user: lma
     influxdb_password: {{ password(16) }}
-    {%- if cookiecutter.kubernetes_enabled == 'True' %}
+    {%- if cookiecutter.openstack_enabled == 'False' %}
     galera_server_maintenance_password: {{ password(16) }}
     galera_server_admin_password: {{ password(16) }}
     {%- endif %}
@@ -49,8 +49,8 @@ parameters:
     stacklight_monitor_node03_address: {{ cookiecutter.stacklight_monitor_node03_address }}
     grafana_admin_password: admin
     grafana_database_type: mysql
-    {%- if cookiecutter.kubernetes_enabled == 'True' %}
-    grafana_database_host: ${_param:stacklight_monitor_address}
+    {%- if cookiecutter.openstack_enabled == 'False' %}
+    grafana_database_host: ${_param:stacklight_telemetry_address}
     {%- else %}
     grafana_database_host: ${_param:openstack_database_address}
     {%- endif %}

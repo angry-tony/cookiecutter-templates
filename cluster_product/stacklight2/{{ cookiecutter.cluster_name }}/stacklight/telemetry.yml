@@ -5,13 +5,13 @@ classes:
 - system.linux.system.repo_local.influxdb
 - system.linux.system.repo_local.ubuntu
 - system.linux.system.repo_local.mcp.extra
-{%- if cookiecutter.kubernetes_enabled == 'True' %}
+{%- if cookiecutter.openstack_enabled == 'False' %}
 - system.linux.system.repo_local.mcp.openstack
 {%- endif %}
 {%- else %}
 - system.linux.system.repo.influxdb
 - system.linux.system.repo.mcp.extra
-{%- if cookiecutter.kubernetes_enabled == 'True' %}
+{%- if cookiecutter.openstack_enabled == 'False' %}
 - system.linux.system.repo.mcp.openstack
 {%- endif %}
 {%- endif %}
@@ -22,7 +22,7 @@ classes:
 - system.influxdb.database.ceilometer
 {%- endif %}
 - system.influxdb.database.prometheus
-{%- if cookiecutter.kubernetes_enabled == 'True' %}
+{%- if cookiecutter.openstack_enabled == 'False' %}
 - system.haproxy.proxy.listen.openstack.galera
 - system.galera.server.database.grafana
 {%- endif %}
@@ -41,7 +41,7 @@ parameters:
     cluster_node02_address: ${_param:stacklight_telemetry_node02_address}
     cluster_node03_hostname: ${_param:stacklight_telemetry_node03_hostname}
     cluster_node03_address: ${_param:stacklight_telemetry_node03_address}
-    {%- if cookiecutter.kubernetes_enabled == 'True' %}
+    {%- if cookiecutter.openstack_enabled == 'False' %}
     openstack_version: ocata
     galera_innodb_buffer_pool_size: 1024M
     galera_max_connections: 200
