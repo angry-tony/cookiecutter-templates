@@ -60,6 +60,116 @@ parameters:
 #        deploy_network:
 #          description: Fabric for deploy_network
 #      machines:
+{%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+#        kvm01:
+#          interface:
+#            mac: 00:25:90:e7:46:d0
+#            subnet: deploy_network
+#            mode: static
+#            ip: ${_param:infra_kvm_node01_deploy_address}
+#            gateway: ${_param:deploy_network_gateway}
+#          power_parameters:
+#            power_address: 176.74.220.208
+#            power_password: vsHmCLc4z0aY
+#            power_type: ipmi
+#            power_user: engineer
+#        kvm02:
+#          interface:
+#            mac: 00:25:90:e7:4b:52
+#            subnet: deploy_network
+#            mode: static
+#            ip: ${_param:infra_kvm_node02_deploy_address}
+#            gateway: ${_param:deploy_network_gateway}
+#          power_parameters:
+#            power_address: 176.74.220.214
+#            power_password: vsHmCLc4z0aY
+#            power_type: ipmi
+#            power_user: engineer
+#        kvm03:
+#          interface:
+#            mac: 00:25:90:e7:48:c6
+#            subnet: deploy_network
+#            mode: static
+#            ip: ${_param:infra_kvm_node03_deploy_address}
+#            gateway: ${_param:deploy_network_gateway}
+#          power_parameters:
+#            power_address: 176.74.220.216
+#            power_password: vsHmCLc4z0aY
+#            power_type: ipmi
+#            power_user: engineer
+  {%- if cookiecutter.openstack_network_engine == 'ovs' %}
+#        gtw01:
+#          interface:
+#            mac: 00:25:90:e7:46:d0
+#            subnet: deploy_network
+#            mode: static
+#            ip: ${_param:openstack_gateway_node01_deploy_address}
+#            gateway: ${_param:deploy_network_gateway}
+#          power_parameters:
+#            power_address: 176.74.220.208
+#            power_password: vsHmCLc4z0aY
+#            power_type: ipmi
+#            power_user: engineer
+#        gtw02:
+#          interface:
+#            mac: 00:25:90:e7:4b:52
+#            subnet: deploy_network
+#            mode: static
+#            ip: ${_param:openstack_gateway_node02_deploy_address}
+#            gateway: ${_param:deploy_network_gateway}
+#          power_parameters:
+#            power_address: 176.74.220.214
+#            power_password: vsHmCLc4z0aY
+#            power_type: ipmi
+#            power_user: engineer
+#        gtw03:
+#          interface:
+#            mac: 00:25:90:e7:48:c6
+#            subnet: deploy_network
+#            mode: static
+#            ip: ${_param:openstack_gateway_node03_deploy_address}
+#            gateway: ${_param:deploy_network_gateway}
+#          power_parameters:
+#            power_address: 176.74.220.216
+#            power_password: vsHmCLc4z0aY
+#            power_type: ipmi
+#            power_user: engineer
+  {%- endif %}
+    {%- for i in range(cookiecutter.openstack_compute_count|int) %}
+    {%- set ip_start = 100 -%}
+    {%- set cmp_start = 0 %}
+#        cmp{{ "%03d"|format(cmp_start + loop.index) }}:
+#          interface:
+#            mac: 00:25:90:eb:92:4a
+#            subnet: deploy_network
+#            mode: static
+#            ip: ${_param:openstack_compute_node{{ "%03d"|format(cmp_start + loop.index) }}_deploy_address}
+#            gateway: ${_param:deploy_network_gateway}
+#          power_parameters:
+#            power_address: 185.8.58.225
+#            power_password: vsHmCLc4z0aY
+#            power_type: ipmi
+#            power_user: engineer
+    {%- endfor %}
+  {%- if cookiecutter.get('ceph_enabled', 'False') == 'True' %}
+    {%- for i in range(cookiecutter.ceph_osd_node_count|int) %}
+    {%- set ip_start = 200 -%}
+    {%- set osd_start = 0 %}
+#        osd{{ "%03d"|format(osd_start + loop.index) }}:
+#          interface:
+#            mac: 00:25:90:eb:92:4a
+#            subnet: deploy_network
+#            mode: static
+#            ip: ${_param:ceph_osd_node{{ "%03d"|format(osd_start + loop.index) }}_deploy_address}
+#            gateway: ${_param:deploy_network_gateway}
+#          power_parameters:
+#            power_address: 185.8.58.225
+#            power_password: vsHmCLc4z0aY
+#            power_type: ipmi
+#            power_user: engineer
+    {%- endfor %}
+  {%- endif %}
+{%- else %}
 #        kvm02:
 #          interface:
 #            mac: 00:25:90:eb:92:4a
@@ -68,4 +178,5 @@ parameters:
 #            power_password: password
 #            power_type: ipmi
 #            power_user: engineer
+{%- endif %}
 {%- endif %}

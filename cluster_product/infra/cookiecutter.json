@@ -21,7 +21,8 @@
     "tenant_network_gateway"                    : "",
 
     "aptly_server_hostname"                     : "apt",
-    "aptly_server_address"                      : "10.167.4.14",
+    "aptly_server_deploy_address"               : "10.167.5.14",
+    "aptly_server_control_address"              : "10.167.4.14",
     "offline_deployment"                        : "False",
 
     "infra_deploy_nic"                          : "eth0",
@@ -68,6 +69,10 @@
     "oss_enabled"                               : "True",
     "bmk_enabled"                               : "False",
 
+    "static_ips_on_deploy_network_enabled"      : "False",
+
     "openstack_compute_count"                   : "100",
-    "ceph_osd_count"                            : "10"
+    "ceph_osd_count"                            : "10",
+    "ceph_osd_node_count"                       : 3
+
 }

@@ -10,6 +10,9 @@
     "stacklight_monitor_node01_address"         : "10.167.4.71",
     "stacklight_monitor_node02_address"         : "10.167.4.72",
     "stacklight_monitor_node03_address"         : "10.167.4.73",
+    "stacklight_monitor_node01_deploy_address"  : "10.167.5.71",
+    "stacklight_monitor_node02_deploy_address"  : "10.167.5.72",
+    "stacklight_monitor_node03_deploy_address"  : "10.167.5.73",
     "stacklight_monitor_hostname"               : "mon",
     "stacklight_monitor_node01_hostname"        : "mon01",
     "stacklight_monitor_node02_hostname"        : "mon02",
@@ -19,6 +22,9 @@
     "stacklight_log_node01_address"             : "10.167.4.61",
     "stacklight_log_node02_address"             : "10.167.4.62",
     "stacklight_log_node03_address"             : "10.167.4.63",
+    "stacklight_log_node01_deploy_address"      : "10.167.5.61",
+    "stacklight_log_node02_deploy_address"      : "10.167.5.62",
+    "stacklight_log_node03_deploy_address"      : "10.167.5.63",
     "stacklight_log_hostname"                   : "log",
     "stacklight_log_node01_hostname"            : "log01",
     "stacklight_log_node02_hostname"            : "log02",
@@ -28,6 +34,9 @@
     "stacklight_telemetry_node01_address"       : "10.167.4.86",
     "stacklight_telemetry_node02_address"       : "10.167.4.87",
     "stacklight_telemetry_node03_address"       : "10.167.4.88",
+    "stacklight_telemetry_node01_deploy_address": "10.167.5.86",
+    "stacklight_telemetry_node02_deploy_address": "10.167.5.87",
+    "stacklight_telemetry_node03_deploy_address": "10.167.5.88",
     "stacklight_telemetry_hostname"             : "mtr",
     "stacklight_telemetry_node01_hostname"      : "mtr01",
     "stacklight_telemetry_node02_hostname"      : "mtr02",
@@ -36,6 +45,8 @@
     "stacklight_notification_smtp_host"         : "127.0.0.1",
     "stacklight_notification_address"           : "alerts@localhost",
 
-    "openstack_enabled"                       : "True",
+    "static_ips_on_deploy_network_enabled"      : "False",
+
+    "openstack_enabled"                         : "True",
     "kubernetes_enabled"                        : "False"
 }

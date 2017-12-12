@@ -22,9 +22,26 @@ parameters:
     ceph_rgw_node02_address: {{ cookiecutter.ceph_rgw_node02_address }}
     ceph_rgw_node03_address: {{ cookiecutter.ceph_rgw_node03_address }}
 
+    {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+    ceph_mon_node01_deploy_address: {{ cookiecutter.ceph_mon_node01_deploy_address }}
+    ceph_mon_node02_deploy_address: {{ cookiecutter.ceph_mon_node02_deploy_address }}
+    ceph_mon_node03_deploy_address: {{ cookiecutter.ceph_mon_node03_deploy_address }}
+    ceph_rgw_node01_deploy_address: {{ cookiecutter.ceph_rgw_node01_deploy_address }}
+    ceph_rgw_node02_deploy_address: {{ cookiecutter.ceph_rgw_node02_deploy_address }}
+    ceph_rgw_node03_deploy_address: {{ cookiecutter.ceph_rgw_node03_deploy_address }}
+    ceph_osd_rack01_deploy_subnet: {{ cookiecutter.ceph_osd_rack01_deploy_subnet }}
+    {%- for i in range(cookiecutter.ceph_osd_node_count|int) %}
+    {%- set ip_start = 200 -%}
+    {%- set osd_start = 0 %}
+    ceph_osd_node{{ "%03d"|format(osd_start + loop.index) }}_deploy_address: ${_param:ceph_osd_rack01_deploy_subnet}.{{ ip_start|int + loop.index }}
+    {%- endfor %}
+    {%- endif %}
+
+    backend_vlan: {{ cookiecutter.backend_vlan }}
     ceph_cluster_fsid: "{{ secret(8) }}-{{ secret(4) }}-{{ secret(4) }}-{{ secret(4) }}-{{ secret(12) }}"
     ceph_osd_rack01_single_subnet: {{ cookiecutter.ceph_osd_rack01_single_subnet }}
     ceph_osd_rack01_backend_subnet: {{ cookiecutter.ceph_osd_rack01_backend_subnet }}
+    backend_network_netmask: {{ cookiecutter.backend_network_netmask }}
     ceph_osd_rack01_hostname: {{ cookiecutter.ceph_osd_rack01_hostname }}
   linux:
     network:

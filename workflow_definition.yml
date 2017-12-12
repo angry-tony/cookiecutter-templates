@@ -155,6 +155,11 @@ general_params_action:
         help_text: "IP gateway address of deploy network"
         initial: "10.0.0.1"
         width: half
+      - initial: False
+        name: static_ips_on_deploy_network_enabled
+        label: "Static IPs on deploy network"
+        help_text: "Assign static IP addresses on deploy network"
+        type: BOOL
       - name: "control_network_subnet"
         type: IP
         help_text: "IP address of control network with network mask"
@@ -350,6 +355,17 @@ infra_params_action:
           - "bluestore"
         - - "filestore"
           - "filestore"
+    - name: "backend_network_subnet"
+      type: IP
+      help_text: "IP address of Ceph backend network with network mask - used as cluster_network for OSD data replication"
+      initial: "10.0.2.0/24"
+      mask: True
+    - name: "backend_vlan"
+      type: TEXT
+      help_text: "Ceph backend plane vlan ID for cluster_network"
+      initial: "30"
+      label: "Ceph Backend VLAN for cluster_network"
+      width: half
   - name: "cicd_params"
     label: "CI/CD"
     requires:
@@ -403,9 +419,22 @@ product_params_action:
       initial: '{{ deploy_network_subnet | netmask }}'
       name: deploy_network_netmask
       type: IP
-    - help_text: "IP address of a mirror VM"
+    - help_text: IP mask of Ceph backend network
+      hidden: True
+      initial: '{{ backend_network_subnet | netmask }}'
+      name: backend_network_subnet
+      type: IP
+      requires:
+      - ceph_enabled: True
+    - help_text: "IP address of a mirror VM on deploy network"
       initial: "{{ deploy_network_subnet | subnet(14) }}"
-      name: "aptly_server_address"
+      name: "aptly_server_deploy_address"
+      type: "IP"
+      requires:
+      - offline_deployment: True
+    - help_text: "IP address of a mirror VM on control network"
+      initial: "{{ control_network_subnet | subnet(14) }}"
+      name: "aptly_server_control_address"
       type: "IP"
       requires:
       - offline_deployment: True
@@ -555,6 +584,13 @@ product_params_action:
       name: cicd_control_node01_address
       type: IP
       width: half
+    - help_text: Deploy IP address of cicd control node01
+      initial: '{{ deploy_network_subnet | subnet(91) }}'
+      name: cicd_control_node01_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of cicd control node01
       initial: cid01
       name: cicd_control_node01_hostname
@@ -565,6 +601,13 @@ product_params_action:
       name: cicd_control_node02_address
       type: IP
       width: half
+    - help_text: Deploy IP address of cicd control node02
+      initial: '{{ deploy_network_subnet | subnet(92) }}'
+      name: cicd_control_node02_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of cicd control node02
       initial: cid02
       name: cicd_control_node02_hostname
@@ -575,6 +618,13 @@ product_params_action:
       name: cicd_control_node03_address
       type: IP
       width: half
+    - help_text: Deploy IP address of cicd control node03
+      initial: '{{ deploy_network_subnet | subnet(93) }}'
+      name: cicd_control_node03_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of cicd control node03
       initial: cid03
       name: cicd_control_node03_hostname
@@ -677,6 +727,28 @@ product_params_action:
     - help_text: IP address of OSS node03
       initial: '${_param:stacklight_monitor_node03_address}'
       name: oss_node03_address
+      type: TEXT
+    - help_text: Deploy IP address of OSS node01
+      initial: '${_param:stacklight_monitor_node01_deploy_address}'
+      name: oss_node01_deploy_address
+      type: IP
+      requires:
+      - static_ips_on_deploy_network_enabled: True
+    - help_text: Deploy IP address of OSS node02
+      initial: '${_param:stacklight_monitor_node02_deploy_address}'
+      name: oss_node02_deploy_address
+      type: IP
+      requires:
+      - static_ips_on_deploy_network_enabled: True
+    - help_text: Deploy IP address of OSS node03
+      initial: '${_param:stacklight_monitor_node03_deploy_address}'
+      name: oss_node03_deploy_address
+      type: IP
+      requires:
+      - static_ips_on_deploy_network_enabled: True
+    - help_text: "OpenStack auth URL for OSS tools"
+      initial: "http://172.17.16.190:5000/v3"
+      name: oss_openstack_auth_url
       type: TEXT
       requires:
       - oss_enabled: True
@@ -1129,6 +1201,12 @@ product_params_action:
       name: opencontrail_analytics_address
       type: IP
       width: half
+    - help_text: Deploy IP address of OC analytics node01
+      initial: '${_param:stacklight_monitor_node01_deploy_address}'
+      name: oss_node01_deploy_address
+      type: IP
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: ''
       initial: nal
       name: opencontrail_analytics_hostname
@@ -1139,6 +1217,13 @@ product_params_action:
       name: opencontrail_analytics_node01_address
       type: IP
       width: half
+    - help_text: Deploy IP address of a opencontrail analytics node01
+      initial: '{{ deploy_network_subnet | subnet(31) }}'
+      name: opencontrail_analytics_node01_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of a opencontrail analytics node01 on control network
       initial: nal01
       name: opencontrail_analytics_node01_hostname
@@ -1149,6 +1234,13 @@ product_params_action:
       name: opencontrail_analytics_node02_address
       type: IP
       width: half
+    - help_text: Deploy IP address of a opencontrail analytics node02
+      initial: '{{ deploy_network_subnet | subnet(32) }}'
+      name: opencontrail_analytics_node02_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of a opencontrail analytics node02 on control network
       initial: nal02
       name: opencontrail_analytics_node02_hostname
@@ -1159,6 +1251,13 @@ product_params_action:
       name: opencontrail_analytics_node03_address
       type: IP
       width: half
+    - help_text: Deploy IP address of a opencontrail analytics node03
+      initial: '{{ deploy_network_subnet | subnet(33) }}'
+      name: opencontrail_analytics_node03_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of a opencontrail analytics node03 on control network
       initial: nal03
       name: opencontrail_analytics_node03_hostname
@@ -1191,6 +1290,13 @@ product_params_action:
       name: opencontrail_control_node01_address
       type: IP
       width: half
+    - help_text: Deploy IP address of a opencontrail control node01
+      initial: '{{ deploy_network_subnet | subnet(21) }}'
+      name: opencontrail_control_node01_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of a opencontrail control node01 on control network
       initial: ntw01
       name: opencontrail_control_node01_hostname
@@ -1201,6 +1307,13 @@ product_params_action:
       name: opencontrail_control_node02_address
       type: IP
       width: half
+    - help_text: Deploy IP address of a opencontrail control node02
+      initial: '{{ deploy_network_subnet | subnet(22) }}'
+      name: opencontrail_control_node02_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of a opencontrail control node02 on control network
       initial: ntw02
       name: opencontrail_control_node02_hostname
@@ -1211,6 +1324,13 @@ product_params_action:
       name: opencontrail_control_node03_address
       type: IP
       width: half
+    - help_text: Deploy IP address of a opencontrail control node03
+      initial: '{{ deploy_network_subnet | subnet(23) }}'
+      name: opencontrail_control_node03_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of a opencontrail control node03 on control network
       initial: ntw03
       name: opencontrail_control_node03_hostname
@@ -1259,6 +1379,13 @@ product_params_action:
     requires:
     - opencontrail_enabled: True
   - fields:
+    - help_text: Deploy NIC on management network
+      initial: eth0
+      name: compute_deploy_nic
+      type: TEXT
+      width: half
+      requires:
+        - static_ips_on_deploy_network_enabled: True
     - help_text: First NIC in OpenStack compute bond
       initial: eth1
       name: compute_primary_first_nic
@@ -1288,6 +1415,14 @@ product_params_action:
           - "balance-alb"
       requires:
       - deployment_type: physical
+    - help_text: Deploy NIC on management network
+      initial: eth0
+      name: gateway_deploy_nic
+      type: TEXT
+      width: half
+      requires:
+        - openstack_network_engine: 'ovs'
+        - static_ips_on_deploy_network_enabled: True
     - help_text: First NIC in OVS gateway bond
       initial: eth1
       name: gateway_primary_first_nic
@@ -1311,6 +1446,13 @@ product_params_action:
       name: openstack_compute_rack01_single_subnet
       type: TEXT
       width: half
+    - help_text: deploy plane network prefix for compute nodes
+      initial: '{{ ".".join(deploy_network_subnet.split(".")[:3]) }}'
+      name: openstack_compute_rack01_deploy_subnet
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: data plane network prefix for compute nodes
       initial: '{{ ".".join(tenant_network_subnet.split(".")[:3]) }}'
       name: openstack_compute_rack01_tenant_subnet
@@ -1331,6 +1473,13 @@ product_params_action:
       name: openstack_control_node01_address
       type: IP
       width: half
+    - help_text: Deploy IP address of a control node01
+      initial: '{{ deploy_network_subnet | subnet(11) }}'
+      name: openstack_control_node01_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of a control node01
       initial: ctl01
       name: openstack_control_node01_hostname
@@ -1341,6 +1490,13 @@ product_params_action:
       name: openstack_control_node02_address
       type: IP
       width: half
+    - help_text: Deploy IP address of a control node02
+      initial: '{{ deploy_network_subnet | subnet(12) }}'
+      name: openstack_control_node02_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of a control node02
       initial: ctl02
       name: openstack_control_node02_hostname
@@ -1351,6 +1507,13 @@ product_params_action:
       name: openstack_control_node03_address
       type: IP
       width: half
+    - help_text: Deploy IP address of a control node03
+      initial: '{{ deploy_network_subnet | subnet(13) }}'
+      name: openstack_control_node03_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of a control node03
       initial: ctl03
       name: openstack_control_node03_hostname
@@ -1371,6 +1534,13 @@ product_params_action:
       name: openstack_database_node01_address
       type: IP
       width: half
+    - help_text: Deploy IP address of a database node01
+      initial: '{{ deploy_network_subnet | subnet(51) }}'
+      name: openstack_database_node01_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of a database node01
       initial: dbs01
       name: openstack_database_node01_hostname
@@ -1381,6 +1551,13 @@ product_params_action:
       name: openstack_database_node02_address
       type: IP
       width: half
+    - help_text: Deploy IP address of a database node02
+      initial: '{{ deploy_network_subnet | subnet(52) }}'
+      name: openstack_database_node02_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of a database node02
       initial: dbs02
       name: openstack_database_node02_hostname
@@ -1391,6 +1568,13 @@ product_params_action:
       name: openstack_database_node03_address
       type: IP
       width: half
+    - help_text: Deploy IP address of a database node03
+      initial: '{{ deploy_network_subnet | subnet(53) }}'
+      name: openstack_database_node03_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of a database node03
       initial: dbs03
       name: openstack_database_node03_hostname
@@ -1403,6 +1587,14 @@ product_params_action:
       width: half
       requires:
         - openstack_network_engine: 'ovs'
+    - help_text: Deploy IP address of gateway node01
+      initial: '{{ deploy_network_subnet | subnet(224) }}'
+      name: openstack_gateway_node01_deploy_address
+      type: IP
+      width: half
+      requires:
+      - openstack_network_engine: 'ovs'
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of gateway node01
       initial: gtw01
       name: openstack_gateway_node01_hostname
@@ -1424,6 +1616,14 @@ product_params_action:
       width: half
       requires:
         - openstack_network_engine: 'ovs'
+    - help_text: Deploy IP address of gateway node02
+      initial: '{{ deploy_network_subnet | subnet(225) }}'
+      name: openstack_gateway_node02_deploy_address
+      type: IP
+      width: half
+      requires:
+      - openstack_network_engine: 'ovs'
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of gateway node02
       initial: gtw02
       name: openstack_gateway_node02_hostname
@@ -1445,6 +1645,14 @@ product_params_action:
       width: half
       requires:
         - openstack_network_engine: 'ovs'
+    - help_text: Deploy IP address of gateway node03
+      initial: '{{ deploy_network_subnet | subnet(226) }}'
+      name: openstack_gateway_node03_deploy_address
+      type: IP
+      width: half
+      requires:
+      - openstack_network_engine: 'ovs'
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of gateway node03
       initial: gtw03
       name: openstack_gateway_node03_hostname
@@ -1473,6 +1681,13 @@ product_params_action:
       name: openstack_message_queue_node01_address
       type: IP
       width: half
+    - help_text: Deploy IP address of message queue node01
+      initial: '{{ deploy_network_subnet | subnet(41) }}'
+      name: openstack_message_queue_node01_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of a message queue node01
       initial: msg01
       name: openstack_message_queue_node01_hostname
@@ -1483,6 +1698,13 @@ product_params_action:
       name: openstack_message_queue_node02_address
       type: IP
       width: half
+    - help_text: Deploy IP address of message queue node02
+      initial: '{{ deploy_network_subnet | subnet(42) }}'
+      name: openstack_message_queue_node02_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of a message queue node02
       initial: msg02
       name: openstack_message_queue_node02_hostname
@@ -1493,6 +1715,13 @@ product_params_action:
       name: openstack_message_queue_node03_address
       type: IP
       width: half
+    - help_text: Deploy IP address of message queue node03
+      initial: '{{ deploy_network_subnet | subnet(43) }}'
+      name: openstack_message_queue_node03_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of a message queue node03
       initial: msg03
       name: openstack_message_queue_node03_hostname
@@ -1503,6 +1732,13 @@ product_params_action:
       name: openstack_benchmark_node01_address
       type: IP
       width: half
+    - help_text: Deploy IP address of a benchmark node
+      initial: '{{ deploy_network_subnet | subnet(95) }}'
+      name: openstack_benchmark_node01_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of a benchmark node
       initial: bmk01
       name: openstack_benchmark_node01_hostname
@@ -1512,6 +1748,14 @@ product_params_action:
       initial: '{{ control_network_subnet | subnet(19) }}'
       name: openstack_upgrade_node01_address
       type: IP
+      width: half
+    - help_text: Deploy IP address of a upgrade node
+      initial: '{{ deploy_network_subnet | subnet(19) }}'
+      name: openstack_upgrade_node01_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: Tag of the physical network the sriov interface belongs to
       initial: physnet1
       name: openstack_nfv_sriov_network
@@ -1584,6 +1828,13 @@ product_params_action:
       name: openstack_proxy_node01_address
       type: IP
       width: half
+    - help_text: Deploy IP address of a proxy node01
+      initial: '{{ deploy_network_subnet | subnet(81) }}'
+      name: openstack_proxy_node01_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of a proxy node01
       initial: prx01
       name: openstack_proxy_node01_hostname
@@ -1594,6 +1845,13 @@ product_params_action:
       name: openstack_proxy_node02_address
       type: IP
       width: half
+    - help_text: Deploy IP address of a proxy node02
+      initial: '{{ deploy_network_subnet | subnet(82) }}'
+      name: openstack_proxy_node02_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of a proxy node02
       initial: prx02
       name: openstack_proxy_node02_hostname
@@ -1632,6 +1890,13 @@ product_params_action:
       name: stacklight_log_node01_address
       type: IP
       width: half
+    - help_text: Deploy IP address of stacklight logging node01
+      initial: '{{ deploy_network_subnet | subnet(61) }}'
+      name: stacklight_log_node01_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of stacklight logging node01
       initial: log01
       name: stacklight_log_node01_hostname
@@ -1642,6 +1907,13 @@ product_params_action:
       name: stacklight_log_node02_address
       type: IP
       width: half
+    - help_text: Deploy IP address of stacklight logging node02
+      initial: '{{ deploy_network_subnet | subnet(62) }}'
+      name: stacklight_log_node02_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of stacklight logging node02
       initial: log02
       name: stacklight_log_node02_hostname
@@ -1652,6 +1924,13 @@ product_params_action:
       name: stacklight_log_node03_address
       type: IP
       width: half
+    - help_text: Deploy IP address of stacklight logging node03
+      initial: '{{ deploy_network_subnet | subnet(63) }}'
+      name: stacklight_log_node03_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of stacklight logging node03
       initial: log03
       name: stacklight_log_node03_hostname
@@ -1672,6 +1951,13 @@ product_params_action:
       name: stacklight_monitor_node01_address
       type: IP
       width: half
+    - help_text: Deploy IP address of stacklight monitoring node01
+      initial: '{{ deploy_network_subnet | subnet(71) }}'
+      name: stacklight_monitor_node01_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of stacklight monitoring node01
       initial: mon01
       name: stacklight_monitor_node01_hostname
@@ -1682,6 +1968,13 @@ product_params_action:
       name: stacklight_monitor_node02_address
       type: IP
       width: half
+    - help_text: Deploy IP address of stacklight monitoring node02
+      initial: '{{ deploy_network_subnet | subnet(72) }}'
+      name: stacklight_monitor_node02_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of stacklight monitoring node02
       initial: mon02
       name: stacklight_monitor_node02_hostname
@@ -1692,6 +1985,13 @@ product_params_action:
       name: stacklight_monitor_node03_address
       type: IP
       width: half
+    - help_text: Deploy IP address of stacklight monitoring node03
+      initial: '{{ deploy_network_subnet | subnet(73) }}'
+      name: stacklight_monitor_node03_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of stacklight monitoring node03
       initial: mon03
       name: stacklight_monitor_node03_hostname
@@ -1712,6 +2012,13 @@ product_params_action:
       name: stacklight_telemetry_node01_address
       type: IP
       width: half
+    - help_text: Deploy IP address of stacklight telemetry node01
+      initial: '{{ deploy_network_subnet | subnet(86) }}'
+      name: stacklight_telemetry_node01_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of stacklight telemetry node01
       initial: mtr01
       name: stacklight_telemetry_node01_hostname
@@ -1722,6 +2029,13 @@ product_params_action:
       name: stacklight_telemetry_node02_address
       type: IP
       width: half
+    - help_text: Deploy IP address of stacklight telemetry node02
+      initial: '{{ deploy_network_subnet | subnet(87) }}'
+      name: stacklight_telemetry_node02_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of stacklight telemetry node02
       initial: mtr02
       name: stacklight_telemetry_node02_hostname
@@ -1732,6 +2046,13 @@ product_params_action:
       name: stacklight_telemetry_node03_address
       type: IP
       width: half
+    - help_text: Deploy IP address of stacklight telemetry node03
+      initial: '{{ deploy_network_subnet | subnet(88) }}'
+      name: stacklight_telemetry_node03_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of stacklight telemetry node03
       initial: mtr03
       name: stacklight_telemetry_node03_hostname
@@ -1780,6 +2101,13 @@ product_params_action:
       name: ceph_mon_node01_address
       type: IP
       width: half
+    - help_text: Deploy IP address of ceph mon storage node01
+      initial: '{{ deploy_network_subnet | subnet(66) }}'
+      name: ceph_mon_node01_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of ceph mon storage node01
       initial: cmn01
       name: ceph_mon_node01_hostname
@@ -1790,6 +2118,13 @@ product_params_action:
       name: ceph_mon_node02_address
       type: IP
       width: half
+    - help_text: Deploy IP address of ceph mon storage node02
+      initial: '{{ deploy_network_subnet | subnet(67) }}'
+      name: ceph_mon_node02_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of ceph mon storage node02
       initial: cmn02
       name: ceph_mon_node02_hostname
@@ -1800,6 +2135,13 @@ product_params_action:
       name: ceph_mon_node03_address
       type: IP
       width: half
+    - help_text: Deploy IP address of ceph mon storage node03
+      initial: '{{ deploy_network_subnet | subnet(68) }}'
+      name: ceph_mon_node03_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of ceph mon storage node03
       initial: cmn03
       name: ceph_mon_node03_hostname
@@ -1820,6 +2162,13 @@ product_params_action:
       name: ceph_rgw_node01_address
       type: IP
       width: half
+    - help_text: Deploy IP address of ceph rados gateway storage node01
+      initial: '{{ deploy_network_subnet | subnet(76) }}'
+      name: ceph_rgw_node01_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of ceph rados gateway storage node01
       initial: rgw01
       name: ceph_rgw_node01_hostname
@@ -1830,6 +2179,13 @@ product_params_action:
       name: ceph_rgw_node02_address
       type: IP
       width: half
+    - help_text: Deploy IP address of ceph rados gateway storage node02
+      initial: '{{ deploy_network_subnet | subnet(77) }}'
+      name: ceph_rgw_node02_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of ceph rados gateway storage node02
       initial: rgw02
       name: ceph_rgw_node02_hostname
@@ -1840,9 +2196,21 @@ product_params_action:
       name: ceph_rgw_node03_address
       type: IP
       width: half
+    - help_text: Deploy IP address of ceph rados gateway storage node03
+      initial: '{{ deploy_network_subnet | subnet(78) }}'
+      name: ceph_rgw_node03_deploy_address
+      type: IP
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - help_text: hostname of ceph rados gateway storage node03
       initial: rgw03
       name: ceph_rgw_node03_hostname
+      type: TEXT
+      width: half
+    - help_text: number of OSD hosts
+      initial: '3'
+      name: ceph_osd_node_count
       type: TEXT
       width: half
     - help_text: number of OSDs
@@ -1860,11 +2228,18 @@ product_params_action:
       name: ceph_osd_rack01_single_subnet
       type: TEXT
       width: half
-    - help_text: deploy network prefix for ceph OSDs
-      initial: '{{ ".".join(deploy_network_subnet.split(".")[:3]) }}'
+    - help_text: cluster network prefix for ceph OSDs - used to replicate OSDs data
+      initial: '{{ ".".join(backend_network_subnet.split(".")[:3]) }}'
       name: ceph_osd_rack01_backend_subnet
       type: TEXT
       width: half
+    - help_text: deploy network prefix for ceph OSDs
+      initial: '{{ ".".join(deploy_network_subnet.split(".")[:3]) }}'
+      name: ceph_osd_rack01_deploy_subnet
+      type: TEXT
+      width: half
+      requires:
+      - static_ips_on_deploy_network_enabled: True
     - name: "ceph_public_network"
       type: IP
       help_text: "IP address of ceph public network with network mask"
@@ -1874,7 +2249,7 @@ product_params_action:
     - name: "ceph_cluster_network"
       type: IP
       help_text: "IP address of ceph cluster network with network mask"
-      initial: "{{ deploy_network_subnet }}"
+      initial: "{{ backend_network_subnet }}"
       mask: True
       width: half
     - help_text: ceph OSD journal size in GB
@@ -1891,6 +2266,42 @@ product_params_action:
       width: half
       requires:
       - ceph_osd_backend: "bluestore"
+    - help_text: Deploy NIC on management network
+      initial: eth0
+      name: ceph_deploy_nic
+      type: TEXT
+      width: half
+      requires:
+        - static_ips_on_deploy_network_enabled: True
+    - help_text: First NIC in Ceph OSD node bond
+      initial: eth1
+      name: ceph_primary_first_nic
+      type: TEXT
+      width: half
+    - help_text: Second NIC in Ceph OSD node bond
+      initial: eth2
+      name: ceph_primary_second_nic
+      type: TEXT
+      width: half
+    - name: "ceph_osd_bond_mode"
+      help_text: Bond mode for OSD nodes
+      type: "CHOICE"
+      initial: "active-backup"
+      choices:
+        - - "active-backup"
+          - "active-backup"
+        - - "balance-xor"
+          - "balance-xor"
+        - - "broadcast"
+          - "broadcast"
+        - - "802.3ad"
+          - "802.3ad"
+        - - "balance-tlb"
+          - "balance-tlb"
+        - - "balance-alb"
+          - "balance-alb"
+      requires:
+      - deployment_type: physical
     - help_text: comma separated list of OSD data disks
       initial: '/dev/vdd,/dev/vde,/dev/vdf'
       name: ceph_osd_data_disks

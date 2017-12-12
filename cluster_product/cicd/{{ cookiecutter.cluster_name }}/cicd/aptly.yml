@@ -215,6 +215,13 @@ parameters:
       options:
         bip: 10.99.0.1/16
         fixed-cidr: 10.99.0.1/17
+  linux:
+    network:
+      interface:
+        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+        ens3: ${_param:linux_deploy_interface}
+        {%- endif %}
+        ens4: ${_param:linux_single_interface}
   git:
     server:
        directory: /srv/git/

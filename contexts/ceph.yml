@@ -136,7 +136,7 @@ default_context:
   ceph_osd_backend: bluestore
   ceph_osd_rack01_hostname: osd
   ceph_osd_rack01_single_subnet: 172.16.47
-  ceph_osd_rack01_backend_subnet: 172.16.48
+  ceph_osd_rack01_deploy_subnet: 172.16.48
   ceph_public_network: 172.16.47.0/24
   ceph_cluster_network: 172.16.48.70/24
   ceph_osd_mode:  separated
@@ -149,3 +149,4 @@ default_context:
   local_pipelines: True
   local_docker_images: True
   local_python_repo: True
+  static_ips_on_deploy_network_enabled: 'True'

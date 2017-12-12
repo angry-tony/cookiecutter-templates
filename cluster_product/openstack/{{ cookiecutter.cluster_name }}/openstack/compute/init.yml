@@ -58,6 +58,9 @@ parameters:
   linux:
     network:
       interface:
+  {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+        {{ cookiecutter.compute_deploy_nic }}: ${_param:linux_deploy_interface}
+  {%- endif %}
   {%- if not cookiecutter.get('openstack_nfv_dpdk_enabled', 'False') == 'True' %}
         eth1:
           mtu: 9000
