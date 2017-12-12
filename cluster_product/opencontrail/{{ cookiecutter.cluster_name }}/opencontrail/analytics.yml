@@ -1,25 +1,25 @@
 classes:
 - service.haproxy.proxy.single
 {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
-- system.linux.system.repo_local.ubuntu
-- system.linux.system.repo_local.mcp.openstack
 - system.linux.system.repo_local.mcp.extra
 - system.linux.system.repo_local.mcp.contrail
-- system.linux.system.repo_local.mcp.salt
-- system.linux.system.repo_local.cassandra
+- system.linux.system.repo_local.mcp.apt_mirantis.openstack
+- system.linux.system.repo_local.mcp.apt_mirantis.ubuntu
+- system.linux.system.repo_local.mcp.apt_mirantis.saltstack_2016_3
+- system.linux.system.repo_local.mcp.apt_mirantis.cassandra
 {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
-- system.linux.system.repo_local.sensu
+- system.linux.system.repo_local.mcp.apt_mirantis.sensu
 {%- endif %}
 {%- else %}
-- system.linux.system.repo.ubuntu
-- system.linux.system.repo.mcp.openstack
 - system.linux.system.repo.mcp.extra
 - system.linux.system.repo.mcp.contrail
-- system.linux.system.repo.saltstack.trusty
-- system.linux.system.repo.cassandra
+- system.linux.system.repo.mcp.apt_mirantis.openstack
+- system.linux.system.repo.mcp.apt_mirantis.ubuntu
+- system.linux.system.repo.mcp.apt_mirantis.saltstack_2016_3
+- system.linux.system.repo.mcp.apt_mirantis.cassandra
 {%- if cookiecutter.stacklight_enabled == 'True' %}
 {%- if cookiecutter.stacklight_version == '1' %}
-- system.linux.system.repo.sensu
+- system.linux.system.repo.mcp.apt_mirantis.sensu
 {%- endif %}
 {%- if cookiecutter.stacklight_version == '2' %}
 - system.prometheus.exporters.jmx

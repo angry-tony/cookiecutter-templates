@@ -1,11 +1,13 @@
 classes:
 {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
-- system.linux.system.repo_local.elasticsearch
-- system.linux.system.repo_local.ubuntu
+- system.linux.system.repo_local.mcp.apt_mirantis.elastic
+- system.linux.system.repo_local.mcp.apt_mirantis.kibana
+- system.linux.system.repo_local.mcp.apt_mirantis.ubuntu
 - system.linux.system.repo_local.mcp.extra
 {%- else %}
-- system.linux.system.repo.elasticsearch
-- system.linux.system.repo.kibana
+- system.linux.system.repo.mcp.apt_mirantis.elastic
+- system.linux.system.repo.mcp.apt_mirantis.kibana
+- system.linux.system.repo.mcp.apt_mirantis.ubuntu
 - system.linux.system.repo.mcp.extra
 {%- endif %}
 - system.haproxy.proxy.listen.stacklight.elasticsearch

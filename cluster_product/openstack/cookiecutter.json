@@ -1,6 +1,8 @@
 {
     "cluster_name"                              : "deployment_name",
 
+    "mcp_version"                               : "stable",
+
     "openstack_network_engine"                  : "opencontrail",
     "openstack_ovs_dvr_enabled"                 : "False",
 

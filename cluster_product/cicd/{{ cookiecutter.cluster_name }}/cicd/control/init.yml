@@ -4,15 +4,15 @@
 classes:
   - system.linux.system.haveged
   {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
-  - system.linux.system.repo_local.ubuntu
-  - system.linux.system.repo_local.glusterfs
-  - system.linux.system.repo_local.docker
+  - system.linux.system.repo_local.mcp.apt_mirantis.ubuntu
+  - system.linux.system.repo_local.mcp.apt_mirantis.glusterfs
+  - system.linux.system.repo_local.mcp.apt_mirantis.docker
   - system.linux.system.repo_local.mcp.salt
   - system.linux.system.repo_local.mcp.extra
   {%- else %}
-  - system.linux.system.repo.ubuntu
-  - system.linux.system.repo.glusterfs
-  - system.linux.system.repo.docker
+  - system.linux.system.repo.mcp.apt_mirantis.ubuntu
+  - system.linux.system.repo.mcp.apt_mirantis.glusterfs
+  - system.linux.system.repo.mcp.apt_mirantis.docker
   - system.linux.system.repo.mcp.salt
   - system.linux.system.repo.mcp.extra
   {%- endif %}
