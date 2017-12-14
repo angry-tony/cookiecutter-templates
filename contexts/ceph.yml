@@ -105,32 +105,7 @@ default_context:
   salt_master_hostname: cfg01
   salt_master_management_address: 10.167.5.15
   oss_enabled: 'False'
-  stacklight_enabled: 'True'
-  stacklight_version: '1'
-  stacklight_log_address: 10.167.4.60
-  stacklight_log_hostname: log
-  stacklight_log_node01_address: 10.167.4.61
-  stacklight_log_node01_hostname: log01
-  stacklight_log_node02_address: 10.167.4.62
-  stacklight_log_node02_hostname: log02
-  stacklight_log_node03_address: 10.167.4.63
-  stacklight_log_node03_hostname: log03
-  stacklight_monitor_address: 10.167.4.70
-  stacklight_monitor_hostname: mon
-  stacklight_monitor_node01_address: 10.167.4.71
-  stacklight_monitor_node01_hostname: mon01
-  stacklight_monitor_node02_address: 10.167.4.72
-  stacklight_monitor_node02_hostname: mon02
-  stacklight_monitor_node03_address: 10.167.4.73
-  stacklight_monitor_node03_hostname: mon03
-  stacklight_telemetry_address: 10.167.4.85
-  stacklight_telemetry_hostname: mtr
-  stacklight_telemetry_node01_address: 10.167.4.86
-  stacklight_telemetry_node01_hostname: mtr01
-  stacklight_telemetry_node02_address: 10.167.4.87
-  stacklight_telemetry_node02_hostname: mtr02
-  stacklight_telemetry_node03_address: 10.167.4.88
-  stacklight_telemetry_node03_hostname: mtr03
+  stacklight_enabled: 'False'
   tenant_network_gateway: ''
   tenant_network_netmask: 255.255.255.0
   tenant_vlan: '20'

@@ -33,7 +33,7 @@ classes:
 {%- endif %}
 - system.opencontrail.control.control
 - system.opencontrail.client.cluster
-{%- if cookiecutter.get('openstack_enabled') == 'True' %}
+{%- if cookiecutter.get('openstack_enabled','False') == 'True' %}
 - system.opencontrail.client.resource.openstack_metadata
 {%- endif %}
 - system.zookeeper.backup.client.single

@@ -37,5 +37,6 @@
 
     "stacklight_enabled"                        : "True",
     "stacklight_version"                        : "1",
-    "kubernetes_enabled"                        : "False"
+    "kubernetes_enabled"                        : "False",
+    "openstack_enabled"                         : "True"
 }

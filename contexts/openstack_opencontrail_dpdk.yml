@@ -108,7 +108,7 @@ default_context:
   salt_master_management_address: 10.167.5.15
   oss_enabled: 'False'
   stacklight_enabled: 'True'
-  stacklight_version: '1'
+  stacklight_version: '2'
   tenant_network_gateway: ''
   tenant_network_netmask: 255.255.255.0
   tenant_vlan: '20'

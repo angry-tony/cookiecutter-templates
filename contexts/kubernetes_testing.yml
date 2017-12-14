@@ -4,7 +4,7 @@ default_context:
     opencontrail_enabled: false
     oss_enabled: false
     stacklight_enabled: true
-    stacklight_version: '1'
+    stacklight_version: '2'
     cicd_enabled:  false
     kubernetes_enabled: true
     deployment_type: virtual
