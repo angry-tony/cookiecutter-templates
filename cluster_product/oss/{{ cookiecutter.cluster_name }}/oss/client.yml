@@ -140,7 +140,17 @@ parameters:
     # OSS OpenStack
     oss_openstack_username: {{ cookiecutter.oss_openstack_username }}
     oss_openstack_password: {{ cookiecutter.oss_openstack_password }}
-    oss_openstack_auth_url: {{ cookiecutter.oss_openstack_auth_url }}
+    {%- if cookiecutter.oss_openstack_ssl_verify == 'True' %}
+    oss_openstack_http_prefix: https
+    {%- else %}
+    oss_openstack_http_prefix: http
+    {%- endif %}
+    {%- if cookiecutter.oss_openstack_endpoint_type == 'public' %}
+    oss_openstack_endpoint_address: ${_param:cluster_public_host}
+    {%- else %}
+    oss_openstack_endpoint_address: ${_param:openstack_control_address}
+    {%- endif %}
+    oss_openstack_auth_url: ${_param:oss_openstack_http_prefix}://${_param:oss_openstack_endpoint_address}:5000/v3
     oss_openstack_project: {{ cookiecutter.oss_openstack_project }}
     oss_openstack_domain_id: {{ cookiecutter.oss_openstack_domain_id }}
     oss_openstack_username_domain_id: {{ cookiecutter.oss_openstack_username_domain_id }}
