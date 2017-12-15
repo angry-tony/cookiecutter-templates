@@ -134,7 +134,6 @@ default_context:
   tenant_network_netmask: 255.255.255.0
   tenant_vlan: '20'
   oss_enabled: 'True'
-  oss_openstack_auth_url: http://10.100.0.10:5000/v3
   oss_openstack_username: admin
   oss_openstack_password: password
   oss_openstack_project: admin
