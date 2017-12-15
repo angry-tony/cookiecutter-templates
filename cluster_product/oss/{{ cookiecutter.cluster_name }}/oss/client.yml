@@ -15,6 +15,9 @@ classes:
 {%- if cookiecutter.oss_security_audit_enabled == 'True' %}
 - system.postgresql.client.security_monkey
 {%- endif %}
+{%- if cookiecutter.oss_cleanup_service_enabled == 'True' %}
+- system.postgresql.client.janitor_monkey
+{%- endif %}
 
 # Elasticsearch
 - system.elasticsearch.client

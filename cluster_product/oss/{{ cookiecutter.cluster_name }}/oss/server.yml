@@ -2,7 +2,9 @@ classes:
 # Docker
 - system.docker.host
 # Keepalived
+{%- if cookiecutter.stacklight_enabled == 'True' %}
 - system.keepalived.cluster.instance.stacklight_monitor_vip
+{%- endif %}
 - system.salt.minion.cert.proxy.cicd
 {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
 - system.linux.system.repo_local.docker
@@ -83,10 +85,12 @@ parameters:
     haproxy_jenkins_bind_host: ${_param:cicd_control_address}
     haproxy_jenkins_bind_port: 8081
 
+    {%- if cookiecutter.stacklight_enabled == 'True' %}
     haproxy_kibana_bind_host: ${_param:cluster_vip_address}
     haproxy_kibana_bind_port: ${_param:cluster_kibana_port}
     haproxy_kibana_ssl:
       enabled: false
+    {%- endif %}
 
     elasticsearch_ssl:
       enabled: false
