@@ -25,6 +25,8 @@
     "stacklight_telemetry_node02_hostname"      : "mtr02",
     "stacklight_telemetry_node03_hostname"      : "mtr03",
 
+    "mcp_version"                               : "stable",
+
     "local_repositories"                        : "False",
     "local_docker_images"                       : "False",
     "local_repo_url"                            : "${_param:cicd_control_address}",

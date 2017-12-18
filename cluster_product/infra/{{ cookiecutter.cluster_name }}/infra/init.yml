@@ -46,6 +46,12 @@ parameters:
     # Don't set it "false" before you configure sudo policies and enable power users.
     linux_system_user_sudo: true
 
+    apt_mk_version: {{ cookiecutter.mcp_version }}
+
+    {%- if cookiecutter.mcp_version != 'stable' or cookiecutter.mcp_version != 'testing' or cookiecutter.mcp_version != 'nightly' %}
+    jenkins_pipelines_branch: refs/tags/{{ cookiecutter.mcp_version }}
+    {%- endif %}
+
     {%- if cookiecutter.kubernetes_enabled != 'True' %}
     {%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
     salt_control_trusty_image: http://${_param:aptly_server_hostname}:8078/images/ubuntu-14-04-x64-mcp1.1.qcow2

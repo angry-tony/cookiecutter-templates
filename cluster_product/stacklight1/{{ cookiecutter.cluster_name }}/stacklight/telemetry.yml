@@ -3,20 +3,20 @@
 {%- endmacro -%}
 classes:
 {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
-- system.linux.system.repo_local.ubuntu
-- system.linux.system.repo_local.influxdb
-- system.linux.system.repo_local.mcp.salt
+- system.linux.system.repo_local.mcp.apt_mirantis.ubuntu
+- system.linux.system.repo_local.mcp.apt_mirantis.influxdb
+- system.linux.system.repo_local.mcp.apt_mirantis.saltstack_2016_3
 - system.linux.system.repo_local.mcp.extra
 {%- if cookiecutter.kubernetes_enabled == 'True' %}
-- system.linux.system.repo_local.mcp.openstack
+- system.linux.system.repo_local.mcp.apt_mirantis.openstack
 {%- endif %}
 {%- else %}
-- system.linux.system.repo.ubuntu
-- system.linux.system.repo.influxdb
-- system.linux.system.repo.saltstack.xenial
+- system.linux.system.repo.mcp.apt_mirantis.ubuntu
+- system.linux.system.repo.mcp.apt_mirantis.influxdb
+- system.linux.system.repo.mcp.apt_mirantis.saltstack_2016_3
 - system.linux.system.repo.mcp.extra
 {%- if cookiecutter.kubernetes_enabled == 'True' %}
-- system.linux.system.repo.mcp.openstack
+- system.linux.system.repo.mcp.apt_mirantis.openstack
 {%- endif %}
 {%- endif %}
 - system.influxdb.server.single

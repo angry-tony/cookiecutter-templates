@@ -2,6 +2,7 @@
     "cluster_name"                              : "deployment_name",
     "deployment_type"                           : "physical",
     "compute_bond_mode"                         : "active-backup",
+    "mcp_version"                               : "stable",
 
     "local_repositories"                        : "False",
     "local_repo_url"                            : "${_param:cicd_control_address}",

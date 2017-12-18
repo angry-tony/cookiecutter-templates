@@ -3,6 +3,8 @@
 
     "ceph_version"                         : "luminous",
 
+    "mcp_version"                               : "stable",
+
     "ceph_mon_node01_address"              : "172.16.47.66",
     "ceph_mon_node02_address"              : "172.16.47.67",
     "ceph_mon_node03_address"              : "172.16.47.68",

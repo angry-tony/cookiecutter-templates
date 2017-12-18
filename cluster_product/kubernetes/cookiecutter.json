@@ -2,6 +2,8 @@
     "cluster_name"                               : "deployment_name",
     "deployment_type"                            : "virtual",
 
+    "mcp_version"                               : "stable",
+
     "compute_bond_mode"                          : "active-backup",
 
     "kubernetes_keepalived_vip_interface"        : "ens4",
