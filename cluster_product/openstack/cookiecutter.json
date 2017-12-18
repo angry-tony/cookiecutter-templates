@@ -116,5 +116,6 @@
     "compute_primary_second_nic"                     : "eth2",
 
     "openstack_compute_count"                        : "100",
-    "compute_bond_mode"                              : "active-backup"
+    "compute_bond_mode"                              : "active-backup",
+    "oss_enabled"                                    : "False"
 }

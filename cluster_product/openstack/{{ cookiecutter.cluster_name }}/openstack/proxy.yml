@@ -50,6 +50,10 @@ classes:
 {%- if cookiecutter.stacklight_enabled == 'True' %}
 - cluster.{{ cookiecutter.cluster_name }}.stacklight.proxy
 {%- endif %}
+{%- if cookiecutter.oss_enabled == 'True' %}
+- system.nginx.server.proxy.oss.devops_portal
+- system.nginx.server.proxy.oss.rundeck
+{%- endif %}
 parameters:
   _param:
     keepalived_vip_interface: ens3

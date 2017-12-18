@@ -63,14 +63,3 @@ parameters:
     grafana_prometheus_address: ${_param:stacklight_monitor_address}
     grafana_prometheus_port: 15016
     stacklight_prometheus_port: 15010
-
-# Switch to generic ElasticSearch
-{%- if (cookiecutter.stacklight_enabled == 'True') and (cookiecutter.oss_enabled == 'True') %}
-    #TODO vnaumov prepare normal fix
-    haproxy_elasticsearch_bind_host: ${_param:stacklight_log_address}
-    haproxy_elasticsearch_http_bind_port: 9200
-    elasticsearch_bind_host: ${_param:stacklight_log_address}
-    elasticsearch_binary_bind_port: 9300
-    elasticsearch_cluster_name: elasticsearch
-    rundeck_cis_elasticsearch_url: http://${_param:stacklight_log_address}:9200
-{%- endif %}
