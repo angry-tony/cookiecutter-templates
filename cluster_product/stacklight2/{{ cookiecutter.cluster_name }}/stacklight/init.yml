@@ -47,6 +47,17 @@ parameters:
     stacklight_monitor_node01_address: {{ cookiecutter.stacklight_monitor_node01_address }}
     stacklight_monitor_node02_address: {{ cookiecutter.stacklight_monitor_node02_address }}
     stacklight_monitor_node03_address: {{ cookiecutter.stacklight_monitor_node03_address }}
+    {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+    stacklight_log_node01_deploy_address: {{ cookiecutter.stacklight_log_node01_deploy_address }}
+    stacklight_log_node02_deploy_address: {{ cookiecutter.stacklight_log_node02_deploy_address }}
+    stacklight_log_node03_deploy_address: {{ cookiecutter.stacklight_log_node03_deploy_address }}
+    stacklight_telemetry_node01_deploy_address: {{ cookiecutter.stacklight_telemetry_node01_deploy_address }}
+    stacklight_telemetry_node02_deploy_address: {{ cookiecutter.stacklight_telemetry_node02_deploy_address }}
+    stacklight_telemetry_node03_deploy_address: {{ cookiecutter.stacklight_telemetry_node03_deploy_address }}
+    stacklight_monitor_node01_deploy_address: {{ cookiecutter.stacklight_monitor_node01_deploy_address }}
+    stacklight_monitor_node02_deploy_address: {{ cookiecutter.stacklight_monitor_node02_deploy_address }}
+    stacklight_monitor_node03_deploy_address: {{ cookiecutter.stacklight_monitor_node03_deploy_address }}
+    {%- endif %}
     grafana_admin_password: admin
     grafana_database_type: mysql
     {%- if cookiecutter.openstack_enabled == 'False' %}

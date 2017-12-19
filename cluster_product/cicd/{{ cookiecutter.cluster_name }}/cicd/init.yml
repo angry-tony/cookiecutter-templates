@@ -7,6 +7,11 @@ parameters:
     cicd_control_node01_address: {{ cookiecutter.cicd_control_node01_address }}
     cicd_control_node02_address: {{ cookiecutter.cicd_control_node02_address }}
     cicd_control_node03_address: {{ cookiecutter.cicd_control_node03_address }}
+    {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+    cicd_control_node01_deploy_address: {{ cookiecutter.cicd_control_node01_deploy_address }}
+    cicd_control_node02_deploy_address: {{ cookiecutter.cicd_control_node02_deploy_address }}
+    cicd_control_node03_deploy_address: {{ cookiecutter.cicd_control_node03_deploy_address }}
+    {%- endif %}
     cicd_control_hostname: {{ cookiecutter.cicd_control_vip_hostname }}
     cicd_control_node01_hostname: {{ cookiecutter.cicd_control_node01_hostname }}
     cicd_control_node02_hostname: {{ cookiecutter.cicd_control_node02_hostname }}

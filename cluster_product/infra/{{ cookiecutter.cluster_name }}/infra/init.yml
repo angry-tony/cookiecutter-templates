@@ -65,7 +65,8 @@ parameters:
     {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
     local_repos: true
     aptly_server_hostname: {{ cookiecutter.aptly_server_hostname }}
-    aptly_server_address: {{ cookiecutter.aptly_server_address }}
+    aptly_server_deploy_address: {{ cookiecutter.aptly_server_deploy_address }}
+    aptly_server_control_address: {{ cookiecutter.aptly_server_control_address }}
     local_repo_url: {{ cookiecutter.local_repo_url}}
     linux_repo_refresh_db: true
     {%- if cookiecutter.get('local_docker_images', 'False') == 'True' %}
@@ -124,10 +125,21 @@ parameters:
     {%- endif %}
     {%- endif %}
 
+    {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+    linux_deploy_interface:
+      enabled: true
+      type: eth
+      proto: static
+      address: ${_param:deploy_address}
+      netmask: ${_param:deploy_network_netmask}
+      gateway: ${_param:deploy_network_gateway}
+      ipflush_onchange: true
+    {%- else %}
     linux_dhcp_interface:
       enabled: true
       type: eth
       proto: dhcp
+    {%- endif %}
     linux_single_interface:
       enabled: true
       type: eth
@@ -146,6 +158,9 @@ parameters:
   linux:
     network:
       dhclient:
+        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+        enabled: false
+        {%- else %}
         enabled: true
         request:
           - subnet-mask
@@ -164,6 +179,7 @@ parameters:
           - netbios-scope
           - interface-mtu
           - rfc3442-classless-static-routes
+        {%- endif %}
       host:
         hostname:
           address: ${_param:single_address}
@@ -182,7 +198,7 @@ parameters:
           - cfg.${_param:cluster_domain}
         {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
         apt:
-          address: ${_param:aptly_server_address}
+          address: ${_param:aptly_server_control_address}
           names:
           - ${_param:aptly_server_hostname}
           - ${_param:aptly_server_hostname}.${_param:cluster_domain}

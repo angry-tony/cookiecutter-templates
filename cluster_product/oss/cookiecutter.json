@@ -12,6 +12,9 @@
     "oss_node03_address"                        : "${_param:stacklight_monitor_node03_address}",
     "mcp_version"                               : "stable",
     "ofline_deployment"                         : "False",
+    "oss_node01_deploy_address"                 : "${_param:stacklight_monitor_node01_deploy_address}",
+    "oss_node01_deploy_address"                 : "${_param:stacklight_monitor_node02_deploy_address}",
+    "oss_node01_deploy_address"                 : "${_param:stacklight_monitor_node03_deploy_address}",
 
     "oss_openstack_username"                    : "admin",
     "oss_openstack_password"                    : "${_param:keystone_admin_password}",
@@ -33,6 +36,7 @@
     "sfdc_environment_id"                       : "0",
     "sfdc_sandbox_enabled"                      : "True",
 
+    "static_ips_on_deploy_network_enabled"      : "False",
 
     "oss_runbook_public_key"                    : "<<WILL_BE_GENERATED>>",
     "oss_runbook_private_key"                   : "<<WILL_BE_GENERATED>>",

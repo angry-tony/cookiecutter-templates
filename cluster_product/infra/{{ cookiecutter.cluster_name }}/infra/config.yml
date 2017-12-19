@@ -164,12 +164,21 @@ parameters:
           {%- endif %}
           params:
             tenant_address: ${_param:kubernetes_control_node01_tenant_address}
+        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+            deploy_address: ${_param:kubernetes_control_node01_deploy_address}
+        {%- endif %}
         kubernetes_control_node02:
           params:
             tenant_address: ${_param:kubernetes_control_node02_tenant_address}
+        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+            deploy_address: ${_param:kubernetes_control_node02_deploy_address}
+        {%- endif %}
         kubernetes_control_node03:
           params:
             tenant_address: ${_param:kubernetes_control_node03_tenant_address}
+          {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+            deploy_address: ${_param:kubernetes_control_node03_deploy_address}
+          {%- endif %}
         {%- if cookiecutter.stacklight_enabled != 'True' or cookiecutter.cicd_enabled != 'True' %}
           classes:
           - system.backupninja.server.single
@@ -178,12 +187,32 @@ parameters:
         opencontrail_control_node01:
           params:
             rabbitmq_cluster_role: master
+        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+            deploy_address: ${_param:opencontrail_control_node01_deploy_address}
+        {%- endif %}
         opencontrail_control_node02:
           params:
             rabbitmq_cluster_role: slave
+        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+            deploy_address: ${_param:opencontrail_control_node02_deploy_address}
+        {%- endif %}
         opencontrail_control_node03:
           params:
             rabbitmq_cluster_role: slave
+        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+            deploy_address: ${_param:opencontrail_control_node03_deploy_address}
+        {%- endif %}
+        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+        opencontrail_analytics_node01:
+          params:
+            deploy_address: ${_param:opencontrail_analytics_node01_deploy_address}
+        opencontrail_analytics_node02:
+          params:
+            deploy_address: ${_param:opencontrail_analytics_node02_deploy_address}
+        opencontrail_analytics_node03:
+          params:
+            deploy_address: ${_param:opencontrail_analytics_node03_deploy_address}
+        {%- endif %}
         {%- endif %}
         {%- endif %}
         {%- if cookiecutter.deployment_type == 'physical' and (cookiecutter.openstack_enabled == 'True' or (cookiecutter.kubernetes_enabled == 'True' and (cookiecutter.stacklight_enabled == 'True' or cookiecutter.cicd_enabled == 'True'))) %}
@@ -207,10 +236,41 @@ parameters:
         stacklight_log_node01:
           classes:
           - system.elasticsearch.client.single
+        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+          params:
+            deploy_address: ${_param:stacklight_log_node01_deploy_address}
+        stacklight_log_node02:
+          params:
+            deploy_address: ${_param:stacklight_log_node02_deploy_address}
+        stacklight_log_node03:
+          params:
+            deploy_address: ${_param:stacklight_log_node03_deploy_address}
+        {%- endif %}
         stacklight_monitor_node01:
           classes:
           - system.grafana.client.single
           - system.kibana.client.single
+        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+          params:
+            deploy_address: ${_param:stacklight_monitor_node01_deploy_address}
+        stacklight_monitor_node02:
+          params:
+            deploy_address: ${_param:stacklight_monitor_node02_deploy_address}
+        stacklight_monitor_node03:
+          params:
+            deploy_address: ${_param:stacklight_monitor_node03_deploy_address}
+        {%- if cookiecutter.kubernetes_enabled == 'False' %}
+        stacklight_telemetry_node01:
+          params:
+            deploy_address: ${_param:stacklight_telemetry_node01_deploy_address}
+        stacklight_telemetry_node02:
+          params:
+            deploy_address: ${_param:stacklight_telemetry_node02_deploy_address}
+        stacklight_telemetry_node03:
+          params:
+            deploy_address: ${_param:stacklight_telemetry_node03_deploy_address}
+        {%- endif %}
+        {%- endif %}
         {%- endif %}
         {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.kubernetes_enabled == 'True' %}
         stacklight_telemetry_node01:
@@ -218,65 +278,177 @@ parameters:
           - service.galera.master.cluster
           params:
             mysql_cluster_role: master
+        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+            deploy_address: ${_param:stacklight_telemetry_node01_deploy_address}
+        {%- endif %}
         stacklight_telemetry_node02:
           classes:
           - service.galera.slave.cluster
           params:
             mysql_cluster_role: slave
+        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+            deploy_address: ${_param:stacklight_telemetry_node02_deploy_address}
+        {%- endif %}
         stacklight_telemetry_node03:
           classes:
           - service.galera.slave.cluster
           params:
             mysql_cluster_role: slave
+        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+            deploy_address: ${_param:stacklight_telemetry_node03_deploy_address}
+        {%- endif %}
         {%- endif %}
         {%- if cookiecutter.openstack_enabled == 'True' and cookiecutter.openstack_network_engine == 'opencontrail' %}
         opencontrail_control_node01:
           classes:
           - cluster.${_param:cluster_name}.opencontrail.control_init
+        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+          params:
+            deploy_address: ${_param:opencontrail_control_node01_deploy_address}
+        opencontrail_control_node02:
+          params:
+            deploy_address: ${_param:opencontrail_control_node02_deploy_address}
+        opencontrail_control_node03:
+          params:
+            deploy_address: ${_param:opencontrail_control_node03_deploy_address}
+        opencontrail_analytics_node01:
+          params:
+            deploy_address: ${_param:opencontrail_analytics_node01_deploy_address}
+        opencontrail_analytics_node02:
+          params:
+            deploy_address: ${_param:opencontrail_analytics_node02_deploy_address}
+        opencontrail_analytics_node03:
+          params:
+            deploy_address: ${_param:opencontrail_analytics_node03_deploy_address}
+        {%- endif %}
         {%- endif %}
         {%- if cookiecutter.openstack_enabled == 'True' %}
         openstack_control_node01:
           params:
             linux_system_codename: xenial
+            {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+            deploy_address: ${_param:openstack_control_node01_deploy_address}
+            {%- endif %}
           classes:
           - cluster.${_param:cluster_name}.openstack.control_init
         openstack_control_node02:
           params:
             linux_system_codename: xenial
+            {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+            deploy_address: ${_param:openstack_control_node02_deploy_address}
+            {%- endif %}
         openstack_control_node03:
           params:
             linux_system_codename: xenial
+            {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+            deploy_address: ${_param:openstack_control_node02_deploy_address}
+            {%- endif %}
         openstack_database_node01:
           params:
             linux_system_codename: xenial
+            {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+            deploy_address: ${_param:openstack_database_node01_deploy_address}
+            {%- endif %}
           classes:
           - cluster.${_param:cluster_name}.openstack.database_init
         openstack_database_node02:
           params:
             linux_system_codename: xenial
+            {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+            deploy_address: ${_param:openstack_database_node02_deploy_address}
+            {%- endif %}
         openstack_database_node03:
           params:
             linux_system_codename: xenial
+            {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+            deploy_address: ${_param:openstack_database_node03_deploy_address}
+            {%- endif %}
         openstack_message_queue_node01:
           params:
             linux_system_codename: xenial
+            {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+            deploy_address: ${_param:openstack_message_queue_node01_deploy_address}
+            {%- endif %}
         openstack_message_queue_node02:
           params:
             linux_system_codename: xenial
+            {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+            deploy_address: ${_param:openstack_message_queue_node02_deploy_address}
+            {%- endif %}
         openstack_message_queue_node03:
           params:
             linux_system_codename: xenial
+            {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+            deploy_address: ${_param:openstack_message_queue_node03_deploy_address}
+            {%- endif %}
         openstack_proxy_node01:
           params:
             linux_system_codename: xenial
+            {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+            deploy_address: ${_param:openstack_proxy_node01_deploy_address}
+            {%- endif %}
         openstack_proxy_node02:
           params:
             linux_system_codename: xenial
+            {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+            deploy_address: ${_param:openstack_proxy_node02_deploy_address}
+            {%- endif %}
+        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+        openstack_control_upgrade_node01:
+          params:
+            deploy_address: ${_param:openstack_upgrade_node01_deploy_address}
+        {%- if cookiecutter.openstack_network_engine == 'ovs' %}
+        openstack_gateway_node01:
+          params:
+            deploy_address: ${_param:openstack_gateway_node01_deploy_address}
+        openstack_gateway_node02:
+          params:
+            deploy_address: ${_param:openstack_gateway_node02_deploy_address}
+        openstack_gateway_node03:
+          params:
+            deploy_address: ${_param:openstack_gateway_node03_deploy_address}
+        {%- endif %}
+        {%- endif %}
+        {%- if cookiecutter.bmk_enabled == 'True' and cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+        openstack_benchmark_node01:
+          params:
+            deploy_address: ${_param:openstack_benchmark_node01_deploy_address}
+        {%- endif %}
         {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '2' %}
         stacklight_log_node01:
           classes:
           - system.elasticsearch.client.single
           - system.kibana.client.single
+        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+          params:
+            deploy_address: ${_param:stacklight_log_node01_deploy_address}
+        stacklight_log_node02:
+          params:
+            deploy_address: ${_param:stacklight_log_node02_deploy_address}
+        stacklight_log_node03:
+          params:
+            deploy_address: ${_param:stacklight_log_node03_deploy_address}
+        stacklight_server_node01:
+          params:
+            deploy_address: ${_param:stacklight_monitor_node01_deploy_address}
+        stacklight_server_node02:
+          params:
+            deploy_address: ${_param:stacklight_monitor_node02_deploy_address}
+        stacklight_server_node03:
+          params:
+            deploy_address: ${_param:stacklight_monitor_node03_deploy_address}
+        {%- if cookiecutter.kubernetes_enabled == 'False' %}
+        stacklight_telemetry_node01:
+          params:
+            deploy_address: ${_param:stacklight_telemetry_node01_deploy_address}
+        stacklight_telemetry_node02:
+          params:
+            deploy_address: ${_param:stacklight_telemetry_node02_deploy_address}
+        stacklight_telemetry_node03:
+          params:
+            deploy_address: ${_param:stacklight_telemetry_node03_deploy_address}
+        {%- endif %}
+        {%- endif %}
         {%- endif %}
         {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
         aptly_server_node01:
@@ -287,8 +459,61 @@ parameters:
           params:
             salt_master_host: ${_param:reclass_config_master}
             linux_system_codename: xenial
-            single_address: ${_param:aptly_server_address}
+            single_address: ${_param:aptly_server_control_address}
+            deploy_address: ${_param:aptly_server_deploy_address}
         {%- endif %}
+        {%- if cookiecutter.get('ceph_enabled', 'False') == 'True' and cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+        ceph_mon_node01:
+          params:
+            deploy_address: ${_param:ceph_mon_node01_deploy_address}
+        ceph_mon_node02:
+          params:
+            deploy_address: ${_param:ceph_mon_node02_deploy_address}
+        ceph_mon_node03:
+          params:
+            deploy_address: ${_param:ceph_mon_node03_deploy_address}
+        ceph_rgw_node01:
+          params:
+            deploy_address: ${_param:ceph_rgw_node01_deploy_address}
+        ceph_rgw_node02:
+          params:
+            deploy_address: ${_param:ceph_rgw_node02_deploy_address}
+        ceph_rgw_node03:
+          params:
+            deploy_address: ${_param:ceph_rgw_node03_deploy_address}
+        {%- endif %}
+        {%- if cookiecutter.get('cicd_enabled', 'False') == 'True' and cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+        cicd_control_node01:
+          params:
+            deploy_address: ${_param:cicd_control_node01_deploy_address}
+        cicd_control_node02:
+          params:
+            deploy_address: ${_param:cicd_control_node02_deploy_address}
+        cicd_control_node03:
+          params:
+            deploy_address: ${_param:cicd_control_node03_deploy_address}
+        {%- endif %}
+        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+        {%- for i in range(cookiecutter.openstack_compute_count|int) %}
+        {%- set ip_start = 100 -%}
+        {%- set cmp_start = 0 %}
+        openstack_compute_node{{ "%03d"|format(cmp_start + loop.index) }}:
+          name: ${_param:openstack_compute_rack01_hostname}{{ "%03d"|format(cmp_start + loop.index) }}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.openstack.compute
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+          {%- if cookiecutter.get('openstack_nfv_dpdk_enabled', 'False') == 'True' and cookiecutter.openstack_network_engine == 'opencontrail' %}
+            linux_system_codename: trusty
+          {%- else %}
+            linux_system_codename: xenial
+          {%- endif %}
+            single_address: ${_param:openstack_compute_rack01_single_subnet}.{{ ip_start|int + loop.index }}
+            deploy_address: ${_param:openstack_compute_rack01_deploy_subnet}.{{ ip_start|int + loop.index }}
+            tenant_address: ${_param:openstack_compute_rack01_tenant_subnet}.{{ ip_start|int + loop.index }}
+        {%- endfor %}
+        {%- else %}
         openstack_compute_rack01:
           name: ${_param:openstack_compute_rack01_hostname}<<count>>
           domain: ${_param:cluster_domain}
@@ -310,6 +535,11 @@ parameters:
               single_address:
                 value: ${_param:openstack_compute_rack01_single_subnet}.<<count>>
                 start: 101
+            {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+              deploy_address:
+                value: ${_param:openstack_compute_rack01_deploy_subnet}.<<count>>
+                start: 101
+            {%- endif %}
               tenant_address:
                 value: ${_param:openstack_compute_rack01_tenant_subnet}.<<count>>
                 start: 101
@@ -320,6 +550,7 @@ parameters:
           {%- else %}
             linux_system_codename: xenial
           {%- endif %}
+        {%- endif %}
         {%- if cookiecutter.get('openstack_nfv_sriov_enabled', 'False') == 'True' %}
             # sriov_nic01_device_name: eth7
             # sriov_nic01_numvfs: 7
@@ -345,7 +576,25 @@ parameters:
         {%- endif %}
         {%- endif %}
         {%- endif %}
-        {%- if cookiecutter.get('ceph_enabled', 'False') == 'True' %}
+    {%- if cookiecutter.get('ceph_enabled', 'False') == 'True' %}
+      {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+        {%- for i in range(cookiecutter.ceph_osd_node_count|int) %}
+        {%- set ip_start = 200 -%}
+        {%- set osd_start = 0 %}
+        ceph_osd_node{{ "%03d"|format(osd_start + loop.index) }}:
+          name: ${_param:ceph_osd_rack01_hostname}{{ "%03d"|format(osd_start + loop.index) }}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.ceph.osd
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            ceph_crush_parent: rack01
+            linux_system_codename: xenial
+            single_address: ${_param:ceph_osd_rack01_single_subnet}.{{ ip_start|int + loop.index }}
+            deploy_address: ${_param:ceph_osd_rack01_deploy_subnet}.{{ ip_start|int + loop.index }}
+            backend_address: ${_param:ceph_osd_rack01_backend_subnet}.{{ ip_start|int + loop.index }}
+        {%- endfor %}
+      {%- else %}
         ceph_osd_rack01:
           name: ${_param:ceph_osd_rack01_hostname}<<count>>
           domain: ${_param:cluster_domain}
@@ -366,4 +615,6 @@ parameters:
             salt_master_host: ${_param:reclass_config_master}
             ceph_crush_parent: rack01
             linux_system_codename: xenial
-        {%- endif %}
+      {%- endif %}
+    {%- endif %}
+

@@ -5,6 +5,9 @@
     "cicd_control_node02_address"               : "10.167.4.92",
     "cicd_control_node03_address"               : "10.167.4.93",
     "mcp_version"                               : "stable",
+    "cicd_control_node01_deploy_address"        : "10.167.5.91",
+    "cicd_control_node02_deploy_address"        : "10.167.5.92",
+    "cicd_control_node03_deploy_address"        : "10.167.5.93",
 
     "offline_deployment"                        : "False",
     "local_repositories"                        : "False",
@@ -28,6 +31,9 @@
     "openldap_organisation"                     : "${_param:cluster_name}",
     "openldap_domain"                           : "deployment-name.local",
 
+    "static_ips_on_deploy_network_enabled"      : "False",
+
     "stacklight_enabled"                        : "False",
+
     "ceph_enabled"                              : "False"
 }

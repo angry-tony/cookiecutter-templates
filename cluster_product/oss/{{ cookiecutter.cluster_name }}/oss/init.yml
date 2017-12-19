@@ -7,3 +7,8 @@ parameters:
     oss_node01_address: {{ cookiecutter.oss_node01_address }}
     oss_node02_address: {{ cookiecutter.oss_node02_address }}
     oss_node03_address: {{ cookiecutter.oss_node03_address }}
+    {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+    oss_node01_deploy_address: {{ cookiecutter.oss_node01_deploy_address }}
+    oss_node02_deploy_address: {{ cookiecutter.oss_node02_deploy_address }}
+    oss_node03_deploy_address: {{ cookiecutter.oss_node03_deploy_address }}
+    {%- endif %}
