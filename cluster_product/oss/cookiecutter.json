@@ -30,6 +30,7 @@
     "sfdc_consumer_key"                         : "example_consumer_key",
     "sfdc_consumer_secret"                      : "example_consumer_secret",
     "sfdc_organization_id"                      : "example_organization_id",
+    "sfdc_environment_id"                       : "0",
     "sfdc_sandbox_enabled"                      : "True",
 
 
