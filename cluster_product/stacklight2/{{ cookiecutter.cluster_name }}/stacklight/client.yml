@@ -18,7 +18,7 @@ classes:
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
-    {%- if cookiecutter.mcp_version != 'stable' or cookiecutter.mcp_version != 'testing' or cookiecutter.mcp_version != 'nightly' %}
+    {%- if cookiecutter.mcp_version != 'stable' and cookiecutter.mcp_version != 'testing' and cookiecutter.mcp_version != 'nightly' %}
     {%- if cookiecutter.get('local_docker_images', 'False') == 'True' %}
     docker_image_alertmanager: ${_param:aptly_server_hostname}:5000/alertmanager:${_param:apt_mk_version}
     docker_image_pushgateway: ${_param:aptly_server_hostname}:5000/pushgateway:${_param:apt_mk_version}
