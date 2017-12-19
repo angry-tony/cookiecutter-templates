@@ -360,11 +360,11 @@ infra_params_action:
       help_text: "IP address of Ceph backend network with network mask - used as cluster_network for OSD data replication"
       initial: "10.0.2.0/24"
       mask: True
+      width: half
     - name: "backend_vlan"
       type: TEXT
-      help_text: "Ceph backend plane vlan ID for cluster_network"
+      help_text: "Ceph backend vlan ID used for OSD data replication on cluster_network"
       initial: "30"
-      label: "Ceph Backend VLAN for cluster_network"
       width: half
   - name: "cicd_params"
     label: "CI/CD"
@@ -422,7 +422,7 @@ product_params_action:
     - help_text: IP mask of Ceph backend network
       hidden: True
       initial: '{{ backend_network_subnet | netmask }}'
-      name: backend_network_subnet
+      name: backend_network_netmask
       type: IP
       requires:
       - ceph_enabled: True
