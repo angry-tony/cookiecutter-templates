@@ -2264,21 +2264,21 @@ product_params_action:
       width: half
       requires:
       - ceph_osd_backend: "bluestore"
-    - help_text: Deploy NIC on management network
+    - help_text: Deploy NIC of Ceph OSD nodes on management network
       initial: eth0
-      name: ceph_deploy_nic
+      name: ceph_osd_deploy_nic
       type: TEXT
       width: half
       requires:
         - static_ips_on_deploy_network_enabled: True
     - help_text: First NIC in Ceph OSD node bond
       initial: eth1
-      name: ceph_primary_first_nic
+      name: ceph_osd_primary_first_nic
       type: TEXT
       width: half
     - help_text: Second NIC in Ceph OSD node bond
       initial: eth2
-      name: ceph_primary_second_nic
+      name: ceph_osd_primary_second_nic
       type: TEXT
       width: half
     - name: "ceph_osd_bond_mode"

@@ -13,8 +13,8 @@
     "mcp_version"                               : "stable",
     "ofline_deployment"                         : "False",
     "oss_node01_deploy_address"                 : "${_param:stacklight_monitor_node01_deploy_address}",
-    "oss_node01_deploy_address"                 : "${_param:stacklight_monitor_node02_deploy_address}",
-    "oss_node01_deploy_address"                 : "${_param:stacklight_monitor_node03_deploy_address}",
+    "oss_node02_deploy_address"                 : "${_param:stacklight_monitor_node02_deploy_address}",
+    "oss_node03_deploy_address"                 : "${_param:stacklight_monitor_node03_deploy_address}",
 
     "oss_openstack_username"                    : "admin",
     "oss_openstack_password"                    : "${_param:keystone_admin_password}",

@@ -5,8 +5,8 @@ classes:
 parameters:
   _param:
     ceph_remote_backup_server: ${_param:infra_kvm_node03_address}
-    primary_first_nic: {{ cookiecutter.ceph_primary_first_nic }}
-    primary_second_nic: {{ cookiecutter.ceph_primary_second_nic }}
+    primary_first_nic: {{ cookiecutter.ceph_osd_primary_first_nic }}
+    primary_second_nic: {{ cookiecutter.ceph_osd_primary_second_nic }}
   ceph:
     osd:
       enabled: true
@@ -40,7 +40,7 @@ parameters:
     network:
       interface:
       {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
-        {{ cookiecutter.ceph_deploy_nic }}: ${_param:linux_deploy_interface}
+        {{ cookiecutter.ceph_osd_deploy_nic }}: ${_param:linux_deploy_interface}
       {%- endif %}
         eth1:
           mtu: 9000
