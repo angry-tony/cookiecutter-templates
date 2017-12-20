@@ -419,13 +419,6 @@ product_params_action:
       initial: '{{ deploy_network_subnet | netmask }}'
       name: deploy_network_netmask
       type: IP
-    - help_text: IP mask of Ceph backend network
-      hidden: True
-      initial: '{{ backend_network_subnet | netmask }}'
-      name: backend_network_netmask
-      type: IP
-      requires:
-      - ceph_enabled: True
     - help_text: "IP address of a mirror VM on deploy network"
       initial: "{{ deploy_network_subnet | subnet(14) }}"
       name: "aptly_server_deploy_address"
@@ -731,19 +724,19 @@ product_params_action:
     - help_text: Deploy IP address of OSS node01
       initial: '${_param:stacklight_monitor_node01_deploy_address}'
       name: oss_node01_deploy_address
-      type: IP
+      type: TEXT
       requires:
       - static_ips_on_deploy_network_enabled: True
     - help_text: Deploy IP address of OSS node02
       initial: '${_param:stacklight_monitor_node02_deploy_address}'
       name: oss_node02_deploy_address
-      type: IP
+      type: TEXT
       requires:
       - static_ips_on_deploy_network_enabled: True
     - help_text: Deploy IP address of OSS node03
       initial: '${_param:stacklight_monitor_node03_deploy_address}'
       name: oss_node03_deploy_address
-      type: IP
+      type: TEXT
       requires:
       - static_ips_on_deploy_network_enabled: True
     - help_text: "OpenStack auth URL for OSS tools"
@@ -1207,12 +1200,6 @@ product_params_action:
       name: opencontrail_analytics_address
       type: IP
       width: half
-    - help_text: Deploy IP address of OC analytics node01
-      initial: '${_param:stacklight_monitor_node01_deploy_address}'
-      name: oss_node01_deploy_address
-      type: IP
-      requires:
-      - static_ips_on_deploy_network_enabled: True
     - help_text: ''
       initial: nal
       name: opencontrail_analytics_hostname
@@ -2102,6 +2089,11 @@ product_params_action:
     requires:
     - stacklight_enabled: True
   - fields:
+    - help_text: IP mask of Ceph backend network
+      hidden: True
+      initial: '{{ backend_network_subnet | netmask }}'
+      name: backend_network_netmask
+      type: IP
     - help_text: IP address of ceph mon storage node01
       initial: '{{ control_network_subnet | subnet(66) }}'
       name: ceph_mon_node01_address
