@@ -90,11 +90,6 @@ parameters:
       insecure_registries:
         - ${_param:aptly_server_hostname}:5000
   {%- endif %}
-  prometheus:
-    server:
-      storage:
-        local:
-          target_heap_size: 3221225472
   linux:
     network:
       interface:
