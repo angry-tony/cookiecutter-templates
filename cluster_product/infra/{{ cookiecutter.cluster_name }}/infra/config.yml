@@ -236,7 +236,7 @@ parameters:
         stacklight_log_node01:
           classes:
           - system.elasticsearch.client.single
-        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+          {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
           params:
             deploy_address: ${_param:stacklight_log_node01_deploy_address}
         stacklight_log_node02:
@@ -245,12 +245,12 @@ parameters:
         stacklight_log_node03:
           params:
             deploy_address: ${_param:stacklight_log_node03_deploy_address}
-        {%- endif %}
+          {%- endif %}
         stacklight_monitor_node01:
           classes:
           - system.grafana.client.single
           - system.kibana.client.single
-        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+          {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
           params:
             deploy_address: ${_param:stacklight_monitor_node01_deploy_address}
         stacklight_monitor_node02:
@@ -259,7 +259,7 @@ parameters:
         stacklight_monitor_node03:
           params:
             deploy_address: ${_param:stacklight_monitor_node03_deploy_address}
-        {%- if cookiecutter.kubernetes_enabled == 'False' %}
+            {%- if cookiecutter.kubernetes_enabled == 'False' %}
         stacklight_telemetry_node01:
           params:
             deploy_address: ${_param:stacklight_telemetry_node01_deploy_address}
@@ -269,34 +269,69 @@ parameters:
         stacklight_telemetry_node03:
           params:
             deploy_address: ${_param:stacklight_telemetry_node03_deploy_address}
+            {%- endif %}
+          {%- endif %}
         {%- endif %}
-        {%- endif %}
-        {%- endif %}
-        {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.kubernetes_enabled == 'True' %}
+        {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '2' %}
         stacklight_telemetry_node01:
+          {%- if  cookiecutter.openstack_enabled == 'False' %}
           classes:
           - service.galera.master.cluster
+          {%- endif %}
           params:
+          {%- if  cookiecutter.openstack_enabled == 'False' %}
             mysql_cluster_role: master
-        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+          {%- endif %}
+          {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
             deploy_address: ${_param:stacklight_telemetry_node01_deploy_address}
-        {%- endif %}
+          {%- endif %}
         stacklight_telemetry_node02:
+          {%- if  cookiecutter.openstack_enabled == 'False' %}
           classes:
           - service.galera.slave.cluster
+          {%- endif %}
           params:
+          {%- if  cookiecutter.openstack_enabled == 'False' %}
             mysql_cluster_role: slave
-        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+          {%- endif %}
+          {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
             deploy_address: ${_param:stacklight_telemetry_node02_deploy_address}
-        {%- endif %}
+          {%- endif %}
         stacklight_telemetry_node03:
+          {%- if  cookiecutter.openstack_enabled == 'False' %}
           classes:
           - service.galera.slave.cluster
+          {%- endif %}
           params:
+          {%- if  cookiecutter.openstack_enabled == 'False' %}
             mysql_cluster_role: slave
-        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+          {%- endif %}
+          {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
             deploy_address: ${_param:stacklight_telemetry_node03_deploy_address}
-        {%- endif %}
+          {%- endif %}
+        stacklight_log_node01:
+          classes:
+          - system.elasticsearch.client.single
+          - system.kibana.client.single
+          {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+          params:
+            deploy_address: ${_param:stacklight_log_node01_deploy_address}
+        stacklight_log_node02:
+          params:
+            deploy_address: ${_param:stacklight_log_node02_deploy_address}
+        stacklight_log_node03:
+          params:
+            deploy_address: ${_param:stacklight_log_node03_deploy_address}
+        stacklight_server_node01:
+          params:
+            deploy_address: ${_param:stacklight_monitor_node01_deploy_address}
+        stacklight_server_node02:
+          params:
+            deploy_address: ${_param:stacklight_monitor_node02_deploy_address}
+        stacklight_server_node03:
+          params:
+            deploy_address: ${_param:stacklight_monitor_node03_deploy_address}
+          {%- endif %}
         {%- endif %}
         {%- if cookiecutter.openstack_enabled == 'True' and cookiecutter.openstack_network_engine == 'opencontrail' %}
         opencontrail_control_node01:
@@ -413,42 +448,6 @@ parameters:
         openstack_benchmark_node01:
           params:
             deploy_address: ${_param:openstack_benchmark_node01_deploy_address}
-        {%- endif %}
-        {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '2' %}
-        stacklight_log_node01:
-          classes:
-          - system.elasticsearch.client.single
-          - system.kibana.client.single
-        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
-          params:
-            deploy_address: ${_param:stacklight_log_node01_deploy_address}
-        stacklight_log_node02:
-          params:
-            deploy_address: ${_param:stacklight_log_node02_deploy_address}
-        stacklight_log_node03:
-          params:
-            deploy_address: ${_param:stacklight_log_node03_deploy_address}
-        stacklight_server_node01:
-          params:
-            deploy_address: ${_param:stacklight_monitor_node01_deploy_address}
-        stacklight_server_node02:
-          params:
-            deploy_address: ${_param:stacklight_monitor_node02_deploy_address}
-        stacklight_server_node03:
-          params:
-            deploy_address: ${_param:stacklight_monitor_node03_deploy_address}
-        {%- if cookiecutter.kubernetes_enabled == 'False' %}
-        stacklight_telemetry_node01:
-          params:
-            deploy_address: ${_param:stacklight_telemetry_node01_deploy_address}
-        stacklight_telemetry_node02:
-          params:
-            deploy_address: ${_param:stacklight_telemetry_node02_deploy_address}
-        stacklight_telemetry_node03:
-          params:
-            deploy_address: ${_param:stacklight_telemetry_node03_deploy_address}
-        {%- endif %}
-        {%- endif %}
         {%- endif %}
         {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
         aptly_server_node01:
