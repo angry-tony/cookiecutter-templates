@@ -4,6 +4,7 @@
 
     "local_repositories"                        : "False",
     "local_docker_images"                       : "False",
+    "local_repo_url"                            : "${_param:aptly_server_deploy_address}",
 
     "oss_enabled"                               : "True",
     "oss_address"                               : "${_param:stacklight_monitor_address}",

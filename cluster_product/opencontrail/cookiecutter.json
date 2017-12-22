@@ -6,7 +6,7 @@
     "mcp_version"                                   : "stable",
 
     "local_repositories"                            : "False",
-    "local_repo_url"                                : "${_param:cicd_control_address}",
+    "local_repo_url"                                : "${_param:aptly_server_deploy_address}",
 
     "opencontrail_analytics_address"                : "10.167.4.30",
     "opencontrail_analytics_node01_address"         : "10.167.4.31",

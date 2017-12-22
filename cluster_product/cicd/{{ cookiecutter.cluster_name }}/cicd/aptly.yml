@@ -1,42 +1,29 @@
 {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
 classes:
 - system.aptly.server.single
-- system.aptly.server.mirror.debian
+- system.aptly.server.mirror.ubuntu.trusty.mcp.apt_mk.cassandra
 - system.aptly.server.mirror.ubuntu.trusty.mcp.apt_mk.salt
 - system.aptly.server.mirror.ubuntu.trusty.mcp.apt_mk.extra
 - system.aptly.server.mirror.ubuntu.trusty.mcp.apt_mk.mitaka
 - system.aptly.server.mirror.ubuntu.trusty.mcp.apt_mk.oc323
-- system.aptly.server.mirror.ubuntu.trusty.mcp.openstack_mitaka
-- system.aptly.server.mirror.ubuntu.trusty.ceph
-- system.aptly.server.mirror.ubuntu.trusty.docker
-- system.aptly.server.mirror.ubuntu.trusty.docker_legacy
-- system.aptly.server.mirror.ubuntu.trusty.grafana
-- system.aptly.server.mirror.ubuntu.trusty.haproxy
-- system.aptly.server.mirror.ubuntu.trusty.rabbitmq
-- system.aptly.server.mirror.ubuntu.trusty.salt
-- system.aptly.server.mirror.ubuntu.trusty.ubuntu
-- system.aptly.server.mirror.ubuntu.xenial.mcp.openstack_ocata
-- system.aptly.server.mirror.ubuntu.xenial.mcp.openstack_mitaka
+#- system.aptly.server.mirror.ubuntu.trusty.ubuntu.trusty.main
+- system.aptly.server.mirror.ubuntu.xenial.mcp.apt_mk.aptly
+- system.aptly.server.mirror.ubuntu.xenial.mcp.apt_mk.elastic
+- system.aptly.server.mirror.ubuntu.xenial.mcp.apt_mk.openstack.ocata
+- system.aptly.server.mirror.ubuntu.xenial.mcp.apt_mk.openstack.mitaka
 - system.aptly.server.mirror.ubuntu.xenial.mcp.apt_mk.salt
 - system.aptly.server.mirror.ubuntu.xenial.mcp.apt_mk.extra
 - system.aptly.server.mirror.ubuntu.xenial.mcp.apt_mk.ocata
 - system.aptly.server.mirror.ubuntu.xenial.mcp.apt_mk.oc323
-- system.aptly.server.mirror.ubuntu.xenial.influxdb
-- system.aptly.server.mirror.ubuntu.xenial.glusterfs
-- system.aptly.server.mirror.ubuntu.xenial.maas
-- system.aptly.server.mirror.ubuntu.xenial.docker
+- system.aptly.server.mirror.ubuntu.xenial.mcp.apt_mk.influxdb
+- system.aptly.server.mirror.ubuntu.xenial.mcp.apt_mk.glusterfs
+- system.aptly.server.mirror.ubuntu.xenial.mcp.apt_mk.maas
+- system.aptly.server.mirror.ubuntu.xenial.mcp.apt_mk.docker
 - system.aptly.server.mirror.ubuntu.xenial.docker_legacy
-- system.aptly.server.mirror.ubuntu.xenial.ceph
-- system.aptly.server.mirror.ubuntu.xenial.grafana
+- system.aptly.server.mirror.ubuntu.xenial.mcp.apt_mk.ceph
+- system.aptly.server.mirror.ubuntu.xenial.mcp.apt_mk.grafana
+- system.aptly.server.mirror.ubuntu.xenial.mcp.apt_mk.saltstack.salt-2016-3
 - system.aptly.server.mirror.ubuntu.xenial.ubuntu
-- system.aptly.server.mirror.ubuntu.xenial.salt
-- system.aptly.server.repo.ubuntu.trusty.extra
-- system.aptly.server.repo.ubuntu.trusty.openstack
-- system.aptly.server.repo.ubuntu.trusty.salt
-- system.aptly.server.repo.ubuntu.trusty.opencontrail
-- system.aptly.server.repo.ubuntu.xenial.extra
-- system.aptly.server.repo.ubuntu.xenial.openstack
-- system.aptly.server.repo.ubuntu.xenial.salt
 - system.git.server.single
 - service.docker.host
 - system.docker.client
@@ -44,6 +31,7 @@ classes:
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
+    ubuntu_mirror_url: mirror.mirantis.com/${_param:apt_mk_version}
     aptly_gpg_keypair_id: A8272E04
     aptly_gpg_passphrase: ""
     aptly_server_secure: true
@@ -141,74 +129,104 @@ parameters:
       registry:
         target_registry: apt:5000
         image:
-          - registry: ""
-            name: registry:2
-          - registry: docker
-            name: compose:1.17.1
-          - registry: osixia
-            name: openldap:1.1.8
-          - registry: tcpcloud
-            name: aptly:latest
-          - registry: tcpcloud
-            name: aptly-public:latest
-          - registry: tcpcloud
-            name: aptly-api:latest
-          - registry: tcpcloud
-            name: aptly-publisher:latest
-          - registry: tcpcloud
-            name: jnlp-slave:latest
-          - registry: tcpcloud
-            name: phpldapadmin:0.6.12
-          - registry: tcpcloud
-            name: jenkins:2.73
-          - registry: tcpcloud
-            name: gerrit:2.13.6
-          - registry: tcpcloud
-            name: mysql:5.6
-          - registry: grafana
-            name: grafana:4.5.2
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/external
+            name: registry:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/external
+            name: compose:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/external
+            name: openldap:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/cicd
+            name: aptly:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/cicd
+            name: aptly-public:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/cicd
+            name: aptly-api:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/cicd
+            name: aptly-publisher:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/cicd
+            name: jnlp-slave:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/cicd
+            name: phpldapadmin:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/cicd
+            name: jenkins:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/cicd
+            name: gerrit:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/cicd
+            name: mysql:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/external
+            name: grafana:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/external
+            name: visualizer:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/external
+            name: elasticsearch:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/external
+            name: mongo:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/external
+            name: postgres:${_param:apt_mk_version}
           - registry: docker-prod-local.artifactory.mirantis.com/openstack-docker
-            name: heka:latest
-          - registry: dockersamples
-            name: visualizer:latest
+            name: heka:${_param:apt_mk_version}
           - registry: docker-prod-local.artifactory.mirantis.com/mirantis/oss
-            name: security-monkey-api:latest
-          - registry: docker.elastic.co/elasticsearch
-            name: elasticsearch:5.4.1
+            name: security-monkey-api:${_param:apt_mk_version}
           - registry: docker-prod-local.artifactory.mirantis.com/mirantis/oss
-            name: security-monkey-scheduler:latest
+            name: security-monkey-scheduler:${_param:apt_mk_version}
           - registry: docker-prod-local.artifactory.mirantis.com/mirantis/oss
-            name: janitor-monkey:latest
-          - registry: library
-            name: mongo:3.4
+            name: janitor-monkey:${_param:apt_mk_version}
           - registry: docker-prod-local.artifactory.mirantis.com/mirantis/oss
-            name: rundeck:latest
+            name: rundeck:${_param:apt_mk_version}
           - registry: docker-prod-local.artifactory.mirantis.com/mirantis/oss
-            name: devops-portal:latest
-          - registry: library
-            name: postgres:9.6
+            name: devops-portal:${_param:apt_mk_version}
           - registry: docker-prod-local.artifactory.mirantis.com/mirantis/oss
-            name: pushkin:latest
-          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/oss
-            name: hce:latest
+            name: pushkin:${_param:apt_mk_version}
           - registry: docker-prod-local.artifactory.mirantis.com/openstack-docker
-            name: alertmanager:latest
+            name: alertmanager:${_param:apt_mk_version}
           - registry: docker-prod-local.artifactory.mirantis.com/openstack-docker
-            name: pushgateway:latest
+            name: pushgateway:${_param:apt_mk_version}
           - registry: docker-prod-local.artifactory.mirantis.com/openstack-docker
-            name: prometheus:latest
+            name: prometheus:${_param:apt_mk_version}
           - registry: docker-prod-local.artifactory.mirantis.com/openstack-docker
-            name: telegraf:latest
+            name: telegraf:${_param:apt_mk_version}
           - registry: docker-prod-local.artifactory.mirantis.com/openstack-docker
-            name: remote_storage_adapter:latest
+            name: remote_storage_adapter:${_param:apt_mk_version}
           - registry: docker-prod-local.artifactory.mirantis.com/openstack-docker
-            name: prometheus_relay:latest
+            name: prometheus_relay:${_param:apt_mk_version}
           - registry: docker-prod-local.artifactory.mirantis.com/mirantis/kubernetes/contrail-integration
-            name: contrail-cni:v1.0.0
+            name: contrail-cni:${_param:apt_mk_version}
           - registry: docker-prod-local.artifactory.mirantis.com/mirantis/kubernetes/contrail-integration
-            name: contrail-network-controller:v1.0.0
+            name: contrail-network-controller:${_param:apt_mk_version}
           - registry: docker-prod-local.artifactory.mirantis.com/mirantis/kubernetes
-            name: hyperkube-amd64:v1.6.2-2
+            name: hyperkube-amd64:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/external
+            name: pause:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/kubernetes
+            name: virtlet:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/external
+            name: kubernetes-dashboard-amd64:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/external
+            name: k8s-dns-kube-dns-amd64:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/external
+            name: k8s-dns-dnsmasq-amd64:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/external
+            name: k8s-dns-sidecar-amd64:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/external
+            name: cluster-proportional-autoscaler-amd64:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/kubernetes
+            name: k8s-netchecker-agent:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/kubernetes
+            name: k8s-netchecker-server:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/external
+            name: etcd:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/external
+            name: etcd-operator:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/external
+            name: tiller:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/projectcalico/calico
+            name: ctl:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/projectcalico/calico
+            name: node:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/projectcalico/calico
+            name: cni:${_param:apt_mk_version}
+          - registry: docker-prod-local.artifactory.mirantis.com/mirantis/external
+            name: kube-policy-controller:${_param:apt_mk_version}
     host:
       insecure_registries:
         - apt:5000
@@ -234,6 +252,8 @@ parameters:
           url: https://github.com/openstack-infra/gerritlib.git
         - name: jeepyb
           url: https://github.com/openstack-infra/jeepyb.git
+        - name: rundeck-cis-jobs
+          url: https://github.com/Mirantis/rundeck-cis-jobs.git
   aptly:
     server:
       mirror_update:
@@ -344,27 +364,6 @@ parameters:
               - amd64
               - source
         xenial-backports-universe:
-          publisher:
-            architectures:
-              - amd64
-              - source
-        #Trusty
-        trusty-main:
-          publisher:
-            architectures:
-              - amd64
-              - source
-        trusty-multiverse:
-          publisher:
-            architectures:
-              - amd64
-              - source
-        trusty-restricted:
-          publisher:
-            architectures:
-              - amd64
-              - source
-        trusty-universe:
           publisher:
             architectures:
               - amd64

@@ -38,7 +38,7 @@
 
     "local_repositories"                        : "False",
     "local_docker_images"                       : "False",
-    "local_repo_url"                            : "${_param:cicd_control_address}",
+    "local_repo_url"                            : "${_param:aptly_server_deploy_address}",
 
     "stacklight_enabled"                        : "True",
     "stacklight_version"                        : "2",

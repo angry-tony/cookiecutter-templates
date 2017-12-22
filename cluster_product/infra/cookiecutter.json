@@ -7,7 +7,7 @@
 
     "local_repositories"                        : "False",
     "local_docker_images"                       : "False",
-    "local_repo_url"                            : "${_param:cicd_control_address}",
+    "local_repo_url"                            : "${_param:aptly_server_deploy_address}",
 
     "deployment_type"                           : "physical",
     "deploy_network_netmask"                    : "255.255.255.0",
