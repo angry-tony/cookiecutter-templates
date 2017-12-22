@@ -48,10 +48,18 @@ parameters:
   _param:
     {%- if cookiecutter.openstack_enabled == 'True' %}
     heka_amqp_host: ${_param:openstack_message_queue_address}
+    {%- if cookiecutter.mcp_version != 'stable' and cookiecutter.mcp_version != 'testing' and cookiecutter.mcp_version != 'nightly' %}
+    {%- if cookiecutter.get('local_docker_images', 'False') == 'True' %}
+    docker_image_remote_collector: ${_param:aptly_server_hostname}:5000/heka:${_param:apt_mk_version}
+    {%- else %}
+    docker_image_remote_collector: docker-prod-local.artifactory.mirantis.com/openstack-docker/heka:${_param:apt_mk_version}
+    {%- endif %}
+    {%- else %}
     {%- if cookiecutter.get('local_docker_images', 'False') == 'True' %}
     docker_image_remote_collector: ${_param:aptly_server_hostname}:5000/heka:latest
     {%- else %}
     docker_image_remote_collector: docker-prod-local.artifactory.mirantis.com/openstack-docker/heka:latest
+    {%- endif %}
     {%- endif %}
     remote_collector_telegraf_host: monitoring_remote_agent
     {%- endif %}
