@@ -87,6 +87,7 @@
 
     "oss_portal_image"                          : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/devops-portal:latest",
     "oss_rundeck_image"                         : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/rundeck:latest",
+    "oss_rundeck_external_datasource_enabled"   : "False",
     "oss_cis_openstack_image"                   : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/cis-openstack:latest",
     "oss_pushkin_image"                         : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/pushkin:latest",
     "oss_hce_image"                             : "docker-prod-local.artifactory.mirantis.com/mirantis/oss/hce:latest",

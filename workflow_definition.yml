@@ -793,6 +793,12 @@ product_params_action:
       type: TEXT
       requires:
       - oss_enabled: True
+    - help_text: "Switch Rundeck service to use postgresql database as external source for datastore"
+      initial: False
+      name: oss_rundeck_external_datasource_enabled
+      type: BOOL
+      requires:
+      - oss_enabled: True
     - help_text: "Private key for Rundeck. It is generated automatically."
       hidden: True
       initial: |-

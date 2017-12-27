@@ -225,7 +225,8 @@ parameters:
       source_credentials: {{ cookiecutter.oss_cleanup_service_os_credentials_path }}
     {%- endif %}
 
-    # Rundeck
+    # Rundeck DB support
+    {%- if cookiecutter.oss_rundeck_external_datasource_enabled == 'True' %}
     rundeck_db_user: rundeck
     rundeck_db_user_password: {{ password(16) }}
     rundeck_db_host: ${_param:haproxy_postgresql_bind_host}
@@ -233,6 +234,7 @@ parameters:
     rundeck_postgresql_password: ${_param:rundeck_db_user_password}
     rundeck_postgresql_database: rundeck
     rundeck_postgresql_host: ${_param:rundeck_db_host}
+    {%- endif %}
 
     rundeck_runbook_public_key: {{ cookiecutter.oss_runbook_public_key }}
     rundeck_runbook_private_key: |
@@ -286,3 +288,15 @@ parameters:
     {%- else %}
     rundeck_cis_elasticsearch_url: http://${_param:haproxy_elasticsearch_bind_host}:${_param:haproxy_elasticsearch_http_bind_port}
     {%- endif %}
+
+{%- if cookiecutter.oss_rundeck_external_datasource_enabled == 'True' %}
+  rundeck:
+    server:
+      datasource:
+        engine: postgresql
+        host: ${_param:rundeck_postgresql_host}
+        port: ${_param:rundeck_postgresql_port}
+        username: ${_param:rundeck_postgresql_username}
+        password: ${_param:rundeck_postgresql_password}
+        database: ${_param:rundeck_postgresql_database}
+{%- endif %}
