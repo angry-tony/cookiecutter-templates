@@ -76,6 +76,7 @@
 
     "oss_cleanup_service_enabled"               : "True",
     "oss_cleanup_service_ssl_verify"            : "${_param:oss_openstack_ssl_verify}",
+    "oss_cleanup_service_endpoint_type"         : "${_param:oss_openstack_endpoint_type}",
     "oss_cleanup_service_os_credentials_path"   : "${_param:oss_openstack_credentials_path}",
     "oss_cleanup_service_username"              : "${_param:oss_openstack_username}",
     "oss_cleanup_service_password"              : "${_param:oss_openstack_password}",
