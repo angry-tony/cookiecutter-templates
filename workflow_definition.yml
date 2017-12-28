@@ -1048,7 +1048,7 @@ product_params_action:
       name: etcd_ssl
       type: BOOL
     - help_text: Image with Kubernetes.
-      initial: docker-prod-local.artifactory.mirantis.com/mirantis/kubernetes/hyperkube-amd64:v1.7.3-1
+      initial: docker-prod-local.artifactory.mirantis.com/mirantis/kubernetes/hyperkube-amd64:v1.8.5-4
       name: hyperkube_image
       type: TEXT
     - help_text: Enable Virtlet addon
