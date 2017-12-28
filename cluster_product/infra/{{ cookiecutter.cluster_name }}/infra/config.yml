@@ -391,7 +391,7 @@ parameters:
           params:
             linux_system_codename: xenial
             {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
-            deploy_address: ${_param:openstack_control_node02_deploy_address}
+            deploy_address: ${_param:openstack_control_node03_deploy_address}
             {%- endif %}
         openstack_database_node01:
           params:
