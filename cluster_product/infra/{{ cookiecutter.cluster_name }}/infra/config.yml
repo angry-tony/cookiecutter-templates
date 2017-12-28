@@ -273,40 +273,40 @@ parameters:
           {%- endif %}
         {%- endif %}
         {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '2' %}
-        stacklight_telemetry_node01:
           {%- if  cookiecutter.openstack_enabled == 'False' %}
+        stacklight_telemetry_node01:
           classes:
           - service.galera.master.cluster
-          {%- endif %}
           params:
-          {%- if  cookiecutter.openstack_enabled == 'False' %}
             mysql_cluster_role: master
-          {%- endif %}
-          {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+            {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
             deploy_address: ${_param:stacklight_telemetry_node01_deploy_address}
-          {%- endif %}
+            {%- endif %}
         stacklight_telemetry_node02:
-          {%- if  cookiecutter.openstack_enabled == 'False' %}
           classes:
           - service.galera.slave.cluster
-          {%- endif %}
           params:
-          {%- if  cookiecutter.openstack_enabled == 'False' %}
             mysql_cluster_role: slave
-          {%- endif %}
-          {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+            {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
             deploy_address: ${_param:stacklight_telemetry_node02_deploy_address}
-          {%- endif %}
+            {%- endif %}
         stacklight_telemetry_node03:
-          {%- if  cookiecutter.openstack_enabled == 'False' %}
           classes:
           - service.galera.slave.cluster
-          {%- endif %}
           params:
-          {%- if  cookiecutter.openstack_enabled == 'False' %}
             mysql_cluster_role: slave
-          {%- endif %}
-          {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+            {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+            deploy_address: ${_param:stacklight_telemetry_node03_deploy_address}
+            {%- endif %}
+          {%- elif cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+        stacklight_telemetry_node01:
+          params:
+            deploy_address: ${_param:stacklight_telemetry_node01_deploy_address}
+        stacklight_telemetry_node02:
+          params:
+            deploy_address: ${_param:stacklight_telemetry_node02_deploy_address}
+        stacklight_telemetry_node03:
+          params:
             deploy_address: ${_param:stacklight_telemetry_node03_deploy_address}
           {%- endif %}
         stacklight_log_node01:
