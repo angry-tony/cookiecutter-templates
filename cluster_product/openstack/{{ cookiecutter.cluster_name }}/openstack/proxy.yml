@@ -31,6 +31,9 @@ classes:
 - system.nginx.server.proxy.openstack_api
 - system.nginx.server.proxy.openstack_vnc
 - system.nginx.server.proxy.openstack_web
+{%- if cookiecutter.get('ceph_enabled', 'False') == 'True'  %}
+- system.nginx.server.proxy.ceph_radosgw
+{%- endif %}
 - system.horizon.server.single
 - system.salt.minion.cert.proxy.openstack
 - system.salt.minion.cert.proxy.pki
