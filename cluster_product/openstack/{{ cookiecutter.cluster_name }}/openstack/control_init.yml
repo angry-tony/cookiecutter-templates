@@ -11,7 +11,9 @@ classes:
 - system.keystone.client.service.neutron
 - system.keystone.client.service.nova21
 - system.keystone.client.service.nova-placement
+{%- if cookiecutter.openstack_version in ['newton', 'ocata'] %}
 - system.keystone.client.service.glare
+{%- endif %}
 - system.keystone.client.service.cinder3
 - system.keystone.client.service.keystone
 {%- if cookiecutter.stacklight_enabled == 'True' %}
