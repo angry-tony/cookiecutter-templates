@@ -52,6 +52,8 @@
     "ceph_osd_primary_first_nic"           : "eth1",
     "ceph_osd_primary_second_nic"          : "eth2",
 
+    "ceph_hyper_converged"                 : "False",
+
     "ceph_osd_bond_mode"                   : "active-backup",
     "backend_vlan"                         : "30",
     "local_repositories"                   : "False"

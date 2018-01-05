@@ -24,6 +24,8 @@
     "cicd_enabled"                                   : "True",
     "stacklight_enabled"                             : "True",
     "ceph_enabled"                                   : "False",
+    "ceph_hyper_converged"                           : "False",
+    "openstack_nova_compute_reserved_host_memory_mb" : "20000",
     "stacklight_version"                             : "1",
     "bmk_enabled"                                    : "False",
 

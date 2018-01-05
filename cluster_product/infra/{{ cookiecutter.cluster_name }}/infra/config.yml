@@ -511,6 +511,12 @@ parameters:
             single_address: ${_param:openstack_compute_rack01_single_subnet}.{{ ip_start|int + loop.index }}
             deploy_address: ${_param:openstack_compute_rack01_deploy_subnet}.{{ ip_start|int + loop.index }}
             tenant_address: ${_param:openstack_compute_rack01_tenant_subnet}.{{ ip_start|int + loop.index }}
+            {%- if cookiecutter.get('ceph_enabled', 'False') == 'True' %}
+            {%- if cookiecutter.get('ceph_hyper_converged', 'False') == 'True' %}
+            backend_address: ${_param:ceph_osd_rack01_backend_subnet}.{{ ip_start|int + loop.index }}
+            ceph_crush_parent: rack01
+            {%- endif %}
+            {%- endif %}
         {%- endfor %}
         {%- else %}
         openstack_compute_rack01:
@@ -542,8 +548,20 @@ parameters:
               tenant_address:
                 value: ${_param:openstack_compute_rack01_tenant_subnet}.<<count>>
                 start: 101
+            {%- if cookiecutter.get('ceph_enabled', 'False') == 'True' %}
+              {%- if cookiecutter.get('ceph_hyper_converged', 'False') == 'True' %}
+              backend_address:
+                value: ${_param:ceph_osd_rack01_backend_subnet}.<<count>>
+                start: 101
+              {%- endif %}
+            {%- endif %}
           params:
             salt_master_host: ${_param:reclass_config_master}
+          {%- if cookiecutter.get('ceph_enabled', 'False') == 'True' %}
+            {%- if cookiecutter.get('ceph_hyper_converged', 'False') == 'True' %}
+            ceph_crush_parent: rack01
+            {%- endif %}
+          {%- endif %}
           {%- if cookiecutter.get('openstack_nfv_dpdk_enabled', 'False') == 'True' and cookiecutter.openstack_network_engine == 'opencontrail' %}
             linux_system_codename: trusty
           {%- else %}
@@ -575,7 +593,8 @@ parameters:
         {%- endif %}
         {%- endif %}
         {%- endif %}
-    {%- if cookiecutter.get('ceph_enabled', 'False') == 'True' %}
+  {%- if cookiecutter.get('ceph_enabled', 'False') == 'True' %}
+    {%- if cookiecutter.get('ceph_hyper_converged', 'False') == 'False' %}
       {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
         {%- for i in range(cookiecutter.ceph_osd_node_count|int) %}
         {%- set ip_start = 200 -%}
@@ -616,4 +635,5 @@ parameters:
             linux_system_codename: xenial
       {%- endif %}
     {%- endif %}
+  {%- endif %}
 
