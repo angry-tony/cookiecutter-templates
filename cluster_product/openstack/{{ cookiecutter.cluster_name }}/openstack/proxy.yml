@@ -29,6 +29,9 @@ classes:
 - system.nginx.server.proxy.cicd.jenkins
 {%- endif %}
 - system.nginx.server.proxy.openstack_api
+{%- if cookiecutter.openstack_version in ['newton', 'ocata'] %}
+- system.nginx.server.proxy.openstack.glare
+{%- endif %}
 - system.nginx.server.proxy.openstack_vnc
 - system.nginx.server.proxy.openstack_web
 {%- if cookiecutter.get('ceph_enabled', 'False') == 'True'  %}
