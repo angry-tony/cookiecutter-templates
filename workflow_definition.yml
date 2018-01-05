@@ -366,6 +366,11 @@ infra_params_action:
       help_text: "Ceph backend vlan ID used for OSD data replication on cluster_network"
       initial: "30"
       width: half
+    - name: "ceph_hyper_converged"
+      type: "BOOL"
+      help_text: "Collocate Ceph OSD with Nova compute service on Compute hosts"
+      initial: False
+      label: "Ceph Hyper-Converged"
   - name: "cicd_params"
     label: "CI/CD"
     requires:
@@ -1786,7 +1791,14 @@ product_params_action:
       requires_or:
       - openstack_nfv_dpdk_enabled: True
       - openstack_nova_compute_nfv_req_enabled: True
+      - ceph_hyper_converged: True
       type: TEXT
+    - help_text: Reserved memory for Host and Ceph processes - for example 3GB * number of OSD disks on the host
+      initial: '20000'
+      name: openstack_nova_compute_reserved_host_memory_mb
+      type: TEXT
+      requires:
+      - ceph_hyper_converged: True
     - help_text: If openstack_network_engine == ovs. Enables dvr.
       initial: false
       name: openstack_ovs_dvr_enabled
@@ -2217,6 +2229,8 @@ product_params_action:
       name: ceph_osd_node_count
       type: TEXT
       width: half
+      requires:
+      - ceph_hyper_converged: False
     - help_text: number of OSDs
       initial: '10'
       name: ceph_osd_count
@@ -2227,11 +2241,15 @@ product_params_action:
       name: ceph_osd_rack01_hostname
       type: TEXT
       width: half
+      requires:
+      - ceph_hyper_converged: False
     - help_text: control plane network prefix for ceph OSDs
       initial: '{{ ".".join(control_network_subnet.split(".")[:3]) }}'
       name: ceph_osd_rack01_single_subnet
       type: TEXT
       width: half
+      requires:
+      - ceph_hyper_converged: False
     - help_text: cluster network prefix for ceph OSDs - used to replicate OSDs data
       initial: '{{ ".".join(backend_network_subnet.split(".")[:3]) }}'
       name: ceph_osd_rack01_backend_subnet
@@ -2277,18 +2295,18 @@ product_params_action:
       width: half
       requires:
         - static_ips_on_deploy_network_enabled: True
-    - help_text: First NIC in Ceph OSD node bond
+    - help_text: First NIC of Ceph OSD bond used for Ceph communication
       initial: eth1
       name: ceph_osd_primary_first_nic
       type: TEXT
       width: half
-    - help_text: Second NIC in Ceph OSD node bond
+    - help_text: Second NIC of Ceph OSD bond used for Ceph communication
       initial: eth2
       name: ceph_osd_primary_second_nic
       type: TEXT
       width: half
     - name: "ceph_osd_bond_mode"
-      help_text: Bond mode for OSD nodes
+      help_text: Bond mode for Ceph OSD communication
       type: "CHOICE"
       initial: "active-backup"
       choices:

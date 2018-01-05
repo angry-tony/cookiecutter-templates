@@ -66,6 +66,7 @@
     "openstack_nfv_sriov_enabled"               : "False",
     "analytics_pipeline_enabled"                : "False",
     "ceph_enabled"                              : "False",
+    "ceph_hyper_converged"                      : "False",
     "oss_enabled"                               : "True",
     "bmk_enabled"                               : "False",
 

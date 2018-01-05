@@ -152,9 +152,10 @@ parameters:
 #            power_user: engineer
     {%- endfor %}
   {%- if cookiecutter.get('ceph_enabled', 'False') == 'True' %}
-    {%- for i in range(cookiecutter.ceph_osd_node_count|int) %}
-    {%- set ip_start = 200 -%}
-    {%- set osd_start = 0 %}
+    {%- if cookiecutter.get('ceph_hyper_converged', 'False') == 'False' %}
+      {%- for i in range(cookiecutter.ceph_osd_node_count|int) %}
+      {%- set ip_start = 200 -%}
+      {%- set osd_start = 0 %}
 #        osd{{ "%03d"|format(osd_start + loop.index) }}:
 #          interface:
 #            mac: 00:25:90:eb:92:4a
@@ -167,7 +168,8 @@ parameters:
 #            power_password: vsHmCLc4z0aY
 #            power_type: ipmi
 #            power_user: engineer
-    {%- endfor %}
+      {%- endfor %}
+    {%- endif %}
   {%- endif %}
 {%- else %}
 #        kvm02:

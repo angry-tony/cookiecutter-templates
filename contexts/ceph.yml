@@ -150,3 +150,4 @@ default_context:
   local_docker_images: True
   local_python_repo: True
   static_ips_on_deploy_network_enabled: 'True'
+  ceph_hyper_converged: 'True'
