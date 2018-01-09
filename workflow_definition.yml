@@ -240,7 +240,7 @@ infra_params_action:
         - upstream_proxy_enabled: True
       - initial: False
         name: upstream_proxy_auth_enabled
-        label: "Authentication for upstream proxy is required"
+        label: "Authentication for upstream proxy"
         help_text: "Enable upstream proxy authentication for MaaS and cicd services"
         type: BOOL
         requires:
@@ -442,13 +442,13 @@ product_params_action:
       name: "aptly_server_control_address"
       type: "IP"
       requires:
-      - offline_deployment: True
+      - local_repositories: True
     - help_text: "Hostname of a mirror VM"
       initial: "apt"
       name: "aptly_server_hostname"
       type: "TEXT"
       requires:
-      - offline_deployment: True
+      - local_repositories: True
     - help_text: hostname of a KVM node01
       initial: kvm01
       name: infra_kvm01_hostname
@@ -564,13 +564,13 @@ product_params_action:
       initial: 'admin'
       name: upstream_proxy_user
       requires:
-      - platform: upstream_proxy_auth_enabled
+      - upstream_proxy_auth_enabled: True
       type: TEXT
     - help_text: 'Password of upstream proxy used for authentication'
       initial: 'passwd'
       name: upstream_proxy_password
       requires:
-      - platform: upstream_proxy_auth_enabled
+      - upstream_proxy_auth_enabled: True
       type: TEXT
     - help_text: Hash of salt_api_passfor
       hidden: True
