@@ -29,6 +29,9 @@ default_context:
   upstream_proxy_enabled: True
   upstream_proxy_address: 10.167.5.1
   upstream_proxy_port: 8080
+  upstream_proxy_auth_enabled: True
+  upstream_proxy_user: test
+  upstream_proxy_password: test
   infra_kvm01_control_address: 10.167.4.241
   infra_kvm01_deploy_address: 10.167.5.241
   infra_kvm01_hostname: kvm01

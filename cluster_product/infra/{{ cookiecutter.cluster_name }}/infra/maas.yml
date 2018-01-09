@@ -18,6 +18,10 @@ parameters:
       upstream_proxy:
         address: {{ cookiecutter.upstream_proxy_address }}
         port: {{ cookiecutter.upstream_proxy_port }}
+  {%- if cookiecutter.upstream_proxy_auth_enabled == 'True' %}
+        user: {{ cookiecutter.upstream_proxy_user }}
+        password: {{ cookiecutter.upstream_proxy_password }}
+  {%- endif %}
 {%- endif %}
 {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
       maas_config:

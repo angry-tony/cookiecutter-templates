@@ -238,6 +238,13 @@ infra_params_action:
         type: "TEXT"
         requires:
         - upstream_proxy_enabled: True
+      - initial: False
+        name: upstream_proxy_auth_enabled
+        label: "Authentication for upstream proxy is required"
+        help_text: "Enable upstream proxy authentication for MaaS and cicd services"
+        type: BOOL
+        requires:
+        - upstream_proxy_enabled: True
   - name: "publication"
     label: "Publication Options"
     fields:
@@ -429,7 +436,7 @@ product_params_action:
       name: "aptly_server_deploy_address"
       type: "IP"
       requires:
-      - offline_deployment: True
+      - local_repositories: True
     - help_text: "IP address of a mirror VM on control network"
       initial: "{{ control_network_subnet | subnet(14) }}"
       name: "aptly_server_control_address"
@@ -552,6 +559,18 @@ product_params_action:
       name: openstack_compute_count
       requires:
       - platform: openstack_enabled
+      type: TEXT
+    - help_text: 'User of upstream proxy used for authentication'
+      initial: 'admin'
+      name: upstream_proxy_user
+      requires:
+      - platform: upstream_proxy_auth_enabled
+      type: TEXT
+    - help_text: 'Password of upstream proxy used for authentication'
+      initial: 'passwd'
+      name: upstream_proxy_password
+      requires:
+      - platform: upstream_proxy_auth_enabled
       type: TEXT
     - help_text: Hash of salt_api_passfor
       hidden: True
@@ -1788,6 +1807,7 @@ product_params_action:
     - help_text: pinned cpu's for nova
       initial: 1,2,3,4,5,7,8,9,10,11
       name: openstack_nova_cpu_pinning
+      width: half
       requires_or:
       - openstack_nfv_dpdk_enabled: True
       - openstack_nova_compute_nfv_req_enabled: True
@@ -1797,6 +1817,7 @@ product_params_action:
       initial: '20000'
       name: openstack_nova_compute_reserved_host_memory_mb
       type: TEXT
+      width: half
       requires:
       - ceph_hyper_converged: True
     - help_text: If openstack_network_engine == ovs. Enables dvr.
