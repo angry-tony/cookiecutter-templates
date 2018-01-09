@@ -171,6 +171,7 @@ parameters:
           bridge: br_ctl
   linux:
     network:
+      bridge: linux
       interface:
         eth0:
           enabled: true
