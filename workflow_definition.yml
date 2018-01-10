@@ -805,9 +805,9 @@ product_params_action:
       type: TEXT
       requires:
       - oss_enabled: True
-    - help_text: "OpenStack plain CA certificate path"
-      initial: "/srv/volumes/rundeck/storage/content/keys/cis/openstack/cert.pem"
-      name: oss_openstack_cert_path
+    - help_text: "OpenStack credentials path"
+      initial: "/srv/volumes/rundeck/storage"
+      name: oss_openstack_credentials_path
       type: TEXT
       requires:
       - oss_enabled: True

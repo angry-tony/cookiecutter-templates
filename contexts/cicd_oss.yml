@@ -163,4 +163,4 @@ default_context:
   oss_cleanup_service_enabled: 'True'
   oss_openstack_ssl_verify: 'False'
   oss_openstack_endpoint_type: 'public'
-  oss_openstack_credentials_path: '/srv/volumes/rundeck/storage/content/keys/cis/openstack'
+  oss_openstack_credentials_path: '/srv/volumes/rundeck/storage'

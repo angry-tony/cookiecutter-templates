@@ -22,7 +22,7 @@
     "oss_openstack_project"                     : "admin",
     "oss_openstack_domain_id"                   : "default",
     "oss_openstack_cert"                        : "example_plain_type_certificate",
-    "oss_openstack_credentials_path"            : "/srv/volumes/rundeck/storage/content/keys/cis/openstack",
+    "oss_openstack_credentials_path"            : "/srv/volumes/rundeck/storage",
     "oss_openstack_username_domain_id"          : "default",
     "oss_openstack_ssl_verify"                  : "False",
     "oss_openstack_endpoint_type"               : "public",
