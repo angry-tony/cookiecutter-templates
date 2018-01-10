@@ -6,8 +6,13 @@ classes:
 - system.linux.system.repo.mcp.apt_mirantis.maas
 {%- endif %}
 - system.maas.region.single
+- system.backupninja.client.single
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
+  _param:
+    backupninja_backup_host: ${_param:infra_kvm_node03_address}
+    backupninja_engine: rsync
+
   maas:
     region:
       commissioning_scripts:

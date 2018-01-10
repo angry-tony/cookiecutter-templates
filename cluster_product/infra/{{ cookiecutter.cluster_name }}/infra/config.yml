@@ -225,6 +225,8 @@ parameters:
             keepalived_vip_priority: 101
             linux_system_codename: xenial
         infra_kvm_node03:
+          classes:
+          - system.backupninja.server.single
           params:
             keepalived_vip_priority: 102
             linux_system_codename: xenial
