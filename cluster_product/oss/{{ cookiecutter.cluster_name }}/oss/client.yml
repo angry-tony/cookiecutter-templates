@@ -22,7 +22,7 @@ classes:
 # Elasticsearch
 - system.elasticsearch.client
 - system.elasticsearch.client.index.pushkin
-- system.elasticsearch.client.index.janitor_monkey
+- system.elasticsearch.client.index.cis_openstack
 
 # DevOps Portal
 - service.devops_portal.config
