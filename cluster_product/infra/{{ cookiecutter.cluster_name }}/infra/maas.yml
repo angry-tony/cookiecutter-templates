@@ -37,8 +37,8 @@ parameters:
         host: ${_param:deploy_address}
 {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
       saltstack_repo_key: ${_param:aptly_gpg_public_key}
-      saltstack_repo_trusty: "http://${_param:local_repo_url}/ubuntu-trusty stable salt"
-      saltstack_repo_xenial: "http://${_param:local_repo_url}/ubuntu-xenial stable salt"
+      saltstack_repo_trusty: "http://${_param:local_repo_url}/ubuntu-trusty ${_param:apt_mk_version} salt"
+      saltstack_repo_xenial: "http://${_param:local_repo_url}/ubuntu-xenial ${_param:apt_mk_version} salt"
 {%- endif %}
 # linux:
 #   network:
