@@ -40,7 +40,6 @@ classes:
 - system.glance.control.storage.ceph
 - system.cinder.control.backend.ceph
 - system.ceph.common.cluster
-- cluster.{{ cookiecutter.cluster_name }}.ceph.common
 {%- endif %}
 - system.keystone.server.cluster
 - system.keystone.server.wsgi
@@ -65,6 +64,9 @@ classes:
 - system.heka.ceilometer_collector.single
 - system.aodh.server.cluster
 - system.ceilometer.server.cluster
+{%- endif %}
+{%- if cookiecutter.get('ceph_enabled', 'False') == 'True'  %}
+- cluster.{{ cookiecutter.cluster_name }}.ceph.common
 {%- endif %}
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
