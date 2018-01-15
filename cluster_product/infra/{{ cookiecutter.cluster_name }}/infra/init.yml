@@ -134,6 +134,7 @@ parameters:
       netmask: ${_param:deploy_network_netmask}
       gateway: ${_param:deploy_network_gateway}
       ipflush_onchange: true
+      restart_on_ipflush: true
     {%- else %}
     linux_dhcp_interface:
       enabled: true
