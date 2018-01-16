@@ -800,9 +800,17 @@ product_params_action:
       requires:
       - oss_enabled: True
     - help_text: "OpenStack plain CA certificate"
-      initial: ""
+      initial: "      -----BEGIN CERTIFICATE-----
+      MIIE0DCCA7igAwIBAgIBBzANBgkqhkiG9w0BAQsFADCBgzELMAkGA1UEBhMCVVMx
+      EDAOBgNVBAgTB0FyaXpvbmExEzARBgNVBAcTClNjb3R0c2RhbGUxGjAYBgNVBAoT
+      AAGjggEaMIIBFjAPBgNVHRMBAf8EBTADAQH/MA4GA1UdDwEB/wQEAwIBBjAdBgNV
+      91cxG7685C/b+LrTW+C05+Z5Yg4MotdqY3MxtfWoSKQ7CC2iXZDXtHwlTxFWMMS2
+      -----END CERTIFICATE-----
+      -----BEGIN CERTIFICATE-----
+      dGhvcml0eSAtIEcyMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAv3Fi
+      9kIDN0zmiN/VryTyscPfzLXs4Jlet0lUIDyUGAzHHFIYSaRt4bNYC8..."
       name: oss_openstack_cert
-      type: TEXT
+      type: LONG_TEXT
       requires:
       - oss_enabled: True
     - help_text: "OpenStack plain CA certificate path"
@@ -845,13 +853,13 @@ product_params_action:
       requires:
       - oss_enabled: True
     - help_text: "Define proxy-endpoint ip address for Rundeck dashboard to provide access from external network"
-      initial: ""
+      initial: "${_param:openstack_proxy_address}"
       name: rundeck_iframe_host
       type: TEXT
       requires:
       - oss_enabled: True
     - help_text: "Define proxy-endpoint port for Rundeck dashboard to provide access from external network"
-      initial: ""
+      initial: "${_param:haproxy_rundeck_exposed_port}"
       name: rundeck_iframe_port
       type: TEXT
       requires:
