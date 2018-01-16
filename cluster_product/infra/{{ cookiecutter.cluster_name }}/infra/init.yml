@@ -50,6 +50,8 @@ parameters:
 
     {%- if cookiecutter.mcp_version != 'stable' and cookiecutter.mcp_version != 'testing' and cookiecutter.mcp_version != 'nightly' %}
     jenkins_pipelines_branch: refs/tags/{{ cookiecutter.mcp_version }}
+    {%- else %}
+    jenkins_pipelines_branch: master
     {%- endif %}
 
     {%- if cookiecutter.kubernetes_enabled != 'True' %}

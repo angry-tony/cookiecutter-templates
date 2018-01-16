@@ -81,6 +81,9 @@ classes:
 - system.salt.minion.cert.k8s_server
 - system.reclass.storage.system.kubernetes_control_cluster
 {%- endif %}
+- service.jenkins.client
+- system.jenkins.client.credential.salt
+- system.jenkins.client.job.deploy.openstack
 {%- if cookiecutter.deployment_type == 'physical' %}
 - cluster.{{ cookiecutter.cluster_name }}.infra.maas
 {%- endif %}
@@ -101,6 +104,10 @@ parameters:
     {%- elif cookiecutter.kubernetes_enabled == 'True' %}
     backupninja_backup_host: ${_param:kubernetes_control_node03_address}
     {%- endif %}
+    jenkins_git_url: 'git@cfg01:/home/repo'
+    jenkins_gerrit_url: ${_param:jenkins_git_url}
+    salt_api_password: {{ cookiecutter.salt_api_password }}
+    jenkins_salt_api_url: "http://${_param:salt_master_host}:6969"
   {%- if cookiecutter.kubernetes_enabled != 'True' %}
   linux:
     network:

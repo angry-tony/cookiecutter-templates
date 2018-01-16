@@ -33,6 +33,7 @@
     "salt_master_management_address"            : "10.167.5.15",
     "salt_master_hostname"                      : "cfg01",
     "salt_api_password_hash"                    : "<<WILL_BE_GENERATED>>",
+    "salt_api_password"                         : "<<WILL_BE_GENERATED>>",
 
     "maas_deploy_address"                       : "10.167.4.91",
     "maas_hostname"                             : "mas01",
