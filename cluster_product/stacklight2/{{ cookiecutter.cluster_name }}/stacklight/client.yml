@@ -4,7 +4,7 @@ classes:
 - system.docker.client
 - system.docker.swarm.stack.dashboard
 - system.docker.swarm.stack.monitoring
-{%- if cookiecutter.openstack_enabled == 'True' %}
+{%- if cookiecutter.openstack_enabled == 'True' and cookiecutter.fluentd_enabled != 'True' %}
 - system.docker.swarm.stack.monitoring.remote_collector
 {%- endif %}
 {%- if cookiecutter.get('ceph_enabled', 'False') == 'True'  %}

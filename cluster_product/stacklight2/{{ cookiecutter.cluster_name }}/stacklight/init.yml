@@ -80,6 +80,7 @@ parameters:
     stacklight_telemetry_node01_hostname: {{ cookiecutter.stacklight_telemetry_node01_hostname }}
     stacklight_telemetry_node02_hostname: {{ cookiecutter.stacklight_telemetry_node02_hostname }}
     stacklight_telemetry_node03_hostname: {{ cookiecutter.stacklight_telemetry_node03_hostname }}
+    fluentd_elasticsearch_host: ${_param:stacklight_log_address}
   linux:
     network:
       host:

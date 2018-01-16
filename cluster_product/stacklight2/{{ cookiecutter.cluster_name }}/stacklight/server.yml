@@ -18,7 +18,7 @@ classes:
 {%- if cookiecutter.kubernetes_enabled == 'True' %}
 - system.salt.minion.cert.prometheus_server
 {%- endif %}
-{%- if cookiecutter.openstack_enabled == 'True' %}
+{%- if cookiecutter.openstack_enabled == 'True' and cookiecutter.fluentd_enabled != 'True' %}
 - system.heka.remote_collector.container
 - system.heka.remote_collector.input.amqp
 - system.heka.remote_collector.output.elasticsearch

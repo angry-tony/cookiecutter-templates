@@ -42,6 +42,7 @@
 
     "stacklight_enabled"                        : "True",
     "stacklight_version"                        : "2",
+    "fluentd_enabled"                           : "True",
 
     "openstack_enabled"                         : "True",
     "kubernetes_enabled"                        : "False",
