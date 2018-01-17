@@ -1,6 +1,3 @@
-{%- macro password(size=16) -%}
-{% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'|random }}{% endfor %}
-{%- endmacro %}
 parameters:
   _param:
     cicd_control_address: {{ cookiecutter.cicd_control_vip_address }}
@@ -76,9 +73,9 @@ parameters:
     openldap_organisation: "{{ cookiecutter.openldap_organisation }}"
     openldap_dn: "dc={{ cookiecutter.openldap_domain|replace('.', ',dc=') }}"
     openldap_domain: "{{ cookiecutter.openldap_domain }}"
-    openldap_admin_password: {{ password(16) }}
-    openldap_config_password: {{ password(16) }}
-    openldap_readonly_password: {{ password(16) }}
+    openldap_admin_password: ${_param:openldap_admin_password_generated}
+    openldap_config_password: ${_param:openldap_config_password_generated}
+    openldap_readonly_password: ${_param:openldap_readonly_password_generated}
     # Jenkins
     jenkins_admin_password: ${_param:openldap_admin_password}
     jenkins_security_ldap_server: ${_param:cicd_control_address}
@@ -88,8 +85,8 @@ parameters:
     # Gerrit
     gerrit_admin_password: ${_param:openldap_admin_password}
     {%- else %}
-    jenkins_admin_password: {{ password(16) }}
-    gerrit_admin_password: {{ password(16) }}
+    jenkins_admin_password: ${_param:jenkins_admin_password_generated}
+    gerrit_admin_password: ${_param:gerrit_admin_password_generated}
     {%- endif %}
 
     # Aptly

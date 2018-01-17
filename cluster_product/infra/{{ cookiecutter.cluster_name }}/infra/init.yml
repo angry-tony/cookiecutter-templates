@@ -1,6 +1,3 @@
-{%- macro password(size=16) -%}
-{% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'|random }}{% endfor %}
-{%- endmacro %}
 classes:
 - system.linux.system.single
 - system.linux.system.single.debian
@@ -57,6 +54,7 @@ classes:
 - cluster.{{ cookiecutter.cluster_name }}.cicd
 {%- endif %}
 #- cluster.{{ cookiecutter.cluster_name }}.infra.proxy
+- cluster.{{ cookiecutter.cluster_name }}.infra.secrets
 parameters:
   _param:
     # Don't set it "false" before you configure sudo policies and enable power users.
@@ -124,8 +122,8 @@ parameters:
     infra_maas_node01_deploy_address: ${_param:infra_config_deploy_address}
     infra_maas_node01_hostname: ${_param:infra_config_hostname}
     maas_admin_username: mirantis
-    maas_admin_password: {{ password(16) }}
-    maas_db_password: {{ password(16) }}
+    maas_admin_password: ${_param:maas_admin_password_generated}
+    maas_db_password: ${_param:maas_db_password_generated}
 
     {%- if cookiecutter.openstack_enabled == 'True' or (cookiecutter.kubernetes_enabled == 'True' and (cookiecutter.stacklight_enabled == 'True' or cookiecutter.cicd_enabled == 'True')) %}
     infra_kvm_address: {{ cookiecutter.infra_kvm_vip_address }}

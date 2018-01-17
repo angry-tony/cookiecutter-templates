@@ -1,11 +1,8 @@
-{%- macro password(size=16) -%}
-{% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'|random }}{% endfor %}
-{%- endmacro -%}
 parameters:
   _param:
     opencontrail_version: 3.0
     linux_repo_contrail_component: oc323
-    opencontrail_stats_password: {{ password(16) }}
+    opencontrail_stats_password: ${_param:opencontrail_stats_password_generated}
     opencontrail_compute_dns: ${_param:dns_server01}
     opencontrail_compute_gateway: ${_param:tenant_network_gateway}
     {%- if not cookiecutter.get('openstack_nfv_dpdk_enabled', 'False') == 'True' and cookiecutter.deployment_type == 'physical' %}
@@ -43,8 +40,8 @@ parameters:
     opencontrail_analytics_node03_hostname: {{ cookiecutter.opencontrail_analytics_node03_hostname }}
 
     {%- if cookiecutter.get('kubernetes_enabled','False') == 'True' %}
-    rabbitmq_secret_key: {{ password(16) }}
-    rabbitmq_admin_password: {{ password(16) }}
+    rabbitmq_secret_key: ${_param:rabbitmq_secret_key_generated}
+    rabbitmq_admin_password: ${_param:rabbitmq_admin_password_generated}
     {%- endif %}
 
   linux:

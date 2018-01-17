@@ -21,7 +21,6 @@
     "oss_openstack_password"                    : "${_param:keystone_admin_password}",
     "oss_openstack_project"                     : "admin",
     "oss_openstack_domain_id"                   : "default",
-    "oss_openstack_cert"                        : "example_plain_type_certificate",
     "oss_openstack_credentials_path"            : "/srv/volumes/rundeck/storage",
     "oss_openstack_username_domain_id"          : "default",
     "oss_openstack_ssl_verify"                  : "False",
@@ -38,9 +37,6 @@
     "sfdc_sandbox_enabled"                      : "True",
 
     "static_ips_on_deploy_network_enabled"      : "False",
-
-    "oss_runbook_public_key"                    : "<<WILL_BE_GENERATED>>",
-    "oss_runbook_private_key"                   : "<<WILL_BE_GENERATED>>",
 
     "oss_notification_email_from"               : "",
     "oss_notification_sender_password"          : "",

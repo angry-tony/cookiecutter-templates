@@ -1,6 +1,3 @@
-{%- macro password(size=16) -%}
-{% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'|random }}{% endfor %}
-{%- endmacro -%}
 parameters:
   _param:
     alarming_service: sensu
@@ -10,28 +7,28 @@ parameters:
     heka_aggregator_host: ${_param:stacklight_monitor_address}
     aggregator_port: 5565
     grafana_user: admin
-    grafana_password: {{ password(16) }}
+    grafana_password: ${_param:grafana_password_generated}
     cluster_elasticsearch_port: 9200
     cluster_kibana_port: 5601
     cluster_grafana_port: 3000
-    mysql_grafana_password: {{ password(16) }}
+    mysql_grafana_password: ${_param:mysql_grafana_password_generated}
     grafana_influxdb_host: ${_param:stacklight_telemetry_address}
     elasticsearch_port: 9200
-    influxdb_stacklight_password: {{ password(16) }}
-    influxdb_admin_password: {{ password(16) }}
+    influxdb_stacklight_password: ${_param:influxdb_stacklight_password_generated}
+    influxdb_admin_password: ${_param:influxdb_admin_password_generated}
     influxdb_port: 8086
     influxdb_database: lma
     influxdb_user: lma
-    influxdb_password: {{ password(16) }}
+    influxdb_password: ${_param:influxdb_password_generated}
     {%- if cookiecutter.kubernetes_enabled == 'True' %}
-    galera_server_maintenance_password: {{ password(16) }}
-    galera_server_admin_password: {{ password(16) }}
+    galera_server_maintenance_password: ${_param:galera_server_maintenance_password_generated}
+    galera_server_admin_password: ${_param:galera_server_admin_password_generated}
     {%- endif %}
-    stacklight_monitor_rabbitmq_password: {{ password(16) }}
-    stacklight_monitor_uchiwa_password: {{ password(16) }}
-    stacklight_log_keepalived_password: {{ password(16) }}
-    stacklight_monitor_keepalived_password: {{ password(16) }}
-    stacklight_telemetry_keepalived_password: {{ password(16) }}
+    stacklight_monitor_rabbitmq_password: ${_param:stacklight_monitor_rabbitmq_password_generated}
+    stacklight_monitor_uchiwa_password: ${_param:stacklight_monitor_uchiwa_password_generated}
+    stacklight_log_keepalived_password: ${_param:stacklight_log_keepalived_password_generated}
+    stacklight_monitor_keepalived_password: ${_param:stacklight_monitor_keepalived_password_generated}
+    stacklight_telemetry_keepalived_password: ${_param:stacklight_telemetry_keepalived_password_generated}
     stacklight_environment: ${_param:cluster_domain}
 
     # Stacklight Monitor

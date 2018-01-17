@@ -97,6 +97,5 @@ parameters:
     elasticsearch_ssl:
       enabled: false
 
-    rundeck_runbook_public_key: {{ cookiecutter.oss_runbook_public_key }}
-    rundeck_runbook_private_key: |
-      {{ cookiecutter.oss_runbook_private_key|indent(6) }}
+    rundeck_runbook_public_key: ${_param:rundeck_runbook_public_key_generated}
+    rundeck_runbook_private_key: ${_param:rundeck_runbook_private_key_generated}

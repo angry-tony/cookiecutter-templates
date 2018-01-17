@@ -77,6 +77,13 @@
     "oss_enabled"                               : "True",
     "bmk_enabled"                               : "False",
 
+    "cicd_private_key"                          : "<<WILL_BE_GENERATED>>",
+    "cicd_public_key"                           : "<<WILL_BE_GENERATED>>",
+
+    "oss_runbook_private_key"                   : "<<WILL_BE_GENERATED>>",
+    "oss_runbook_public_key"                    : "<<WILL_BE_GENERATED>>",
+    "oss_openstack_cert"                        : "example_plain_type_certificate",
+
     "static_ips_on_deploy_network_enabled"      : "False",
     "use_default_network_scheme"                : "True",
 

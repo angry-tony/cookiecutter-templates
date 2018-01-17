@@ -24,10 +24,8 @@
     "upstream_proxy_enabled"                    : "False",
 
     "salt_api_password"                         : "<<WILL_BE_GENERATED>>",
-    "cicd_private_key"                          : "<<WILL_BE_GENERATED>>",
-    "cicd_public_key"                           : "<<WILL_BE_GENERATED>>",
 
-    "openstack_enabled"                          : "True",
+    "openstack_enabled"                         : "True",
 
     "openldap_enabled"                          : "True",
     "openldap_organisation"                     : "${_param:cluster_name}",

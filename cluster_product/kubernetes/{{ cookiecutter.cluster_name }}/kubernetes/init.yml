@@ -1,6 +1,3 @@
-{%- macro password(size=16) -%}
-{% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'|random }}{% endfor %}
-{%- endmacro %}
 parameters:
   _param:
     salt_minion_ca_host: ${_param:infra_config_hostname}.${_param:cluster_domain}
@@ -8,14 +5,14 @@ parameters:
 
     # kubernetes settings
     kubernetes_admin_user: admin
-    kubernetes_admin_password: {{ password(16) }}
-    kubernetes_admin_token: {{ password(32) }}
-    kubernetes_kubelet_token: {{ password(32) }}
-    kubernetes_kube-proxy_token: {{ password(32) }}
-    kubernetes_scheduler_token: {{ password(32) }}
-    kubernetes_controller-manager_token: {{ password(32) }}
-    kubernetes_dns_token: {{ password(32) }}
-    etcd_initial_token: {{ password(32) }}
+    kubernetes_admin_password: ${_param:kubernetes_admin_password_generated}
+    kubernetes_admin_token: ${_param:kubernetes_admin_token_generated}
+    kubernetes_kubelet_token: ${_param:kubernetes_kubelet_token_generated}
+    kubernetes_kube-proxy_token: ${_param:kubernetes_kube-proxy_token_generated}
+    kubernetes_scheduler_token: ${_param:kubernetes_scheduler_token_generated}
+    kubernetes_controller-manager_token: ${_param:kubernetes_controller-manager_token_generated}
+    kubernetes_dns_token: ${_param:kubernetes_dns_token_generated}
+    etcd_initial_token: ${_param:etcd_initial_token_generated}
 
     # addresses and hostnames
     kubernetes_internal_api_address: 10.254.0.1

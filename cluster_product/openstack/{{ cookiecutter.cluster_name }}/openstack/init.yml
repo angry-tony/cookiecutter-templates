@@ -1,9 +1,3 @@
-{%- macro password(size=16) -%}
-{% for index in range(size) %}{{ 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'|random }}{% endfor %}
-{%- endmacro -%}
-{%- macro secret(size=12) -%}
-{% for index in range(size) %}{{ 'abcdef0123456789'|random }}{% endfor %}
-{%- endmacro -%}
 parameters:
   _param:
     openstack_region: RegionOne
@@ -73,23 +67,23 @@ parameters:
 {%- endif %}
 
     galera_server_cluster_name: openstack_cluster
-    galera_server_maintenance_password: {{ password(16) }}
-    galera_server_admin_password: {{ password(16) }}
-    rabbitmq_secret_key: {{ password(16) }}
-    rabbitmq_admin_password: {{ password(16) }}
-    rabbitmq_openstack_password: {{ password(16) }}
+    galera_server_maintenance_password: ${_param:galera_server_maintenance_password_generated}
+    galera_server_admin_password: ${_param:galera_server_admin_password_generated}
+    rabbitmq_secret_key: ${_param:rabbitmq_secret_key_generated}
+    rabbitmq_admin_password: ${_param:rabbitmq_admin_password_generated}
+    rabbitmq_openstack_password: ${_param:rabbitmq_openstack_password_generated}
     glance_version: ${_param:openstack_version}
     glance_service_host: ${_param:openstack_control_address}
     keystone_version: ${_param:openstack_version}
     keystone_service_host: ${_param:openstack_control_address}
     heat_version: ${_param:openstack_version}
     heat_service_host: ${_param:openstack_control_address}
-    heat_domain_admin_password: {{ password(16) }}
+    heat_domain_admin_password: ${_param:heat_domain_admin_password_generated}
     cinder_version: ${_param:openstack_version}
     cinder_service_host: ${_param:openstack_control_address}
     ceilometer_version: ${_param:openstack_version}
     ceilometer_service_host: ${_param:openstack_control_address}
-    ceilometer_influxdb_password: {{ password(16) }}
+    ceilometer_influxdb_password: ${_param:ceilometer_influxdb_password_generated}
     nova_version: ${_param:openstack_version}
     nova_service_host: ${_param:openstack_control_address}
     neutron_version: ${_param:openstack_version}
@@ -99,36 +93,36 @@ parameters:
     aodh_service_host: ${_param:openstack_control_address}
 
     mysql_admin_user: root
-    mysql_aodh_password: {{ password(16) }}
+    mysql_aodh_password: ${_param:mysql_aodh_password_generated}
     mysql_admin_password: ${_param:galera_server_admin_password}
-    mysql_cinder_password: {{ password(16) }}
-    mysql_ceilometer_password: {{ password(16) }}
-    mysql_glance_password: {{ password(16) }}
-    mysql_heat_password: {{ password(16) }}
-    mysql_keystone_password: {{ password(16) }}
-    mysql_neutron_password: {{ password(16) }}
-    mysql_nova_password: {{ password(16) }}
-    keystone_service_token: {{ password(16) }}
-    keystone_admin_password: {{ password(16) }}
-    keystone_ceilometer_password: {{ password(16) }}
-    keystone_cinder_password: {{ password(16) }}
-    keystone_glance_password: {{ password(16) }}
-    keystone_heat_password: {{ password(16) }}
-    keystone_keystone_password: {{ password(16) }}
-    keystone_neutron_password: {{ password(16) }}
-    keystone_nova_password: {{ password(16) }}
-    keystone_aodh_password: {{ password(16) }}
-    ceilometer_secret_key: {{ password(16) }}
+    mysql_cinder_password: ${_param:mysql_cinder_password_generated}
+    mysql_ceilometer_password: ${_param:mysql_ceilometer_password_generated}
+    mysql_glance_password: ${_param:mysql_glance_password_generated}
+    mysql_heat_password: ${_param:mysql_heat_password_generated}
+    mysql_keystone_password: ${_param:mysql_keystone_password_generated}
+    mysql_neutron_password: ${_param:mysql_neutron_password_generated}
+    mysql_nova_password: ${_param:mysql_nova_password_generated}
+    keystone_service_token: ${_param:keystone_service_token_generated}
+    keystone_admin_password: ${_param:keystone_admin_password_generated}
+    keystone_ceilometer_password: ${_param:keystone_ceilometer_password_generated}
+    keystone_cinder_password: ${_param:keystone_cinder_password_generated}
+    keystone_glance_password: ${_param:keystone_glance_password_generated}
+    keystone_heat_password: ${_param:keystone_heat_password_generated}
+    keystone_keystone_password: ${_param:keystone_keystone_password_generated}
+    keystone_neutron_password: ${_param:keystone_neutron_password_generated}
+    keystone_nova_password: ${_param:keystone_nova_password_generated}
+    keystone_aodh_password: ${_param:keystone_aodh_password_generated}
+    ceilometer_secret_key: ${_param:ceilometer_secret_key_generated}
     horizon_version: ${_param:openstack_version}
-    horizon_secret_key: {{ password(64) }}
+    horizon_secret_key: ${_param:horizon_secret_key_generated}
     horizon_identity_host: ${_param:openstack_control_address}
     horizon_identity_encryption: none
     horizon_identity_version: 2
     mongodb_server_replica_set: ceilometer
-    mongodb_ceilometer_password: {{ password(16) }}
-    mongodb_admin_password: {{ password(16) }}
-    mongodb_shared_key: {{ password(64) }}
-    metadata_password: {{ password(16) }}
+    mongodb_ceilometer_password: ${_param:mongodb_ceilometer_password_generated}
+    mongodb_admin_password: ${_param:mongodb_admin_password_generated}
+    mongodb_shared_key: ${_param:mongodb_shared_key_generated}
+    metadata_password: ${_param:openstack_metadata_password_generated}
     salt_pki_proxy_alt_names: IP:${_param:cluster_public_host},DNS:${_param:cluster_public_host},IP:${_param:openstack_proxy_address},DNS:horizon.${_param:cluster_domain}
 
 {%- if cookiecutter.stacklight_enabled == 'True' %}
@@ -228,8 +222,8 @@ parameters:
 
     {%- if cookiecutter.get('ceph_enabled', 'False') == 'True'  %}
     # Ceph
-    cinder_storage_secret_uuid: "{{ secret(8) }}-{{ secret(4) }}-{{ secret(4) }}-{{ secret(4) }}-{{ secret(12) }}"
-    nova_storage_secret_uuid: "{{ secret(8) }}-{{ secret(4) }}-{{ secret(4) }}-{{ secret(4) }}-{{ secret(12) }}"
+    cinder_storage_secret_uuid: ${_param:cinder_storage_secret_uuid_generated}
+    nova_storage_secret_uuid: ${_param:nova_storage_secret_uuid_generated}
     nova_storage_pool: vms
     nova_storage_user: nova
     cinder_storage_pool: volumes
@@ -245,11 +239,11 @@ parameters:
     openstack_fluentd_handler_enabled: true
     {%- endif %}
     # Billing
-    #keystone_billometer_password: {{ password(16) }}
+    #keystone_billometer_password: ${_param:keystone_billometer_password_generated}
     #keystone_billometer_address: ${_param:billometer_service_host}
     #billometer_service_host: ${_param:openstack_billing_address}
     #billometer_version: ${_param:openstack_version}
-    #billometer_secret_key: {{ password(64) }}
+    #billometer_secret_key: ${_param:billometer_secret_key_generated}
     #billometer_identity_password: ${_param:keystone_billometer_password}
     #billometer_identity_host: ${_param:openstack_control_address}
     #billometer_identity_token: ${_param:keystone_service_token}
