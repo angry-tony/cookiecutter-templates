@@ -124,6 +124,12 @@ parameters:
             - ${_param:dns_server02}
         ens4: ${_param:linux_single_interface}
   {%- endif %}
+  jenkins:
+    client:
+      master:
+        host: ${_param:salt_master_host}
+        port: 8081
+        password: r00tme
   salt:
     master:
       command_timeout: 600
