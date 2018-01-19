@@ -2,6 +2,9 @@ classes:
 - system.ceph.osd.cluster
 - system.ceph.backup.client.single
 - cluster.{{ cookiecutter.cluster_name }}.ceph.common
+{%- if cookiecutter.use_default_network_scheme != 'False' %}
+- cluster.{{ cookiecutter.cluster_name }}.ceph.networking.osd
+{%- endif %}
 parameters:
   _param:
     ceph_remote_backup_server: ${_param:infra_kvm_node03_address}
@@ -36,56 +39,3 @@ parameters:
 {%- endfor %}
 
 {%- endif %}
-  linux:
-    network:
-      interface:
-    {%- if cookiecutter.get('ceph_hyper_converged', 'False') == 'False' %}
-      {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
-        {{ cookiecutter.ceph_osd_deploy_nic }}: ${_param:linux_deploy_interface}
-      {%- endif %}
-    {%- endif %}
-        eth1:
-          mtu: 9000
-          enabled: true
-          type: slave
-          proto: manual
-          name: ${_param:ceph_osd_primary_first_nic}
-          master: bond1
-        eth2:
-          mtu: 9000
-          enabled: true
-          type: slave
-          proto: manual
-          name: ${_param:ceph_osd_primary_second_nic}
-          master: bond1
-        bond1:
-          enabled: true
-          proto: manual
-          type: bond
-          use_interfaces:
-          - ${_param:ceph_osd_primary_second_nic}
-          - ${_param:ceph_osd_primary_first_nic}
-          slaves: ${_param:ceph_osd_primary_second_nic} ${_param:ceph_osd_primary_first_nic}
-          mode: {{ cookiecutter.ceph_osd_bond_mode }}
-  {%- if cookiecutter.get('ceph_hyper_converged', 'False') == 'False' %}
-    # bond for cluster communication on _param:public_network
-        bond1.1:
-          name: bond1.${_param:control_vlan}
-          enabled: true
-          type: vlan
-          proto: static
-          address: ${_param:single_address}
-          netmask: ${_param:control_network_netmask}
-          use_interfaces:
-          - bond1
-  {%- endif %}
-    # bond for OSD data replication on _param:cluster_network
-        bond1.2:
-          name: bond1.${_param:backend_vlan}
-          enabled: true
-          type: vlan
-          proto: static
-          address: ${_param:backend_address}
-          netmask: ${_param:backend_network_netmask}
-          use_interfaces:
-          - bond1

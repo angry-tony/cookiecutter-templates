@@ -160,6 +160,11 @@ general_params_action:
         label: "Static IPs on deploy network"
         help_text: "Assign static IP addresses on deploy network"
         type: BOOL
+      - initial: True
+        name: use_default_network_scheme
+        label: "Use default network scheme"
+        help_text: "Use default networking scheme for each component"
+        type: BOOL
       - name: "control_network_subnet"
         type: IP
         help_text: "IP address of control network with network mask"

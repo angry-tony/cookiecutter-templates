@@ -90,6 +90,9 @@ classes:
 - cluster.{{ cookiecutter.cluster_name }}.infra.maas
 {%- endif %}
 - cluster.{{ cookiecutter.cluster_name }}.infra
+{%- if cookiecutter.use_default_network_scheme != 'False' %}
+- cluster.{{ cookiecutter.cluster_name }}.infra.networking.config
+{%- endif %}
 parameters:
   _param:
     salt_master_base_environment: prd
@@ -115,22 +118,6 @@ parameters:
     {%- else %}
     jenkins_pipelines_branch: master
     {%- endif %}
-  {%- if cookiecutter.kubernetes_enabled != 'True' %}
-  linux:
-    network:
-      interface:
-        ens3:
-          enabled: true
-          type: eth
-          proto: static
-          address: ${_param:deploy_address}
-          netmask: ${_param:deploy_network_netmask}
-          gateway: ${_param:deploy_network_gateway}
-          name_servers:
-            - ${_param:dns_server01}
-            - ${_param:dns_server02}
-        ens4: ${_param:linux_single_interface}
-  {%- endif %}
   jenkins:
     client:
       master:

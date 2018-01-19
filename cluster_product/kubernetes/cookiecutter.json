@@ -32,7 +32,8 @@
     "kubernetes_control_node02_hostname"        : "ctl02",
     "kubernetes_control_node03_hostname"        : "ctl03",
 
-    "static_ips_on_deploy_network_enabled" : "False",
+    "static_ips_on_deploy_network_enabled"      : "False",
+    "use_default_network_scheme"                : "True",
 
     "calico_network"                             : "192.168.0.0",
     "calico_netmask"                             : "16",

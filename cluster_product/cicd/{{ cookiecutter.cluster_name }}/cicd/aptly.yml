@@ -29,6 +29,9 @@ classes:
 - system.docker.client
 - service.docker.registry
 - cluster.{{ cookiecutter.cluster_name }}.infra
+  {%- if cookiecutter.use_default_network_scheme != 'False' %}
+- cluster.{{ cookiecutter.cluster_name }}.cicd.networking.virtual
+  {%- endif %}
 parameters:
   _param:
     ubuntu_mirror_url: mirror.mirantis.com/${_param:apt_mk_version}
@@ -233,13 +236,6 @@ parameters:
       options:
         bip: 10.99.0.1/16
         fixed-cidr: 10.99.0.1/17
-  linux:
-    network:
-      interface:
-        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
-        ens3: ${_param:linux_deploy_interface}
-        {%- endif %}
-        ens4: ${_param:linux_single_interface}
   git:
     server:
        directory: /srv/git/

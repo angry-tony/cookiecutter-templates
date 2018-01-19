@@ -17,6 +17,10 @@ classes:
 - cluster.{{ cookiecutter.cluster_name }}.opencontrail.compute
 {%- endif %}
 - cluster.{{ cookiecutter.cluster_name }}.infra
+{%- if cookiecutter.use_default_network_scheme != 'False' %}
+- cluster.{{ cookiecutter.cluster_name }}.kubernetes.networking.compute
+{%- endif %}
+
 parameters:
   {%- if cookiecutter.kubernetes_network_engine == 'calico' %}
   _param:
@@ -66,62 +70,3 @@ parameters:
         sysctl:
           # The default operating system limits on mmap counts is likely to be too low, which may result in out of memory exceptions.
           vm.max_map_count: 262144
-
-  {%- if cookiecutter.kubernetes_network_engine == 'calico' %}
-    network:
-      interface:
-      {%- if cookiecutter.deployment_type == 'virtual' %}
-        ens3: ${_param:linux_single_interface}
-        ens4:
-          enabled: true
-          type: eth
-          proto: static
-          address: ${_param:tenant_address}
-          netmask: ${_param:tenant_network_netmask}
-      {%- else %}
-        eth1:
-          mtu: 9000
-          enabled: true
-          type: slave
-          proto: manual
-          name: ${_param:primary_first_nic}
-          master: bond0
-        eth2:
-          mtu: 9000
-          enabled: true
-          type: slave
-          proto: manual
-          name: ${_param:primary_second_nic}
-          master: bond0
-        bond0:
-          mtu: 9000
-          enabled: true
-          proto: manual
-          type: bond
-          use_interfaces:
-          - ${_param:primary_first_nic}
-          - ${_param:primary_second_nic}
-          slaves: ${_param:primary_first_nic} ${_param:primary_second_nic}
-          mode: {{ cookiecutter.compute_bond_mode }}
-        bond0.1:
-          mtu: 9000
-          name: bond0.${_param:control_vlan}
-          enabled: true
-          proto: static
-          type: vlan
-          use_interfaces:
-          - bond0
-          address: ${_param:single_address}
-          netmask: ${_param:control_network_netmask}
-        bond0.2:
-          mtu: 9000
-          name: bond0.${_param:tenant_vlan}
-          enabled: true
-          proto: static
-          type: vlan
-          use_interfaces:
-          - bond0
-          address: ${_param:tenant_address}
-          netmask: ${_param:tenant_network_netmask}
-      {%- endif %}
-  {%- endif %}

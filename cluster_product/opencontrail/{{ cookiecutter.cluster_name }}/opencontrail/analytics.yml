@@ -31,6 +31,9 @@ classes:
 - system.opencontrail.client.resource.database_node
 - system.opencontrail.control.analytics
 - cluster.{{ cookiecutter.cluster_name }}.infra
+{%- if cookiecutter.use_default_network_scheme != 'False' %}
+- cluster.{{ cookiecutter.cluster_name }}.opencontrail.networking.virtual
+{%- endif %}
 parameters:
   _param:
     ### latest OpenStack repo on Trusty is Mitaka
@@ -45,10 +48,3 @@ parameters:
     cluster_node02_address: ${_param:opencontrail_analytics_node02_address}
     cluster_node03_hostname: ${_param:opencontrail_analytics_node03_hostname}
     cluster_node03_address: ${_param:opencontrail_analytics_node03_address}
-  linux:
-    network:
-      interface:
-        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
-        eth0: ${_param:linux_deploy_interface}
-        {%- endif %}
-        eth1: ${_param:linux_single_interface}

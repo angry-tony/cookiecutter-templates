@@ -32,6 +32,7 @@
     "openldap_domain"                           : "deployment-name.local",
 
     "static_ips_on_deploy_network_enabled"      : "False",
+    "use_default_network_scheme"                : "True",
 
     "stacklight_enabled"                        : "False",
 

@@ -54,6 +54,9 @@ classes:
 - system.nginx.server.proxy.oss.devops_portal
 - system.nginx.server.proxy.oss.rundeck
 {%- endif %}
+{%- if cookiecutter.use_default_network_scheme != 'False' %}
+- cluster.{{ cookiecutter.cluster_name }}.openstack.networking.virtual
+{%- endif %}
 parameters:
   _param:
     keepalived_vip_interface: ens3
@@ -67,10 +70,3 @@ parameters:
       cert_file: /srv/salt/pki/${_param:cluster_name}/${salt:minion:cert:proxy:common_name}.crt
       chain_file: /srv/salt/pki/${_param:cluster_name}/${salt:minion:cert:proxy:common_name}-with-chain.crt
     cluster_vip_address: ${_param:openstack_proxy_address}
-  linux:
-    network:
-      interface:
-        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
-        ens2: ${_param:linux_deploy_interface}
-        {%- endif %}
-        ens3: ${_param:linux_single_interface}

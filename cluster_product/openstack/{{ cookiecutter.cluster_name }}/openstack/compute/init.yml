@@ -37,6 +37,9 @@ classes:
 {%- endif %}
 - system.linux.network.dynamic_hosts
 - cluster.{{ cookiecutter.cluster_name }}.infra
+{%- if cookiecutter.use_default_network_scheme != 'False' %}
+- cluster.{{ cookiecutter.cluster_name }}.openstack.networking.compute
+{%- endif %}
 parameters:
   _param:
     cluster_vip_address: ${_param:openstack_control_address}
@@ -69,136 +72,6 @@ parameters:
     compute:
       backend:
         tenant_vlan_range: "${_param:neutron_tenant_vlan_range}"
-  {%- endif %}
-  linux:
-    network:
-      interface:
-  {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
-        {{ cookiecutter.compute_deploy_nic }}: ${_param:linux_deploy_interface}
-  {%- endif %}
-  {%- if not cookiecutter.get('openstack_nfv_dpdk_enabled', 'False') == 'True' %}
-        eth1:
-          mtu: 9000
-          enabled: true
-          type: slave
-          proto: manual
-          name: ${_param:primary_first_nic}
-          master: bond0
-        eth2:
-          mtu: 9000
-          enabled: true
-          type: slave
-          proto: manual
-          name: ${_param:primary_second_nic}
-          master: bond0
-      {%- if not cookiecutter.openstack_ovs_dvr_enabled == 'True' %}
-        {%- if cookiecutter.openstack_ovs_encapsulation_type == 'vxlan' %}
-        bond0:
-          enabled: true
-          proto: manual
-          type: bond
-          use_interfaces:
-          - ${_param:primary_second_nic}
-          - ${_param:primary_first_nic}
-          slaves: ${_param:primary_second_nic} ${_param:primary_first_nic}
-          mode: {{ cookiecutter.compute_bond_mode }}
-        bond0.1:
-          name: bond0.${_param:control_vlan}
-          enabled: true
-          type: vlan
-          proto: static
-          address: ${_param:single_address}
-          netmask: ${_param:control_network_netmask}
-          use_interfaces:
-          - bond0
-        bond0.2:
-          name: bond0.${_param:tenant_vlan}
-          enabled: true
-          type: vlan
-          proto: manual
-          use_interfaces:
-          - bond0
-        br-mesh:
-          enabled: true
-          type: bridge
-          address: ${_param:tenant_address}
-          netmask: ${_param:tenant_network_netmask}
-          use_interfaces:
-          - bond0.${_param:tenant_vlan}
-        {%- elif cookiecutter.openstack_ovs_encapsulation_type == 'vlan' %}
-        bond0:
-          enabled: true
-          proto: manual
-          ovs_bridge: br-prv
-          ovs_type: OVSPort
-          type: bond
-          use_interfaces:
-          - ${_param:primary_second_nic} ${_param:primary_first_nic}
-          slaves: ${_param:primary_first_nic}
-          mode: {{ cookiecutter.compute_bond_mode }}
-        br-prv:
-          enabled: true
-          type: ovs_bridge
-        br-mgmt:
-          enabled: true
-          type: ovs_port
-          bridge: br-prv
-          proto: static
-          ovs_options: tag=${_param:control_vlan}
-          address: ${_param:single_address}
-          netmask: ${_param:control_network_netmask}
-        {%- endif %}
-      {%- elif cookiecutter.openstack_ovs_dvr_enabled == 'True' %}
-        bond0:
-          enabled: true
-          proto: manual
-          ovs_bridge: br-floating
-          ovs_type: OVSPort
-          type: bond
-          use_interfaces:
-          - ${_param:primary_first_nic}
-          - ${_param:primary_second_nic}
-          slaves: ${_param:primary_first_nic} ${_param:primary_second_nic}
-          mode: {{ cookiecutter.compute_bond_mode }}
-        br-floating:
-          enabled: true
-          type: ovs_bridge
-        br-mgmt:
-          enabled: true
-          type: ovs_port
-          bridge: br-floating
-          proto: static
-          ovs_options: tag=${_param:control_vlan}
-          address: ${_param:single_address}
-          netmask: ${_param:control_network_netmask}
-        {%- if cookiecutter.openstack_ovs_encapsulation_type == 'vxlan' %}
-        br-mesh:
-          enabled: true
-          type: ovs_port
-          bridge: br-floating
-          proto: static
-          ovs_options: tag=${_param:tenant_vlan}
-          address: ${_param:tenant_address}
-          netmask: ${_param:tenant_network_netmask}
-        {%- elif cookiecutter.openstack_ovs_encapsulation_type == 'vlan' %}
-        br-prv:
-          enabled: true
-          type: ovs_bridge
-        floating-to-prv:
-          enabled: true
-          type: ovs_port
-          port_type: patch
-          bridge: br-floating
-          peer: prv-to-floating
-        prv-to-floating:
-          enabled: true
-          type: ovs_port
-          port_type: patch
-          bridge: br-prv
-          peer: floating-to-prv
-        {%- endif %}
-      {%- endif %}
-      bridge: openvswitch
   {%- endif %}
 {%- endif %}
 ## Best practice configure high speed interface for live migrations

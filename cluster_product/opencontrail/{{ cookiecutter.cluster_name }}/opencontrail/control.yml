@@ -43,6 +43,9 @@ classes:
 - system.opencontrail.client.resource.database_node
 - system.opencontrail.client.resource.global_vrouter_config
 - cluster.{{ cookiecutter.cluster_name }}.infra
+{%- if cookiecutter.use_default_network_scheme != 'False' %}
+- cluster.{{ cookiecutter.cluster_name }}.opencontrail.networking.virtual
+{%- endif %}
 parameters:
   _param:
     ### latest OpenStack repo on Trusty is Mitaka
@@ -67,12 +70,6 @@ parameters:
     opencontrail_message_queue_node03_address: ${_param:opencontrail_control_node03_address}
     {%- endif %}
   linux:
-    network:
-      interface:
-        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
-        eth0: ${_param:linux_deploy_interface}
-        {%- endif %}
-        eth1: ${_param:linux_single_interface}
       host:
         ctl:
           address: ${_param:openstack_control_address}
