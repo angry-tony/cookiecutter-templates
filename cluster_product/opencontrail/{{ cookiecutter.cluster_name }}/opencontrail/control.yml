@@ -17,14 +17,12 @@ classes:
 - system.linux.system.repo.mcp.apt_mirantis.ubuntu
 - system.linux.system.repo.mcp.apt_mirantis.saltstack_2016_3
 - system.linux.system.repo.mcp.apt_mirantis.cassandra
-{%- if cookiecutter.stacklight_enabled == 'True' %}
-{%- if cookiecutter.stacklight_version == '1' %}
+{%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
 - system.linux.system.repo.mcp.apt_mirantis.sensu
 {%- endif %}
-{%- if cookiecutter.stacklight_version == '2' %}
+{%- endif %}
+{%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '2' %}
 - system.prometheus.exporters.jmx
-{%- endif %}
-{%- endif %}
 {%- endif %}
 {%- if cookiecutter.get('kubernetes_enabled','False') == 'True' %}
 - system.rabbitmq.server.cluster
