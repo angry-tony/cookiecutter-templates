@@ -7,6 +7,7 @@ classes:
 {%- endif %}
 - system.linux.system.repo_local.mcp.apt_mirantis.ubuntu
 - system.linux.system.repo_local.mcp.apt_mirantis.glusterfs
+- system.linux.system.repo_local.mcp.apt_mirantis.saltstack_2016_3
 {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
 - system.linux.system.repo_local.mcp.apt_mirantis.sensu
 {%- endif %}
@@ -18,6 +19,7 @@ classes:
 {%- endif %}
 - system.linux.system.repo.mcp.apt_mirantis.ubuntu
 - system.linux.system.repo.mcp.apt_mirantis.glusterfs
+- system.linux.system.repo.mcp.apt_mirantis.saltstack_2016_3
 {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
 - system.linux.system.repo.mcp.apt_mirantis.sensu
 {%- endif %}
@@ -108,6 +110,11 @@ parameters:
     jenkins_gerrit_url: ${_param:jenkins_git_url}
     salt_api_password: {{ cookiecutter.salt_api_password }}
     jenkins_salt_api_url: "http://${_param:salt_master_host}:6969"
+    {%- if cookiecutter.mcp_version != 'stable' and cookiecutter.mcp_version != 'testing' and cookiecutter.mcp_version != 'nightly' %}
+    jenkins_pipelines_branch: '{{ cookiecutter.mcp_version }}'
+    {%- else %}
+    jenkins_pipelines_branch: master
+    {%- endif %}
   {%- if cookiecutter.kubernetes_enabled != 'True' %}
   linux:
     network:

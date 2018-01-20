@@ -17,6 +17,7 @@ classes:
 - system.linux.system.repo.mcp.apt_mirantis.ubuntu
 - system.linux.system.repo.mcp.apt_mirantis.saltstack_2016_3
 - system.linux.system.repo.mcp.apt_mirantis.glusterfs
+- system.linux.system.repo.mcp.apt_mirantis.ceph
 {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
 - system.linux.system.repo.mcp.apt_mirantis.sensu
 {%- endif %}

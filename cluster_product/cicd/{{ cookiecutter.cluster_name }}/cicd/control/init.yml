@@ -97,7 +97,8 @@ parameters:
   aptly:
     publisher:
       source:
-        image: ${_param:aptly_server_hostname}:5000/aptly-publisher
+        registry: ${_param:aptly_server_hostname}:5000
+        image: aptly-publisher:${_param:apt_mk_version}
   docker:
     host:
       insecure_registries:

@@ -201,7 +201,7 @@ parameters:
           - cfg.${_param:cluster_domain}
         {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
         apt:
-          address: ${_param:aptly_server_control_address}
+          address: ${_param:aptly_server_deploy_address}
           names:
           - ${_param:aptly_server_hostname}
           - ${_param:aptly_server_hostname}.${_param:cluster_domain}
