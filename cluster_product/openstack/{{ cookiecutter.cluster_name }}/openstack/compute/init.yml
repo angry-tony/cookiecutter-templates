@@ -1,16 +1,14 @@
 classes:
 {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
-- system.linux.system.repo_local.mcp.extra
-- system.linux.system.repo_local.mcp.salt
-- system.linux.system.repo_local.mcp.apt_mirantis.openstack
 - system.linux.system.repo_local.mcp.apt_mirantis.ubuntu
+- system.linux.system.repo_local.mcp.apt_mirantis.openstack
+- system.linux.system.repo_local.mcp.extra
 - system.linux.system.repo_local.mcp.apt_mirantis.saltstack_2016_3
 {%- else %}
-- system.linux.system.repo.mcp.extra
-- system.linux.system.repo.mcp.salt
-- system.linux.system.repo.mcp.apt_mirantis.openstack
 - system.linux.system.repo.mcp.apt_mirantis.ubuntu
 - system.linux.system.repo.mcp.apt_mirantis.saltstack_2016_3
+- system.linux.system.repo.mcp.apt_mirantis.openstack
+- system.linux.system.repo.mcp.extra
 {%- endif %}
 {%- if cookiecutter.get('openstack_nova_compute_nfv_req_enabled', 'False') == 'True' or cookiecutter.get('openstack_nfv_dpdk_enabled', 'False') == 'True' %}
 - system.nova.compute.nfv.hugepages
