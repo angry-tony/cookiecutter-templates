@@ -3,6 +3,7 @@
 {%- endmacro -%}
 parameters:
   _param:
+    docker_registry_http_secret: {{ password(16) }}
     stacklight_monitor_address: ${_param:stacklight_monitor_address}
     prometheus_control_address: ${_param:stacklight_monitor_address}
     kibana_elasticsearch_host: ${_param:stacklight_log_address}
@@ -29,6 +30,8 @@ parameters:
     {%- endif %}
     stacklight_log_keepalived_password: {{ password(16) }}
     stacklight_telemetry_keepalived_password: {{ password(16) }}
+    keepalived_stacklight_monitor_vip_password: {{ password(16) }}
+    keepalived_prometheus_vip_password: {{ password(16) }}
     stacklight_environment: ${_param:cluster_domain}
     stacklight_log_address: {{ cookiecutter.stacklight_log_address }}
     stacklight_log_node01_address: {{ cookiecutter.stacklight_log_node01_address }}
@@ -58,7 +61,7 @@ parameters:
     stacklight_monitor_node02_deploy_address: {{ cookiecutter.stacklight_monitor_node02_deploy_address }}
     stacklight_monitor_node03_deploy_address: {{ cookiecutter.stacklight_monitor_node03_deploy_address }}
     {%- endif %}
-    grafana_admin_password: admin
+    grafana_admin_password: {{ password(16) }}
     grafana_database_type: mysql
     {%- if cookiecutter.openstack_enabled == 'False' %}
     grafana_database_host: ${_param:stacklight_telemetry_address}
