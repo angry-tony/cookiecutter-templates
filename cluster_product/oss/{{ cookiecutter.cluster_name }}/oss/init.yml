@@ -1,9 +1,5 @@
 parameters:
   _param:
-    keepalived_prometheus_vip_address: {{ cookiecutter.oss_address }}
-    keepalived_prometheus_vip_password: 'password'
-    keepalived_prometheus_vip_interface: ens3
-
     oss_node01_address: {{ cookiecutter.oss_node01_address }}
     oss_node02_address: {{ cookiecutter.oss_node02_address }}
     oss_node03_address: {{ cookiecutter.oss_node03_address }}
