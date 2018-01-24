@@ -91,9 +91,12 @@ parameters:
     {%- else %}
     gerrit_auth_type: DEVELOPMENT_BECOME_ANY_ACCOUNT
     {%- endif %}
-{%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
   jenkins:
     client:
+      lib:
+        pipeline-library:
+          branch: ${_param:jenkins_pipelines_branch}
+{%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
       globalenvprop:
         OFFLINE_DEPLOYMENT:
           value: "true"
