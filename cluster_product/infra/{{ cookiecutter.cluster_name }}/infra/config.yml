@@ -142,6 +142,11 @@ parameters:
         host: ${_param:salt_master_host}
         port: 8081
         password: r00tme
+{%- if cookiecutter.get('offline_deployment', 'False') == 'True' %}
+      globalenvprop:
+        OFFLINE_DEPLOYMENT:
+          value: "true"
+{%- endif %}
   salt:
     master:
       command_timeout: 600
