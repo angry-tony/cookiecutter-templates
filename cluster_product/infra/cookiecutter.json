@@ -75,6 +75,7 @@
     "bmk_enabled"                               : "False",
 
     "static_ips_on_deploy_network_enabled"      : "False",
+    "use_default_network_scheme"                : "True",
 
     "openstack_compute_count"                   : "100",
     "ceph_osd_count"                            : "10",

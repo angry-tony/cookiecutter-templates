@@ -30,6 +30,7 @@
     "bmk_enabled"                                    : "False",
 
     "static_ips_on_deploy_network_enabled"           : "False",
+    "use_default_network_scheme"                     : "True",
 
     "openstack_version"                              : "ocata",
 

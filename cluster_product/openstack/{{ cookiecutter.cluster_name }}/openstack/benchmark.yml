@@ -1,21 +1,14 @@
 {%- if cookiecutter.bmk_enabled == 'True' %}
 classes:
-{%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
+  {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
 - system.linux.system.repo_local.mcp.extra
 - system.linux.system.repo_local.mcp.apt_mirantis.ubuntu
-{%- else %}
+  {%- else %}
 - system.linux.system.repo.mcp.extra
 - system.linux.system.repo.mcp.apt_mirantis.ubuntu
-{%- endif %}
+  {%- endif %}
 - cluster.{{ cookiecutter.cluster_name }}.infra
-parameters:
-  linux:
-    network:
-      interface:
-        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
-        eth0: ${_param:linux_deploy_interface}
-        {%- else %}
-        eth0: ${_param:linux_dhcp_interface}
-        {%- endif %}
-        eth1: ${_param:linux_single_interface}
+  {%- if cookiecutter.use_default_network_scheme != 'False' %}
+- cluster.{{ cookiecutter.cluster_name }}.openstack.networking.benchmark
+  {%- endif %}
 {%- endif %}

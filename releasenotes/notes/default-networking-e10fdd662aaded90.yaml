@@ -1,0 +1,12 @@
+---
+---
+summary: >
+  Added an option for disabling default networking
+
+features:
+  - Added ``use_default_network_scheme`` parameter. Default value
+    is ``True``.
+
+upgrades:
+  - Networking configuration moved to /networking directories as
+    separate files for better editing

@@ -1,0 +1,10 @@
+# virtual node default networking template
+#
+parameters:
+  linux:
+    network:
+      interface:
+        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
+        eth0: ${_param:linux_deploy_interface}
+        {%- endif %}
+        eth1: ${_param:linux_single_interface}

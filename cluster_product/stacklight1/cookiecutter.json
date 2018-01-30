@@ -1,6 +1,6 @@
 {
     "cluster_name"                              : "deployment_name",
-    
+
     "local_repositories"                        : "False",
     "local_repo_url"                            : "${_param:aptly_server_deploy_address}",
 
@@ -46,6 +46,7 @@
     "stacklight_notification_address"           : "alerts@localhost",
 
     "static_ips_on_deploy_network_enabled"      : "False",
+    "use_default_network_scheme"                : "True",
 
     "openstack_enabled"                         : "True",
     "kubernetes_enabled"                        : "False"

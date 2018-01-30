@@ -43,6 +43,7 @@
     "openstack_nfv_dpdk_enabled"                    : "False",
 
     "static_ips_on_deploy_network_enabled"          : "False",
+    "use_default_network_scheme"                    : "True",
     "compute_deploy_nic"                            : "eth0",
 
     "stacklight_enabled"                            : "True",

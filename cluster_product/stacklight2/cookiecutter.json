@@ -47,6 +47,7 @@
     "kubernetes_enabled"                        : "False",
 
     "static_ips_on_deploy_network_enabled"      : "False",
+    "use_default_network_scheme"                : "True",
 
     "oss_enabled"                               : "True",
     "oss_sfdc_support_enabled"                  : "True",

@@ -47,6 +47,7 @@
     "ceph_osd_journal_or_block_db_disks"   : "/dev/vdb,/dev/vdc",
 
     "static_ips_on_deploy_network_enabled" : "False",
+    "use_default_network_scheme"           : "True",
 
     "ceph_osd_deploy_nic"                  : "eth0",
     "ceph_osd_primary_first_nic"           : "eth1",
