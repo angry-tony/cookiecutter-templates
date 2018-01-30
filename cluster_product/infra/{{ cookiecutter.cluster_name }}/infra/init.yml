@@ -24,8 +24,17 @@ classes:
 - cluster.{{ cookiecutter.cluster_name }}.stacklight.client
 {%- endif %}
 {%- if cookiecutter.stacklight_version == '2' %}
+{%- if cookiecutter.fluentd_enabled == 'True' %}
+- system.linux.system.repo.fluentd
+- system.fluentd
+- system.fluentd.label.default_metric
+- system.fluentd.label.default_metric.prometheus
+- system.fluentd.label.default_output.elasticsearch
+- system.fluentd.label.default_output.drop_event
+{%- else %}
 - system.heka.log_collector.single
 - system.heka.log_collector.output.telegraf
+{%- endif %}
 - system.telegraf.agent
 - system.prometheus.collector
 - service.grafana.collector

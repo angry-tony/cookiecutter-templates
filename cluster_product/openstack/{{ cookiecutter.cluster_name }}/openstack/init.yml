@@ -240,6 +240,10 @@ parameters:
     {%- if cookiecutter.get('cicd_enabled', 'False') == 'True'  %}
     nginx_proxy_gerrit_server_site_port: 8070
     {%- endif %}
+    {%- if cookiecutter.fluentd_enabled == 'True' %}
+    openstack_log_appender: true
+    openstack_fluentd_handler_enabled: true
+    {%- endif %}
     # Billing
     #keystone_billometer_password: {{ password(16) }}
     #keystone_billometer_address: ${_param:billometer_service_host}
