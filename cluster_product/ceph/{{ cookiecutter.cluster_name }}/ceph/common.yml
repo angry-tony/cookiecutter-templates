@@ -12,6 +12,8 @@ classes:
 {%- endif %}
 - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
+  _param:
+    linux_system_repo_mcp_ceph_codename: ${_param:ceph_version}
   ceph:
     common:
       public_network: {{ cookiecutter.ceph_public_network }}

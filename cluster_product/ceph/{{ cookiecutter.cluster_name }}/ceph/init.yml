@@ -3,7 +3,6 @@
 {%- endmacro -%}
 parameters:
   _param:
-    linux_repo_ceph_component: ${_param:ceph_version}
     ceph_version: {{ cookiecutter.ceph_version }}
 
     ceph_mon_node01_hostname: {{ cookiecutter.ceph_mon_node01_hostname }}
