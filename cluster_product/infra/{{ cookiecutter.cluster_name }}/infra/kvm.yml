@@ -63,7 +63,7 @@ parameters:
     cluster_node01_address: ${_param:infra_kvm_node01_address}
     cluster_node02_address: ${_param:infra_kvm_node02_address}
     cluster_node03_address: ${_param:infra_kvm_node03_address}
-    keepalived_vip_interface: br_ctl
+    keepalived_vip_interface: br-ctl
     keepalived_vip_virtual_router_id: 69
     deploy_nic: {{ cookiecutter.infra_deploy_nic }}
     primary_first_nic: {{ cookiecutter.infra_primary_first_nic }}
@@ -155,9 +155,9 @@ parameters:
     nic:
       default:
         eth1:
-          bridge: br_mgm
+          bridge: br-mgm
         eth0:
-          bridge: br_ctl
+          bridge: br-ctl
   #   system:
   #     package:
   #       linux-image-4.8.0-39-generic:
