@@ -112,3 +112,4 @@ default_context:
   tenant_network_gateway: ''
   tenant_network_netmask: 255.255.255.0
   tenant_vlan: '20'
+  vnf_onboarding_enabled: 'False'
