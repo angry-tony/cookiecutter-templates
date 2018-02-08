@@ -1,0 +1,12 @@
+---
+
+summary: >
+  Added the missing ``linux_system_repo_mcp_ceph_codename``
+  parameter for Ceph
+
+fixes:
+  - Added the missing ``linux_system_repo_mcp_ceph_codename``
+    parameter for the Ceph repository to allow controlling the
+    Ceph version from the cluster level. Now, the OpenStack
+    compute nodes are deployed with Ceph version
+    Luminous (v12.2.2) instead of Jewel (v10.2.10).
