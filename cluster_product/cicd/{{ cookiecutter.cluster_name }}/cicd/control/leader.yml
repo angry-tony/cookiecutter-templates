@@ -30,6 +30,9 @@ classes:
   {%- if cookiecutter.get('ceph_enabled', 'False') == 'True'  %}
   - system.jenkins.client.job.ceph
   {%- endif %}
+  {%- if cookiecutter.get('vnf_onboarding_enabled', 'False') == 'True' and cookiecutter.stacklight_enabled == 'True'  %}
+  - system.jenkins.client.job.vnf-onboarding
+  {%- endif %}
   # Security
   {%- if cookiecutter.openldap_enabled == 'True' %}
   - system.jenkins.client.security.ldap
@@ -49,6 +52,9 @@ classes:
   # Gerrit
   - system.gerrit.client
   - system.gerrit.client.project.ci
+  {%- if cookiecutter.get('vnf_onboarding_enabled', 'False') == 'True' and cookiecutter.stacklight_enabled == 'True'  %}
+  - system.gerrit.client.project.vnf_onboarding
+  {%- endif %}
 
   - system.docker.swarm.master
 

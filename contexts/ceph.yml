@@ -112,6 +112,7 @@ default_context:
   tenant_network_gateway: ''
   tenant_network_netmask: 255.255.255.0
   tenant_vlan: '20'
+  vnf_onboarding_enabled: 'False'
   ceph_enabled: 'True'
   ceph_mon_node01_address: 10.167.4.91
   ceph_mon_node01_hostname: cmn01

@@ -10,6 +10,7 @@ default_context:
     deployment_type: virtual
     openstack_nfv_dpdk_enabled: false
     openstack_nfv_sriov_enabled: false
+    vnf_onboarding_enabled: false
     dns_server01: 8.8.8.8
     dns_server02: 8.8.4.4
 
