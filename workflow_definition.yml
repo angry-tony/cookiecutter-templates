@@ -298,6 +298,30 @@ infra_params_action:
       readonly: True
       requires:
         - opencontrail_enabled: False
+  - name: "openstack_cluster_size_section"
+    label: "OpenStack Cluster Size"
+    doc: |
+      OpenStack Cluster Size
+      ======================
+      The sizing of OpenStack Virtual Control Plane depends on anticipated
+      number of Compute nodes. Compact is up to 50; small is 50 to 100;
+      medium is 100 to 200 and large is 200 to 500.
+    requires:
+      - platform: "openstack_enabled"
+    fields:
+      - name: "openstack_cluster_size"
+        help_text: "Select desired size of OpenStack VCP"
+        type: "CHOICE"
+        initial: "compact"
+        choices:
+          - - "compact"
+            - "up to 50"
+          - - "small"
+            - "50 to 100"
+          - - "medium"
+            - "100 to 200"
+          - - "large"
+            - "200 to 500"
   - name: "openstack_networking"
     label: "OpenStack Networking"
     doc: |

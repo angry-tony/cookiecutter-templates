@@ -80,6 +80,6 @@
 
     "openstack_compute_count"                   : "100",
     "ceph_osd_count"                            : "10",
-    "ceph_osd_node_count"                       : 3
-
+    "ceph_osd_node_count"                       : 3,
+    "openstack_cluster_size"                    : "compact"
 }
