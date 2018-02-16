@@ -6,6 +6,7 @@
     "mcp_version"                               : "stable",
 
     "local_repositories"                        : "False",
+    "local_pipelines"                           : "False",
     "local_docker_images"                       : "False",
     "local_repo_url"                            : "${_param:aptly_server_deploy_address}",
 

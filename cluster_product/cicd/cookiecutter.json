@@ -36,5 +36,19 @@
 
     "stacklight_enabled"                        : "False",
 
-    "ceph_enabled"                              : "False"
+    "ceph_enabled"                              : "False",
+
+    "registry_docker_image"                     : "registry:2",
+    "compose_docker_image"                      : "docker/compose:1.17.1",
+    "visualizer_docker_image"                   : "dockersamples/visualizer:latest",
+    "gerrit_docker_image"                       : "tcpcloud/gerrit:2.13.6",
+    "mysql_docker_image"                        : "tcpcloud/mysql:5.6",
+    "jenkins_docker_image"                      : "tcpcloud/jenkins:2.100",
+    "jenkins_slave_docker_image"                : "tcpcloud/jnlp-slave:latest",
+    "openldap_docker_image"                     : "osixia/openldap:1.1.8",
+    "phpldapadmin_docker_image"                 : "tcpcloud/phpldapadmin:0.6.12",
+    "aptly_docker_image"                        : "tcpcloud/aptly",
+    "aptly_api_docker_image"                    : "tcpcloud/aptly-api",
+    "aptly_public_docker_image"                 : "tcpcloud/aptly-public",
+    "aptly_publisher_docker_image"              : "tcpcloud/aptly-publisher"
 }

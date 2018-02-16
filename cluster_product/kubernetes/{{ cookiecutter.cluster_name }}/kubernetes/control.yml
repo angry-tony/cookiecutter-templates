@@ -15,7 +15,6 @@ classes:
 - system.salt.minion.cert.etcd_server
 - system.kubernetes.master.cluster
 - cluster.{{ cookiecutter.cluster_name }}.kubernetes.compute
-- cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
     keepalived_vip_interface: {{ cookiecutter.kubernetes_keepalived_vip_interface }}
@@ -69,7 +68,7 @@ parameters:
         externaldns:
           enabled: {{ cookiecutter.kubernetes_externaldns_enabled }}
           namespace: kube-system
-          image: mirantis/external-dns:latest
+          image: ${_param:kubernetes_externaldns_image}
           domain: ${_param:kubernetes_cluster_domain}
           provider: {{ cookiecutter.kubernetes_externaldns_provider }}
         netchecker:

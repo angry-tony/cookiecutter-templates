@@ -19,7 +19,7 @@ parameters:
     git_mk_pipelines_upstream: http://${_param:aptly_server_hostname}:8088/Mirantis/mk-pipelines
     {%- endif %}
     glusterfs_service_host: ${_param:infra_kvm_address}
-    {%- if cookiecutter.mcp_version != 'stable' and cookiecutter.mcp_version != 'testing' and cookiecutter.mcp_version != 'nightly' %}
+    {%- if cookiecutter.mcp_version != 'nightly' %}
     {%- if cookiecutter.get('local_docker_images', 'False') == 'True' %}
     docker_image_registry: ${_param:aptly_server_hostname}:5000/registry:${_param:apt_mk_version}
     docker_image_compose: ${_param:aptly_server_hostname}:5000/compose:${_param:apt_mk_version}
@@ -52,22 +52,20 @@ parameters:
       public: docker-prod-local.artifactory.mirantis.com/mirantis/cicd/aptly-public:${_param:apt_mk_version}
     {%- endif %}
     {%- else %}
-    {%- if cookiecutter.get('local_docker_images', 'False') == 'True' %}
-    docker_image_registry: ${_param:aptly_server_hostname}:5000/registry:2
-    docker_image_compose: ${_param:aptly_server_hostname}:5000/compose:1.8.0
-    docker_image_visualizer: ${_param:aptly_server_hostname}:5000/visualizer
-    docker_image_gerrit: ${_param:aptly_server_hostname}:5000/gerrit:2.13.6
-    docker_image_mysql: ${_param:aptly_server_hostname}:5000/mysql:5.6
-    docker_image_jenkins: ${_param:aptly_server_hostname}:5000/jenkins:2.73
-    docker_image_jenkins_slave: ${_param:aptly_server_hostname}:5000/jnlp-slave
-    docker_image_openldap: ${_param:aptly_server_hostname}:5000/openldap:1.1.8
-    docker_image_phpldapadmin: ${_param:aptly_server_hostname}:5000/phpldapadmin:0.6.12
-    aptly_publisher_image: ${_param:aptly_server_hostname}:5000/aptly-publisher
+    docker_image_registry: {{ cookiecutter.registry_docker_image }}
+    docker_image_compose: {{ cookiecutter.compose_docker_image }}
+    docker_image_visualizer: {{ cookiecutter.visualizer_docker_image }}
+    docker_image_gerrit: {{ cookiecutter.gerrit_docker_image }}
+    docker_image_mysql: {{ cookiecutter.mysql_docker_image }}
+    docker_image_jenkins: {{ cookiecutter.jenkins_docker_image }}
+    docker_image_jenkins_slave: {{ cookiecutter.jenkins_slave_docker_image }}
+    docker_image_openldap: {{ cookiecutter.openldap_docker_image }}
+    docker_image_phpldapadmin: {{ cookiecutter.phpldapadmin_docker_image }}
+    aptly_publisher_image: {{ cookiecutter.aptly_publisher_docker_image }}
     docker_image_aptly:
-      base: ${_param:aptly_server_hostname}:5000/aptly
-      api: ${_param:aptly_server_hostname}:5000/aptly-api
-      public: ${_param:aptly_server_hostname}:5000/aptly-public
-    {%- endif %}
+      base: {{ cookiecutter.aptly_docker_image }}
+      api: {{ cookiecutter.aptly_api_docker_image }}
+      public: {{ cookiecutter.aptly_public_docker_image }}
     {%- endif %}
     {%- if cookiecutter.openldap_enabled == 'True' %}
     # OpenLDAP

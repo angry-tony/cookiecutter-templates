@@ -16,19 +16,49 @@ classes:
 {%- if cookiecutter.kubernetes_network_opencontrail_enabled == 'True' %}
 - cluster.{{ cookiecutter.cluster_name }}.opencontrail.compute
 {%- endif %}
-- cluster.{{ cookiecutter.cluster_name }}.infra
 {%- if cookiecutter.use_default_network_scheme != 'False' %}
 - cluster.{{ cookiecutter.cluster_name }}.kubernetes.networking.compute
 {%- endif %}
+- cluster.{{ cookiecutter.cluster_name }}.infra
 
 parameters:
-  {%- if cookiecutter.kubernetes_network_calico_enabled == 'True' %}
   _param:
-    kubernetes_calicoctl_image: {{ cookiecutter.calicoctl_image }}
-    kubernetes_calico_image: {{ cookiecutter.calico_image }}
-    kubernetes_calico_cni_image: {{ cookiecutter.calico_cni_image }}
-    kubernetes_hyperkube_image: {{ cookiecutter.hyperkube_image }}
-  {%- endif %}
+    {%- if cookiecutter.mcp_version != 'nightly' %}
+    {%- if cookiecutter.get('local_docker_images', 'False') == 'True' %}
+    kubernetes_externaldns_image: ${_param:aptly_server_hostname}:5000/external-dns:${_param:apt_mk_version}
+    kubernetes_hyperkube_image: ${_param:aptly_server_hostname}:5000/hyperkube-amd64:${_param:apt_mk_version}
+    {%- if cookiecutter.kubernetes_network_calico_enabled == 'True' %}
+    kubernetes_calicoctl_image: ${_param:aptly_server_hostname}:5000/ctl:${_param:apt_mk_version}
+    kubernetes_calico_image: ${_param:aptly_server_hostname}:5000/node:${_param:apt_mk_version}
+    kubernetes_calico_cni_image: ${_param:aptly_server_hostname}:5000/cni:${_param:apt_mk_version}
+    {%- endif %}
+    {%- if cookiecutter.kubernetes_network_opencontrail_enabled == 'True' %}
+    kubernetes_contrail_network_controller_image: ${_param:aptly_server_hostname}:5000/contrail-network-controller:${_param:apt_mk_version}
+    {%- endif %}
+    {%- else %}
+    kubernetes_externaldns_image: docker-prod-local.artifactory.mirantis.com/mirantis/external/external-dns:${_param:apt_mk_version}
+    kubernetes_hyperkube_image: docker-prod-local.artifactory.mirantis.com/mirantis/kubernetes/hyperkube-amd64:${_param:apt_mk_version}
+    {%- if cookiecutter.kubernetes_network_calico_enabled == 'True' %}
+    kubernetes_calicoctl_image: docker-prod-local.artifactory.mirantis.com/mirantis/projectcalico/calico/ctl:${_param:apt_mk_version}
+    kubernetes_calico_image: docker-prod-local.artifactory.mirantis.com/mirantis/projectcalico/calico/node:${_param:apt_mk_version}
+    kubernetes_calico_cni_image: docker-prod-local.artifactory.mirantis.com/mirantis/projectcalico/calico/cni:${_param:apt_mk_version}
+    {%- endif %}
+    {%- if cookiecutter.kubernetes_network_opencontrail_enabled == 'True' %}
+    kubernetes_contrail_network_controller_image: docker-prod-local.artifactory.mirantis.com/mirantis/kubernetes/contrail-integration/contrail-network-controller:${_param:apt_mk_version}
+    {%- endif %}
+    {%- endif %}
+    {%- else %}
+    kubernetes_externaldns_image: {{ cookiecutter.external_dns_docker_image }}
+    kubernetes_hyperkube_image: {{ cookiecutter.hyperkube_docker_image }}
+    {%- if cookiecutter.kubernetes_network_calico_enabled == 'True' %}
+    kubernetes_calicoctl_image: {{ cookiecutter.calicoctl_docker_image }}
+    kubernetes_calico_image: {{ cookiecutter.calico_docker_image }}
+    kubernetes_calico_cni_image: {{ cookiecutter.calico_cni_docker_image }}
+    {%- endif %}
+    {%- if cookiecutter.kubernetes_network_opencontrail_enabled == 'True' %}
+    kubernetes_contrail_network_controller_image: {{ cookiecutter.k8s_contrail_network_controller_docker_image }}
+    {%- endif %}
+    {%- endif %}
   docker:
     host:
       pkgs:

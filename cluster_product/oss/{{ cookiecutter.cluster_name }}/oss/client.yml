@@ -71,7 +71,7 @@ classes:
 
 parameters:
   _param:
-    {%- if cookiecutter.mcp_version != 'stable' and cookiecutter.mcp_version != 'testing' and cookiecutter.mcp_version != 'nightly' %}
+    {%- if cookiecutter.mcp_version != 'nightly' %}
     {%- if cookiecutter.get('local_docker_images', 'False') == 'True' %}
     docker_image_devops_portal: ${_param:aptly_server_hostname}:5000/devops-portal:${_param:apt_mk_version}
     docker_image_elasticsearch: ${_param:aptly_server_hostname}:5000/elasticsearch:${_param:apt_mk_version}
@@ -84,6 +84,9 @@ parameters:
     docker_image_security_monkey_scheduler: ${_param:aptly_server_hostname}:5000/security-monkey-scheduler:${_param:apt_mk_version}
     {%- if cookiecutter.stacklight_enabled == 'True' %}
     docker_image_hce: ${_param:aptly_server_hostname}:5000/hce:${_param:apt_mk_version}
+    {%- endif %}
+    {%- if cookiecutter.oss_cis_enabled == 'True' %}
+    rundeck_cis_os_docker_image: ${_param:aptly_server_hostname}:5000/cis-openstack:${_param:apt_mk_version}
     {%- endif %}
     {%- else %}
     docker_image_devops_portal: docker-prod-local.artifactory.mirantis.com/mirantis/oss/devops-portal:${_param:apt_mk_version}
@@ -98,34 +101,25 @@ parameters:
     {%- if cookiecutter.stacklight_enabled == 'True' %}
     docker_image_hce: docker-prod-local.artifactory.mirantis.com/mirantis/oss/hce:${_param:apt_mk_version}
     {%- endif %}
+    {%- if cookiecutter.oss_cis_enabled == 'True' %}
+    rundeck_cis_os_docker_image: docker-prod-local.artifactory.mirantis.com/mirantis/oss/cis-openstack:${_param:apt_mk_version}
+    {%- endif %}
     {%- endif %}
     {%- else %}
-    {%- if cookiecutter.get('local_docker_images', 'False') == 'True' %}
-    docker_image_devops_portal: ${_param:aptly_server_hostname}:5000/devops-portal:latest
-    docker_image_elasticsearch: ${_param:aptly_server_hostname}:5000/elasticsearch:5.4.1
-    docker_image_janitor_monkey: ${_param:aptly_server_hostname}:5000/janitor-monkey:latest
-    docker_image_mongodb: ${_param:aptly_server_hostname}:5000/mongo:3.4
-    docker_image_postgresql: ${_param:aptly_server_hostname}:5000/postgres:9.6
-    docker_image_pushkin: ${_param:aptly_server_hostname}:5000/pushkin:latest
-    docker_image_rundeck: ${_param:aptly_server_hostname}:5000/rundeck:latest
-    docker_image_security_monkey_api: ${_param:aptly_server_hostname}:5000/security-monkey-api:latest
-    docker_image_security_monkey_scheduler: ${_param:aptly_server_hostname}:5000/security-monkey-scheduler:latest
+    docker_image_devops_portal: {{ cookiecutter.oss_portal_docker_image }}
+    docker_image_elasticsearch: {{ cookiecutter.oss_elasticsearch_docker_image }}
+    docker_image_janitor_monkey: {{ cookiecutter.oss_janitor_monkey_docker_image }}
+    docker_image_mongodb: {{ cookiecutter.oss_mongodb_docker_image }}
+    docker_image_postgresql: {{ cookiecutter.oss_postgresql_docker_image }}
+    docker_image_pushkin: {{ cookiecutter.oss_pushkin_docker_image }}
+    docker_image_rundeck: {{ cookiecutter.oss_rundeck_docker_image }}
+    docker_image_security_monkey_api: {{ cookiecutter.oss_security_monkey_api_docker_image }}
+    docker_image_security_monkey_scheduler: {{ cookiecutter.oss_security_monkey_scheduler_docker_image }}
     {%- if cookiecutter.stacklight_enabled == 'True' %}
-    docker_image_hce: ${_param:aptly_server_hostname}:5000/hce:latest
+    docker_image_hce: {{ cookiecutter.oss_hce_docker_image }}
     {%- endif %}
-    {%- else %}
-    docker_image_devops_portal: {{ cookiecutter.oss_portal_image }}
-    docker_image_elasticsearch: {{ cookiecutter.oss_elasticsearch_image }}
-    docker_image_janitor_monkey: {{ cookiecutter.oss_janitor_monkey_image }}
-    docker_image_mongodb: {{ cookiecutter.oss_mongodb_image }}
-    docker_image_postgresql: {{ cookiecutter.oss_postgresql_image }}
-    docker_image_pushkin: {{ cookiecutter.oss_pushkin_image }}
-    docker_image_rundeck: {{ cookiecutter.oss_rundeck_image }}
-    docker_image_security_monkey_api: {{ cookiecutter.oss_security_monkey_api_image }}
-    docker_image_security_monkey_scheduler: {{ cookiecutter.oss_security_monkey_scheduler_image }}
-    {%- if cookiecutter.stacklight_enabled == 'True' %}
-    docker_image_hce: {{ cookiecutter.oss_hce_image }}
-    {%- endif %}
+    {%- if cookiecutter.oss_cis_enabled == 'True' %}
+    rundeck_cis_os_docker_image: {{ cookiecutter.oss_cis_openstack_docker_image }}
     {%- endif %}
     {%- endif %}
     # PostgreSQL
@@ -249,7 +243,6 @@ parameters:
       domain_id: {{ cookiecutter.oss_cis_domain_id }}
       cert: {{ cookiecutter.oss_cis_cacert }}
       ssl_cert_file: {{ cookiecutter.oss_cis_cacert_file_type }}
-    rundeck_cis_os_docker_image: {{ cookiecutter.oss_cis_openstack_image }}
 
     # In case of using DOP through external proxy address
     rundeck_forward_iframe: {{ cookiecutter.rundeck_forward_iframe }}

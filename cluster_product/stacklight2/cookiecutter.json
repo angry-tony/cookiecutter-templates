@@ -54,5 +54,12 @@
     "oss_enabled"                               : "True",
     "oss_sfdc_support_enabled"                  : "True",
 
-    "ceph_enabled"                              : "False"
+    "ceph_enabled"                              : "False",
+    "alertmanager_docker_image"                 : "docker-prod-local.artifactory.mirantis.com/openstack-docker/alertmanager:latest",
+    "pushgateway_docker_image"                  : "docker-prod-local.artifactory.mirantis.com/openstack-docker/pushgateway:latest",
+    "prometheus_docker_image"                   : "docker-prod-local.artifactory.mirantis.com/openstack-docker/prometheus:latest",
+    "remote_agent_docker_image"                 : "docker-prod-local.artifactory.mirantis.com/openstack-docker/telegraf:latest",
+    "remote_storage_adapter_docker_image"       : "docker-prod-local.artifactory.mirantis.com/openstack-docker/remote_storage_adapter:latest",
+    "prometheus_relay_docker_image"             : "docker-prod-local.artifactory.mirantis.com/openstack-docker/prometheus_relay:latest",
+    "grafana_docker_image"                      : "grafana/grafana:5.0.3"
 }
