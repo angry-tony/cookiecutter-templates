@@ -3,6 +3,7 @@
 {%- endmacro %}
 classes:
 - system.linux.system.single
+- system.linux.system.single.debian
 #- system.openssh.server.team.lab
 #- system.openssh.server.team.presales
 #- system.openssh.server.team.services
