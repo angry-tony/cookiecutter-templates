@@ -3,7 +3,7 @@ classes:
 - system.grafana.client.datasource.prometheus
 - system.docker.client
 - system.docker.swarm.stack.dashboard
-- system.docker.swarm.stack.monitoring
+- system.docker.swarm.stack.monitoring.prometheus_global
 {%- if cookiecutter.openstack_enabled == 'True' %}
 - system.docker.swarm.stack.monitoring.remote_collector
 {%- endif %}
