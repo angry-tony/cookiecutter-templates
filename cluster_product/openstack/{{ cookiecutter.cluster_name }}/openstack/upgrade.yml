@@ -78,6 +78,7 @@ parameters:
         name: cinder_upgrade
   nova:
     controller:
+      update_cells: true
       database:
         host: ${_param:openstack_database_address}
         name: nova_upgrade
