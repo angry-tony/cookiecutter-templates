@@ -20,6 +20,8 @@
 
     "openstack_neutron_qos"                          : "False",
     "openstack_neutron_vlan_aware_vms"               : "False",
+    "openstack_neutron_bgp_vpn"                      : "False",
+    "openstack_neutron_bgp_vpn_driver"               : "bagpipe",
 
     "cicd_enabled"                                   : "True",
     "stacklight_enabled"                             : "True",

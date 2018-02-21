@@ -1882,6 +1882,21 @@ product_params_action:
       requires:
       - openstack_network_engine: ovs
       type: BOOL
+    - help_text: Enables BGP VPN service.
+      initial: false
+      name: openstack_neutron_bgp_vpn
+      type: BOOL
+    - name: openstack_neutron_bgp_vpn_driver
+      initial: bagpipe
+      help_text: "Driver for BGP VPN service."
+      type: "CHOICE"
+      choices:
+        - - "bagpipe"
+          - "BaGPipe"
+        - - "opencontrail"
+          - "OpenContrail"
+        - - "opendaylight"
+          - "OpenDaylight"
     - help_text: IP VIP address of proxy cluster on control network
       initial: '{{ control_network_subnet | subnet(80) }}'
       name: openstack_proxy_address

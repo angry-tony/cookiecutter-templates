@@ -88,6 +88,8 @@ default_context:
   openstack_ovs_dvr_enabled: 'False'
   openstack_neutron_qos: 'False'
   openstack_neutron_vlan_aware_vms: 'False'
+  openstack_neutron_bgp_vpn: 'False'
+  openstack_neutron_bgp_vpn_driver: 'bagpipe'
   openstack_ovs_encapsulation_type: vxlan
   openstack_proxy_address: 10.167.4.80
   openstack_proxy_hostname: prx
