@@ -38,4 +38,12 @@ parameters:
       backend:
         tenant_vlan_range: "${_param:neutron_tenant_vlan_range}"
   {%- endif %}
+  {%- if cookiecutter.get('openstack_neutron_l2gw', 'False') == 'True' %}
+  neutron:
+    gateway:
+      l2gw:
+        enabled: true
+        ovsdb_hosts:
+          {{ cookiecutter.ovsdb_server.replace(':', ': ', 1) }}
+  {%- endif %}
 {%- endif %}

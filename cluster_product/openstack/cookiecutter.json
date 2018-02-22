@@ -19,6 +19,7 @@
     "openstack_nfv_sriov_network"                    : "physnet1",
 
     "openstack_neutron_qos"                          : "False",
+    "openstack_neutron_l2gw"                         : "False",
     "openstack_neutron_vlan_aware_vms"               : "False",
 
     "cicd_enabled"                                   : "True",
