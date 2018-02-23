@@ -10,12 +10,6 @@ classes:
 {%- if cookiecutter.get('ceph_enabled', 'False') == 'True'  %}
 - system.docker.swarm.stack.monitoring.remote_agent.ceph_common
 {%- endif %}
-
-
-#- cluster.{{ cookiecutter.cluster_name }}.infra
-#- cluster.{{ cookiecutter.cluster_name }}.cicd.control
-
-- cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
     {%- if cookiecutter.mcp_version != 'stable' and cookiecutter.mcp_version != 'testing' and cookiecutter.mcp_version != 'nightly' %}
