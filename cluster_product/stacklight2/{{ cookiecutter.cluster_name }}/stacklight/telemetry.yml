@@ -22,7 +22,15 @@ classes:
 {%- if cookiecutter.openstack_enabled == 'True' %}
 - system.influxdb.database.ceilometer
 {%- endif %}
+{%- if cookiecutter.stacklight_long_term_storage_type == "influxdb" %}
 - system.influxdb.database.prometheus
+{%- endif %}
+{%- if cookiecutter.stacklight_long_term_storage_type == "prometheus" %}
+- system.prometheus.relay
+- system.prometheus.server.standalone
+- system.prometheus.server.target.federation
+- system.prometheus.server.target.federation.all_metrics
+{%- endif %}
 {%- if cookiecutter.openstack_enabled == 'False' %}
 - system.haproxy.proxy.listen.openstack.galera
 - system.galera.server.database.grafana

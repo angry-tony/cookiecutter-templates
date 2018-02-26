@@ -1,0 +1,46 @@
+---
+# Author the following sections or remove the section if it is not related.
+# Use one release note per a feature.
+#
+# If you miss a section from the list below, please first submit a review
+# adding it to .releasenotes/config.yaml.
+#
+# Format content with reStructuredText (RST).
+# **Formatting examples:**
+# - |
+#   This is a brief description of the feature. It may include a
+#   number of components:
+#
+#   * List item 1
+#   * List item 2.
+#     This code block below will appear as part of the list item 2:
+#
+#     .. code-block:: yaml
+#
+#        classes:
+#        - system.class.to.load
+#
+#   The code block below will appear on the same level as the feature
+#   description:
+#
+#   .. code-block:: text
+#
+#      provide model/formula pillar snippets
+
+summary: >
+  Added the capability to choose between Prometheus and InfluxDB as a database
+  to store long-term metrics data.
+
+features:
+  - |
+    Added the capability to choose between Prometheus and InfluxDB as a
+    database to store long-term metrics data. Such approach enables using the
+    same dashboards to access short-term and long-term monitoring data.
+
+    Using Prometheus as a database, the following Prometheus servers are
+    available:
+
+    - Containerized Prometheus on the monitoring nodes is responsible for
+      metrics gathering and alarming.
+    - Prometheus on the Telemetry nodes is responsible for scraping the data
+      from the containerized Prometheus through the federation feature.
