@@ -26,7 +26,13 @@ classes:
 {%- endif %}
 {%- if cookiecutter.stacklight_version == '2' %}
 {%- if cookiecutter.fluentd_enabled == 'True' %}
-- system.linux.system.repo.fluentd
+{%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
+- system.linux.system.repo.mcp.apt.mirantis.fluentd
+- system.linux.system.repo.mcp.apt.mirantis.openstack
+{%- else %}
+- system.linux.system.repo_local.mcp.apt.mirantis.fluentd
+- system.linux.system.repo_local.mcp.apt.mirantis.openstack
+{%- endif %}
 - system.fluentd
 - system.fluentd.label.default_metric
 - system.fluentd.label.default_metric.prometheus
