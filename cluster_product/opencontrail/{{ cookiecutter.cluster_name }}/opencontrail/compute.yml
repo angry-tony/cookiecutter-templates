@@ -7,7 +7,6 @@ classes:
 - system.opencontrail.compute.cluster
 - system.opencontrail.client.cluster
 - system.opencontrail.client.resource.virtual_router
-- cluster.{{ cookiecutter.cluster_name }}.infra
 {%- if cookiecutter.use_default_network_scheme != 'False' %}
 - cluster.{{ cookiecutter.cluster_name }}.opencontrail.networking.compute
 {%- endif %}
