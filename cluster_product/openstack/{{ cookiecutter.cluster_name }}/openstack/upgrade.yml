@@ -33,7 +33,6 @@ classes:
 - system.keystone.client.service.nova21
 - system.rabbitmq.server.single
 - system.rabbitmq.server.vhost.openstack
-- system.backupninja.server.single
 - cluster.{{ cookiecutter.cluster_name }}.infra
 {%- if cookiecutter.use_default_network_scheme != 'False' %}
 - cluster.{{ cookiecutter.cluster_name }}.openstack.networking.virtual

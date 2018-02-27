@@ -1,0 +1,11 @@
+classes:
+- system.zookeeper.backup.client.single
+parameters:
+  _param:
+{%- if (cookiecutter.openstack_enabled == 'True' and cookiecutter.openstack_network_engine == 'opencontrail') %}
+    zookeeper_remote_backup_server: ${_param:infra_kvm_node03_address}
+{%- elif (cookiecutter.kubernetes_enabled == 'True' and cookiecutter.kubernetes_network_engine == 'opencontrail') %}
+    zookeeper_remote_backup_server: ${_param:kubernetes_control_node03_address}
+{%- endif %}
+    root_private_key: |
+      {{ cookiecutter.backup_private_key|indent(6) }}

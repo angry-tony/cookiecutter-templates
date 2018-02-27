@@ -1,2 +1,2 @@
 classes:
-- system.cassandra.backup.client.single
+- cluster.{{ cookiecutter.cluster_name }}.infra.backup.client_cassandra

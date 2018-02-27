@@ -34,6 +34,8 @@
     "salt_master_hostname"                      : "cfg01",
     "salt_api_password_hash"                    : "<<WILL_BE_GENERATED>>",
     "salt_api_password"                         : "<<WILL_BE_GENERATED>>",
+    "backup_private_key"                        : "<<WILL_BE_GENERATED>>",
+    "backup_public_key"                         : "<<WILL_BE_GENERATED>>",
 
     "maas_deploy_address"                       : "10.167.4.91",
     "maas_hostname"                             : "mas01",

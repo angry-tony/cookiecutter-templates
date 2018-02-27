@@ -1,4 +1,4 @@
-{% set private_key, public_key = generate_ssh_keypair(context_seed) %}
+{% set private_key_cicd, public_key_cicd = generate_ssh_keypair(context_seed + '_cicd') %} {% set private_key_backup, public_key_backup = generate_ssh_keypair(context_seed + '_backup') %} {% set private_key_rundeck, public_key_rundeck = generate_ssh_keypair(context_seed + '_rundeck') %}
 general_params_action:
   - name: "base"
     label: "Base"
@@ -615,6 +615,17 @@ product_params_action:
       initial: '{{ tenant_network_subnet | netmask }}'
       name: tenant_network_netmask
       type: IP
+    - help_text: Private key for backups. It is generated automatically.
+      hidden: True
+      initial: |-
+        {{ private_key_backup|indent(8) }}
+      name: backup_private_key
+      type: LONG_TEXT
+    - help_text: Public key for backups. It is generated automatically.
+      hidden: True
+      initial: '{{ public_key_backup }}'
+      name: backup_public_key
+      type: LONG_TEXT
     label: Infrastructure product parameters
     name: infra
     doc: |
@@ -693,12 +704,12 @@ product_params_action:
     - help_text: Private key for Jenkins. It is generated automatically.
       hidden: True
       initial: |-
-        {{ private_key|indent(8) }}
+        {{ private_key_cicd|indent(8) }}
       name: cicd_private_key
       type: LONG_TEXT
     - help_text: Public key for Jenkins. It is generated automatically.
       hidden: True
-      initial: '{{ public_key }}'
+      initial: '{{ public_key_cicd }}'
       name: cicd_public_key
       type: LONG_TEXT
     - initial: "${_param:cluster_name}"
@@ -867,14 +878,14 @@ product_params_action:
     - help_text: "Private key for Rundeck. It is generated automatically."
       hidden: True
       initial: |-
-        {{ private_key|indent(8) }}
+        {{ private_key_rundeck|indent(8) }}
       name: oss_runbook_private_key
       type: LONG_TEXT
       requires:
       - oss_enabled: True
     - help_text: "Public key for Rundeck. It is generated automatically."
       hidden: True
-      initial: '{{ public_key }}'
+      initial: '{{ public_key_rundeck }}'
       name: oss_runbook_public_key
       type: LONG_TEXT
       requires:

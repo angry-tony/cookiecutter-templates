@@ -24,7 +24,6 @@ classes:
 - system.linux.system.repo.mcp.apt_mirantis.sensu
 {%- endif %}
 {%- endif %}
-- system.openssh.client.lab
 {%- if cookiecutter.openstack_enabled == 'True' %}
 - system.glusterfs.client.cluster
 - system.glusterfs.client.volume.salt_pki
@@ -33,12 +32,6 @@ classes:
 - system.salt.minion.ca.salt_master
 - system.salt.master.api
 - system.reclass.storage.salt
-- system.backupninja.client.single
-- system.xtrabackup.server.single
-{%- if cookiecutter.openstack_enabled == 'True' and cookiecutter.openstack_network_engine == 'opencontrail' %}
-- system.cassandra.backup.server.single
-- system.zookeeper.backup.server.single
-{%- endif %}
 {%- if cookiecutter.deployment_type == 'physical' and (cookiecutter.openstack_enabled == 'True' or (cookiecutter.kubernetes_enabled == 'True' and (cookiecutter.stacklight_enabled == 'True' or cookiecutter.cicd_enabled == 'True'))) %}
 - system.reclass.storage.system.physical_control_cluster
 {%- endif %}
@@ -90,6 +83,7 @@ classes:
 - cluster.{{ cookiecutter.cluster_name }}.infra.maas
 {%- endif %}
 - cluster.{{ cookiecutter.cluster_name }}.infra
+- cluster.{{ cookiecutter.cluster_name }}.infra.backup.client_common
 {%- if cookiecutter.use_default_network_scheme != 'False' %}
 - cluster.{{ cookiecutter.cluster_name }}.infra.networking.config
 {%- endif %}
@@ -104,11 +98,6 @@ parameters:
     linux_system_codename: xenial
     salt_api_password_hash: "{{ cookiecutter.salt_api_password_hash }}"
     salt_master_host: ${_param:infra_config_deploy_address}
-    {%- if cookiecutter.deployment_type == 'physical' and (cookiecutter.openstack_enabled == 'True' or (cookiecutter.kubernetes_enabled == 'True' and (cookiecutter.stacklight_enabled == 'True' or cookiecutter.cicd_enabled == 'True'))) %}
-    backupninja_backup_host: ${_param:infra_kvm_node03_address}
-    {%- elif cookiecutter.kubernetes_enabled == 'True' %}
-    backupninja_backup_host: ${_param:kubernetes_control_node03_address}
-    {%- endif %}
     jenkins_git_url: 'git@cfg01:/home/repo'
     jenkins_gerrit_url: ${_param:jenkins_git_url}
     salt_api_password: {{ cookiecutter.salt_api_password }}
@@ -198,7 +187,7 @@ parameters:
           {%- endif %}
         {%- if cookiecutter.stacklight_enabled != 'True' or cookiecutter.cicd_enabled != 'True' %}
           classes:
-          - system.backupninja.server.single
+          - cluster.${_param:cluster_name}.infra.backup.server
         {%- endif %}
         {%- if cookiecutter.kubernetes_network_engine == 'opencontrail' %}
         opencontrail_control_node01:
@@ -243,8 +232,7 @@ parameters:
             linux_system_codename: xenial
         infra_kvm_node03:
           classes:
-          - system.backupninja.server.single
-          - system.ceph.backup.server.single
+          - cluster.${_param:cluster_name}.infra.backup.server
           params:
             keepalived_vip_priority: 102
             linux_system_codename: xenial
@@ -395,6 +383,10 @@ parameters:
             {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
             deploy_address: ${_param:openstack_control_node03_deploy_address}
             {%- endif %}
+          {%- if cookiecutter.deployment_type == 'virtual' %}
+          classes:
+          - cluster.${_param:cluster_name}.infra.backup.server
+          {%- endif %}
         openstack_database_node01:
           params:
             linux_system_codename: xenial

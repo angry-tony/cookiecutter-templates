@@ -1,0 +1,16 @@
+classes:
+- system.backupninja.client.single
+- system.openssh.client.root
+parameters:
+  _param:
+    {%- if cookiecutter.openstack_enabled == 'True' and cookiecutter.deployment_type == 'physical' %}
+    backupninja_backup_host: ${_param:infra_kvm_node03_address}
+    {%- elif cookiecutter.openstack_enabled == 'True' and cookiecutter.deployment_type == 'virtual' %}
+    backupninja_backup_host: ${_param:openstack_control_node03_address}
+    {%- elif cookiecutter.deployment_type == 'physical' and cookiecutter.kubernetes_enabled == 'True' and (cookiecutter.stacklight_enabled == 'True' or cookiecutter.cicd_enabled == 'True') %}
+    backupninja_backup_host: ${_param:infra_kvm_node03_address}
+    {%- elif cookiecutter.kubernetes_enabled == 'True' and (cookiecutter.stacklight_enabled != 'True' or cookiecutter.cicd_enabled != 'True') %}
+    backupninja_backup_host: ${_param:kubernetes_control_node03_address}
+    {%- endif %}
+    root_private_key: |
+      {{ cookiecutter.backup_private_key|indent(6) }}
