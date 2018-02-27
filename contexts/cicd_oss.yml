@@ -148,6 +148,7 @@ default_context:
   oss_notification_sender_password: ''
   oss_notification_smtp_host: ''
   oss_notification_smtp_port: ''
+  oss_notification_smtp_use_tls: 'True'
   oss_notification_webhook_login_id: '13'
   oss_notification_webhook_app_id: '24'
   oss_sfdc_support_enabled: 'True'

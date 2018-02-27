@@ -1,0 +1,8 @@
+---
+summary: >
+  Added the capability for the Push Notification service to work with an SMTP server with or without TLS
+
+features:
+  - |
+    Added the ``pushkin_smtp_use_tls`` parameter that enables you to define
+    the TLS usage in the SMTP server configuration of the Push Notification service.
