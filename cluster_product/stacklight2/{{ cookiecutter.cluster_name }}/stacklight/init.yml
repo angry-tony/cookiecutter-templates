@@ -61,7 +61,7 @@ parameters:
     stacklight_monitor_node02_deploy_address: {{ cookiecutter.stacklight_monitor_node02_deploy_address }}
     stacklight_monitor_node03_deploy_address: {{ cookiecutter.stacklight_monitor_node03_deploy_address }}
     {%- endif %}
-    grafana_admin_password: {{ password(16) }}
+    grafana_admin_password: ${_param:grafana_password}
     grafana_database_type: mysql
     {%- if cookiecutter.openstack_enabled == 'False' %}
     grafana_database_host: ${_param:stacklight_telemetry_address}
