@@ -31,6 +31,9 @@ classes:
 - system.opencontrail.client.cluster
 - system.heat.server.resource.contrail
 {%- endif %}
+{%- if cookiecutter.openstack_neutron_bgp_vpn == 'True' %}
+- system.heat.server.resource.networking_bgpvpn
+{%- endif %}
 {%- if cookiecutter.openstack_network_engine == 'ovs' %}
 - system.neutron.control.openvswitch.cluster
 {%- if cookiecutter.get('openstack_nfv_sriov_enabled', 'False') == 'True' %}
