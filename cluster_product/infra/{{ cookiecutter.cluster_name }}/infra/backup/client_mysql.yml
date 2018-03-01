@@ -1,0 +1,10 @@
+classes:
+- system.xtrabackup.client.single
+parameters:
+  _param:
+    xtrabackup_remote_server: ${_param:infra_kvm_node03_address}
+{%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
+    xtrabackup_qpress_source_name: http://${_param:aptly_server_hostname}:8078/qpress-11-linux-x64.tar
+{%- endif %}
+    root_private_key: |
+      {{ cookiecutter.backup_private_key|indent(6) }}

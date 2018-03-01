@@ -1,8 +1,3 @@
 classes:
 - system.mysql.client.single
-- system.xtrabackup.client.single
-{%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
-parameters:
-  _param:
-    xtrabackup_qpress_source_name: http://${_param:aptly_server_hostname}:8078/qpress-11-linux-x64.tar
-{%- endif %}
+- cluster.{{ cookiecutter.cluster_name }}.infra.backup.client_mysql
