@@ -79,7 +79,9 @@ parameters:
     # CI/CD service databases
     mysql_admin_password: {{ password(16) }}
     mysql_gerrit_password: {{ password(16) }}
+    {%- if cookiecutter.openstack_enabled == 'True' %}
     nginx_proxy_gerrit_server_site_host: ${_param:cluster_public_host}
+    {%- endif %}
     nginx_proxy_gerrit_server_site_port: 8070
     gerrit_http_listen_url: proxy-https://*:8080/
     {%- if cookiecutter.get('local_pipelines', 'False') == 'True' %}
@@ -90,10 +92,12 @@ parameters:
     http_proxy: 'http://${_param:infra_config_deploy_address}:8000'
     {%- endif %}
 
+    {%- if cookiecutter.openstack_enabled == 'True' %}
     # Proxy
     cluster_ssl_certificate:
       enabled: true
       pem_file: /etc/haproxy/ssl/${_param:cluster_public_host}-all.pem
+    {%- endif %}
     haproxy_bind_address: ${_param:cluster_vip_address}
     haproxy_mysql_source_port: 13306
   {%- if cookiecutter.get('local_docker_images', 'False') == 'True' %}
