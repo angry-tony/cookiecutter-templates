@@ -14,3 +14,8 @@ parameters:
     {%- endif %}
     root_private_key: |
       {{ cookiecutter.backup_private_key|indent(6) }}
+  # for salt-master backup
+  backupninja:
+    client:
+      target:
+        engine_opts: "-av --delete --recursive --safe-links"
