@@ -40,14 +40,16 @@ general_params_action:
       - name: "cookiecutter_template_branch"
         type: "TEXT"
         help_text: "branch/tag/refspec of cookiecutter-templates repo to checkout. Format: master or 2018.1 or refs/changes/xx/xxxxx/x"
-        initial: '{{ mcp_version }}'
+        initial: ''
+        required: False
       - name: "shared_reclass_url"
         type: "TEXT"
         initial: "https://gerrit.mcp.mirantis.net/salt-models/reclass-system.git"
       - name: "shared_reclass_branch"
         type: "TEXT"
         help_text: "branch/tag/refspec of reclass-system repo to checkout. Format: master or 2018.1 or refs/changes/xx/xxxxx/x"
-        initial: '{{ mcp_version }}'
+        initial: ''
+        required: False
       - name: "cookiecutter_template_credentials"
         type: "TEXT"
         initial: "gerrit"
