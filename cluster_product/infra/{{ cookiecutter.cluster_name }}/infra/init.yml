@@ -24,13 +24,13 @@ classes:
 {%- if cookiecutter.stacklight_version == '2' %}
 {%- if cookiecutter.fluentd_enabled == 'True' %}
 {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
-- system.linux.system.repo.mcp.updates
-- system.linux.system.repo.mcp.apt_mirantis.fluentd
-- system.linux.system.repo.mcp.apt_mirantis.openstack
-{%- else %}
 - system.linux.system.repo_local.mcp.updates
 - system.linux.system.repo_local.mcp.apt_mirantis.fluentd
 - system.linux.system.repo_local.mcp.apt_mirantis.openstack
+{%- else %}
+- system.linux.system.repo.mcp.updates
+- system.linux.system.repo.mcp.apt_mirantis.fluentd
+- system.linux.system.repo.mcp.apt_mirantis.openstack
 {%- endif %}
 - system.fluentd
 - system.fluentd.label.default_metric
