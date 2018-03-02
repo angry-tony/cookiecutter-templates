@@ -501,6 +501,7 @@ parameters:
           params:
             deploy_address: ${_param:cicd_control_node03_deploy_address}
         {%- endif %}
+        {%- if cookiecutter.openstack_enabled == 'True' %}
         {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
         {%- for i in range(cookiecutter.openstack_compute_count|int) %}
         {%- set ip_start = 100 -%}
@@ -599,6 +600,7 @@ parameters:
             # compute_ovs_dpdk_socket_mem: "1024"
             # compute_ovs_dpdk_lcore_mask: "0x400"
             # compute_ovs_memory_channels: "2"
+        {%- endif %}
         {%- endif %}
         {%- endif %}
         {%- endif %}
