@@ -10,6 +10,8 @@ parameters:
 
     neutron_enable_qos: {{ cookiecutter.openstack_neutron_qos }}
     neutron_enable_vlan_aware_vms: {{ cookiecutter.openstack_neutron_vlan_aware_vms }}
+    neutron_enable_bgp_vpn: {{ cookiecutter.openstack_neutron_bgp_vpn }}
+    neutron_bgp_vpn_driver: {{ cookiecutter.openstack_neutron_bgp_vpn_driver }}
 
     {%- if cookiecutter.openstack_ovs_dvr_enabled == 'True' %}
     neutron_compute_external_access: True
