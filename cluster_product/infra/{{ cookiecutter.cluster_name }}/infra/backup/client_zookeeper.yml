@@ -9,3 +9,8 @@ parameters:
 {%- endif %}
     root_private_key: |
       {{ cookiecutter.backup_private_key|indent(6) }}
+  zookeeper:
+    backup:
+      client:
+        target:
+          home_dir: /srv/volumes/backup/zookeeper

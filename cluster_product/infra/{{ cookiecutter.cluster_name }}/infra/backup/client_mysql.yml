@@ -8,3 +8,7 @@ parameters:
 {%- endif %}
     root_private_key: |
       {{ cookiecutter.backup_private_key|indent(6) }}
+  xtrabackup:
+    server:
+      enabled: false
+      backup_dir: /srv/volumes/backup/xtrabackup

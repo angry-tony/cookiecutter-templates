@@ -10,6 +10,8 @@ classes:
 {%- if cookiecutter.get('ceph_enabled', 'False') == 'True' %}
 - system.ceph.backup.server.single
 {%- endif %}
+- system.glusterfs.client.cluster
+- system.glusterfs.client.volume.backup
 parameters:
   _param:
     backupninja_public_key: {{ cookiecutter.backup_public_key }}
@@ -22,4 +24,25 @@ parameters:
 {%- endif %}
 {%- if cookiecutter.get('ceph_enabled', 'False') == 'True' %}
     ceph_backup_public_key: {{ cookiecutter.backup_public_key }}
+{%- endif %}
+  backupninja:
+    server:
+      home_dir: /srv/volumes/backup/backupninja
+{%- if cookiecutter.openstack_enabled == 'True' %}
+  xtrabackup:
+    server:
+      backup_dir: /srv/volumes/backup/xtrabackup
+{%- endif %}
+{%- if (cookiecutter.kubernetes_enabled == 'True' and cookiecutter.kubernetes_network_engine == 'opencontrail') or (cookiecutter.openstack_enabled == 'True' and cookiecutter.openstack_network_engine == 'opencontrail') %}
+  zookeeper:
+    backup:
+      backup_dir: /srv/volumes/backup/zookeeper
+  cassandra:
+    backup:
+      backup_dir: /srv/volumes/backup/cassandra
+{%- endif %}
+{%- if cookiecutter.get('ceph_enabled', 'False') == 'True' %}
+  ceph:
+    backup:
+      backup_dir: /srv/volumes/backup/ceph
 {%- endif %}

@@ -31,6 +31,7 @@ classes:
 {%- if cookiecutter.openstack_enabled == 'True' %}
 - system.glusterfs.server.volume.glance
 - system.glusterfs.server.volume.keystone
+- system.glusterfs.server.volume.backup
 - system.salt.control.cluster.openstack_control_cluster
 - system.salt.control.cluster.openstack_proxy_cluster
 - system.salt.control.cluster.openstack_database_cluster
