@@ -1,6 +1,9 @@
 classes:
 - system.horizon.server.single
 #- system.horizon.server.plugin.theme
+{%- if cookiecutter.openstack_neutron_bgp_vpn == 'True' %}
+- system.horizon.server.plugin.neutron_bgpvpn
+{%- endif %}
 {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
 - system.horizon.server.plugin.contrail
 - system.horizon.server.plugin.overrides
