@@ -358,6 +358,19 @@ infra_params_action:
         type: TEXT
         requires:
           - opencontrail_enabled: False
+      - name: openstack_neutron_l2gw
+        label: "OpenStack Neutron L2 Gateways enabled"
+        help_text: "enable L2 Gateways extension"
+        initial: False
+        type: BOOL
+        requires:
+          - openstack_ovs_encapsulation_type: vxlan
+      - name: ovsdb_server
+        help_text: "The pointer to the switch in the format <ovsdb_name>:<ip address>:<port>"
+        initial: ovsdbx:127.0.0.1:6632
+        type: TEXT
+        requires:
+          - openstack_neutron_l2gw: True
       - initial: False
         name: openstack_nfv_sriov_enabled
         label: "OpenStack NFV SRIOV enabled"

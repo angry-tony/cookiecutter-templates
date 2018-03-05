@@ -36,6 +36,9 @@ classes:
 {%- if cookiecutter.get('openstack_nfv_sriov_enabled', 'False') == 'True' %}
 - system.neutron.control.openvswitch.sriov
 {%- endif %}
+{%- if cookiecutter.get('openstack_neutron_l2gw', 'False') == 'True' %}
+- service.neutron.control.services.l2gw
+{%- endif %}
 {%- endif %}
 - system.keystone.server.cluster
 - system.keystone.server.wsgi
