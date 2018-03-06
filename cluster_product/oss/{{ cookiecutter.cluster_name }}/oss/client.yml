@@ -147,14 +147,14 @@ parameters:
     pushkin_db_user: pushkin
     pushkin_db_user_password: ${_param:pushkin_db_user_password_generated}
     pushkin_db_host: ${_param:haproxy_postgresql_bind_host}
-    pushkin_smtp_host: {{ cookiecutter.oss_notification_smtp_host }}
-    pushkin_smtp_port: {{ cookiecutter.oss_notification_smtp_port }}
-    pushkin_email_sender_password: {{ cookiecutter.oss_notification_sender_password }}
+    pushkin_smtp_host: {{ cookiecutter.oss_pushkin_smtp_host }}
+    pushkin_smtp_port: {{ cookiecutter.oss_pushkin_smtp_port }}
+    pushkin_email_sender_password: {{ cookiecutter.oss_pushkin_email_sender_password }}
     #..WebHook notification senders
-    webhook_from: {{ cookiecutter.oss_notification_email_from }}
-    webhook_recipients: {{ cookiecutter.oss_notification_email_recipients }}
-    webhook_login_id: {{ cookiecutter.oss_notification_webhook_login_id }}
-    webhook_application_id: {{ cookiecutter.oss_notification_webhook_app_id }}
+    webhook_from: {{ cookiecutter.oss_webhook_from }}
+    webhook_recipients: {{ cookiecutter.oss_webhook_recipients }}
+    webhook_login_id: {{ cookiecutter.oss_webhook_login_id }}
+    webhook_application_id: {{ cookiecutter.oss_webhook_app_id }}
     {%- if cookiecutter.oss_sfdc_support_enabled == 'True' %}
     # SFDC configuration
     sfdc_auth_url: {{ cookiecutter.sfdc_auth_url }}
@@ -197,7 +197,7 @@ parameters:
     security_monkey_openstack:
       username: {{ cookiecutter.oss_security_audit_username }}
       password: {{ cookiecutter.oss_security_audit_password }}
-      auth_url: ${_param:oss_openstack_auth_url}
+      auth_url: {{ cookiecutter.oss_security_audit_os_auth_url }}
       user_domain_name: {{ cookiecutter.oss_security_audit_user_domain_id }}
       project_domain_name: {{ cookiecutter.oss_security_audit_project_domain_id }}
       ssl_verify: {{ cookiecutter.oss_security_audit_ssl_verify }}
@@ -213,7 +213,7 @@ parameters:
     janitor_monkey_openstack:
       username: {{ cookiecutter.oss_cleanup_service_username }}
       password: {{ cookiecutter.oss_cleanup_service_password }}
-      auth_url: ${_param:oss_openstack_auth_url}
+      auth_url: {{ cookiecutter.oss_cleanup_service_os_auth_url }}
       project_name: {{ cookiecutter.oss_cleanup_service_project }}
       project_domain_name: {{ cookiecutter.oss_cleanup_service_project_domain_id }}
       ssl_verify: {{ cookiecutter.oss_cleanup_service_ssl_verify }}
@@ -241,8 +241,8 @@ parameters:
     rundeck_cis_jobs_repository: {{ cookiecutter.oss_cis_jobs_repository }}
     rundeck_cis_jobs_revision: {{ cookiecutter.oss_cis_jobs_repository_branch }}
     rundeck_cis_openstack:
-      auth_url: ${_param:oss_openstack_auth_url}/auth/tokens
-      endpoint_type: ${_param:oss_openstack_endpoint_type}URL
+      auth_url: {{ cookiecutter.oss_cis_os_auth_url }}/auth/tokens
+      endpoint_type: {{ cookiecutter.oss_cis_endpoint_type }}URL
       username: {{ cookiecutter.oss_cis_username }}
       password: {{ cookiecutter.oss_cis_password }}
       project_name: {{ cookiecutter.oss_cis_project }}

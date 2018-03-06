@@ -932,13 +932,13 @@ product_params_action:
       - oss_enabled: True
     - help_text: "Notification email sender"
       initial: ""
-      name: oss_notification_email_from
+      name: oss_webhook_from
       type: TEXT
       requires:
       - oss_enabled: True
     - help_text: "Notification email recipients"
       initial: ""
-      name: oss_notification_email_recipients
+      name: oss_webhook_recipients
       type: TEXT
       requires:
       - oss_enabled: True
@@ -1002,6 +1002,18 @@ product_params_action:
       type: TEXT
       requires:
       - oss_cis_enabled: True
+    - help_text: "CIS OpenStack auth url"
+      initial: "${_param:oss_openstack_auth_url}"
+      name: oss_cis_os_auth_url
+      type: TEXT
+      requires:
+      - oss_cis_enabled: True
+    - help_text: "CIS OpenStack endpoint type"
+      initial: "${_param:oss_openstack_endpoint_type}"
+      name: oss_cis_endpoint_type
+      type: TEXT
+      requires:
+      - oss_cis_enabled: True
     - help_text: "CIS OpenStack project"
       initial: "${_param:oss_openstack_project}"
       name: oss_cis_project
@@ -1044,6 +1056,12 @@ product_params_action:
       type: TEXT
       requires:
       - oss_security_audit_enabled: True
+    - help_text: "Security audit auth url"
+      initial: "${_param:oss_openstack_auth_url}"
+      name: oss_security_audit_os_auth_url
+      type: TEXT
+      requires:
+      - oss_security_audit_enabled: True
     - help_text: "Security audit project"
       initial: "${_param:oss_openstack_project}"
       name: oss_security_audit_project
@@ -1083,6 +1101,12 @@ product_params_action:
     - help_text: "Cleanup service password"
       initial: "${_param:oss_openstack_password}"
       name: oss_cleanup_service_password
+      type: TEXT
+      requires:
+      - oss_cleanup_service_enabled: True
+    - help_text: "Cleanup service auth url"
+      initial: "${_param:oss_openstack_auth_url}"
+      name: oss_cleanup_service_os_auth_url
       type: TEXT
       requires:
       - oss_cleanup_service_enabled: True
@@ -2175,27 +2199,23 @@ product_params_action:
       width: half
     - help_text: Address of the SMTP host (for alert notifications)
       initial: 127.0.0.1
-      name: stacklight_notification_smtp_host
+      name: oss_pushkin_smtp_host
       type: TEXT
     - help_text: Address of the SMTP port (for alert notifications)
       initial: 587
-      name: oss_notification_smtp_port
+      name: oss_pushkin_smtp_port
       type: TEXT
     - help_text: Sender-mail password (for alert notifications)
       initial: password
-      name: oss_notification_sender_password
+      name: oss_pushkin_email_sender_password
       type: TEXT
     - help_text: Webhook login id (for alert notifications)
       initial: 13
-      name: oss_notification_webhook_login_id
+      name: oss_webhook_login_id
       type: TEXT
     - help_text: Webhook application id (for alert notifications)
       initial: 24
-      name: oss_notification_app_id
-      type: TEXT
-    - help_text: Recipient mail address (for alert notifications)
-      initial: alerts@localhost
-      name: stacklight_notification_address
+      name: oss_webhook_app_id
       type: TEXT
     label: StackLight product parameters
     name: stacklight
