@@ -6,5 +6,7 @@ parameters:
       interface:
         {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
         ens2: ${_param:linux_deploy_interface}
+        {%- else %}
+        ens2: ${_param:linux_dhcp_interface}
         {%- endif %}
         ens3: ${_param:linux_single_interface}
