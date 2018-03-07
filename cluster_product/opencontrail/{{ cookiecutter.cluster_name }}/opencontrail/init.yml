@@ -1,7 +1,7 @@
 parameters:
   _param:
     opencontrail_version: 3.0
-    linux_repo_contrail_component: oc323
+    linux_repo_contrail_component: oc32
     opencontrail_stats_password: ${_param:opencontrail_stats_password_generated}
     opencontrail_compute_dns: ${_param:dns_server01}
     opencontrail_compute_gateway: ${_param:tenant_network_gateway}
