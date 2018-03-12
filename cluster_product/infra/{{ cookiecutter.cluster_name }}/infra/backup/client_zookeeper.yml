@@ -13,4 +13,4 @@ parameters:
     backup:
       client:
         target:
-          home_dir: /srv/volumes/backup/zookeeper
+          backup_dir: /srv/volumes/backup/zookeeper
