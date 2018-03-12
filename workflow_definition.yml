@@ -616,6 +616,12 @@ product_params_action:
       requires:
       - platform: openstack_enabled
       type: TEXT
+    - help_text: "Enables padding with zeros when generating Compute hostnames (ex.: Name a node as cmp001 if True, otherwise name it as cmp1)"
+      initial: True
+      name: compute_padding_with_zeros
+      type: BOOL
+      requires:
+      - platform: openstack_enabled
     - help_text: 'User of upstream proxy used for authentication'
       initial: 'admin'
       name: upstream_proxy_user
@@ -2378,6 +2384,10 @@ product_params_action:
       width: half
       requires:
       - ceph_hyper_converged: False
+    - help_text: "Enables padding with zeros when generating Ceph OSD hostnames (ex.: Name a node as osd001 if True, otherwise name it as osd1)"
+      initial: True
+      name: osd_padding_with_zeros
+      type: BOOL
     - help_text: number of OSDs
       initial: '10'
       name: ceph_osd_count
