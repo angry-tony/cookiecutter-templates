@@ -23,6 +23,10 @@ classes:
   - system.glusterfs.client.volume.registry
   - system.glusterfs.client.volume.salt_pki
   - system.glusterfs.client.volume.mysql
+  {%- if cookiecutter.kqueen_enabled == 'True' %}
+  - system.glusterfs.client.volume.kqueen
+  - system.glusterfs.client.volume.etcd
+  {%- endif %}
   {%- if cookiecutter.openldap_enabled == 'True' %}
   - system.glusterfs.client.volume.openldap
   {%- endif %}
@@ -47,6 +51,10 @@ classes:
   {%- if cookiecutter.openldap_enabled == 'True' %}
   - system.haproxy.proxy.listen.openldap
   - system.haproxy.proxy.listen.phpldapadmin
+  {%- endif %}
+  {%- if cookiecutter.kqueen_enabled == 'True' %}
+  - system.haproxy.proxy.listen.cicd.kqueen
+  - system.haproxy.proxy.listen.cicd.etcd
   {%- endif %}
   - system.haproxy.proxy.listen.mysql
   - system.haproxy.proxy.listen.stats

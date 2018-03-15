@@ -7,3 +7,7 @@ classes:
   - system.glusterfs.server.volume.mysql
   - system.glusterfs.server.volume.openldap
   - system.glusterfs.server.volume.registry
+  {%- if cookiecutter.kqueen_enabled == 'True' %}
+  - system.glusterfs.server.volume.kqueen
+  - system.glusterfs.server.volume.etcd
+  {%- endif %}

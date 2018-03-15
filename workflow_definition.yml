@@ -443,6 +443,14 @@ infra_params_action:
       initial: true
       name: openldap_enabled
       type: BOOL
+    - help_text: "enable kqueen service"
+      initial: True
+      name: kqueen_enabled
+      type: BOOL
+    - help_text: "define personal mail server instead of default"
+      initial: True
+      name: kqueen_custom_mail_enabled
+      type: BOOL
   - name: "oss_params"
     label: "OSS"
     requires:
@@ -759,6 +767,98 @@ product_params_action:
       requires:
       - local_repositories: True
       - offline_deployment: False
+    - initial: "kqueen/api:v0.18"
+      name: docker_image_kqueen_api
+      type: TEXT
+      requires:
+      - kqueen_enabled: True
+      help_text: specify docker image version for kqueen-api
+    - initial: "kqueen/ui:v0.18"
+      name: docker_image_kqueen_ui
+      type: TEXT
+      requires:
+      - kqueen_enabled: True
+      help_text: specify docker image version for kqueen-ui
+    - initial: False
+      name: kqueen_api_debug
+      type: BOOL
+      requires:
+      - kqueen_enabled: True
+      help_text: run kqueen-api service in debug mode
+    - initial: False
+      name: kqueen_ui_debug
+      type: BOOL
+      requires:
+      - kqueen_enabled: True
+      help_text: run kqueen-ui service in debug mode
+    - initial: "172.16.238.0/24"
+      name: kqueen_api_prometheus_whitelist
+      type: TEXT
+      requires:
+      - kqueen_enabled: True
+      help_text: whitelist configuration for external prometheus service, leave blank if prometheus is not installed
+    - initial: "mail"
+      name: kqueen_ui_mail_host
+      type: TEXT
+      requires:
+      - kqueen_enabled: True
+      - kqueen_custom_mail_enabled: True
+      help_text: kqueen-ui mail server host address
+    - initial: "10025"
+      name: kqueen_ui_mail_port
+      type: TEXT
+      requires:
+      - kqueen_enabled: True
+      - kqueen_custom_mail_enabled: True
+      help_text: kqueen-ui mail server port address
+    - initial: False
+      name: kqueen_ui_enable_public_registration
+      type: BOOL
+      requires:
+      - kqueen_enabled: True
+      help_text: Allow users to register in Kqueen manually from UI, otherwise admin-invitations only
+    - initial: "{{ 32|generate_password }}"
+      name: kqueen_api_secret_key
+      type: TEXT
+      requires:
+      - kqueen_enabled: True
+      help_text: Kqueen API Flask application secret key
+    - initial: "{{ 32|generate_password }}"
+      name: kqueen_ui_secret_key
+      type: TEXT
+      requires:
+      - kqueen_enabled: True
+      help_text: Kqueen UI Flask application secret key
+    - initial: True
+      name: kqueen_api_bootstrap_admin
+      type: BOOL
+      requires:
+      - kqueen_enabled: True
+      help_text: register admin account during Kqueen deployment
+    - initial: "admin"
+      name: kqueen_api_admin_username
+      type: TEXT
+      requires:
+      - kqueen_enabled: True
+      help_text: Define username for admin account in case of bootstrap admin
+    - initial: "{{ 32|generate_password }}"
+      name: kqueen_api_admin_password
+      type: TEXT
+      requires:
+      - kqueen_enabled: True
+      help_text: Define password for admin account in case of bootstrap admin
+    - initial: "MirantisCloudPlatform"
+      name: kqueen_api_admin_organization
+      type: TEXT
+      requires:
+      - kqueen_enabled: True
+      help_text: Define organization for admin account in case of bootstrap admin
+    - initial: "mcp"
+      name: kqueen_api_admin_namespace
+      type: TEXT
+      requires:
+      - kqueen_enabled: True
+      help_text: Define namespace for admin account in case of bootstrap admin
     - initial: "${_param:aptly_server_deploy_address}"
       help_text: Local Repositories
       name: local_repo_url

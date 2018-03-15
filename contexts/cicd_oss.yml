@@ -166,3 +166,18 @@ default_context:
   oss_openstack_ssl_verify: 'False'
   oss_openstack_endpoint_type: 'public'
   oss_openstack_credentials_path: '/srv/volumes/rundeck/storage'
+  docker_image_kqueen_api: 'kqueen/api:v0.18'
+  docker_image_kqueen_ui: 'kqueen/ui:v0.8'
+  kqueen_api_debug: 'False'
+  kqueen_api_prometheus_whitelist: ''
+  kqueen_ui_mail_host: 'mail'
+  kqueen_ui_mail_port: '10025'
+  kqueen_ui_debug: 'False'
+  kqueen_ui_enable_public_registration: 'False'
+  kqueen_api_secret_key: <<WILL_BE_GENERATED>>
+  kqueen_ui_secret_key: <<WILL_BE_GENERATED>>
+  kqueen_api_bootstrap_admin: 'True'
+  kqueen_api_admin_username: 'admin'
+  kqueen_api_admin_password: <<WILL_BE_GENERATED>>
+  kqueen_api_admin_organization: 'MirantisCloudPlatform'
+  kqueen_api_admin_namespace: 'mcp'
