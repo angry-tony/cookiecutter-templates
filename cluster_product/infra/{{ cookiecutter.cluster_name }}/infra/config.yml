@@ -103,11 +103,6 @@ parameters:
     salt_api_password: {{ cookiecutter.salt_api_password }}
     jenkins_salt_api_url: "http://${_param:salt_master_host}:6969"
     jenkins_pipeline_library_url: git@cfg01:/home/repo/mcp-ci/pipeline-library
-    {%- if cookiecutter.mcp_version != 'stable' and cookiecutter.mcp_version != 'testing' and cookiecutter.mcp_version != 'nightly' %}
-    jenkins_pipelines_branch: '{{ cookiecutter.mcp_version }}'
-    {%- else %}
-    jenkins_pipelines_branch: master
-    {%- endif %}
   jenkins:
     client:
       lib:
