@@ -750,6 +750,13 @@ product_params_action:
       requires:
       - openldap_enabled: True
       help_text: LDAP domain
+    - initial: "https://github.com/Mirantis/mcp-local-repo-model"
+      help_text: Local Repo Model
+      name: local_model_url
+      type: TEXT
+      requires:
+      - local_repositories: True
+      - offline_deployment: False
     - initial: "${_param:aptly_server_deploy_address}"
       help_text: Local Repositories
       name: local_repo_url
