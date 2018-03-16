@@ -2208,6 +2208,15 @@ product_params_action:
       name: stacklight_telemetry_node03_hostname
       type: TEXT
       width: half
+    - name: "stacklight_long_term_storage_type"
+      label: "Long Term Storage type"
+      type: "CHOICE"
+      initial: "prometheus"
+      choices:
+        - - "prometheus"
+          - "Prometheus"
+        - - "influxdb"
+          - "InfluxDB"
     - help_text: Address of the SMTP host (for alert notifications)
       initial: 127.0.0.1
       name: oss_pushkin_smtp_host

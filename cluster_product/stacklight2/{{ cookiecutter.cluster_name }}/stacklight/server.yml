@@ -30,13 +30,19 @@ classes:
 {%- endif %}
 - system.prometheus.alertmanager.notification.pushkin
 - system.prometheus.server.alert.labels_add.route
-- system.prometheus.server.remote_write.docker
-- system.prometheus.server.target.dns
+- system.prometheus.server.target.dns.alertmanager
+- system.prometheus.server.target.dns.prometheus
+- system.prometheus.server.target.dns.pushgateway
+- system.prometheus.server.target.dns.remote_agent
 - system.prometheus.server.alertmanager.dns
 - system.prometheus.pushgateway.container
 - system.prometheus.server.container
 - system.prometheus.alertmanager.container
+{%- if cookiecutter.stacklight_long_term_storage_type == "influxdb" %}
+- system.prometheus.server.target.dns.remote_storage_adapter
 - system.prometheus.remote_storage_adapter.container
+- system.prometheus.server.remote_write.docker
+{%- endif %}
 {%- if cookiecutter.get('ceph_enabled', 'False') == 'True'  %}
 - system.ceph.common.cluster
 - system.ceph.common.container
@@ -74,6 +80,9 @@ parameters:
     prometheus_server_alert_label_route: 'email,salesforce'
     {%- endif %}
     cluster_vip_address: ${_param:stacklight_monitor_address}
+    {%- if cookiecutter.stacklight_long_term_storage_type == "prometheus" %}
+    prometheus_storage_retention: 120h
+    {%- endif %}
 
     keepalived_stacklight_monitor_vip_address: ${_param:stacklight_monitor_address}
 

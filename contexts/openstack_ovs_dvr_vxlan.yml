@@ -110,6 +110,7 @@ default_context:
   oss_enabled: 'True'
   stacklight_enabled: 'True'
   stacklight_version: '2'
+  stacklight_long_term_storage_type: prometheus
   stacklight_log_address: 10.167.4.60
   stacklight_log_hostname: log
   stacklight_log_node01_address: 10.167.4.61

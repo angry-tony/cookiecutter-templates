@@ -43,6 +43,7 @@
     "stacklight_enabled"                        : "True",
     "stacklight_version"                        : "2",
     "fluentd_enabled"                           : "True",
+    "stacklight_long_term_storage_type"         : "prometheus",
 
     "openstack_enabled"                         : "True",
     "kubernetes_enabled"                        : "False",

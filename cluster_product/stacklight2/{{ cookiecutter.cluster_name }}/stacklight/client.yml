@@ -3,7 +3,15 @@ classes:
 - system.grafana.client.datasource.prometheus
 - system.docker.client
 - system.docker.swarm.stack.dashboard
-- system.docker.swarm.stack.monitoring.prometheus_global
+- system.docker.swarm.stack.monitoring.prometheus
+- system.docker.swarm.stack.monitoring.prometheus.global
+- system.docker.swarm.stack.monitoring.alertmanager
+- system.docker.swarm.stack.monitoring.prometheus_relay
+- system.docker.swarm.stack.monitoring.pushgateway
+- system.docker.swarm.stack.monitoring.remote_agent
+{%- if cookiecutter.stacklight_long_term_storage_type == "influxdb" %}
+- system.docker.swarm.stack.monitoring.remote_storage_adapter
+{%- endif %}
 {%- if cookiecutter.openstack_enabled == 'True' %}
 - system.docker.swarm.stack.monitoring.remote_collector
 {%- endif %}
