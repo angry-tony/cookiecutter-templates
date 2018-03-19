@@ -8,11 +8,17 @@ classes:
 {%- if cookiecutter.openstack_enabled == 'False' %}
 - system.linux.system.repo_local.mcp.apt_mirantis.openstack
 {%- endif %}
+{%- if cookiecutter.stacklight_long_term_storage_type == "prometheus" %}
+- system.linux.system.repo_local.mcp.apt_mirantis.openstack
+{%- endif %}
 {%- else %}
 - system.linux.system.repo.mcp.apt_mirantis.influxdb
 - system.linux.system.repo.mcp.apt_mirantis.ubuntu
 - system.linux.system.repo.mcp.extra
 {%- if cookiecutter.openstack_enabled == 'False' %}
+- system.linux.system.repo.mcp.apt_mirantis.openstack
+{%- endif %}
+{%- if cookiecutter.stacklight_long_term_storage_type == "prometheus" %}
 - system.linux.system.repo.mcp.apt_mirantis.openstack
 {%- endif %}
 {%- endif %}
