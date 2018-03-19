@@ -46,11 +46,12 @@ parameters:
 
     kubernetes_virtlet_enabled: {{ cookiecutter.kubernetes_virtlet_enabled }}
 
-    {%- if cookiecutter.kubernetes_network_engine == 'calico' %}
+    {%- if cookiecutter.kubernetes_network_calico_enabled == 'True' %}
     # calico
     calico_private_network: {{ cookiecutter.calico_network }}
     calico_private_netmask: {{ cookiecutter.calico_netmask }}
-    {%- elif cookiecutter.kubernetes_network_engine == 'opencontrail' %}
+    {%- endif %}
+    {%- if cookiecutter.kubernetes_network_opencontrail_enabled == 'True' %}
     openstack_control_address: None
     keystone_admin_password: None
     openstack_version: None

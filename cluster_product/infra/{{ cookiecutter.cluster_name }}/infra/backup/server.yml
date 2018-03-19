@@ -3,7 +3,7 @@ classes:
 {%- if cookiecutter.openstack_enabled == 'True' %}
 - system.xtrabackup.server.single
 {%- endif %}
-{%- if (cookiecutter.kubernetes_enabled == 'True' and cookiecutter.kubernetes_network_engine == 'opencontrail') or (cookiecutter.openstack_enabled == 'True' and cookiecutter.openstack_network_engine == 'opencontrail') %}
+{%- if (cookiecutter.kubernetes_enabled == 'True' and cookiecutter.kubernetes_network_opencontrail_enabled == 'True') or (cookiecutter.openstack_enabled == 'True' and cookiecutter.openstack_network_engine == 'opencontrail') %}
 - system.cassandra.backup.server.single
 - system.zookeeper.backup.server.single
 {%- endif %}
@@ -18,7 +18,7 @@ parameters:
 {%- if cookiecutter.openstack_enabled == 'True' %}
     xtrabackup_public_key: {{ cookiecutter.backup_public_key }}
 {%- endif %}
-{%- if (cookiecutter.kubernetes_enabled == 'True' and cookiecutter.kubernetes_network_engine == 'opencontrail') or (cookiecutter.openstack_enabled == 'True' and cookiecutter.openstack_network_engine == 'opencontrail') %}
+{%- if (cookiecutter.kubernetes_enabled == 'True' and cookiecutter.kubernetes_network_opencontrail_enabled == 'True') or (cookiecutter.openstack_enabled == 'True' and cookiecutter.openstack_network_engine == 'opencontrail') %}
     zookeeper_backup_public_key: {{ cookiecutter.backup_public_key }}
     cassandra_backup_public_key: {{ cookiecutter.backup_public_key }}
 {%- endif %}
@@ -33,7 +33,7 @@ parameters:
     server:
       backup_dir: /srv/volumes/backup/xtrabackup
 {%- endif %}
-{%- if (cookiecutter.kubernetes_enabled == 'True' and cookiecutter.kubernetes_network_engine == 'opencontrail') or (cookiecutter.openstack_enabled == 'True' and cookiecutter.openstack_network_engine == 'opencontrail') %}
+{%- if (cookiecutter.kubernetes_enabled == 'True' and cookiecutter.kubernetes_network_opencontrail_enabled == 'True') or (cookiecutter.openstack_enabled == 'True' and cookiecutter.openstack_network_engine == 'opencontrail') %}
   zookeeper:
     backup:
       backup_dir: /srv/volumes/backup/zookeeper

@@ -1,6 +1,6 @@
 # Kubernetes compute node default networking template
 #
-{%- if cookiecutter.kubernetes_network_engine == 'calico' %}
+{%- if cookiecutter.kubernetes_network_calico_enabled == 'True' %}
 parameters:
   linux:
     network:

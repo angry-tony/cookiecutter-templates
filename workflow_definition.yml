@@ -302,20 +302,16 @@ infra_params_action:
     requires:
       - platform: "kubernetes_enabled"
     fields:
-    - name: "kubernetes_network_engine"
-      help_text: "Possible options are calico and opencontrail, this parameter is set automatically."
-      type: "TEXT"
-      initial: "opencontrail"
-      readonly: True
+    - name: "kubernetes_network_opencontrail_enabled"
+      help_text: "Enable opencontrail CNI."
+      type: "BOOL"
+      initial: "True"
       requires:
         - opencontrail_enabled: True
-    - name: "kubernetes_network_engine"
-      help_text: "Possible options are calico and opencontrail, this parameter is set automatically."
-      type: "TEXT"
-      initial: "calico"
-      readonly: True
-      requires:
-        - opencontrail_enabled: False
+    - name: "kubernetes_network_calico_enabled"
+      help_text: "Enable Calico CNI."
+      type: "BOOL"
+      initial: "False"
   - name: "openstack_cluster_size_section"
     label: "OpenStack Cluster Size"
     doc: |
@@ -1146,37 +1142,37 @@ product_params_action:
       name: calico_cni_image
       type: TEXT
       requires:
-        - kubernetes_network_engine: 'calico'
+        - kubernetes_network_calico_enabled: True
     - help_text: ''
       initial: True
       name: calico_enable_nat
       type: BOOL
       requires:
-        - kubernetes_network_engine: 'calico'
+        - kubernetes_network_calico_enabled: True
     - help_text: Image with Calico
       initial: docker-prod-local.artifactory.mirantis.com/mirantis/projectcalico/calico/node:latest
       name: calico_image
       type: TEXT
       requires:
-        - kubernetes_network_engine: 'calico'
+        - kubernetes_network_calico_enabled: True
     - help_text: Netmask of calico_network
       initial: '16'
       name: calico_netmask
       type: TEXT
       requires:
-        - kubernetes_network_engine: 'calico'
+        - kubernetes_network_calico_enabled: True
     - help_text: Network that is used for kubernetes containers
       initial: 192.168.0.0
       name: calico_network
       type: IP
       requires:
-        - kubernetes_network_engine: 'calico'
+        - kubernetes_network_calico_enabled: True
     - help_text: Image with Calicoctl command
       initial: docker-prod-local.artifactory.mirantis.com/mirantis/projectcalico/calico/ctl:latest
       name: calicoctl_image
       type: TEXT
       requires:
-        - kubernetes_network_engine: 'calico'
+        - kubernetes_network_calico_enabled: True
     - help_text: enable ssl for etcd
       initial: True
       name: etcd_ssl
@@ -1227,7 +1223,7 @@ product_params_action:
       name: kubernetes_compute_node01_tenant_address
       type: IP
       requires:
-        - kubernetes_network_engine: 'opencontrail'
+        - kubernetes_network_opencontrail_enabled: True
     - help_text: hostname of kubernetes compute node02
       initial: cmp02
       name: kubernetes_compute_node02_hostname
@@ -1247,7 +1243,7 @@ product_params_action:
       name: kubernetes_compute_node02_tenant_address
       type: IP
       requires:
-        - kubernetes_network_engine: 'opencontrail'
+        - kubernetes_network_opencontrail_enabled: True
     - help_text: ''
       initial: '{{ control_network_subnet | subnet(10) }}'
       name: kubernetes_control_address
@@ -1271,7 +1267,7 @@ product_params_action:
       name: kubernetes_control_node01_tenant_address
       type: IP
       requires:
-        - kubernetes_network_engine: 'opencontrail'
+        - kubernetes_network_opencontrail_enabled: True
     - help_text: IP address of kubernetes control node02
       initial: '{{ control_network_subnet | subnet(12) }}'
       name: kubernetes_control_node02_address
@@ -1296,7 +1292,7 @@ product_params_action:
       name: kubernetes_control_node02_tenant_address
       type: IP
       requires:
-        - kubernetes_network_engine: 'opencontrail'
+        - kubernetes_network_opencontrail_enabled: True
     - help_text: ''
       initial: '{{ deploy_network_subnet | subnet(13) }}'
       name: kubernetes_control_node03_deploy_address
@@ -1311,21 +1307,21 @@ product_params_action:
       name: kubernetes_control_node03_tenant_address
       type: IP
       requires:
-        - kubernetes_network_engine: 'opencontrail'
+        - kubernetes_network_opencontrail_enabled: True
     - help_text: 'Public floating IP pool'
       initial: '10.151.0.0/16'
       name: opencontrail_public_ip_range
       type: TEXT
       width: half
       requires:
-        - kubernetes_network_engine: 'opencontrail'
+        - kubernetes_network_opencontrail_enabled: True
     - help_text: 'Private range used for pods'
       initial: '10.150.0.0/16'
       name: opencontrail_private_ip_range
       type: TEXT
       width: half
       requires:
-        - kubernetes_network_engine: 'opencontrail'
+        - kubernetes_network_opencontrail_enabled: True
     - help_text: Interface used for keepalived VIP
       initial: ens4
       name: kubernetes_keepalived_vip_interface

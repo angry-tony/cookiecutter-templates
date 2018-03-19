@@ -18,7 +18,7 @@ default_context:
     cluster_name: k8s-salt-model
     cluster_domain: mcp-fuel-aio.local
     reclass_repository: "https://github.com/mceloud/k8s-salt-model.git"
-    kubernetes_network_engine: calico
+    kubernetes_network_calico_enabled: True
 
     salt_master_address: 192.168.10.100
     salt_master_management_address: 192.168.10.100

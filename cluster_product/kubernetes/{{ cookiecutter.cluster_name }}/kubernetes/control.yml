@@ -26,7 +26,7 @@ parameters:
         engine: docker_hybrid
       ssl:
         enabled: {{ cookiecutter.etcd_ssl }}
-      {%- if cookiecutter.kubernetes_network_engine == 'calico' %}
+      {%- if cookiecutter.kubernetes_network_calico_enabled == 'True' %}
       setup:
         calico:
           key: /calico/v1/ipam/v4/pool/${_param:calico_private_network}-${_param:calico_private_netmask}
@@ -40,21 +40,26 @@ parameters:
         ssl:
           enabled: {{ cookiecutter.etcd_ssl }}
       network:
-        etcd:
-          ssl:
-            enabled: {{ cookiecutter.etcd_ssl }}
-        {%- if cookiecutter.stacklight_enabled == 'True' %}
-        prometheus:
+        {%- if cookiecutter.kubernetes_network_calico_enabled == 'True' %}
+        calico:
           enabled: true
+          etcd:
+            ssl:
+              enabled: {{ cookiecutter.etcd_ssl }}
+          {%- if cookiecutter.stacklight_enabled == 'True' %}
+          prometheus:
+            enabled: true
+          {%- endif %}
         {%- endif %}
-        {%- if cookiecutter.kubernetes_network_engine == 'opencontrail' %}
-        engine: opencontrail
-        public_ip_range: {{ cookiecutter.opencontrail_public_ip_range }}
-        public_network: {{ cookiecutter.get('opencontrail_public_ip_network', 'default-domain:default-project:Public') }}
-        private_ip_range: {{ cookiecutter.opencontrail_private_ip_range }}
-        config:
-          api:
-            host: ${_param:opencontrail_control_address}
+        {%- if cookiecutter.kubernetes_network_opencontrail_enabled == 'True' %}
+        opencontrail:
+          enabled: true
+          public_ip_range: {{ cookiecutter.opencontrail_public_ip_range }}
+          public_network: {{ cookiecutter.get('opencontrail_public_ip_network', 'default-domain:default-project:Public') }}
+          private_ip_range: {{ cookiecutter.opencontrail_private_ip_range }}
+          config:
+            api:
+              host: ${_param:opencontrail_control_address}
         {%- endif %}
       namespace:
         netchecker:
@@ -71,7 +76,7 @@ parameters:
           enabled: true
         helm:
           enabled: false
-        {%- if cookiecutter.kubernetes_network_engine == 'opencontrail' %}
+        {%- if cookiecutter.kubernetes_network_opencontrail_enabled == 'True' %}
         dashboard:
           enabled: False
         contrail_network_controller:
