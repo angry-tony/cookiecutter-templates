@@ -30,6 +30,7 @@ classes:
 - system.prometheus.server.standalone
 - system.prometheus.server.target.federation
 - system.prometheus.server.target.federation.all_metrics
+- system.haproxy.proxy.listen.stacklight.prometheus_relay
 {%- endif %}
 {%- if cookiecutter.openstack_enabled == 'False' %}
 - system.haproxy.proxy.listen.openstack.galera
