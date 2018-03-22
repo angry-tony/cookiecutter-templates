@@ -18,6 +18,7 @@ parameters:
     git_pipeline_library_upstream: http://${_param:aptly_server_hostname}:8088/pipeline-library
     git_mk_pipelines_upstream: http://${_param:aptly_server_hostname}:8088/Mirantis/mk-pipelines
     {%- endif %}
+    glusterfs_service_host: ${_param:infra_kvm_address}
     {%- if cookiecutter.mcp_version != 'stable' and cookiecutter.mcp_version != 'testing' and cookiecutter.mcp_version != 'nightly' %}
     {%- if cookiecutter.get('local_docker_images', 'False') == 'True' %}
     docker_image_registry: ${_param:aptly_server_hostname}:5000/registry:${_param:apt_mk_version}
