@@ -499,12 +499,17 @@ parameters:
             deploy_address: ${_param:cicd_control_node03_deploy_address}
         {%- endif %}
         {%- if cookiecutter.openstack_enabled == 'True' %}
+        {%- if cookiecutter.compute_padding_with_zeros == 'False' %}
+        {%- set compute_digits = 0 %}
+        {%- else %}
+        {%- set compute_digits = 3 if cookiecutter.openstack_compute_count|string|length < 3 else cookiecutter.openstack_compute_count|string|length -%}
+        {%- endif %}
         {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
         {%- for i in range(cookiecutter.openstack_compute_count|int) %}
         {%- set ip_start = 100 -%}
         {%- set cmp_start = 0 %}
-        openstack_compute_node{{ "%03d"|format(cmp_start + loop.index) }}:
-          name: ${_param:openstack_compute_rack01_hostname}{{ "%03d"|format(cmp_start + loop.index) }}
+        openstack_compute_node{{ ("%0" + compute_digits|string + "d")|format(cmp_start + loop.index) }}:
+          name: ${_param:openstack_compute_rack01_hostname}{{ ("%0" + compute_digits|string + "d")|format(cmp_start + loop.index) }}
           domain: ${_param:cluster_domain}
           classes:
           - cluster.${_param:cluster_name}.openstack.compute
@@ -542,7 +547,7 @@ parameters:
           repeat:
             count: {{ cookiecutter.openstack_compute_count }}
             start: 1
-            digits: 3
+            digits: {{ compute_digits }}
             params:
               single_address:
                 value: ${_param:openstack_compute_rack01_single_subnet}.<<count>>
@@ -603,12 +608,17 @@ parameters:
         {%- endif %}
   {%- if cookiecutter.get('ceph_enabled', 'False') == 'True' %}
     {%- if cookiecutter.get('ceph_hyper_converged', 'False') == 'False' %}
+    {%- if cookiecutter.osd_padding_with_zeros == 'False' %}
+    {%- set osd_digits = 0 %}
+    {%- else %}
+    {%- set osd_digits = 3 if cookiecutter.ceph_osd_node_count|string|length < 3 else cookiecutter.ceph_osd_node_count|string|length -%}
+    {%- endif %}
       {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
         {%- for i in range(cookiecutter.ceph_osd_node_count|int) %}
         {%- set ip_start = 200 -%}
         {%- set osd_start = 0 %}
-        ceph_osd_node{{ "%03d"|format(osd_start + loop.index) }}:
-          name: ${_param:ceph_osd_rack01_hostname}{{ "%03d"|format(osd_start + loop.index) }}
+        ceph_osd_node{{ ("%0" + osd_digits|string + "d")|format(osd_start + loop.index) }}:
+          name: ${_param:ceph_osd_rack01_hostname}{{ ("%0" + osd_digits|string + "d")|format(osd_start + loop.index) }}
           domain: ${_param:cluster_domain}
           classes:
           - cluster.${_param:cluster_name}.ceph.osd
@@ -629,7 +639,7 @@ parameters:
           repeat:
             count: {{ cookiecutter.ceph_osd_count }}
             start: 1
-            digits: 3
+            digits: {{ osd_digits }}
             params:
               single_address:
                 value: ${_param:ceph_osd_rack01_single_subnet}.<<count>>
