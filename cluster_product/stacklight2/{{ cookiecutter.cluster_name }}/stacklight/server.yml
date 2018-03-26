@@ -53,6 +53,14 @@ classes:
 {%- if cookiecutter.use_default_network_scheme != 'False' %}
 - cluster.{{ cookiecutter.cluster_name }}.stacklight.networking.virtual
 {%- endif %}
+
+# Kqueen metrics support
+{%- if cookiecutter.kqueen_enabled == 'True' %}
+- system.prometheus.server.alert.etcd
+- system.prometheus.server.target.static.etcd
+- system.prometheus.server.target.static.kqueen
+{%- endif %}
+
 parameters:
   _param:
     {%- if cookiecutter.openstack_enabled == 'True' %}
@@ -82,6 +90,13 @@ parameters:
     cluster_vip_address: ${_param:stacklight_monitor_address}
     {%- if cookiecutter.stacklight_long_term_storage_type == "prometheus" %}
     prometheus_storage_retention: 120h
+    {%- endif %}
+    # Kqueen metrics support
+    {%- if cookiecutter.kqueen_enabled == 'True' %}
+    prometheus_etcd_host: ${_param:cicd_control_address}
+    prometheus_etcd_port: ${_param:haproxy_etcd_exposed_port}
+    prometheus_kqueen_api_host: ${_param:cicd_control_address}
+    prometheus_kqueen_api_port: ${_param:haproxy_kqueen_api_exposed_port}
     {%- endif %}
 
     keepalived_stacklight_monitor_vip_address: ${_param:stacklight_monitor_address}

@@ -53,6 +53,7 @@
 
     "oss_enabled"                               : "True",
     "oss_sfdc_support_enabled"                  : "True",
+    "kqueen_enabled"                            : "False",
 
     "ceph_enabled"                              : "False",
     "alertmanager_docker_image"                 : "docker-prod-local.artifactory.mirantis.com/openstack-docker/alertmanager:latest",
