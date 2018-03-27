@@ -69,8 +69,6 @@ parameters:
   _param:
     # Kqueen
     {%- if cookiecutter.kqueen_enabled == 'True' %}
-    docker_image_kqueen_api: {{ cookiecutter.docker_image_kqueen_api }}
-    docker_image_kqueen_ui: {{ cookiecutter.docker_image_kqueen_ui }}
     kqueen_api_bind_port: ${_param:haproxy_kqueen_api_bind_port}
     kqueen_api_debug: {{ cookiecutter.kqueen_api_debug }}
     kqueen_api_prometheus_whitelist: {{ cookiecutter.kqueen_api_prometheus_whitelist }}

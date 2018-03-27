@@ -51,11 +51,11 @@
     "aptly_api_docker_image"                    : "tcpcloud/aptly-api",
     "aptly_public_docker_image"                 : "tcpcloud/aptly-public",
     "aptly_publisher_docker_image"              : "tcpcloud/aptly-publisher",
-    "kqueen_enabled"                            : "False",
-
-    "kqueen_custom_mail_enabled"                : "True",
     "docker_image_kqueen_api"                   : "kqueen/api:v0.18",
     "docker_image_kqueen_ui"                    : "kqueen/ui:v0.8",
+
+    "kqueen_enabled"                            : "False",
+    "kqueen_custom_mail_enabled"                : "True",
     "kqueen_api_debug"                          : "False",
     "kqueen_api_prometheus_whitelist"           : "",
     "kqueen_ui_mail_host"                       : "mail",
