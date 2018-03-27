@@ -8,6 +8,13 @@ classes:
   - system.docker.swarm.stack.docker
   - system.docker.swarm.stack.gerrit
   - system.docker.swarm.stack.jenkins
+  {%- if cookiecutter.kqueen_enabled == 'True' %}
+  - system.docker.swarm.stack.kqueen
+  - system.docker.swarm.network.kqueen_backend
+  {%- if cookiecutter.kqueen_custom_mail_enabled == 'False' %}
+  - system.docker.swarm.stack.kqueen_mail
+  {%- endif %}
+  {%- endif %}
   {%- if cookiecutter.openldap_enabled == 'True' %}
   - system.docker.swarm.stack.ldap
   {%- endif %}
@@ -60,6 +67,33 @@ classes:
 
 parameters:
   _param:
+    # Kqueen
+    {%- if cookiecutter.kqueen_enabled == 'True' %}
+    docker_image_kqueen_api: {{ cookiecutter.docker_image_kqueen_api }}
+    docker_image_kqueen_ui: {{ cookiecutter.docker_image_kqueen_ui }}
+    kqueen_api_bind_port: ${_param:haproxy_kqueen_api_bind_port}
+    kqueen_api_debug: {{ cookiecutter.kqueen_api_debug }}
+    kqueen_api_prometheus_whitelist: {{ cookiecutter.kqueen_api_prometheus_whitelist }}
+    kqueen_ui_bind_port: ${_param:haproxy_kqueen_ui_bind_port}
+    kqueen_ui_debug: {{ cookiecutter.kqueen_ui_debug }}
+    kqueen_ui_enable_public_registration: {{ cookiecutter.kqueen_ui_enable_public_registration }}
+    kqueen_credentials:
+      kqueen_api_secret_key: {{ cookiecutter.kqueen_api_secret_key }}
+      kqueen_ui_secret_key: {{ cookiecutter.kqueen_ui_secret_key }}
+      kqueen_api_bootstrap_admin: {{ cookiecutter.kqueen_api_bootstrap_admin }}
+      kqueen_api_admin_username: {{ cookiecutter.kqueen_api_admin_username }}
+      kqueen_api_admin_password: {{ cookiecutter.kqueen_api_admin_password }}
+      kqueen_api_admin_organization: {{ cookiecutter.kqueen_api_admin_organization }}
+      kqueen_api_admin_namespace: {{ cookiecutter.kqueen_api_admin_namespace }}
+    {%- if cookiecutter.kqueen_custom_mail_enabled == 'False' %}
+    # Using default mail server with default port 10025
+    mail_server_hostname: mail
+    kqueen_ui_mail_host: ${_param:mail_server_hostname}
+    {%- else %}
+    kqueen_ui_mail_host: {{ cookiecutter.kqueen_ui_mail_host }}
+    kqueen_ui_mail_port: {{ cookiecutter.kqueen_ui_mail_port }}
+    {%- endif %}
+    {%- endif %}
     # Jenkins
     jenkins_slave_user: admin
     jenkins_client_user: admin
