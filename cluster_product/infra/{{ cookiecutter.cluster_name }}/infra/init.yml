@@ -100,10 +100,7 @@ parameters:
 
     cluster_domain: {{ cookiecutter.cluster_domain }}
     cluster_name: {{ cookiecutter.cluster_name }}
-    {%- if cookiecutter.openstack_enabled == 'True' %}
     cluster_public_host: {{ cookiecutter.public_host }}
-    {%- endif %}
-
     control_network_netmask: {{ cookiecutter.control_network_netmask }}
     tenant_network_netmask: {{ cookiecutter.tenant_network_netmask }}
 
