@@ -111,6 +111,7 @@ parameters:
     cluster_node03_address: ${_param:stacklight_monitor_node03_address}
     keepalived_vip_virtual_router_id: 280
     keepalived_stacklight_monitor_vip_interface: ${_param:keepalived_vip_interface}
+    alertmanager_external_url: {{ cookiecutter.public_host }}
     cluster_public_host: ${_param:cluster_vip_address}
     # Proxy
     cluster_ssl_certificate:

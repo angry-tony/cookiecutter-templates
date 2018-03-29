@@ -1,5 +1,6 @@
 {
     "cluster_name"                              : "deployment_name",
+    "public_host"                               : "${_param:openstack_proxy_address}",
     "stacklight_log_address"                    : "10.167.4.60",
     "stacklight_log_node01_address"             : "10.167.4.61",
     "stacklight_log_node02_address"             : "10.167.4.62",
