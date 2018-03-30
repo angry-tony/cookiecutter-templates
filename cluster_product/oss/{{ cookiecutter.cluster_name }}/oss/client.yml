@@ -260,12 +260,12 @@ parameters:
 
     {%- if (cookiecutter.stacklight_enabled == 'True') %}
     # Switch to generic ElasticSearch
-    haproxy_elasticsearch_bind_host: ${_param:stacklight_monitor_address}
+    haproxy_elasticsearch_bind_host: ${_param:stacklight_log_address}
     haproxy_elasticsearch_http_bind_port: 9200
-    elasticsearch_bind_host: ${_param:stacklight_monitor_address}
+    elasticsearch_bind_host: ${_param:stacklight_log_address}
     elasticsearch_binary_bind_port: 9300
     elasticsearch_cluster_name: elasticsearch
-    rundeck_cis_elasticsearch_url: http://${_param:stacklight_monitor_address}:9200
+    rundeck_cis_elasticsearch_url: http://${_param:stacklight_log_address}:9200
 
 
   devops_portal:
