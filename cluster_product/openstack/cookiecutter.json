@@ -26,7 +26,7 @@
 
     "cicd_enabled"                                   : "True",
     "stacklight_enabled"                             : "True",
-    "fluentd_enabled"                                : "False",
+    "fluentd_enabled"                                : "True",
     "ceph_enabled"                                   : "False",
     "ceph_hyper_converged"                           : "False",
     "openstack_nova_compute_reserved_host_memory_mb" : "20000",

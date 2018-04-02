@@ -65,6 +65,9 @@ parameters:
 
     apt_mk_version: {{ cookiecutter.mcp_version }}
 
+    # TODO: Revert openstack repo part after refactoring here: https://mirantis.jira.com/browse/PROD-17500
+    openstack_version: {{ cookiecutter.openstack_version }}
+
     {%- if cookiecutter.mcp_version != 'stable' and cookiecutter.mcp_version != 'testing' and cookiecutter.mcp_version != 'nightly' %}
     jenkins_pipelines_branch: '${_param:apt_mk_version}'
     {%- else %}
