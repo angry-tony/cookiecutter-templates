@@ -796,7 +796,20 @@ product_params_action:
       type: TEXT
       requires:
       - kqueen_enabled: True
-      help_text: whitelist configuration for external prometheus service, leave blank if prometheus is not installed
+    - initial: "ldap://ldap"
+      name: kqueen_api_ldap_uri
+      type: TEXT
+      requires:
+      - kqueen_enabled: True
+      - openldap_enabled: True
+      help_text: LDAP Uri for Kqueen ACL access
+    - initial: "local,ldap"
+      name: kqueen_api_auth_modules
+      type: TEXT
+      requires:
+      - kqueen_enabled: True
+      - openldap_enabled: True
+      help_text: List of enabled Kqueen Auth modules. Default is Local only
     - initial: "mail"
       name: kqueen_ui_mail_host
       type: TEXT
@@ -816,7 +829,19 @@ product_params_action:
       type: BOOL
       requires:
       - kqueen_enabled: True
-      help_text: Allow users to register in Kqueen manually from UI, otherwise admin-invitations only
+    - initial: False
+      name: kqueen_ui_ldap_auth_notify
+      type: BOOL
+      requires:
+      - kqueen_enabled: True
+      - openldap_enabled: True
+      help_text: Enable e-mail notifications for LDAP Auth in Kqueen. Required Mail Server
+    - initial: True
+      name: kqueen_ui_local_auth_notify
+      type: BOOL
+      requires:
+      - kqueen_enabled: True
+      help_text: Enable e-mail notifications for Local Auth in Kqueen. Required Mail Server
     - initial: "{{ 32|generate_password }}"
       name: kqueen_api_secret_key
       type: TEXT

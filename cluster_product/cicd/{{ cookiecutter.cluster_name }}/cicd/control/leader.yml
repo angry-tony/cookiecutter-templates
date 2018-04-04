@@ -75,6 +75,7 @@ parameters:
     kqueen_ui_bind_port: ${_param:haproxy_kqueen_ui_bind_port}
     kqueen_ui_debug: {{ cookiecutter.kqueen_ui_debug }}
     kqueen_ui_enable_public_registration: {{ cookiecutter.kqueen_ui_enable_public_registration }}
+    kqueen_ui_local_auth_notify: {{ cookiecutter.kqueen_ui_local_auth_notify }}
     kqueen_credentials:
       kqueen_api_secret_key: {{ cookiecutter.kqueen_api_secret_key }}
       kqueen_ui_secret_key: {{ cookiecutter.kqueen_ui_secret_key }}
@@ -83,6 +84,7 @@ parameters:
       kqueen_api_admin_password: {{ cookiecutter.kqueen_api_admin_password }}
       kqueen_api_admin_organization: {{ cookiecutter.kqueen_api_admin_organization }}
       kqueen_api_admin_namespace: {{ cookiecutter.kqueen_api_admin_namespace }}
+    {%- endif %}
     {%- if cookiecutter.kqueen_custom_mail_enabled == 'False' %}
     # Using default mail server with default port 10025
     mail_server_hostname: mail
@@ -91,6 +93,10 @@ parameters:
     kqueen_ui_mail_host: {{ cookiecutter.kqueen_ui_mail_host }}
     kqueen_ui_mail_port: {{ cookiecutter.kqueen_ui_mail_port }}
     {%- endif %}
+    {%- if cookiecutter.openldap_enabled == 'True' %}
+    kqueen_ui_ldap_auth_notify: {{ cookiecutter.kqueen_ui_ldap_auth_notify }}
+    kqueen_api_ldap_uri: "ldap://${_param:cluster_vip_address}"
+    kqueen_api_auth_modules: {{ cookiecutter.kqueen_api_auth_modules }}
     {%- endif %}
     # Jenkins
     jenkins_slave_user: admin
