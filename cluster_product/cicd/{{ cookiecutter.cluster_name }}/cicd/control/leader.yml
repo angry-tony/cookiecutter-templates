@@ -18,7 +18,9 @@ classes:
   {%- if cookiecutter.openldap_enabled == 'True' %}
   - system.docker.swarm.stack.ldap
   {%- endif %}
-
+  {%- if cookiecutter.get('vnf_onboarding_enabled', 'False') == 'True' and cookiecutter.stacklight_enabled == 'True' %}
+  - system.docker.swarm.stack.jenkins.slave_ssl
+  {%- endif %}
   # Jenkins
   - system.jenkins.master.config
   - system.jenkins.client
@@ -36,6 +38,7 @@ classes:
   {%- endif %}
   {%- if cookiecutter.get('vnf_onboarding_enabled', 'False') == 'True' and cookiecutter.stacklight_enabled == 'True'  %}
   - system.jenkins.client.job.vnf-onboarding
+  - system.jenkins.client.job.git-mirrors.downstream.vnf_ondoarding
   {%- endif %}
   # Security
   {%- if cookiecutter.openldap_enabled == 'True' %}

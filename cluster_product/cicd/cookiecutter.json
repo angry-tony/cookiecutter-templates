@@ -74,5 +74,6 @@
     "kqueen_api_admin_organization"             : "MirantisCloudPlatform",
     "kqueen_api_admin_namespace"                : "mcp",
 
-    "ceph_enabled"                              : "False"
+    "ceph_enabled"                              : "False",
+    "vnf_onboarding_enabled"                    : "False"
 }
