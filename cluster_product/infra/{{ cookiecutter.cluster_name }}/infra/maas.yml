@@ -1,4 +1,4 @@
-{%- if cookiecutter.deployment_type == 'physical' %}
+{%- if cookiecutter.deployment_type in ['physical'] %}
 classes:
 {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
 - system.linux.system.repo_local.mcp.apt_mirantis.maas
@@ -11,6 +11,9 @@ parameters:
   _param:
     maas_region_port: 5240
     maas_cluster_region_port: ${_param:maas_region_port}
+    {%- if cookiecutter.get('internal_proxy_enabled', 'False') == 'True' %}
+    dns_server01: {{ cookiecutter.upstream_dns_address }}
+    {%- endif %}
   maas:
     region:
       commissioning_scripts:

@@ -35,6 +35,8 @@
     "stacklight_telemetry_node02_hostname"      : "mtr02",
     "stacklight_telemetry_node03_hostname"      : "mtr03",
 
+    "internal_proxy_enabled"                    : "False",
+
     "mcp_version"                               : "stable",
     "openstack_version"                         : "ocata",
 

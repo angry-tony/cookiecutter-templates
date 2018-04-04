@@ -1,6 +1,6 @@
 # Infra config node default networking template
 #
-{%- if cookiecutter.deployment_type == 'physical' %}
+{%- if cookiecutter.deployment_type in ['physical'] %}
 parameters:
   linux:
     network:

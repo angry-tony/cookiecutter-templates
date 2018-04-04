@@ -32,7 +32,7 @@ classes:
 - system.salt.minion.ca.salt_master
 - system.salt.master.api
 - system.reclass.storage.salt
-{%- if cookiecutter.deployment_type == 'physical' and (cookiecutter.openstack_enabled == 'True' or (cookiecutter.kubernetes_enabled == 'True' and (cookiecutter.stacklight_enabled == 'True' or cookiecutter.cicd_enabled == 'True'))) %}
+{%- if cookiecutter.deployment_type in ['physical'] and (cookiecutter.openstack_enabled == 'True' or (cookiecutter.kubernetes_enabled == 'True' and (cookiecutter.stacklight_enabled == 'True' or cookiecutter.cicd_enabled == 'True'))) %}
 - system.reclass.storage.system.physical_control_cluster
 {%- endif %}
 {%- if (cookiecutter.kubernetes_enabled == 'True' and cookiecutter.kubernetes_network_opencontrail_enabled == 'True' ) or (cookiecutter.openstack_enabled == 'True' and cookiecutter.openstack_network_engine == 'opencontrail') %}
@@ -79,7 +79,7 @@ classes:
 - service.jenkins.client
 - system.jenkins.client.credential.salt
 - system.jenkins.client.job.deploy.openstack
-{%- if cookiecutter.deployment_type == 'physical' %}
+{%- if cookiecutter.deployment_type in ['physical'] %}
 - cluster.{{ cookiecutter.cluster_name }}.infra.maas
 {%- endif %}
 - cluster.{{ cookiecutter.cluster_name }}.infra
@@ -103,6 +103,12 @@ parameters:
     salt_api_password: {{ cookiecutter.salt_api_password }}
     jenkins_salt_api_url: "http://${_param:salt_master_host}:6969"
     jenkins_pipeline_library_url: git@cfg01:/home/repo/mcp-ci/pipeline-library
+    http_proxy_address: ""
+    http_proxy_port: ""
+    http_proxy: ""
+    {%- if cookiecutter.get('internal_proxy_enabled', 'False') == 'True' %}
+    ntp_strata_host1: ntp.cesnet.cz
+    {%- endif %}
   jenkins:
     client:
       lib:
@@ -157,6 +163,130 @@ parameters:
       data_source:
         engine: local
       node:
+        {%- if cookiecutter.deployment_type in ['physical'] and (cookiecutter.openstack_enabled == 'True' or (cookiecutter.kubernetes_enabled == 'True' and (cookiecutter.stacklight_enabled == 'True' or cookiecutter.cicd_enabled == 'True'))) %}
+        infra_kvm_node01:
+          classes:
+          - cluster.{{ cookiecutter.cluster_name }}.infra.glusterfs
+          params:
+            keepalived_vip_priority: 100
+            linux_system_codename: xenial
+        infra_kvm_node02:
+          classes:
+          - cluster.{{ cookiecutter.cluster_name }}.infra.glusterfs
+          params:
+            keepalived_vip_priority: 101
+            linux_system_codename: xenial
+        infra_kvm_node03:
+          classes:
+          - cluster.${_param:cluster_name}.infra.backup.server
+          - cluster.{{ cookiecutter.cluster_name }}.infra.glusterfs
+          params:
+            keepalived_vip_priority: 102
+            linux_system_codename: xenial
+        {%- if cookiecutter.get('physical_lab_setup', 'False') == 'True' %}
+        infra_kvm_node04:
+          name: ${_param:infra_kvm_node04_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.kvm
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            linux_system_codename: xenial
+            single_address: ${_param:infra_kvm_node04_address}
+            deploy_address: ${_param:infra_kvm_node04_deploy_address}
+        infra_kvm_node05:
+          name: ${_param:infra_kvm_node05_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.kvm
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            linux_system_codename: xenial
+            single_address: ${_param:infra_kvm_node05_address}
+            deploy_address: ${_param:infra_kvm_node05_deploy_address}
+        infra_kvm_node06:
+          name: ${_param:infra_kvm_node06_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.kvm
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            linux_system_codename: xenial
+            single_address: ${_param:infra_kvm_node06_address}
+            deploy_address: ${_param:infra_kvm_node06_deploy_address}
+        {%- if cookiecutter.stacklight_enabled == 'True' %}
+        infra_kvm_node07:
+          name: ${_param:infra_kvm_node07_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.kvm
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            linux_system_codename: xenial
+            single_address: ${_param:infra_kvm_node07_address}
+            deploy_address: ${_param:infra_kvm_node07_deploy_address}
+        infra_kvm_node08:
+          name: ${_param:infra_kvm_node08_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.kvm
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            linux_system_codename: xenial
+            single_address: ${_param:infra_kvm_node08_address}
+            deploy_address: ${_param:infra_kvm_node08_deploy_address}
+        infra_kvm_node09:
+          name: ${_param:infra_kvm_node09_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.kvm
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            linux_system_codename: xenial
+            single_address: ${_param:infra_kvm_node09_address}
+            deploy_address: ${_param:infra_kvm_node09_deploy_address}
+        {%- endif %}
+        {%- if cookiecutter.opencontrail_enabled == 'True' %}
+        infra_kvm_node10:
+          name: ${_param:infra_kvm_node10_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.kvm
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            linux_system_codename: xenial
+            single_address: ${_param:infra_kvm_node10_address}
+            deploy_address: ${_param:infra_kvm_node10_deploy_address}
+        infra_kvm_node11:
+          name: ${_param:infra_kvm_node11_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.kvm
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            linux_system_codename: xenial
+            single_address: ${_param:infra_kvm_node11_address}
+            deploy_address: ${_param:infra_kvm_node11_deploy_address}
+        infra_kvm_node12:
+          name: ${_param:infra_kvm_node12_hostname}
+          domain: ${_param:cluster_domain}
+          classes:
+          - cluster.${_param:cluster_name}.infra.kvm
+          params:
+            salt_master_host: ${_param:reclass_config_master}
+            linux_system_codename: xenial
+            single_address: ${_param:infra_kvm_node12_address}
+            deploy_address: ${_param:infra_kvm_node12_deploy_address}
+        {%- endif %}
+        {%- endif %}
+        {%- endif %}
+        {%- if cookiecutter.kubernetes_enabled == 'True' %}
+        kubernetes_control_node01:
+          classes:
+          params:
+            tenant_address: ${_param:kubernetes_control_node01_tenant_address}
+            deploy_address: ${_param:kubernetes_control_node01_deploy_address}
+        {%- endif %}
         {%- if cookiecutter.kubernetes_enabled == 'True' %}
         kubernetes_control_node01:
           {%- if cookiecutter.analytics_pipeline_enabled == 'True' %}
@@ -215,22 +345,6 @@ parameters:
             deploy_address: ${_param:opencontrail_analytics_node03_deploy_address}
         {%- endif %}
         {%- endif %}
-        {%- endif %}
-        {%- if cookiecutter.deployment_type == 'physical' and (cookiecutter.openstack_enabled == 'True' or (cookiecutter.kubernetes_enabled == 'True' and (cookiecutter.stacklight_enabled == 'True' or cookiecutter.cicd_enabled == 'True'))) %}
-        infra_kvm_node01:
-          params:
-            keepalived_vip_priority: 100
-            linux_system_codename: xenial
-        infra_kvm_node02:
-          params:
-            keepalived_vip_priority: 101
-            linux_system_codename: xenial
-        infra_kvm_node03:
-          classes:
-          - cluster.${_param:cluster_name}.infra.backup.server
-          params:
-            keepalived_vip_priority: 102
-            linux_system_codename: xenial
         {%- endif %}
         {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
         stacklight_log_node01:
@@ -552,7 +666,11 @@ parameters:
         {%- endif %}
           repeat:
             count: {{ cookiecutter.openstack_compute_count }}
+            {%- if cookiecutter.get('physical_lab_setup', 'False') == 'True' %}
+            start: 0
+            {%- else %}
             start: 1
+            {%- endif %}
             digits: {{ compute_digits }}
             params:
               single_address:
@@ -660,4 +778,5 @@ parameters:
       {%- endif %}
     {%- endif %}
   {%- endif %}
+
 

@@ -1,10 +1,9 @@
-{%- if cookiecutter.deployment_type == 'physical' and (cookiecutter.openstack_enabled == 'True' or (cookiecutter.kubernetes_enabled == 'True' and (cookiecutter.stacklight_enabled == 'True' or cookiecutter.cicd_enabled == 'True'))) %}
+{%- if cookiecutter.deployment_type in ['physical'] and (cookiecutter.openstack_enabled == 'True' or (cookiecutter.kubernetes_enabled == 'True' and (cookiecutter.stacklight_enabled == 'True' or cookiecutter.cicd_enabled == 'True'))) %}
 classes:
 {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
 - system.linux.system.repo_local.mcp.extra
 - system.linux.system.repo_local.mcp.apt_mirantis.openstack
 - system.linux.system.repo_local.mcp.apt_mirantis.ubuntu
-- system.linux.system.repo_local.mcp.apt_mirantis.glusterfs
 - system.linux.system.repo_local.mcp.apt_mirantis.ceph
 - system.linux.system.repo_local.mcp.apt_mirantis.saltstack
 {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
@@ -14,15 +13,11 @@ classes:
 - system.linux.system.repo.mcp.extra
 - system.linux.system.repo.mcp.apt_mirantis.openstack
 - system.linux.system.repo.mcp.apt_mirantis.ubuntu
-- system.linux.system.repo.mcp.apt_mirantis.glusterfs
 - system.linux.system.repo.mcp.apt_mirantis.saltstack
 {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
 - system.linux.system.repo.mcp.apt_mirantis.sensu
 {%- endif %}
 {%- endif %}
-- service.keepalived.cluster.single
-- system.glusterfs.server.cluster
-- system.glusterfs.server.volume.salt_pki
 - system.salt.control.virt
 {%- if cookiecutter.opencontrail_enabled == 'True' %}
 - system.salt.control.cluster.opencontrail_analytics_cluster
@@ -30,18 +25,15 @@ classes:
 - system.salt.control.sizes.opencontrail
 {%- endif %}
 {%- if cookiecutter.openstack_enabled == 'True' %}
-- system.glusterfs.server.volume.glance
-- system.glusterfs.server.volume.keystone
-- system.glusterfs.server.volume.backup
 - system.salt.control.cluster.openstack_control_cluster
 - system.salt.control.cluster.openstack_proxy_cluster
 - system.salt.control.cluster.openstack_database_cluster
 - system.salt.control.cluster.openstack_message_queue_cluster
+#- system.salt.control.cluster.openstack_upgrade_single
 - system.salt.control.sizes.openstack
 {%- if cookiecutter.bmk_enabled == 'True' %}
 - system.salt.control.cluster.openstack_benchmark_single
 {%- endif %}
-#- system.salt.control.cluster.openstack_upgrade_single
 {%- endif %}
 {%- if cookiecutter.stacklight_enabled == 'True' %}
 - system.salt.control.cluster.stacklight_server_cluster
@@ -51,7 +43,6 @@ classes:
 {%- endif %}
 {%- if cookiecutter.cicd_enabled == 'True' %}
 - system.salt.control.cluster.cicd_control_cluster
-- cluster.{{ cookiecutter.cluster_name }}.cicd.gluster
 - system.salt.control.sizes.cicd
 {%- endif %}
 {%- if cookiecutter.get('ceph_enabled', 'False') == 'True' %}
@@ -69,11 +60,53 @@ parameters:
     cluster_node01_address: ${_param:infra_kvm_node01_address}
     cluster_node02_address: ${_param:infra_kvm_node02_address}
     cluster_node03_address: ${_param:infra_kvm_node03_address}
-    keepalived_vip_interface: br-ctl
-    keepalived_vip_virtual_router_id: 69
     deploy_nic: {{ cookiecutter.infra_deploy_nic }}
     primary_first_nic: {{ cookiecutter.infra_primary_first_nic }}
     primary_second_nic: {{ cookiecutter.infra_primary_second_nic }}
+    {%- if cookiecutter.openstack_cluster_size == 'minimal' %}
+    {%- if cookiecutter.openstack_enabled == 'True' %}
+    salt_control_size_cpu_openstack_control: 8
+    salt_control_size_ram_openstack_control: 12288
+    salt_control_size_disk_profile_openstack_control: small
+    salt_control_size_net_profile_openstack_control: default
+    salt_control_size_cpu_openstack_database: 6
+    salt_control_size_ram_openstack_database: 8192
+    salt_control_size_disk_profile_openstack_database: medium
+    salt_control_size_net_profile_openstack_database: default
+    salt_control_size_cpu_openstack_message_queue: 6
+    salt_control_size_ram_openstack_message_queue: 8192
+    salt_control_size_disk_profile_openstack_message_queue: small
+    salt_control_size_net_profile_openstack_message_queue: default
+    salt_control_size_cpu_openstack_proxy: 4
+    salt_control_size_ram_openstack_proxy: 6144
+    salt_control_size_disk_profile_openstack_proxy: small
+    salt_control_size_net_profile_openstack_proxy: default
+    salt_control_size_cpu_openstack_upgrade: 8
+    salt_control_size_ram_openstack_upgrade: 12288
+    salt_control_size_disk_profile_openstack_upgrade: small
+    salt_control_size_net_profile_openstack_upgrade: default
+    {%- if cookiecutter.cicd_enabled == 'True' %}
+    salt_control_size_cpu_cicd_control: 8
+    salt_control_size_ram_cicd_control: 8192
+    salt_control_size_disk_profile_cicd_control: small
+    salt_control_size_net_profile_cicd_control: default
+    {%- endif %}
+    {%- if cookiecutter.stacklight_enabled == 'True' %}
+    salt_control_size_cpu_stacklight_log: 4
+    salt_control_size_ram_stacklight_log: 4096
+    salt_control_size_disk_profile_stacklight_log: medium
+    salt_control_size_net_profile_stacklight_log: default
+    salt_control_size_cpu_stacklight_server: 4
+    salt_control_size_ram_stacklight_server: 6144
+    salt_control_size_disk_profile_stacklight_server: small
+    salt_control_size_net_profile_stacklight_server: default
+    salt_control_size_cpu_stacklight_telemetry: 4
+    salt_control_size_ram_stacklight_telemetry: 4096
+    salt_control_size_disk_profile_stacklight_telemetry: medium
+    salt_control_size_net_profile_stacklight_telemetry: default
+    {%- endif %}
+    {%- endif %}
+    {%- endif %}
     {%- if cookiecutter.openstack_cluster_size == 'compact' %}
     {%- if cookiecutter.openstack_enabled == 'True' %}
     salt_control_size_cpu_openstack_control: 8
@@ -264,7 +297,179 @@ parameters:
     salt_control_size_net_profile_ceph_rgw: default
     {%- endif %}
     {%- endif %}
-  {%- if cookiecutter.openstack_enabled == 'True' %}
+  {%- if cookiecutter.openstack_enabled == 'True' and cookiecutter.get('physical_lab_setup', 'False') == 'True' %}
+  salt:
+    control:
+      cluster:
+        internal:
+          node:
+            {%- if cookiecutter.bmk_enabled == 'True' %}
+            bmk01:
+              image: ${_param:salt_control_xenial_image}
+              mac:
+                eth1: ac:de:48:aa:aa:01
+                eth0: ac:de:48:aa:ab:01
+            {%- endif %}
+            ctl01:
+              image: ${_param:salt_control_xenial_image}
+              mac:
+                eth1: ac:de:48:aa:aa:02
+                eth0: ac:de:48:aa:ab:02
+            ctl02:
+              image: ${_param:salt_control_xenial_image}
+              mac:
+                eth1: ac:de:48:aa:aa:03
+                eth0: ac:de:48:aa:ab:03
+            ctl03:
+              image: ${_param:salt_control_xenial_image}
+              mac:
+                eth1: ac:de:48:aa:aa:04
+                eth0: ac:de:48:aa:ab:04
+            dbs01:
+              image: ${_param:salt_control_xenial_image}
+              mac:
+                eth1: ac:de:48:aa:aa:05
+                eth0: ac:de:48:aa:ab:05
+            dbs02:
+              image: ${_param:salt_control_xenial_image}
+              mac:
+                eth1: ac:de:48:aa:aa:06
+                eth0: ac:de:48:aa:ab:06
+            dbs03:
+              image: ${_param:salt_control_xenial_image}
+              mac:
+                eth1: ac:de:48:aa:aa:07
+                eth0: ac:de:48:aa:ab:07
+            msg01:
+              image: ${_param:salt_control_xenial_image}
+              provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
+              mac:
+                eth1: ac:de:48:aa:aa:08
+                eth0: ac:de:48:aa:ab:08
+            msg02:
+              image: ${_param:salt_control_xenial_image}
+              provider: ${_param:infra_kvm_node05_hostname}.${_param:cluster_domain}
+              mac:
+                eth1: ac:de:48:aa:aa:09
+                eth0: ac:de:48:aa:ab:09
+            msg03:
+              image: ${_param:salt_control_xenial_image}
+              provider: ${_param:infra_kvm_node06_hostname}.${_param:cluster_domain}
+              mac:
+                eth1: ac:de:48:aa:aa:0a
+                eth0: ac:de:48:aa:ab:0a
+            prx01:
+              image: ${_param:salt_control_xenial_image}
+              mac:
+                eth1: ac:de:48:aa:aa:0b
+                eth0: ac:de:48:aa:ab:0b
+            prx02:
+              image: ${_param:salt_control_xenial_image}
+              mac:
+                eth1: ac:de:48:aa:aa:0c
+                eth0: ac:de:48:aa:ab:0c
+            {%- if cookiecutter.cicd_enabled == 'True' %}
+            cid01:
+              provider: ${_param:infra_kvm_node04_hostname}.${_param:cluster_domain}
+              mac:
+                eth1: ac:de:48:aa:aa:0d
+                eth0: ac:de:48:aa:ab:0d
+            cid02:
+              provider: ${_param:infra_kvm_node05_hostname}.${_param:cluster_domain}
+              mac:
+                eth1: ac:de:48:aa:aa:0e
+                eth0: ac:de:48:aa:ab:0e
+            cid03:
+              provider: ${_param:infra_kvm_node06_hostname}.${_param:cluster_domain}
+              mac:
+                eth1: ac:de:48:aa:aa:0f
+                eth0: ac:de:48:aa:ab:0f
+            {%- endif %}
+            {%- if cookiecutter.stacklight_enabled == 'True' %}
+            mon01:
+              provider: ${_param:infra_kvm_node07_hostname}.${_param:cluster_domain}
+              mac:
+                eth1: ac:de:48:aa:aa:10
+                eth0: ac:de:48:aa:ab:10
+            mon02:
+              provider: ${_param:infra_kvm_node08_hostname}.${_param:cluster_domain}
+              mac:
+                eth1: ac:de:48:aa:aa:11
+                eth0: ac:de:48:aa:ab:11
+            mon03:
+              provider: ${_param:infra_kvm_node09_hostname}.${_param:cluster_domain}
+              mac:
+                eth1: ac:de:48:aa:aa:12
+                eth0: ac:de:48:aa:ab:12
+            mtr01:
+              provider: ${_param:infra_kvm_node07_hostname}.${_param:cluster_domain}
+              mac:
+                eth1: ac:de:48:aa:aa:13
+                eth0: ac:de:48:aa:ab:13
+            mtr02:
+              provider: ${_param:infra_kvm_node08_hostname}.${_param:cluster_domain}
+              mac:
+                eth1: ac:de:48:aa:aa:14
+                eth0: ac:de:48:aa:ab:14
+            mtr03:
+              provider: ${_param:infra_kvm_node09_hostname}.${_param:cluster_domain}
+              mac:
+                eth1: ac:de:48:aa:aa:15
+                eth0: ac:de:48:aa:ab:15
+            log01:
+              provider: ${_param:infra_kvm_node07_hostname}.${_param:cluster_domain}
+              mac:
+                eth1: ac:de:48:aa:aa:16
+                eth0: ac:de:48:aa:ab:16
+            log02:
+              provider: ${_param:infra_kvm_node08_hostname}.${_param:cluster_domain}
+              mac:
+                eth1: ac:de:48:aa:aa:17
+                eth0: ac:de:48:aa:ab:17
+            log03:
+              provider: ${_param:infra_kvm_node09_hostname}.${_param:cluster_domain}
+              mac:
+                eth1: ac:de:48:aa:aa:18
+                eth0: ac:de:48:aa:ab:18
+            {%- endif %}
+            {%- if cookiecutter.opencontrail_enabled == 'True' %}
+            ntw01:
+              provider: ${_param:infra_kvm_node010_hostname}.${_param:cluster_domain}
+              mac:
+                eth1: ac:de:48:aa:aa:20
+                eth0: ac:de:48:aa:ab:20
+            ntw02:
+              provider: ${_param:infra_kvm_node11_hostname}.${_param:cluster_domain}
+              mac:
+                eth1: ac:de:48:aa:aa:21
+                eth0: ac:de:48:aa:ab:21
+            ntw03:
+              provider: ${_param:infra_kvm_node12_hostname}.${_param:cluster_domain}
+              mac:
+                eth1: ac:de:48:aa:aa:22
+                eth0: ac:de:48:aa:ab:22
+            nal01:
+              provider: ${_param:infra_kvm_node10_hostname}.${_param:cluster_domain}
+              mac:
+                eth1: ac:de:48:aa:aa:23
+                eth0: ac:de:48:aa:ab:23
+            nal02:
+              provider: ${_param:infra_kvm_node11_hostname}.${_param:cluster_domain}
+              mac:
+                eth1: ac:de:48:aa:aa:24
+                eth0: ac:de:48:aa:ab:24
+            nal03:
+              provider: ${_param:infra_kvm_node12_hostname}.${_param:cluster_domain}
+              mac:
+                eth1: ac:de:48:aa:aa:25
+                eth0: ac:de:48:aa:ab:25
+            {%- endif %}
+#            upg01:
+#              provider: ${_param:infra_kvm_node03_hostname}.${_param:cluster_domain}
+#              mac:
+#                eth1: ac:de:48:aa:aa:19
+#                eth0: ac:de:48:aa:ab:19
+  {%- elif cookiecutter.openstack_enabled == 'True' and cookiecutter.deployment_type == 'physical' %}
   salt:
     control:
       cluster:

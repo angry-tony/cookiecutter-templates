@@ -4,7 +4,7 @@ parameters:
   linux:
     network:
       interface:
-    {%- if cookiecutter.deployment_type == 'physical' %}
+    {%- if cookiecutter.deployment_type in ['physical'] %}
       {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
         {{ cookiecutter.compute_deploy_nic }}: ${_param:linux_deploy_interface}
       {%- endif %}

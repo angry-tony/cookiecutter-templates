@@ -58,6 +58,7 @@ classes:
   {%- endif %}
   - system.haproxy.proxy.listen.mysql
   - system.haproxy.proxy.listen.stats
+  - cluster.{{ cookiecutter.cluster_name }}.infra
 parameters:
   _param:
     apt_mk_version: {{ cookiecutter.mcp_version }}
@@ -91,7 +92,7 @@ parameters:
     gerrit_pipeline_library_repo: http://${_param:aptly_server_hostname}:8088/pipeline-library.git
     gerrit_mk_pipelines_repo: http://${_param:aptly_server_hostname}:8088/mk-pipelines.git
     {%- endif %}
-    {%- if cookiecutter.upstream_proxy_enabled == 'True' %}
+    {%- if cookiecutter.upstream_proxy_enabled == 'True' and cookiecutter.get('internal_proxy_enabled', 'False') == 'False' %}
     http_proxy: 'http://${_param:infra_config_deploy_address}:8000'
     {%- endif %}
 
@@ -114,6 +115,21 @@ parameters:
       insecure_registries:
         - ${_param:aptly_server_hostname}:5000
   {%- endif %}
+  {%- if cookiecutter.get('internal_proxy_enabled', 'False') == 'True' and cookiecutter.get('local_docker_images', 'False') == 'True' %}
+      proxy:
+        enabled: true
+        http: ${_param:http_proxy}
+        https: ${_param:http_proxy}
+        no_proxy: ${linux:system:proxy:noproxy}
+  {%- elif cookiecutter.get('internal_proxy_enabled', 'False') == 'True' %}
+  docker:
+    host:
+      proxy:
+        enabled: true
+        http: ${_param:http_proxy}
+        https: ${_param:http_proxy}
+        no_proxy: ${linux:system:proxy:noproxy}
+  {%- endif %}
   linux:
     system:
       package:
@@ -123,4 +139,13 @@ parameters:
          /var/lib/jenkins/:
             user: ${_param:jenkins_slave_user_id}
             group: ${_param:jenkins_slave_group_id}
+    {%- if cookiecutter.get('internal_proxy_enabled', 'False') == 'True' %}
+      proxy:
+        noproxy:
+          - ${_param:cicd_control_node01_address}
+          - ${_param:cicd_control_node02_address}
+          - ${_param:cicd_control_node03_address}
+          - ${_param:cicd_control_address}
+    {%- endif %}
+
 

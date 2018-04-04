@@ -124,3 +124,34 @@ parameters:
       insecure_registries:
         - ${_param:aptly_server_hostname}:5000
   {%- endif %}
+  {%- if cookiecutter.get('internal_proxy_enabled', 'False') == 'True' and cookiecutter.get('local_docker_images', 'False') == 'True' %}
+      proxy:
+        enabled: true
+        http: ${_param:http_proxy}
+        https: ${_param:http_proxy}
+        no_proxy: ${linux:system:proxy:noproxy}
+  linux:
+    system:
+      proxy:
+        noproxy:
+          - ${_param:stacklight_monitor_address}
+          - ${_param:stacklight_monitor_node01_address}
+          - ${_param:stacklight_monitor_node02_address}
+          - ${_param:stacklight_monitor_node03_address}
+  {%- elif cookiecutter.get('internal_proxy_enabled', 'False') == 'True' %}
+  docker:
+    host:
+      proxy:
+        enabled: true
+        http: ${_param:http_proxy}
+        https: ${_param:http_proxy}
+        no_proxy: ${linux:system:proxy:noproxy}
+  linux:
+    system:
+      proxy:
+        noproxy:
+          - ${_param:stacklight_monitor_address}
+          - ${_param:stacklight_monitor_node01_address}
+          - ${_param:stacklight_monitor_node02_address}
+          - ${_param:stacklight_monitor_node03_address}
+  {%- endif %}

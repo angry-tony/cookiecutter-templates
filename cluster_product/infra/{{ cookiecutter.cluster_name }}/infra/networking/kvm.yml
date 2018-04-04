@@ -10,6 +10,15 @@ parameters:
           type: eth
           proto: manual
           name: ${_param:deploy_nic}
+        {%- if cookiecutter.get('physical_lab_setup', 'False') == 'True' %}
+          ipflush_onchange: True
+        eth1:
+          enabled: true
+          type: eth
+          proto: manual
+          name: ${_param:primary_first_nic}
+          ipflush_onchange: True
+        {%- else %}
         eth1:
           enabled: true
           type: slave
@@ -22,6 +31,7 @@ parameters:
           proto: manual
           name: ${_param:primary_second_nic}
           master: bond0
+        {%- endif %}
         br-mgm:
           enabled: true
           proto: static
@@ -34,6 +44,7 @@ parameters:
           - ${_param:dns_server02}
           use_interfaces:
           - ${_param:deploy_nic}
+        {%- if cookiecutter.get('physical_lab_setup', 'False') == 'False' %}
         bond0:
           enabled: true
           proto: manual
@@ -50,6 +61,7 @@ parameters:
           type: vlan
           use_interfaces:
           - bond0
+        {%- endif %}
         br-ctl:
           enabled: true
           type: bridge
@@ -57,4 +69,8 @@ parameters:
           address: ${_param:single_address}
           netmask: ${_param:control_network_netmask}
           use_interfaces:
+          {%- if cookiecutter.get('physical_lab_setup', 'False') == 'False' %}
           - bond0.${_param:control_vlan}
+          {%- else %}
+          - ${_param:primary_first_nic}
+          {%- endif %}
