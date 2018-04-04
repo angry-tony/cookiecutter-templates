@@ -121,9 +121,6 @@ parameters:
     # MaaS parameters
     infra_maas_node01_deploy_address: ${_param:infra_config_deploy_address}
     infra_maas_node01_hostname: ${_param:infra_config_hostname}
-    maas_admin_username: mirantis
-    maas_admin_password: ${_param:maas_admin_password_generated}
-    maas_db_password: ${_param:maas_db_password_generated}
 
     {%- if cookiecutter.openstack_enabled == 'True' or (cookiecutter.kubernetes_enabled == 'True' and (cookiecutter.stacklight_enabled == 'True' or cookiecutter.cicd_enabled == 'True')) %}
     infra_kvm_address: {{ cookiecutter.infra_kvm_vip_address }}
