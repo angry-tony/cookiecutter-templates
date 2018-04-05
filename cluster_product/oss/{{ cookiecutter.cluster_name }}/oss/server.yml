@@ -63,7 +63,9 @@ classes:
 - system.haproxy.proxy.listen.oss.janitor_monkey
 - system.haproxy.proxy.listen.oss.mongodb
 {%- endif %}
+{%- if cookiecutter.stacklight_enabled == 'False' %}
 - cluster.{{ cookiecutter.cluster_name }}.infra
+{%- endif %}
 
 # Rundeck
 - system.rundeck.client.runbook

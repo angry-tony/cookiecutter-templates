@@ -52,6 +52,9 @@ classes:
 {%- endif %}
 - system.reclass.storage.system.openstack_control_upgrade_single
 {%- endif %}
+{%- if cookiecutter.oss_enabled == 'True' %}
+- system.reclass.storage.system.oss_cluster
+{%- endif %}
 {%- if cookiecutter.stacklight_enabled == 'True' %}
 - system.reclass.storage.system.stacklight_log_cluster
 - system.reclass.storage.system.stacklight_telemetry_cluster
@@ -61,9 +64,6 @@ classes:
 {%- if cookiecutter.stacklight_version == '2' %}
 - system.reclass.storage.system.stacklightv2_server_cluster
 {%- endif %}
-{%- endif %}
-{%- if cookiecutter.oss_enabled == 'True' %}
-- system.reclass.storage.system.oss_cluster
 {%- endif %}
 {%- if cookiecutter.cicd_enabled == 'True' %}
 - system.reclass.storage.system.cicd_control_cluster
