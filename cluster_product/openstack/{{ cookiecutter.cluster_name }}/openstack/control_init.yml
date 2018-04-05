@@ -19,9 +19,17 @@ classes:
 {%- endif %}
 {%- if cookiecutter.get('ceph_enabled', 'False') == 'True'  %}
 - system.keystone.client.service.radosgw-swift
+{%- endif %}
 parameters:
+{%- if cookiecutter.get('ceph_enabled', 'False') == 'True'  %}
   _param:
     radosgw_swift_cluster_port: 8080
     radosgw_service_host: ${_param:ceph_rgw_address}
     keystone_swift_password: ${_param:keystone_swift_password_generated}
 {%- endif %}
+  #TODO Need to research, implement and test moving keystone fernet repository from GlusterFS and use secured rsync to ship rotated keys across ctl nodes. PROD-18539
+  linux:
+    system:
+      job:
+        keystone_job_rotate:
+          enabled: False
