@@ -1,6 +1,6 @@
 # Infra config node default networking template
 #
-{%- if cookiecutter.kubernetes_enabled != 'True' %}
+{%- if cookiecutter.deployment_type == 'physical' %}
 parameters:
   linux:
     network:
