@@ -2,7 +2,7 @@ parameters:
   _param:
     openstack_region: RegionOne
     admin_email: root@localhost
-    openstack_version: {{ cookiecutter.openstack_version }}
+
 {%- if cookiecutter.openstack_network_engine == 'ovs' %}
     ##Neutron osv/nodvr + dpdk
     neutron_global_physnet_mtu: 1500
