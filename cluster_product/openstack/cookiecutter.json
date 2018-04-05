@@ -1,5 +1,6 @@
 {
     "cluster_name"                                   : "deployment_name",
+    "deployment_type"                                : "physical",
 
     "mcp_version"                                    : "stable",
 

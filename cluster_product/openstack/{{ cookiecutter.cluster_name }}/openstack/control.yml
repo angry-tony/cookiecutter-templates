@@ -63,6 +63,11 @@ classes:
 - system.heat.server.notification.messagingv2
 - system.haproxy.proxy.listen.openstack.nova-placement
 - system.haproxy.proxy.listen.openstack.glare
+{%- if cookiecutter.deployment_type == 'heat' %}
+- system.glusterfs.server.volume.glance
+- system.glusterfs.server.volume.keystone
+- system.glusterfs.server.cluster
+{%- endif %}
 - system.glusterfs.client.cluster
 - system.glusterfs.client.volume.glance
 - system.glusterfs.client.volume.keystone
