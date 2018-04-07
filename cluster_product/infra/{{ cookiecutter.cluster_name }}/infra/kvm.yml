@@ -264,6 +264,7 @@ parameters:
     salt_control_size_net_profile_ceph_rgw: default
     {%- endif %}
     {%- endif %}
+  {%- if cookiecutter.openstack_enabled == 'True' %}
   salt:
     control:
       cluster:
@@ -295,6 +296,7 @@ parameters:
               image: ${_param:salt_control_xenial_image}
             prx02:
               image: ${_param:salt_control_xenial_image}
+  {%- endif %}
   virt:
     nic:
       default:
