@@ -9,6 +9,7 @@ parameters:
     heka_aggregator_host: ${_param:stacklight_monitor_address}
     grafana_user: admin
     grafana_password: ${_param:grafana_password_generated}
+    grafana_admin_password: ${_param:grafana_password_generated}
     cluster_elasticsearch_port: 9200
     cluster_kibana_port: 5601
     cluster_grafana_port: 3000
@@ -58,7 +59,6 @@ parameters:
     stacklight_monitor_node02_deploy_address: {{ cookiecutter.stacklight_monitor_node02_deploy_address }}
     stacklight_monitor_node03_deploy_address: {{ cookiecutter.stacklight_monitor_node03_deploy_address }}
     {%- endif %}
-    grafana_admin_password: ${_param:grafana_admin_password_generated}
     grafana_database_type: mysql
     {%- if cookiecutter.openstack_enabled == 'False' %}
     grafana_database_host: ${_param:stacklight_telemetry_address}
