@@ -84,9 +84,7 @@ parameters:
     # CI/CD service databases
     mysql_admin_password: ${_param:cicd_mysql_admin_password_generated}
     mysql_gerrit_password: ${_param:cicd_mysql_gerrit_password_generated}
-    {%- if cookiecutter.openstack_enabled == 'True' %}
     nginx_proxy_gerrit_server_site_host: ${_param:cluster_public_host}
-    {%- endif %}
     nginx_proxy_gerrit_server_site_port: 8070
     gerrit_http_listen_url: proxy-https://*:8080/
     {%- if cookiecutter.get('local_pipelines', 'False') == 'True' %}
