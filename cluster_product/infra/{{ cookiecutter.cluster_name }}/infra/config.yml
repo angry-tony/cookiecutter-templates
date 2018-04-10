@@ -250,6 +250,9 @@ parameters:
           classes:
           - system.grafana.client.single
           - system.kibana.client.single
+          {%- if cookiecutter.get('vnf_onboarding_enabled', 'False') == 'True' %}
+          - system.kibana.client.vnf-onboarding
+          {%- endif %}
           {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
           params:
             deploy_address: ${_param:stacklight_monitor_node01_deploy_address}
@@ -313,6 +316,9 @@ parameters:
           classes:
           - system.elasticsearch.client.single
           - system.kibana.client.single
+          {%- if cookiecutter.get('vnf_onboarding_enabled', 'False') == 'True' %}
+          - system.kibana.client.vnf-onboarding
+          {%- endif %}
           {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
           params:
             deploy_address: ${_param:stacklight_log_node01_deploy_address}
