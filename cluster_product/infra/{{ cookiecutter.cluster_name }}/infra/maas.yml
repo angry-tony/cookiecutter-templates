@@ -17,6 +17,12 @@ parameters:
         00-maas-05-simplify-network-interfaces: /etc/maas/files/commisioning_scripts/00-maas-05-simplify-network-interfaces
       bind:
         host: ${_param:deploy_address}:${_param:maas_region_port}
+{%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
+      boot_sources:
+        local_image_mirror:
+          url: http://${_param:aptly_server_deploy_address}/maas/images/ephemeral-v3/daily
+          keyring_file: /usr/share/keyrings/ubuntu-cloudimage-keyring.gpg
+{%- endif %}
 {%- if cookiecutter.upstream_proxy_enabled == 'True' %}
       upstream_proxy:
         address: {{ cookiecutter.upstream_proxy_address }}
