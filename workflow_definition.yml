@@ -807,6 +807,7 @@ product_params_action:
       type: TEXT
       requires:
       - kqueen_enabled: True
+      help_text: whitelist configuration for external prometheus service, leave blank if prometheus is not installed
     - initial: "ldap://ldap"
       name: kqueen_api_ldap_uri
       type: TEXT
@@ -814,6 +815,20 @@ product_params_action:
       - kqueen_enabled: True
       - openldap_enabled: True
       help_text: LDAP Uri for Kqueen ACL access
+    - initial: "cn=admin,dc=example,dc=org"
+      name: kqueen_api_ldap_dn
+      type: TEXT
+      requires:
+      - kqueen_enabled: True
+      - openldap_enabled: True
+      help_text: LDAP DN for Kqueen Read-only access
+    - initial: "{{ 16|generate_password }}"
+      name: kqueen_api_ldap_password
+      type: TEXT
+      requires:
+      - kqueen_enabled: True
+      - openldap_enabled: True
+      help_text: LDAP DN password for Kqueen Read-only access
     - initial: "local,ldap"
       name: kqueen_api_auth_modules
       type: TEXT
@@ -840,6 +855,7 @@ product_params_action:
       type: BOOL
       requires:
       - kqueen_enabled: True
+      help_text: Allow users to register in Kqueen manually from UI, otherwise admin-invitations only
     - initial: False
       name: kqueen_ui_ldap_auth_notify
       type: BOOL

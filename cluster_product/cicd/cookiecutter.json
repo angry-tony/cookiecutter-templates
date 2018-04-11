@@ -59,6 +59,8 @@
     "kqueen_api_debug"                          : "False",
     "kqueen_api_prometheus_whitelist"           : "",
     "kqueen_api_ldap_uri"                       : "ldap://ldap",
+    "kqueen_api_ldap_dn"                        : "cn=admin,dc=cicd-lab-dev,dc=local",
+    "kqueen_api_ldap_password"                  : "password",
     "kqueen_api_auth_modules"                   : "local,ldap",
     "kqueen_ui_mail_host"                       : "mail",
     "kqueen_ui_mail_port"                       : "10025",
