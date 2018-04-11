@@ -63,6 +63,11 @@ general_params_action:
         help_text: "branch/tag/refspec of reclass-system repo to checkout. Format: master or 2018.1 or refs/changes/xx/xxxxx/x"
         initial: ''
         required: False
+      - name: "mcp_common_scripts_branch"
+        type: "TEXT"
+        help_text: "branch/tag of mcp-common-scripts repo to checkout. Format: master or 2018.1 or"
+        initial: ''
+        required: False
       - name: "cookiecutter_template_credentials"
         type: "TEXT"
         initial: "gerrit"
