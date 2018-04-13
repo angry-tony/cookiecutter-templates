@@ -36,6 +36,7 @@
     "stacklight_telemetry_node03_hostname"      : "mtr03",
 
     "mcp_version"                               : "stable",
+    "openstack_version"                         : "ocata",
 
     "local_repositories"                        : "False",
     "local_docker_images"                       : "False",

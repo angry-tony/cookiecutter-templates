@@ -13,7 +13,7 @@ classes:
 {%- endif %}
 - system.keystone.client.service.cinder3
 - system.keystone.client.service.keystone
-{%- if cookiecutter.stacklight_enabled == 'True' %}
+{%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.openstack_version in ['mitaka', 'newton', 'ocata'] %}
 - system.keystone.client.service.aodh
 - system.keystone.client.service.ceilometer
 {%- endif %}

@@ -19,7 +19,7 @@ classes:
 - system.haproxy.proxy.listen.stacklight.influxdb_relay
 - system.influxdb.relay.cluster
 - system.influxdb.server.single
-{%- if cookiecutter.openstack_enabled == 'True' %}
+{%- if cookiecutter.openstack_enabled == 'True' and cookiecutter.openstack_version in ['mitaka', 'newton', 'ocata'] %}
 - system.influxdb.database.ceilometer
 {%- endif %}
 {%- if cookiecutter.stacklight_long_term_storage_type == "influxdb" %}

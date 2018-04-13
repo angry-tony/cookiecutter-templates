@@ -17,7 +17,9 @@ classes:
 - system.nova.compute.cluster
 - system.nova.compute.notification.messagingv2
 {%- if cookiecutter.stacklight_enabled == 'True' %}
+{%- if cookiecutter.openstack_version in ['mitaka', 'newton', 'ocata'] %}
 - system.ceilometer.agent.cluster
+{%- endif %}
 {%- if cookiecutter.stacklight_version == '2' %}
 - system.prometheus.exporters.libvirt
 {%- endif %}

@@ -71,7 +71,7 @@ classes:
 - system.glusterfs.client.cluster
 - system.glusterfs.client.volume.glance
 - system.glusterfs.client.volume.keystone
-{%- if cookiecutter.stacklight_enabled == 'True' %}
+{%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.openstack_version in ['mitaka', 'newton', 'ocata'] %}
 - system.ceilometer.server.backend.influxdb
 - system.heka.ceilometer_collector.single
 - system.aodh.server.cluster
