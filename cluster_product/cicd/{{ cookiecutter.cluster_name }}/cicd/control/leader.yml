@@ -39,7 +39,13 @@ classes:
   {%- endif %}
   {%- if cookiecutter.get('vnf_onboarding_enabled', 'False') == 'True' and cookiecutter.stacklight_enabled == 'True'  %}
   - system.jenkins.client.job.vnf-onboarding
-  - system.jenkins.client.job.git-mirrors.downstream.vnf_ondoarding
+  - system.jenkins.client.job.git-mirrors.downstream.vnf_onboarding
+  {%- if cookiecutter.get('vnf_onboarding_vnf_list', []) is defined %}
+  {%- for vnf in cookiecutter.vnf_onboarding_vnf_list.split(',') %}
+  - system.jenkins.client.job.vnf-onboarding.test_{{ vnf }}
+  - system.jenkins.client.job.git-mirrors.downstream.vnf_onboarding.{{ vnf }}
+  {%- endfor %}
+  {%- endif %}
   {%- endif %}
   # Security
   {%- if cookiecutter.openldap_enabled == 'True' %}
@@ -62,6 +68,11 @@ classes:
   - system.gerrit.client.project.ci
   {%- if cookiecutter.get('vnf_onboarding_enabled', 'False') == 'True' and cookiecutter.stacklight_enabled == 'True'  %}
   - system.gerrit.client.project.vnf_onboarding
+  {%- if cookiecutter.get('vnf_onboarding_vnf_list', []) is defined %}
+  {%- for vnf in cookiecutter.vnf_onboarding_vnf_list.split(',') %}
+  - system.gerrit.client.project.vnf_onboarding.{{ vnf }}
+  {%- endfor %}
+  {%- endif %}
   {%- endif %}
 
   - system.docker.swarm.master

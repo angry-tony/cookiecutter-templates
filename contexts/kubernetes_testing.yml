@@ -11,6 +11,7 @@ default_context:
     openstack_nfv_dpdk_enabled: false
     openstack_nfv_sriov_enabled: false
     vnf_onboarding_enabled: false
+    vnf_onboarding_vnf_list: 'avi_loadbalancer,metaswitch_vsbc,nginx_vnf'
     dns_server01: 8.8.8.8
     dns_server02: 8.8.4.4
 

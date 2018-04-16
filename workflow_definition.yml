@@ -2694,3 +2694,20 @@ product_params_action:
 
     requires:
     - ceph_enabled: True
+  - name: vnf_onboarding
+    label: VNF Onboarding parameters
+    doc: |
+      VNF Onboarding parameters
+      ==========================
+
+      This section covers parameters that allow enabling VNF Onboarding Validation pipelines in the cluster.
+    requires:
+    - vnf_onboarding_enabled: True
+    - stacklight_enabled: True
+    fields:
+    - help_text: "Comma separated list of VNF names which validation pipelines should be enabled. "
+      initial: "avi_loadbalancer,metaswitch_vsbc,nginx_vnf"
+      name: vnf_onboarding_vnf_list
+      type: TEXT
+      requires:
+      - vnf_onboarding_enabled: True
