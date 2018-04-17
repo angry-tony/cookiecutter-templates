@@ -32,7 +32,7 @@ parameters:
 
     cluster_vip_address: ${_param:kubernetes_control_address}
     cluster_local_address: ${_param:single_address}
-
+    glusterfs_service_host: ${_param:kubernetes_control_node03_address}
     # etcd stuff
     cluster_node01_hostname: ${_param:kubernetes_control_node01_hostname}
     cluster_node01_address: ${_param:kubernetes_control_node01_address}
