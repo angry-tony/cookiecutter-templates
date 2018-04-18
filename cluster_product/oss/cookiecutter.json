@@ -41,6 +41,7 @@
     "oss_pushkin_email_sender_password"            : "",
     "oss_pushkin_smtp_host"                        : "",
     "oss_pushkin_smtp_port"                        : "",
+    "oss_pushkin_smtp_use_tls"                     : "True",
     "oss_webhook_from"                             : "",
     "oss_webhook_recipients"                       : "",
     "oss_webhook_login_id"                         : "13",
