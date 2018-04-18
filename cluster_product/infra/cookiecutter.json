@@ -95,5 +95,7 @@
     "ceph_osd_node_count"                       : 3,
     "openstack_cluster_size"                    : "compact",
     "compute_padding_with_zeros"                : "True",
-    "osd_padding_with_zeros"                    : "True"
+    "osd_padding_with_zeros"                    : "True",
+
+    "openssh_groups"                            : ""
 }

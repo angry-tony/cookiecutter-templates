@@ -2,11 +2,11 @@ classes:
 - system.linux.system.single
 - system.linux.system.single.debian
 - system.salt.minion.single
-#- system.openssh.server.team.lab
-#- system.openssh.server.team.presales
-#- system.openssh.server.team.services
-#- system.openssh.server.team.networking
-#- system.openssh.server.team.stacklight
+{%- if cookiecutter.openssh_groups|trim %}
+{%- for openssh_group in cookiecutter.openssh_groups.split(',') %}
+- system.openssh.server.team.{{ openssh_group|trim }}
+{%- endfor %}
+{%- endif %}
 - system.rsyslog.client.single
 {%- if cookiecutter.kubernetes_enabled == 'True' %}
 - cluster.{{ cookiecutter.cluster_name }}.kubernetes

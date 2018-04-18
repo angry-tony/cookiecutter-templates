@@ -79,6 +79,10 @@ general_params_action:
             - "Heat"
           - - "physical"
             - "Physical"
+      - name: "openssh_groups"
+        type: "TEXT"
+        initial: ""
+        required: False
       - name: "publication_method"
         type: "CHOICE"
         initial: "email"
