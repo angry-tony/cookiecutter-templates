@@ -1,0 +1,5 @@
+summary: >
+  Disabled the Heka-based Tenant Telemetry for OpenStack Pike and newer releases
+
+deprecations:
+  - Disabled the Heka-based Tenant Telemetry for OpenStack Pike and newer releases. If you have the OpenStack Pike release, use the standalone Tenant Telemetry that uses its own back ends.
