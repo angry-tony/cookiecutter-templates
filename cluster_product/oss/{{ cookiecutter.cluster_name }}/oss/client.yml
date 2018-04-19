@@ -4,16 +4,17 @@ classes:
 - system.postgresql.client.pushkin
 - system.postgresql.client.rundeck
 {%- if cookiecutter.oss_sfdc_support_enabled == 'True' %}
-- system.postgresql.client.sfdc
+- system.postgresql.client.pushkin.sfdc
 {%- endif %}
 {%- if cookiecutter.stacklight_enabled == 'True' %}
-- system.postgresql.client.alertmanager
+- system.postgresql.client.pushkin.alertmanager
 {%- endif %}
 {%- if cookiecutter.oss_security_audit_enabled == 'True' %}
 - system.postgresql.client.security_monkey
+- system.postgresql.client.pushkin.security_monkey
 {%- endif %}
 {%- if cookiecutter.oss_cleanup_service_enabled == 'True' %}
-- system.postgresql.client.janitor_monkey
+- system.postgresql.client.pushkin.janitor_monkey
 {%- endif %}
 
 # Elasticsearch
