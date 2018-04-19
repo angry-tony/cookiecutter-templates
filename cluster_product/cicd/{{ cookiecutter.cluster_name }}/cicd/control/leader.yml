@@ -33,6 +33,7 @@ classes:
   - system.jenkins.client.job.git-mirrors.downstream.pipelines
   - system.jenkins.client.job.deploy.openstack
   - system.jenkins.client.job.deploy.update
+  - system.jenkins.client.job.validate
   {%- if cookiecutter.get('ceph_enabled', 'False') == 'True'  %}
   - system.jenkins.client.job.ceph
   {%- endif %}
