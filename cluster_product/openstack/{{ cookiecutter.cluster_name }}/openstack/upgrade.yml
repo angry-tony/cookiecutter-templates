@@ -3,7 +3,7 @@ classes:
 - system.linux.system.repo_local.mcp.extra
 - system.linux.system.repo_local.mcp.apt_mirantis.openstack
 - system.linux.system.repo_local.mcp.apt_mirantis.ubuntu
-- system.linux.system.repo_local.mcp.apt_mirantis.saltstack_2016_3
+- system.linux.system.repo_local.mcp.apt_mirantis.saltstack
 {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
 - system.linux.system.repo_local.mcp.contrail
 {%- endif %}
@@ -11,7 +11,7 @@ classes:
 - system.linux.system.repo.mcp.extra
 - system.linux.system.repo.mcp.apt_mirantis.openstack
 - system.linux.system.repo.mcp.apt_mirantis.ubuntu
-- system.linux.system.repo.mcp.apt_mirantis.saltstack_2016_3
+- system.linux.system.repo.mcp.apt_mirantis.saltstack
 {%- if cookiecutter.openstack_network_engine == 'opencontrail' %}
 - system.linux.system.repo.mcp.contrail
 {%- endif %}

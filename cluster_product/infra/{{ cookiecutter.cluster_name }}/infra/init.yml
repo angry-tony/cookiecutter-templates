@@ -64,7 +64,7 @@ parameters:
     linux_system_user_sudo: true
 
     apt_mk_version: {{ cookiecutter.mcp_version }}
-
+    salt_version: 2016.3
     # TODO: Revert openstack repo part after refactoring here: https://mirantis.jira.com/browse/PROD-17500
     openstack_version: {{ cookiecutter.openstack_version }}
 

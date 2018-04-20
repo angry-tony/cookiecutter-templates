@@ -7,13 +7,13 @@ classes:
   - system.linux.system.repo_local.mcp.apt_mirantis.ubuntu
   - system.linux.system.repo_local.mcp.apt_mirantis.glusterfs
   - system.linux.system.repo_local.mcp.apt_mirantis.docker
-  - system.linux.system.repo_local.mcp.apt_mirantis.saltstack_2016_3
+  - system.linux.system.repo_local.mcp.apt_mirantis.saltstack
   - system.linux.system.repo_local.mcp.extra
   {%- else %}
   - system.linux.system.repo.mcp.apt_mirantis.ubuntu
   - system.linux.system.repo.mcp.apt_mirantis.glusterfs
   - system.linux.system.repo.mcp.apt_mirantis.docker
-  - system.linux.system.repo.mcp.apt_mirantis.saltstack_2016_3
+  - system.linux.system.repo.mcp.apt_mirantis.saltstack
   - system.linux.system.repo.mcp.extra
   {%- endif %}
   - system.glusterfs.client.cluster

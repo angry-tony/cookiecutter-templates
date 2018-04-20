@@ -41,8 +41,8 @@ parameters:
         host: ${_param:deploy_address}:${_param:maas_cluster_region_port}
 {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
       saltstack_repo_key: ${_param:aptly_gpg_public_key}
-      saltstack_repo_trusty: "http://${_param:local_repo_url}/ubuntu-trusty/salt/2016.3 ${_param:apt_mk_version} main"
-      saltstack_repo_xenial: "http://${_param:local_repo_url}/ubuntu-xenial/salt/2016.3 ${_param:apt_mk_version} main"
+      saltstack_repo_trusty: "http://${_param:local_repo_url}/ubuntu-trusty/salt/${_param:salt_version} ${_param:apt_mk_version} main"
+      saltstack_repo_xenial: "http://${_param:local_repo_url}/ubuntu-xenial/salt/${_param:salt_version} ${_param:apt_mk_version} main"
 {%- endif %}
 # linux:
 #   network:

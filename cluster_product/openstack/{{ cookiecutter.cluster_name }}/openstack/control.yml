@@ -3,7 +3,7 @@ classes:
 - system.linux.system.repo_local.mcp.extra
 - system.linux.system.repo_local.mcp.apt_mirantis.openstack
 - system.linux.system.repo_local.mcp.apt_mirantis.ubuntu
-- system.linux.system.repo_local.mcp.apt_mirantis.saltstack_2016_3
+- system.linux.system.repo_local.mcp.apt_mirantis.saltstack
 - system.linux.system.repo_local.mcp.apt_mirantis.glusterfs
 - system.linux.system.repo_local.mcp.apt_mirantis.ceph
 {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
@@ -16,7 +16,7 @@ classes:
 - system.linux.system.repo.mcp.extra
 - system.linux.system.repo.mcp.apt_mirantis.openstack
 - system.linux.system.repo.mcp.apt_mirantis.ubuntu
-- system.linux.system.repo.mcp.apt_mirantis.saltstack_2016_3
+- system.linux.system.repo.mcp.apt_mirantis.saltstack
 - system.linux.system.repo.mcp.apt_mirantis.glusterfs
 {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
 - system.linux.system.repo.mcp.apt_mirantis.sensu
