@@ -1042,8 +1042,14 @@ product_params_action:
       requires:
       - oss_enabled: True
     - help_text: "OpenStack ssl verification mechanism"
-      initial: "False"
+      initial: False
       name: oss_openstack_ssl_verify
+      type: BOOL
+      requires:
+      - oss_enabled: True
+    - help_text: "Connection protocol type to Prometheus source for Hardware Correlation"
+      initial: "http"
+      name: oss_hce_prometheus_protocol
       type: TEXT
       requires:
       - oss_enabled: True
