@@ -778,13 +778,13 @@ product_params_action:
       requires:
       - local_repositories: True
       - offline_deployment: False
-    - initial: "kqueen/api:v0.18"
+    - initial: "kqueen/api:v0.19"
       name: docker_image_kqueen_api
       type: TEXT
       requires:
       - kqueen_enabled: True
       help_text: specify docker image version for kqueen-api
-    - initial: "kqueen/ui:v0.18"
+    - initial: "kqueen/ui:v0.19"
       name: docker_image_kqueen_ui
       type: TEXT
       requires:

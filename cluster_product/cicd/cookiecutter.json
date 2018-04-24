@@ -51,8 +51,8 @@
     "aptly_api_docker_image"                    : "tcpcloud/aptly-api",
     "aptly_public_docker_image"                 : "tcpcloud/aptly-public",
     "aptly_publisher_docker_image"              : "tcpcloud/aptly-publisher",
-    "docker_image_kqueen_api"                   : "kqueen/api:v0.18",
-    "docker_image_kqueen_ui"                    : "kqueen/ui:v0.8",
+    "docker_image_kqueen_api"                   : "kqueen/api:v0.19",
+    "docker_image_kqueen_ui"                    : "kqueen/ui:v0.9",
 
     "kqueen_enabled"                            : "False",
     "kqueen_custom_mail_enabled"                : "True",
