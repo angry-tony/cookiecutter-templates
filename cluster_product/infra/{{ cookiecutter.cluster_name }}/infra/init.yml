@@ -18,10 +18,6 @@ classes:
 - cluster.{{ cookiecutter.cluster_name }}.opencontrail
 {%- endif %}
 {%- if cookiecutter.stacklight_enabled == 'True' %}
-- cluster.{{ cookiecutter.cluster_name }}.stacklight
-{%- if cookiecutter.stacklight_version == '1' %}
-- cluster.{{ cookiecutter.cluster_name }}.stacklight.client
-{%- endif %}
 {%- if cookiecutter.stacklight_version == '2' %}
 {%- if cookiecutter.fluentd_enabled == 'True' %}
 {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
@@ -45,6 +41,10 @@ classes:
 - system.telegraf.agent
 - system.prometheus.collector
 - service.grafana.collector
+{%- endif %}
+- cluster.{{ cookiecutter.cluster_name }}.stacklight
+{%- if cookiecutter.stacklight_version == '1' %}
+- cluster.{{ cookiecutter.cluster_name }}.stacklight.client
 {%- endif %}
 {%- endif %}
 {%- if cookiecutter.oss_enabled == 'True' %}
