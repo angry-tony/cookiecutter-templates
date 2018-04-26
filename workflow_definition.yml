@@ -33,8 +33,10 @@ general_params_action:
         initial: "https://github.com/Mirantis/mk-lab-salt-model.git"
       - name: "mcp_version"
         type: "CHOICE"
-        initial: "2018.3.1"
+        initial: "2018.4.0"
         choices:
+          - - "2018.4.0"
+            - "2018.4.0"
           - - "2018.3.1"
             - "2018.3.1"
           - - "2018.1"
