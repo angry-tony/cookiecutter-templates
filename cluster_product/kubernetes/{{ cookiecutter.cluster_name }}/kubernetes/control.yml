@@ -13,12 +13,23 @@ classes:
 - system.linux.system.repo.mcp.apt_mirantis.saltstack
 {%- endif %}
 - system.salt.minion.cert.etcd_server
+- system.salt.minion.cert.etcd_client
+- system.salt.minion.cert.k8s_client
 - system.kubernetes.master.cluster
+{%- if cookiecutter.kubernetes_network_opencontrail_enabled == 'True' %}
+- system.kubernetes.pool.cluster
+{%- else %}
 - cluster.{{ cookiecutter.cluster_name }}.kubernetes.compute
+{%- endif %}
 parameters:
   _param:
     keepalived_vip_interface: {{ cookiecutter.kubernetes_keepalived_vip_interface }}
     keepalived_vip_virtual_router_id: 65
+    {%- if cookiecutter.kubernetes_network_opencontrail_enabled == 'True' %}
+    kubernetes_externaldns_image: docker-prod-local.artifactory.mirantis.com/mirantis/external/external-dns:${_param:apt_mk_version}
+    kubernetes_hyperkube_image: docker-prod-local.artifactory.mirantis.com/mirantis/kubernetes/hyperkube-amd64:${_param:apt_mk_version}
+    kubernetes_contrail_network_controller_image: docker-prod-local.artifactory.mirantis.com/mirantis/kubernetes/contrail-integration/contrail-network-controller:${_param:apt_mk_version}
+    {%- endif %}
   etcd:
     server:
       source:
@@ -34,11 +45,23 @@ parameters:
           # value: '{"ipip":"tunl0","ipip_mode":"always","ipam":true,"disabled":false, "masquerade":{{ cookiecutter.calico_enable_nat|lower }},"cidr":"${_param:calico_private_network}/${_param:calico_private_netmask}"}'
       {%- endif %}
   kubernetes:
+    {%- if cookiecutter.kubernetes_network_opencontrail_enabled == 'True' %}
+    pool:
+      network:
+        engine: none
+        opencontrail:
+          enabled: false
+      kubelet:
+        fail_on_swap: false
+    {%- endif %}
     master:
       etcd:
         ssl:
           enabled: {{ cookiecutter.etcd_ssl }}
       network:
+        {%- if cookiecutter.kubernetes_network_opencontrail_enabled == 'True' %}
+        engine: none
+        {%- endif %}
         {%- if cookiecutter.kubernetes_network_calico_enabled == 'True' %}
         calico:
           enabled: true
@@ -75,11 +98,13 @@ parameters:
           enabled: true
         helm:
           enabled: false
-        {%- if cookiecutter.kubernetes_network_opencontrail_enabled == 'True' %}
+      {%- if cookiecutter.kubernetes_network_opencontrail_enabled == 'True' %}
         dashboard:
           enabled: False
         contrail_network_controller:
           namespace: kube-system
           enabled: true
           image: ${_param:kubernetes_contrail_network_controller_image}
-        {%- endif %}
+      hyperkube:
+        image: ${_param:kubernetes_hyperkube_image}
+      {%- endif %}

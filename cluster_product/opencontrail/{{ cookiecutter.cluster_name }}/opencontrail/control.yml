@@ -25,11 +25,9 @@ classes:
 - system.prometheus.exporters.jmx
 {%- endif %}
 {%- if cookiecutter.get('kubernetes_enabled','False') == 'True' %}
-- system.rabbitmq.server.cluster
-- system.rabbitmq.server.vhost.opencontrail
 - system.opencontrail.client.resource.k8s_api
 {%- endif %}
-- system.opencontrail.control.control
+- system.opencontrail.control.cluster4_0
 - system.opencontrail.client.cluster
 {%- if cookiecutter.get('openstack_enabled','False') == 'True' %}
 - system.opencontrail.client.resource.openstack_metadata
@@ -48,8 +46,10 @@ parameters:
   _param:
     ### latest OpenStack repo on Trusty is Mitaka
     openstack_version: mitaka
+    {%- if cookiecutter.get('kubernetes_enabled','False') == 'False'  and cookiecutter.openstack_enabled == 'False'  %}
     keepalived_vip_interface: eth1
     keepalived_vip_virtual_router_id: 60
+    {%- endif %}
     cluster_vip_address: ${_param:opencontrail_control_address}
     cluster_local_address: ${_param:single_address}
     cluster_node01_hostname: ${_param:opencontrail_control_node01_hostname}
@@ -62,25 +62,44 @@ parameters:
     opencontrail_router01_address: {{ cookiecutter.opencontrail_router01_address }}
     opencontrail_router02_hostname: {{ cookiecutter.opencontrail_router02_hostname }}
     opencontrail_router02_address: {{ cookiecutter.opencontrail_router02_address }}
-    {%- if cookiecutter.get('kubernetes_enabled','False') == 'True' %}
+    {%- if cookiecutter.get('kubernetes_enabled','False') == 'True' and cookiecutter.openstack_enabled == 'False' %}
     opencontrail_message_queue_node01_address: ${_param:opencontrail_control_node01_address}
     opencontrail_message_queue_node02_address: ${_param:opencontrail_control_node02_address}
     opencontrail_message_queue_node03_address: ${_param:opencontrail_control_node03_address}
+    opencontrail_message_queue_address: ${_param:opencontrail_control_address}
     {%- endif %}
   linux:
+    network:
       host:
         ctl:
-          address: ${_param:openstack_control_address}
+          address: ${_param:opencontrail_control_address}
           names:
           - ctl
           - ctl.${_param:cluster_domain}
   opencontrail:
     web:
       network:
-        host: ${_param:openstack_control_address}
+        host: ${_param:opencontrail_control_address}
+      {%- if cookiecutter.get('kubernetes_enabled','False') == 'True'  and cookiecutter.openstack_enabled == 'False' %}
+      identity:
+        engine: k8s
+      http:
+        port: 8095
+      {%- endif %}
     common:
       network:
-        host: ${_param:openstack_control_address}
+        host: ${_param:opencontrail_control_address}
     config:
       network:
-        host: ${_param:openstack_control_address}
+        host: ${_param:opencontrail_control_address}
+    {%- if cookiecutter.get('kubernetes_enabled','False') == 'True'  and cookiecutter.openstack_enabled == 'False' %}
+      aaa_mode: no-auth
+      identity:
+        engine: none
+    collector:
+      identity:
+        engine: none
+    client:
+      api:
+        host: ${_param:opencontrail_control_address}
+    {%- endif %}

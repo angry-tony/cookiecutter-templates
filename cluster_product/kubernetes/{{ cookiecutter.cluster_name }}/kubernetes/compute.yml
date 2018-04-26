@@ -13,9 +13,6 @@ classes:
 - system.kubernetes.pool.cluster
 - system.salt.minion.cert.k8s_client
 - system.salt.minion.cert.etcd_client
-{%- if cookiecutter.kubernetes_network_opencontrail_enabled == 'True' %}
-- cluster.{{ cookiecutter.cluster_name }}.opencontrail.compute
-{%- endif %}
 {%- if cookiecutter.use_default_network_scheme != 'False' %}
 - cluster.{{ cookiecutter.cluster_name }}.kubernetes.networking.compute
 {%- endif %}
@@ -70,9 +67,13 @@ parameters:
         {%- if cookiecutter.kubernetes_network_opencontrail_enabled == 'True' %}
         opencontrail:
           enabled: true
+          version: {{ cookiecutter.opencontrail_version }}
           config:
             api:
               host: ${_param:opencontrail_control_address}
+          cni_image: ${_param:kubernetes_contrail_cni_image}
+      kubelet:
+        fail_on_swap: false
         {%- endif %}
     common:
       hyperkube:

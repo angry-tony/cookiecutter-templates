@@ -1,0 +1,97 @@
+default_context:
+# infra
+    openstack_enabled: 'False'
+    oss_enabled: 'True'
+    cicd_enabled:  'True'
+    kubernetes_enabled: 'True'
+    opencontrail_enabled: 'True'
+    openstack_nfv_dpdk_enabled: 'False'
+    openstack_nfv_sriov_enabled: 'False'
+    vnf_onboarding_enabled: 'False'
+    deployment_type: physical
+    control_network_netmask: 255.255.255.128
+    tenant_network_netmask: 255.255.255.128
+    dns_server01: 8.8.8.8
+    dns_server02: 8.8.4.4
+
+# kubernetes
+    cluster_name: k8s-ha-contrail
+    cluster_domain: k8s-ha-contrail.local
+    reclass_repository: "https://gerrit.mcp.mirantis.net/salt-models/mcp-virtual-lab.git"
+    kubernetes_network_opencontrail_enabled: 'True'
+    salt_master_address: 172.17.98.160
+    salt_master_management_address: 172.17.98.6
+    kubelet_fail_on_swap: 'False'
+    public_host: ""
+
+    kubernetes_keepalived_vip_interface: eth1
+    kubernetes_control_address: 172.17.98.200
+
+    kubernetes_compute_node01_address: 172.17.98.171
+    kubernetes_compute_node01_hostname: cmp01
+    kubernetes_compute_node02_address: 172.17.98.172
+    kubernetes_compute_node02_hostname: cmp02
+    kubernetes_control_node01_address: 172.17.98.161
+    kubernetes_control_node01_hostname: ctl01
+    kubernetes_control_node02_address: 172.17.98.162
+    kubernetes_control_node02_hostname: ctl02
+    kubernetes_control_node03_address: 172.17.98.163
+    kubernetes_control_node03_hostname: ctl03
+
+    opencontrail_public_ip_range: 172.17.47.128/25
+
+
+# opencontrail
+    opencontrail_version: "4.0"
+    linux_repo_contrail_component: oc40
+    opencontrail_analytics_address: ${_param:opencontrail_control_address}
+    opencontrail_analytics_hostname: nal
+    opencontrail_analytics_node01_address: ${_param:opencontrail_control_node01_address}
+    opencontrail_analytics_node01_hostname: ${_param:opencontrail_control_node01_hostname}
+    opencontrail_analytics_node02_address: ${_param:opencontrail_control_node02_address}
+    opencontrail_analytics_node02_hostname: ${_param:opencontrail_control_node02_hostname}
+    opencontrail_analytics_node03_address: ${_param:opencontrail_control_node03_address}
+    opencontrail_analytics_node03_hostname: ${_param:opencontrail_control_node03_hostname}
+    opencontrail_compute_iface: one2.2476
+    opencontrail_compute_iface_mask: '25'
+    opencontrail_control_address: 172.17.98.200
+    opencontrail_control_hostname: ctl
+    opencontrail_control_node01_address: 172.17.98.161
+    opencontrail_control_node01_hostname: ctl01
+    opencontrail_control_node02_address: 172.17.98.162
+    opencontrail_control_node02_hostname: ctl02
+    opencontrail_control_node03_address: 172.17.98.163
+    opencontrail_control_node03_hostname: ctl03
+    opencontrail_router01_address: 172.18.182.66
+    opencontrail_router01_hostname: rtr01
+    opencontrail_router02_address: 172.18.182.68
+    opencontrail_router02_hostname: rtr02
+
+# stacklight
+    stacklight_enabled: 'True'
+    stacklight_version: '2'
+    stacklight_long_term_storage_type: prometheus
+    stacklight_log_address: 172.17.98.180
+    stacklight_log_hostname: log
+    stacklight_log_node01_address: 172.17.98.181
+    stacklight_log_node01_hostname: log01
+    stacklight_log_node02_address: 172.17.98.182
+    stacklight_log_node02_hostname: log02
+    stacklight_log_node03_address: 172.17.98.183
+    stacklight_log_node03_hostname: log03
+    stacklight_monitor_address: 172.17.98.190
+    stacklight_monitor_hostname: mon
+    stacklight_monitor_node01_address: 172.17.98.191
+    stacklight_monitor_node01_hostname: mon01
+    stacklight_monitor_node02_address: 172.17.98.192
+    stacklight_monitor_node02_hostname: mon02
+    stacklight_monitor_node03_address: 172.17.98.193
+    stacklight_monitor_node03_hostname: mon03
+    stacklight_telemetry_address: 172.17.98.195
+    stacklight_telemetry_hostname: mtr
+    stacklight_telemetry_node01_address: 172.17.98.196
+    stacklight_telemetry_node01_hostname: mtr01
+    stacklight_telemetry_node02_address: 172.17.98.197
+    stacklight_telemetry_node02_hostname: mtr02
+    stacklight_telemetry_node03_address: 172.17.98.198
+    stacklight_telemetry_node03_hostname: mtr03

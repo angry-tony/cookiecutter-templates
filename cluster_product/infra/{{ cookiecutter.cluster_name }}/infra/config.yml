@@ -35,7 +35,7 @@ classes:
 {%- if cookiecutter.deployment_type in ['physical'] and (cookiecutter.openstack_enabled == 'True' or (cookiecutter.kubernetes_enabled == 'True' and (cookiecutter.stacklight_enabled == 'True' or cookiecutter.cicd_enabled == 'True'))) %}
 - system.reclass.storage.system.physical_control_cluster
 {%- endif %}
-{%- if (cookiecutter.kubernetes_enabled == 'True' and cookiecutter.kubernetes_network_opencontrail_enabled == 'True' ) or (cookiecutter.openstack_enabled == 'True' and cookiecutter.openstack_network_engine == 'opencontrail') %}
+{%- if (cookiecutter.kubernetes_enabled == 'True' and cookiecutter.kubernetes_network_opencontrail_enabled == 'True' and cookiecutter.opencontrail_version != "4.0") or (cookiecutter.openstack_enabled == 'True' and cookiecutter.openstack_network_engine == 'opencontrail' and cookiecutter.opencontrail_version != "4.0") %}
 - system.reclass.storage.system.opencontrail_analytics_cluster
 - system.reclass.storage.system.opencontrail_control_cluster
 {%- endif %}
@@ -74,7 +74,11 @@ classes:
 {%- endif %}
 {%- if cookiecutter.kubernetes_enabled == 'True' %}
 - system.salt.minion.cert.k8s_server
+{%- if cookiecutter.kubernetes_network_opencontrail_enabled == 'True'%}
+- system.reclass.storage.system.kubernetes_contrail_cluster
+{%- else %}
 - system.reclass.storage.system.kubernetes_control_cluster
+{%- endif %}
 {%- endif %}
 - service.jenkins.client
 - system.jenkins.client.credential.salt
@@ -152,10 +156,13 @@ parameters:
             deploy_address:
               value_template: <<node_deploy_ip>>
         kubernetes_compute:
-          expression: <<node_hostname>>__startswith__cmp
+          expression: <<node_hostname>>__startswith__kcm
           node_class:
             value_template:
               - cluster.<<node_cluster>>.kubernetes.compute
+            {%- if cookiecutter.kubernetes_network_opencontrail_enabled == 'True'%}
+              - cluster.<<node_cluster>>.opencontrail.compute
+            {%- endif%}
           node_param:
             deploy_address:
               value_template: <<node_deploy_ip>>
@@ -314,37 +321,7 @@ parameters:
           classes:
           - cluster.${_param:cluster_name}.infra.backup.server
         {%- endif %}
-        {%- if cookiecutter.kubernetes_network_opencontrail_enabled == 'True' %}
-        opencontrail_control_node01:
-          params:
-            rabbitmq_cluster_role: master
-        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
-            deploy_address: ${_param:opencontrail_control_node01_deploy_address}
-        {%- endif %}
-        opencontrail_control_node02:
-          params:
-            rabbitmq_cluster_role: slave
-        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
-            deploy_address: ${_param:opencontrail_control_node02_deploy_address}
-        {%- endif %}
-        opencontrail_control_node03:
-          params:
-            rabbitmq_cluster_role: slave
-        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
-            deploy_address: ${_param:opencontrail_control_node03_deploy_address}
-        {%- endif %}
-        {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
-        opencontrail_analytics_node01:
-          params:
-            deploy_address: ${_param:opencontrail_analytics_node01_deploy_address}
-        opencontrail_analytics_node02:
-          params:
-            deploy_address: ${_param:opencontrail_analytics_node02_deploy_address}
-        opencontrail_analytics_node03:
-          params:
-            deploy_address: ${_param:opencontrail_analytics_node03_deploy_address}
-        {%- endif %}
-        {%- endif %}
+
         {%- endif %}
         {%- if cookiecutter.stacklight_enabled == 'True' and cookiecutter.stacklight_version == '1' %}
         stacklight_log_node01:

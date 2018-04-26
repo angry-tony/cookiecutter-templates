@@ -4,12 +4,45 @@ classes:
 {%- else %}
 - system.linux.system.repo.mcp.contrail
 {%- endif %}
-- system.opencontrail.compute.cluster
 - system.opencontrail.client.cluster
 - system.opencontrail.client.resource.virtual_router
+{%- if cookiecutter.opencontrail_version == "4.0" %}
+- system.opencontrail.compute.cluster4_0
+{%- else %}
+- system.opencontrail.compute.cluster
+{%- endif%}
 {%- if cookiecutter.use_default_network_scheme != 'False' %}
 - cluster.{{ cookiecutter.cluster_name }}.opencontrail.networking.compute
 {%- endif %}
+{%- if cookiecutter.get('kubernetes_enabled','False') == 'True' and cookiecutter.opencontrail_version == "4.0" %}
+- cluster.{{ cookiecutter.cluster_name }}.opencontrail
+{%- endif %}
+
 parameters:
   _param:
     opencontrail_compute_address: ${_param:tenant_address}
+
+  {%- if cookiecutter.get('kubernetes_enabled','False') == 'True'  and cookiecutter.openstack_enabled == 'False' %}
+    primary_first_nic: eth0
+    primary_second_nic: eth1
+
+  opencontrail:
+    common:
+      identity:
+        engine: k8s
+        host: none
+        token: none
+        password: none
+      network:
+        engine: k8s
+        host: none
+    client:
+      api:
+        host: ${_param:opencontrail_control_address}
+        port: 9100
+      identity:
+        engine: k8s
+        host: none
+        token: none
+        password: none
+  {%- endif %}

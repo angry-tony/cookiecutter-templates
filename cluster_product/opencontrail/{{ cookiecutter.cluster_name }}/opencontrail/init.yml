@@ -1,7 +1,7 @@
 parameters:
   _param:
-    opencontrail_version: 3.0
-    linux_repo_contrail_component: oc32
+    opencontrail_version: {{ cookiecutter.opencontrail_version }}
+    linux_repo_contrail_component: {{ cookiecutter.linux_repo_contrail_component }}
     opencontrail_stats_password: ${_param:opencontrail_stats_password_generated}
     opencontrail_compute_dns: ${_param:dns_server01}
     opencontrail_compute_gateway: ${_param:tenant_network_gateway}
@@ -39,11 +39,12 @@ parameters:
     opencontrail_analytics_node02_hostname: {{ cookiecutter.opencontrail_analytics_node02_hostname }}
     opencontrail_analytics_node03_hostname: {{ cookiecutter.opencontrail_analytics_node03_hostname }}
 
-    {%- if cookiecutter.get('kubernetes_enabled','False') == 'True' %}
+    {%- if cookiecutter.openstack_enabled == 'True' %}
     rabbitmq_secret_key: ${_param:rabbitmq_secret_key_generated}
     rabbitmq_admin_password: ${_param:rabbitmq_admin_password_generated}
     {%- endif %}
 
+  {%- if cookiecutter.get('kubernetes_enabled','False') == 'False' %}
   linux:
     network:
       host:
@@ -87,3 +88,4 @@ parameters:
           names:
           - ${_param:opencontrail_analytics_node03_hostname}
           - ${_param:opencontrail_analytics_node03_hostname}.${_param:cluster_domain}
+  {%- endif %}

@@ -8,6 +8,9 @@
     "local_repositories"                            : "False",
     "local_repo_url"                                : "${_param:aptly_server_deploy_address}",
 
+    "opencontrail_version"                          : "3.0",
+    "linux_repo_contrail_component"                 : "oc32",
+
     "opencontrail_analytics_address"                : "10.167.4.30",
     "opencontrail_analytics_node01_address"         : "10.167.4.31",
     "opencontrail_analytics_node02_address"         : "10.167.4.32",
