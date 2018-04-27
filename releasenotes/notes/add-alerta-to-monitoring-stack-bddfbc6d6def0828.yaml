@@ -1,0 +1,6 @@
+summary: >
+  Add Alerta UI to Monitoring stack 
+
+features:
+  - Alerta receives, consolidates and deduplicates the alerts sent by Alertmanager and visually represents them through a simple yet effective web UI. Using Alerta, you can easily view the most recent alerts, watched alerts, as well as group and filter alerts according to your needs. Alerta uses MongoDB as a back end.
+
