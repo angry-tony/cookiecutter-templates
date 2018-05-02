@@ -55,11 +55,17 @@ parameters:
     nova_vncproxy_url: https://${_param:cluster_public_host}:6080
     primary_first_nic: {{ cookiecutter.compute_primary_first_nic }}
     primary_second_nic: {{ cookiecutter.compute_primary_second_nic }}
-{%- if cookiecutter.get('ceph_enabled', 'False') == 'True'  %}
-{%- if cookiecutter.get('ceph_hyper_converged', 'False') == 'True' %}
+{%- set _reserved_mb = cookiecutter.openstack_nova_compute_reserved_host_memory_mb|int + (
+    cookiecutter.openstack_nova_compute_reserved_host_memory_mb_stacklight|int
+    if cookiecutter.get('stacklight_enabled', 'False') == 'True' else 0) + (
+    cookiecutter.openstack_nova_compute_reserved_host_memory_mb_ceph|int
+    if cookiecutter.get('ceph_enabled', 'False') == 'True' and (
+    cookiecutter.get('ceph_hyper_converged', 'False') == 'True') else 0) %}
   nova:
     compute:
-      reserved_host_memory_mb: {{ cookiecutter.openstack_nova_compute_reserved_host_memory_mb }}
+      reserved_host_memory_mb: {{ _reserved_mb }}
+{%- if cookiecutter.get('ceph_enabled', 'False') == 'True'  %}
+{%- if cookiecutter.get('ceph_hyper_converged', 'False') == 'True' %}
       vcpu_pin_set: {{ cookiecutter.openstack_nova_cpu_pinning }}
   linux:
     system:
