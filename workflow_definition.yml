@@ -43,6 +43,8 @@ general_params_action:
             - "2018.1"
           - - "2017.12"
             - "2017.12"
+          - - "proposed"
+            - "proposed"
           - - "stable"
             - "stable"
           - - "testing"
