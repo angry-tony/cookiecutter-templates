@@ -26,6 +26,9 @@ classes:
   - system.jenkins.client
   - system.jenkins.client.credential.gerrit
   - system.jenkins.client.credential.salt
+  {%- if cookiecutter.get('vnf_onboarding_enabled', 'False') == 'True' and cookiecutter.get('vnf_onboarding_predeployed_resources', 'False') == 'True' %}
+  - system.jenkins.client.credential.vnf_onboarding
+  {%- endif %}
   # Jobs
   {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
   - system.jenkins.client.job.aptly
@@ -130,6 +133,9 @@ parameters:
     jenkins_aptly_api_url: http://${_param:aptly_server_hostname}:${_param:aptly_api_port}
     jenkins_aptly_url: http://${_param:aptly_server_hostname}:${_param:aptly_public_port}
     jenkins_aptly_storages: "local"
+    {%- endif %}
+    {%- if cookiecutter.get('vnf_onboarding_enabled', 'False') == 'True' and cookiecutter.get('vnf_onboarding_predeployed_resources', 'False') == 'True' %}
+    vnf_openstack_private_key: ${_param:vnf_openstack_private_key_genereted}
     {%- endif %}
 
     # Gerrit
