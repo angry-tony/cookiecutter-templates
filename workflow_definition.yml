@@ -2081,9 +2081,21 @@ product_params_action:
       - openstack_nova_compute_nfv_req_enabled: True
       - ceph_hyper_converged: True
       type: TEXT
-    - help_text: Reserved memory for Host and Ceph processes - for example 3GB * number of OSD disks on the host
-      initial: '20000'
+    - help_text: Reserved memory for Host processes
+      initial: '900'
       name: openstack_nova_compute_reserved_host_memory_mb
+      type: TEXT
+      width: half
+    - help_text: Reserved memory for stacklight processes
+      initial: '200'
+      name: openstack_nova_compute_reserved_host_memory_mb
+      type: TEXT
+      width: half
+      requires:
+      - stacklight_enabled: True
+    - help_text: Reserved memory for Ceph processes - for example 3GB * number of OSD disks on the host
+      initial: '19100'
+      name: openstack_nova_compute_reserved_host_memory_mb_ceph
       type: TEXT
       width: half
       requires:
