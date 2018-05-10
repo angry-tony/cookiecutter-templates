@@ -1130,6 +1130,30 @@ product_params_action:
       type: TEXT
       requires:
       - oss_enabled: True
+    - help_text: Address of the SMTP host (for alert notifications)
+      initial: 127.0.0.1
+      name: oss_pushkin_smtp_host
+      type: TEXT
+      requires:
+      - oss_enabled: True
+    - help_text: Address of the SMTP port (for alert notifications)
+      initial: 587
+      name: oss_pushkin_smtp_port
+      type: TEXT
+      requires:
+      - oss_enabled: True
+    - help_text: SMTP server under tls (for alert notifications)
+      initial: True
+      name: oss_notification_smtp_use_tls
+      type: BOOL
+      requires:
+      - oss_enabled: True
+    - help_text: Sender-mail password (for alert notifications)
+      initial: password
+      name: oss_pushkin_email_sender_password
+      type: TEXT
+      requires:
+      - oss_enabled: True
     - help_text: "Authentication url for SalesForce Service"
       initial: ""
       name: sfdc_auth_url
@@ -2406,22 +2430,6 @@ product_params_action:
           - "Prometheus"
         - - "influxdb"
           - "InfluxDB"
-    - help_text: Address of the SMTP host (for alert notifications)
-      initial: 127.0.0.1
-      name: oss_pushkin_smtp_host
-      type: TEXT
-    - help_text: Address of the SMTP port (for alert notifications)
-      initial: 587
-      name: oss_pushkin_smtp_port
-      type: TEXT
-    - help_text: SMTP server under tls (for alert notifications)
-      initial: True
-      name: oss_notification_smtp_use_tls
-      type: BOOL
-    - help_text: Sender-mail password (for alert notifications)
-      initial: password
-      name: oss_pushkin_email_sender_password
-      type: TEXT
     - help_text: Webhook login id (for alert notifications)
       initial: 13
       name: oss_webhook_login_id
