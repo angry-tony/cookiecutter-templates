@@ -36,8 +36,8 @@ parameters:
       api: ${_param:aptly_server_hostname}:5000/aptly-api:${_param:apt_mk_version}
       public: ${_param:aptly_server_hostname}:5000/aptly-public:${_param:apt_mk_version}
     {%- if cookiecutter.kqueen_enabled == 'True' %}
-    docker_image_kqueen_api: ${_param:aptly_server_hostname}:5000/api:${_param:apt_mk_version}
-    docker_image_kqueen_ui: ${_param:aptly_server_hostname}:5000/ui:${_param:apt_mk_version}
+    docker_image_kqueen_api: ${_param:aptly_server_hostname}:5000/api:{{ cookiecutter.docker_tag_kqueen_api }}
+    docker_image_kqueen_ui: ${_param:aptly_server_hostname}:5000/ui:{{ cookiecutter.docker_tag_kqueen_ui }}
     {%- endif %}
     {%- else %}
     docker_image_registry: docker-prod-local.artifactory.mirantis.com/mirantis/external/registry:${_param:apt_mk_version}
@@ -55,8 +55,8 @@ parameters:
       api: docker-prod-local.artifactory.mirantis.com/mirantis/cicd/aptly-api:${_param:apt_mk_version}
       public: docker-prod-local.artifactory.mirantis.com/mirantis/cicd/aptly-public:${_param:apt_mk_version}
     {%- if cookiecutter.kqueen_enabled == 'True' %}
-    docker_image_kqueen_api: docker-prod-local.artifactory.mirantis.com/mirantis/external/api:${_param:apt_mk_version}
-    docker_image_kqueen_ui: docker-prod-local.artifactory.mirantis.com/mirantis/external/ui:${_param:apt_mk_version}
+    docker_image_kqueen_api: docker-prod-local.artifactory.mirantis.com/mirantis/external/api:{{ cookiecutter.docker_tag_kqueen_api }}
+    docker_image_kqueen_ui: docker-prod-local.artifactory.mirantis.com/mirantis/external/ui:{{ cookiecutter.docker_tag_kqueen_ui }}
     {%- endif %}
     {%- endif %}
     {%- else %}
@@ -75,8 +75,8 @@ parameters:
       api: {{ cookiecutter.aptly_api_docker_image }}
       public: {{ cookiecutter.aptly_public_docker_image }}
     {%- if cookiecutter.kqueen_enabled == 'True' %}
-    docker_image_kqueen_api: {{ cookiecutter.docker_image_kqueen_api }}
-    docker_image_kqueen_ui: {{ cookiecutter.docker_image_kqueen_ui }}
+    docker_image_kqueen_api: {{ cookiecutter.docker_image_kqueen_api }}:{{ cookiecutter.docker_tag_kqueen_api }}
+    docker_image_kqueen_ui: {{ cookiecutter.docker_image_kqueen_ui }}:{{ cookiecutter.docker_tag_kqueen_ui }}
     {%- endif %}
     {%- endif %}
     {%- if cookiecutter.openldap_enabled == 'True' %}
