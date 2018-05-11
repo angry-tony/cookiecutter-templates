@@ -25,17 +25,17 @@ parameters:
   _param:
     {%- if cookiecutter.get('local_docker_images', 'False') == 'True' %}
     kubernetes_externaldns_image: ${_param:aptly_server_hostname}:5000/external-dns:${_param:apt_mk_version}
-    kubernetes_hyperkube_image: ${_param:kubernetes_hyperkube_image_local}
-    kubernetes_netchecker_agent_image: ${_param:kubernetes_netchecker_agent_image_local}
-    kubernetes_netchecker_server_image: ${_param:kubernetes_netchecker_server_image_local}
+    kubernetes_hyperkube_repo: ${_param:aptly_server_hostname}:5000
+    kubernetes_netchecker_agent_repo: ${_param:aptly_server_hostname}:5000
+    kubernetes_netchecker_server_repo: ${_param:aptly_server_hostname}:5000
     {%- if cookiecutter.kubernetes_network_calico_enabled == 'True' %}
-    kubernetes_calico_calicoctl_image: ${_param:kubernetes_calico_calicoctl_image_local}
-    kubernetes_calico_image: ${_param:kubernetes_calico_image_local}
-    kubernetes_calico_cni_image: ${_param:kubernetes_calico_cni_image_local}
+    kubernetes_calico_calicoctl_repo: ${_param:aptly_server_hostname}:5000
+    kubernetes_calico_repo: ${_param:aptly_server_hostname}:5000
+    kubernetes_calico_cni_repo: ${_param:aptly_server_hostname}:5000
     {%- endif %}
     {%- if cookiecutter.kubernetes_network_opencontrail_enabled == 'True' %}
-    kubernetes_contrail_cni_image: ${_param:kubernetes_contrail_cni_image_local}
-    kubernetes_contrail_network_controller_image: ${_param:kubernetes_contrail_network_controller_image_local}
+    kubernetes_contrail_cni_repo: ${_param:aptly_server_hostname}:5000
+    kubernetes_contrail_network_controller_repo: ${_param:aptly_server_hostname}:5000
     {%- endif %}
     {%- else %}
     {%- if cookiecutter.mcp_version != 'nightly' %}
