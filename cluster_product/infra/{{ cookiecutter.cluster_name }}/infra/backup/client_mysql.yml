@@ -12,3 +12,6 @@ parameters:
     server:
       enabled: false
       backup_dir: /srv/volumes/backup/xtrabackup
+  mysql:
+    client:
+      backup_dir: /srv/volumes/backup/backupninja

@@ -22,6 +22,7 @@
     "cicd_control_node03_hostname"              : "cid03",
 
     "upstream_proxy_enabled"                    : "False",
+    "internal_proxy_enabled"                    : "False",
 
     "salt_api_password"                         : "<<WILL_BE_GENERATED>>",
 

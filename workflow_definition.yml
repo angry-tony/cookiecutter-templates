@@ -231,6 +231,11 @@ general_params_action:
         label: "Upstream proxy"
         help_text: "Enable upstream proxy for MaaS and cicd services"
         type: BOOL
+      - initial: False
+        name: internal_proxy_enabled
+        label: "Internal cloud proxy"
+        help_text: "Enable internal proxy for control plane nodes and services"
+        type: BOOL
 infra_params_action:
   - name: "salt"
     label: "Salt Master"
@@ -251,6 +256,23 @@ infra_params_action:
         name: salt_api_password
         type: TEXT
         hidden: True
+  - name: "proxy"
+    label: "internal cloud proxy"
+    requires:
+    - internal_proxy_enabled: True
+    fields:
+      - help_text: "Address of internal proxy"
+        initial: ""
+        name: "internal_proxy_address"
+        type: "IP"
+      - help_text: "Port of internal proxy"
+        initial: ""
+        name: "internal_proxy_port"
+        type: "TEXT"
+      - help_text: "Upstream DNS"
+        initial: ""
+        name: "upstream_dns_address"
+        type: "TEXT"
   - name: "maas"
     label: "Ubuntu MaaS"
     requires:
@@ -343,6 +365,8 @@ infra_params_action:
         type: "CHOICE"
         initial: "compact"
         choices:
+          - - "minimal"
+            - "few"
           - - "compact"
             - "up to 50"
           - - "small"

@@ -1,0 +1,21 @@
+classes:
+{%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
+- system.linux.system.repo_local.mcp.apt_mirantis.glusterfs
+{%- else %}
+- system.linux.system.repo.mcp.apt_mirantis.glusterfs
+{%- endif %}
+- service.keepalived.cluster.single
+- system.glusterfs.server.cluster
+- system.glusterfs.server.volume.salt_pki
+{%- if cookiecutter.openstack_enabled == 'True' %}
+- system.glusterfs.server.volume.glance
+- system.glusterfs.server.volume.keystone
+- system.glusterfs.server.volume.backup
+{%- endif %}
+{%- if cookiecutter.cicd_enabled == 'True' %}
+- cluster.{{ cookiecutter.cluster_name }}.cicd.gluster
+{%- endif %}
+parameters:
+  _param:
+    keepalived_vip_interface: br-ctl
+    keepalived_vip_virtual_router_id: 69

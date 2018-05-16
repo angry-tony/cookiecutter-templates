@@ -9,6 +9,30 @@ parameters:
         {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
         {{ cookiecutter.compute_deploy_nic }}: ${_param:linux_deploy_interface}
         {%- endif %}
+        {%- if cookiecutter.get('physical_lab_setup', 'False') == 'True' %}
+        management_interface:
+          enabled: true
+          name: ens3
+          proto: dhcp
+          type: eth
+        primary_interface:
+          enabled: true
+          address: ${_param:single_address}
+          netmask: 255.255.255.0
+          name: ${_param:primary_first_nic}
+          proto: static
+          type: eth
+        tenant_interface:
+          enabled: true
+          name: ${_param:primary_second_nic}
+          address: ${_param:tenant_address}
+          netmask: 255.255.255.0
+          proto: static
+          type: eth
+        br-floating:
+          enabled: true
+          type: ovs_bridge
+        {%- else %}
         eth1:
           enabled: true
           type: slave
@@ -68,4 +92,5 @@ parameters:
           port_type: patch
           bridge: br-prv
           peer: floating-to-prv
+        {%- endif %}
         {%- endif %}

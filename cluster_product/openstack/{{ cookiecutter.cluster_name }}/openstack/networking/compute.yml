@@ -5,6 +5,35 @@ parameters:
   linux:
     network:
       interface:
+{%- if cookiecutter.get('physical_lab_setup', 'False') == 'True'%}
+        primary_interface:
+          enabled: true
+          name: ${_param:primary_first_nic}
+          proto: manual
+          type: eth
+        tenant_interface:
+          enabled: true
+          name: ${_param:primary_second_nic}
+          proto: manual
+          type: eth
+        br-ctl:
+          enabled: true
+          type: bridge
+          proto: static
+          address: ${_param:single_address}
+          netmask: 255.255.255.0
+          use_interfaces:
+          - ${_param:primary_first_nic}
+        br-mesh:
+          enabled: true
+          type: bridge
+          proto: static
+          address: ${_param:tenant_address}
+          netmask: 255.255.255.0
+          use_interfaces:
+          - ${_param:primary_second_nic}
+      bridge: openvswitch
+{%- else %}
   {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
         {{ cookiecutter.compute_deploy_nic }}: ${_param:linux_deploy_interface}
   {%- endif %}
@@ -132,4 +161,5 @@ parameters:
       {%- endif %}
       bridge: openvswitch
   {%- endif %}
+{%- endif %}
 {%- endif %}

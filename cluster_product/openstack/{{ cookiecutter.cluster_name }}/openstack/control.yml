@@ -103,3 +103,20 @@ parameters:
       backend:
         tenant_vlan_range: "${_param:neutron_tenant_vlan_range}"
   {%- endif %}
+{%- if cookiecutter.get('internal_proxy_enabled', 'False') == 'True' %}
+  linux:
+    system:
+      proxy:
+        http: ${_param:http_proxy}
+        https: ${_param:http_proxy}
+        noproxy:
+          - .local
+          - localhost
+          - 169.254.169.254
+          - 127.0.0.1
+      env:
+        http_proxy: ${linux:system:proxy:http}
+        https_proxy: ${linux:system:proxy:http}
+        ftp:         ${linux:system:proxy:http}
+        no_proxy: ${linux:system:proxy:noproxy}
+{%- endif %}

@@ -77,7 +77,6 @@ classes:
 
   - system.docker.swarm.master
 
-  - cluster.{{ cookiecutter.cluster_name }}.infra
   - cluster.{{ cookiecutter.cluster_name }}.cicd.control
 
 parameters:
@@ -174,4 +173,10 @@ parameters:
             host: ${_param:aptly_server_hostname}
             port: 8084
             upstream_fallback: False
+{%- endif %}
+{%- if cookiecutter.get('internal_proxy_enabled', 'False') == 'True' %}
+  gerrit:
+    client:
+      proxy:
+        https_proxy: ${_param:http_proxy}
 {%- endif %}

@@ -25,6 +25,9 @@
     "openstack_neutron_bgp_vpn"                                 : "False",
     "openstack_neutron_bgp_vpn_driver"                          : "bagpipe",
 
+    "internal_proxy_enabled"                                    : "False",
+    "physical_lab_setup"                                        : "False",
+
     "cicd_enabled"                                              : "True",
     "stacklight_enabled"                                        : "True",
     "fluentd_enabled"                                           : "True",
