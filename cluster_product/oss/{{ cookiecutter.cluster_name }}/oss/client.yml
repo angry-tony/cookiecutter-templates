@@ -132,8 +132,7 @@ parameters:
 
     {%- if cookiecutter.stacklight_enabled == 'True' %}
     # HCE
-    hce_elasticsearch_host: ${_param:elasticsearch_bind_host}
-    hce_elasticsearch_port: ${_param:elasticsearch_http_bind_port}
+    hce_prometheus_protocol: {{ cookiecutter.oss_hce_prometheus_protocol }}
     hce_prometheus_host: ${_param:stacklight_monitor_address}
     hce_prometheus_port: ${_param:stacklight_prometheus_port}
     {%- endif %}
