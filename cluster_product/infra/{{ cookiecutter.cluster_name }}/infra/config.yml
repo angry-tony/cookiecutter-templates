@@ -156,7 +156,7 @@ parameters:
             deploy_address:
               value_template: <<node_deploy_ip>>
         kubernetes_compute:
-          expression: <<node_hostname>>__startswith__kcm
+          expression: <<node_hostname>>__startswith__cmp
           node_class:
             value_template:
               - cluster.<<node_cluster>>.kubernetes.compute
