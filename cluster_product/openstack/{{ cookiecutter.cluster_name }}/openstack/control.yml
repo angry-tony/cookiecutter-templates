@@ -67,6 +67,7 @@ classes:
 - system.glusterfs.server.volume.glance
 - system.glusterfs.server.volume.keystone
 - system.glusterfs.server.cluster
+- system.keepalived.cluster.instance.default_keepalived_check
 {%- endif %}
 - system.glusterfs.client.cluster
 - system.glusterfs.client.volume.glance
