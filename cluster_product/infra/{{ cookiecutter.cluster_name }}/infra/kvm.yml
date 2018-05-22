@@ -302,6 +302,10 @@ parameters:
     control:
       cluster:
         internal:
+          {%- if cookiecutter.openstack_version in ['mitaka','newton','ocata'] %}
+          rng:
+            backend: /dev/random
+          {%- endif %}
           node:
             {%- if cookiecutter.bmk_enabled == 'True' %}
             bmk01:
@@ -474,6 +478,10 @@ parameters:
     control:
       cluster:
         internal:
+          {%- if cookiecutter.openstack_version in ['mitaka','newton','ocata'] %}
+          rng:
+            backend: /dev/random
+          {%- endif %}
           node:
             {%- if cookiecutter.bmk_enabled == 'True' %}
             bmk01:
