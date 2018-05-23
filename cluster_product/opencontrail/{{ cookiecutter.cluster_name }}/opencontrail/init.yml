@@ -1,7 +1,12 @@
 parameters:
   _param:
     opencontrail_version: {{ cookiecutter.opencontrail_version }}
-    linux_repo_contrail_component: {{ cookiecutter.linux_repo_contrail_component }}
+    {%- if cookiecutter.get('opencontrail_version') == '3.0' %}
+    linux_repo_contrail_component: oc32
+    {%- endif %}
+    {%- if cookiecutter.get('opencontrail_version') == '4.0' %}
+    linux_repo_contrail_component: oc40
+    {%- endif %}
     opencontrail_stats_password: ${_param:opencontrail_stats_password_generated}
     opencontrail_compute_dns: ${_param:dns_server01}
     opencontrail_compute_gateway: ${_param:tenant_network_gateway}

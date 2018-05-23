@@ -119,6 +119,17 @@ general_params_action:
         help_text: "Enable OpenContrail sub-cluster"
         initial: True
         label: "OpenContrail enabled"
+      - name: "opencontrail_version"
+        type: "CHOICE"
+        help_text: "DO NOT USE 4.0 IN PRODUCTION, NOT TESTED YET, STILL IN DEVELOPMENT !!!"
+        initial: "3.2"
+        requires:
+        - opencontrail_enabled: True
+        choices:
+          - - "3.2"
+            - "3.0"
+          - - "4.0"
+            - "4.0"
       - name: "stacklight_enabled"
         type: "BOOL"
         help_text: "Enable StackLight sub-cluster"
