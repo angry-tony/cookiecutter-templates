@@ -30,6 +30,37 @@ parameters:
     kubernetes_control_node03_deploy_address: {{ cookiecutter.kubernetes_control_node03_deploy_address }}
     {%- endif %}
 
+    # k8s Images
+    {%- if cookiecutter.get('local_docker_images', 'False') == 'True' %}
+    {%- if cookiecutter.get('kubernetes_externaldns_enabled', 'False') == 'True' %}
+    kubernetes_externaldns_image: ${_param:aptly_server_hostname}:5000/external-dns:${_param:apt_mk_version}
+    {%- endif %}
+    kubernetes_hyperkube_repo: ${_param:aptly_server_hostname}:5000
+    kubernetes_netchecker_agent_repo: ${_param:aptly_server_hostname}:5000
+    kubernetes_netchecker_server_repo: ${_param:aptly_server_hostname}:5000
+    {%- if cookiecutter.kubernetes_network_calico_enabled == 'True' %}
+    kubernetes_calico_calicoctl_repo: ${_param:aptly_server_hostname}:5000
+    kubernetes_calico_repo: ${_param:aptly_server_hostname}:5000
+    kubernetes_calico_cni_repo: ${_param:aptly_server_hostname}:5000
+    {%- endif %}
+    {%- if cookiecutter.kubernetes_network_opencontrail_enabled == 'True' %}
+    kubernetes_contrail_cni_repo: ${_param:aptly_server_hostname}:5000
+    kubernetes_contrail_network_controller_repo: ${_param:aptly_server_hostname}:5000
+    {%- endif %}
+    {%- else %}
+    {%- if cookiecutter.get('kubernetes_externaldns_enabled', 'False') == 'True' %}
+    {%- if cookiecutter.mcp_version != 'nightly' %}
+    kubernetes_externaldns_image: docker-prod-local.artifactory.mirantis.com/mirantis/external/external-dns:{_param:apt_mk_version}
+    {%- else %}
+    kubernetes_externaldns_image: docker-prod-local.artifactory.mirantis.com/mirantis/external/external-dns:latest
+    {%- endif %}
+    {%- endif %}
+    {%- endif %}
+
+    {%- if cookiecutter.kubernetes_network_opencontrail_enabled == 'True' %}
+    kubernetes_contrail_network_controller_image: docker-prod-local.artifactory.mirantis.com/mirantis/kubernetes/contrail-integration/contrail-network-controller:${_param:apt_mk_version}
+    {%- endif %}
+
     cluster_vip_address: ${_param:kubernetes_control_address}
     cluster_local_address: ${_param:single_address}
     glusterfs_service_host: ${_param:kubernetes_control_node03_address}
