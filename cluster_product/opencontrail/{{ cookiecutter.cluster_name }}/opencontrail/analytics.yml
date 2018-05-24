@@ -27,7 +27,7 @@ classes:
 - system.opencontrail.client.cluster
 - system.opencontrail.client.resource.analytics_node
 - system.opencontrail.client.resource.database_node
-{%- if cookiecutter.get('kubernetes_enabled','False') == 'True' %}
+{%- if cookiecutter.opencontrail_version == "4.0" %}
 - system.opencontrail.control.analytics4_0
 {%- else %}
 - system.opencontrail.control.analytics
