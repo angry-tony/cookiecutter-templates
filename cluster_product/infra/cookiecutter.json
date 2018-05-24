@@ -40,6 +40,16 @@
 
     "maas_deploy_address"                       : "10.167.4.91",
     "maas_hostname"                             : "mas01",
+    "maas_manage_deploy_network"                : "False",
+    "maas_dhcp_enabled"                         : "False",
+    "maas_fabric_name"                          : "fabric-0",
+    "maas_deploy_gateway"                       : "192.168.0.1",
+    "maas_deploy_cidr"                          : "192.168.0.0/24",
+    "maas_deploy_range_start"                   : "192.168.0.10",
+    "maas_deploy_range_end"                     : "192.168.0.100",
+    "maas_deploy_vlan"                          : "0",
+
+
 
     "upstream_proxy_enabled"                    : "False",
     "upstream_proxy_address"                    : "10.167.5.1",
