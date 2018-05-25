@@ -27,10 +27,12 @@ classes:
 {%- if cookiecutter.get('kubernetes_enabled','False') == 'True' %}
 - system.opencontrail.client.resource.k8s_api
 {%- endif %}
-{%- if cookiecutter.opencontrail_version == "4.0" %}
+{%- if cookiecutter.opencontrail_version == "4.0"  and cookiecutter.get('kubernetes_enabled','False') == 'True' %}
 - system.opencontrail.control.cluster4_0
+{%- elif cookiecutter.opencontrail_version == "4.0" %}
+- system.opencontrail.control.control4_0
 {%- else %}
-- system.opencontrail.control.cluster
+- system.opencontrail.control.control
 {%- endif%}
 - system.opencontrail.client.cluster
 {%- if cookiecutter.get('openstack_enabled','False') == 'True' %}
