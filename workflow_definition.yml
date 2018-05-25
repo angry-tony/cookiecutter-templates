@@ -359,7 +359,9 @@ infra_params_action:
     - name: "kubernetes_network_calico_enabled"
       help_text: "Enable Calico CNI."
       type: "BOOL"
-      initial: "False"
+      initial: "True"
+      requires:
+        - opencontrail_enabled: False
   - name: "openstack_cluster_size_section"
     label: "OpenStack Cluster Size"
     doc: |
