@@ -11,6 +11,7 @@ parameters:
   _param:
     maas_region_port: 5240
     maas_cluster_region_port: ${_param:maas_region_port}
+    maas_name: ${_param:infra_config_hostname}
     {%- if cookiecutter.get('internal_proxy_enabled', 'False') == 'True' %}
     dns_server01: {{ cookiecutter.upstream_dns_address }}
     {%- endif %}
@@ -20,6 +21,8 @@ parameters:
         00-maas-05-simplify-network-interfaces: /etc/maas/files/commisioning_scripts/00-maas-05-simplify-network-interfaces
       bind:
         host: ${_param:deploy_address}:${_param:maas_region_port}
+      maas_config:
+        maas_name: ${_param:maas_name}
 {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
       boot_sources:
         local_image_mirror:
@@ -38,6 +41,23 @@ parameters:
 {%- if cookiecutter.get('local_repositories', 'False') == 'True' %}
       maas_config:
         main_archive: http://${_param:local_repo_url}/ubuntu
+{%- endif %}
+{%- if cookiecutter.get('physical_lab_setup', 'False') == 'True' or cookiecutter.get('maas_manage_deploy_network', 'False') == 'True'  %}
+      subnets:
+        deploy_network:
+          cidr: {{ cookiecutter.maas_deploy_cidr }}
+          fabric: {{ cookiecutter.maas_fabric_name }}
+          gateway_ip: {{ cookiecutter.maas_deploy_gateway }}
+          iprange:
+            end: {{ cookiecutter.maas_deploy_range_end }}
+            start: {{ cookiecutter.maas_deploy_range_start }}
+      fabrics:
+        {{ cookiecutter.maas_fabric_name }}:
+          description: Fabric for deploy_network
+          vlan:
+            {{ cookiecutter.maas_deploy_vlan }}:
+              description: "Deploy VLAN"
+              dhcp: {{ cookiecutter.maas_dhcp_enabled }}
 {%- endif %}
     cluster:
       region:
@@ -75,6 +95,12 @@ parameters:
 #      fabrics:
 #        deploy_network:
 #          description: Fabric for deploy_network
+#          vlan:
+#            0:
+#              description: "Deploy VLAN"
+#              dhcp: True
+#
+
 #      machines:
 {%- if cookiecutter.get('static_ips_on_deploy_network_enabled', 'False') == 'True' %}
 #        kvm01:

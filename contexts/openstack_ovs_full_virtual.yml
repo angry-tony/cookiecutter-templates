@@ -80,7 +80,7 @@ default_context:
   upstream_dns_address: 172.18.208.44
   dns_server01: 192.168.10.15
   dns_server02: 172.18.208.44
-  email_address: osmola@mirantis.com
+  email_address: pcizinsky@mirantis.com
   gateway_primary_first_nic: ens4
   gateway_primary_second_nic: ens5
   infra_bond_mode: active-backup
@@ -110,6 +110,13 @@ default_context:
   local_repositories: 'False'
   maas_deploy_address: 192.168.10.15
   maas_hostname: cfg01
+  maas_dhcp_enabled: 'True'
+  maas_fabric_name: fabric-0
+  maas_deploy_gateway: 10.10.0.1
+  maas_deploy_cidr: 10.10.0.0/16
+  maas_deploy_range_start: 10.10.191.255
+  maas_deploy_range_end: 10.10.255.254
+  maas_deploy_vlan: 0
   mcp_version: nightly
   offline_deployment: 'False'
   opencontrail_enabled: 'False'
