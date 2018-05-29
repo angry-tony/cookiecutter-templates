@@ -328,28 +328,30 @@ infra_params_action:
         requires:
         - maas_manage_deploy_network: True
       - help_text: "Gateway for deploy network"
-        initial: "192.168.10.1"
+        initial: "10.0.0.1"
         name: "maas_deploy_gateway"
         type: "IP"
         requires:
         - maas_manage_deploy_network: True
       - help_text: "CIDR for deploy network"
-        initial: "192.168.10.0/24"
+        initial: "10.0.0.0/24"
         name: "maas_deploy_cidr"
         type: "IP"
         mask: True
         requires:
         - maas_manage_deploy_network: True
       - help_text: "Start IP for deploy network"
-        initial: "192.168.10.1"
+        initial: "10.0.0.1"
         name: "maas_deploy_range_start"
         type: "IP"
+        width: half
         requires:
         - maas_manage_deploy_network: True
       - help_text: "End IP for deploy network"
-        initial: "192.168.10.1"
+        initial: "10.0.0.254"
         name: "maas_deploy_range_end"
         type: "IP"
+        width: half
         requires:
         - maas_manage_deploy_network: True
       - help_text: "Vid 0 has default name untagged in MaaS UI"

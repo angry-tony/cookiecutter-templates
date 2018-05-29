@@ -44,7 +44,7 @@ parameters:
 {%- endif %}
 {%- if cookiecutter.get('physical_lab_setup', 'False') == 'True' or cookiecutter.get('maas_manage_deploy_network', 'False') == 'True'  %}
       subnets:
-        deploy_network:
+        {{ cookiecutter.maas_deploy_cidr }}:
           cidr: {{ cookiecutter.maas_deploy_cidr }}
           fabric: {{ cookiecutter.maas_fabric_name }}
           gateway_ip: {{ cookiecutter.maas_deploy_gateway }}
