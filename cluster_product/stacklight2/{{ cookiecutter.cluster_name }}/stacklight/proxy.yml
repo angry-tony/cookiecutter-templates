@@ -2,6 +2,7 @@ classes:
 - system.nginx.server.single
 - system.nginx.server.proxy.stacklight.grafana
 - system.nginx.server.proxy.stacklight.kibana
+- system.nginx.server.proxy.monitoring.alerta
 - system.nginx.server.proxy.monitoring.prometheus_server
 - system.nginx.server.proxy.monitoring.prometheus_alertmanager
 - system.salt.minion.cert.proxy

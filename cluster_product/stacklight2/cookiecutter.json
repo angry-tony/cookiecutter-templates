@@ -66,5 +66,6 @@
     "remote_agent_docker_image"                 : "docker-prod-local.artifactory.mirantis.com/openstack-docker/telegraf:latest",
     "remote_storage_adapter_docker_image"       : "docker-prod-local.artifactory.mirantis.com/openstack-docker/remote_storage_adapter:latest",
     "prometheus_relay_docker_image"             : "docker-prod-local.artifactory.mirantis.com/openstack-docker/prometheus_relay:latest",
-    "grafana_docker_image"                      : "grafana/grafana:5.0.3"
+    "grafana_docker_image"                      : "grafana/grafana:5.0.3",
+    "alerta_docker_image"                       : "alerta/alerta-web:5.2.0"
 }

@@ -28,8 +28,12 @@ classes:
 {%- if cookiecutter.openstack_enabled == 'True' %}
 - system.telegraf.agent.remote.input.http_listener
 {%- endif %}
+- system.mongodb.server.cluster
+- system.prometheus.alerta
 - system.prometheus.alertmanager.notification.pushkin
+- system.prometheus.alertmanager.notification.alerta
 - system.prometheus.server.alert.labels_add.route
+- system.prometheus.server.alert.alerta_relabel
 - system.prometheus.server.target.dns.alertmanager
 - system.prometheus.server.target.dns.prometheus
 - system.prometheus.server.target.dns.pushgateway
@@ -104,10 +108,13 @@ parameters:
 
     control_vip_address: ${_param:stacklight_monitor_address}
     cluster_node01_name: ${_param:stacklight_monitor_node01_hostname}
+    cluster_node01_hostname: ${_param:stacklight_monitor_node01_hostname}
     cluster_node01_address: ${_param:stacklight_monitor_node01_address}
     cluster_node02_name: ${_param:stacklight_monitor_node02_hostname}
+    cluster_node02_hostname: ${_param:stacklight_monitor_node02_hostname}
     cluster_node02_address: ${_param:stacklight_monitor_node02_address}
     cluster_node03_name: ${_param:stacklight_monitor_node03_hostname}
+    cluster_node03_hostname: ${_param:stacklight_monitor_node03_hostname}
     cluster_node03_address: ${_param:stacklight_monitor_node03_address}
     keepalived_vip_virtual_router_id: 280
     keepalived_stacklight_monitor_vip_interface: ${_param:keepalived_vip_interface}
