@@ -52,7 +52,7 @@ parameters:
   _param:
     ### latest OpenStack repo on Trusty is Mitaka
     openstack_version: mitaka
-    {%- if cookiecutter.get('kubernetes_enabled','False') == 'False'  and cookiecutter.openstack_enabled == 'False'  %}
+    {%- if cookiecutter.get('kubernetes_enabled','False') == 'False'  and cookiecutter.openstack_enabled == 'True'  %}
     keepalived_vip_interface: eth1
     keepalived_vip_virtual_router_id: 60
     {%- endif %}
