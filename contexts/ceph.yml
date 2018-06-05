@@ -117,6 +117,7 @@ default_context:
   tenant_vlan: '20'
   vnf_onboarding_enabled: 'False'
   vnf_onboarding_vnf_list: 'avi_loadbalancer,metaswitch_vsbc,nginx_vnf'
+  vnf_onboarding_predeployed_resources: 'False'
   ceph_enabled: 'True'
   ceph_mon_node01_address: 10.167.4.91
   ceph_mon_node01_hostname: cmn01

@@ -128,5 +128,7 @@
 
     "openstack_compute_count"                                   : "100",
     "compute_bond_mode"                                         : "active-backup",
-    "oss_enabled"                                               : "False"
+    "oss_enabled"                                               : "False",
+    "vnf_onboarding_predeployed_resources"                      : "False",
+    "vnf_onboarding_vnf_list"                                   : "avi_loadbalancer,metaswitch_vsbc,nginx_vnf"
 }

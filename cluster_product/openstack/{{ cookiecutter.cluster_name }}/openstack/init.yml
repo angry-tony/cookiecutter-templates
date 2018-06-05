@@ -138,6 +138,27 @@ parameters:
     openstack_notification_topics: notifications
 {%- endif %}
 
+{%- if cookiecutter.get('vnf_onboarding_predeployed_resources', 'False') == 'True' %}
+    vnf_artifactory_url: "https://artifactory.mcp.mirantis.net/artifactory/vnf-onboarding-sandbox"
+    vnf_cloudify_enterprise_manager_image_name: "cloudify-manager-4.3.1ga"
+    vnf_cloudify_community_manager_image_name: "cloudify-manager-community-18.2.28"
+    vnf_agent_vm_image_name: "agent_vm"
+    vnf_base_agent_vm_image_name: "base_agent_vm"
+    vnf_base_backend_vm_image_name: "base_backend_vm"
+    vnf_openstack_admin_user_password: ${_param:vnf_openstack_admin_user_password_generated}
+    vnf_openstack_test_user_password: ${_param:vnf_openstack_test_user_password_generated}
+    vnf_openstack_admin_user_email: "admintest@localhost"
+    vnf_openstack_test_user_email: "vnfonboardingtest@localhost"
+    {%- if 'avi_loadbalancer' in cookiecutter.get('vnf_onboarding_vnf_list', []) %}
+    vnf_avi_control_image_name: "avi-control-17.2.3"
+    {%- endif %}
+    {%- if 'metaswitch_vsbc' in cookiecutter.get('vnf_onboarding_vnf_list', []) %}
+    vnf_metaswitch_dcm_image_name: "MetaswitchDCM"
+    vnf_metaswitch_mdm_image_name: "MetaswitchMDM"
+    vnf_metaswitch_perimeta_image_name: "MetaswitchPerimeta"
+    {%- endif %}
+{%- endif %}
+
     # openstack service addresses
     openstack_proxy_address: {{ cookiecutter.openstack_proxy_address }}
     openstack_proxy_node01_address: {{ cookiecutter.openstack_proxy_node01_address }}

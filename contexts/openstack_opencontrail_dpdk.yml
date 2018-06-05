@@ -114,3 +114,4 @@ default_context:
   tenant_vlan: '20'
   vnf_onboarding_enabled: 'False'
   vnf_onboarding_vnf_list: 'avi_loadbalancer,metaswitch_vsbc,nginx_vnf'
+  vnf_onboarding_predeployed_resources: 'False'

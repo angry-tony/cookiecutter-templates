@@ -20,6 +20,12 @@ classes:
 {%- if cookiecutter.get('ceph_enabled', 'False') == 'True'  %}
 - system.keystone.client.service.radosgw-swift
 {%- endif %}
+{%- if cookiecutter.get('vnf_onboarding_predeployed_resources', 'False') == 'True' %}
+- system.keystone.client.vnf_onboarding
+{%- for vnf in cookiecutter.get('vnf_onboarding_vnf_list', []).split(',') %}
+- system.keystone.client.vnf_onboarding.{{ vnf }}
+{%- endfor %}
+{%- endif %}
 parameters:
 {%- if cookiecutter.get('ceph_enabled', 'False') == 'True'  %}
   _param:

@@ -145,5 +145,8 @@
     "compute_padding_with_zeros"                : "True",
     "osd_padding_with_zeros"                    : "True",
 
-    "openssh_groups"                            : ""
+    "openssh_groups"                            : "",
+    "vnf_onboarding_enabled"                    : "False",
+    "vnf_onboarding_predeployed_resources"      : "False",
+    "vnf_openstack_private_key"                 : "<<WILL_BE_GENERATED>>"
 }

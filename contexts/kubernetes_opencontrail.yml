@@ -10,6 +10,7 @@ default_context:
     openstack_nfv_sriov_enabled: false
     vnf_onboarding_enabled: false
     vnf_onboarding_vnf_list: 'avi_loadbalancer,metaswitch_vsbc,nginx_vnf'
+    vnf_onboarding_predeployed_resources: 'False'
     deployment_type: virtual
     control_network_netmask: 255.255.255.0
     tenant_network_netmask: 255.255.255.0

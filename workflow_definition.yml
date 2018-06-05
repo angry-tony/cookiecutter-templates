@@ -146,6 +146,11 @@ general_params_action:
         help_text: "Enable benchmark node"
         initial: False
         label: "Benchmark node enabled"
+      - name: "vnf_onboarding_enabled"
+        type: "BOOL"
+        help_text: "Enable VNF Onboarding"
+        initial: False
+        label: "VNF Onboarding enabled"
   - name: "networking"
     label: "Networking"
     doc: |
@@ -2783,5 +2788,11 @@ product_params_action:
       initial: "avi_loadbalancer,metaswitch_vsbc,nginx_vnf"
       name: vnf_onboarding_vnf_list
       type: TEXT
+      requires:
+      - vnf_onboarding_enabled: True
+    - help_text: "Create several resources such as flavors, images, etc before pipelines execution."
+      initial: False
+      name: vnf_onboarding_vnf_list
+      type: BOOL
       requires:
       - vnf_onboarding_enabled: True
