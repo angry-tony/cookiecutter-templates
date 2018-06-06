@@ -1,0 +1,5 @@
+default_context:
+  openstack_version: queens
+  mcp_version: testing
+  openstack_ovs_dvr_enabled: 'False'
+  openstack_ovs_encapsulation_type: vxlan
